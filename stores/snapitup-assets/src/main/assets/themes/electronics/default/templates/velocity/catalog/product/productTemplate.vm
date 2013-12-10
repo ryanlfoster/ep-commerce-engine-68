@@ -1,0 +1,6 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## productTemplate.vm
+
+## no on is using this $pageName variable.. Should be removed!
+#set($pageName = "catalog/product/productTemplate.vm")
+#productMainTemplate(false true "" true true)

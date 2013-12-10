@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		">
+	<bean id="utilityTemplate" abstract="true" class="com.elasticpath.commons.util.impl.UtilityImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="settingsReader" ref="settingsService"/>
+	</bean>
+
+	<bean id="utility" parent="utilityTemplate" scope="singleton"/>
+
+	<bean id="urlUtility" class="com.elasticpath.commons.util.impl.UrlUtilityImpl" scope="singleton">
+		<property name="characterEncoding" value="UTF-8"/>
+	</bean>
+
+	<bean id="passwordGenerator" class="com.elasticpath.commons.util.impl.PasswordGeneratorImpl" scope="singleton">
+	</bean>
+
+	<bean id="indexUtility" class="com.elasticpath.service.search.solr.IndexUtilityImpl" scope="singleton">
+		<property name="solrAttributeTypeExt">
+			<map>
+				<entry key="dateValue" value="_sdt"/>
+				<entry key="dateTimeValue" value="_sdt"/>
+				<entry key="shortTextValue" value="_st"/>
+				<entry key="longTextValue" value="_st"/>
+				<entry key="booleanValue" value="_b"/>
+				<entry key="decimalValue" value="_sf"/>
+				<entry key="integerValue" value="_si"/>
+			</map>
+		</property>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="orderEventHelperTemplate" abstract="true"
+		class="com.elasticpath.domain.event.impl.OrderEventHelperImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="moneyFormatter" ref="moneyFormatter" />
+		<property name="shippingServiceLevelService" ref="shippingServiceLevelService" />
+		<property name="timeService" ref="timeService" />
+		<property name="formatterMap">
+			<map key-type="com.elasticpath.plugin.payment.PaymentType">
+				<entry key="CREDITCARD" value-ref="orderEventCreditCardDetailsFormatter" />
+				<entry key="GIFT_CERTIFICATE" value-ref="orderEventGiftCertificateDetailsFormatter" />
+				<entry key="PAYMENT_TOKEN" value-ref="orderEventPaymentTokenDetailsFormatter" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="orderEventCreditCardDetailsFormatter" class="com.elasticpath.domain.event.impl.OrderEventCreditCardDetailsFormatter"/>
+	<bean id="orderEventGiftCertificateDetailsFormatter" class="com.elasticpath.domain.event.impl.OrderEventGiftCertificateDetailsFormatter"/>
+	<bean id="orderEventPaymentTokenDetailsFormatter" class="com.elasticpath.domain.event.impl.OrderEventPaymentTokenDetailsFormatter"/>
+
+	<bean id="orderEventHelper" parent="orderEventHelperTemplate"/>
+
+	<bean id="eventOriginatorHelper" class="com.elasticpath.domain.event.impl.EventOriginatorHelperImpl">
+		<property name="elasticPath" ref="elasticPath"/>
+	</bean>
+
+	<bean id="cmPasswordPolicy" class="com.elasticpath.commons.security.impl.CmPasswordPolicyImpl" scope="singleton">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="settingsService" ref="settingsService"/>
+		<property name="passwordGenerator" ref="passwordGenerator"/>
+	</bean>
+
+	<bean id="maximumAgePasswordPolicy" class="com.elasticpath.commons.security.impl.MaximumAgePasswordPolicyImpl" scope="singleton">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="settingsService" ref="settingsService"/>
+		<property name="passwordGenerator" ref="passwordGenerator"/>
+	</bean>
+
+	<bean id="retryAttemptPasswordPolicy" class="com.elasticpath.commons.security.impl.RetryAttemptPasswordPolicyImpl" scope="singleton">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="settingsService" ref="settingsService"/>
+		<property name="passwordGenerator" ref="passwordGenerator"/>
+	</bean>
+
+	<bean id="accountPasswordPolicy" class="com.elasticpath.commons.security.impl.AccountPasswordPolicyImpl" scope="singleton">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="settingsService" ref="settingsService"/>
+		<property name="passwordGenerator" ref="passwordGenerator"/>
+	</bean>
+</beans>

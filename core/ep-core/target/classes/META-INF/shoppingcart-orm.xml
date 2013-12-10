@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.shoppingcart.impl</package>
+	<entity class="ShoppingItemImpl">
+		<named-query name="CARTITEM_DELETE_BY_SKU_UID">
+			<query>
+				DELETE
+				FROM ShoppingItemImpl ci
+				WHERE ci.productSkuInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SHOPPING_ITEM_BY_GUID">
+			<query>
+				SELECT si
+				FROM ShoppingItemImpl si
+				WHERE si.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ShoppingCartMementoImpl">
+		<named-query name="SHOPPING_CART_FIND_BY_GUID_EAGER">
+			<query>
+				SELECT sc
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="SHOPPING_CART_DELETE_BY_GUID">
+			<query>
+				DELETE
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.guid IN (:list)
+			</query>
+		</named-query>
+		<named-query name="SHOPPING_CART_FIND_BY_SHOPPER_UID">
+			<query>
+				SELECT sc
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.shopperUid = ?1
+			</query>
+		</named-query>
+		<named-query name="SHOPPING_CART_GUID_FIND_BY_CUSTOMER_AND_STORE">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc, ShopperMementoImpl s
+				WHERE sc.shopperUid = s.uidPk
+				AND s.customer.guid = ?1
+				AND s.storeCode = ?2
+			</query>
+		</named-query>
+		<named-query name="DELETE_EMPTY_SHOPPING_CARTS_BY_SHOPPER_UID">
+			<query>
+				DELETE
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.allItems IS EMPTY
+				AND sc.shopperUid IN (:list)
+			</query>
+		</named-query>
+		<named-query name="DELETE_ALL_SHOPPING_CARTS_BY_SHOPPER_UID">
+			<query>
+				DELETE
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.shopperUid IN (:list)
+			</query>
+		</named-query>
+		<named-query name="FIND_SHOPPING_CART_GUIDS_LAST_MODIFIED_BEFORE_DATE">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.lastModifiedDate &lt;= ?1
+				ORDER BY sc.lastModifiedDate
+			</query>
+		</named-query>
+		<named-query name="FIND_SHOPPING_CART_LAST_MODIFIED_DATE">
+			<query>
+				SELECT sc.lastModifiedDate
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.guid= ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_GUID_OF_SHOPPING_CART_WITH_MATCHING_GUID">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_GUID_OF_SHOPPING_CART_WITH_MATCHING_GUID_AND_HAS_ITEMS">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.guid = ?1
+				AND sc.allItems IS NOT EMPTY
+			</query>
+		</named-query>
+		<named-query name="FIND_GUID_OF_SHOPPING_CART_WITH_MATCHING_GUID_AND_STORE_CODE">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc
+				WHERE sc.guid = ?1
+				AND LOWER(sc.storeCode) = LOWER(?2)
+			</query>
+		</named-query>
+		<named-query name="FIND_GUID_OF_SHOPPING_CART_WITH_MATCHING_GUID_AND_HAS_BUNDLE_ITEMS">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc
+				INNER JOIN sc.allItems si
+				WHERE sc.guid = ?1
+				AND si.childItemsInternal IS NOT EMPTY
+			</query>
+		</named-query>
+		<named-query name="FIND_GUID_OF_SHOPPING_CART_WITH_MATCHING_GUID_AND_HAS_SHIPPABLE_ITEMS">
+			<query>
+				SELECT sc.guid
+				FROM ShoppingCartMementoImpl sc
+				INNER JOIN sc.allItems si
+				WHERE sc.guid = ?1
+				AND si.productSkuInternal.shippable = true
+			</query>
+		</named-query>
+	</entity>
+	<entity class="WishListImpl">
+		<named-query name="WISHLIST_BY_SHOPPING_CONTEXT">
+			<query>
+				SELECT wl
+				FROM WishListImpl wl
+				WHERE wl.shopperUid = ?1
+			</query>
+		</named-query>
+		<named-query name="WISHLIST_BY_SHOPPING_ITEM_SKU">
+			<query>
+				SELECT wl
+				FROM WishListImpl wl, IN (wl.allItems) item
+				WHERE item.productSkuInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="DELETE_EMPTY_WISHLISTS_BY_SHOPPER_UID">
+			<query>
+				DELETE
+				FROM WishListImpl wl
+				WHERE wl.allItems IS EMPTY
+				AND wl.shopperUid IN (:list)
+			</query>
+		</named-query>
+		<named-query name="DELETE_ALL_WISHLISTS_BY_SHOPPER_UID">
+			<query>
+				DELETE
+				FROM WishListImpl wl
+				WHERE wl.shopperUid IN (:list)
+			</query>
+		</named-query>
+	</entity>
+
+	<entity class="ShoppingItemRecurringPriceImpl"/>
+
+</entity-mappings>
+

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<import resource="classpath:spring/prototypes/prototypes.xml" />
+	<import resource="classpath:spring/models/domainModel.xml" />
+
+	<import resource="dataaccess/sync-dao.xml" />
+
+	<import resource="classpath:spring/service/service.xml" />
+
+	<!-- Suppress instantiating a caching bean for data sync by using an alias which forces use of the non-caching version -->
+	<alias name="nonCachingProductCharacteristicsService" alias="cachingProductCharacteristicsService" />
+
+	<!-- As service.xml is imported, the beans referenced by service.xml but not defined in that file should be defined here or in any xml file imported. -->
+	<bean id="storeMessageSourceDelegate" class="com.elasticpath.commons.util.impl.StoreMessageSourceImpl" />
+
+	<bean id="applicationInitialization" class="com.elasticpath.tools.sync.beanfactory.local.LocalPersistenceEngineInitialization" init-method="init">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="dataSourceProperties" ref="dataSourceProperties" />
+	</bean>
+	<import resource="service/sync-configuration.xml" />
+
+	<import resource="service/sync-merge-configuration.xml" />
+
+	<import resource="service/sync-service.xml" />
+	<import resource="classpath:spring/commons/util-config.xml" />
+	<import resource="classpath:spring/commons/validators.xml" />
+
+	<import resource="classpath:spring/dataaccess/openjpa/openjpa.xml" />
+
+	<bean id="entityManagerFactory" parent="abstractEntityManagerFactory">
+		<property name="jpaPropertyMap">
+			<map>
+				<!--
+					Explicitly using OOTB OpenJPA data cache as opposed to Ehcache which is the default for core.
+					We can't use Ehcache for the two instances of JPA at the same time, because they would share the same cache, but they
+					are dealing with different data.
+				 -->
+				<entry key="openjpa.DataCacheManager" value="default" />
+
+				<entry key="openjpa.DataCache" value="true(cacheSize=25000,softReferenceSize=0)" />
+				<entry key="openjpa.DataCacheTimeout" value="1800000" />
+				<entry key="openjpa.RemoteCommitProvider" value="sjvm" />
+				<entry key="openjpa.QueryCompilationCache" value="true(cacheSize=25000,softReferenceSize=0)" />
+				<entry key="openjpa.QueryCache" value="true(cacheSize=10000,softReferenceSize=0)" />
+				<entry key="openjpa.jdbc.QuerySQLCache" value="false" />
+			</map>
+		</property>
+	</bean>
+
+	<import resource="classpath*:META-INF/conf/ep-dst-plugin-local.xml" />
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!--
+   	Provides an image that links to a specified URL or tiggers
+	a javascript function.
+
+	Input Paramters:
+	1. imagePath - the path to image file
+	2. altText - the alternative text for the image
+	3. onClick - a URL or javascript function
+
+-->
+
+<content-wrapper> 
+	<template-name>imageClickableTemplate.cwt</template-name>
+	<wrapper-id>imageClickableWrapper</wrapper-id>
+	<wrapper-name>Image clickable</wrapper-name>
+
+
+	<user-input-settings>
+		<user-input-setting localizable="true" id="imagePath" name="Path to Image" type="Image"  required="true" pass-to-template="true"/>
+		<user-input-setting localizable="true" id="altText" name="Alternative Text" type="StringShort"  required="true" pass-to-template="true"/>
+		<user-input-setting localizable="true" id="onClick" name="On Click URL or JavaScript" type="StringShort"  required="true" pass-to-template="true"/>
+	</user-input-settings>
+
+	
+</content-wrapper>

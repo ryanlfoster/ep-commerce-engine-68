@@ -1,0 +1,495 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## orderConf.html.vm
+#emailInit()
+<?xml-stylesheet href="http://www.w3.org/StyleSheets/TR/W3C-REC.css" type="text/css"?>
+<?xml-stylesheet href="#internalStyle" type="text/css"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style type="text/css" id="internalStyle">
+            .promotion td { padding:4px 0 0 0; text-align:right; }
+            .promotion td.title { color:red; text-transform:capitalize; }
+            .promotion td.value { color:red; }
+            
+            .total td { text-align:right; padding:10px 0 0 0; }
+            .total td.title { font-weight:bold; text-transform:uppercase; }
+            .total td.value { font-size:152%; font-weight:bold; color:#3667A2; }
+            
+            .availability { text-align:left; color:green; font-size:92%; margin:.5em 0 0 0; }
+            
+            .shipment-details table { table-layout:auto; width:100%; margin:0; border-collapse:collapse; }
+            .shipment-details td { padding:4px 0 0 0; text-align:right; }
+            .shipment-details td.title { font-weight:bold; text-transform:capitalize; }
+            .shipment-details td.value { padding:4px 0 0 10px; text-align:left; }
+            
+            .gift-certificate td { padding:4px 0 0 0; text-align:right; }
+            .gift-certificate td.title { color:red; text-transform:capitalize; }
+            .gift-certificate td.value { color:red; }
+			
+			.order-heading { color:#80A71F; border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:10px 0; }
+			.order-shipment { color:#80A71F; border-top:1px solid #ddd; padding:10px 0; }
+			
+			.clear10 { height:10px;clear:both;overflow:hidden; }
+            .clear20 { height:20px;clear:both;overflow:hidden; }
+			
+			.body { width:600px; margin-left:auto; margin-right:auto; 
+				    background:#fff; color:#333; font-size:11pt; line-height:150%; padding-bottom:20px; border:0; 
+					font-family:arial,helvetica,sans-serif;border:2px solid #ccc; }
+					
+			/* ---- Product Bundling ----- */
+
+            #constituents-list {
+              padding: 0;
+            }
+
+            li.constituent-item {
+                line-height: 1.5em;
+            }
+
+            li.constituent-item span.constituent-name {
+              font-weight: normal;
+            }
+
+            .constituent-level-1 {
+                margin-top: 9px;
+                margin-left: 7px;
+            }
+
+            .constituent-level-2 {
+              margin-left: 29px;
+            }
+
+            .constituent-level-3 {
+              margin-left: 51px;
+            }
+
+            .constituent-level-4 {
+            	margin-left: 73px;
+            }
+			
+			.constituent-quantity {
+			    color: #A00;
+			    font-weight: bold;
+			    font-size: 14px;
+			}
+			
+    </style>
+  </head>
+    <body>
+        <div class="body">
+            <table width="600" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                <tr>
+                    <td>#parse("includes/header.email.vm")</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%" border="0" align="center" cellpadding="10" cellspacing="0" bgcolor="#FFFFFF">
+                            <tr>
+                                #set ($customer = $order.getCustomer())
+                                #set ($billingAddress = $order.getBillingAddress())
+                                #set ($shippingAddress = $order.getShippingAddress())
+                                <td>
+                                    <p>$dateTool.get('MMMM d, yyyy')</p>
+                                    <p>#emailMessage("email.orderConf.header") #if($customer.firstName && $customer.lastName)$!customer.firstName $!customer.lastName #else $!billingAddress.firstName $!billingAddress.lastName#end,</p>
+                                    <p>#emailMessage("email.orderConf.printOut")</p>
+                                    <p>#emailMessage("email.orderConf.account"): <a href="$storeUrl/manage-account.ep">$storeUrl/manage-account.ep</a></p>
+                                    <h3 class="order-heading">#emailMessage("email.orderConf.orderDetails")</h3>
+                                    <table class="order-details">
+                                        <tr class="order-details" id="customer-email">
+                                            <td class="title">#emailMessage("email.emailAddress"):</td>
+                                            <td class="value" id="status">$!customer.email</td>
+                                        </tr>
+                                        <tr class="order-details" id="order-number">
+                                            <td class="title">#emailMessage("email.orderConf.orderNumber"):</td>
+                                            <td class="value" id="number" align="left"> $!order.orderNumber</td>
+                                        </tr>
+                                        <tr class="order-details" id="order-date">
+                                            <td class="title">#emailMessage("email.orderConf.orderDate"):</td>
+                                            <td class="value" id="date">$dateTool.format('long', $!order.getCreatedDate())</td>
+                                        </tr>
+                                    </table>
+                  
+                                    #foreach($shipment in $order.getAllShipments())
+                                        <div class="clear20"></div>
+                                        #if($shipment.orderShipmentType == "PHYSICAL")
+                                            #set($shippingAddres = $shipment.shipmentAddress)
+                                            <div class="order-shipment">#emailMessage("email.orderConf.physicalShipment") $shipment.shipmentNumber</div>
+                                            <table width="100%" border="0" cellpadding="2" cellspacing="0">
+                                                <tr class="shipment-details" id="shipping-address">
+                                                    <td class="title">#emailMessage("email.orderConf.shipping.address"):</td>
+                                                    <td class="value" id="address">
+                                                        $!shippingAddres.firstName $!shippingAddres.lastName,
+                                                        $!shippingAddres.street1,
+                                                        #if ($shippingAddres.street2 && $shippingAddres.street2.length() > 0)
+                                                            $!shippingAddres.street2,
+                                                        #end
+                                                        $!shippingAddres.city,
+                                                        #if ($shippingAddres.subCountry)$!shippingAddres.subCountry,
+                                                        #end $!shippingAddres.zipOrPostalCode,
+                                                        $ctxCountries.getCountryDisplayName($!shippingAddres.country, ${order.locale})
+                                                    </td>
+                                                </tr>
+                                                <tr class="shipment-details" id="shipping-method">
+                                                    <td class="title">#emailMessage("email.orderConf.shipping.method"):</td>
+                                                    <td class="value" id="address">$shipment.serviceLevel</td>
+                                                </tr>
+                                            </table>
+                                        #elseif ($shipment.orderShipmentType == "SERVICE")
+                                            <div class="order-shipment">#emailMessage("email.orderConf.recurringShipment")</div>
+                                        #elseif($shipment.orderShipmentType == "ELECTRONIC")
+                                            <div class="order-shipment">#emailMessage("email.orderConf.electronicShipment")</div>
+                                        #else
+                                          	## OOPS! A new kind of item?!
+                                        #end
+                                    <div class="clear10"></div>
+
+                                    <table class="cart" width="100%" style="border-collapse:collapse;">
+                                        <thead>
+                                            <tr>
+                                                <td width="60" style="padding:6px;">&nbsp;</td>
+                                                <td style="font-weight:bold; padding:6px;">#emailMessage("email.description")</td>
+                                                <td style="font-weight:bold; padding:6px;" align="right">
+                                                  	#if ($shipment.orderShipmentType != "SERVICE")
+                                                  		#emailMessage("email.total")
+                                                  	#end
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	
+                                            #set($orderItemFormBeans = $orderItemFormBeanMap.get($shipment.getUidPk()))
+                                            #foreach($orderItemFormBean in $orderItemFormBeans)
+                                                <tr valign="top">
+                                                    ## Display Order LineItem
+                                                    #if($orderItemFormBean.getImage())
+                                                        #set($image = $!orderItemFormBean.getImage())
+                                                    #else
+                                                        #set($image = "")
+                                    				#end
+                                    		        #setSchedulesPriceAndFrequency($orderItemFormBean.getPrice())  
+                                    		        #set ($recurringPrice = $effectivePrice)
+                                    		        #if ($shipment.orderShipmentType == "SERVICE")
+                                    		          #setDisplayPrices(true)
+                                    		        #else
+                                    		          #setDisplayPrices(false)
+                                    		        #end                     						
+                        						                                                       
+                                                   
+                        				
+                                                    <td style="padding:6px; border-bottom:1px solid #ddd;" align="center">#displayCatalogImage($image "50" "50" "0" "middle" "0" $!orderItemFormBean.getDisplayName() "")</td>
+                                                    <td style="padding:6px; border-bottom:1px solid #ddd;">
+                                                        <div><a href="$storeUrl/product-view.ep?pID=$orderItemFormBean.getProductSku().getProduct().getGuid()">$!orderItemFormBean.getDisplayName()</a></div>
+                                                        <div style="font-size:smaller;">
+                                                            #if ($!orderItemFormBean.getDisplaySkuOptions())
+                                                                #displaySkuOptionValues($orderItemFormBean $order.locale)
+                                                            #end
+                                                            <em>$orderItemFormBean.skuCode</em>
+                                                        </div>
+                                                        #if ($shipment.getShipmentStatus() != "SHIPPED")
+                                                            #set($availability = $orderItemFormBean.getProductSku().getProduct().getAvailabilityCriteria())
+                                                            #set($releaseDate = $orderItemFormBean.getProductSku().getProduct().getExpectedReleaseDate())
+                                                            #set($reorderDate = $orderItemFormBean.getInventory().getRestockDate())
+                                                            #if (!$orderItemFormBean.isAllocated())
+                                                                #if ($availability.toString() == "AVAILABLE_FOR_PRE_ORDER")
+                                                                    <div class="availability" id="inventoryText">#emailMessage("email.orderConf.availabilityMessage.preOrder")&nbsp;$dateTool.format('E, MMMM d',$releaseDate)</div>
+                                                                #elseif ($availability.toString() == "AVAILABLE_FOR_BACK_ORDER")
+                                                                    <div class="availability" id="inventoryText">#emailMessage("email.orderConf.availabilityMessage.backOrder")&nbsp;
+                														#if($!reorderDate)
+                															$dateTool.format('E, MMMM d',$reorderDate)
+                														#else
+                															N/A
+            	                                                        #end
+                                                                    </div>
+                                                                #end
+                                                            #elseif(!$orderItemFormBean.getDigitalAsset())
+                                                                <div class="availability" id="inventoryText">#emailMessage("email.orderConf.availabilityMessage.allocated")</div>
+                                                            #end
+                                                        #end
+                                                        #if ($shipment.orderShipmentType == "SERVICE")
+                                                            #set ($dollarSavings = $!recurringPrice.getDollarSavings())
+                                                        #else
+                                                            #set ($dollarSavings = $!orderItemFormBean.getPrice().getDollarSavings())
+                                                        #end
+                                                        #**
+														*Check if orderItem is a calculated bundle and is recurring. If so, don't display price
+														*for bundle 
+														*#                                                     
+                                                        #isOrderItemFormBeanABundle($orderItemFormBean)                                                                                                         
+                                                       	#if ( !($shipment.orderShipmentType == "SERVICE" && $isBundle))                                                                                                                                                      
+                                                        	<div style="margin-top:5px;">$!orderItemFormBean.getQuantity() @ <span style="font-weight:bold; color:#FE0700;">#displayPriceForLocale($orderItemFormBean.getUnitPriceMoney(), $order.locale)</span>
+	                                                            #if ($shipment.orderShipmentType == "SERVICE")
+    	                                                            #getPriceScheduleFrequency($lowestPriceSchedule)
+                                                            	#end
+                                                        	</div>
+                                                      	#end
+                                                      	#**
+                                                      	*Only display sale information if on sale and not a recurring bundle
+                                                      	*#
+                                                        #if ($onSale && !($shipment.orderShipmentType=="SERVICE" && $isBundle))
+                                                            <div style="color:#3667A2; font-size:smaller;">#emailMessage("email.orderConf.was") #displayPriceForLocale($orderItemFormBean.getListPriceMoney(), $order.locale), #emailMessage("email.orderConf.save") #displayPriceForLocale($dollarSavings, $order.locale)</div>
+                                                        #end
+                                                        #if($orderItemFormBean.getDigitalAsset())
+                                                            #set ($digitalAsset = $!orderItemFormBean.getDigitalAsset())
+                                                            <div style="margin-top:5px;"><a href="$storeUrl/sec-asset.ep?assetID=$digitalAsset.getEncryptedUidPk()&orderSKUID=$orderItemFormBean.getEncryptedUidPk()">$digitalAsset.getFileNameWithoutPath()</a></div>
+                                                        #end
+                                                    </div>
+                                                   
+                                                    #if ($orderItemFormBean.getChildren().size() > 0)
+                                                        #displayOrderItemChildren($orderItemFormBean, ${order.locale}, false)
+                                                    #end
+                                                </td>
+                                                <td style="padding:6px; border-bottom:1px solid #ddd;" align="right">
+                                                  	#if ($shipment.orderShipmentType != "SERVICE")
+            											#displayPriceForLocale($orderItemFormBean.getTotalMoney(), $order.locale)
+                                                    #end
+                                                </td>
+                                            </tr>
+                                        #end ## END FOREACH ORDERITEMFORMBEAN ITERATION
+                                       	#if ($shipment.orderShipmentType != "SERVICE")
+                                            <tr>
+                                                <td align="right" colspan="3">
+                                                    ## START SHIPMENT SUMMARY
+                                                    <table width="50%" border="0" cellpadding="2" cellspacing="0" align="right">
+                                                        ## START discount for exclusive tax calculation method
+                                                        ## order discount
+                                                        #if ($shipment.hasSubtotalDiscount() && !$shipment.isInclusiveTaxCalculation())
+                                                            <tr align="right">
+                                                                <td style="padding:4px 0 0 0; color:red;">#emailMessage("email.orderConf.orderdiscount")</td>
+                                                                <td style="padding:4px 0 0 0; color:red; width:100px">#displayPriceForLocale($shipment.getSubtotalDiscountMoney(), $order.locale)</td>
+                                                            </tr>
+                                                        #end
+                                                        ## END order discount
+                                                        <tr align="right">
+                                                            <td nowrap="nowrap"><strong>#emailMessage("email.orderConf.subtotal"):</strong></td>
+                                                            <td class="subtotal">#displayPriceForLocale($shipment.getItemSubtotalMoney(), $order.locale)</td>
+                                                        </tr>
+                                          
+                                                        #if ($shipment.getOrderShipmentType() == "PHYSICAL")
+                                                            <tr align="right">
+                                                                <td>#emailMessage("email.orderConf.shipping"):</td>
+                                                                <td>#displayPriceForLocale($shipment.getShippingCostMoney(), $order.locale)</td>
+                                                            </tr>
+                                                            ## empty lines section
+                                                            <tr align="right"><td></td><td></td></tr>
+                                                            <tr align="right"><td></td><td></td></tr>
+                                                            <tr align="right"><td></td><td></td></tr>
+                                                            ## end empty lines section
+                                                            <tr align="right">
+                                                                <td><strong>#emailMessage("email.orderConf.totalBeforeTax"):</strong></td>
+                                                                <td>#displayPriceForLocale($shipment.getTotalBeforeTaxMoney(), $order.locale)</td>
+                                                            </tr>
+                                                        #end
+                                                        <tr align="right">
+                                                            <td>#emailMessage("email.orderConf.tax.items"):</td>
+                                                            <td>#displayPriceForLocale($shipment.getItemTaxMoney(), $order.locale)</td>
+                                                        </tr>
+                                                        #if ($shipment.getOrderShipmentType() == "PHYSICAL")
+                                                            <tr align="right">
+                                                                <td>#emailMessage("email.orderConf.tax.shipping"):</td>
+                                                                <td>#displayPriceForLocale($shipment.getShippingTaxMoney(), $order.locale)</td>
+                                                            </tr>
+                                                            ## START subtotal discount
+                                                            #if ($shipment.hasSubtotalDiscount() && $shipment.isInclusiveTax())
+                                                                <tr align="right">
+                                                                    <td style="padding:4px 0 0 0; color:red;">#emailMessage("email.orderConf.orderdiscount")</td>
+                                                                    <td style="padding:4px 0 0 0; color:red;">#displayPriceForLocale($shipment.getSubtotalDiscountMoney(), $order.locale)</td>
+                                                                </tr>
+                                                            #end
+                                                            ## END subtotal discount
+                                                        #end
+                                                        ## empty lines section
+                                                        <tr align="right"><td></td><td></td></tr>
+                                                        <tr align="right"><td></td><td></td></tr>
+                                                        <tr align="right"><td></td><td></td></tr>
+                                                        ##
+                                                        <tr align="right">
+                                                            <td><strong>#emailMessage("email.orderConf.shipmentTotal"):</strong></td>
+                                                            <td class="total">#displayPriceForLocale($shipment.getTotalMoney(), $order.locale)</td>
+                                                        </tr>
+                                                    </table>
+                                                    ## END SHIPMENT SUMMARY
+                                                </td>
+                                            </tr>
+                                        #end ## END orderShipmentType != "SERVICE"
+                                    </tbody>
+                                </table>
+                            #end ## END FOREACH SHIPMENT
+                
+                            <div class="clear20"></div>
+                            <div>
+                                <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+                                    <TBODY>
+                                        <TR>
+                                            <td vAlign="top" width="50%">
+                                                <div class="order-heading"><strong>#emailMessage("email.orderConf.billingAddress"):</strong></div>
+                                                #if ($order.orderPayment.paymentMethod == "PAYPAL_EXPRESS")
+                                                    PayPal Account: $!order.orderPayment.email
+                                                #elseif ($billingAddress)
+                                                    $!billingAddress.firstName $!billingAddress.lastName<BR/>
+                                                    $!billingAddress.street1<br />
+                                                    #if ($billingAddress.street2 && $billingAddress.street2.length() > 0)
+                                                        $!billingAddress.street2<br />
+                                                    #end
+                                                    $!billingAddress.city
+                                                    #if ($shippingAddress.subCountry)$!billingAddress.subCountry,#end $!billingAddress.zipOrPostalCode<br />
+                                                    $ctxCountries.getCountryDisplayName($!billingAddress.country, ${order.locale})<br />
+                                                    $!billingAddress.phoneNumber<br>
+                                                #end
+                                            </td>
+
+                                            <td align="right">
+                                                ## order summary
+                                                <div class="order-heading"><strong>#emailMessage("email.orderConf.ordersummary"):</strong></div>
+                                                <table width="100%" border="0" cellpadding="2" cellspacing="0">
+                                                    ##discount for exclusive tax calculation method
+                                                    #if($order.hasSubtotalDiscount()&&!$order.isInclusiveTaxCalculation())
+                                                        <tr class="promotion" id="promotion-exclusive">
+                                                            <td class="title">#emailMessage("email.orderConf.orderdiscount"):</td>
+                                                            <td id="exclusive-discount-value" class="value"> #displayPriceForLocale($order.getSubtotalDiscountMoney(), $order.locale)</td>
+                                                        </tr>
+                                                    #end
+                                                    <tr align="right">
+                                                        <td nowrap="nowrap"><strong>#emailMessage("email.orderConf.subtotal"):</strong></td>
+                                                        <td class="subtotal">#displayPriceForLocale($order.getSubtotalMoney(), $order.locale)</td>
+                                                    </tr>
+                                                    <tr align="right">
+                                                        <td>#emailMessage("email.orderConf.shipping"):</td>
+                                                        #if ($!order.getTotalShippingCostMoney().getAmount().setScale(0,0).intValue()>0)
+                                                           <td>#displayPriceForLocale($order.getTotalShippingCostMoney(), $order.locale)</td>
+                                                        #else
+                                                            <td>N/A</td>
+                                                        #end
+                                                    </tr>
+                                                    ##empty lines
+                                                    <tr align="right"><td></td><td></td></tr>
+                                                    <tr align="right"><td></td><td></td></tr>
+                                                    <tr align="right"><td></td><td></td></tr>
+                                                    ##
+                                                    <tr align="right">
+                                                        <td><strong>#emailMessage("email.orderConf.totalBeforeTax"):</strong></td>
+                                                        <td>#displayPriceForLocale($order.getTotalBeforeTaxMoney(), $order.locale)</td>
+                                                    </tr>
+                                                    <tr align="right">
+                                                        <td>#emailMessage("email.orderConf.tax.items"):</td>
+                                                        <td>#displayPriceForLocale($order.getTotalItemTaxesMoney(), $order.locale)</td>
+                                                    </tr>
+                                                    <tr align="right">
+                                                        <td>#emailMessage("email.orderConf.tax.shipping"):</td>
+                                                        <td>#displayPriceForLocale($order.getTotalShippingTaxesMoney(), $order.locale)</td>
+                                                    </tr>
+                                                    ##discount for inclusive tax calculation method
+                                                    #if($order.hasSubtotalDiscount()&&$order.isInclusiveTaxCalculation())
+                                                        <tr class="promotion" id="promotion-inclusive">
+                                                            <td class="title">#emailMessage("email.orderConf.orderdiscount"):</td>
+                                                            <td id="inclusive-discount-value" class="value"> #displayPriceForLocale($order.getSubtotalDiscountMoney(), $order.locale)</td>
+                                                        </tr>
+                                                    #end
+                                                    #if($order.getTotalGiftCertificateDiscount() > 0)
+                                                        <tr class="gift-certificate" id="gift-certificate">
+                                                            <td class="title">#emailMessage("email.giftCert.email.giftCertificates"):</td>
+                                                            <td id="gift-certificate-value" class="value"> #displayPriceForLocale($order.getTotalGiftCertificateDiscountMoney(), $order.locale)</td>
+                                                        </tr>
+                                                    #end
+                                                    ##empty lines
+                                                    <tr align="right"><td></td><td></td></tr>
+                                                    <tr align="right"><td></td><td></td></tr>
+                                                    <tr align="right"><td></td><td></td></tr>
+                                                    ##
+                                                    <tr align="right">
+                                                        <td><strong>#emailMessage("email.orderConf.grandtotal"):</strong></td>
+                                                        <td class="total"><strong>#displayPriceForLocale($order.getTotalMoney(), $order.locale)</strong></td>
+                                                    </tr>
+                                                </table>
+        
+                                            </td>
+                                        </TR>
+                                    </TBODY>
+                                </TABLE>
+                            </div>
+
+                            ## START ending paragraph
+                            <div align="left" style="margin:10px 10px 0 0; border-top:1px solid #ddd;">
+                                <p>
+                                    #if($order.orderPayment.paymentMethod == "CREDITCARD")
+                                        #emailMessage("email.orderConf.endingMessage1")
+                                    #else
+                                        #emailMessage("email.orderConf.endingMessage2")
+                                    #end
+                                </p>
+                                <p>#emailMessage("email.orderConf.thankYou")</p>
+                            
+                                <p>$store.getName()</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>#parse("includes/footer.email.vm")</td>
+        </tr>
+  </table>
+  </div>
+  </body>
+</html>
+
+#macro(displayConstituentHtmlEmail $productDisplayName $item $quantity $level $locale $effectivePrice)  
+  #set ($style = '')
+  
+  #if ($velocityCount != 1)
+    #set ($style = 'padding-top:7px; border-top:1px solid #d9d9d9')
+  #end
+  <li class="constituent-item constituent-level-$level" style="$style">
+    <span class="constituent-name">$productDisplayName</span>
+        #if ($quantity > 1)
+           <span class="constituent-quantity">x $quantity</span>
+    #end
+    <span class="sku">#displaySkuOptionValues($item $locale)  </span>
+    ###
+    ###Now check if item is recurring and not a nested bundle
+    ###if so, display recurring price and frequency
+    #isOrderItemFormBeanABundle($item) 
+    #if ( $isRecurring && !$isBundle)    
+      <div>
+      	 $quantity @ 
+      	 #set ($recurringPrice = $effectivePrice)
+            <span style="font-weight:bold; color:#FE0700;"> #displayPriceForLocale($recurringPrice.lowestPrice, $locale) </span>       
+        #getPriceScheduleFrequency($lowestPriceSchedule)
+      </div>
+    #end    
+  </li>
+#end
+
+#macro(displayOrderItemChildren $itemFormBean $locale $showSkuOptions)
+    <div id="short-constituents-list">
+        <h2>#emailMessage("email.orderConf.includes")</h2>
+    <ul id="constituents-list"> 
+    
+    ## iterating constituentView items in the bundle
+      #foreach ($item in $itemFormBean.getChildren())      	
+          ##Check for recurring schedule in the order children.
+          ## If recurring item, display recurring, otherwise,display regular constituent item
+          #setSchedulesPriceAndFrequency($item.price)    		
+  	      #displayConstituentHtmlEmail ($item.displayName $item $item.quantity $item.level $locale $effectivePrice)		
+          #displayDigitalAsset($item.getDigitalAsset())
+      #end
+    </ul>
+    </div>
+#end
+
+#macro (isOrderItemFormBeanABundle $orderItemFormBean )
+    #set ($prodSku = $orderItemFormBean.getProductSku())
+    #set ($productBundle = $prodSku.getProduct())
+    #set ($isBundle = false)
+    #set ($isBundle = $productBundle.isCalculated())
+    #set ($productBundle = false)
+#end
+
+#macro (getPriceScheduleFrequency $schedule)
+	<span class="schedule-frequency">#emailMessage("productTemplate.recurringPrice.${schedule.paymentSchedule.name}")</div>
+#end

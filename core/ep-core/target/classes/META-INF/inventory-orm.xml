@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.inventory.domain.impl</package>
+	<entity class="InventoryImpl">
+		<named-query name="INVENTORY_SELECT_BY_GUID_AND_WAREHOUSE_UID">
+			<query>
+				SELECT i
+				FROM InventoryImpl i
+				WHERE i.skuCode = ?1
+				AND i.warehouseUid = ?2
+			</query>
+		</named-query>
+		<named-query name="INVENTORY_SELECT_BY_SKUCODE">
+			<query>
+				SELECT i
+				FROM InventoryImpl i
+				WHERE i.skuCode = ?1
+			</query>
+		</named-query>
+		<named-query name="INVENTORY_LIST_BY_SKUCODES_AND_WAREHOUSE_UID">
+			<query>
+				SELECT i
+				FROM InventoryImpl i
+				WHERE i.warehouseUid = ?1
+				AND i.skuCode in (:list)
+			</query>
+		</named-query>
+	</entity>
+
+	<entity class="InventoryJournalImpl">
+		<named-query name="INVENTORY_JOURNAL_SUM_DELTAS_BY_SKUCODE_AND_WAREHOUSE_UID">
+			<query>
+				SELECT NEW com.elasticpath.inventory.strategy.impl.InventoryJournalRollupImpl(ij.skuCode, ij.warehouseUid, SUM(ij.allocatedQuantityDelta), SUM(ij.quantityOnHandDelta))
+				FROM InventoryJournalImpl ij
+				WHERE ij.skuCode = ?1
+				AND ij.warehouseUid = ?2
+				GROUP BY ij.skuCode, ij.warehouseUid
+			</query>
+		</named-query>
+		<named-query name="LOWSTOCK_JOURNALING">
+			<query>
+				SELECT NEW com.elasticpath.inventory.impl.InventoryDtoImpl(ij.skuCode, ij.warehouseUid, i.quantityOnHandInternal, SUM(ij.quantityOnHandDelta), i.allocatedQuantity, SUM(ij.allocatedQuantityDelta), i.reservedQuantityInternal, i.reorderMinimumInternal, i.reorderQuantity, i.restockDate)
+				FROM InventoryJournalImpl ij, InventoryImpl i
+				WHERE ij.skuCode = i.skuCode
+				AND ij.warehouseUid = i.warehouseUid
+				AND ij.skuCode IN (:list)
+				AND ij.warehouseUid = ?1
+				GROUP BY ij.skuCode, ij.warehouseUid, i.quantityOnHandInternal, i.allocatedQuantity, i.reservedQuantityInternal, i.reorderMinimumInternal, i.reorderQuantity, i.restockDate
+				HAVING (SUM(ij.quantityOnHandDelta) + i.quantityOnHandInternal) &lt;= i.reorderMinimumInternal
+			</query>
+		</named-query>
+		<named-query name="LOWSTOCK_JOURNALING_ALL">
+			<query>
+				SELECT NEW com.elasticpath.inventory.impl.InventoryDtoImpl(ij.skuCode, ij.warehouseUid, i.quantityOnHandInternal, SUM(ij.quantityOnHandDelta), i.allocatedQuantity, SUM(ij.allocatedQuantityDelta), i.reservedQuantityInternal, i.reorderMinimumInternal, i.reorderQuantity, i.restockDate)
+				FROM InventoryJournalImpl ij, InventoryImpl i
+				WHERE ij.skuCode = i.skuCode
+				AND ij.warehouseUid = i.warehouseUid
+				AND ij.warehouseUid = ?1
+				GROUP BY ij.skuCode, ij.warehouseUid, i.quantityOnHandInternal, i.allocatedQuantity, i.reservedQuantityInternal, i.reorderMinimumInternal, i.reorderQuantity, i.restockDate
+				HAVING (SUM(ij.quantityOnHandDelta) + i.quantityOnHandInternal) &lt;= i.reorderMinimumInternal
+			</query>
+		</named-query>
+
+		<named-query name="LOWSTOCK_LEGACY">
+			<query>
+				SELECT NEW com.elasticpath.inventory.impl.InventoryDtoImpl(i.skuCode, i.warehouseUid, i.quantityOnHandInternal, i.allocatedQuantity, i.reservedQuantityInternal, i.reorderMinimumInternal, i.reorderQuantity, i.restockDate)
+				FROM InventoryImpl i
+				WHERE i.skuCode IN (:list)
+				AND i.warehouseUid = ?1
+				AND i.quantityOnHandInternal &lt;= i.reorderMinimumInternal
+			</query>
+		</named-query>
+		<named-query name="LOWSTOCK_LEGACY_ALL">
+			<query>
+				SELECT NEW com.elasticpath.inventory.impl.InventoryDtoImpl(i.skuCode, i.warehouseUid, i.quantityOnHandInternal, i.allocatedQuantity, i.reservedQuantityInternal, i.reorderMinimumInternal, i.reorderQuantity, i.restockDate)
+				FROM InventoryImpl i
+				WHERE i.warehouseUid = ?1
+				AND i.quantityOnHandInternal &lt;= i.reorderMinimumInternal
+			</query>
+		</named-query>
+
+		<named-query name="INVENTORY_JOURNAL_ALL_KEYS_WITH_MIN_ROWS">
+			<query>
+				SELECT NEW com.elasticpath.inventory.InventoryKey(ij.skuCode, ij.warehouseUid)
+				FROM InventoryJournalImpl ij
+				GROUP BY ij.skuCode, ij.warehouseUid
+				HAVING count(ij) >= ?1
+			</query>
+		</named-query>
+
+		<named-query name="INVENTORY_JOURNAL_ROLLUPS_BY_UIDS">
+			<query>
+				SELECT NEW com.elasticpath.inventory.strategy.impl.InventoryJournalRollupImpl(ij.skuCode, ij.warehouseUid, SUM(ij.allocatedQuantityDelta), SUM(ij.quantityOnHandDelta))
+				FROM InventoryJournalImpl ij WHERE ij.uidPk in (:uids)
+				GROUP BY ij.skuCode, ij.warehouseUid
+			</query>
+		</named-query>
+
+		<named-query name="INVENTORY_JOURNAL_UIDS_BY_KEY">
+			<query>
+				SELECT ij.uidPk
+				FROM InventoryJournalImpl ij
+				WHERE ij.skuCode = ?1
+				AND ij.warehouseUid = ?2
+			</query>
+		</named-query>
+
+		<named-query name="INVENTORY_JOURNAL_DELETE_BY_UIDS">
+			<query>
+				DELETE FROM InventoryJournalImpl ij
+				WHERE ij.uidPk in (:uids)
+			</query>
+		</named-query>
+
+		<named-query name="INVENTORY_JOURNAL_DELETE_BY_SKU_WAREHOUSE">
+			<query>
+				DELETE FROM InventoryJournalImpl ij
+				WHERE ij.skuCode = ?1
+				AND ij.warehouseUid = ?2
+			</query>
+		</named-query>
+	</entity>
+
+	<entity class="InventoryJournalLockImpl">
+		<named-query name="INVENTORY_JOURNAL_LOCK_BY_SKUCODE_AND_WAREHOUSE_UID">
+			<query>
+				SELECT lock
+				FROM InventoryJournalLockImpl lock
+				WHERE lock.skuCode = ?1
+				AND lock.warehouseUid = ?2
+			</query>
+		</named-query>
+
+		<named-query name="INVENTORY_JOURNAL_LOCK_DELETE_BY_SKUCODE_AND_WAREHOUSE_UID">
+			<query>
+				DELETE FROM InventoryJournalLockImpl lock
+				WHERE lock.skuCode = ?1
+				AND lock.warehouseUid = ?2
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>

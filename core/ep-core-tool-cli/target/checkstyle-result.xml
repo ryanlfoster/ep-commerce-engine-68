@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/Cli.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/CliDB.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/CliParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/LoadPropertiesHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/BulkSetSettingParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/IndexBuildStatusParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/PingSearchServerParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/RecompileRuleBaseParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/RequestReindexParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/SetCmUserPasswordParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/SetSettingParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-cli/src/main/java/com/elasticpath/tools/epcoretool/client/parsers/UnSetSettingParser.java">
+</file>
+</checkstyle>

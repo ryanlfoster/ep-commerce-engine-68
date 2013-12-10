@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Squish</id>
+		<parent>abstract-triggered</parent>
+		<jobType>free</jobType>
+		<node>Squish</node>
+		<jdkName>${squishJdkName}</jdkName>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGET</name>
+				<description>Deployment target to use</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value />
+				<description>The BuildRepo URL to upload test results to</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>ARTIFACT_REPOSITORY_ID</name>
+				<value />
+				<description>
+					Email needs to know the repository containing the build artifacts. For Nightly builds, this is the Snapshot repository ID. For Release builds, this is the Release Repository ID.
+				</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<value />
+				<description>The EP Version used by this build</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<maven>
+				<pom>non-distributable/squish.util/pom.xml</pom>
+				<targets><![CDATA[-U -B -e clean -Ddeployment.target=$DEPLOYMENT_TARGET]]></targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>non-distributable/squish.util/pom.xml</pom>
+				<targets><![CDATA[-U -B -e package -Ddeployment.target=$DEPLOYMENT_TARGET]]></targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<xml>
+				<content>
+				<![CDATA[
+					<com.froglogic.squish.SquishBuilder>
+						<squishConfig>Default</squishConfig>
+						<testSuite>C:\squish\suite_CMSmokeTest</testSuite>
+						<testCase>tst_Master</testCase>
+						<host>localhost</host>
+						<port>4322</port>
+						<extraOptions />
+					</com.froglogic.squish.SquishBuilder>
+				]]>
+				</content>
+			</xml>
+			<maven>
+				<!-- ep.platform.site.url is set below to work around MSITE-604 and MSITE-501 -->
+				<pom>non-distributable/squish.util/pom.xml</pom>
+				<mavenName>${mavenName}</mavenName>
+				<targets>
+				<![CDATA[
+					-U -B -e site-deploy -Ddeployment.target=$DEPLOYMENT_TARGET -Dworkspace=$WORKSPACE
+					-Dep.platform.site.url="$EP_PLATFORM_SITE_URL/squish/$DEPLOYMENT_TARGET"
+				]]>
+				</targets>
+			</maven>
+		</tasks>
+
+		<publishers>
+		<![CDATA[
+			<hudson.plugins.textfinder.TextFinderPublisher>
+				<fileSet>squish_junit/*.xml</fileSet>
+				<regexp>failures=\"[1-9][0-9]*\"</regexp>
+				<succeedIfFound>false</succeedIfFound>
+				<unstableIfFound>true</unstableIfFound>
+				<alsoCheckConsoleOutput>false</alsoCheckConsoleOutput>
+			</hudson.plugins.textfinder.TextFinderPublisher>
+			<hudson.plugins.parameterizedtrigger.BuildTrigger>
+				<configs>
+					<hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+						<configs>
+							<hudson.plugins.parameterizedtrigger.CurrentBuildParameters />
+						</configs>
+						<projects>${jenkinsJobPrefix}-Nightly-Selenium</projects>
+						<condition>ALWAYS</condition>
+						<triggerWithNoParameters>false</triggerWithNoParameters>
+					</hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+					<hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+						<configs>
+							<hudson.plugins.parameterizedtrigger.CurrentBuildParameters />
+							<hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+								<properties>SQUISH_RUN=false</properties>
+							</hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+						</configs>
+						<projects>${jenkinsJobPrefix}-Nightly-Email</projects>
+						<condition>FAILED</condition>
+						<triggerWithNoParameters>false</triggerWithNoParameters>
+					</hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+				</configs>
+			</hudson.plugins.parameterizedtrigger.BuildTrigger>
+		]]>
+
+			<!-- Adding Email Ext configurations because this publishers section overwrites the abstract one -->
+			<![CDATA[${emailExtConfig}]]>
+		</publishers>
+	</job>
+</jobs>

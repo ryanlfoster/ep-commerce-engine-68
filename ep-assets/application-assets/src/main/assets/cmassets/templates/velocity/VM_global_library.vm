@@ -1,0 +1,6 @@
+#**
+* Macro for emails to retrieve messages from a msgSource object
+*#
+#macro(emailMessage $code)
+	$msgSource.getMessage($code, null, $code, $locale)
+#end

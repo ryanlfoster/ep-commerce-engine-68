@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+	
+	<bean id="openjpaInitializer" class="com.elasticpath.persistence.openjpa.support.impl.OpenJPAInitializer" init-method="init">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+	<bean id="emailService" class="com.elasticpath.service.misc.impl.NoOpEmailService"/>
+
+	<bean id="categoryServiceTarget" parent="categoryServiceTargetTemplate">
+		<property name="categoryLoadTunerDefault">
+			<ref bean="CATEGORY_LOAD_TUNER_DEFAULT_PLUS_ATTRIBUTES" />
+		</property>
+	</bean>
+
+	<bean id="searchHostLocator" class="com.elasticpath.service.search.impl.SettingsSearchHostLocatorImpl">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="searchConfigFactory" class="com.elasticpath.service.search.impl.DefaultSearchConfigFactoryImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="searchHostLocator" ref="searchHostLocator" />
+	</bean>
+	
+</beans>

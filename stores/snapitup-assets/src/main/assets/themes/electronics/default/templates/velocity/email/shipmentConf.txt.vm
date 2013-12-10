@@ -1,0 +1,95 @@
+#emailInit()
+#set ($shipment = $orderShipment)
+#set ($customer = $order.getCustomer())
+#set ($billingAddress = $order.getBillingAddress())
+#set ($shippingAddress = $shipment.getShipmentAddress())
+
+#emailMessage("email.shipConf.dear") #if($customer.firstName && $customer.lastName)$!customer.firstName $!customer.lastName#else$!billingAddress.firstName $!billingAddress.lastName#end,
+
+#emailMessage("email.shipConf.re") $order.getOrderNumber()
+
+#emailMessage("email.shipConf.message")#**#
+	
+#emailMessage("email.shipConf.shipmentNumber"): $!shipment.shipmentNumber#**#
+#emailMessage("email.shipConf.shippedDate"): $!shipment.shipmentDate#**#
+#emailMessage("email.shipConf.shipmentType"):  $!shipment.getCarrier() -  $!shipment.getServiceLevel()#**#
+#emailMessage("email.shipConf.TrackingNumber"): $!shipment.trackingCode#**#
+
+#if($shippingAddress)
+#emailMessage("email.shipConf.shippingAddress"):#**#
+$!shippingAddress.firstName $!shippingAddress.lastName#**#
+$!shippingAddress.street1#**#
+#if ($shippingAddress.street2 && $shippingAddress.street2.length() > 0)$!shippingAddress.street2#**##end
+$!shippingAddress.city#**#
+#if($shippingAddress.subCountry)$!shippingAddress.subCountry,#end $!shippingAddress.zipOrPostalCode#**#
+$ctxCountries.getCountryDisplayName($shippingAddress.country, ${order.locale})#**#
+$!shippingAddress.phoneNumber#**#
+#end
+
+------------------------------------------------------------------------------------#**#
+#emailMessage("email.shipConf.orderItems"):#**#
+
+#foreach($orderItemFormBean in $orderItemFormBeanList)
+#set ($listPrice = "#displayPriceForLocale($orderItemFormBean.getListPriceMoney(), $order.locale)")
+#set ($unitPrice = "#displayPriceForLocale($orderItemFormBean.getUnitPriceMoney(), $order.locale)")
+#set ($onSale = $!orderItemFormBean.getUnitPriceMoney().lessThan($orderItemFormBean.getListPriceMoney()))
+## Display skucode
+$orderItemFormBean.skuCode $orderItemFormBean.displayName 
+#if($!orderItemFormBean.getDisplaySkuOptions())
+$!orderItemFormBean.getDisplaySkuOptions()
+#end
+#if($onSale)
+#set ($dollarSavings = $!orderItemFormBean.getDollarSavingsMoney())
+$!orderItemFormBean.getQuantity() @ $unitPrice
+#emailMessage("email.orderConf.was") $!listPrice, #emailMessage("email.orderConf.save") #displayPriceForLocale($dollarSavings, $order.locale)
+#else
+$!orderItemFormBean.getQuantity() @ $unitPrice
+#end
+
+#if ($orderItemFormBean.getChildren().size() > 0)
+#displayOrderItemChildrenText($orderItemFormBean, ${order.locale}, false)
+
+#end
+#end
+
+------------------------------------------------------------------------------------#**#
+
+#emailMessage("email.shipConf.subtotal"): #displayPriceForLocale($shipment.getItemSubtotalMoney(), $order.locale)#**#
+#emailMessage("email.shipConf.shipping"): #if($!shipment.getShippingCostMoney().getAmount().setScale(0,0).intValue()>0)#displayPriceForLocale($shipment.getShippingCostMoney(), $order.locale) #else N/A #end#**#	
+#if($shipment.hasSubtotalDiscount()&&!$shipment.isInclusiveTax())
+#emailMessage("email.shipConf.shipmentDiscount"): #displayPriceForLocale($order.getSubtotalDiscountMoney(), $order.locale)#**#
+#end
+
+#emailMessage("email.shipConf.totalBeforeTax"): #displayPriceForLocale($shipment.getTotalBeforeTaxMoney(), $order.locale)#**#
+#emailMessage("email.shipConf.itemTax"): #displayPriceForLocale($shipment.getItemTaxMoney(), $order.locale)#**#
+#emailMessage("email.shipConf.shippingTax"): #displayPriceForLocale($shipment.getShippingTaxMoney(), $order.locale)#**#
+
+#emailMessage("email.shipConf.shipmentTotal"): #displayPriceForLocale($shipment.getTotalMoney(), $order.locale)#**#
+
+------------------------------------------------------------------------------------#**#
+
+#emailMessage("email.shipConf.track")#**#
+$store.getUrl()/order-details.ep?oID=$!order.getOrderNumber()
+
+#emailMessage("email.shipConf.thankYou")
+
+--------------------------------------#**#
+$store.getName()
+$store.getUrl()
+--------------------------------------#**#
+
+## MACRO TO DISPLAY ORDERITEMS AS TEXT
+#macro(displayOrderItemChildrenText $itemFormBean $locale $showSkuOptions)
+#emailMessage("email.orderConf.includes"):
+
+## iterating constituentView items in the bundle
+#foreach ($item in $itemFormBean.getChildren())
+#displayConstituentText ($item.displayName $item.displaySkuOptions $item.quantity $item.level $locale $showSkuOptions)
+#end
+#end
+
+## MACRO TO DISPLAY BUNDLE CONSTITUENTS AS TEXT
+#macro(displayConstituentText $productDisplayName $skuDisplayName $quantity $level $itemFormBean $locale $showSkuOptions)
+$productDisplayName #if ($quantity > 1)x $quantity#end
+$!skuDisplayName
+#end

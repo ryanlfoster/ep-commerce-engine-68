@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+
+	<job>
+		<id>abstract-archetypes</id>
+		<parent>abstract-triggered</parent>
+		<abstract>true</abstract>
+		<jobType>free</jobType>
+
+		<useUpdate>true</useUpdate>
+		<doRevert>true</doRevert>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<value>${ep.platform.version}</value>
+				<description>Version of platform (and therefore archetypes) to use.</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+					<![CDATA[
+					# Start with a clean workspace.
+					rm -rf ~/.m2/repository/com/elasticpath
+
+					rm -rf target/archetype-work/
+					mkdir -p target/archetype-work/
+					echo "<project><modelVersion>4.0.0</modelVersion><groupId>dummy</groupId><artifactId>dummy</artifactId><version>1.0-SNAPSHOT</version><packaging>pom</packaging></project>" > target/archetype-work/pom.xml
+					]]>
+				</command>
+			</shell>
+			<!-- Generate Liquibase Extension from the archetype. -->
+			<maven>
+				<targets>archetype:generate -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+				<pom>target/archetype-work/pom.xml</pom>
+				<properties>
+					archetypeArtifactId=schema-extension-archetype
+					archetypeGroupId=com.elasticpath.db
+					archetypeVersion=$EP_PLATFORM_VERSION
+					groupId=com.elasticpath.example
+					artifactId=schema-extension
+					version=1.0-SNAPSHOT
+					interactiveMode=false
+				</properties>
+			</maven>
+			<!-- Generate a core extension from the archetype. -->
+			<maven>
+				<targets>archetype:generate -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+				<pom>target/archetype-work/pom.xml</pom>
+				<properties>
+					archetypeArtifactId=ep-core-archetype
+					archetypeGroupId=com.elasticpath
+					archetypeVersion=$EP_PLATFORM_VERSION
+					groupId=com.elasticpath.example
+					artifactId=core-extension
+					version=1.0-SNAPSHOT
+					interactiveMode=false
+				</properties>
+			</maven>
+			<!-- Generate the webapp projects from the archetypes -->
+			<maven>
+				<targets>archetype:generate -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+				<pom>target/archetype-work/pom.xml</pom>
+				<properties>
+					archetypeArtifactId=ep-storefront-webapp-archetype
+					archetypeGroupId=com.elasticpath
+					archetypeVersion=$EP_PLATFORM_VERSION
+					groupId=com.elasticpath.example
+					artifactId=storefront
+					version=1.0-SNAPSHOT
+					interactiveMode=false
+				</properties>
+			</maven>
+			<maven>
+				<targets>archetype:generate -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+				<pom>target/archetype-work/pom.xml</pom>
+				<properties>
+					archetypeArtifactId=ep-search-webapp-archetype
+					archetypeGroupId=com.elasticpath
+					archetypeVersion=$EP_PLATFORM_VERSION
+					groupId=com.elasticpath.example
+					artifactId=search
+					version=1.0-SNAPSHOT
+					interactiveMode=false
+				</properties>
+			</maven>
+			<maven>
+				<targets>archetype:generate -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+				<pom>target/archetype-work/pom.xml</pom>
+				<properties>
+					archetypeArtifactId=ep-cmserver-webapp-archetype
+					archetypeGroupId=com.elasticpath
+					archetypeVersion=$EP_PLATFORM_VERSION
+					groupId=com.elasticpath.example
+					artifactId=cmserver
+					version=1.0-SNAPSHOT
+					interactiveMode=false
+				</properties>
+			</maven>
+
+			<!-- Deploy the Liquibase extension. -->
+			<maven>
+				<pom>target/archetype-work/schema-extension/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<!-- Deploy the Core extension. -->
+			<maven>
+				<pom>target/archetype-work/core-extension/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<!-- Deploy the storefront webapp, for all appservers -->
+			<maven>
+				<pom>target/archetype-work/storefront/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-tomcat-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/storefront/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-jboss-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/storefront/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-weblogic-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/storefront/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-websphere-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+
+			<!-- Deploy the search webapp, for all appservers -->
+			<maven>
+				<pom>target/archetype-work/search/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-tomcat-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/search/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-jboss-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/search/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-weblogic-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/search/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-websphere-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+
+			<!-- Deploy the cmserver webapp, for all appservers -->
+			<maven>
+				<pom>target/archetype-work/cmserver/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-tomcat-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/cmserver/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-jboss-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/cmserver/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-weblogic-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+			<maven>
+				<pom>target/archetype-work/cmserver/pom.xml</pom>
+				<targets>clean deploy -B -U -P${maven.common.profiles},with-websphere-war,nightly</targets>
+				<mavenName>${mavenName}</mavenName>
+			</maven>
+		</tasks>
+	</job>
+</jobs>

@@ -1,0 +1,1096 @@
+#**
+ *
+ * VM_global_library.vm
+ * This file consists of a collection of Velocity macros aimed at easing
+ * some of the common requirements of elastic path applications.
+ *
+*#
+
+#**
+* Initialises global variables used in all store front web templates
+*#
+#macro (templateInit)
+  #set ($showPageName = false)
+  #set ($springHtmlEscape = true)
+  #set ($baseUrl = $storefrontContextUrl) 
+  #if ($showPageName)
+	$!pageName
+  #end
+#end
+
+#**
+* Initialises global variables used in all email templates
+*#
+#macro (emailInit)
+  #set ($baseUrl = $baseImgUrl)
+#end
+
+#**
+* Initialises global variables used in category store front web templates
+*#
+#macro (initCategoryVariables)
+  #set ($currentCatalogViewResult = $catalogViewResultBean.getCurrentCatalogViewResult())
+  #set ($currentCatalogViewRequest = $currentCatalogViewResult.getCatalogViewRequest())
+  #set ($currentCatalogViewResultSize = $currentCatalogViewResult.getResultsCount())
+  #set ($totalPageNumber = $catalogViewResultBean.getTotalPageNumber())
+  #set ($currentPageNumber = $catalogViewResultBean.getCurrentPageNumber())
+  #set ($currentCatalogViewQueryString = $currentCatalogViewRequest.getQueryString())
+  #if ($currentCatalogViewRequest.getSortTypeOrderString())
+    #set ($currentCatalogViewSorterId = $currentCatalogViewRequest.getSortTypeOrderString())
+  #else
+    #set ($currentCatalogViewSorterId = "")
+  #end
+  #if($currentCatalogViewResult.getCategory())
+	#set ($currentCategory = $currentCatalogViewResult.getCategory())
+	#set ($ldf = $currentCatalogViewResult.getCategory().getLocaleDependantFields($locale))
+	#set ($localeUrlMap = $requestLocaleUrlTool.getLocaleLinksForCategory($locale, $currentCategory, $currentPageNumber, $ctxSeoEnabledHelper.getBoolean()))
+  #end
+#end
+
+#**
+ * To display a global warning message if there is any global/field error
+*#
+#macro (GlobalWarning $name $styleClass)
+  #set ($errorsCount = $springMacroRequestContext.getErrors($name).getErrorCount())
+  #set ($globalErrors = $springMacroRequestContext.getErrors($name).getGlobalErrors())
+  #set ($fieldErrorCount = $errorsCount - $listTool.size($globalErrors))
+  #if($fieldErrorCount > 0)
+    <div class="$styleClass">#springMessage("error.fieldNotice")</div>
+  #end
+#end
+
+#**
+* To display the global error message associated with a command object
+*#
+#macro (displayGlobalErrors $name)
+  #set ($globalErrors = $springMacroRequestContext.getErrors($name).getGlobalErrors())
+  #if($globalErrors.size() > 0)
+    <div id="alert" class="alert">
+      <div class="error-message-title">#springMessage("error.general")</div>
+      #foreach ($err in $globalErrors)
+        <div class="error-message-item">$springMacroRequestContext.getMessage($err)</div>
+      #end
+    </div>
+  #end
+#end
+
+
+#**
+* To display a catalog image
+*#
+#macro (displayCatalogImage $image $width $height $padding $align $border $alt $id)
+  #set ($widthStr = "")
+  #set ($heightStr = "")
+  #if ($width != "")
+    #set ($widthStr = "width=$!width")
+  #end
+  #if ($height != "")
+    #set ($heightStr = "height=$!height")
+  #end
+  #set($imageUrl="$baseUrl/renderImage.image?imageName=$image&amp;width=$!width&amp;height=$!height&amp;padding=$!padding")
+  #if($!id != "")
+    #set($idTag = "id='$!id'")
+  #end
+  <img src="$imageUrl" $widthStr $heightStr align="$!align" border="$!border" alt="$escapeTool.html($!alt)" $!idTag/>
+#end
+
+#**
+* Macro to translate a message code into a message.
+*#
+#macro (commerceMessage $code)
+	$ctxEp.getMessage($code, null, $code, $locale)
+#end
+
+#**
+* Macro for emails to retrieve messages from a msgSource object - must not have a line break before the #end.
+*#
+#macro(emailMessage $code)
+$msgSource.getMessage($code, null, $code, $locale)#end
+
+#**
+* Macro to translate a message code into a message with args, using the given default text if no message found.
+*#
+#macro (springMessageTextWithArgs $code $objects $text)
+$springMacroRequestContext.getMessage($code, $objects, $text)
+#end
+
+#**
+* Display the price of a cart item in the shopping cart locale
+*#
+#macro (displayCartItemPrice $regPrice $salePrice)
+  #if($salePrice && $regPrice.getAmount().doubleValue() != $salePrice.getAmount().doubleValue())
+    <div class="reg-price">#displayPriceForCartLocale($regPrice)</div>
+    <div class="your-price"><img src="$baseUrl/template-resources/images/tag.gif" width="16" height="16" align="absmiddle" /> #displayPriceForCartLocale($salePrice)</div>
+    <div class="savings">#springMessage("shoppingCart.yousave"):</div>
+    <div class="savings-value">$moneyFormatter.formatCurrency($regPrice.getSaleSavings($salePrice), $locale) ($moneyFormatter.formatPercentage($regPrice.getSalePercentage($salePrice), $locale))</div>
+  #else
+    #displayPriceForCartLocale($regPrice)
+  #end
+#end
+
+#**
+* Parse the category seo url.
+*#
+#macro (parseCategorySeoUrl $category $pageNumber)
+  #if ($ctxSeoEnabledHelper.getBoolean())
+    #set ($categorySeoUrl = "$baseUrl/$ctxSeoUrlBuilder.categorySeoUrl($category, $locale, $pageNumber)")
+    #set ($categorySeoUrl = $escapeTool.html($categorySeoUrl))
+  #else
+    #set ($categorySeoUrl = "$baseUrl/browse.ep?cID=${category.uidPk}&filters=c${category.guid}&pn=${pageNumber}")
+  #end
+#end
+
+#**
+* Parse the product seo url.
+*#
+#macro (parseProductSeoUrl $product $category)
+  #if ($ctxSeoEnabledHelper.getBoolean())
+    #set ($productSeoUrl = "$baseUrl/$ctxSeoUrlBuilder.productSeoUrl($product, $locale, $category)")
+  #else
+    #set ($productSeoUrl = "$baseUrl/product-view.ep?pID=${product.guid}")
+  #end
+  #set ($productSeoUrl = $escapeTool.html($productSeoUrl))
+#end
+
+#**
+* Parse the recently viewed items seo url.
+*#
+#macro (parseRecentlyViewedSeoUrl $product)
+  #if ($ctxSeoEnabledHelper.getBoolean())
+    #set ($recentlyViewedSeoUrl = "$baseUrl/$viewHistoryProduct.getSeoUrl($locale)")
+  #else
+    #set ($recentlyViewedSeoUrl = "$baseUrl/product-view.ep?pID=${product.guid}")
+  #end
+  #set ($recentlyViewedSeoUrl = $escapeTool.html($recentlyViewedSeoUrl))
+#end
+
+#**
+* Get the Min Qty from next price tier, the input price should has sorted price tier
+*#
+#macro (getNextMinQty $qty $price)
+  #set ($foundNextMinQty = 0)
+  #foreach ($priceTier in $price.getPriceTiers())
+    #set($upperQty = $priceTier.getMinQty())
+    #set($upperQty = $upperQty - 1)
+    #if (($priceTier.getMinQty() > $qty) && ($foundNextMinQty == 0))
+      #if ($upperQty > $qty)
+        ## This prevents displaying 1 - 1 @ $10.00.
+        - $upperQty
+      #end
+      #set($foundNextMinQty = 1)
+    #end
+  #end
+  #if ($foundNextMinQty == 0)
+    +
+  #end
+#end
+
+
+#**
+* Display recently viewed item
+*#
+#macro (displayRecentlyViewed $viewedProduct)
+  <ul class="recentlyviewed">
+    #if($viewedProduct.getImage())
+      #set ($image = $!viewedProduct.getImage())
+    #else
+      #set ($image = "")
+    #end
+    #set ($productName =   $viewedProduct.getLdf($locale).getDisplayName())
+    #set ($brandName = $viewedProduct.getBrand().getDisplayName($locale, true))
+    #parseRecentlyViewedSeoUrl($viewedProduct)
+    #set ($recentlyViewedSeoUrl = $escapeTool.html($recentlyViewedSeoUrl))
+
+    <li class="product-img"><a href="$recentlyViewedSeoUrl">#displayCatalogImage($image "40" "40" "0" "middle" "0" $productName "")</a></li>
+    <li class="product-item-name">
+    <div class="brand-name">$!brandName</div>
+    <div class="prod-name"><a href="$recentlyViewedSeoUrl">$productName</a></div>
+    </li>
+  </ul>
+#end
+
+#**
+* Display shoppingItem (used in search, category results, cross sells etc)
+*#
+#macro (displayProductWithPrice $product $catalog $warehouse $price $sectionName $isSearch $productCharacteristics)
+    #set($hasAdjustments = false)
+    #if($productCharacteristics.hasMultipleConfigurations())
+        #set($hasAdjustments = true)
+    #end
+  <ul class="product">
+    #if($product.getImage())
+      #set ($image = $!product.getImage())
+    #else
+      #set ($image = "")
+    #end
+    #set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+    #set ($brandName = $product.getBrand().getLocalizedProperties().getValue("brandDisplayName", $locale)       )
+    #parseProductSeoUrl($product $product.getDefaultCategory())
+    <li class="product-img"><a href="$productSeoUrl">#displayCatalogImage($image "120" "120" "0" "middle" "0" $productName "")</a></li>
+    <li class="product-item-name">
+    <div class="brand-name">$!brandName</div>
+    <div class="prod-name"><a href="$productSeoUrl">$!productName</a></div>
+    </li>
+        <li class="product-pricing">
+            #if($price)
+               #if($isSearch == true) 
+               	#displayProductsAndBundlesInSearch($price)
+               #else  	 
+                #displayProductPrice($product $price $hasAdjustments true true $sectionName)
+               #end
+            #end
+        </li>
+        #if($ctxEp.isPowerReviewsEnabled())
+          ## Display the product review snippet for the product
+          <li class="product-review-snippet">
+            <script type="text/javascript">
+              if(self.snippet) {
+                pr_write_review='$baseUrl/product-review.ep?pGUID=$product.getGuid()';
+                pr_page_id = '$product.getGuid()';
+                snippet(document);
+              }
+            </script>
+          </li>
+        #end
+        <li class="inventory-details">
+            #set ($inventoryDetails = $product.getInventoryDetails($product.getDefaultSku().getSkuCode()))
+            #set ($messageCode = $inventoryDetails.getMessageCode())
+
+            #if ($messageCode)
+                #if($messageCode == "OUT_OF_STOCK")
+                    <span class="product-out-stock">#springMessage($!messageCode.getPropertyKey())</span>
+                #elseif($messageCode == "OUT_OF_STOCK_WITH_RESTOCK_DATE")
+                    <span class="product-out-stock" id="inventoryText">#springMessage("productTemplate.outOfStock")</span>
+                    <span class="product-restock-date" id="restockDate">(#springMessage("productTemplate.availableOnlyInStockRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$inventoryDetails.getStockDate()))</span>
+                #elseif($messageCode == "IN_STOCK")
+                    <span class="availability"></span>
+                #elseif ($messageCode)
+                    <span class="availability" id="inventoryText">#springMessage($messageCode.getPropertyKey())</span>
+                #end
+            #end
+        </li>
+    <div class="clear0"></div>
+  </ul>
+#end
+
+##
+##Macro to display bundles and products in the sorted search
+##
+##
+#macro (displayProductsAndBundlesInSearch $price)
+    #set ($schedulse = false)
+    #set ($schedules = $price.getPricingScheme().getSchedules())
+    #if ($schedules.size() == 1) ## use existing display product logic if bundle has only 1 schedule
+        #displayProductPrice($product $price $hasAdjustments true true $sectionName)
+    #else
+        #set ($priceTiers = false)
+        #set ($priceTiers = $price.getPricingScheme().getPriceTiersMinQuantities())
+       #if($priceTiers.size() <= 1) 
+           	#displayBundleSingleTierRecurringPrices($price.getPricingScheme() false $sectionName)
+       #else
+           #displayBundleTierRecurringPrice($price.getPricingScheme() $priceTiers $sectionName )
+       #end
+    #end                       
+#end
+
+##
+## Macro to iterate through the set of integer price tiers and display them
+##
+##
+#macro (displayBundleTierRecurringPrice $pricingScheme $priceTiers $sectionName)
+ <div id="priceTier">
+            <ul>
+              #foreach ($priceTier in $priceTiers)
+                  #set ($tierArray = $priceTiers.toArray())
+                  <li> 
+                  <span class="tier-level"> ## properly format the tier level from $priceTiers
+                        $priceTier
+                        #if($velocityCount <$tierArray.size())
+                            #set ($nextTier =0 )
+                            #set ($nextTier = $tierArray.get($velocityCount))
+                            #set ($nextTier = $nextTier - 1 )	
+                            #if ($nextTier > $priceTier)
+                                - $nextTier
+                            #end
+                        #else
+                            +
+                        #end
+                            @
+                     </span>
+                        &nbsp;
+                        #displayBundleSingleTierRecurringPrices($pricingScheme $priceTier $sectionName)
+                  </li>
+              #end
+              </ul>
+          </div>
+#end
+
+##
+## Macro to display a bundles single tiers prices and frequencies
+## Iterates through and displays all the schedules and prices
+##
+#macro (displayBundleSingleTierRecurringPrices $pricingScheme $tier $sectionName)
+  #set ($schedulse = false)
+  #set ($schedules = $price.getPricingScheme().getSchedules())	
+  #set ($ctr = 0)
+  #foreach ($schedule in $schedules)
+    #set ($seperateFrequencies = false)
+        #if ($velocityCount <$schedules.size())
+            #set ($seperateFrequencies = true)   
+        #end
+    #displayBundleRecurringPriceAtTier($pricingScheme $schedule $tier $sectionName $seperateFrequencies)
+  #end  
+#end
+
+##
+## Macro to display a bundles  price and schedule frequency at the given tier.
+##
+##
+#macro (displayBundleRecurringPriceAtTier  $pricingScheme  $schedule $tier $sectionName $seperateFrequencies)
+    #if($tier == false)
+        #set ($isTiers = false)
+    #else 
+        #set ($isTiers = true)
+    #end	
+    #set ($constituentPrice = false)
+    #set ($constituentLowestPrice = false)       
+    #set ($constituentPrice = $pricingScheme.getSimplePriceForSchedule($schedule))
+    #if ( $isTiers == false)
+        #set ($constituentLowestPrice = $constituentPrice.getLowestPrice())
+    #else
+        #set ($constituentLowestPrice = $constituentPrice.getLowestPrice($tier))
+    #end
+     <span class="schedule-price$!sectionName">
+        <span class="reg-price$!sectionName" id="lowestPrice">
+            #displayPriceForCartLocale($constituentLowestPrice)
+            #if ($schedule.getType().toString().equals("RECURRING"))         
+                #displayPriceScheduleFrequency($schedule)
+            #else
+                #springMessage("productTemplate.recurringPrice.NOW")
+             #end
+             
+             #if ($seperateFrequencies == true)
+             	  ,
+             #end
+        </span> 
+    </span>
+#end
+
+
+
+#**
+* Display product small (used to display featured products in the category pages)
+*#
+#macro (displayProductSmall $product $price)
+  <ul class="product">
+    #if($product.getImage())
+      #set ($image = $!product.getImage())
+    #else
+      #set ($image = "")
+    #end
+    #set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+    #set ($brandName = $product.getBrand().getLocalizedProperties().getValue("brandDisplayName", $locale)		)
+    #parseProductSeoUrl($product $product.getDefaultCategory())
+    <li class="product-img"><a href="$productSeoUrl">#displayCatalogImage($image "60" "60" "0" "middle" "0" $productName "")</a></li>
+    <li class="product-item-name">
+    <div class="brand-name">$!brandName</div>
+    <div class="prod-name"><a href="$productSeoUrl">$!productName</a></div>
+    </li>
+    <li class="product-pricing">
+	  #displayProductPrice($product $price false false true "")
+    </li>
+  </ul>
+#end
+
+
+
+#**
+* Display the  shipping options
+*#
+#macro (displayShippingOptions $estimateAddress $shippingServiceLevelList)
+
+#set ($optionSize = 0)
+#if ($!shippingServiceLevelList)
+	#set ($optionSize = $!shippingServiceLevelList.size())
+#end
+
+<fieldset id="shippingOptionsDiv">
+  <legend>#springMessage("viewCart.shippingRates")</legend>
+  #set ($propertyKey = "shippingServiceLevelDisplayName")
+  <table class="shipping-rates-table" id="shippingOptionsTable">
+    <tbody id="shippingOptionsTableBody">
+      #if ($optionSize > 0)
+        #foreach($shippingServiceLevel in $shippingServiceLevelList)
+          #set ($selected = 0)
+          #set ($shippingCost = $shippingServiceLevel.getShippingCost())
+          <tr valign="top">
+            <td>
+              <input type="radio" onclick="onShippingServiceLevelSelect(this);" name="selectedShippingServiceLevel" value="$shippingServiceLevel.uidPk" #if($!sesShoppingCart.getSelectedShippingServiceLevel().getUidPk() == $!shippingServiceLevel.uidPk)  checked="true" #end/>
+            </td>
+            <td class="type">$shippingServiceLevel.getLocalizedProperties().getValue($propertyKey, $locale)</td>
+            <td class="rate">#displayPriceForCartLocale($shippingCost)</td>
+          </tr>
+        #end
+      #end
+    </tbody>
+  </table>
+  <div id="estimatenoservicealert" class="alert" #if ($optionSize>0)style="display:none"#end>
+    <div class="error-message-title">#springMessage("deliveryOptions.noService")</div>
+  </div>
+  </fieldset>
+
+  <div class="fieldset-footer">
+	#if ($estimateAddress.subCountry)
+		#set ($subCountryComma = ',')
+	#end
+	#if ($estimateAddress.country)
+		#set ($countryComma = ',')
+	#end
+    <em id="estimationAddressNode"> $!estimateAddress.subCountry$!subCountryComma$!estimateAddress.country$!countryComma$!estimateAddress.zipOrPostalCode</em><br />
+    <a href="javascript:void()" onclick="changeEstimationAddress();return false;">#springMessage("viewCart.changeAddress")</a>
+  </div>
+#end
+
+#**
+* Display price.
+* Reset price variables hand so prices don't carry over from past execution.
+* Show prefix 'from' if required.
+*#
+#macro (displayPrice $price $hasAdjustments $showSave $schedule $showPriceTiers $sectionName)
+  #set ($listPrice = $price.getListPrice())
+  #set ($lowestPrice = $price.getLowestPrice())  
+  #set ($onSale = $price.isLowestLessThanList())
+  #if ($hasAdjustments)
+	<div class="starting-from" id="starting-from">#springMessage("productgrid.starting")</div>
+  #end
+  #if ($showPriceTiers && $price.hasPriceTiers())
+      #displayPriceTiers($price $schedule $sectionName) 
+  #else
+    #if ($onSale && $showSave)
+      #set ($dollarSavings = $price.getDollarSavings())
+      <span class="sale-price$!sectionName" id="lowestPrice">#displayPriceForCartLocale($!lowestPrice)</span>
+        #displayPriceScheduleFrequencyWithClass($schedule "sale-price$!sectionName")
+        #displayWasSave($schedule $listPrice $dollarSavings $sectionName)
+    #else
+      <span class="reg-price$!sectionName" id="lowestPrice">#displayPriceForCartLocale($!lowestPrice)</span>
+      #displayPriceScheduleFrequencyWithClass($schedule "schedule-frequency-bold$!sectionName")
+    #end
+  #end
+#end
+
+
+#**
+* Display the price formatted for the passed locale
+*#
+#macro(displayPriceForLocale $price $currentLocale)
+    #if ($price && "$!price" != "")
+        $moneyFormatter.formatCurrency($price, $currentLocale)
+    #end
+#end
+
+
+#**
+* Display the price formatted for the shopping cart's locale
+*#
+#macro(displayPriceForCartLocale $price)
+    #displayPriceForLocale($price $locale)
+#end
+
+
+#**
+* Display price tiers
+*#
+#macro (displayPriceTiers $price $schedule $sectionName)
+    #if ($price.hasPriceTiers())
+      <!-- priceTier div may be filled in by Javascript -->
+      <div id="priceTier">
+          <ul>
+            #foreach ($priceTier in $price.getPriceTiers())
+                #set ($curMinQty = $priceTier.getMinQty())
+                <li>
+                    <span class="tier-level">
+                        $curMinQty #getNextMinQty($curMinQty $price) @
+                    </span>
+                    #set ($onSale = $price.isLowestLessThanList($curMinQty))
+                    #set($tierId = $velocityCount - 1)
+                    #if($onSale)
+                        <span class="sale-price$!sectionName" id="tier-price-$tierId">
+                            &nbsp;#displayPriceForCartLocale($!price.getLowestPrice($curMinQty))#getPriceScheduleText ($schedule)
+                        </span>
+                    #else
+                        <span class="reg-price$!sectionName" id="tier-price-$tierId">
+                            &nbsp;#displayPriceForCartLocale($!price.getLowestPrice($curMinQty))#getPriceScheduleText ($schedule)
+                        </span>
+                    #end
+                </li>
+            #end
+            </ul>
+        </div>
+    #end
+#end
+
+
+#**
+* Display all the Cart Items
+*#
+#macro (displayShoppingItems $shoppingCartFormBean $isCheckout $availabilityMap)
+	<input type="hidden" name="updateCartItemIndex" />
+    #foreach($shoppingItemFormBean in $shoppingCartFormBean.getCartItems())
+		#set ($cartItemIndex = $shoppingCartFormBean.getCartItems().indexOf($shoppingItemFormBean))
+
+		#if($shoppingItemFormBean.product.productType.name == "Gift Certificates")
+			#displayGiftCertificateNewLineItem($shoppingItemFormBean $cartItemIndex $isCheckout $shoppingCartFormBean.locale)
+		#else
+
+			#if ($shoppingItemFormBean.dependent == false)
+				## getCartItems return a list of ShoppingItemFormBeans
+				#displayShoppingItem($shoppingItemFormBean $cartItemIndex $isDependent $isCheckout $availabilityMap $shoppingCartFormBean.locale)
+				#set($shoppingItem = $sesShoppingCart.getCartItemById($shoppingItemFormBean.getUpdateShoppingItemUid()))
+				#displayDependentItems($shoppingCartFormBean $shoppingItem $isCheckout $availabilityMap)
+			#end
+	    #end
+	#end
+#end
+
+#**
+* Displays the dependent items of given form bean, like warranties
+*#
+#macro (displayDependentItems $shoppingCartFormBean $shoppingItem $isCheckout $availabilityMap)
+	#foreach($dependentItem in $shoppingItem.getDependentItems())
+		#set($shoppingItemFormBean = $shoppingCartFormBean.getShoppingItemFormBeanBy($dependentItem.uidPk))
+		#displayShoppingItem($shoppingItemFormBean $shoppingCartFormBean.cartItems.indexOf($shoppingItemFormBean) true $isCheckout $availabilityMap $shoppingCartFormBean.locale)
+	#end
+#end
+
+#**
+* Display a Cart Items
+*#
+#macro (displayShoppingItem $cartItem $cartItemIndex $isDependent $isCheckout $availabilityMap $locale)
+  #set ($product = $cartItem.product)
+  #set ($productSku = $product.getSkuByCode($cartItem.skuCode))
+  #set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+  #set ($cartItemUid = $cartItem.getUpdateShoppingItemUid())
+  #set ($quantity = $cartItem.quantity)
+  #set ($price = $cartItem.getPrice())
+  #set ($total = $cartItem.getTotal())
+  #set ($availability = $availabilityMap.get($cartItemUid))
+  #parseProductSeoUrl($product $product.getDefaultCategory() $locale)
+  #if($productSku.getImage())
+    #set ($image = $!productSku.getImage())
+  #else
+    #set ($image = "")
+  #end
+  #if(!$isDependent)
+    #set($className="line")
+  #else
+    #set($className="dependant")
+  #end
+  <tr class="$!className">
+    <td class="action">
+      #if (!$isDependent)
+        <a href="product-view.ep?pID=$product.getCode()&amp;update=viewCart&amp;cartItemId=$cartItemUid">#springMessage("globals.cart.edit")</a>
+
+        #if(!$isCheckout)
+          <a href="move-to-wishlist.ep?skuCode=$productSku.skuCode&amp;itemUid=$cartItemUid">#springMessage("globals.cart.movetowishlist")</a>
+        #end
+      #end
+      #if(!$isCheckout)
+        <a href="remove-cart-item.ep?itemUid=$cartItemUid">#springMessage("globals.cart.remove")</a>
+      #end
+    </td>
+    <td class="img">
+      #if($image != "")
+        #displayCatalogImage($image "50" "50" "0" "middle" "0" $productName "")
+      #end
+    </td>
+    <td class="desc">
+    	#if ($product.isDisplayable() && !$isDependent)
+    		<a href="product-view.ep?pID=$product.getCode()&amp;update=viewCart&amp;cartItemId=$cartItemUid">$productName</a><br />
+		#else
+			$productName <br />
+		#end
+        #foreach ($skuOptionValue in $productSku.getOptionValues())
+            #if (!$skuOptionValue.getSkuOption().getOptionKey().equals("Frequency"))
+                $skuOptionValue.getLocalizedProperties().getValue("skuOptionValueDisplayName", $locale) <br />
+            #end
+        #end
+      <div class="sku">$productSku.skuCode</div>
+	  #set($messageCode = $availability.messageCode)
+	  #if($messageCode == "OUT_OF_STOCK" || $messageCode == "OUT_OF_STOCK_WITH_RESTOCK_DATE")
+	  	<div class="req" id="inventoryText">
+	  #else
+	  	<div class="availability" id="inventoryText">
+	  #end
+		<div>#springMessage($messageCode.propertyKey)</div>
+		<span class="sku">
+			#if ($messageCode == "AVAILABLE_FOR_PREORDER")
+			  #if ($productSku.product.expectedReleaseDate)
+				(#springMessage("productTemplate.preOrderRestockDate"): $dateTool.format('E, MMMM d',$productSku.product.expectedReleaseDate))
+			  #end
+			#elseif ($messageCode == "AVAILABLE_FOR_BACKORDER")
+			  #if ($availability.stockDate)
+				(#springMessage("productTemplate.backOrderRestockDate"): $dateTool.format('E, MMMM d',$availability.stockDate))
+			  #else
+				(#springMessage("productTemplate.willShipWhenAvailable"))
+			  #end
+			#elseif($messageCode == "OUT_OF_STOCK_WITH_RESTOCK_DATE")
+			  #if ($availability.stockDate)
+				$dateTool.format('E, MMMM d',$availability.getStockDate())
+			  #end
+			#end
+		</span>
+	  </div>
+
+	  #if ($cartItem.getConstituents().size() > 0)
+		  #displayConstituents($cartItem $locale)
+	  #end
+
+	  #if(!$availability.hasSufficientUnallocatedQty())
+		  <div class="req">#springMessage("globals.cart.insufficientinventory")</div>
+	  #end
+	</td>
+
+    <td class="unit-price">
+	  #set ($recurringSchedules = $false)
+	  #set ($recurringSchedules = $!price.getPricingScheme().getRecurringSchedules())
+	  #set ($purchaseTimeSchedule = $!price.getPricingScheme().getPurchaseTimeSchedules())
+	  
+	  #if ($recurringSchedules && $recurringSchedules.size() > 0 && $cartItem.isCalculatedBundle() == false)
+		  #set($recurringSchedule = $recurringSchedules.iterator().next())
+		  #set($effectivePrice = $price.getPricingScheme().getSimplePriceForSchedule($recurringSchedule))
+	  #else
+		  #set($effectivePrice = $price)
+		  #set($recurringSchedule = $false)
+	  #end
+	  
+	  #set ($lowestPrice = $effectivePrice.getLowestPrice($quantity))
+	  #set ($onSale = $effectivePrice.isLowestLessThanList($quantity))
+	  #if($onSale)
+        #set ($dollarSavings = $effectivePrice.getDollarSavings($quantity))
+		#set ($listPrice = $effectivePrice.getListPrice($quantity))
+        <div class="sale-price-for-cart">#displayPriceForCartLocale($lowestPrice)</div>
+		#displayWasSave($schedule $listPrice $dollarSavings "-for-cart")
+      #else
+        <div class="reg-price-for-cart">#displayPriceForCartLocale($lowestPrice)</div>
+      #end
+	
+    </td>
+    <td class="frequency"> 
+	  #if ($recurringSchedule)
+	    #displayPriceScheduleFrequency($recurringSchedule)
+	  #end
+	</td>
+	<td class="qty">
+      #if (!$isCheckout && !$isDependent)
+
+      	#set ($minQty = $cartItem.getMinQty())
+        #set ($qtyCount = $minQty + 10)
+		#if ($quantity > 10)
+	    	#set ($qtyCount = $quantity + 10)
+		#end
+
+        #set ($counter = [$minQty..$qtyCount])
+        <select id="cartItems[$cartItemIndex].quantity" name="cartItems[$cartItemIndex].quantity" onchange="updateCartItemQuantity($cartItemIndex);">
+          #foreach( $index in $counter )
+            <option #if($quantity == $index)selected #end value="${index}">${index}</option>
+          #end
+        </select>
+        #springShowErrors("<br>" "req")
+      #else
+        $quantity
+      #end
+    </td>
+    #if(!$isDependent)
+      #set($id="cartItems[$cartItemIndex].price")
+    #end
+
+    <td class="total-price" id="$!id">
+   		#displayPriceForCartLocale($total)
+   	</td>
+	
+  </tr>
+#end
+
+#**
+* Display a new Cart Item
+*#
+#macro (displayGiftCertificateNewLineItem $shoppingItemFormBean $cartItemIndex $isCheckout $locale)
+
+  ##set($cartItem = $sesShoppingCart.getCartItemById($shoppingItemFormBean.getUpdateShoppingItemUid()))
+  #set($cartItem = $shoppingItemFormBean)
+
+  #set ($product = $cartItem.product)
+  #set ($productSku = $product.getSkuByCode($cartItem.skuCode))
+  #set ($cartItemUid = $cartItem.getUpdateShoppingItemUid())
+  #set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+
+  #set ($price = $cartItem.getPrice())
+
+  <tr class="line gift-certificate">
+    <td class="action">
+      #** <a href="product-view.ep?update=viewCart&amp;cartItemId=$cartItem.uidPk&amp;pID=giftCertificate">#springMessage("globals.cart.edit")</a> *#
+      <a href="product-view.ep?pID=$product.getCode()&amp;update=viewCart&amp;cartItemId=$cartItemUid">#springMessage("globals.cart.edit")</a>
+
+      #if(!$isCheckout)
+        <a href="remove-cart-item.ep?itemUid=$cartItemUid">#springMessage("globals.cart.remove")</a>
+      #end
+    </td>
+    <td class="img">
+      #foreach ($skuOptionValue in $productSku.getOptionValues())
+      		#if($skuOptionValue.image != "")
+      					#set($gcImage = $skuOptionValue.image)
+      					#set($gcTheme = $skuOptionValue.getDisplayName($locale))
+      		#end
+      #end
+      <img src="$baseUrl/renderImage.image?imageName=$gcImage&amp;width=50&amp;height=50&amp;padding=0" border="0" alt="$gcTheme"/>
+    </td>
+    <td class="desc">
+    		<a href="product-view.ep?pID=$product.getCode()&amp;update=viewCart&amp;cartItemId=$cartItemUid">
+      #if ($productName) $productName #else #springMessage("viewCart.giftCertificate.electronic") #end (#displayPriceForCartLocale($cartItem.getTotal()))</a><br />
+
+      #foreach ($skuOptionValue in $productSku.getOptionValues())
+        $skuOptionValue.getLocalizedProperties().getValue("skuOptionValueDisplayName", $locale)		<br />
+      #end
+
+      <div class="sku">$productSku.skuCode</div>
+
+      <div class="desc-gc">
+      #springMessage("viewCart.giftCertificate.recipientEmail"): $cartItem.giftCertificateFields.recipientEmail
+
+	  #set($recipientName = $cartItem.giftCertificateFields.recipientName)
+	  #if(($recipientName) && ($recipientName.length() > 0))
+		<br/>#springMessage("globals.giftCertificate.recipientName"): $recipientName
+	  #end
+
+	  #set($senderName = $cartItem.giftCertificateFields.senderName)
+	  #if(($senderName) && ($senderName.length() > 0))
+		<br/>#springMessage("globals.giftCertificate.senderName"): $senderName
+	  #end
+	     </div>
+    </td>
+    <td class="unit-price">
+        #set ($lowestPrice = $price.getLowestPrice(1))
+        #set ($onSale = $price.isLowestLessThanList(1))
+      #if($onSale)
+        #set ($dollarSavings = $cartItem.getPrice().getDollarSavings($cartItem.quantity))
+		#set ($listPrice = $price.getListPrice(1))
+        <div class="sale-price">#displayPriceForCartLocale($lowestPrice)</div>
+        <div class="was-save">#springMessage("globals.cart.was") #displayPriceForCartLocale($listPrice), #springMessage("globals.cart.save") #displayPriceForCartLocale($dollarSavings)</div>
+      #else
+        <div class="reg-price-for-cart">#displayPriceForCartLocale($lowestPrice, $locale)</div>
+      #end
+    </td>
+    <td class="frequency">
+    </td>
+    <td class="qty">
+      1
+    </td>
+    #set($id="cartItems[$cartItemIndex].price")
+    <td class="total-price" id="$!id">#displayPriceForCartLocale($cartItem.getTotal())</td>
+  </tr>
+#end
+
+
+#**
+* For localized Spring messages - takes in a List for the arguments - HTML escapes the message.
+*#
+#macro (springArgMessage $code $args)
+	$springMacroRequestContext.getMessage($code, $args)
+#end
+
+#**
+ * Limits the display length of the specified string
+ * by truncating it and appending "..." characters
+ * Note that this must be all one line to avoid extra spaces
+*#
+#macro (limitDisplayLength $stringToTruncate)#if ($stringToTruncate && $stringToTruncate.length() > 25)$stringToTruncate.substring(0, 25)...#else${stringToTruncate}#end#end
+
+
+#macro(displayProductPrice $product $price $showStartingFrom $showSave $showPriceTiers $sectionName)
+    #if($product.isNotSoldSeparately())
+        <div class="not-sold-separately">#springMessage("productgrid.nss")</div>
+    #else
+        #displayPriceOrPriceSchedules($price $showStartingFrom $showSave $showPriceTiers $sectionName)
+    #end
+#end
+
+
+#macro (displayPriceOrPriceSchedules $price $showStartingFrom $showSave $showPriceTiers $sectionName)
+	 
+	  ## need to call recurring code if the bundle has recurring items
+	  ## we determine this by checking the prices schedules type  
+      ##
+	  ##Note: when bundle constituent items are recurring, we need to display recurring price/freq
+	  ##for bundle
+	  ##
+	  #setSchedulesPriceAndFrequency($price)	
+	  #if ($isRecurring) 
+    	   #displayPriceSchedule ($pricingScheme $lowestPriceSchedule $sectionName $showSave $ShowPriceTiers)
+	   #else
+        #displayPrice($effectivePrice $showStartingFrom $showSave $scheduleForLowestPrice $showPriceTiers $sectionName)
+ 	  #end
+#end
+	  
+	  
+#macro (displayPriceSchedules $scheme $schedules $sectionName $showSave $showPriceTiers)
+    #foreach($schedule in $schedules)
+        #displayPriceSchedule( $scheme $schedule $sectionName $showSave $ShowPriceTiers)
+    #end
+#end
+
+#macro (displayPriceSchedule $scheme $schedule $sectionName $showSave $ShowPriceTiers)
+    <span class="schedule-price$!sectionName">#displayPrice($scheme.getSimplePriceForSchedule($schedule) false $showSave $schedule $showPriceTiers $sectionName)</span>
+#end
+
+
+#macro(displayConstituents $itemFormBean $locale)
+    <div id="short-constituents-list">
+        <h2>#springMessage("productTemplate.Includes")</h2>
+		<ul id="constituents-list">
+
+		## iterating constituentView items in the bundle
+	  	#foreach ($item in $itemFormBean.getConstituents())
+	  		#if ($item.isSelected())
+	  			#set ($prod = $item.product)
+				#set ($prodSku = $prod.getSkuByCode($item.getSkuCode()))
+				#displayConstituent ($item $prod.getLocaleDependantFields($locale).getDisplayName() "" $item.quantity $item.level $locale)
+    		#end
+    	#end
+		</ul>
+    </div>
+#end
+
+#macro(displayConstituent $constituent $productDisplayName $skuDisplayName $quantity $level $locale)
+	#set ($style = '')
+	#if ($velocityCount != 1)
+		#set ($style = 'padding-top:7px; border-top:1px solid #d9d9d9')
+	#end
+	
+	<li class="constituent-item constituent-level-$level" style="$style">
+		<span class="constituent-name">&bull; $productDisplayName</span>
+        <!-- determine if the product is a calculated bundle, if so display the price along with the constituent information-->
+        <div>
+    		#if ($constituent.isCalculatedBundleItem() && $constituent.isCalculatedBundle() == false)
+	           #setSchedulesPriceAndFrequency($constituent.price)
+                #set ($lowestPrice = false)
+                #set ($lowestPrice = $effectivePrice.getLowestPrice($quantity))
+                <span class="adjustment-amount">#displayPriceForCartLocale($lowestPrice) 
+                    #if ($isRecurring)
+                        #springMessage("productTemplate.recurringPrice.$frequency")
+                    #end
+                </span>
+		    #end
+            #if ($quantity > 1)
+               <span class="constituent-quantity">x $quantity</span>
+		    #end
+		    #displaySkuOptionValues($constituent $locale)
+         </div>
+	</li>
+#end
+
+
+
+#macro(displayDigitalAsset $digitalAsset)
+	#if($digitalAsset)
+       <div><a href="sec-asset.ep?assetID=$digitalAsset.getEncryptedUidPk()&amp;orderSKUID=$orderItemFormBean.getEncryptedUidPk()"><img src="$baseUrl/template-resources/images/ico-download.gif" alt="Download Digital Goods" border="0" />$digitalAsset.getFileNameWithoutPath()</a></div>
+    #end
+#end
+
+##
+## Products search autocompletion macro, use a DWR library
+##
+#macro(searchProductSuggestJsScript $searchInputId  $imageWidth $imageHeight $minChars $resultDivWidth $scrollHeight $extraParams)
+
+    #set($enableAutocomplete = $autoCompleteSearchEnabledHelper.getBoolean())
+    #set($enablePrice = $autoCompleteSearchPriceEnabledHelper.getBoolean())
+    #set($enableThumbnail = $autoCompleteSearchThumbnailEnabledHelper.getBoolean())
+    #set($maxAutoResults = $autoCompleteSearchNumberOfResultsHelper.getInteger())
+
+    #if($enableAutocomplete)
+	<script type='text/javascript'>
+
+    jq().ready(function() {
+
+	 jq("#$searchInputId").autocomplete( "", {
+		minChars: $minChars,
+		width: $resultDivWidth,
+		scrollHeight: $scrollHeight, ## height of the results (ul) block
+		autoFill: false,       ## if true then autocomplete the input box with suggestions
+		dataType: "json",      ## type of data received from Ajax requiest
+		max: $maxAutoResults,
+		matchContains: false,                                 ## settings for highliting
+		highlight: false,                                    ## matched parts
+		highlightItem: false,                                ## of result
+		scroll: false,
+		matchSubset: false,
+		selectFirst: false,
+
+		async: function (term, handler){
+			var searchRequest = { searchText: term, categoryUid: this.extraParams.categoryId() };
+   			autocompletionProduct.findProducts(searchRequest, handler);
+				},
+
+		parse: function(resultData) {
+			result = [];
+			for (x = 0; x < resultData.length; x++) {
+				result[x] = { data: resultData[x] };
+			}
+			return result;
+		},
+
+		#if($extraParams) extraParams: $extraParams,#end  ## extra ulr parameters for Ajax request
+
+		formatItem: function(row, i, max, term) {    ## custom format function. tells widget how the results
+			                                         ## should be output
+		 #set($imageColumnWidth = $imageWidth + 5)
+			var productTable =
+				  "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr>"
+				#if($enableThumbnail)+ "<td width='$imageColumnWidth'  valign='top'><img class='ac_result_img' width='$imageWidth' height='$imageHeight' "
+				+ "src='$baseUrl/renderImage.image?imageName=" + row.image + "&width=$imageWidth&height=$imageHeight'/></td>" #end
+				+ "<td align='left' valign='top'><span  class='ac_result_name'><a href='" + row.url + "'>" + row.name + "</a></span><br/>"
+				+ "<span  class='ac_result_description'>" + row.description + "</td>"
+				#if($enablePrice)+ "<td align='right' width='50' valign='top'><span  class='ac_result_price'>" + row.price + "</span></td>" #end
+			 + "</tr></table>";
+			return productTable;
+		},
+		formatBeforeItems: function(element) { ## additional option for creating node in result div before the actual items
+					firstLine = jq("<div/>").appendTo(element).addClass("suggestFirstLine");
+					firstLine.html("#springMessage('global.search.autocomplete.suggest')");
+		},
+		formatAfterItems: function(element) {  ## additional option for creating node in result div after the actual items
+					lastLine = jq("<div/>").appendTo(element).addClass("suggestLastLine");
+					lastLine.html("<input type='submit' onclick='javascript:submit$searchInputId()' class='button' name='viewAll' value='#springMessage('global.search.autocomplete.viewAll')' />");
+		},
+		formatResult: function(data, value) {
+			return "ProductGUID:" + data.guid;
+		}
+	}).result(function(event, item) {     ## result selection trigger
+		  location.href = item.url;          ## when item is selected the user is redirected to url of product
+	});
+ });
+
+
+  function submit$searchInputId() {
+     ## additional trigger for 'View All' button to launch normal search
+ 		var suggestForm = jq("#$searchInputId").parents("form");
+ 		var formUrl = suggestForm.serialize();
+ 		location.href = suggestForm.attr('action') + '?' + formUrl;
+  }
+
+	</script>
+	#end
+#end
+
+
+#macro (displayPriceScheduleFrequency $schedule)
+	#displayPriceScheduleFrequencyWithClass($schedule "schedule-frequency")
+#end
+
+#macro (displayPriceScheduleFrequencyWithClass $schedule $cssClass)
+	#if ($schedule.paymentSchedule)
+      <span class="$cssClass">&nbsp;#springMessage("productTemplate.recurringPrice.${schedule.paymentSchedule.name}")</span>
+	#end
+#end
+
+#macro (getPriceScheduleText $schedule)
+	#if ($schedule.paymentSchedule)
+	  #springMessage("productTemplate.recurringPrice.${schedule.paymentSchedule.name}")
+	#end
+#end
+
+#macro (displayWasSave $schedule $listPrice $dollarSavings $sectionName)
+	  #if ($schedule.paymentSchedule)
+		<div class="was-save$!sectionName" id="listPrice">#springMessage("productgrid.was") #displayPriceForCartLocale($listPrice) #springMessage("productTemplate.recurringPrice.${schedule.paymentSchedule.name}"), #springMessage("productgrid.save")
+		 #displayPriceForCartLocale($dollarSavings) #springMessage("productTemplate.recurringPrice.${schedule.paymentSchedule.name}")</div>
+	  #else
+	    <div class="was-save$!sectionName" id="listPrice">#springMessage("productgrid.was") #displayPriceForCartLocale($listPrice), #springMessage("productgrid.save") #displayPriceForCartLocale($dollarSavings)</div>
+      #end
+#end
+
+
+#macro (displayFrequencySummary $frequencyMap $divisionName)            
+## displays the recurring price frequency summary table [SUBS-109]
+#if ($frequencyMap.entrySet().size() >0)
+    <div class="clear20"></div>
+    <div class="general-tbl"> ##  default table formatting
+    <fieldset>
+        <legend class="dueNow">#springMessage($divisionName)</legend>
+        <table>
+            <thead>
+                <tr>              
+                    <td class="action">#springMessage("viewCart.frequency")</td>               
+                    <td class="total-prices">#springMessage("viewCart.amount")</td>
+                  	<td class="taxes">#springMessage("viewCart.tax")</td>
+                </tr>
+            </thead>
+            <tbody>
+                #foreach ($mapEntry in $frequencyMap.entrySet())
+                    <tr>
+                        <div>                           
+                            <td>#springMessage("productTemplate.recurringPrice.$mapEntry.value.getName()") </td>
+                            <td>#displayPriceForCartLocale($mapEntry.value.getAmount())</td> 
+                            <td>#springMessage("viewCart.recurringTax")</td>
+                        </div>
+                    </tr>
+                #end
+            </tbody>
+     </table>
+    </fieldset>
+</div>
+#end
+#end
+
+#**
+* Sets the lowest price and frequency for the given price object
+* This will set the variable $effectivePrice to the lowest price of
+* the product, or its lowest constituent item
+* and will also set $lowestPriceSchedule to that value
+*NOTE: variables are global.
+*# 
+#macro (setSchedulesPriceAndFrequency $price)
+	    #set ($lowestPriceSchedule = false)
+	    #set ($lowestPrice = false)
+	    #set ($effectivePrice = $price)	  
+	    #set ($frequency = false)
+	    #set ($isRecurring  = false)	    
+	    #set ($pricingScheme = false)	    
+	    #set ($recurringSchedules = false)
+        #set ($effectivePrice = false)
+        
+        #set ($effectivePrice = $price)
+        #set ($pricingScheme = $price.pricingScheme)
+	    #if ($pricingScheme != false && !$pricingScheme.recurringSchedules.empty)
+           #set ($lowestPriceSchedule = $pricingScheme.getScheduleForLowestPrice())         
+   	       #set ($lowestPrice = $price.getPricingScheme().getSimplePriceForSchedule($lowestPriceSchedule))
+           #set ($effectivePrice = $!$lowestPrice)
+           #set ($recurringSchedules = $pricingScheme.getRecurringSchedules())
+      	   #set ($frequency = $lowestPriceSchedule.getPaymentSchedule().getName())	       
+	       #if ($lowestPriceSchedule.getType().toString().equals("RECURRING"))         
+	           #set ($isRecurring  = true)
+       	   #end
+	       ### Now have lowest recurring schedule ( or just regular schedule)
+	       ### AND effectivePrice = the lowest price for product/bundle   
+		#end
+#end
+
+
+#macro (displaySkuOptionValues $item  $locale)
+     $item.getFilteredSkuOptionValues($locale)
+#end
+
+##
+##Sets the list, unit and sale price from the recurring price.
+##Check to make sure recurring price on item level is set.
+##
+#macro( setDisplayPrices $isRecurringItem)
+    #if ($isRecurringItem)
+    	#set ($listPrice = "#displayPriceForCartLocale($recurringPrice.listPrice)")
+        #set ($unitPrice = "#displayPriceForCartLocale($recurringPrice.lowestPrice)")
+        #set ($onSale = $recurringPrice.lowestPrice.lessThan($$recurringPrice.listPrice))
+    #else
+        #set ($listPrice = "#displayPriceForCartLocale($!orderItemFormBean.getListPriceMoney())")
+        #set ($unitPrice = "#displayPriceForCartLocale($!orderItemFormBean.getUnitPriceMoney())")
+        #set ($onSale = $!orderItemFormBean.getUnitPriceMoney().lessThan($orderItemFormBean.getListPriceMoney()))
+    #end
+    #set ($effectivePrice = $orderItemFormBean.getPrice())
+#end

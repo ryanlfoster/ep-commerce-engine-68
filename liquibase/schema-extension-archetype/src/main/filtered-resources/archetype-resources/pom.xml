@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.db</groupId>
+		<artifactId>database-parent</artifactId>
+		<version>@project.version@</version>
+	</parent>
+
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>jar</packaging>
+	<name>Customer Specific Extensions</name>
+	<version>${version}</version>
+
+	<properties>
+		<licensing.skip>true</licensing.skip>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.db</groupId>
+			<artifactId>core-schema</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<configuration>
+						<changeLogFile>liquibase/core-changelog-ext.xml</changeLogFile>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.elasticpath.db</groupId>
+							<artifactId>liquibase-extensions</artifactId>
+							<version>@project.version@</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

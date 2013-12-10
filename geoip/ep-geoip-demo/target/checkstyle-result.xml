@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/main/java/com/elasticpath/domain/geoip/provider/DomainNameResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/main/java/com/elasticpath/domain/geoip/provider/impl/DomainNameResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/main/java/com/elasticpath/domain/geoip/provider/impl/NullGeoIpProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/main/java/com/elasticpath/domain/geoip/provider/impl/NullSelectableFloatTagValueProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/main/java/com/elasticpath/domain/geoip/provider/impl/NullSelectableStringTagValueProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/test/java/com/elasticpath/domain/geoip/provider/impl/DomainNameResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-demo/src/test/java/com/elasticpath/domain/geoip/provider/impl/NullGeoIpProviderTest.java">
+</file>
+</checkstyle>

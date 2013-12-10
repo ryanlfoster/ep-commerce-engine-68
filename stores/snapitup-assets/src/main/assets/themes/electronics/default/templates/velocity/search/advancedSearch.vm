@@ -1,0 +1,200 @@
+## Copyright (c) Elastic Path Software Inc., 2010
+## advancedSearch.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#set($pageName = "search/advancedSearch.vm")
+#set ($action = "advanced-search.ep")
+#initCategoryVariables()
+
+#set($_content = "advancedSearchBody")
+#masterTemplate()
+
+#macro(advancedSearchBody)
+	#set($amountFromDefault = 0)
+	#set($amountToDefault = 2000)
+	#if (!$advancedSearchControllerFormBean.amountFrom)
+		#set($amountFrom = $amountFromDefault)
+	#else
+		#set($amountFrom = $advancedSearchControllerFormBean.amountFrom)
+	#end
+	#if (!$advancedSearchControllerFormBean.amountTo)
+		#set($amountTo = $amountToDefault)
+	#else
+		#set($amountTo = $advancedSearchControllerFormBean.amountTo)
+	#end
+	<script type="text/javascript">
+	jq().ready(function() {
+		jq("#slider-range").slider({
+			range: true,
+			min: 0,
+			max: 2000,
+			values: [$!amountFrom, $!amountTo],
+			step: 10,
+			slide: function(event, ui) {
+				jq("#amountFrom").val(ui.values[0]);
+				jq("#amountTo").val(ui.values[1]);
+			}
+		});
+		jq("#amountFrom").val(jq("#slider-range").slider("values", 0));
+		jq("#amountTo").val(jq("#slider-range").slider("values", 1));
+	});
+
+	function clear_form(form) {
+		var elements = form.elements;
+		for (i=0; i<elements.length; ++i) {
+			var field_type = elements[i].type.toLowerCase();
+			switch (field_type) {
+				case "text":
+				case "password":
+				case "textarea":
+				case "hidden":
+					elements[i].value = "";
+					break;
+				case "radio":
+				case "checkbox":
+					elements[i].checked = false;
+					break;
+				case "select-one":
+					## Default element is always the 'first' element rather than unselected
+					elements[i].selectedIndex = 0;
+					break;
+				case "select-multi":
+					elements[i].selectedIndex = -1;
+					break;
+				default:
+					break;
+			}
+		}
+
+		## Slider is special, need to reset it manually
+		jq("#amountFrom").val($!amountFromDefault);
+		jq("#amountTo").val($!amountToDefault);
+		jq("#slider-range").slider("option", "values", [$!amountFromDefault, $!amountToDefault]);
+
+		## Slider doesn't refresh after set set the option values, force a UI refresh by disabling
+		jq("#slider-range").slider("option", "disabled", true);
+		jq("#slider-range").slider("option", "disabled", false);
+	}
+	</script>
+
+	#if($emptyResultSet)
+		<div id="emptyResult" style="margin-bottom: 20px; padding: 5px; border-style: solid; border-color: red">
+			#springMessage("advancedSearch.emptyResult")
+		</div>
+	#end
+
+    <form action="$baseUrl/advanced-search.ep" method="get" name="AdvancedSearchControllerFormBean">
+
+	#set($finderStyle = "")
+	#if($catalogViewResultBean.getProducts() && $catalogViewResultBean.getProducts().size() > 0)
+		#set($finderStyle = "display: none;")
+	#end
+	<div id="finder" style="padding: 5px; border-style: solid; border-color: black; $!finderStyle">
+		<p>
+    		<label for="amountFrom">#springMessage("productTemplate.priceRange"): $!currency.getSymbol()</label>
+			#springFormInput("advancedSearchControllerFormBean.amountFrom" "maxlength='6' readonly='1' style='border:0; color:#f6931f; font-weight:bold; width: 50px'")
+    		<label for="amountTo"> to $!currency.getSymbol()</label>
+			#springFormInput("advancedSearchControllerFormBean.amountTo" "maxlength='6' readonly='1' style='border:0; color:#f6931f; font-weight:bold; width: 50px'")
+	   </p>
+	   <div id="slider-range" style="margin: 10px; width: 500px"></div>
+
+	#renderAttributeFields($shortTextAttributeValueMap "advancedSearch.all" "true")
+	<br/>
+
+	#renderAttributeFields($booleanAttributeValueMap "advancedSearch.dontcare" "false")
+
+		<p>
+		#renderSimpleAttributeRangeFilterField
+		</p>
+
+		#renderBrands($brandList $brandCodeNameMap)
+			<br/>
+
+	<input type="submit" class="button" name="$parameterMapper.searchFormButtonName" value="#springMessage("header.search")"/>
+	<input type="button" class="button" name="reset" value="#springMessage("header.searchclear")" onclick="clear_form(this.form)"/>
+
+	</div>
+
+	</form>
+
+	#if(!$emptyResultSet)
+		#searchResults
+	#end
+
+    <div class="clear20"></div>
+#end
+
+#macro(renderBrands $brandList $brandCodeNameMap)
+  <p>
+	  <h4 align="center">#springMessage("advancedSearch.brands")</h4>
+		  #set($i=0)
+  <table id="brandTable" border="0" cellspacing="0" cellpadding="3">
+  #foreach($brand in $brandList)
+     ##four brands in a row
+		     #set($rowMaxReached = $i % 4)
+     #if($rowMaxReached == 0)
+		       #if($i != 0)
+		         </tr>
+		       #end
+  				     <tr>
+     #end
+      <td>
+
+     #set($map = $brandCodeNameMap.get($brand))
+     #springFormCheckboxes("advancedSearchControllerFormBean.brands" $map "" "")
+     #set($i=$i+1)
+  #end
+
+   </tr>
+</table>
+	</p>
+
+
+#end
+
+#macro(renderAttributeFields $attributeValueMap $msg $shortText)
+  #foreach($attributeKey in $attributeValueMap.keySet())
+    #set($map = $attributeValueMap.get($attributeKey))
+    #set($allMsg = $springMacroRequestContext.getMessage($msg)) <br/>
+    #set($ret = $map.put("", $allMsg))
+    <label>#springMessage("productTemplate.${attributeKey}")</label>
+    #if ($shortText == "true")
+      #springFormSingleSelect("advancedSearchControllerFormBean.attributeValuesMap[$attributeKey]" $map "")
+    #else
+      #springFormRadioButtons("advancedSearchControllerFormBean.attributeValuesMap[$attributeKey]" $map "&nbsp;" "")
+    #end
+  #end
+#end
+
+
+#macro(renderSimpleAttributeRangeFilterField)
+	  #foreach($attributeRangeKey in $advancedSearchControllerFormBean.nonPreDefinedAttributeRangeFilterMap.keySet())
+		    <label for="$attrRangeFrom">#springMessage("productTemplate.${attributeRangeKey}")</label>
+		    #springFormInput("advancedSearchControllerFormBean.nonPreDefinedAttributeRangeFilterMap[$attributeRangeKey].fromField" "")
+				    #springMessage("advancedSearch.to")
+		    #springFormInput("advancedSearchControllerFormBean.nonPreDefinedAttributeRangeFilterMap[$attributeRangeKey].toField" "")
+		    #springShowErrors("<br>" "req")
+		    <br/>
+	  #end
+#end
+
+
+#macro(searchResults)
+    #set($productList = $catalogViewResultBean.getProducts())
+    #if($productList && $productList.size() > 0)
+        #set($advancedsearch = true)
+        #parse("includes/productgrid.vm")
+##    #end
+
+		##    #if(!$productList.isEmpty())
+        <div id="side-menu">
+            #parse("includes/sidemenu.vm")
+        </div>
+		        <div id="promo-banner" style="float: left; padding-top: 22px;">
+			        #contentspace('PromoBanner', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>PromoBanner</font></div>")
+		    </div>
+    #end
+    <div class="clear20"></div>
+
+#end

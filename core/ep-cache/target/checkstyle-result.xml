@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-cache/src/main/java/com/elasticpath/cache/SimpleTimeoutCache.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-cache/src/test/java/com/elasticpath/cache/SimpleTimeoutCacheTest.java">
+</file>
+</checkstyle>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>sync</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Data Synchronization Tool Build Driver</name>
+
+	<inceptionYear>2011</inceptionYear>
+	<url>http://www.elasticpath.com</url>
+
+	<modules>
+		<module>ep-sync</module>
+		<module>ep-sync-cli</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>with-fittests</id>
+			<modules>
+				<module>ep-sync-fittests</module>
+			</modules>
+		</profile>
+	</profiles>
+</project>

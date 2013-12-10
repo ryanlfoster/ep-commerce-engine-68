@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/builder/checkout/CheckoutTestCartBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/builder/CustomerBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/builder/DomainObjectBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/builder/OrderBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/builder/payment/gateway/PaymentGatewayBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/builder/ProductSkuBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/contentspace/impl/TestContentSpaceMediator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/factory/OrderPaymentFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/factory/TestCustomerSessionFactoryForTestApplication.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/factory/TestGuidUtility.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/factory/TestShopperFactoryForTestApplication.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/factory/TestShoppingCartFactoryForTestApplication.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/domain/testcontext/ShoppingTestData.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/service/CustomerAuthenticationService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/service/CustomerOrderingService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/service/impl/CustomerAuthenticationServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/service/impl/CustomerOrderingServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/service/impl/OrderConfigurationServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/service/OrderConfigurationService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/tax/TaxCategoryTypeConverter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/tax/TaxJurisdictionFacade.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/builders/CustomerCreditCardBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/common/exception/DataSourceInitializerException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/common/exception/TestApplicationException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/db/DbTestCase.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/integration/BasicSpringContextTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/integration/DirtiesDatabase.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/integration/importjobs/ImportJobProcessorLauncher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/integration/importjobs/ImportJobTestCase.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/integration/junit/DatabaseHandlingTestExecutionListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/integration/junit/DatabaseTestExecutionListenerHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/MultiClasspathResourceLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/CatalogTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/CmImportJobTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/CmUserTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/ConditionalExpressionPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/CouponTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/AbstractDataSourceInitializer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/DataSourceConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/DataSourceInitializer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/DerbyDataSourceInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/H2DataSourceInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/HSQLDbDataSourceInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/MySQLDataSourceInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/OracleDataSourceInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/database/SqlServerDataSourceInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/DatasourceInitializerFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/DynamicContentDeliveryTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/DynamicDataSourceFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/GiftCertificateTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/ImportTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/LiveSystemDatabaseManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/MultiDatabaseManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/OrderTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/PaymentGatewayTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/PriceListAssignmentPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/PriceListPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/PromotionTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/SellingContextTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/SettingsTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/ShippingRegionTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/ShippingServiceLevelTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/StoreTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/TaxTestPersister.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/TestApplicationContext.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/TestConfig.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/TestConfigurationFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/TestDataPersisterFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/AbstractScenario.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/CustomerScenario.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/ImportJobScenario.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/payment/OrderHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/payment/OrderHandlerVerifier.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/payment/PaymentHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/payment/ProductHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/ShoppingCartSimpleStoreScenario.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/SimpleStoreScenario.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/persister/testscenarios/SingleStoreMultiCatalogScenario.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/RealEmailFacade.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/AssociationTypeConverter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/CheckoutHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/DatabaseResetUtil.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/DummyImportService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/FakeEmailServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/FreePortScanner.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/search/SearchServerLauncher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/search/SearchServerLauncherHostLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/StringCodeConverter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/TestTimer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-application/src/main/java/com/elasticpath/test/util/Utils.java">
+</file>
+</checkstyle>

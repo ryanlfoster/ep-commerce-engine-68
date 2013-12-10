@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+             xmlns:beans="http://www.springframework.org/schema/beans" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/security
+             http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	<!-- !!!! DOCSpringSecurityXML -->
+	
+  <http>
+    <intercept-url pattern="/*-account.ep*" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/manage-account.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/edit-account.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/create-address.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/*-address.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/*-credit-card*.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/order-details.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/checkout.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/check-out.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/delivery-options.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/billing-and-review.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/receipt.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/update-password.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/*password*.ep*" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/update-email.ep*" access="ROLE_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/address-preference.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/print-receipt.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/sec-asset.ep*" access="ROLE_CUSTOMER,ROLE_ANONYMOUS_CUSTOMER" requires-channel="${ep.sf.secure.channel}" />
+ 
+    <intercept-url pattern="/*sign-in.ep*" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/*signin.ep*" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/payer-authentication-return.ep*" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/search-gift-certificate.ep" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/check-gift-cert-balance.ep" requires-channel="${ep.sf.secure.channel}" />
+    <intercept-url pattern="/j_acegi_security_check.ep" requires-channel="${ep.sf.secure.channel}" />
+
+    <intercept-url pattern="/*.ep" requires-channel="http"  />
+    <intercept-url pattern="/*.ep\?*" requires-channel="http" />
+    <intercept-url pattern="/*.html" requires-channel="http" />
+    <intercept-url pattern="/*.html\?*" requires-channel="http" />
+	<!-- !!!! DOCSpringSecurityXML -->
+    <port-mappings>
+      <port-mapping http="${ep.storefront.port.http}" https="${ep.storefront.port.https}" />
+    </port-mappings>
+
+    <form-login login-page="/sign-in.ep" authentication-failure-url="/sign-in.ep?login_failed=1"
+        authentication-success-handler-ref="authenticationSuccessHandler" login-processing-url="/j_acegi_security_check.ep"/>
+
+    <logout logout-url="/sign-out.ep" logout-success-url="/index.ep" />
+		
+    <custom-filter ref="logoutCustomerSessionFilter" after="LOGOUT_FILTER"/>
+
+    <session-management session-authentication-strategy-ref="sessionAuthenticationStrategy" />
+		
+  </http>
+
+  <!-- !!!! DOCauthentication-manager -->
+	<authentication-manager>
+		<authentication-provider user-service-ref="customerAuthenticationDao">
+			<password-encoder ref="passwordEncoder">
+				<salt-source ref="customerSaltSource" />
+			</password-encoder>
+		</authentication-provider>
+
+		<!-- To enable transparent upgrading of customer password encryption after authentication in Storefront, 
+		remove the customerAuthenticationDao authentication-provider and uncomment the upgradingCustomerDaoAuthenticationProvider
+		authentication-provider. -->
+
+		<!-- The customerAuthenticationDao provider allows fallback to saltless SHA-1 encoding -->
+		<authentication-provider user-service-ref="customerAuthenticationDao"> 
+			<password-encoder ref="sha1PasswordEncoder"/> 
+		</authentication-provider>
+
+		<!-- The upgradingCustomerDaoAuthenticationProvider provider allows a transparent upgrade after fallback to saltless SHA-1 encoding -->
+		<!--  authentication-provider ref="upgradingCustomerDaoAuthenticationProvider" / -->
+
+		<authentication-provider ref="guestAuthenticationProvider" />
+	</authentication-manager>
+
+  <beans:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+    <beans:property name="defaultTargetUrl" value="/manage-account.ep"/> 
+  </beans:bean>
+
+  <beans:bean id="customerAuthenticationDao" parent="txProxyTemplate">
+    <beans:property name="target">
+      <beans:bean class="com.elasticpath.persistence.impl.CustomerAuthenticationDaoImpl">
+        <beans:property name="persistenceEngine" ref="persistenceEngine" />
+        <beans:property name="customerService" ref="customerService" />
+        <beans:property name="storeConfig" ref="threadLocalStorage" />
+      </beans:bean>
+     </beans:property>
+  </beans:bean>
+      
+  <!--  The following provider allows a transparent upgrade after fallback to saltless SHA-1 encoding -->
+    <beans:bean id="upgradingCustomerDaoAuthenticationProvider" 
+    	class="com.elasticpath.service.security.impl.UpgradingCustomerDaoAuthenticationProvider">
+    	
+   		<beans:property name="customerService" ref="customerService" />
+   		<beans:property name="userDetailsService" ref="customerAuthenticationDao" />
+   		<beans:property name="saltSource" ref="customerSaltSource" />
+   		<beans:property name="passwordEncoder" ref="sha1PasswordEncoder" />
+    </beans:bean>
+
+  <!-- !!!! DOCauthentication-manager -->
+
+  <beans:bean id="logoutCustomerSessionFilter" class="com.elasticpath.commons.filter.impl.LogoutFilter">
+    <beans:property name="logoutSuccessUrl" value="/index.ep"/>
+    <beans:property name="handlers">
+      <beans:list>
+      	<beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+    	<beans:bean class="com.elasticpath.sfweb.filters.LogoutCustomerSessionHandler">
+    	  <beans:property name="cookieHandler" ref="cookieHandler"/>
+    	</beans:bean>
+      </beans:list>
+    </beans:property>
+    <beans:property name="filterProcessesUrl" value="/sign-out-customer-session.ep" />
+  </beans:bean>
+    
+  <beans:bean id="sessionAuthenticationStrategy" class="com.elasticpath.sfweb.handlers.CustomerSignInAuthenticationStrategy">
+    <beans:property name="webCustomerSessionService" ref="webCustomerSessionService"/>
+    <beans:property name="httpServletFacadeFactory" ref="httpServletFacadeFactory" />
+  </beans:bean>
+  
+  <beans:bean id="guestAuthenticationProvider" class="com.elasticpath.sfweb.security.GuestAuthenticationProvider" />
+  
+</beans:beans>

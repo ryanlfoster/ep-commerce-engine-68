@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/CatalogPromotionMonitor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/impl/IndexNotificationProcessorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/filter/impl/CustomerFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/grouper/impl/UidGroupingTaskImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/AbstractEntityLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/BatchCategoryLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/BatchCmUserLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/BatchCustomerLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/BatchProductLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/BatchProductSkuLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/BatchRuleLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/loader/impl/ShippingServiceLevelLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/AbstractIndexingTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/DocumentCreatingTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/DocumentCreatingTaskFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/EntityLoadingTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/EntityLoadingTaskFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/AbstractIndexingStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/DocumentCreatingStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/DocumentPublishingStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/EntityLoadingStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/IndexingPipelineImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/UidFilteringStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/impl/UidGroupingStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/IndexingPipeline.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/IndexingStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/IndexingTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/IndexingTaskFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/stats/impl/IndexingStatsImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/stats/impl/PipelinePerformanceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/stats/impl/PipelineStatusImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/stats/IndexingStatistics.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/stats/PipelinePerformance.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/stats/PipelineStatus.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/UidFilteringTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/UidFilteringTaskFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/UidGroupingTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/pipeline/UidGroupingTaskFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/AbstractIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/CategoryIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/CmUserIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/CustomerIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/IndexBuilderFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/ProductIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/PromotionIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/ShippingServiceLevelIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/impl/SkuIndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/IndexBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/builders/IndexBuilderFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/AbstractDocumentCreatingTask.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/AbstractSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/CategorySolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/CmUserSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/CustomerSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/ProductSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/RuleSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/ShippingServiceLevelSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/document/impl/SkuSolrInputDocumentCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/IndexBuildEventListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/queueingpublisher/impl/DeleteCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/queueingpublisher/impl/ShutdownCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/queueingpublisher/impl/SolrPublishCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/queueingpublisher/impl/UpdateCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/impl/AbstractIndexServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/impl/IndexBuildPolicyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/impl/IndexBuildServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/impl/QueueingSolrDocumentPublisher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/impl/SimpleSolrDocumentPublisher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/IndexBuildPolicy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/IndexBuildPolicyContext.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/IndexBuildPolicyContextFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/index/solr/service/IndexBuildService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/IndexNotificationProcessor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/plugin/FuzzyDisMaxQParserPlugin.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/solr/handlers/MultiLocaleSpellCheckerRequestHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/solr/PriceComparatorSource.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/solr/PriceListPriceScoreDocComparator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/solr/ProductPriceSortField.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/main/java/com/elasticpath/search/web/context/impl/SolrHomeSettingEpContextConfigListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/CatalogPromotionMonitorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/impl/IndexNotificationProcessorImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/grouper/impl/IndexGrouperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/loader/impl/BatchCategoryLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/loader/impl/BatchCustomerLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/loader/impl/BatchProductLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/loader/impl/BatchProductSkuLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/loader/impl/BatchRuleLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/loader/impl/LoadIndividuallyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/pipeline/impl/IndexingPipelineImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/builders/impl/CategoryIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/builders/impl/CmUserIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/builders/impl/CustomerIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/builders/impl/PromotionIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/builders/impl/ShippingServiceLevelIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/builders/impl/SpellingUpdaterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/CategorySolrInputDocumentCreatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/CmUserSolrInputDocumentCreatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/CustomerSolrInputDocumentCreatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/ProductIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/RuleSolrInputDocumentCreatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/SkuIndexBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/document/impl/SkuSolrInputDocumentCreatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/service/impl/IndexBuildPolicyImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/service/impl/IndexBuildServiceImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/index/solr/service/impl/TestSolrDocumentPublisher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/solr/PriceListPriceScoreDocComparatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/search/ep-search/src/test/java/com/elasticpath/search/testutils/MockInterface.java">
+</file>
+</checkstyle>

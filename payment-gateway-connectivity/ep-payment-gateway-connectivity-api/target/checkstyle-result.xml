@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/CaptureCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/CreditCardCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/FinalizeShipmentCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/PaymentGatewayCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/PaypalExpressCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/PreAuthorizeCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/RefundCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/ReversePreAuthorizationCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/SaleCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/TokenAuthorizationCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/capabilities/VoidCaptureCapability.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/AddressDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/CardDetailsPaymentMethod.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/AddressDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/CardDetailsPaymentMethodImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/MoneyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/OrderPaymentDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/OrderShipmentDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/OrderSkuDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/PayerAuthenticationEnrollmentResultDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/PayerAuthValidationValueDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/ShoppingCartDtoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/impl/TokenPaymentMethodImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/Money.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/OrderPaymentDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/OrderShipmentDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/OrderSkuDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/PayerAuthenticationEnrollmentResultDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/PayerAuthValidationValueDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/PaymentMethod.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/ShoppingCartDto.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/dto/TokenPaymentMethod.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/AmountLimitExceededException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/AuthorizedAmountExceededException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/CardDeclinedException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/CardErrorException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/CardExpiredException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/GiftCertificateCurrencyMismatchException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/GiftCertificateException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/GiftCertificateZeroBalanceException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/InsufficientFundException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/InsufficientGiftCertificateBalanceException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/InvalidAddressException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/InvalidCVV2Exception.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/PayerAuthenticationException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/PaymentGatewayException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/PaymentOperationNotSupportedException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/exceptions/PaymentProcessingException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/PaymentGatewayPluginInvoker.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/PaymentGatewayPluginManagement.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/PaymentType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/spi/AbstractCreditCardPaymentGatewayPluginSPI.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/spi/AbstractPaymentGatewayPluginSPI.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/AuthorizationTransactionRequest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/AuthorizationTransactionResponse.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/CaptureTransactionRequest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/CaptureTransactionResponse.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/AuthorizationTransactionCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/CaptureTransactionCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/factory/PaymentGatewayTransactionCommandBuilderFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/impl/AuthorizationTransactionCommandImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/impl/CaptureTransactionCommandImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/impl/PaymentGatewayTransactionCommandBuilderFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/command/PaymentTransactionCommand.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/impl/AuthorizationTransactionRequestImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/impl/AuthorizationTransactionResponseImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/impl/CaptureTransactionRequestImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/impl/CaptureTransactionResponseImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/impl/PaymentTransactionRequestImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/impl/PaymentTransactionResponseImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/PaymentTransactionRequest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/PaymentTransactionResponse.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/service/impl/PaymentGatewayTransactionServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/payment-gateway-connectivity/ep-payment-gateway-connectivity-api/src/main/java/com/elasticpath/plugin/payment/transaction/service/PaymentGatewayTransactionService.java">
+</file>
+</checkstyle>

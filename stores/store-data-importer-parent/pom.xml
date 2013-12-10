@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>stores-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>store-data-importer-parent</artifactId>
+	<name>Store Data Importer Parent</name>
+
+	<packaging>pom</packaging>
+
+	<description>Parent project for importing store data via importexport.</description>
+	<inceptionYear>2011</inceptionYear>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.db</groupId>
+			<artifactId>core-schema</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-importexport</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-base</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-persistence-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-persistence-openjpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-settings</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<skipDeploy>true</skipDeploy>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>resources</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- Get import data xml -->
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<id>unpack-store-data</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>unpack-dependencies</goal>
+							</goals>
+							<!-- Child artifacts will need to define data.artifactId -->
+							<configuration>
+								<includeArtifactIds>${data.artifactId}</includeArtifactIds>
+								<type>jar</type>
+								<outputDirectory>${project.build.directory}/classes</outputDirectory>
+								<overWriteSnapshots>true</overWriteSnapshots>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<dependencies>
+						<dependency>
+							<groupId>com.elasticpath.db</groupId>
+							<artifactId>liquibase-extensions</artifactId>
+							<version>6.8.0.2013101613-RELEASE</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>create-schema</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>update</goal>
+							</goals>
+							<configuration>
+								<propertyFileWillOverride>true</propertyFileWillOverride>
+								<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+								<driver>${datapopdb.jdbc.driver}</driver>
+								<url>${datapopdb.url}</url>
+								<username>${datapopdb.username}</username>
+								<password>${datapopdb.password}</password>
+								<expressionVars>
+									<property>
+										<name>epdb.schemaname</name>
+										<value>${datapopdb.schemaname}</value>
+									</property>
+								</expressionVars>
+								<changeLogFile>liquibase/elasticpath-db-changelog.xml
+							</changeLogFile>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>perform-import</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>java</executable>
+								<arguments>
+									<argument>-Xms256m</argument>
+									<argument>-Xmx1024m</argument>
+									<argument>-XX:MaxPermSize=256m</argument>
+									<argument>-agentlib:jdwp=transport=dt_socket,address=${ep.debug.port},server=y,suspend=n</argument>
+									<argument>-classpath</argument>
+									<classpath />
+									<argument>com.elasticpath.importexport.client.Index</argument>
+									<argument>-i</argument>
+									<argument>-c</argument>
+									<argument>${project.build.outputDirectory}/cfg/importconfiguration.xml
+								</argument>
+								</arguments>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>com.elasticpath.tools</groupId>
+					<artifactId>ep-core-tool</artifactId>
+					<!-- We pass some special values to ep-core-tool so it can tell ep-core what to use for a JDBC source. -->
+					<configuration>
+						<jdbcUrl>${datapopdb.url}</jdbcUrl>
+						<jdbcDriverClass>${datapopdb.jdbc.driver}</jdbcDriverClass>
+						<jdbcPassword>${datapopdb.password}</jdbcPassword>
+						<jdbcUsername>${datapopdb.username}</jdbcUsername>
+					</configuration>
+
+					<executions>
+						<execution>
+							<id>override-settings</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>bulk-set-settings</goal>
+							</goals>
+
+							<configuration>
+								<settings>
+									<setting>COMMERCE/SYSTEM/SEARCH/searchHost@default=${ep.search.url}
+								</setting>
+									<setting>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsHost=${ep.asset.vfs.host}
+								</setting>
+									<setting>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsPort=${ep.asset.vfs.port}
+								</setting>
+									<setting>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsProtocol=${ep.asset.vfs.protocol}
+								</setting>
+									<setting>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsUsername=${ep.asset.vfs.username}
+								</setting>
+									<setting>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsPassword=${ep.asset.vfs.password}
+								</setting>
+									<setting>COMMERCE/APPSPECIFIC/RCP/ASSETS/vfsRootpath=${ep.asset.vfs.rootpath}
+								</setting>
+									<setting>COMMERCE/SYSTEM/EMAIL/emailCmUrl=${ep.emailCmUrl}
+								</setting>
+									<setting>COMMERCE/SYSTEM/assetHttpHost=${ep.asset.http.host}
+								</setting>
+									<setting>COMMERCE/SYSTEM/ASSETS/assetLocation=${ep.local.asset.path}
+								</setting>							
+									<setting>COMMERCE/SYSTEM/EMAIL/mailHost=${ep.smtp.host}
+								</setting>								
+								</settings>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+</project>

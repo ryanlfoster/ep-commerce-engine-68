@@ -1,0 +1,231 @@
+/* ----- GENERAL ----- */
+body {background-color:#C4DAFA;color:#000;margin:0;padding:0;}
+
+body {font:small/122% arial,helvetica,clean,terminal,sans-serif;font:x-small;}
+body * {line-height:122%;}
+table {font-size:inherit;font:x-small;}
+html>body {font:84.5%/122% arial,helvetica,clean,sans-serif;}
+.clear { clear:both;}
+.clear0{clear:both;}
+.clear1{height:1px;clear:both;overflow:hidden;}
+.clear5{height:5px;clear:both;overflow:hidden;}
+.clear10{height:10px;clear:both;overflow:hidden;}
+.clear20{height:20px;clear:both;overflow:hidden;}
+.clear40{height:40px;clear:both;overflow:hidden;}
+.clear60{height:60px;clear:both;overflow:hidden;}
+
+/* ----- HEADER ----- */
+div.header { background-color:#FFFFFF; border-bottom:6px solid #1A75CF;}
+.logo {margin:4px 0px 0px 4px;}
+.status {margin:0px 6px 10px 0px; font-size:.85em;}
+
+/* ----- HEADER TABS ----- */
+/* hack to workaround a universal header/tab MSIE bug */
+.sdMgn { *display:inline; }
+
+/* primary tabs */
+#nav-pri { width:100%; margin-left:8px; } /* IE */
+#nav-pri ul {font:bold 77%/1.2em verdana; *font-size:78%; list-style:none; margin:0 0 -1px 0; padding:0 0 0 .3em; position:relative; } /* relative for IE6 quirks mode */
+#nav-pri li { float:left; margin:0 .33em -1px 0; padding:0; }
+#nav-pri li * { cursor:pointer; cursor:hand; }
+#nav-pri li a { text-decoration:none; color:#3061A3; }
+#nav-pri li a:hover { text-decoration:underline; background-color:#C2D5F0; }
+html #nav-pri li strong a:hover { text-decoration:none; }
+#nav-pri li.on strong, #nav-pri li.on strong a, #nav-pri li.on strong a:hover { background-color:#1A75CF; color:#fff; text-decoration:none; }
+#nav-pri li strong { border-bottom:1px solid #1A75CF; }
+#nav-pri li a, #nav-pri li strong, #nav-pri li em { display:block; }
+#nav-pri li span { display:block; cursor:default; }
+#nav-pri li span * { cursor:default; }
+* html #nav-pri li a, * html #nav-pri li strong { display:inline-block; }  /* makes IE 100% clickable, and fixes widths for macIE */
+#nav-pri li em { font-style:normal; padding:.5em .6em; }
+#nav-pri li.orphan, #nav-pri li.orphan a, #nav-pri li.orphan em,
+#nav-pri li.orphan2, #nav-pri li.orphan2 a, #nav-pri li.orphan2 em { background:transparent none; color:#3061A3; border-width:0; margin:0; }
+
+/* bg images */
+#nav-pri li a, #nav-pri li strong { background:#EAF1FB url(../images/tab-corner-ne.gif) no-repeat top right; }
+#nav-pri li em { background:transparent url(../images/tab-corner-nw.gif) no-repeat; }
+#nav-pri li.on a, #nav-pri li.on strong { background:#1A75CF url(../images/tab-corner-ne-on.gif) no-repeat top right; }
+#nav-pri li.on em { background:transparent url(../images/tab-corner-nw-on.gif) no-repeat; }
+
+/* clear floats */
+* html #nav-sec ul {height:2em;} /* IE 5 */
+* html #nav-pri ul/* IE5 hide*/, * html #nav-sec ul/* IE5 hide*/{ height:1%; } /* clear IE>5 */
+
+html>body #nav-pri ul, html>body #nav-sec ul {} /* clear others */
+
+/* macIE hacks */
+* html>body #nav-pri ul { float:left; margin:0 .33em 0 0; padding:0; }
+* html>body #nav-pri li em { display:inline-block; }
+* html>body #nav-pri ul, * html>body #nav-sec ul { width:100%; overflow:hidden; }
+* html>body #nav-pri li.on strong { position:static; }
+* html>body #nav-sec ul { height:auto; }
+* html>body #nav-pri { text-align:left; }
+
+/* some alternate implementations */
+#nav4 { margin-bottom: ; float:left; width:100%; background-color:#fff; }
+#nav4 li.on strong { background-color:#3061A3; border-color:#1A75CF; }
+
+#nav-pri li.orphan em, #nav-pri li.orphan2 em { padding:.5em .6em; *padding:.6em .6em; }
+#nav-pri li.orphan img, #nav-pri li.orphan2 img { margin:-2px; }
+#nav4 li.orphan a:hover, #nav4 li.orphan2 a:hover { text-decoration:underline; background:none; }
+#nav4 li.orphan2 { float:right; background:none; }
+#nav-pri li.orphan2 em { color:#666; }
+
+/* ----- LAYOUT ----- */
+div.wrapper {padding:4px; border-top:1px solid #fff; }
+
+#left-pane { width:220px; border:1px solid #002D96; background-color:#FFFFFF;}
+#right-pane { border:1px solid #002D96; background-color:#FFFFFF; }
+
+div.box-border { border:1px solid #002D96; background-color:#FFFFFF; }
+
+div.box-label {	height:1.8em; color:#FFF; font-size:1em; line-height:1.6em; font-weight:bold; background-color:#5987D6; background-image:url(../images/bg-bar-1.gif); background-position:top left; background-repeat:repeat-x; padding:0 6px; }
+div.box-label .title { float:left; font-size:1em; line-height:1.6em; display:inline; }
+div.box-label .action { float:right; font-size:1em; line-height:1.6em; display:inline; cursor:pointer; }
+
+div.sub-label {	background-image:url(../images/bg-bar-2.gif); background-position:top left;	background-repeat:repeat-x;	border-top:2px solid #d5d5d5; border-bottom:1px solid #666;	padding:2px 6px 2px 6px; font-size:1em;	font-weight:bold; height:20px; }
+div.sub-label .title { float:left; display:inline; }
+div.sub-label .action { float:right; display:inline; cursor:pointer; }
+
+div.box-group {	margin-bottom:30px;	padding:0px 0px 15px 0px; border-bottom:2px solid #ccc; }
+
+.box-tab { background-color:#D4D0C8; }
+.box-action { border-bottom:1px solid #919B9C; background-color:#FFFFFF; padding:3px 3px 4px 3px; }
+
+.box-tools { border-bottom:1px solid #919B9C; background-color:#F7F8F9; padding:6px 6px; font-size:1px; }
+.box-tools img { vertical-align:middle; }
+
+.box-restriction { border-bottom:1px solid #919B9C;	min-height:.8em; height:auto!important; height:.8em; line-height:.8em; font-size:.8em; padding:.5em; color:#666; }
+
+.box-search { background-image:url(../images/bg-box-search.gif); background-repeat:repeat-x; background-position:left top; padding:10px; }
+.box-tasks { padding:10px; }
+.box-tree {	padding:10px; font-weight:normal; }
+
+.actions { border-top:1px solid #ddd; padding:4px; bottom:0; }
+
+.box-tab-inner { padding:20px 20px 0px 20px; width:auto!important; }
+.box-popup { padding:10px; height:95%; }
+.drag-item { border:1px solid #e3edfa; background-color:#FFF; margin-bottom:2px; padding:2px; cursor:pointer; }
+
+.submit-action-box { position:absolute; bottom:8px; right:8px; }
+.general-validation-error { position:absolute; bottom:8px; left:9px; padding:3px 6px 3px 6px; background-color:#CC3333; color:#FFF; font-weight:bold; font-size:80%; }
+
+/* ----- SUB LAYOUT ----- */
+.bPageBlock .pbBody { padding:6px 20px 20px 20px; }
+.bPageBlock .pbSummaryBody { padding:6px 20px 20px 20px; }
+.bPageBlock .detailList { width:100%; }
+.bPageBlock .detailList th, .bPageBlock .detailList td { vertical-align:top; }
+.bPageBlock .labelCol { padding:2px 10px 2px 2px; text-align:right; font-size:91%; font-weight:bold; color:#333; }
+.bPageBlock .detailList .labelCol { width:18%; }
+.bPageBlock .dataCol { padding:2px 2px 2px 10px; text-align:left; }
+.bPageBlock .detailList .dataCol { width:32%; }
+.bPageBlock .detailList .data2Col { padding:2px 2px 2px 10px; text-align:left; width:82%; }
+.bPageBlock .detailList .col02 { border-right:20px solid #FFF; }
+.bPageBlock .detailList tr td, .bPageBlock .detailList tr th { border-bottom:1px solid #f5f5f5; }
+.bPageBlock .detailList table td, .bPageBlock .detailList table th { border-bottom-style: none; }
+
+.bPageBlock .pbSummaryBody .detailList .labelCol { width:82%; }
+.bPageBlock .pbSummaryBody .detailList .data2Col { padding:2px 2px 2px 10px; text-align:right; width:18%; }
+
+
+/* ----- GRID ----- */
+table.grid { width:100%; cursor:default; border-collapse:collapse; }
+
+* html div.tableContainer {	/* IE only hack */	width:100%;	border:1px solid #ccc; }
+
+table.grid td,
+table.grid th {	border-right:1px solid #999; padding:2px; font-weight:normal; }
+table.grid thead td, table thead th { height:20px; background:#ccc; background-image:url(../images/bg-bar-tbl-header.gif); background-position:top left; background-repeat:repeat-x; font-weight:normal; text-align:left; padding:0px 2px 0px 4px; border-bottom:1px solid #ACA899; border-right:1px solid #ccc; border-left:1px solid #f7f8f9; white-space:nowrap; }
+
+* html div.tableContainer table.grid thead tr td,
+* html div.tableContainer table.grid thead tr th { /* IE Only hacks */ position:relative; top:expression(dojo.html.getFirstAncestorByTag(this,'table').parentNode.scrollTop-2); }
+
+html>body tbody.scrollContent { /* height:262px; overflow-x:hidden; overflow-y:auto; */	}
+
+tbody.scrollContent td, tbody.scrollContent tr td {	height:20px; background:#FFF; border-bottom:1px solid #F0F0F0; border-left:none; border-right:1px solid #F0F0F0; border-top:none; padding:2px 2px 2px 4px; }
+tbody.scrollContent tr.alternateRow td {background: #e3edfa;}
+tbody.scrollContent tr.selected td {background: yellow;	}
+tbody.scrollContent tr:hover td {background: #a6c2e7; }
+tbody.scrollContent tr.selected:hover td {background: #ff3;	}
+
+
+/* ----- PAGINATION ----- */
+.pages { padding:1em 1em 2em 1em; margin:1em 0; clear:left; font-size:85%; display:inline; }
+.pages a, .pages span {display:block; float:left; padding:0.2em 0.5em; margin-right:0.1em; border:1px solid #fff; background:#fff; display:inline; }
+.pages span.current { border:1px solid #06c; font-weight:bold; background:#06c; color:#fff; display:inline; }
+.pages a { border: 1px solid #9AAFE5; text-decoration: none; cursor:pointer; }
+.pages a:hover { border-color: #06c;}
+.pages a.nextprev { font-weight: bold; }
+.pages span.nextprev { color: #666;}
+.pages span.nextprev { border: 1px solid #ddd; color: #999;}
+
+
+/* ----- BUTTONS ----- */
+
+.btn, .button {
+    font-family: Verdana, Geneva, sans-serif;
+    background-image:  url(../images/bg-button.gif);
+    background-repeat: repeat-x;
+    background-position: left top;
+    border-right:1px solid #5C5D61;
+    border-bottom:1px solid #5C5D61;
+    border-top:none;
+    border-left:none;
+    font-size: 80%;
+    color:#FFFFFF;
+    padding:1px 3px 1px 3px;
+    cursor:pointer;
+    font-weight:bold;
+    display:inline;
+}
+
+.btn { margin: 0 2px; }
+
+span.right { float:right; padding-right:16px; }
+span.left {	float:left; padding-right:16px; }
+
+.hand { cursor: pointer; cursor: hand; }
+
+/* ----- ERRORS ----- */
+.req { color:red; padding:4px 0 0 0; }
+/* notification with icon
+.req { color:red; padding:4px 0px 0px 16px; background-image:url(../images/icon-aro-req.gif); background-repeat:no-repeat; }
+*/
+.error-msg { border:2px solid red; padding:8px; margin:20px 0px 20px 0px; color:red; }
+.fieldErr { padding:8px; color:red; }
+.fieldErr-top {	padding:8px; color:red;	position:absolute; top:30px; left:8px; clear:both; }
+.alert { display:block; width:100%; padding:5px; margin:0px; color:red; font-weight:bold; height:35px; }
+.message { display:block; width:100%; padding:0px; margin:0px; color:green; font-weight:bold; height:35px; }
+.dojoDialog { background:#eee; border:1px solid #999; -moz-border-radius:5px; padding:4px; }
+.error { min-height:4em; padding:10px 10px 6px 60px; background-image: url(../images/icon-error.gif); background-repeat:no-repeat; background-color:#fff; color:red; border-bottom:1px solid #002D96; height:auto; }
+/* for Internet Explorer */
+/*\*/
+* html .error { height:4em; }
+/**/
+
+.balance-alert { font-weight:bold; color:red; }
+
+/* ---- ToolTip ---- */
+.tooltip {
+	background:#CC3333;
+	background-image:url(../images/bg-tooltip-box.gif);
+	background-repeat:no-repeat;
+	background-position:left;
+	color:white;
+	font-weight:bold;
+	position:relative;
+	font-size:.85em;
+	padding:6px 6px 6px 17px;
+	z-index:999;
+}
+
+/* ---- Validation ---- */
+input.errHilite, select.errHilite, textarea.errHilite {background-color:#FF9;}
+label.errHilite {color:#C00;}
+div.errHilite {color:#C00;}
+.validation-icon { vertical-align:middle; }
+
+/* ---- Progress Bar ---- */
+div.progress {  border:1px solid #666; margin:0; padding:0; }
+div.progress table { width:100%; height:100%; border:0px; margin:0px; padding:0px; }
+div.progress td { border:1px solid #666; margin:2px; }

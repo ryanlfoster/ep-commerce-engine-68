@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		">
+
+	<bean id="validationProvider" class="org.apache.bval.jsr303.ApacheValidationProvider"/>
+	<bean id="constraintValidatorFactory" class="com.elasticpath.validation.validators.impl.ElasticPathConstraintValidatorFactory"/>
+	<bean id="traversableResolver" class="org.apache.bval.jsr303.resolver.SimpleTraversableResolver"/>
+
+	<bean id="jsr303Validator" class="com.elasticpath.validation.bootstrap.LocalClassLoaderValidationProviderFactoryBean">
+		<constructor-arg ref="validationProvider"/>
+		<constructor-arg ref="constraintValidatorFactory"/>
+		<constructor-arg ref="traversableResolver"/>
+	</bean>
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.SpringValidatorAdapter">
+		<constructor-arg ref="jsr303Validator"/>
+	</bean>
+
+	<!--  All validators should have prototype scope due to possible state required for the constraints they
+		- are validating (i.e. user supplied data in the case of the @Size constraint).
+		-
+		- If you want a singleton validator, be sure to understand the consequences.
+		-->
+
+	<bean class="com.elasticpath.validation.validators.impl.AttributeRequiredValidatorForCustomerProfile" scope="prototype">
+		<property name="attributeService" ref="attributeService"/>
+	</bean>
+
+	<bean class="com.elasticpath.validation.validators.impl.CustomerUsernameUserIdModeEmailValidator" scope="prototype">
+		<property name="customerService" ref="customerService"/>
+	</bean>
+
+	<bean class="com.elasticpath.validation.validators.impl.CountryValidatorForString" scope="prototype">
+		<property name="geography" ref="geography"/>
+	</bean>
+
+	<bean class="com.elasticpath.validation.validators.impl.CountryValidatorForAddress" scope="prototype">
+		<property name="geography" ref="geography"/>
+	</bean>
+
+	<bean class="com.elasticpath.validation.validators.impl.ShortTextValueSizeValidator" scope="prototype">
+		<property name="supportedAttributeTypes">
+			<list>
+				<util:constant static-field="com.elasticpath.domain.attribute.AttributeType.SHORT_TEXT"/>
+				<util:constant static-field="com.elasticpath.domain.attribute.AttributeType.IMAGE"/>
+				<util:constant static-field="com.elasticpath.domain.attribute.AttributeType.FILE"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

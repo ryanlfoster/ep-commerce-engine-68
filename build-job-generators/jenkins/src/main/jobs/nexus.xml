@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+	<import file="nexus-common.xml" />
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nexus-Repository-Setup</id>
+		<parent>abstract-nexus-config-setup</parent>
+
+		<parameters>
+			<!-- Need to specify which DCE and RelOS developer groups are added to the new build-server-repo-group -->
+			<parameter>
+				<type>string</type>
+				<name>RELOS_DEV_GROUP_ID</name>
+				<value>relos-dev-group</value>
+				<description>
+					This is the RelOS-dev-group that is added to newly created Build-Server repo group. Defaults to the trunk group.
+				</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>REST_RES_DEV_GROUP_ID</name>
+				<value>rest-res-dev-group</value>
+				<description>
+					This is the Rest-Res-dev-group that is added to newly created Build-Server repo group. Defaults to the trunk group.
+				</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<!-- Create new repositories -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:create-group-repository</targets>
+				<pom>work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoId=${nightlySnapshotRepoGroup}
+					name=${jenkinsJobPrefix} Nightly Snapshots Group
+				]]>
+				</properties>
+			</maven>
+
+			<!-- Need to add RelOS, and Rest-Res dev group to the new build-server-repo-group -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:add-repository-to-group</targets>
+				<pom>work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoGroupId=${nexusJobBuildServerRepoGroup}
+					repoId=$RELOS_DEV_GROUP_ID
+				]]>
+				</properties>
+			</maven>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:add-repository-to-group</targets>
+				<pom>work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoGroupId=${nexusJobBuildServerRepoGroup}
+					repoId=$REST_RES_DEV_GROUP_ID
+				]]>
+				</properties>
+			</maven>
+
+			<!-- Add repositories to developer-group -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:add-repository-to-group</targets>
+				<pom>work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoGroupId=${nexusJobDeveloperRepoGroup}
+					repoId=${nightlySnapshotRepoGroup}
+				]]>
+				</properties>
+			</maven>
+		</tasks>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nexus-Repository-Cleanup</id>
+		<parent>abstract-nexus-config-cleanup</parent>
+
+		<tasks>
+			<!-- Clean up snapshot repositories. You'll need to clean release repositories manually since we don't want to accidentally delete important releases. -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:remove-old-repositories</targets>
+				<pom>work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoGroupId=${nightlySnapshotRepoGroup}
+					repoIdPrefix=${nightlySnapshotRepoPreifx}
+					maxBadRepo=0
+					maxGoodRepo=0
+				]]>
+				</properties>
+			</maven>
+
+			<!-- Clean up repository groups - except releases. -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:delete-repository</targets>
+				<pom>work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoId=${nightlySnapshotRepoGroup}
+				]]>
+				</properties>
+			</maven>
+		</tasks>
+	</job>
+</jobs>

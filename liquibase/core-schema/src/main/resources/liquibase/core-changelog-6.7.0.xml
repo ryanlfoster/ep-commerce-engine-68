@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-6.7.0.xml">
+
+	<!-- Reminder:
+		- Table names cannot exceed 30 characters (Oracle limitation)
+		- Column names cannot exceed 30 characters (Oracle limitation)
+		- Index names cannot exceed 18 characters (DB2 limitation)
+		
+		 Important:
+		- Using <preCondition> ? read: http://forum.liquibase.org/topic/unexpected-behaviour-of-preconditions-with-updatesql
+		- Using <preCondition> ? Consider adding onUpdateSql="TEST", but understand how it plays with updateSQL!
+	-->
+	
+	<changeSet id="6.7.0" author="elasticpath">
+	
+		<comment>[COR-199] Add Customer GUID and Customer Role to TOAUTHACCESSTOKEN to support anonymous user authentication</comment>
+		<addColumn tableName="TOAUTHACCESSTOKEN">
+			<column name="CUSTOMER_GUID" type="VARCHAR(64)" />
+			<column name="CUSTOMER_ROLE" type="VARCHAR(64)" />
+		</addColumn>
+		
+		<update tableName="TOAUTHACCESSTOKEN">
+			<column name="CUSTOMER_GUID" valueComputed="(SELECT TCUSTOMER.GUID FROM TCUSTOMER WHERE TCUSTOMER.USER_ID = TOAUTHACCESSTOKEN.USERNAME)" />
+			<column name="CUSTOMER_ROLE" value="ROLE_CUSTOMER" />
+		</update>
+	
+		<delete tableName="TOAUTHACCESSTOKEN">
+			<where>CUSTOMER_GUID IS NULL</where>
+		</delete>
+	
+		<addNotNullConstraint tableName="TOAUTHACCESSTOKEN" columnName="CUSTOMER_GUID" columnDataType="VARCHAR(64)"/>
+		<addNotNullConstraint tableName="TOAUTHACCESSTOKEN" columnName="CUSTOMER_ROLE" columnDataType="VARCHAR(64)"/>
+		<dropColumn tableName="TOAUTHACCESSTOKEN" columnName="USERNAME" />
+
+		<comment>[COR-1] Add anonymous customer cleanup Quartz job</comment>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="113" />
+			<column name="PATH" value="COMMERCE/SYSTEM/ANONYMOUSCUSTOMERCLEANUP/maxHistory" />
+			<column name="VALUE_TYPE" value="Integer" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="60" />
+			<column name="DESCRIPTION" value="This setting controls the number of days of anonymous customer history to keep before a Quartz job clears it." />
+		</insert>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="114" />
+			<column name="PATH" value="COMMERCE/SYSTEM/ANONYMOUSCUSTOMERCLEANUP/batchSize" />
+			<column name="VALUE_TYPE" value="Integer" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="1000" />
+			<column name="DESCRIPTION" value="The maximum number of anonymous customers to cleanup in one transaction." />
+		</insert>
+
+		<comment>[COR-1] Change cleanup job settings to all be SYSTEM. The current implementations do not support store-specific settings.</comment>
+		<update tableName="TSETTINGDEFINITION">
+			<column name="PATH"	value="COMMERCE/SYSTEM/SESSIONCLEANUP/maxHistory" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />		
+			<where>UIDPK = '94'</where>
+		</update>
+		<update tableName="TSETTINGDEFINITION">
+			<column name="PATH"	value="COMMERCE/SYSTEM/ABANDONEDCARTCLEANUP/maxHistory" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />		
+			<where>UIDPK = '104'</where>
+		</update>
+
+	</changeSet>
+	
+</databaseChangeLog>

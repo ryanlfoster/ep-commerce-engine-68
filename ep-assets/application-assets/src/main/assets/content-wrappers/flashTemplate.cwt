@@ -1,0 +1,17 @@
+<!-- Flash -->		
+		<script type="text/javascript" src="$baseUrl/template-resources/js/swfobject.js"></script>
+		<div id="flash">
+			<script type="text/javascript">
+			var flashvars = {link1: "$baseUrl/$url1",
+							link2: "$baseUrl/$url2",
+							link3: "$baseUrl/$url3",
+							open1: "_self",
+							open2: "_self",
+							open3: "_self"};
+			var params = {wmode: "transparent"};
+				//<![CDATA[
+				swfobject.embedSWF("$baseDcAssetUrl/$flashPath", "flash", "768", "200", "8.0.0", "", flashvars, params, {id: "flash"});
+				//]]>
+			</script>
+		</div>
+<!-- /Flash -->

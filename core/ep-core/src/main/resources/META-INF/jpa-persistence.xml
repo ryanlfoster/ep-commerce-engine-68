@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="commerce-persistence-unit">
+
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<mapping-file>META-INF/attribute-orm.xml</mapping-file>
+		<mapping-file>META-INF/bundling-orm.xml</mapping-file>
+		<mapping-file>META-INF/catalog-orm.xml</mapping-file>
+		<mapping-file>META-INF/cartorder-orm.xml</mapping-file>
+		<mapping-file>META-INF/cmuser-orm.xml</mapping-file>
+		<mapping-file>META-INF/customer-orm.xml</mapping-file>
+		<mapping-file>META-INF/dataimport-orm.xml</mapping-file>
+		<mapping-file>META-INF/inventory-orm.xml</mapping-file>
+		<mapping-file>META-INF/order-orm.xml</mapping-file>
+		<mapping-file>META-INF/payment-orm.xml</mapping-file>
+		<mapping-file>META-INF/rules-orm.xml</mapping-file>
+		<mapping-file>META-INF/search-orm.xml</mapping-file>
+		<mapping-file>META-INF/shipping-orm.xml</mapping-file>
+		<mapping-file>META-INF/shopper-orm.xml</mapping-file>
+		<mapping-file>META-INF/shoppingcart-orm.xml</mapping-file>
+		<mapping-file>META-INF/skuconfiguration-orm.xml</mapping-file>
+		<mapping-file>META-INF/store-orm.xml</mapping-file>
+		<mapping-file>META-INF/tax-orm.xml</mapping-file>
+		<mapping-file>META-INF/advancedsearch-orm.xml</mapping-file>
+		<mapping-file>META-INF/pricing-orm.xml</mapping-file>
+		<mapping-file>META-INF/targetedselling-orm.xml</mapping-file>
+		<mapping-file>META-INF/changeset-orm.xml</mapping-file>
+		<mapping-file>META-INF/tags-orm.xml</mapping-file>
+		<mapping-file>META-INF/sellingcontext-orm.xml</mapping-file>
+		<mapping-file>META-INF/contentspace-orm.xml</mapping-file>
+		<mapping-file>META-INF/audit-orm.xml</mapping-file>
+		<mapping-file>META-INF/oauthtoken-orm.xml</mapping-file>
+		<mapping-file>META-INF/paymenttoken-orm.xml</mapping-file>
+
+		<class>com.elasticpath.domain.attribute.impl.AbstractAttributeValueImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.AttributeGroupAttributeImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.AttributeImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.CategoryAttributeValueImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.CategoryTypeAttributeImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.CustomerProfileValueImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.ProductAttributeValueImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.ProductTypeProductAttributeImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.ProductTypeSkuAttributeImpl</class>
+		<class>com.elasticpath.domain.attribute.impl.SkuAttributeValueImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.BrandImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.CatalogImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.CatalogLocaleImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.CategoryDeletedImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.AbstractCategoryImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.CategoryImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.LinkedCategoryImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.CategoryLocaleDependantFieldsImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.CategoryTypeImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.DigitalAssetAuditImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.DigitalAssetImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.AbstractLocaleDependantFieldsImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductAssociationImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductCategoryImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductDeletedImpl</class>
+		<class>com.elasticpath.domain.search.impl.ObjectDeletedImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductLocaleDependantFieldsImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductSkuImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ProductTypeImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.TopSellerImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.TopSellerProductImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.ItemConfigurationMementoImpl</class>
+		<class>com.elasticpath.domain.cmuser.impl.CmUserImpl</class>
+		<class>com.elasticpath.domain.cmuser.impl.UserPermissionImpl</class>
+		<class>com.elasticpath.domain.cmuser.impl.UserRoleImpl</class>
+		<class>com.elasticpath.domain.cmuser.impl.UserPasswordHistoryItemImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerImpl</class>
+		<class>com.elasticpath.domain.customer.impl.AbstractAddressImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerAddressImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerAuthenticationImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerCreditCardImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerDeletedImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerGroupImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerRoleImpl</class>
+		<class>com.elasticpath.domain.customer.impl.CustomerSessionMementoImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportJobImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportMappingImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportBadRowImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportFaultImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportNotificationImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportNotificationMetadataImpl</class>
+		<class>com.elasticpath.domain.dataimport.impl.ImportJobStatusImpl</class>
+		<class>com.elasticpath.domain.impl.AbstractListenableValueObjectImpl</class>
+		<class>com.elasticpath.domain.impl.AbstractListenableEntityImpl</class>
+		<class>com.elasticpath.inventory.domain.impl.InventoryImpl</class>
+		<class>com.elasticpath.inventory.domain.impl.InventoryJournalImpl</class>
+		<class>com.elasticpath.inventory.domain.impl.InventoryJournalLockImpl</class>
+		<class>com.elasticpath.domain.misc.impl.AbstractLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.BrandLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.SkuOptionLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.SkuOptionValueLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.TaxCategoryLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.ShippingServiceLevelLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderAddressImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderDataImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderEventImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderLockImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderPaymentImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderReturnImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderReturnSkuImpl</class>
+		<class>com.elasticpath.domain.order.impl.AbstractOrderShipmentImpl</class>
+		<class>com.elasticpath.domain.order.impl.PhysicalOrderShipmentImpl</class>
+		<class>com.elasticpath.domain.order.impl.ElectronicOrderShipmentImpl</class>
+		<class>com.elasticpath.domain.order.impl.ServiceOrderShipmentImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderSkuImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderTaxValueImpl</class>
+		<class>com.elasticpath.domain.rules.impl.EpRuleBaseImpl</class>
+		<class>com.elasticpath.domain.rules.impl.AbstractRuleElementImpl</class>
+		<class>com.elasticpath.domain.rules.impl.AbstractRuleExceptionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.AbstractRuleImpl</class>
+		<class>com.elasticpath.domain.rules.impl.AppliedRuleImpl</class>
+		<class>com.elasticpath.domain.rules.impl.AppliedCouponImpl</class>
+		<class>com.elasticpath.domain.rules.impl.BrandConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartCategoryPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartCategoryAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartContainsItemsOfCategoryConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartCurrencyConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.LimitedUsagePromotionConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartNFreeSkusActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartNthProductPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartProductAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartProductPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartSkuAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartAnySkuAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartSkuPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartAnySkuPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartSubtotalAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartSubtotalPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CatalogCurrencyPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CatalogCurrencyAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CartSubtotalConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CategoryExceptionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.ProductCategoryConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.ProductConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.ProductExceptionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.ProductInCartConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.PromotionRuleImpl</class>
+		<class>com.elasticpath.domain.rules.impl.RuleParameterImpl</class>
+		<class>com.elasticpath.domain.rules.impl.RuleSetImpl</class>
+		<class>com.elasticpath.domain.rules.impl.ShippingAmountDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.ShippingPercentDiscountActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.SkuExceptionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.SkuInCartConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.AnySkuInCartConditionImpl</class>
+		<class>com.elasticpath.domain.search.impl.SfSearchLogImpl</class>
+		<class>com.elasticpath.domain.search.impl.SynonymGroupImpl</class>
+		<class>com.elasticpath.domain.search.impl.SynonymImpl</class>
+		<class>com.elasticpath.domain.search.impl.IndexNotificationImpl</class>
+		<class>com.elasticpath.domain.search.impl.IndexBuildStatusImpl</class>
+		<class>com.elasticpath.domain.search.query.impl.SearchTermsMementoImpl</class>
+		<class>com.elasticpath.domain.search.query.impl.SearchTermsActivityImpl</class>
+		<class>com.elasticpath.domain.search.query.impl.SearchTermsActivitySummaryImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.AbstractShippingCostCalculationMethodImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.CostPerUnitWeightMethodImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.FixedBaseAndCostPerUnitWeightMethodImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.FixedBaseAndOrderTotalPercentageMethodImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.FixedPriceMethodImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.OrderTotalPercentageMethodImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.ShippingCostCalculationParameterImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.ShippingRegionImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.ShippingServiceLevelImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.ShippingCostCalculationParameterImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.ShippingRegionImpl</class>
+		<class>com.elasticpath.domain.shipping.impl.ShippingServiceLevelImpl</class>
+		<class>com.elasticpath.domain.shoppingcart.impl.ShoppingCartMementoImpl</class>
+		<class>com.elasticpath.domain.shoppingcart.impl.ShoppingItemImpl</class>
+		<class>com.elasticpath.domain.skuconfiguration.impl.JpaAdaptorOfSkuOptionValueImpl</class>
+		<class>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</class>
+		<class>com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl</class>
+		<class>com.elasticpath.domain.tax.impl.TaxCodeImpl</class>
+		<class>com.elasticpath.domain.tax.impl.TaxCategoryImpl</class>
+		<class>com.elasticpath.domain.tax.impl.TaxJurisdictionImpl</class>
+		<class>com.elasticpath.domain.tax.impl.TaxValueImpl</class>
+		<class>com.elasticpath.domain.tax.impl.TaxRegionImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.GiftCertificateImpl</class>
+		<class>com.elasticpath.domain.payment.impl.GiftCertificateTransactionImpl</class>
+		<class>com.elasticpath.domain.store.impl.WarehouseImpl</class>
+		<class>com.elasticpath.domain.store.impl.WarehouseAddressImpl</class>
+		<class>com.elasticpath.domain.store.impl.StoreImpl</class>
+		<class>com.elasticpath.domain.store.impl.CreditCardTypeImpl</class>
+		<class>com.elasticpath.domain.payment.impl.PaymentGatewayImpl</class>
+		<class>com.elasticpath.domain.payment.impl.PaymentGatewayPropertyImpl</class>
+		<class>com.elasticpath.domain.order.impl.CreditCardNumber</class>
+		<class>com.elasticpath.domain.advancedsearch.impl.AdvancedSearchQueryImpl</class>
+		<class>com.elasticpath.domain.store.impl.StoreCurrencyImpl</class>
+		<class>com.elasticpath.domain.store.impl.StoreLocaleImpl</class>
+		<class>com.elasticpath.domain.pricing.impl.PriceListDescriptorImpl</class>
+		<class>com.elasticpath.domain.pricing.impl.BaseAmountImpl</class>
+		<class>com.elasticpath.domain.pricing.impl.PriceAdjustmentImpl</class>
+		<class>com.elasticpath.domain.objectgroup.impl.BusinessObjectGroupMemberImpl</class>
+		<class>com.elasticpath.domain.objectgroup.impl.BusinessObjectMetadataImpl</class>
+		<class>com.elasticpath.domain.changeset.impl.ChangeSetImpl</class>
+		<class>com.elasticpath.domain.changeset.impl.ChangeSetUserImpl</class>
+		<class>com.elasticpath.domain.contentspace.impl.DynamicContentImpl</class>
+		<class>com.elasticpath.domain.targetedselling.impl.DynamicContentDeliveryImpl</class>
+		<class>com.elasticpath.domain.contentspace.impl.ContentSpaceImpl</class>
+		<class>com.elasticpath.domain.contentspace.impl.ParameterValueImpl</class>
+		<class>com.elasticpath.domain.contentspace.impl.ParameterLocaleDependantValueImpl</class>
+		<class>com.elasticpath.domain.sellingcontext.impl.SellingContextImpl</class>
+		<class>com.elasticpath.domain.audit.impl.ChangeTransactionImpl</class>
+		<class>com.elasticpath.domain.audit.impl.ChangeTransactionMetadataImpl</class>
+		<class>com.elasticpath.domain.audit.impl.AbstractChangeOperationImpl</class>
+		<class>com.elasticpath.domain.audit.impl.SingleChangeOperationImpl</class>
+		<class>com.elasticpath.domain.audit.impl.BulkChangeOperationImpl</class>
+		<class>com.elasticpath.domain.audit.impl.DataChangedImpl</class>
+		<class>com.elasticpath.domain.shoppingcart.impl.ShoppingItemData</class>
+		<class>com.elasticpath.domain.impl.AbstractItemData</class>
+		<class>com.elasticpath.domain.impl.AbstractShoppingItemImpl</class>
+		<class>com.elasticpath.domain.order.impl.OrderItemData</class>
+		<class>com.elasticpath.domain.auth.impl.OAuth2AccessTokenMementoImpl</class>
+		<class>com.elasticpath.domain.auth.OAuth2AuthenticationMemento</class>
+		<class>com.elasticpath.domain.auth.ClientAuthenticationMemento</class>
+		<class>com.elasticpath.domain.auth.UserAuthenticationMemento</class>
+		<class>com.elasticpath.domain.customer.impl.AbstractPaymentMethodImpl</class>
+		<class>com.elasticpath.domain.customer.impl.PaymentTokenImpl</class>
+
+		<!-- tagging framework start -->
+
+		<class>com.elasticpath.tags.domain.impl.TagAllowedValueImpl</class>
+		<class>com.elasticpath.tags.domain.impl.TagDefinitionImpl</class>
+		<class>com.elasticpath.tags.domain.impl.TagDictionaryImpl</class>
+		<class>com.elasticpath.tags.domain.impl.TagGroupImpl</class>
+		<class>com.elasticpath.tags.domain.impl.ConditionalExpressionImpl</class>
+		<class>com.elasticpath.tags.domain.impl.TagValueTypeImpl</class>
+		<class>com.elasticpath.tags.domain.impl.TagOperatorImpl</class>
+
+		<class>com.elasticpath.domain.misc.impl.TagDefinitionLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.TagGroupLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.TagAllowedValueLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.domain.misc.impl.TagOperatorLocalizedPropertyValueImpl</class>
+		<class>com.elasticpath.validation.domain.impl.TagValueTypeDeclarativeValidationConstraintImpl</class>
+		<class>com.elasticpath.validation.domain.impl.DeclarativeValidationConstraintImpl</class>
+		<class>com.elasticpath.domain.misc.impl.TagValueConstraintLocalizedPropertyValueImpl</class>
+
+		<!-- tagging framework end -->
+
+		<!-- bundling framework start -->
+
+		<class>com.elasticpath.domain.catalog.impl.ProductBundleImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.BundleConstituentImpl</class>
+		<class>com.elasticpath.domain.catalog.impl.SelectionRuleImpl</class>
+
+		<!-- bundling framework end -->
+
+		<class>com.elasticpath.domain.pricing.impl.PriceListAssignmentImpl</class>
+
+		<class>com.elasticpath.domain.rules.impl.CouponImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CouponConfigImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CouponUsageImpl</class>
+		<class>com.elasticpath.domain.rules.impl.CouponAssignmentActionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.LimitedUseCouponCodeConditionImpl</class>
+		<class>com.elasticpath.domain.rules.impl.RuleLocalizedPropertyValueImpl</class>
+
+		<class>com.elasticpath.domain.shopper.impl.ShopperMementoImpl</class>
+
+		<class>com.elasticpath.domain.shoppingcart.impl.AbstractShoppingListImpl</class>
+		<class>com.elasticpath.domain.shoppingcart.impl.WishListImpl</class>
+
+		<class>com.elasticpath.domain.quantity.Quantity</class>
+
+		<class>com.elasticpath.domain.shoppingcart.impl.ShoppingItemRecurringPriceImpl</class>
+		<class>com.elasticpath.domain.shoppingcart.impl.ShoppingItemSimplePrice</class>
+
+		<class>com.elasticpath.domain.cartorder.impl.CartOrderImpl</class>
+
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<!-- !!!! DOCjpaPropertiesXML -->
+		<properties>
+			<!-- Default ConnectionFactoryName has changed in 6.4.  It can be overridden by a custom
+				   jpa-persistence.xml in a jar in the classpath after ep-core.  However recommended
+				   practice is to use the new name or setup a JNDI alias.  -->
+			<property name="openjpa.ConnectionFactoryName" value="java:comp/env/jdbc/epjndi"/>
+			<property name="openjpa.Log" value="commons"/>
+			<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true, PrettyPrintLineLength=120"/>
+			<property name="openjpa.jdbc.EagerFetchMode" value="parallel"/>
+			<property name="openjpa.jdbc.SubclassFetchMode" value="parallel"/>
+			<property name="openjpa.DetachState" value="loaded(DetachedStateField=true)"/>
+			<property name="openjpa.Multithreaded" value="true"/>
+			<property name="openjpa.AutoDetach" value="close, commit, nontx-read"/>
+			<property name="openjpa.jdbc.DBDictionary" value="SupportsSubselect=true, SupportsCorrelatedSubselect=false"/>
+
+			<!-- Uncomment the section below to enable data caching, comment them out to disable -->
+			<property name="openjpa.DataCache" value="true(cacheSize=25000,softReferenceSize=0)"/>
+			<property name="openjpa.RemoteCommitProvider" value="sjvm"/>
+			<property name="openjpa.DataCacheTimeout" value="1000"/>
+			<property name="openjpa.QueryCompilationCache" value="true(cacheSize=2500,softReferenceSize=0)"/>
+
+			<property name="openjpa.QueryCache" value="true(cacheSize=10000,softReferenceSize=0)"/>
+			<property name="openjpa.jdbc.QuerySQLCache" value="false"/>
+		</properties>
+		<!-- !!!! DOCjpaPropertiesXML -->
+
+	</persistence-unit>
+
+</persistence>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="classpath:spring/models/domainModelCM.xml" />
+	<import resource="classpath:spring/dataaccess/daoCM.xml" />
+	<import resource="classpath:spring/service/serviceCM.xml" />
+	<import resource="classpath:spring/service/serviceHttp.xml" />
+	<import resource="classpath:spring/security/security.xml" />
+	<import resource="classpath:spring/web/context-config.xml" />
+	<import resource="classpath:spring/web/filter-config.xml" />
+	<import resource="classpath:spring/scheduling/quartz.xml" />
+	<import resource="classpath:spring/web/url-mapping.xml" />
+	<import resource="classpath:spring/views/velocity/velocity.xml" />
+
+	<import resource="classpath:spring/dataaccess/openjpa/openjpa.xml" />
+	<import resource="classpath:spring/commons/util-config.xml" />
+	<import resource="classpath:spring/commons/validators.xml" />
+
+</beans>

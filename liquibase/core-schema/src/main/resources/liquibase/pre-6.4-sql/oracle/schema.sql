@@ -1,0 +1,5447 @@
+
+-----------------------------------------------------------------------------
+-- JPA_GENERATED_KEYS
+-----------------------------------------------------------------------------
+CREATE TABLE JPA_GENERATED_KEYS
+(
+        ID VARCHAR2(30) NOT NULL,
+        LAST_VALUE NUMBER(20,0)
+);
+
+
+
+
+COMMENT ON TABLE JPA_GENERATED_KEYS IS 'Contains OpenJPA-generated, unique primary keys for other database tables';
+
+
+
+-----------------------------------------------------------------------------
+-- TDIGITALASSETS
+-----------------------------------------------------------------------------
+CREATE TABLE TDIGITALASSETS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        FILE_NAME VARCHAR2(255) NOT NULL,
+        EXPIRY_DAYS NUMBER(10,0),
+        MAX_DOWNLOAD_TIMES NUMBER(10,0)
+);
+
+ALTER TABLE TDIGITALASSETS
+    ADD CONSTRAINT TDIGITALASSETS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_DA_FILE_NAME ON TDIGITALASSETS (FILE_NAME);
+
+
+COMMENT ON TABLE TDIGITALASSETS IS 'references to digital good files stored on the file system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAXCODE
+-----------------------------------------------------------------------------
+CREATE TABLE TTAXCODE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CODE VARCHAR2(255) NOT NULL,
+    CONSTRAINT TTAXCODE_GUID_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TTAXCODE_CODE_UNIQUE UNIQUE (CODE)
+);
+
+ALTER TABLE TTAXCODE
+    ADD CONSTRAINT TTAXCODE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAXCODE IS 'tax codes. For example, goods and books.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAXJURISDICTION
+-----------------------------------------------------------------------------
+CREATE TABLE TTAXJURISDICTION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        REGION_CODE VARCHAR2(255) NOT NULL,
+        PRICE_CALCULATION_METH NUMBER(1,0) default 0,
+    CONSTRAINT TTAXJURISDICTION_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAXJURISDICTION
+    ADD CONSTRAINT TTAXJURISDICTION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAXJURISDICTION IS 'tax jurisdiction details.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAXCATEGORY
+-----------------------------------------------------------------------------
+CREATE TABLE TTAXCATEGORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        FIELD_MATCH_TYPE NUMBER(10,0),
+        TAX_JURISDICTION_UID NUMBER(20,0),
+    CONSTRAINT TTAXCATEGORY_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAXCATEGORY
+    ADD CONSTRAINT TTAXCATEGORY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TAXCAT_TAXJUR_UID ON TTAXCATEGORY (TAX_JURISDICTION_UID);
+
+
+COMMENT ON TABLE TTAXCATEGORY IS 'tax categories.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAXREGION
+-----------------------------------------------------------------------------
+CREATE TABLE TTAXREGION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        REGION_NAME VARCHAR2(255) NOT NULL,
+        TAX_CATEGORY_UID NUMBER(20,0)
+);
+
+ALTER TABLE TTAXREGION
+    ADD CONSTRAINT TTAXREGION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TAXREG_TAXCAT_UID ON TTAXREGION (TAX_CATEGORY_UID);
+
+
+COMMENT ON TABLE TTAXREGION IS 'tax region details.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAXVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TTAXVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TAX_REGION_UID NUMBER(20,0),
+        TAX_CODE_UID NUMBER(20,0),
+        VALUE NUMBER(19,4)
+);
+
+ALTER TABLE TTAXVALUE
+    ADD CONSTRAINT TTAXVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TAXVAL_TAXREG_UID ON TTAXVALUE (TAX_REGION_UID);
+CREATE INDEX I_TAXVAL_TAXCODE_UID ON TTAXVALUE (TAX_CODE_UID);
+
+
+COMMENT ON TABLE TTAXVALUE IS 'tax value details for tax jurisdictions and tax categories.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATALOG
+-----------------------------------------------------------------------------
+CREATE TABLE TCATALOG
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        MASTER NUMBER(1,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DEFAULT_LOCALE VARCHAR2(20) NOT NULL,
+        CATALOG_CODE VARCHAR2(64) NOT NULL,
+    CONSTRAINT TCATALOG_CANDIDATE_KEYS UNIQUE (CATALOG_CODE)
+);
+
+ALTER TABLE TCATALOG
+    ADD CONSTRAINT TCATALOG_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCATALOG IS 'information about catalogs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TATTRIBUTE
+-----------------------------------------------------------------------------
+CREATE TABLE TATTRIBUTE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_KEY VARCHAR2(255) NOT NULL,
+        LOCALE_DEPENDANT NUMBER(1,0) default 0 NOT NULL,
+        ATTRIBUTE_TYPE NUMBER(10,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        REQUIRED NUMBER(1,0) default 0,
+        VALUE_LOOKUP_ENABLED NUMBER(1,0) default 0,
+        MULTI_VALUE_ENABLED NUMBER(1,0) default 0,
+        ATTRIBUTE_USAGE NUMBER(10,0) NOT NULL,
+        SYSTEM NUMBER(1,0) default 0,
+        CATALOG_UID NUMBER(20,0),
+        ATTR_GLOBAL NUMBER(1,0) NOT NULL,
+    CONSTRAINT TATTRIBUTE_UNIQUE UNIQUE (ATTRIBUTE_KEY)
+);
+
+ALTER TABLE TATTRIBUTE
+    ADD CONSTRAINT TATTRIBUTE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TATTRIBUTE IS 'information about custom properties associated with categories, products, and product SKUs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSETTINGDEFINITION
+-----------------------------------------------------------------------------
+CREATE TABLE TSETTINGDEFINITION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PATH VARCHAR2(255) NOT NULL,
+        DEFAULT_VALUE CLOB,
+        VALUE_TYPE VARCHAR2(255) NOT NULL,
+        DESCRIPTION CLOB,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        MAX_OVERRIDE_VALUES NUMBER(20,0) default 0,
+    CONSTRAINT TSETTINGDEFINITION_UNIQUE UNIQUE (PATH)
+);
+
+ALTER TABLE TSETTINGDEFINITION
+    ADD CONSTRAINT TSETTINGDEFINITION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSETTINGDEFINITION IS 'information about setting definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSETTINGMETADATA
+-----------------------------------------------------------------------------
+CREATE TABLE TSETTINGMETADATA
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        SETTING_DEFINITION_UID NUMBER(20,0),
+        METADATA_KEY VARCHAR2(255) NOT NULL,
+        VALUE VARCHAR2(2000)
+);
+
+ALTER TABLE TSETTINGMETADATA
+    ADD CONSTRAINT TSETTINGMETADATA_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SETTINGMETADATA_DEF_UID ON TSETTINGMETADATA (SETTING_DEFINITION_UID);
+
+
+COMMENT ON TABLE TSETTINGMETADATA IS 'metadata entries for settings definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSETTINGVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TSETTINGVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        SETTING_DEFINITION_UID NUMBER(20,0),
+        CONTEXT VARCHAR2(255),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        CONTEXT_VALUE CLOB
+);
+
+ALTER TABLE TSETTINGVALUE
+    ADD CONSTRAINT TSETTINGVALUE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSETTINGVALUE IS 'context-specific values for setting definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORE
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        STORECODE VARCHAR2(64) NOT NULL,
+        DESCRIPTION CLOB,
+        URL VARCHAR2(255),
+        ENABLED NUMBER(1,0) default 0 NOT NULL,
+        DEFAULT_LOCALE VARCHAR2(20),
+        DEFAULT_CURRENCY CHAR(3),
+        SUB_COUNTRY VARCHAR2(200),
+        COUNTRY VARCHAR2(200) NOT NULL,
+        TIMEZONE VARCHAR2(50) NOT NULL,
+        STORE_TYPE CHAR(3) NOT NULL,
+        CONTENT_ENCODING VARCHAR2(20) default 'utf-8',
+        CREDIT_CARD_CVV2_ENABLED NUMBER(1,0) default 0 NOT NULL,
+        CC_PAYER_AUTH_ENABLED NUMBER(1,0) default 0 NOT NULL,
+        DISPLAY_OUT_OF_STOCK NUMBER(1,0) default 0 NOT NULL,
+        STORE_FULL_CREDIT_CARDS NUMBER(1,0) default 1 NOT NULL,
+        EMAIL_SENDER_NAME VARCHAR2(255),
+        EMAIL_SENDER_ADDRESS VARCHAR2(255),
+        STORE_ADMIN_EMAIL VARCHAR2(255),
+        CATALOG_UID NUMBER(20,0),
+        STORE_STATE NUMBER(10,0) default 0 NOT NULL,
+    CONSTRAINT TSTORE_CANDIDATE_KEYS UNIQUE (NAME, STORECODE),
+    CONSTRAINT TSTORECODE_UNIQUE UNIQUE (STORECODE)
+);
+
+ALTER TABLE TSTORE
+    ADD CONSTRAINT TSTORE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_STORE_CATALOG_UID ON TSTORE (CATALOG_UID);
+
+
+COMMENT ON TABLE TSTORE IS 'store information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMER
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        USER_ID VARCHAR2(255) NOT NULL,
+        PREF_BILL_ADDRESS_UID NUMBER(20,0),
+        PREF_SHIP_ADDRESS_UID NUMBER(20,0),
+        CREATION_DATE TIMESTAMP (3) NOT NULL,
+        LAST_EDIT_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        STATUS NUMBER(10,0) NOT NULL,
+        AUTHENTICATION_UID NUMBER(20,0),
+        STORE_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TCUSTOMER_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCUSTOMER
+    ADD CONSTRAINT TCUSTOMER_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CUST_STORE_UID ON TCUSTOMER (STORE_UID);
+CREATE INDEX I_C_USERID ON TCUSTOMER (USER_ID);
+CREATE INDEX I_CUST_CR_DATE ON TCUSTOMER (CREATION_DATE);
+
+
+COMMENT ON TABLE TCUSTOMER IS 'customer account information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERAUTHENTICATION
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERAUTHENTICATION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PASSWORD VARCHAR2(255)
+);
+
+ALTER TABLE TCUSTOMERAUTHENTICATION
+    ADD CONSTRAINT TCUSTOMERAUTHENTICATION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCUSTOMERAUTHENTICATION IS 'customer authentication details.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERPROFILEVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERPROFILEVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_TYPE NUMBER(10,0) NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR2(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR2(255),
+        LONG_TEXT_VALUE CLOB,
+        INTEGER_VALUE NUMBER(10,0),
+        DECIMAL_VALUE NUMBER(19,2),
+        BOOLEAN_VALUE NUMBER(1,0) default 0,
+        DATE_VALUE TIMESTAMP (3),
+        CUSTOMER_UID NUMBER(20,0),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TCUSTOMERPROFILEVALUE
+    ADD CONSTRAINT TCUSTOMERPROFILEVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CPV_ATTR_UID ON TCUSTOMERPROFILEVALUE (ATTRIBUTE_UID);
+CREATE INDEX I_CPV_CUID_ATTKEY ON TCUSTOMERPROFILEVALUE (CUSTOMER_UID, LOCALIZED_ATTRIBUTE_KEY);
+CREATE INDEX I_CPV_STV_ATTVALUE ON TCUSTOMERPROFILEVALUE (SHORT_TEXT_VALUE);
+
+
+COMMENT ON TABLE TCUSTOMERPROFILEVALUE IS 'values associated with customer profiles.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERDELETED
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERDELETED
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CUSTOMER_UID NUMBER(20,0) NOT NULL,
+        DELETED_DATE TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TCUSTOMERDELETED
+    ADD CONSTRAINT TCUSTOMERDELETED_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CUD_DELETED_DATE ON TCUSTOMERDELETED (DELETED_DATE);
+
+
+COMMENT ON TABLE TCUSTOMERDELETED IS 'audit information about deleted customers.';
+
+
+
+-----------------------------------------------------------------------------
+-- TADDRESS
+-----------------------------------------------------------------------------
+CREATE TABLE TADDRESS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LAST_NAME VARCHAR2(100),
+        FIRST_NAME VARCHAR2(100),
+        PHONE_NUMBER VARCHAR2(50),
+        FAX_NUMBER VARCHAR2(50),
+        STREET_1 VARCHAR2(200),
+        STREET_2 VARCHAR2(200),
+        CITY VARCHAR2(200),
+        SUB_COUNTRY VARCHAR2(200),
+        ZIP_POSTAL_CODE VARCHAR2(50),
+        COUNTRY VARCHAR2(200),
+        COMMERCIAL NUMBER(1,0) default 0,
+        GUID VARCHAR2(64) NOT NULL,
+        CUSTOMER_UID NUMBER(20,0),
+    CONSTRAINT TADDRESS_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TADDRESS
+    ADD CONSTRAINT TADDRESS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ADDR_C_UID ON TADDRESS (CUSTOMER_UID);
+
+
+COMMENT ON TABLE TADDRESS IS 'addresses associated with customers.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATALOGSUPPORTEDLOCALE
+-----------------------------------------------------------------------------
+CREATE TABLE TCATALOGSUPPORTEDLOCALE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LOCALE VARCHAR2(255) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCATALOGSUPPORTEDLOCALE
+    ADD CONSTRAINT TCATALOGSUPPORTEDLOCALE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CATSUPLOC_CATALOG_UID ON TCATALOGSUPPORTEDLOCALE (CATALOG_UID);
+
+
+COMMENT ON TABLE TCATALOGSUPPORTEDLOCALE IS 'the supported locales for each catalog.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATEGORYTYPE
+-----------------------------------------------------------------------------
+CREATE TABLE TCATEGORYTYPE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        TEMPLATE VARCHAR2(255) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TCATEGORYTYPE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TCATEGORYTYPE_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCATEGORYTYPE
+    ADD CONSTRAINT TCATEGORYTYPE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CATTYPE_CATALOG_UID ON TCATEGORYTYPE (CATALOG_UID);
+
+
+COMMENT ON TABLE TCATEGORYTYPE IS 'category type information. A category type determines the set of attributes that a category has. An example of a category type would be Electronics.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATEGORY
+-----------------------------------------------------------------------------
+CREATE TABLE TCATEGORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        PARENT_CATEGORY_UID NUMBER(20,0),
+        ORDERING NUMBER(10,0),
+        CATALOG_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCATEGORY
+    ADD CONSTRAINT TCATEGORY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CAT_CATALOG_UID ON TCATEGORY (CATALOG_UID);
+CREATE INDEX I_CAT_PARENT_UID ON TCATEGORY (PARENT_CATEGORY_UID);
+CREATE INDEX I_C_MODIFY_DATE ON TCATEGORY (LAST_MODIFIED_DATE);
+
+
+COMMENT ON TABLE TCATEGORY IS 'information about categories (both linked and master).';
+
+
+
+-----------------------------------------------------------------------------
+-- TMASTERCATEGORY
+-----------------------------------------------------------------------------
+CREATE TABLE TMASTERCATEGORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        START_DATE TIMESTAMP (3) NOT NULL,
+        END_DATE TIMESTAMP (3),
+        HIDDEN NUMBER(1,0) default 0,
+        CATEGORY_TYPE_UID NUMBER(20,0) NOT NULL,
+        CODE VARCHAR2(64) NOT NULL,
+        VIRTUAL NUMBER(1,0),
+    CONSTRAINT TCATEGORY_UNIQUE UNIQUE (CODE)
+);
+
+ALTER TABLE TMASTERCATEGORY
+    ADD CONSTRAINT TMASTERCATEGORY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CAT_TYPE_UID ON TMASTERCATEGORY (CATEGORY_TYPE_UID);
+CREATE INDEX I_C_SE_DATE ON TMASTERCATEGORY (START_DATE, END_DATE);
+
+
+COMMENT ON TABLE TMASTERCATEGORY IS 'information about standard (non-linked) categories.';
+
+
+
+-----------------------------------------------------------------------------
+-- TLINKEDCATEGORY
+-----------------------------------------------------------------------------
+CREATE TABLE TLINKEDCATEGORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        MASTER_CATEGORY_UID NUMBER(20,0),
+        INCLUDE NUMBER(1,0) default 1
+);
+
+ALTER TABLE TLINKEDCATEGORY
+    ADD CONSTRAINT TLINKEDCATEGORY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_LCAT_MCAT_UID ON TLINKEDCATEGORY (MASTER_CATEGORY_UID);
+
+
+COMMENT ON TABLE TLINKEDCATEGORY IS 'information about linked categories. Every linked category is associated with a master category.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATEGORYDELETED
+-----------------------------------------------------------------------------
+CREATE TABLE TCATEGORYDELETED
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CATEGORY_UID NUMBER(20,0) NOT NULL,
+        DELETED_DATE TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TCATEGORYDELETED
+    ADD CONSTRAINT TCATEGORYDELETED_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CAD_DELETED_DATE ON TCATEGORYDELETED (DELETED_DATE);
+
+
+COMMENT ON TABLE TCATEGORYDELETED IS 'audit information about deleted categories.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATEGORYATTRIBUTEVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TCATEGORYATTRIBUTEVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_TYPE NUMBER(10,0) NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR2(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR2(255),
+        LONG_TEXT_VALUE CLOB,
+        INTEGER_VALUE NUMBER(10,0),
+        DECIMAL_VALUE NUMBER(19,2),
+        BOOLEAN_VALUE NUMBER(1,0) default 0,
+        DATE_VALUE TIMESTAMP (3),
+        CATEGORY_UID NUMBER(20,0)
+);
+
+ALTER TABLE TCATEGORYATTRIBUTEVALUE
+    ADD CONSTRAINT TCATEGORYATTRIBUTEVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CAV_ATTR_UID ON TCATEGORYATTRIBUTEVALUE (ATTRIBUTE_UID);
+CREATE INDEX I_CAV_CAT_UID ON TCATEGORYATTRIBUTEVALUE (CATEGORY_UID);
+
+
+COMMENT ON TABLE TCATEGORYATTRIBUTEVALUE IS 'associations between attribute values and categories.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATEGORYLDF
+-----------------------------------------------------------------------------
+CREATE TABLE TCATEGORYLDF
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CATEGORY_UID NUMBER(20,0) NOT NULL,
+        URL VARCHAR2(255),
+        KEY_WORDS VARCHAR2(255),
+        DESCRIPTION VARCHAR2(255),
+        TITLE VARCHAR2(255),
+        DISPLAY_NAME VARCHAR2(255),
+        LOCALE VARCHAR2(20) NOT NULL
+);
+
+ALTER TABLE TCATEGORYLDF
+    ADD CONSTRAINT TCATEGORYLDF_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CLDF_CAT_UID ON TCATEGORYLDF (CATEGORY_UID);
+CREATE INDEX I_CLDF_LOCALE_NAME ON TCATEGORYLDF (LOCALE, DISPLAY_NAME);
+
+
+COMMENT ON TABLE TCATEGORYLDF IS 'locale-dependent information about a category.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCATEGORYTYPEATTRIBUTE
+-----------------------------------------------------------------------------
+CREATE TABLE TCATEGORYTYPEATTRIBUTE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ORDERING NUMBER(10,0),
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        CATEGORY_TYPE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCATEGORYTYPEATTRIBUTE
+    ADD CONSTRAINT TCATEGORYTYPEATTRIBUTE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CTA_ATTR_UID ON TCATEGORYTYPEATTRIBUTE (ATTRIBUTE_UID);
+CREATE INDEX I_CTA_TYPE_UID ON TCATEGORYTYPEATTRIBUTE (CATEGORY_TYPE_UID);
+
+
+COMMENT ON TABLE TCATEGORYTYPEATTRIBUTE IS 'associations between category attributes and category types.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCMUSER
+-----------------------------------------------------------------------------
+CREATE TABLE TCMUSER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        USER_NAME VARCHAR2(255) NOT NULL,
+        EMAIL VARCHAR2(255) NOT NULL,
+        FIRST_NAME VARCHAR2(100),
+        LAST_NAME VARCHAR2(100),
+        PASSWORD VARCHAR2(255) NOT NULL,
+        CREATION_DATE TIMESTAMP (3) NOT NULL,
+        LAST_LOGIN_DATE TIMESTAMP (3),
+        LAST_CHANGED_PASSWORD_DATE TIMESTAMP (3),
+        FAILED_LOGIN_ATTEMPTS NUMBER(10,0) default 0 NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        STATUS NUMBER(10,0) default 4 NOT NULL,
+        ALL_WAREHOUSE_ACCESS NUMBER(1,0) default 1 NOT NULL,
+        ALL_CATALOG_ACCESS NUMBER(1,0) default 1 NOT NULL,
+        ALL_STORE_ACCESS NUMBER(1,0) default 1 NOT NULL,
+        ALL_PRICELIST_ACCESS NUMBER(1,0) default 1 NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+    CONSTRAINT TCMUSER_UNIQUE UNIQUE (USER_NAME),
+    CONSTRAINT TCMUSER_EMAIL_UNIQUE UNIQUE (EMAIL),
+    CONSTRAINT TCMUSER_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCMUSER
+    ADD CONSTRAINT TCMUSER_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCMUSER IS 'information about each Commerce Manager user.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPASSWORDHISTORY
+-----------------------------------------------------------------------------
+CREATE TABLE TPASSWORDHISTORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OLD_PASSWORD VARCHAR2(255) NOT NULL,
+        EXPIRATION_DATE TIMESTAMP (3) NOT NULL,
+        CM_USER_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TPASSWORDHISTORY
+    ADD CONSTRAINT TPASSWORDHISTORY_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TPASSWORDHISTORY IS 'the previous passwords of each Commerce Manager user. (Used for PCI password compliance checking.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TUSERROLE
+-----------------------------------------------------------------------------
+CREATE TABLE TUSERROLE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TUSERROLE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TUSERROLE_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TUSERROLE
+    ADD CONSTRAINT TUSERROLE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TUSERROLE IS 'information about user roles, which grant permission to perform actions in the Commerce Manager client application.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCMUSERROLEX
+-----------------------------------------------------------------------------
+CREATE TABLE TCMUSERROLEX
+(
+        CM_USER_UID NUMBER(20,0) NOT NULL,
+        USER_ROLE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCMUSERROLEX
+    ADD CONSTRAINT TCMUSERROLEX_PK
+PRIMARY KEY (CM_USER_UID,USER_ROLE_UID);
+
+CREATE INDEX I_CMUSER_ROLE_UID ON TCMUSERROLEX (USER_ROLE_UID);
+CREATE INDEX I_CMUSER_USER_UID ON TCMUSERROLEX (CM_USER_UID);
+
+
+COMMENT ON TABLE TCMUSERROLEX IS 'associations between Commerce Manager users and their roles.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHOPPER
+-----------------------------------------------------------------------------
+CREATE TABLE TSHOPPER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255) default 'SHOPPER' NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CUSTOMER_GUID VARCHAR2(64),
+        STORECODE VARCHAR2(64),
+    CONSTRAINT TSHOPPER_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TSHOPPER
+    ADD CONSTRAINT TSHOPPER_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSHOPPER IS 'This table defines Shoppers in the system, which act as intermediaries between CustomerSessions and ShoppingCarts, WishLists, and Customers.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERGROUP
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERGROUP
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TCUSTOMERGROUP_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TCUSTOMERGROUP_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCUSTOMERGROUP
+    ADD CONSTRAINT TCUSTOMERGROUP_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCUSTOMERGROUP IS 'customer groups.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERGROUPROLEX
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERGROUPROLEX
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CUSTOMER_GROUP_UID NUMBER(20,0) NOT NULL,
+        CUSTOMER_ROLE VARCHAR2(255)
+);
+
+ALTER TABLE TCUSTOMERGROUPROLEX
+    ADD CONSTRAINT TCUSTOMERGROUPROLEX_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CGRX_GROUP_UID ON TCUSTOMERGROUPROLEX (CUSTOMER_GROUP_UID);
+
+
+COMMENT ON TABLE TCUSTOMERGROUPROLEX IS 'associations between customer group and roles.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERGROUPX
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERGROUPX
+(
+        CUSTOMER_UID NUMBER(20,0) NOT NULL,
+        CUSTOMERGROUP_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_CGX_GROUP_UID ON TCUSTOMERGROUPX (CUSTOMERGROUP_UID);
+CREATE INDEX I_CGX_CUSTOMER_UID ON TCUSTOMERGROUPX (CUSTOMER_UID);
+
+
+COMMENT ON TABLE TCUSTOMERGROUPX IS 'associations between customers and customer group.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERSESSION
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERSESSION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CREATION_DATE TIMESTAMP (3) NOT NULL,
+        LAST_ACCESSED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        SHOPPER_UID NUMBER(20,0),
+        LOCALE VARCHAR2(255),
+        CURRENCY VARCHAR2(3),
+        GUID VARCHAR2(64) NOT NULL,
+        IP_ADDRESS VARCHAR2(255),
+    CONSTRAINT TCUSTOMERSESSION_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCUSTOMERSESSION
+    ADD CONSTRAINT TCUSTOMERSESSION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CS_SHOPPER_UID ON TCUSTOMERSESSION (SHOPPER_UID);
+CREATE INDEX I_CS_ACS_DATE ON TCUSTOMERSESSION (LAST_ACCESSED_DATE);
+CREATE INDEX I_CS_CRT_DATE ON TCUSTOMERSESSION (CREATION_DATE);
+
+
+COMMENT ON TABLE TCUSTOMERSESSION IS 'information about storefront customers who may not be logged in.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCUSTOMERCREDITCARD
+-----------------------------------------------------------------------------
+CREATE TABLE TCUSTOMERCREDITCARD
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CARD_TYPE VARCHAR2(50) NOT NULL,
+        CARD_HOLDER_NAME VARCHAR2(100) NOT NULL,
+        CARD_NUMBER VARCHAR2(255) NOT NULL,
+        EXPIRY_YEAR VARCHAR2(4) NOT NULL,
+        EXPIRY_MONTH VARCHAR2(2) NOT NULL,
+        START_YEAR VARCHAR2(4),
+        START_MONTH VARCHAR2(2),
+        ISSUE_NUMBER NUMBER(10,0),
+        DEFAULT_CARD NUMBER(1,0),
+        CUSTOMER_UID NUMBER(20,0) NOT NULL,
+        BILLING_ADDRESS_UID NUMBER(20,0),
+    CONSTRAINT TCUSTCCRD_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCUSTOMERCREDITCARD
+    ADD CONSTRAINT TCUSTOMERCREDITCARD_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CCC_CUSTOMER_UID ON TCUSTOMERCREDITCARD (CUSTOMER_UID);
+CREATE INDEX I_CCC_BA_UID ON TCUSTOMERCREDITCARD (BILLING_ADDRESS_UID);
+
+
+COMMENT ON TABLE TCUSTOMERCREDITCARD IS 'information about credit cards associated with customers.';
+
+
+
+-----------------------------------------------------------------------------
+-- TWAREHOUSEADDRESS
+-----------------------------------------------------------------------------
+CREATE TABLE TWAREHOUSEADDRESS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        STREET_1 VARCHAR2(200) NOT NULL,
+        STREET_2 VARCHAR2(200),
+        CITY VARCHAR2(200) NOT NULL,
+        SUB_COUNTRY VARCHAR2(200),
+        ZIP_POSTAL_CODE VARCHAR2(50) NOT NULL,
+        COUNTRY VARCHAR2(200) NOT NULL
+);
+
+ALTER TABLE TWAREHOUSEADDRESS
+    ADD CONSTRAINT TWAREHOUSEADDRESS_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TWAREHOUSEADDRESS IS 'addresses associated with warehouse.';
+
+
+
+-----------------------------------------------------------------------------
+-- TWAREHOUSE
+-----------------------------------------------------------------------------
+CREATE TABLE TWAREHOUSE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        PICK_DELAY NUMBER(10,0),
+        ADDRESS_UID NUMBER(20,0),
+        CODE VARCHAR2(64) NOT NULL,
+    CONSTRAINT TWAREHOUSE_CODE_UNIQUE UNIQUE (CODE)
+);
+
+ALTER TABLE TWAREHOUSE
+    ADD CONSTRAINT TWAREHOUSE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_WAREHOUSE_ADDRESS_UID ON TWAREHOUSE (ADDRESS_UID);
+
+
+COMMENT ON TABLE TWAREHOUSE IS 'information about the warehouses where inventory is kept for stores.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTJOB
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTJOB
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        CSV_FILE_NAME VARCHAR2(255) NOT NULL,
+        COL_DELIMETER CHAR(1),
+        TEXT_QUALIFIER CHAR(1),
+        DATA_TYPE_NAME VARCHAR2(255) NOT NULL,
+        IMPORT_TYPE NUMBER(10,0) NOT NULL,
+        MAX_ALLOW_ERRORS NUMBER(10,0) NOT NULL,
+        CATALOG_UID NUMBER(20,0),
+        STORE_UID NUMBER(20,0),
+        WAREHOUSE_UID NUMBER(20,0),
+        DEPENDENT_OBJ_GUID VARCHAR2(64),
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TIMPORTJOB_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TIMPORTJOB_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TIMPORTJOB
+    ADD CONSTRAINT TIMPORTJOB_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_IMPORTJOB_CATALOG_UID ON TIMPORTJOB (CATALOG_UID);
+CREATE INDEX I_IMPORTJOB_STORE_UID ON TIMPORTJOB (STORE_UID);
+CREATE INDEX I_IMPORTJOB_WAREHOUSE_UID ON TIMPORTJOB (WAREHOUSE_UID);
+
+
+COMMENT ON TABLE TIMPORTJOB IS 'import jobs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTMAPPINGS
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTMAPPINGS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        IMPORT_JOB_UID NUMBER(20,0) NOT NULL,
+        COL_NUMBER NUMBER(10,0) NOT NULL,
+        IMPORT_FIELD_NAME VARCHAR2(255) NOT NULL
+);
+
+ALTER TABLE TIMPORTMAPPINGS
+    ADD CONSTRAINT TIMPORTMAPPINGS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_IMAP_JOB_UID ON TIMPORTMAPPINGS (IMPORT_JOB_UID);
+
+
+COMMENT ON TABLE TIMPORTMAPPINGS IS 'the mappings between CSV columns and target fields for an import job.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERADDRESS
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERADDRESS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LAST_NAME VARCHAR2(100),
+        FIRST_NAME VARCHAR2(100),
+        PHONE_NUMBER VARCHAR2(50),
+        FAX_NUMBER VARCHAR2(50),
+        STREET_1 VARCHAR2(200),
+        STREET_2 VARCHAR2(200),
+        CITY VARCHAR2(200),
+        SUB_COUNTRY VARCHAR2(200),
+        ZIP_POSTAL_CODE VARCHAR2(50),
+        COUNTRY VARCHAR2(200),
+        COMMERCIAL NUMBER(1,0) default 0,
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TORDERADDRESS_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TORDERADDRESS
+    ADD CONSTRAINT TORDERADDRESS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ORDERADDRESS_FIRST_NAME ON TORDERADDRESS (FIRST_NAME );
+CREATE INDEX I_ORDERADDRESS_LAST_NAME ON TORDERADDRESS (LAST_NAME );
+CREATE INDEX I_ORDERADDRESS_ZIP_POSTAL_CODE ON TORDERADDRESS (ZIP_POSTAL_CODE );
+CREATE INDEX I_ORDERADDRESS_PHONE_NUMBER ON TORDERADDRESS (PHONE_NUMBER );
+
+
+COMMENT ON TABLE TORDERADDRESS IS 'the billing and shipping addresses associated with orders.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDER
+-----------------------------------------------------------------------------
+CREATE TABLE TORDER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        IP_ADDRESS VARCHAR2(255),
+        ORDER_BILLING_ADDRESS_UID NUMBER(20,0),
+        TOTAL NUMBER(19,2),
+        STATUS VARCHAR2(20),
+        ORDER_NUMBER VARCHAR2(64) NOT NULL,
+        EXTERNAL_ORDER_NUMBER VARCHAR2(64),
+        CUSTOMER_UID NUMBER(20,0),
+        LOCALE VARCHAR2(5) NOT NULL,
+        CURRENCY VARCHAR2(3),
+        STORE_UID NUMBER(20,0),
+        CREATED_BY NUMBER(20,0),
+        ORDER_SOURCE VARCHAR2(100),
+        EXCHANGE_ORDER NUMBER(1,0) default 0,
+    CONSTRAINT TORDER_UNIQUE UNIQUE (ORDER_NUMBER)
+);
+
+ALTER TABLE TORDER
+    ADD CONSTRAINT TORDER_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_O_STORE_UID ON TORDER (STORE_UID);
+CREATE INDEX I_O_OBA_UID ON TORDER (ORDER_BILLING_ADDRESS_UID);
+CREATE INDEX I_O_CUSTOMER_UID ON TORDER (CUSTOMER_UID);
+CREATE INDEX I_O_MODIFY_DATE ON TORDER (LAST_MODIFIED_DATE);
+CREATE INDEX I_O_CREATED_DATE ON TORDER (CREATED_DATE);
+CREATE INDEX I_O_STATUS ON TORDER (STATUS);
+CREATE INDEX I_O_TOTAL ON TORDER (CURRENCY, TOTAL);
+
+
+COMMENT ON TABLE TORDER IS 'information about orders.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERNUMBERGENERATOR
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERNUMBERGENERATOR
+(
+        UIDPK NUMBER(20,0) default 1 NOT NULL,
+        NEXT_ORDER_NUMBER VARCHAR2(100) NOT NULL
+);
+
+ALTER TABLE TORDERNUMBERGENERATOR
+    ADD CONSTRAINT TORDERNUMBERGENERATOR_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TORDERNUMBERGENERATOR IS 'the next available order number.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERLOCK
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERLOCK
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ORDER_UID NUMBER(20,0) NOT NULL,
+        USER_UID NUMBER(20,0) NOT NULL,
+        CREATED_DATE NUMBER(20,0) NOT NULL,
+    CONSTRAINT TORDERLOCK_UNIQUE UNIQUE (ORDER_UID)
+);
+
+ALTER TABLE TORDERLOCK
+    ADD CONSTRAINT TORDERLOCK_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ORDERLOCK_USER_UID ON TORDERLOCK (USER_UID);
+
+
+COMMENT ON TABLE TORDERLOCK IS 'This table is used by the order locking functionality.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERAUDIT
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERAUDIT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        CREATED_BY NUMBER(20,0),
+        DETAIL CLOB,
+        ORDER_UID NUMBER(20,0),
+        ORIGINATOR_TYPE VARCHAR2(30) NOT NULL,
+        TITLE VARCHAR2(255) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TORDERAUDIT
+    ADD CONSTRAINT TORDERAUDIT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ON_ORDER_UID ON TORDERAUDIT (ORDER_UID);
+CREATE INDEX I_ON_USER_UID ON TORDERAUDIT (CREATED_BY);
+
+
+COMMENT ON TABLE TORDERAUDIT IS 'information related to the events that occur during the lifetime of each order.';
+
+
+
+-----------------------------------------------------------------------------
+-- TGIFTCERTIFICATE
+-----------------------------------------------------------------------------
+CREATE TABLE TGIFTCERTIFICATE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        GIFT_CERTIFICATE_CODE VARCHAR2(64),
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        RECIPIENT_NAME VARCHAR2(255),
+        SENDER_NAME VARCHAR2(255),
+        MESSAGE VARCHAR2(255),
+        THEME VARCHAR2(255),
+        PURCHASE_AMOUNT NUMBER(19,2),
+        CURRENCY VARCHAR2(255),
+        RECEPIENT_EMAIL VARCHAR2(255),
+        CUSTOMER_UID NUMBER(20,0),
+        STORE_UID NUMBER(20,0) NOT NULL,
+        ORDER_GUID VARCHAR2(64)
+);
+
+ALTER TABLE TGIFTCERTIFICATE
+    ADD CONSTRAINT TGIFTCERTIFICATE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_GCERT_CUSTOMER_UID ON TGIFTCERTIFICATE (CUSTOMER_UID);
+CREATE INDEX I_GCERT_STORE_UID ON TGIFTCERTIFICATE (STORE_UID);
+CREATE INDEX I_P_GCERT_CODE ON TGIFTCERTIFICATE (GIFT_CERTIFICATE_CODE);
+CREATE INDEX I_ORDER_GUID ON TGIFTCERTIFICATE (ORDER_GUID);
+
+
+COMMENT ON TABLE TGIFTCERTIFICATE IS 'information about gift certificates.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHIPPINGREGION
+-----------------------------------------------------------------------------
+CREATE TABLE TSHIPPINGREGION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        REGION_STR VARCHAR2(2000),
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TSHIPPINGREGION_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TSHIPPINGREGION_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TSHIPPINGREGION
+    ADD CONSTRAINT TSHIPPINGREGION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSHIPPINGREGION IS 'shipping regions that can associated with shipping services.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHIPPINGCOSTCALCULATIONMETHOD
+-----------------------------------------------------------------------------
+CREATE TABLE TSHIPPINGCOSTCALCULATIONMETHOD
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255) NOT NULL
+);
+
+ALTER TABLE TSHIPPINGCOSTCALCULATIONMETHOD
+    ADD CONSTRAINT TSHIPPINGCOSTCALCULATIONMET_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSHIPPINGCOSTCALCULATIONMETHOD IS 'the method used for shipping cost calculation. For example, Fixed Price.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHIPPINGCOSTCALCULATIONPARAM
+-----------------------------------------------------------------------------
+CREATE TABLE TSHIPPINGCOSTCALCULATIONPARAM
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PARAM_KEY VARCHAR2(255) NOT NULL,
+        VALUE VARCHAR2(255) NOT NULL,
+        DISPLAY_TEXT VARCHAR2(255) NOT NULL,
+        SCCM_UID NUMBER(20,0),
+        CURRENCY CHAR(3)
+);
+
+ALTER TABLE TSHIPPINGCOSTCALCULATIONPARAM
+    ADD CONSTRAINT TSHIPPINGCOSTCALCULATIONPAR_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SCCP_SCCM_UID ON TSHIPPINGCOSTCALCULATIONPARAM (SCCM_UID);
+
+
+COMMENT ON TABLE TSHIPPINGCOSTCALCULATIONPARAM IS 'parameters used by shipping cost calculation methods, such as the dollar value of the fixed base shipping cost.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHIPPINGSERVICELEVEL
+-----------------------------------------------------------------------------
+CREATE TABLE TSHIPPINGSERVICELEVEL
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        SHIPPING_REGION_UID NUMBER(20,0) NOT NULL,
+        STORE_UID NUMBER(20,0) NOT NULL,
+        SCCM_UID NUMBER(20,0) NOT NULL,
+        CARRIER VARCHAR2(255),
+        CODE VARCHAR2(64) NOT NULL,
+        DEFAULT_COST NUMBER(19,2),
+        ENABLED NUMBER(1,0) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+    CONSTRAINT TSHIPPINGSERVICELEVEL_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TSHIPPINGSRVLEVEL_CODE_UNIQUE UNIQUE (CODE)
+);
+
+ALTER TABLE TSHIPPINGSERVICELEVEL
+    ADD CONSTRAINT TSHIPPINGSERVICELEVEL_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SSL_STORE_UID ON TSHIPPINGSERVICELEVEL (STORE_UID);
+CREATE INDEX I_SSL_SR_UID ON TSHIPPINGSERVICELEVEL (SHIPPING_REGION_UID);
+CREATE INDEX I_SSL_SCCM_UID ON TSHIPPINGSERVICELEVEL (SCCM_UID);
+CREATE INDEX I_SSL_MODIFY_DATE ON TSHIPPINGSERVICELEVEL (LAST_MODIFIED_DATE);
+
+
+COMMENT ON TABLE TSHIPPINGSERVICELEVEL IS 'shipping options that can be associated with shipping regions. For example, a Next Day shipping option.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPICKLIST
+-----------------------------------------------------------------------------
+CREATE TABLE TPICKLIST
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        WAREHOUSE_UID NUMBER(20,0),
+        CREATED_BY NUMBER(20,0),
+        ACTIVE NUMBER(1,0) default 0
+);
+
+ALTER TABLE TPICKLIST
+    ADD CONSTRAINT TPICKLIST_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PL_WAREHOUSE_UID ON TPICKLIST (WAREHOUSE_UID);
+CREATE INDEX I_PL_CREATED_BY ON TPICKLIST (CREATED_BY);
+
+
+COMMENT ON TABLE TPICKLIST IS 'information about pick lists.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERSHIPMENT
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERSHIPMENT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255) NOT NULL,
+        STATUS VARCHAR2(20),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        SHIPMENT_DATE TIMESTAMP (3),
+        CARRIER VARCHAR2(255),
+        SERVICE_LEVEL VARCHAR2(255),
+        TRACKING_CODE VARCHAR2(255),
+        ITEM_SUBTOTAL NUMBER(19,2),
+        BEFORE_TAX_SHIPPING_COST NUMBER(19,2),
+        ITEM_TAX NUMBER(19,2),
+        SUBTOTAL_DISCOUNT NUMBER(19,2),
+        SHIPPING_COST NUMBER(19,2),
+        SHIPPING_TAX NUMBER(19,2),
+        SHIPPING_SUBTOTAL NUMBER(19,2),
+        INCLUSIVE_TAX NUMBER(10,0),
+        ORDER_ADDRESS_UID NUMBER(20,0),
+        ORDER_UID NUMBER(20,0),
+        SERVICE_LEVEL_UID NUMBER(20,0),
+        PICKLIST_UID NUMBER(20,0),
+        SHIPMENT_NUMBER VARCHAR2(64) NOT NULL,
+    CONSTRAINT TORDERSHIPMENT_UNIQUE UNIQUE (SHIPMENT_NUMBER)
+);
+
+ALTER TABLE TORDERSHIPMENT
+    ADD CONSTRAINT TORDERSHIPMENT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_OSHIP_SHIPLEVSERV ON TORDERSHIPMENT (SERVICE_LEVEL_UID);
+CREATE INDEX I_OSHIP_OA_UID ON TORDERSHIPMENT (ORDER_ADDRESS_UID);
+CREATE INDEX I_OSHIP_ORDER_UID ON TORDERSHIPMENT (ORDER_UID);
+CREATE INDEX I_OSHIP_PICK_LIST ON TORDERSHIPMENT (PICKLIST_UID);
+CREATE INDEX I_OSHIP_MDFY_DATE ON TORDERSHIPMENT (LAST_MODIFIED_DATE);
+CREATE INDEX I_OSHIP_STATUS ON TORDERSHIPMENT (STATUS);
+
+
+COMMENT ON TABLE TORDERSHIPMENT IS 'information about order shipments.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERPAYMENT
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERPAYMENT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        CARD_TYPE VARCHAR2(50),
+        CARD_HOLDER_NAME VARCHAR2(100),
+        CARD_NUMBER VARCHAR2(255),
+        MASKED_CARD_NUMBER VARCHAR2(255),
+        EXPIRY_YEAR VARCHAR2(4),
+        EXPIRY_MONTH VARCHAR2(2),
+        START_DATE TIMESTAMP (3),
+        ISSUE_NUMBER VARCHAR2(100),
+        PAYMENT_GATEWAY VARCHAR2(100),
+        AMOUNT NUMBER(19,2),
+        REFERENCE_ID VARCHAR2(50),
+        REQUEST_TOKEN VARCHAR2(255),
+        AUTHORIZATION_CODE VARCHAR2(50),
+        TRANSACTION_TYPE VARCHAR2(25),
+        CURRENCY VARCHAR2(10),
+        EMAIL VARCHAR2(100),
+        STATUS VARCHAR2(20),
+        ORDER_UID NUMBER(20,0),
+        GIFTCERTIFICATE_UID NUMBER(20,0),
+        ORDERSHIPMENT_UID NUMBER(20,0),
+        PAYMENT_FOR_SUBSCRIPTIONS NUMBER(10,0),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TORDERPAYMENT
+    ADD CONSTRAINT TORDERPAYMENT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_OP_GCERT_BY ON TORDERPAYMENT (GIFTCERTIFICATE_UID);
+CREATE INDEX I_OP_ORDERSHIPMENT_BY ON TORDERPAYMENT (ORDERSHIPMENT_UID);
+CREATE INDEX I_OP_ORDER_UID ON TORDERPAYMENT (ORDER_UID);
+
+
+COMMENT ON TABLE TORDERPAYMENT IS 'customer payments made against orders.';
+
+
+
+-----------------------------------------------------------------------------
+-- TGIFTCERTIFICATETRANSACTION
+-----------------------------------------------------------------------------
+CREATE TABLE TGIFTCERTIFICATETRANSACTION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        AMOUNT NUMBER(19,2),
+        AUTHORIZATION_CODE VARCHAR2(50),
+        TRANSACTION_TYPE VARCHAR2(25),
+        GIFTCERTIFICATE_UID NUMBER(20,0)
+);
+
+ALTER TABLE TGIFTCERTIFICATETRANSACTION
+    ADD CONSTRAINT TGIFTCERTIFICATETRANSACTION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_GCT_GCERT_BY ON TGIFTCERTIFICATETRANSACTION (GIFTCERTIFICATE_UID);
+
+
+COMMENT ON TABLE TGIFTCERTIFICATETRANSACTION IS 'gift certificate payment transactions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRMAGENERATOR
+-----------------------------------------------------------------------------
+CREATE TABLE TRMAGENERATOR
+(
+        UIDPK NUMBER(20,0) default 1 NOT NULL,
+        NEXT_RMA VARCHAR2(100) NOT NULL
+);
+
+ALTER TABLE TRMAGENERATOR
+    ADD CONSTRAINT TRMAGENERATOR_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TRMAGENERATOR IS 'the next available RMA.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERRETURN
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERRETURN
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        RMA_CODE VARCHAR2(255),
+        RETURN_COMMENT VARCHAR2(2000),
+        ORDER_UID NUMBER(20,0),
+        CREATED_BY NUMBER(20,0),
+        STATUS VARCHAR2(50),
+        RETURN_TYPE VARCHAR2(255),
+        PHYSICAL_RETURN NUMBER(1,0) default 0,
+        EXCHANGE_ORDER_UID NUMBER(20,0),
+        ORDER_PAYMENT_UID NUMBER(20,0),
+        LESS_RESTOCK_AMOUNT NUMBER(19,2),
+        SHIPPING_COST NUMBER(19,2) default 0 NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        RECEIVED_BY NUMBER(20,0),
+        VERSION NUMBER(10,0),
+        ORDER_RETURN_ADDRESS_UID NUMBER(20,0)
+);
+
+ALTER TABLE TORDERRETURN
+    ADD CONSTRAINT TORDERRETURN_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_OR_ORDER_UID ON TORDERRETURN (ORDER_UID);
+CREATE INDEX I_OR_CREATED_BY ON TORDERRETURN (CREATED_BY);
+CREATE INDEX I_OR_RECEIVED_BY ON TORDERRETURN (RECEIVED_BY);
+CREATE INDEX I_OR_EXCHANGE_ORDER_UID ON TORDERRETURN (EXCHANGE_ORDER_UID);
+CREATE INDEX I_OR_RETURN_ADDRESS ON TORDERRETURN (ORDER_RETURN_ADDRESS_UID);
+CREATE INDEX I_OR_RMA_CODE ON TORDERRETURN (RMA_CODE);
+
+
+COMMENT ON TABLE TORDERRETURN IS 'order return information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHIPMENTTAX
+-----------------------------------------------------------------------------
+CREATE TABLE TSHIPMENTTAX
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TAX_CATEGORY_NAME VARCHAR2(255) NOT NULL,
+        TAX_CATEGORY_DISPLAY_NAME VARCHAR2(255) NOT NULL,
+        VALUE NUMBER(19,2),
+        ORDER_SHIPMENT_UID NUMBER(20,0),
+        ORDER_RETURN_UID NUMBER(20,0)
+);
+
+ALTER TABLE TSHIPMENTTAX
+    ADD CONSTRAINT TSHIPMENTTAX_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ST_ORDER_SHIPMENT_UID ON TSHIPMENTTAX (ORDER_SHIPMENT_UID);
+CREATE INDEX I_ST_OR_UID ON TSHIPMENTTAX (ORDER_RETURN_UID);
+
+
+COMMENT ON TABLE TSHIPMENTTAX IS 'information about taxes paid on order shipments.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTTYPE
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        WITH_MULTIPLE_SKUS NUMBER(1,0) default 0 NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        TEMPLATE VARCHAR2(255) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        TAX_CODE_UID NUMBER(20,0) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL,
+        EXCLUDE_FROM_DISCOUNT NUMBER(1,0) default 0 NOT NULL,
+    CONSTRAINT TPRODUCTTYPE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TPRODUCTTYPE_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TPRODUCTTYPE
+    ADD CONSTRAINT TPRODUCTTYPE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PRODTYPE_CATALOG_UID ON TPRODUCTTYPE (CATALOG_UID);
+CREATE INDEX I_PRODTYPE_TAXCODE_UID ON TPRODUCTTYPE (TAX_CODE_UID);
+
+
+COMMENT ON TABLE TPRODUCTTYPE IS 'product types. A product type determines the set of attributes that a product has. An example of a product type would be Shoes.';
+
+COMMENT ON COLUMN TPRODUCTTYPE.UIDPK IS 'yes';
+
+
+-----------------------------------------------------------------------------
+-- TBRAND
+-----------------------------------------------------------------------------
+CREATE TABLE TBRAND
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CODE VARCHAR2(255) NOT NULL,
+        IMAGE_URL VARCHAR2(255),
+        CATALOG_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TBRAND_UNIQUE UNIQUE (CODE)
+);
+
+ALTER TABLE TBRAND
+    ADD CONSTRAINT TBRAND_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_B_CATALOG_UID ON TBRAND (CATALOG_UID);
+
+
+COMMENT ON TABLE TBRAND IS 'product manufacturer/brand information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCT
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        START_DATE TIMESTAMP (3) NOT NULL,
+        END_DATE TIMESTAMP (3),
+        IMAGE VARCHAR2(255),
+        PRODUCT_TYPE_UID NUMBER(20,0) NOT NULL,
+        BRAND_UID NUMBER(20,0),
+        DEFAULT_SKU_UID NUMBER(20,0),
+        CODE VARCHAR2(64) NOT NULL,
+        MIN_QUANTITY NUMBER(10,0) default 1 NOT NULL,
+        EXPECTED_RELEASE_DATE TIMESTAMP (3),
+        HIDDEN NUMBER(1,0) default 0,
+        SALES_COUNT NUMBER(10,0) default 0,
+        TAX_CODE_UID NUMBER(20,0),
+        PRE_OR_BACK_ORDER_LIMIT NUMBER(10,0),
+        AVAILABILITY_CRITERIA VARCHAR2(30),
+        TYPE VARCHAR2(255),
+        NOT_SOLD_SEPARATELY NUMBER(1,0) default 0,
+        CALCULATED NUMBER(1,0) default 0,
+    CONSTRAINT TPRODUCT_UNIQUE UNIQUE (CODE)
+);
+
+ALTER TABLE TPRODUCT
+    ADD CONSTRAINT TPRODUCT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_P_TYPE_UID ON TPRODUCT (PRODUCT_TYPE_UID);
+CREATE INDEX I_P_BRAND_UID ON TPRODUCT (BRAND_UID);
+CREATE INDEX I_P_TAXCODE_UID ON TPRODUCT (TAX_CODE_UID);
+CREATE INDEX I_P_MODIFY_DATE ON TPRODUCT (LAST_MODIFIED_DATE);
+CREATE INDEX I_P_SE_DATE ON TPRODUCT (START_DATE, END_DATE);
+
+
+COMMENT ON TABLE TPRODUCT IS 'information about products. A product must have at least one associated product SKU in order to be sellable.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTATTRIBUTEVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTATTRIBUTEVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_TYPE NUMBER(10,0) NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR2(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR2(255),
+        LONG_TEXT_VALUE CLOB,
+        INTEGER_VALUE NUMBER(10,0),
+        DECIMAL_VALUE NUMBER(19,2),
+        BOOLEAN_VALUE NUMBER(1,0) default 0,
+        DATE_VALUE TIMESTAMP (3),
+        PRODUCT_UID NUMBER(20,0)
+);
+
+ALTER TABLE TPRODUCTATTRIBUTEVALUE
+    ADD CONSTRAINT TPRODUCTATTRIBUTEVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PAV_ATTR_UID ON TPRODUCTATTRIBUTEVALUE (ATTRIBUTE_UID);
+CREATE INDEX I_PAV_PROD_UID ON TPRODUCTATTRIBUTEVALUE (PRODUCT_UID);
+
+
+COMMENT ON TABLE TPRODUCTATTRIBUTEVALUE IS 'product attribute values.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTCATEGORY
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTCATEGORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PRODUCT_UID NUMBER(20,0) NOT NULL,
+        CATEGORY_UID NUMBER(20,0) NOT NULL,
+        FEAT_PRODUCT_ORDER NUMBER(10,0) default 0,
+        DEFAULT_CATEGORY NUMBER(1,0),
+    CONSTRAINT TPRODUCTCATEGORY_UNIQUE UNIQUE (PRODUCT_UID, CATEGORY_UID)
+);
+
+ALTER TABLE TPRODUCTCATEGORY
+    ADD CONSTRAINT TPRODUCTCATEGORY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PC_PUID ON TPRODUCTCATEGORY (PRODUCT_UID);
+CREATE INDEX I_PC_CUID ON TPRODUCTCATEGORY (CATEGORY_UID);
+
+
+COMMENT ON TABLE TPRODUCTCATEGORY IS 'associations between categories and products.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTLDF
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTLDF
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PRODUCT_UID NUMBER(20,0) NOT NULL,
+        URL VARCHAR2(255),
+        KEY_WORDS VARCHAR2(255),
+        DESCRIPTION VARCHAR2(255),
+        TITLE VARCHAR2(255),
+        DISPLAY_NAME VARCHAR2(255),
+        LOCALE VARCHAR2(20) NOT NULL
+);
+
+ALTER TABLE TPRODUCTLDF
+    ADD CONSTRAINT TPRODUCTLDF_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PLDF_PUID ON TPRODUCTLDF (PRODUCT_UID);
+CREATE INDEX I_PLDF_LOCALE_NAME ON TPRODUCTLDF (LOCALE, DISPLAY_NAME);
+
+
+COMMENT ON TABLE TPRODUCTLDF IS 'locale-dependent information about products.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTSKU
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTSKU
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        START_DATE TIMESTAMP (3) NOT NULL,
+        END_DATE TIMESTAMP (3),
+        SKUCODE VARCHAR2(255) NOT NULL,
+        GUID VARCHAR2(255) NOT NULL,
+        IMAGE VARCHAR2(255),
+        PRODUCT_UID NUMBER(20,0) NOT NULL,
+        SHIPPABLE NUMBER(1,0) default 1,
+        WEIGHT NUMBER(19,2) default 0,
+        HEIGHT NUMBER(19,2) default 0,
+        WIDTH NUMBER(19,2) default 0,
+        LENGTH NUMBER(19,2) default 0,
+        PRE_OR_BACK_ORDERED_QUANTITY NUMBER(10,0),
+        DIGITAL NUMBER(1,0) default 0,
+        DIGITAL_ASSET_UID NUMBER(20,0),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+    CONSTRAINT TPRODUCTSKU_UNIQUE UNIQUE (SKUCODE),
+    CONSTRAINT TPRODUCTSKU_GUID UNIQUE (GUID)
+);
+
+ALTER TABLE TPRODUCTSKU
+    ADD CONSTRAINT TPRODUCTSKU_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PS_PRODUCT_UID ON TPRODUCTSKU (PRODUCT_UID);
+CREATE INDEX I_PS_DIGASSET_UID ON TPRODUCTSKU (DIGITAL_ASSET_UID);
+CREATE INDEX I_PS_SE_DATE ON TPRODUCTSKU (START_DATE, END_DATE);
+
+
+COMMENT ON TABLE TPRODUCTSKU IS 'information related to product SKUs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TINVENTORY
+-----------------------------------------------------------------------------
+CREATE TABLE TINVENTORY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        QUANTITY_ON_HAND NUMBER(10,0),
+        RESERVED_QUANTITY NUMBER(10,0),
+        REORDER_MINIMUM NUMBER(10,0) default 0,
+        REORDER_QUANTITY NUMBER(10,0) default 0,
+        RESTOCK_DATE TIMESTAMP (3),
+        ALLOCATED_QUANTITY NUMBER(10,0),
+        WAREHOUSE_UID NUMBER(20,0) NOT NULL,
+        PRODUCTSKU_SKUCODE VARCHAR2(255) NOT NULL,
+    CONSTRAINT TINVENTORY_UNIQUE UNIQUE (WAREHOUSE_UID, PRODUCTSKU_SKUCODE)
+);
+
+ALTER TABLE TINVENTORY
+    ADD CONSTRAINT TINVENTORY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_INVENTORY_WAREHOUSE_UID ON TINVENTORY (WAREHOUSE_UID);
+CREATE INDEX I_INVENTORY_SKUCODE ON TINVENTORY (PRODUCTSKU_SKUCODE);
+
+
+COMMENT ON TABLE TINVENTORY IS 'SKU inventory information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TINVENTORYJOURNAL
+-----------------------------------------------------------------------------
+CREATE TABLE TINVENTORYJOURNAL
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ALLOCATED_QUANTITY_DELTA NUMBER(10,0) NOT NULL,
+        QUANTITY_ON_HAND_DELTA NUMBER(10,0) NOT NULL,
+        SKUCODE VARCHAR2(255) NOT NULL,
+        WAREHOUSE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TINVENTORYJOURNAL
+    ADD CONSTRAINT TINVENTORYJOURNAL_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_INV_JOURNAL_SKU_WAREHOUSE ON TINVENTORYJOURNAL (SKUCODE, WAREHOUSE_UID);
+
+
+COMMENT ON TABLE TINVENTORYJOURNAL IS 'Inventory Journal';
+
+
+
+-----------------------------------------------------------------------------
+-- TINVENTORYJOURNALLOCK
+-----------------------------------------------------------------------------
+CREATE TABLE TINVENTORYJOURNALLOCK
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        SKUCODE VARCHAR2(255) NOT NULL,
+        WAREHOUSE_UID NUMBER(20,0) NOT NULL,
+        LOCKCOUNT NUMBER(10,0) NOT NULL,
+        VERSION NUMBER(10,0) NOT NULL,
+    CONSTRAINT U_INV_JNL_LOCK_CANDIDATE_KEYS UNIQUE (SKUCODE, WAREHOUSE_UID)
+);
+
+ALTER TABLE TINVENTORYJOURNALLOCK
+    ADD CONSTRAINT TINVENTORYJOURNALLOCK_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TINVENTORYJOURNALLOCK IS 'Dedicated optimistic lock table for Inventory Journal';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERSKU
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERSKU
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        PARENT_ITEM_UID NUMBER(20,0),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        SKUCODE VARCHAR2(255) NOT NULL,
+        TAXCODE VARCHAR2(255) NOT NULL,
+        PRODUCT_SKU_UID NUMBER(20,0),
+        ORDER_SHIPMENT_UID NUMBER(20,0),
+        QUANTITY NUMBER(10,0),
+        DISPLAY_NAME VARCHAR2(255) NOT NULL,
+        AMOUNT NUMBER(19,2),
+        TAX_AMOUNT NUMBER(19,2),
+        LIST_UNIT_PRICE NUMBER(19,2),
+        SALE_UNIT_PRICE NUMBER(19,2),
+        PROMO_UNIT_PRICE NUMBER(19,2),
+        UNIT_PRICE NUMBER(19,2),
+        DISCOUNT_AMOUNT NUMBER(19,2),
+        DISPLAY_SKU_OPTIONS VARCHAR2(255),
+        IMAGE VARCHAR2(255),
+        WEIGHT NUMBER(10,0) default 0,
+        DIGITAL_ASSET_UID NUMBER(20,0),
+        ALLOCATED_QUANTITY NUMBER(20,0),
+        CURRENCY VARCHAR2(3),
+        ORDERING NUMBER(10,0) default 0 NOT NULL,
+    CONSTRAINT TORDERSKU_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TORDERSKU
+    ADD CONSTRAINT TORDERSKU_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_OS_SHIPMENT_UID ON TORDERSKU (ORDER_SHIPMENT_UID);
+CREATE INDEX I_OS_PARENT_ITEM_UID ON TORDERSKU (PARENT_ITEM_UID);
+CREATE INDEX I_OS_PRODUCT_SKU_UID ON TORDERSKU (PRODUCT_SKU_UID);
+CREATE INDEX I_OSHIP_PRODUCTSKU ON TORDERSKU (SKUCODE);
+CREATE INDEX I_OS_DIGITALASSET_UID ON TORDERSKU (DIGITAL_ASSET_UID);
+
+
+COMMENT ON TABLE TORDERSKU IS 'information about order line items (SKU, quantity, etc.).';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERRETURNSKU
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERRETURNSKU
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        ORDER_SKU_UID NUMBER(20,0),
+        ORDER_RETURN_UID NUMBER(20,0),
+        QUANTITY NUMBER(10,0),
+        RETURN_AMOUNT NUMBER(19,2),
+        RECEIVED_QUANTITY NUMBER(10,0),
+        RECEIVED_STATE VARCHAR2(255),
+        RETURN_REASON VARCHAR2(255)
+);
+
+ALTER TABLE TORDERRETURNSKU
+    ADD CONSTRAINT TORDERRETURNSKU_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ORS_OR_UID ON TORDERRETURNSKU (ORDER_RETURN_UID);
+CREATE INDEX I_ORS_OS_UID ON TORDERRETURNSKU (ORDER_SKU_UID);
+
+
+COMMENT ON TABLE TORDERRETURNSKU IS 'quantities of SKUs returned for orders.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTASSOCIATION
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTASSOCIATION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        ASSOCIATION_TYPE NUMBER(10,0) NOT NULL,
+        SOURCE_PRODUCT_UID NUMBER(20,0) NOT NULL,
+        TARGET_PRODUCT_UID NUMBER(20,0) NOT NULL,
+        CATALOG_UID NUMBER(20,0),
+        START_DATE TIMESTAMP (3) NOT NULL,
+        END_DATE TIMESTAMP (3),
+        DEFAULT_QUANTITY NUMBER(10,0) default 1 NOT NULL,
+        SOURCE_PRODUCT_DEPENDENT NUMBER(1,0) default 0,
+        ORDERING NUMBER(10,0) default 0
+);
+
+ALTER TABLE TPRODUCTASSOCIATION
+    ADD CONSTRAINT TPRODUCTASSOCIATION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PA_SRCPROD_UID ON TPRODUCTASSOCIATION (SOURCE_PRODUCT_UID);
+CREATE INDEX I_PA_TGTPROD_UID ON TPRODUCTASSOCIATION (TARGET_PRODUCT_UID);
+CREATE INDEX I_PA_CATALOG_UID ON TPRODUCTASSOCIATION (CATALOG_UID);
+CREATE INDEX I_PR_SE_DATE ON TPRODUCTASSOCIATION (START_DATE, END_DATE);
+
+
+COMMENT ON TABLE TPRODUCTASSOCIATION IS 'merchandizing associations between products (cross-sells, upsells, accessories).';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTSKUATTRIBUTEVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTSKUATTRIBUTEVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        ATTRIBUTE_TYPE NUMBER(10,0) NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR2(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR2(255),
+        LONG_TEXT_VALUE CLOB,
+        INTEGER_VALUE NUMBER(10,0),
+        DECIMAL_VALUE NUMBER(19,2),
+        BOOLEAN_VALUE NUMBER(1,0) default 0,
+        DATE_VALUE TIMESTAMP (3),
+        PRODUCT_SKU_UID NUMBER(20,0)
+);
+
+ALTER TABLE TPRODUCTSKUATTRIBUTEVALUE
+    ADD CONSTRAINT TPRODUCTSKUATTRIBUTEVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PSAV_SKU_UID ON TPRODUCTSKUATTRIBUTEVALUE (PRODUCT_SKU_UID);
+CREATE INDEX I_PSAV_ATTR_UID ON TPRODUCTSKUATTRIBUTEVALUE (ATTRIBUTE_UID);
+
+
+COMMENT ON TABLE TPRODUCTSKUATTRIBUTEVALUE IS 'associations between attribute values and products.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTTYPEATTRIBUTE
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPEATTRIBUTE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ORDERING NUMBER(10,0),
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        PRODUCT_TYPE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TPRODUCTTYPEATTRIBUTE
+    ADD CONSTRAINT TPRODUCTTYPEATTRIBUTE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PTA_ATTR_UID ON TPRODUCTTYPEATTRIBUTE (ATTRIBUTE_UID);
+CREATE INDEX I_PTA_TYPE_UID ON TPRODUCTTYPEATTRIBUTE (PRODUCT_TYPE_UID);
+
+
+COMMENT ON TABLE TPRODUCTTYPEATTRIBUTE IS 'associations between product attributes and product types.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTTYPESKUATTRIBUTE
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPESKUATTRIBUTE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ORDERING NUMBER(10,0),
+        ATTRIBUTE_UID NUMBER(20,0) NOT NULL,
+        PRODUCT_TYPE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TPRODUCTTYPESKUATTRIBUTE
+    ADD CONSTRAINT TPRODUCTTYPESKUATTRIBUTE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PTSA_ATTR_UID ON TPRODUCTTYPESKUATTRIBUTE (ATTRIBUTE_UID);
+CREATE INDEX I_PTSA_TYPE_UID ON TPRODUCTTYPESKUATTRIBUTE (PRODUCT_TYPE_UID);
+
+
+COMMENT ON TABLE TPRODUCTTYPESKUATTRIBUTE IS 'associations between product SKU attributes and product types.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSELLINGCONTEXT
+-----------------------------------------------------------------------------
+CREATE TABLE TSELLINGCONTEXT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+        PRIORITY NUMBER(10,0) NOT NULL,
+        TYPE VARCHAR2(100) NOT NULL,
+    CONSTRAINT TSELLINGCONTEXT_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TSELLINGCONTEXT
+    ADD CONSTRAINT TSELLINGCONTEXT_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSELLINGCONTEXT IS 'selling contexts, used to target dynamic content, price lists, and promotions at shopper segments.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRULESET
+-----------------------------------------------------------------------------
+CREATE TABLE TRULESET
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        SCENARIO NUMBER(10,0) NOT NULL,
+    CONSTRAINT TRULESET_UNIQUE UNIQUE (NAME)
+);
+
+ALTER TABLE TRULESET
+    ADD CONSTRAINT TRULESET_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TRULESET IS 'promotion rule sets.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRULE
+-----------------------------------------------------------------------------
+CREATE TABLE TRULE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        RULECODE VARCHAR2(64) NOT NULL,
+        START_DATE TIMESTAMP (3),
+        END_DATE TIMESTAMP (3),
+        ELIGIBILITY_OPERATOR NUMBER(1,0) default 0,
+        CONDITION_OPERATOR NUMBER(1,0) default 0,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+        RULE_SET_UID NUMBER(20,0),
+        STORE_UID NUMBER(20,0),
+        CATALOG_UID NUMBER(20,0),
+        CM_USER_UID NUMBER(20,0),
+        ENABLED NUMBER(1,0) NOT NULL,
+        CURRENT_LUP_NUMBER NUMBER(20,0),
+        SELLING_CTX_UID NUMBER(20,0),
+    CONSTRAINT TRULE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TRULE_CODE_UNIQUE UNIQUE (RULECODE)
+);
+
+ALTER TABLE TRULE
+    ADD CONSTRAINT TRULE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_R_SET_STORE_UID ON TRULE (STORE_UID);
+CREATE INDEX I_R_SET_CATALOG_UID ON TRULE (CATALOG_UID);
+CREATE INDEX I_R_SET_UID ON TRULE (RULE_SET_UID);
+CREATE INDEX I_R_SE_DATE ON TRULE (START_DATE, END_DATE);
+
+
+COMMENT ON TABLE TRULE IS 'rule that can be applied by the rules engine.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRULEELEMENT
+-----------------------------------------------------------------------------
+CREATE TABLE TRULEELEMENT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255) NOT NULL,
+        KIND VARCHAR2(255) NOT NULL,
+        RULE_UID NUMBER(20,0)
+);
+
+ALTER TABLE TRULEELEMENT
+    ADD CONSTRAINT TRULEELEMENT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_RE_RULE_UID ON TRULEELEMENT (RULE_UID);
+
+
+COMMENT ON TABLE TRULEELEMENT IS 'the conditions and actions associated with (promotion) rules.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRULEEXCEPTION
+-----------------------------------------------------------------------------
+CREATE TABLE TRULEEXCEPTION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255) NOT NULL,
+        RULE_ELEMENT_UID NUMBER(20,0)
+);
+
+ALTER TABLE TRULEEXCEPTION
+    ADD CONSTRAINT TRULEEXCEPTION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_REXP_RE_UID ON TRULEEXCEPTION (RULE_ELEMENT_UID);
+
+
+COMMENT ON TABLE TRULEEXCEPTION IS 'exceptions associated with rule actions and conditions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRULEPARAMETER
+-----------------------------------------------------------------------------
+CREATE TABLE TRULEPARAMETER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PARAM_KEY VARCHAR2(255) NOT NULL,
+        PARAM_VALUE VARCHAR2(255) NOT NULL,
+        DISPLAY_TEXT VARCHAR2(255),
+        RULE_ELEMENT_UID NUMBER(20,0),
+        RULE_EXCEPTION_UID NUMBER(20,0)
+);
+
+ALTER TABLE TRULEPARAMETER
+    ADD CONSTRAINT TRULEPARAMETER_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_RP_RE_UID ON TRULEPARAMETER (RULE_ELEMENT_UID);
+CREATE INDEX I_RP_REXP_UID ON TRULEPARAMETER (RULE_EXCEPTION_UID);
+
+
+COMMENT ON TABLE TRULEPARAMETER IS 'the parameters associated with each rule condition, such as the category that a product must belong to in order to qualify for a promotion.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHOPPINGCART
+-----------------------------------------------------------------------------
+CREATE TABLE TSHOPPINGCART
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(100) NOT NULL,
+        STORE_UID NUMBER(20,0) NOT NULL,
+        SHOPPER_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TSHOPPINGCART_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TSHOPPINGCART
+    ADD CONSTRAINT TSHOPPINGCART_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SHOPCART_STORE_UID ON TSHOPPINGCART (STORE_UID);
+CREATE INDEX I_SHOPCART_SHOPPER_UID ON TSHOPPINGCART (SHOPPER_UID);
+
+
+COMMENT ON TABLE TSHOPPINGCART IS 'information about customers'' shopping carts.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCARTITEM
+-----------------------------------------------------------------------------
+CREATE TABLE TCARTITEM
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        SKU_UID NUMBER(20,0) NOT NULL,
+        QUANTITY NUMBER(10,0) NOT NULL,
+        CURRENCY VARCHAR2(3),
+        LIST_UNIT_PRICE NUMBER(19,2),
+        SALE_UNIT_PRICE NUMBER(19,2),
+        PROMO_UNIT_PRICE NUMBER(19,2),
+        DISCOUNT_AMOUNT NUMBER(19,2),
+        TAX_AMOUNT NUMBER(19,2),
+        PARENT_ITEM_UID NUMBER(20,0),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        ORDERING NUMBER(10,0) default 0 NOT NULL
+);
+
+ALTER TABLE TCARTITEM
+    ADD CONSTRAINT TCARTITEM_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CARTI_SKU_UID ON TCARTITEM (SKU_UID);
+CREATE INDEX I_CARTITEM_GUID ON TCARTITEM (GUID);
+CREATE INDEX I_CARTITEM_PARENT_ITEM_UID ON TCARTITEM (PARENT_ITEM_UID);
+
+
+COMMENT ON TABLE TCARTITEM IS 'information about the SKUs in each shopping cart.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHOPPINGITEMRECURRINGPRICE
+-----------------------------------------------------------------------------
+CREATE TABLE TSHOPPINGITEMRECURRINGPRICE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        PAYMENT_SCHEDULE_NAME VARCHAR2(255) NOT NULL,
+        FREQ_AMOUNT NUMBER(19,8) NOT NULL,
+        FREQ_UNIT VARCHAR2(255) NOT NULL,
+        DURATION_AMOUNT NUMBER(19,8),
+        DURATION_UNIT VARCHAR2(255),
+        CARTITEM_UID NUMBER(20,0),
+        ORDERSKU_UID NUMBER(20,0),
+        LIST_UNIT_PRICE NUMBER(19,2),
+        SALE_UNIT_PRICE NUMBER(19,2),
+        PROMO_UNIT_PRICE NUMBER(19,2)
+);
+
+ALTER TABLE TSHOPPINGITEMRECURRINGPRICE
+    ADD CONSTRAINT TSHOPPINGITEMRECURRINGPRICE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SIRP_CARTITEM_UID ON TSHOPPINGITEMRECURRINGPRICE (CARTITEM_UID);
+CREATE INDEX I_SIRP_ORDERSKU_UID ON TSHOPPINGITEMRECURRINGPRICE (ORDERSKU_UID);
+
+
+COMMENT ON TABLE TSHOPPINGITEMRECURRINGPRICE IS 'the recurring price elements of a ShoppingItem.';
+
+
+
+-----------------------------------------------------------------------------
+-- TUSERROLEPERMISSIONX
+-----------------------------------------------------------------------------
+CREATE TABLE TUSERROLEPERMISSIONX
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ROLE_UID NUMBER(20,0) NOT NULL,
+        USER_PERMISSION VARCHAR2(255)
+);
+
+ALTER TABLE TUSERROLEPERMISSIONX
+    ADD CONSTRAINT TUSERROLEPERMISSIONX_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_URPXI_ROLE_UID ON TUSERROLEPERMISSIONX (ROLE_UID);
+
+
+COMMENT ON TABLE TUSERROLEPERMISSIONX IS 'the associations between permissions and user roles.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSKUOPTION
+-----------------------------------------------------------------------------
+CREATE TABLE TSKUOPTION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OPTION_KEY VARCHAR2(100) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TSKUOPTION_UNIQUE UNIQUE (OPTION_KEY)
+);
+
+ALTER TABLE TSKUOPTION
+    ADD CONSTRAINT TSKUOPTION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SKUOPT_CATALOG_UID ON TSKUOPTION (CATALOG_UID);
+
+
+COMMENT ON TABLE TSKUOPTION IS 'the SKU options. For example, Size and Color.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSKUOPTIONVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TSKUOPTIONVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OPTION_VALUE_KEY VARCHAR2(255) NOT NULL,
+        ORDERING NUMBER(10,0),
+        SKU_OPTION_UID NUMBER(20,0) NOT NULL,
+        IMAGE VARCHAR2(255),
+    CONSTRAINT TSKUOPTVAL_UNIQ UNIQUE (OPTION_VALUE_KEY)
+);
+
+ALTER TABLE TSKUOPTIONVALUE
+    ADD CONSTRAINT TSKUOPTIONVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SOV_SO_UID ON TSKUOPTIONVALUE (SKU_OPTION_UID);
+
+
+COMMENT ON TABLE TSKUOPTIONVALUE IS 'the supported values for each SKU option. For example, a SKU option Size might have options Small, Medium, and Large.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTTYPESKUOPTION
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPESKUOPTION
+(
+        PRODUCT_TYPE_UID NUMBER(20,0) NOT NULL,
+        SKU_OPTION_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_PTSO_PT_UID ON TPRODUCTTYPESKUOPTION (PRODUCT_TYPE_UID);
+CREATE INDEX I_PTSO_SO_UID ON TPRODUCTTYPESKUOPTION (SKU_OPTION_UID);
+
+
+COMMENT ON TABLE TPRODUCTTYPESKUOPTION IS 'the associations between SKU options and product types.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTSKUOPTIONVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTSKUOPTIONVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PRODUCT_SKU_UID NUMBER(20,0) NOT NULL,
+        OPTION_KEY VARCHAR2(100) NOT NULL,
+        OPTION_VALUE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TPRODUCTSKUOPTIONVALUE
+    ADD CONSTRAINT TPRODUCTSKUOPTIONVALUE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PSSO_PS_UID ON TPRODUCTSKUOPTIONVALUE (PRODUCT_SKU_UID);
+CREATE INDEX I_PSSO_SKUOV_UID ON TPRODUCTSKUOPTIONVALUE (OPTION_VALUE_UID);
+
+
+COMMENT ON TABLE TPRODUCTSKUOPTIONVALUE IS 'the associations between product SKUs and SKU option values.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRODUCTDELETED
+-----------------------------------------------------------------------------
+CREATE TABLE TPRODUCTDELETED
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PRODUCT_UID NUMBER(20,0) NOT NULL,
+        DELETED_DATE TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TPRODUCTDELETED
+    ADD CONSTRAINT TPRODUCTDELETED_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PD_DELETED_DATE ON TPRODUCTDELETED (DELETED_DATE);
+
+
+COMMENT ON TABLE TPRODUCTDELETED IS 'audit information for deleted products.';
+
+
+
+-----------------------------------------------------------------------------
+-- TOBJECTDELETED
+-----------------------------------------------------------------------------
+CREATE TABLE TOBJECTDELETED
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OBJECT_TYPE VARCHAR2(255) NOT NULL,
+        OBJECT_UID NUMBER(20,0) NOT NULL,
+        DELETED_DATE TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TOBJECTDELETED
+    ADD CONSTRAINT TOBJECTDELETED_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_OD_DELETED_DATE ON TOBJECTDELETED (DELETED_DATE);
+
+
+COMMENT ON TABLE TOBJECTDELETED IS 'audit information for deleted objects.';
+
+
+
+-----------------------------------------------------------------------------
+-- TLOCALIZEDPROPERTIES
+-----------------------------------------------------------------------------
+CREATE TABLE TLOCALIZEDPROPERTIES
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OBJECT_UID NUMBER(20,0),
+        LOCALIZED_PROPERTY_KEY VARCHAR2(255) NOT NULL,
+        VALUE VARCHAR2(255) NOT NULL,
+        TYPE VARCHAR2(31) NOT NULL
+);
+
+ALTER TABLE TLOCALIZEDPROPERTIES
+    ADD CONSTRAINT TLOCALIZEDPROPERTIES_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_LP_OBJECT_UID ON TLOCALIZEDPROPERTIES (OBJECT_UID);
+
+
+COMMENT ON TABLE TLOCALIZEDPROPERTIES IS 'localized properties. (For example, product names).';
+
+
+
+-----------------------------------------------------------------------------
+-- TDIGITALASSETAUDIT
+-----------------------------------------------------------------------------
+CREATE TABLE TDIGITALASSETAUDIT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ORDERSKU_UID NUMBER(20,0) NOT NULL,
+        DIGITALASSET_UID NUMBER(20,0) NOT NULL,
+        DOWNLOAD_TIME TIMESTAMP (3) NOT NULL,
+        IP_ADDRESS VARCHAR2(255)
+);
+
+ALTER TABLE TDIGITALASSETAUDIT
+    ADD CONSTRAINT TDIGITALASSETAUDIT_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TDIGITALASSETAUDIT IS 'audit details related to digital asset download attempts.';
+
+
+
+-----------------------------------------------------------------------------
+-- TAPPLIEDRULE
+-----------------------------------------------------------------------------
+CREATE TABLE TAPPLIEDRULE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ORDER_UID NUMBER(20,0) NOT NULL,
+        RULE_UID NUMBER(20,0) NOT NULL,
+        RULE_NAME VARCHAR2(255) NOT NULL,
+        RULE_CODE CLOB NOT NULL
+);
+
+ALTER TABLE TAPPLIEDRULE
+    ADD CONSTRAINT TAPPLIEDRULE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TAR_ORDER_UID ON TAPPLIEDRULE (ORDER_UID);
+CREATE INDEX I_TAR_RULE_UID ON TAPPLIEDRULE (RULE_UID);
+
+
+COMMENT ON TABLE TAPPLIEDRULE IS 'the (promotion) rules that have been applied to orders.';
+
+
+
+-----------------------------------------------------------------------------
+-- TAPPLIEDRULECOUPONCODE
+-----------------------------------------------------------------------------
+CREATE TABLE TAPPLIEDRULECOUPONCODE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        APPLIED_RULE_UID NUMBER(20,0) NOT NULL,
+        COUPONCODE VARCHAR2(255) NOT NULL,
+        USECOUNT NUMBER(10,0) default 0
+);
+
+ALTER TABLE TAPPLIEDRULECOUPONCODE
+    ADD CONSTRAINT TAPPLIEDRULECOUPONCODE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TAPPLIEDRULECOUPONCODE IS 'the associations between applied coupon codes and applied (promotion) rules.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTOPSELLER
+-----------------------------------------------------------------------------
+CREATE TABLE TTOPSELLER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CATEGORY_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TTOPSELLER_UNIQUE UNIQUE (CATEGORY_UID)
+);
+
+ALTER TABLE TTOPSELLER
+    ADD CONSTRAINT TTOPSELLER_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTOPSELLER IS 'categories of top selling products.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTOPSELLERPRODUCTS
+-----------------------------------------------------------------------------
+CREATE TABLE TTOPSELLERPRODUCTS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TOP_SELLER_UID NUMBER(20,0) NOT NULL,
+        PRODUCT_UID NUMBER(20,0) NOT NULL,
+        SALES_COUNT NUMBER(10,0) NOT NULL,
+    CONSTRAINT TTOPSELLERPRODUCTS_UNIQUE UNIQUE (TOP_SELLER_UID, PRODUCT_UID)
+);
+
+ALTER TABLE TTOPSELLERPRODUCTS
+    ADD CONSTRAINT TTOPSELLERPRODUCTS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TSP_TS_UID ON TTOPSELLERPRODUCTS (TOP_SELLER_UID);
+
+
+COMMENT ON TABLE TTOPSELLERPRODUCTS IS 'top selling product information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSFSEARCHLOG
+-----------------------------------------------------------------------------
+CREATE TABLE TSFSEARCHLOG
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        SEARCH_TIME TIMESTAMP (3) NOT NULL,
+        KEYWORDS VARCHAR2(255),
+        RESULT_COUNT NUMBER(10,0) NOT NULL,
+        SUGGESTIONS_GENERATED NUMBER(1,0) default 0,
+        CATEGORY_RESTRICTION NUMBER(20,0) default 0 NOT NULL
+);
+
+ALTER TABLE TSFSEARCHLOG
+    ADD CONSTRAINT TSFSEARCHLOG_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TSFSEARCHLOG IS 'a history of searches performed in the storefront.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTOREWAREHOUSE
+-----------------------------------------------------------------------------
+CREATE TABLE TSTOREWAREHOUSE
+(
+        STORE_UID NUMBER(20,0) NOT NULL,
+        WAREHOUSE_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_WAREHOUSE_WH_UID ON TSTOREWAREHOUSE (WAREHOUSE_UID);
+CREATE INDEX I_WAREHOUSE_STORE_UID ON TSTOREWAREHOUSE (STORE_UID);
+
+
+COMMENT ON TABLE TSTOREWAREHOUSE IS 'the associations between stores and warehouses.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORECREDITCARDTYPE
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORECREDITCARDTYPE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TYPE VARCHAR2(255),
+        STORE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSTORECREDITCARDTYPE
+    ADD CONSTRAINT TSTORECREDITCARDTYPE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CREDITCARDTYPES_STORE_UID ON TSTORECREDITCARDTYPE (STORE_UID);
+
+
+COMMENT ON TABLE TSTORECREDITCARDTYPE IS 'the supported credit card types for each store.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORETAXCODE
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORETAXCODE
+(
+        STORE_UID NUMBER(20,0) NOT NULL,
+        TAXCODE_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_TAXCODE_TAXCODE_UID ON TSTORETAXCODE (TAXCODE_UID);
+CREATE INDEX I_TAXCODE_STORE_UID ON TSTORETAXCODE (STORE_UID);
+
+
+COMMENT ON TABLE TSTORETAXCODE IS 'the associations between stores and tax codes.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORETAXJURISDICTION
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORETAXJURISDICTION
+(
+        STORE_UID NUMBER(20,0) NOT NULL,
+        TAXJURISDICTION_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_TAXJURISDICTION_JUR_UID ON TSTORETAXJURISDICTION (TAXJURISDICTION_UID);
+CREATE INDEX I_TAXJURISDICTION_STORE_UID ON TSTORETAXJURISDICTION (STORE_UID);
+
+
+COMMENT ON TABLE TSTORETAXJURISDICTION IS 'the associations between stores and tax jurisdictions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPAYMENTGATEWAY
+-----------------------------------------------------------------------------
+CREATE TABLE TPAYMENTGATEWAY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        TYPE VARCHAR2(255) NOT NULL,
+    CONSTRAINT TPAYMENTGATEWAY_NAME UNIQUE (NAME)
+);
+
+ALTER TABLE TPAYMENTGATEWAY
+    ADD CONSTRAINT TPAYMENTGATEWAY_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TPAYMENTGATEWAY IS 'the payment gateways defined in the system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTOREPAYMENTGATEWAY
+-----------------------------------------------------------------------------
+CREATE TABLE TSTOREPAYMENTGATEWAY
+(
+        STORE_UID NUMBER(20,0) NOT NULL,
+        GATEWAY_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_PAYMENTGATEWAY_PGW ON TSTOREPAYMENTGATEWAY (GATEWAY_UID);
+CREATE INDEX I_PAYMENTGATEWAY_STORE ON TSTOREPAYMENTGATEWAY (STORE_UID);
+
+
+COMMENT ON TABLE TSTOREPAYMENTGATEWAY IS 'the associations between payment gateways and stores.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPAYMENTGATEWAYPROPERTIES
+-----------------------------------------------------------------------------
+CREATE TABLE TPAYMENTGATEWAYPROPERTIES
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PROPKEY VARCHAR2(255) NOT NULL,
+        PROPVALUE VARCHAR2(255),
+        PAYMENTGATEWAY_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TPAYMENTGATEWAYPROPERTIES
+    ADD CONSTRAINT TPAYMENTGATEWAYPROPERTIES_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_PGPROPS_PG_UID ON TPAYMENTGATEWAYPROPERTIES (PAYMENTGATEWAY_UID);
+
+
+COMMENT ON TABLE TPAYMENTGATEWAYPROPERTIES IS 'properties (name/value pairs) associated with payment gateways.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORECATALOG
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORECATALOG
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        STORE_UID NUMBER(20,0) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSTORECATALOG
+    ADD CONSTRAINT TSTORECATALOG_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_STORECAT_CATALOG_UID ON TSTORECATALOG (CATALOG_UID);
+CREATE INDEX I_STORECAT_STORE_UID ON TSTORECATALOG (STORE_UID);
+
+
+COMMENT ON TABLE TSTORECATALOG IS 'the associations between stores and catalogs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCMUSERSTORE
+-----------------------------------------------------------------------------
+CREATE TABLE TCMUSERSTORE
+(
+        USER_UID NUMBER(20,0) NOT NULL,
+        STORE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCMUSERSTORE
+    ADD CONSTRAINT TCMUSERSTORE_PK
+PRIMARY KEY (USER_UID,STORE_UID);
+
+CREATE INDEX I_CMUSERSTORE_STORE_UID ON TCMUSERSTORE (STORE_UID);
+CREATE INDEX I_CMUSERSTORE__USER_UID ON TCMUSERSTORE (USER_UID);
+
+
+COMMENT ON TABLE TCMUSERSTORE IS 'the associations between stores and Commerce Manager client users.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCMUSERWAREHOUSE
+-----------------------------------------------------------------------------
+CREATE TABLE TCMUSERWAREHOUSE
+(
+        USER_UID NUMBER(20,0) NOT NULL,
+        WAREHOUSE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCMUSERWAREHOUSE
+    ADD CONSTRAINT TCMUSERWAREHOUSE_PK
+PRIMARY KEY (USER_UID,WAREHOUSE_UID);
+
+CREATE INDEX I_CMUSERWH_WAREHOUSE_UID ON TCMUSERWAREHOUSE (WAREHOUSE_UID);
+CREATE INDEX I_CMUSERWH__USER_UID ON TCMUSERWAREHOUSE (USER_UID);
+
+
+COMMENT ON TABLE TCMUSERWAREHOUSE IS 'the associations between warehouses and Commerce Manager client users.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCMUSERCATALOG
+-----------------------------------------------------------------------------
+CREATE TABLE TCMUSERCATALOG
+(
+        USER_UID NUMBER(20,0) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCMUSERCATALOG
+    ADD CONSTRAINT TCMUSERCATALOG_PK
+PRIMARY KEY (USER_UID,CATALOG_UID);
+
+CREATE INDEX I_CMUSERCATALOG_CATALOG_UID ON TCMUSERCATALOG (CATALOG_UID);
+CREATE INDEX I_CMUSERCATALOG__USER_UID ON TCMUSERCATALOG (USER_UID);
+
+
+COMMENT ON TABLE TCMUSERCATALOG IS 'the associations between catalogs and Commerce Manager client users.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTOREASSOCIATION
+-----------------------------------------------------------------------------
+CREATE TABLE TSTOREASSOCIATION
+(
+        STORE_UID NUMBER(20,0) NOT NULL,
+        ASSOCIATED_STORE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSTOREASSOCIATION
+    ADD CONSTRAINT TSTOREASSOCIATION_PK
+PRIMARY KEY (STORE_UID,ASSOCIATED_STORE_UID);
+
+CREATE INDEX I_STORE_ASSOCIATE_UID ON TSTOREASSOCIATION (STORE_UID);
+CREATE INDEX I_STORE_ASSOCIATION_UID ON TSTOREASSOCIATION (ASSOCIATED_STORE_UID);
+
+
+COMMENT ON TABLE TSTOREASSOCIATION IS 'store login sharing associations.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSYNONYMGROUPS
+-----------------------------------------------------------------------------
+CREATE TABLE TSYNONYMGROUPS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CONCEPT_TERM VARCHAR2(255) NOT NULL,
+        LOCALE VARCHAR2(20) NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSYNONYMGROUPS
+    ADD CONSTRAINT TSYNONYMGROUPS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SYNONYMGR_CATLOG_UID ON TSYNONYMGROUPS (CATALOG_UID);
+
+
+COMMENT ON TABLE TSYNONYMGROUPS IS 'the synonym groups for a store. (Not currently used.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TSYNONYM
+-----------------------------------------------------------------------------
+CREATE TABLE TSYNONYM
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        SYNONYM_UID NUMBER(20,0) NOT NULL,
+        SYNONYM_WORD VARCHAR2(255) NOT NULL
+);
+
+ALTER TABLE TSYNONYM
+    ADD CONSTRAINT TSYNONYM_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_SYNONYM_SYNONYMGR_UID ON TSYNONYM (SYNONYM_UID);
+
+
+COMMENT ON TABLE TSYNONYM IS 'synonyms for synonym groups. (Not currently used.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TINDEXNOTIFY
+-----------------------------------------------------------------------------
+CREATE TABLE TINDEXNOTIFY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        INDEX_TYPE VARCHAR2(100) NOT NULL,
+        UPDATE_TYPE VARCHAR2(64) NOT NULL,
+        AFFECTED_UID NUMBER(20,0),
+        ENTITY_TYPE VARCHAR2(64),
+        QUERY_STRING CLOB
+);
+
+ALTER TABLE TINDEXNOTIFY
+    ADD CONSTRAINT TINDEXNOTIFY_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TINDEXNOTIFY IS 'indexer notifications.';
+
+
+
+-----------------------------------------------------------------------------
+-- TRULESTORAGE
+-----------------------------------------------------------------------------
+CREATE TABLE TRULESTORAGE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        STORE_UID NUMBER(20,0),
+        CATALOG_UID NUMBER(20,0),
+        SCENARIO NUMBER(10,0) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        RULEBASE BLOB NOT NULL
+);
+
+ALTER TABLE TRULESTORAGE
+    ADD CONSTRAINT TRULESTORAGE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_RS_STRE_UID ON TRULESTORAGE (STORE_UID);
+CREATE INDEX I_RS_CAT_UID ON TRULESTORAGE (CATALOG_UID);
+
+
+COMMENT ON TABLE TRULESTORAGE IS 'compiled rule bases for rules (promotions).';
+
+
+
+-----------------------------------------------------------------------------
+-- TADVANCEDSEARCHQUERY
+-----------------------------------------------------------------------------
+CREATE TABLE TADVANCEDSEARCHQUERY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        QUERY_ID NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION CLOB,
+        QUERY_VISIBILITY VARCHAR2(20) NOT NULL,
+        OWNER_ID NUMBER(20,0),
+        QUERY_TYPE VARCHAR2(20) NOT NULL,
+        QUERY_CONTENT CLOB
+);
+
+ALTER TABLE TADVANCEDSEARCHQUERY
+    ADD CONSTRAINT TADVANCEDSEARCHQUERY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ON_OWNER_UID ON TADVANCEDSEARCHQUERY (OWNER_ID);
+
+
+COMMENT ON TABLE TADVANCEDSEARCHQUERY IS 'advanced search queries.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORESUPPORTEDCURRENCY
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORESUPPORTEDCURRENCY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CURRENCY VARCHAR2(255) NOT NULL,
+        STORE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSTORESUPPORTEDCURRENCY
+    ADD CONSTRAINT TSTORESUPPORTEDCURRENCY_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_STORESUPCURR_STORE_UID ON TSTORESUPPORTEDCURRENCY (STORE_UID);
+
+
+COMMENT ON TABLE TSTORESUPPORTEDCURRENCY IS 'the supported currencies for each store.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSTORESUPPORTEDLOCALE
+-----------------------------------------------------------------------------
+CREATE TABLE TSTORESUPPORTEDLOCALE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        LOCALE VARCHAR2(255) NOT NULL,
+        STORE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSTORESUPPORTEDLOCALE
+    ADD CONSTRAINT TSTORESUPPORTEDLOCALE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_STORESUPLOC_STORE_UID ON TSTORESUPPORTEDLOCALE (STORE_UID);
+
+
+COMMENT ON TABLE TSTORESUPPORTEDLOCALE IS 'the supported locales for each store.';
+
+
+
+-----------------------------------------------------------------------------
+-- TINDEXBUILDSTATUS
+-----------------------------------------------------------------------------
+CREATE TABLE TINDEXBUILDSTATUS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        INDEX_TYPE VARCHAR2(100) NOT NULL,
+        LAST_BUILD_DATE TIMESTAMP (3),
+        INDEX_STATUS VARCHAR2(100) default 'MISSING' NOT NULL,
+        TOTAL_RECORDS NUMBER(10,0) default -1,
+        PROCESSED_RECORDS NUMBER(10,0) default -1,
+        OPERATION_START_DATE TIMESTAMP (3),
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TINDEXBUILDSTATUS
+    ADD CONSTRAINT TINDEXBUILDSTATUS_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TINDEXBUILDSTATUS IS 'build status information for the search indexes defined in the system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRICELIST
+-----------------------------------------------------------------------------
+CREATE TABLE TPRICELIST
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        CURRENCY VARCHAR2(255) NOT NULL,
+        DESCRIPTION CLOB,
+        HIDDEN NUMBER(1,0) default 0,
+    CONSTRAINT TPRICELIST_GUID_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TPRICELIST_NAME_UNIQUE UNIQUE (NAME)
+);
+
+ALTER TABLE TPRICELIST
+    ADD CONSTRAINT TPRICELIST_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TPRICELIST IS 'This table holds information about price lists.';
+
+
+
+-----------------------------------------------------------------------------
+-- TBASEAMOUNT
+-----------------------------------------------------------------------------
+CREATE TABLE TBASEAMOUNT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        OBJECT_GUID VARCHAR2(64) NOT NULL,
+        OBJECT_TYPE VARCHAR2(100) NOT NULL,
+        QUANTITY NUMBER(19,2) NOT NULL,
+        LIST NUMBER(19,2),
+        SALE NUMBER(19,2),
+        PRICE_LIST_GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TBASEAMOUNT_UNIQUE UNIQUE (OBJECT_GUID, OBJECT_TYPE, QUANTITY, PRICE_LIST_GUID),
+    CONSTRAINT TBASEAMOUNT_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TBASEAMOUNT
+    ADD CONSTRAINT TBASEAMOUNT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TBASEAMOUNT_FK_GUID ON TBASEAMOUNT (PRICE_LIST_GUID);
+CREATE INDEX I_TBASEAMOUNT_OBJECTS ON TBASEAMOUNT (PRICE_LIST_GUID, OBJECT_GUID);
+
+
+COMMENT ON TABLE TBASEAMOUNT IS 'information about base amounts.';
+
+
+
+-----------------------------------------------------------------------------
+-- TOBJECTGROUPMEMBER
+-----------------------------------------------------------------------------
+CREATE TABLE TOBJECTGROUPMEMBER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        OBJECT_GROUP_ID VARCHAR2(64) NOT NULL,
+        OBJECT_TYPE VARCHAR2(100) NOT NULL,
+        OBJECT_IDENTIFIER VARCHAR2(100) NOT NULL,
+    CONSTRAINT TOBJECTGROUP_UNIQUE UNIQUE (OBJECT_GROUP_ID, OBJECT_TYPE, OBJECT_IDENTIFIER),
+    CONSTRAINT TOBJECTGROUP_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TOBJECTGROUPMEMBER
+    ADD CONSTRAINT TOBJECTGROUPMEMBER_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TOBJECTGROUPMEMBER IS 'the associations between business object groups and their members.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCHANGESET
+-----------------------------------------------------------------------------
+CREATE TABLE TCHANGESET
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+        OBJECT_GROUP_ID VARCHAR2(64) NOT NULL,
+        CREATED_DATE TIMESTAMP (3) NOT NULL,
+        CREATED_BY_USER_GUID VARCHAR2(64) NOT NULL,
+        STATE_CODE VARCHAR2(64) NOT NULL,
+    CONSTRAINT TCHANGESET_GROUP_ID_UNIQUE UNIQUE (OBJECT_GROUP_ID)
+);
+
+ALTER TABLE TCHANGESET
+    ADD CONSTRAINT TCHANGESET_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCHANGESET IS 'information about change sets in the system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TOBJECTMETADATA
+-----------------------------------------------------------------------------
+CREATE TABLE TOBJECTMETADATA
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OBJECT_GROUP_MEMBER_UID NUMBER(20,0) NOT NULL,
+        METADATA_KEY VARCHAR2(255) NOT NULL,
+        METADATA_VALUE VARCHAR2(255) NOT NULL
+);
+
+ALTER TABLE TOBJECTMETADATA
+    ADD CONSTRAINT TOBJECTMETADATA_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TOBJECTMETADATA_MBR_UID ON TOBJECTMETADATA (OBJECT_GROUP_MEMBER_UID);
+
+
+COMMENT ON TABLE TOBJECTMETADATA IS 'information associated with business object group members.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCHANGESETUSER
+-----------------------------------------------------------------------------
+CREATE TABLE TCHANGESETUSER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        USER_GUID VARCHAR2(255) NOT NULL,
+        CHANGESET_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TCHANGESETUSER
+    ADD CONSTRAINT TCHANGESETUSER_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TCHANGESETUSER_CS_UID ON TCHANGESETUSER (CHANGESET_UID);
+CREATE INDEX I_TCHANGESETUSER_USER_GUID ON TCHANGESETUSER (USER_GUID);
+
+
+COMMENT ON TABLE TCHANGESETUSER IS 'the associations between users and change sets.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGDICTIONARY
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGDICTIONARY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        PURPOSE VARCHAR2(255) NOT NULL,
+    CONSTRAINT TAGDICTIONARY_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAGDICTIONARY
+    ADD CONSTRAINT TTAGDICTIONARY_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAGDICTIONARY IS 'the tag dictionaries defined in the system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGCONDITION
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGCONDITION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(4000),
+        CONDITION_STRING VARCHAR2(4000) NOT NULL,
+        TAGDICTIONARY_GUID VARCHAR2(64),
+        NAMED NUMBER(1,0) default 0 NOT NULL,
+    CONSTRAINT TAGCONDITION_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAGCONDITION
+    ADD CONSTRAINT TTAGCONDITION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TAGDICTIONARY_FK ON TTAGCONDITION (TAGDICTIONARY_GUID);
+
+
+COMMENT ON TABLE TTAGCONDITION IS 'the conditions defined in the system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSELLINGCONTEXTCONDITION
+-----------------------------------------------------------------------------
+CREATE TABLE TSELLINGCONTEXTCONDITION
+(
+        SELLING_CONTEXT_UID NUMBER(20,0) NOT NULL,
+        CONDITION_GUID VARCHAR2(64) NOT NULL
+);
+
+
+
+
+COMMENT ON TABLE TSELLINGCONTEXTCONDITION IS 'the associations between selling contexts and their conditions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCSDYNAMICCONTENT
+-----------------------------------------------------------------------------
+CREATE TABLE TCSDYNAMICCONTENT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CONTENT_WRAPPER_ID VARCHAR2(255) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(4000),
+    CONSTRAINT TCSDYNAMICCONTENT_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TCSDYNAMICCONTENT_UNIQUE_NAME UNIQUE (NAME)
+);
+
+ALTER TABLE TCSDYNAMICCONTENT
+    ADD CONSTRAINT TCSDYNAMICCONTENT_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCSDYNAMICCONTENT IS 'dynamic content definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCSDYNAMICCONTENTDELIVERY
+-----------------------------------------------------------------------------
+CREATE TABLE TCSDYNAMICCONTENTDELIVERY
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+        PRIORITY NUMBER(10,0) NOT NULL,
+        CSDC_CONTENT_UID NUMBER(20,0) NOT NULL,
+        SELLING_CONTEXT_GUID VARCHAR2(64),
+    CONSTRAINT TCSDCA_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCSDYNAMICCONTENTDELIVERY
+    ADD CONSTRAINT TCSDYNAMICCONTENTDELIVERY_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCSDYNAMICCONTENTDELIVERY IS 'dynamic content delivery information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCSCONTENTSPACE
+-----------------------------------------------------------------------------
+CREATE TABLE TCSCONTENTSPACE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        TARGET_ID VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+    CONSTRAINT TCSCONTENTSPACE_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TCSCONTENTSPACE_UNIQUE_TARGET UNIQUE (TARGET_ID)
+);
+
+ALTER TABLE TCSCONTENTSPACE
+    ADD CONSTRAINT TCSCONTENTSPACE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCSCONTENTSPACE IS 'content space definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCSPARAMETERVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TCSPARAMETERVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CSDYNAMICCONTENT_UID NUMBER(20,0) NOT NULL,
+        PARAMETER_NAME VARCHAR2(255) NOT NULL,
+        LOCALIZABLE NUMBER(1,0) default 0 NOT NULL,
+        DESCRIPTION VARCHAR2(4000),
+    CONSTRAINT TCSPARAMETERVALUE_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCSPARAMETERVALUE
+    ADD CONSTRAINT TCSPARAMETERVALUE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCSPARAMETERVALUE IS 'information about dynamic content parameters (parameter names, descriptions).';
+
+
+
+-----------------------------------------------------------------------------
+-- TCSPARAMETERVALUELDF
+-----------------------------------------------------------------------------
+CREATE TABLE TCSPARAMETERVALUELDF
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        LOCALE VARCHAR2(20) NOT NULL,
+        LDVALUE VARCHAR2(4000) NOT NULL,
+        CSPARAMETERVALUE_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TCSPARAMETERVALUELDF_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TCSPARAMETERVALUELDF
+    ADD CONSTRAINT TCSPARAMETERVALUELDF_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCSPARAMETERVALUELDF IS 'localized dynamic content parameter values.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCSDYNAMICCONTENTSPACE
+-----------------------------------------------------------------------------
+CREATE TABLE TCSDYNAMICCONTENTSPACE
+(
+        DC_DELIVERY_UID NUMBER(20,0) NOT NULL,
+        DC_CONTENTSPACE_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TCSDYNAMICCONTENTSPACE_CK_1 UNIQUE (DC_DELIVERY_UID, DC_CONTENTSPACE_UID)
+);
+
+
+
+
+COMMENT ON TABLE TCSDYNAMICCONTENTSPACE IS 'the associations between dynamic content deliveries and content spaces.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCHANGETRANSACTION
+-----------------------------------------------------------------------------
+CREATE TABLE TCHANGETRANSACTION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TRANSACTION_ID VARCHAR2(255) NOT NULL,
+        CHANGE_DATE TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TCHANGETRANSACTION
+    ADD CONSTRAINT TCHANGETRANSACTION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCHANGETRANSACTION IS 'information about change transactions. (Used for auditing purposes.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TCHANGETRANSACTIONMETADATA
+-----------------------------------------------------------------------------
+CREATE TABLE TCHANGETRANSACTIONMETADATA
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CHANGE_TRANSACTION_UID NUMBER(20,0) NOT NULL,
+        METADATA_KEY VARCHAR2(255) NOT NULL,
+        METADATA_VALUE VARCHAR2(255) NOT NULL
+);
+
+ALTER TABLE TCHANGETRANSACTIONMETADATA
+    ADD CONSTRAINT TCHANGETRANSACTIONMETADATA_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCHANGETRANSACTIONMETADATA IS 'metadata associated with change transactions. (Used for auditing purposes.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TCHANGEOPERATION
+-----------------------------------------------------------------------------
+CREATE TABLE TCHANGEOPERATION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OPERATION_ORDER NUMBER(10,0) NOT NULL,
+        ROOT_OBJECT_NAME VARCHAR2(255),
+        ROOT_OBJECT_UID NUMBER(20,0),
+        ROOT_OBJECT_GUID VARCHAR2(255),
+        CHANGE_TYPE VARCHAR2(255) NOT NULL,
+        CHANGE_TRANSACTION_UID NUMBER(20,0) NOT NULL,
+        QUERY_STRING VARCHAR2(1000),
+        QUERY_PARAMETERS VARCHAR2(255),
+        TYPE VARCHAR2(20)
+);
+
+ALTER TABLE TCHANGEOPERATION
+    ADD CONSTRAINT TCHANGEOPERATION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCHANGEOPERATION IS 'the details of a change operation. (Used for auditing purposes.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGVALUETYPE
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGVALUETYPE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        JAVA_TYPE VARCHAR2(50),
+        UI_PICKER_KEY VARCHAR2(50),
+    CONSTRAINT TAGVALUETYPE_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAGVALUETYPE
+    ADD CONSTRAINT TTAGVALUETYPE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAGVALUETYPE IS 'the tag value types that can be associated with tag definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGGROUP
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGGROUP
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TAGGROUP_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAGGROUP
+    ADD CONSTRAINT TTAGGROUP_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAGGROUP IS 'the tag groups used to organize tag definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGDEFINITION
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGDEFINITION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(255),
+        TAGVALUETYPE_GUID VARCHAR2(64) NOT NULL,
+        TAGGROUP_UID NUMBER(20,0),
+    CONSTRAINT TAGDEFINITION_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAGDEFINITION
+    ADD CONSTRAINT TTAGDEFINITION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAGDEFINITION IS 'the tag definitions in the system.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGALLOWEDVALUE
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGALLOWEDVALUE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        VALUE VARCHAR2(255) NOT NULL,
+        TAGVALUETYPE_GUID VARCHAR2(64) NOT NULL,
+        DESCRIPTION VARCHAR2(4000),
+        ORDERING NUMBER(10,0) default 0 NOT NULL,
+    CONSTRAINT TAGALLOWEDVALUE_UNIQUE UNIQUE (VALUE, TAGVALUETYPE_GUID),
+    CONSTRAINT TAGALLOWEDVALUE_UNIQUE2 UNIQUE (ORDERING, TAGVALUETYPE_GUID)
+);
+
+ALTER TABLE TTAGALLOWEDVALUE
+    ADD CONSTRAINT TTAGALLOWEDVALUE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAGALLOWEDVALUE IS 'the allowed values for each tag value type.';
+
+
+
+-----------------------------------------------------------------------------
+-- TDATACHANGED
+-----------------------------------------------------------------------------
+CREATE TABLE TDATACHANGED
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        CHANGE_TYPE VARCHAR2(255) NOT NULL,
+        FIELD_NAME VARCHAR2(255),
+        FIELD_OLD_VALUE CLOB,
+        FIELD_NEW_VALUE CLOB,
+        OBJECT_NAME VARCHAR2(255),
+        OBJECT_UID NUMBER(20,0),
+        OBJECT_GUID VARCHAR2(255),
+        CHANGE_OPERATION_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TDATACHANGED
+    ADD CONSTRAINT TDATACHANGED_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TDATACHANGED IS 'information about changes made to objects. (Used for auditing purposes.)';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGDICTIONARYTAGDEFINITION
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGDICTIONARYTAGDEFINITION
+(
+        TAGDICTIONARY_GUID VARCHAR2(64) NOT NULL,
+        TAGDEFINITION_GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TAGDICTIONARYTAGDEF_UNIQUE UNIQUE (TAGDICTIONARY_GUID, TAGDEFINITION_GUID)
+);
+
+
+
+
+COMMENT ON TABLE TTAGDICTIONARYTAGDEFINITION IS 'the associations between tag dictionaries and tag definitions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGOPERATOR
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGOPERATOR
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TAGOPERATOR_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TTAGOPERATOR
+    ADD CONSTRAINT TTAGOPERATOR_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TTAGOPERATOR IS 'the tag operators that can be used in conditions.';
+
+
+
+-----------------------------------------------------------------------------
+-- TTAGVALUETYPEOPERATOR
+-----------------------------------------------------------------------------
+CREATE TABLE TTAGVALUETYPEOPERATOR
+(
+        TAGVALUETYPE_GUID VARCHAR2(64) NOT NULL,
+        TAGOPERATOR_GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TTAGVALUETYPEOPERATOR_UNIQUE UNIQUE (TAGVALUETYPE_GUID, TAGOPERATOR_GUID)
+);
+
+
+
+
+COMMENT ON TABLE TTAGVALUETYPEOPERATOR IS 'the associations between tag value types and tag operators.';
+
+
+
+-----------------------------------------------------------------------------
+-- TVALIDATIONCONSTRAINTS
+-----------------------------------------------------------------------------
+CREATE TABLE TVALIDATIONCONSTRAINTS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        OBJECT_UID NUMBER(20,0),
+        ERROR_MESSAGE_KEY VARCHAR2(255) NOT NULL,
+        VALIDATION_CONSTRAINT VARCHAR2(4000) NOT NULL,
+        TYPE VARCHAR2(31) NOT NULL
+);
+
+ALTER TABLE TVALIDATIONCONSTRAINTS
+    ADD CONSTRAINT TVALIDATIONCONSTRAINTS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_VC_OBJECT_UID ON TVALIDATIONCONSTRAINTS (OBJECT_UID);
+
+
+COMMENT ON TABLE TVALIDATIONCONSTRAINTS IS 'the VALANG validation constraints associated tag value types.';
+
+
+
+-----------------------------------------------------------------------------
+-- TBUNDLECONSTITUENTX
+-----------------------------------------------------------------------------
+CREATE TABLE TBUNDLECONSTITUENTX
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        BUNDLE_UID NUMBER(20,0) NOT NULL,
+        CONSTITUENT_UID NUMBER(20,0),
+        CONSTITUENT_SKU_UID NUMBER(20,0),
+        QUANTITY NUMBER(10,0) default 1 NOT NULL,
+        ORDERING NUMBER(10,0) default 0 NOT NULL,
+    CONSTRAINT TBCX_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TBUNDLECONSTITUENTX
+    ADD CONSTRAINT TBUNDLECONSTITUENTX_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_BCX_BUNDLE_UID ON TBUNDLECONSTITUENTX (BUNDLE_UID);
+CREATE INDEX I_BCX_CONSTITUENT_UID ON TBUNDLECONSTITUENTX (CONSTITUENT_UID);
+CREATE INDEX I_BCX_CONSTITUENT_SKU_UID ON TBUNDLECONSTITUENTX (CONSTITUENT_SKU_UID);
+
+
+COMMENT ON TABLE TBUNDLECONSTITUENTX IS 'the many-to-many relationships between product bundles and bundle items.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRICEADJUSTMENT
+-----------------------------------------------------------------------------
+CREATE TABLE TPRICEADJUSTMENT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        CONSTITUENT_GUID VARCHAR2(64) NOT NULL,
+        AMOUNT NUMBER(19,2),
+        PRICE_LIST_GUID VARCHAR2(64) NOT NULL,
+    CONSTRAINT TPRICEADJUSTMENT_GUID_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TPRICEADJUSTMENT
+    ADD CONSTRAINT TPRICEADJUSTMENT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TPRICEADJUSTMENT_FK_PL_GUID ON TPRICEADJUSTMENT (PRICE_LIST_GUID);
+CREATE INDEX I_TPRICEADJUSTMENT_FK_BCX_GUID ON TPRICEADJUSTMENT (CONSTITUENT_GUID);
+CREATE INDEX I_TPRICEADJUSTMENT_KEYS ON TPRICEADJUSTMENT (PRICE_LIST_GUID, CONSTITUENT_GUID);
+
+
+COMMENT ON TABLE TPRICEADJUSTMENT IS 'price adjustments in a price list.';
+
+
+
+-----------------------------------------------------------------------------
+-- TBUNDLESELECTIONRULE
+-----------------------------------------------------------------------------
+CREATE TABLE TBUNDLESELECTIONRULE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        PARAMETER NUMBER(10,0) NOT NULL,
+        BUNDLE_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TBUNDLESELECTIONRULE
+    ADD CONSTRAINT TBUNDLESELECTIONRULE_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_BSR_BUNDLE_UID ON TBUNDLESELECTIONRULE (BUNDLE_UID);
+
+
+COMMENT ON TABLE TBUNDLESELECTIONRULE IS 'the available bundle item selection rules.';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHOPPINGITEMDATA
+-----------------------------------------------------------------------------
+CREATE TABLE TSHOPPINGITEMDATA
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ITEM_KEY CLOB NOT NULL,
+        ITEM_VALUE CLOB,
+        CARTITEM_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TSHOPPINGITEMDATA
+    ADD CONSTRAINT TSHOPPINGITEMDATA_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CARTITEM_UID ON TSHOPPINGITEMDATA (CARTITEM_UID);
+
+
+COMMENT ON TABLE TSHOPPINGITEMDATA IS 'key/value pairs of data associated with shopping items.';
+
+
+
+-----------------------------------------------------------------------------
+-- TORDERITEMDATA
+-----------------------------------------------------------------------------
+CREATE TABLE TORDERITEMDATA
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        ITEM_KEY CLOB NOT NULL,
+        ITEM_VALUE CLOB,
+        ORDERSKU_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TORDERITEMDATA
+    ADD CONSTRAINT TORDERITEMDATA_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_ORDERSKU_UID ON TORDERITEMDATA (ORDERSKU_UID);
+
+
+COMMENT ON TABLE TORDERITEMDATA IS 'key/value pairs of data associated with order SKUs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TPRICELISTASSIGNMENT
+-----------------------------------------------------------------------------
+CREATE TABLE TPRICELISTASSIGNMENT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        DESCRIPTION VARCHAR2(4000),
+        PRIORITY NUMBER(10,0) default 1 NOT NULL,
+        CATALOG_UID NUMBER(20,0) NOT NULL,
+        PRLISTDSCR_UID NUMBER(20,0) NOT NULL,
+        SELLING_CTX_UID NUMBER(20,0),
+        HIDDEN NUMBER(1,0) default 0,
+    CONSTRAINT TPLA_GUID_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TPLA_NAME_UNIQUE UNIQUE (NAME)
+);
+
+ALTER TABLE TPRICELISTASSIGNMENT
+    ADD CONSTRAINT TPRICELISTASSIGNMENT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_CATALOG_UID ON TPRICELISTASSIGNMENT (CATALOG_UID);
+CREATE INDEX I_PRLISTDSCR_UID ON TPRICELISTASSIGNMENT (PRLISTDSCR_UID);
+
+
+COMMENT ON TABLE TPRICELISTASSIGNMENT IS 'This table associates price lists to catalogs and selling contexts with a specific priority.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTNOTIFICATION
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTNOTIFICATION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        REQUEST_ID VARCHAR2(64) NOT NULL,
+        ACTION VARCHAR2(64) NOT NULL,
+        IMPORT_JOB_UID NUMBER(20,0) NOT NULL,
+        DATE_CREATED TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL,
+        CMUSER_UID NUMBER(20,0) NOT NULL,
+        NOTIFICATION_STATE VARCHAR2(64) NOT NULL,
+        CHANGESET_GUID VARCHAR2(64)
+);
+
+ALTER TABLE TIMPORTNOTIFICATION
+    ADD CONSTRAINT TIMPORTNOTIFICATION_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_IN_IMPORTJOB_FK ON TIMPORTNOTIFICATION (IMPORT_JOB_UID);
+CREATE INDEX I_IN_CMUSER_FK ON TIMPORTNOTIFICATION (CMUSER_UID);
+
+
+COMMENT ON TABLE TIMPORTNOTIFICATION IS 'import job notifications.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTNOTIFICATIONMETADATA
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTNOTIFICATIONMETADATA
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        METADATA_KEY VARCHAR2(255),
+        METADATA_VALUE VARCHAR2(255),
+        IMPORT_NOTIFICATION_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TIMPORTNOTIFICATIONMETADATA
+    ADD CONSTRAINT TIMPORTNOTIFICATIONMETADATA_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_INM_IMPORTNOTIFICATION_FK ON TIMPORTNOTIFICATIONMETADATA (IMPORT_NOTIFICATION_UID);
+
+
+COMMENT ON TABLE TIMPORTNOTIFICATIONMETADATA IS 'import job notification metadata.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTJOBSTATUS
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTJOBSTATUS
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        PROCESS_ID VARCHAR2(64) NOT NULL,
+        IMPORT_JOB_UID NUMBER(20,0) NOT NULL,
+        CMUSER_UID NUMBER(20,0) NOT NULL,
+        START_DATE TIMESTAMP (3),
+        END_DATE TIMESTAMP (3),
+        TOTAL_ROWS NUMBER(10,0),
+        FAILED_ROWS NUMBER(10,0),
+        CURRENT_ROW NUMBER(10,0),
+        STATE VARCHAR2(64) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP (3) default CURRENT_TIMESTAMP (3) NOT NULL
+);
+
+ALTER TABLE TIMPORTJOBSTATUS
+    ADD CONSTRAINT TIMPORTJOBSTATUS_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_IJS_IMPORTJOB_FK ON TIMPORTJOBSTATUS (IMPORT_JOB_UID);
+CREATE INDEX I_IJS_CMUSER_FK ON TIMPORTJOBSTATUS (CMUSER_UID);
+
+
+COMMENT ON TABLE TIMPORTJOBSTATUS IS 'information about the status of running import jobs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTBADROW
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTBADROW
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        IMPORT_JOB_STATUS_UID NUMBER(20,0) NOT NULL,
+        ROW_NUMBER NUMBER(10,0) NOT NULL,
+        ROW_DATA CLOB NOT NULL
+);
+
+ALTER TABLE TIMPORTBADROW
+    ADD CONSTRAINT TIMPORTBADROW_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_IBR_IMPORTJOBSTATUS_FK ON TIMPORTBADROW (IMPORT_JOB_STATUS_UID);
+
+
+COMMENT ON TABLE TIMPORTBADROW IS 'information about rows that failed to import during import jobs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TIMPORTFAULT
+-----------------------------------------------------------------------------
+CREATE TABLE TIMPORTFAULT
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        IMPORT_BAD_ROW_UID NUMBER(20,0) NOT NULL,
+        LEVEL_NUMBER NUMBER(10,0),
+        CODE VARCHAR2(255),
+        SOURCE_MESSAGE CLOB,
+        ARGS VARCHAR2(255)
+);
+
+ALTER TABLE TIMPORTFAULT
+    ADD CONSTRAINT TIMPORTFAULT_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_IF_IMPORTBADROW_FK ON TIMPORTFAULT (IMPORT_BAD_ROW_UID);
+
+
+COMMENT ON TABLE TIMPORTFAULT IS 'information about faults that occurred during import jobs.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCMUSERPRICELIST
+-----------------------------------------------------------------------------
+CREATE TABLE TCMUSERPRICELIST
+(
+        USER_UID NUMBER(20,0) NOT NULL,
+        PRICELIST_GUID VARCHAR2(64) NOT NULL
+);
+
+ALTER TABLE TCMUSERPRICELIST
+    ADD CONSTRAINT TCMUSERPRICELIST_PK
+PRIMARY KEY (USER_UID,PRICELIST_GUID);
+
+CREATE INDEX I_CMUSERPL_GUID ON TCMUSERPRICELIST (PRICELIST_GUID);
+CREATE INDEX I_CMUSERPL_USER_UID ON TCMUSERPRICELIST (USER_UID);
+
+
+COMMENT ON TABLE TCMUSERPRICELIST IS 'user to price lists associations.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCOUPONCONFIG
+-----------------------------------------------------------------------------
+CREATE TABLE TCOUPONCONFIG
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        RULECODE VARCHAR2(64) NOT NULL,
+        USAGE_LIMIT NUMBER(10,0) NOT NULL,
+        USAGE_TYPE VARCHAR2(255) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        LIMITED_DURATION NUMBER(1,0) default 0 NOT NULL,
+        DURATION_DAYS NUMBER(10,0),
+        MULTI_USE_PER_ORDER NUMBER(1,0) default 0 NOT NULL,
+    CONSTRAINT TCOUPONCONFIG_GUID_UNQ UNIQUE (GUID),
+    CONSTRAINT TCOUPONCONFIG_RULECODE_UNQ UNIQUE (RULECODE)
+);
+
+ALTER TABLE TCOUPONCONFIG
+    ADD CONSTRAINT TCOUPONCONFIG_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCOUPONCONFIG IS 'coupon configuration information.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCOUPON
+-----------------------------------------------------------------------------
+CREATE TABLE TCOUPON
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        COUPONCODE VARCHAR2(255) NOT NULL,
+        COUPON_CONFIG_UID NUMBER(20,0) NOT NULL,
+        SUSPENDED NUMBER(1,0) default 0 NOT NULL,
+    CONSTRAINT TCOUPON_RULE_COUPON_UNQ UNIQUE (COUPONCODE)
+);
+
+ALTER TABLE TCOUPON
+    ADD CONSTRAINT TCOUPON_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCOUPON IS 'the coupon definitions and their state.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCOUPONUSAGE
+-----------------------------------------------------------------------------
+CREATE TABLE TCOUPONUSAGE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        COUPON_UID NUMBER(20,0) NOT NULL,
+        USECOUNT NUMBER(10,0) NOT NULL,
+        ACTIVE_IN_CART NUMBER(1,0) default 0 NOT NULL,
+        CUSTOMER_EMAIL_ADDRESS VARCHAR2(255) NOT NULL,
+        LIMITED_DURATION_END_DATE TIMESTAMP (3),
+        SUSPENDED NUMBER(1,0) default 0 NOT NULL,
+    CONSTRAINT TCOUPON_EMAIL_COUPON_UNQ UNIQUE (COUPON_UID, CUSTOMER_EMAIL_ADDRESS)
+);
+
+ALTER TABLE TCOUPONUSAGE
+    ADD CONSTRAINT TCOUPONUSAGE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCOUPONUSAGE IS 'the usage count of limited use coupons.';
+
+
+
+-----------------------------------------------------------------------------
+-- TWISHLIST
+-----------------------------------------------------------------------------
+CREATE TABLE TWISHLIST
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(100) NOT NULL,
+        STORECODE VARCHAR2(64),
+        SHOPPER_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TWISHLIST_UNIQUE UNIQUE (GUID)
+);
+
+ALTER TABLE TWISHLIST
+    ADD CONSTRAINT TWISHLIST_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TWISHLIST_SHOPPER_UID ON TWISHLIST (SHOPPER_UID);
+
+
+COMMENT ON TABLE TWISHLIST IS 'information about customers'' wish lists.';
+
+
+
+-----------------------------------------------------------------------------
+-- TWISHLISTITEMS
+-----------------------------------------------------------------------------
+CREATE TABLE TWISHLISTITEMS
+(
+        WISHLIST_UID NUMBER(20,0) NOT NULL,
+        ITEM_UID NUMBER(20,0) NOT NULL
+);
+
+ALTER TABLE TWISHLISTITEMS
+    ADD CONSTRAINT TWISHLISTITEMS_PK
+PRIMARY KEY (WISHLIST_UID,ITEM_UID);
+
+
+
+COMMENT ON TABLE TWISHLISTITEMS IS 'join table between wishlist and shopping item';
+
+
+
+-----------------------------------------------------------------------------
+-- TSHOPPINGCARTITEMS
+-----------------------------------------------------------------------------
+CREATE TABLE TSHOPPINGCARTITEMS
+(
+        SHOPPING_CART_UID NUMBER(20,0) NOT NULL,
+        ITEM_UID NUMBER(20,0) NOT NULL
+);
+
+
+CREATE INDEX I_TSCI_CART_UID ON TSHOPPINGCARTITEMS (SHOPPING_CART_UID);
+
+
+COMMENT ON TABLE TSHOPPINGCARTITEMS IS 'OpenJPA managed join table between shopping cart and shopping item.';
+
+
+
+-----------------------------------------------------------------------------
+-- TCAMPAIGN
+-----------------------------------------------------------------------------
+CREATE TABLE TCAMPAIGN
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        THIRD_PARTY_ID VARCHAR2(255) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        START_DATE TIMESTAMP (3),
+        END_DATE TIMESTAMP (3),
+        STATE NUMBER(10,0) default 0 NOT NULL,
+    CONSTRAINT TCAMPAIGN_NAME_UNQ UNIQUE (NAME),
+    CONSTRAINT TCAMPAIGN_THIRD_PARTY_ID_UNQ UNIQUE (THIRD_PARTY_ID)
+);
+
+ALTER TABLE TCAMPAIGN
+    ADD CONSTRAINT TCAMPAIGN_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCAMPAIGN IS 'Site Optimization - Campaign';
+
+
+
+-----------------------------------------------------------------------------
+-- TEXPERIENCE
+-----------------------------------------------------------------------------
+CREATE TABLE TEXPERIENCE
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        THIRD_PARTY_ID VARCHAR2(255) NOT NULL,
+        NAME VARCHAR2(255) NOT NULL,
+        GUID VARCHAR2(100) NOT NULL,
+        CAMPAIGN_UID NUMBER(20,0) NOT NULL,
+    CONSTRAINT TEXPERIENCE_GUID_UNIQ UNIQUE (GUID)
+);
+
+ALTER TABLE TEXPERIENCE
+    ADD CONSTRAINT TEXPERIENCE_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TEXPERIENCE IS 'Site Optimization - Experience';
+
+
+
+-----------------------------------------------------------------------------
+-- TMARKETTESTINGOFFER
+-----------------------------------------------------------------------------
+CREATE TABLE TMARKETTESTINGOFFER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(100) NOT NULL,
+        NAME VARCHAR2(255),
+        STORE_UID NUMBER(20,0),
+        OFFER_VALUE_ENTITY_UID NUMBER(20,0),
+        OFFER_TYPE VARCHAR2(255),
+        LAST_SYNC_DATE TIMESTAMP (3),
+        OFFER_TYPE_NAME VARCHAR2(255),
+        CAMPAIGN_STATE NUMBER(10,0) default 1 NOT NULL,
+        EXTERNAL_ID NUMBER(20,0),
+    CONSTRAINT TMARKETOFFER_GUID_UNQ UNIQUE (GUID),
+    CONSTRAINT TMARKETTESTINGOFFER_NAME_UNQ UNIQUE (NAME)
+);
+
+ALTER TABLE TMARKETTESTINGOFFER
+    ADD CONSTRAINT TMARKETTESTINGOFFER_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TMARKETTESTINGOFFER IS 'Site Optimization - Market Testing Offer';
+
+
+
+-----------------------------------------------------------------------------
+-- TEXPERIENCEOFFERLOCATION
+-----------------------------------------------------------------------------
+CREATE TABLE TEXPERIENCEOFFERLOCATION
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        EXPERIENCE_UID NUMBER(20,0) NOT NULL,
+        OFFER_UID NUMBER(20,0) NOT NULL,
+        OFFER_LOCATION VARCHAR2(255) NOT NULL,
+    CONSTRAINT TEOL_ALL_COLUMNS_UNQ UNIQUE (EXPERIENCE_UID, OFFER_UID, OFFER_LOCATION)
+);
+
+ALTER TABLE TEXPERIENCEOFFERLOCATION
+    ADD CONSTRAINT TEXPERIENCEOFFERLOCATION_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TEXPERIENCEOFFERLOCATION IS 'Site Optimization - Experience Offer Location';
+
+
+
+-----------------------------------------------------------------------------
+-- TCARTORDER
+-----------------------------------------------------------------------------
+CREATE TABLE TCARTORDER
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        GUID VARCHAR2(64) NOT NULL,
+        BILLING_GUID VARCHAR2(64),
+        SHOPPINGCART_GUID VARCHAR2(100) NOT NULL,
+    CONSTRAINT UNQ_CARTORDER_GUID UNIQUE (GUID),
+    CONSTRAINT UNQ_CARTORDER_SC_GUID UNIQUE (SHOPPINGCART_GUID)
+);
+
+ALTER TABLE TCARTORDER
+    ADD CONSTRAINT TCARTORDER_PK
+PRIMARY KEY (UIDPK);
+
+
+
+COMMENT ON TABLE TCARTORDER IS 'Cart Order';
+
+
+
+-----------------------------------------------------------------------------
+-- TOAUTHACCESSTOKEN
+-----------------------------------------------------------------------------
+CREATE TABLE TOAUTHACCESSTOKEN
+(
+        UIDPK NUMBER(20,0) NOT NULL,
+        TOKEN_ID VARCHAR2(255) NOT NULL,
+        EXPIRY_DATE TIMESTAMP (3) NOT NULL,
+        TOKEN_TYPE VARCHAR2(255) NOT NULL,
+        USERNAME VARCHAR2(255) NOT NULL,
+        CREDENTIALS VARCHAR2(255) NOT NULL,
+        STORECODE VARCHAR2(255) NOT NULL,
+        CLIENT_ID VARCHAR2(255) NOT NULL,
+        CLIENT_SECRET VARCHAR2(255),
+    CONSTRAINT UNQ_TOAT_TOKEN_TOKEN_ID UNIQUE (TOKEN_ID)
+);
+
+ALTER TABLE TOAUTHACCESSTOKEN
+    ADD CONSTRAINT TOAUTHACCESSTOKEN_PK
+PRIMARY KEY (UIDPK);
+
+CREATE INDEX I_TOAT_EXPIRY_DATE ON TOAUTHACCESSTOKEN (EXPIRY_DATE);
+
+
+COMMENT ON TABLE TOAUTHACCESSTOKEN IS 'OAuth2 access token';
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE TTAXCATEGORY
+    ADD CONSTRAINT TTAXCATEGORY_FK_1 FOREIGN KEY (TAX_JURISDICTION_UID)
+    REFERENCES TTAXJURISDICTION (UIDPK)
+;
+
+
+
+ALTER TABLE TTAXREGION
+    ADD CONSTRAINT TTAXREGION_FK_1 FOREIGN KEY (TAX_CATEGORY_UID)
+    REFERENCES TTAXCATEGORY (UIDPK)
+;
+
+
+
+ALTER TABLE TTAXVALUE
+    ADD CONSTRAINT TTAXVALUE_FK_1 FOREIGN KEY (TAX_REGION_UID)
+    REFERENCES TTAXREGION (UIDPK)
+;
+
+ALTER TABLE TTAXVALUE
+    ADD CONSTRAINT TTAXVALUE_FK_2 FOREIGN KEY (TAX_CODE_UID)
+    REFERENCES TTAXCODE (UIDPK)
+;
+
+
+
+
+
+
+
+
+
+ALTER TABLE TSETTINGMETADATA
+    ADD CONSTRAINT TSETTINGMETADATA_FK_1 FOREIGN KEY (SETTING_DEFINITION_UID)
+    REFERENCES TSETTINGDEFINITION (UIDPK)
+;
+
+
+
+ALTER TABLE TSETTINGVALUE
+    ADD CONSTRAINT TSETTINGVALUE_FK_1 FOREIGN KEY (SETTING_DEFINITION_UID)
+    REFERENCES TSETTINGDEFINITION (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORE
+    ADD CONSTRAINT TSTORE_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TCUSTOMER
+    ADD CONSTRAINT TCUSTOMER_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TCUSTOMERPROFILEVALUE
+    ADD CONSTRAINT TCUSTOMERPROFILEVALUE_FK_1 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+ALTER TABLE TCUSTOMERPROFILEVALUE
+    ADD CONSTRAINT TCUSTOMERPROFILEVALUE_FK_2 FOREIGN KEY (CUSTOMER_UID)
+    REFERENCES TCUSTOMER (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TADDRESS
+    ADD CONSTRAINT TADDRESS_FK_1 FOREIGN KEY (CUSTOMER_UID)
+    REFERENCES TCUSTOMER (UIDPK)
+;
+
+
+
+ALTER TABLE TCATALOGSUPPORTEDLOCALE
+    ADD CONSTRAINT TCATALOGSUPPORTEDLOCALE_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TCATEGORYTYPE
+    ADD CONSTRAINT TCATEGORYTYPE_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TCATEGORY
+    ADD CONSTRAINT TCATEGORY_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+ALTER TABLE TCATEGORY
+    ADD CONSTRAINT TCATEGORY_FK_2 FOREIGN KEY (PARENT_CATEGORY_UID)
+    REFERENCES TCATEGORY (UIDPK)
+;
+
+
+
+ALTER TABLE TMASTERCATEGORY
+    ADD CONSTRAINT TMASTERCATEGORY_FK_1 FOREIGN KEY (CATEGORY_TYPE_UID)
+    REFERENCES TCATEGORYTYPE (UIDPK)
+;
+
+
+
+ALTER TABLE TLINKEDCATEGORY
+    ADD CONSTRAINT TLINKEDCATEGORY_FK_1 FOREIGN KEY (MASTER_CATEGORY_UID)
+    REFERENCES TCATEGORY (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TCATEGORYATTRIBUTEVALUE
+    ADD CONSTRAINT TCATEGORYATTRIBUTEVALUE_FK_1 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TCATEGORYTYPEATTRIBUTE
+    ADD CONSTRAINT TCATEGORYTYPEATTRIBUTE_FK_1 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+ALTER TABLE TCATEGORYTYPEATTRIBUTE
+    ADD CONSTRAINT TCATEGORYTYPEATTRIBUTE_FK_2 FOREIGN KEY (CATEGORY_TYPE_UID)
+    REFERENCES TCATEGORYTYPE (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TPASSWORDHISTORY
+    ADD CONSTRAINT TPASSWORDHISTORY_FK_1 FOREIGN KEY (CM_USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TCMUSERROLEX
+    ADD CONSTRAINT TCMUSERROLEX_FK_1 FOREIGN KEY (USER_ROLE_UID)
+    REFERENCES TUSERROLE (UIDPK)
+;
+
+ALTER TABLE TCMUSERROLEX
+    ADD CONSTRAINT TCMUSERROLEX_FK_2 FOREIGN KEY (CM_USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TSHOPPER
+    ADD CONSTRAINT FK_CUSTOMER FOREIGN KEY (CUSTOMER_GUID)
+    REFERENCES TCUSTOMER (GUID)
+;
+
+
+
+
+
+ALTER TABLE TCUSTOMERGROUPROLEX
+    ADD CONSTRAINT TCUSTOMERGROUPROLEX_FK_1 FOREIGN KEY (CUSTOMER_GROUP_UID)
+    REFERENCES TCUSTOMERGROUP (UIDPK)
+;
+
+
+
+ALTER TABLE TCUSTOMERGROUPX
+    ADD CONSTRAINT TCUSTOMERGROUPX_FK_1 FOREIGN KEY (CUSTOMERGROUP_UID)
+    REFERENCES TCUSTOMERGROUP (UIDPK)
+;
+
+ALTER TABLE TCUSTOMERGROUPX
+    ADD CONSTRAINT TCUSTOMERGROUPX_FK_2 FOREIGN KEY (CUSTOMER_UID)
+    REFERENCES TCUSTOMER (UIDPK)
+;
+
+
+
+ALTER TABLE TCUSTOMERSESSION
+    ADD CONSTRAINT TCUSTOMERSESSION_FK_1 FOREIGN KEY (SHOPPER_UID)
+    REFERENCES TSHOPPER (UIDPK)
+;
+
+
+
+ALTER TABLE TCUSTOMERCREDITCARD
+    ADD CONSTRAINT TCUSTOMERCREDITCARD_FK_1 FOREIGN KEY (CUSTOMER_UID)
+    REFERENCES TCUSTOMER (UIDPK)
+;
+
+ALTER TABLE TCUSTOMERCREDITCARD
+    ADD CONSTRAINT TCUSTOMERCREDITCARD_FK_2 FOREIGN KEY (BILLING_ADDRESS_UID)
+    REFERENCES TADDRESS (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TWAREHOUSE
+    ADD CONSTRAINT TWAREHOUSE_FK_1 FOREIGN KEY (ADDRESS_UID)
+    REFERENCES TWAREHOUSEADDRESS (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTJOB
+    ADD CONSTRAINT TIMPORTJOB_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+ALTER TABLE TIMPORTJOB
+    ADD CONSTRAINT TIMPORTJOB_FK_2 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TIMPORTJOB
+    ADD CONSTRAINT TIMPORTJOB_FK_3 FOREIGN KEY (WAREHOUSE_UID)
+    REFERENCES TWAREHOUSE (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTMAPPINGS
+    ADD CONSTRAINT TIMPORTMAPPINGS_FK_1 FOREIGN KEY (IMPORT_JOB_UID)
+    REFERENCES TIMPORTJOB (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TORDER
+    ADD CONSTRAINT TORDER_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TORDER
+    ADD CONSTRAINT TORDER_FK_2 FOREIGN KEY (ORDER_BILLING_ADDRESS_UID)
+    REFERENCES TORDERADDRESS (UIDPK)
+;
+
+ALTER TABLE TORDER
+    ADD CONSTRAINT TORDER_FK_3 FOREIGN KEY (CUSTOMER_UID)
+    REFERENCES TCUSTOMER (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TORDERLOCK
+    ADD CONSTRAINT TORDERLOCK_FK_1 FOREIGN KEY (ORDER_UID)
+    REFERENCES TORDER (UIDPK)
+;
+
+ALTER TABLE TORDERLOCK
+    ADD CONSTRAINT TORDERLOCK_FK_2 FOREIGN KEY (USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TORDERAUDIT
+    ADD CONSTRAINT TORDERAUDIT_FK_1 FOREIGN KEY (ORDER_UID)
+    REFERENCES TORDER (UIDPK)
+;
+
+ALTER TABLE TORDERAUDIT
+    ADD CONSTRAINT TORDERAUDIT_FK_2 FOREIGN KEY (CREATED_BY)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TGIFTCERTIFICATE
+    ADD CONSTRAINT TGIFTCERTIFICATE_FK_1 FOREIGN KEY (CUSTOMER_UID)
+    REFERENCES TCUSTOMER (UIDPK)
+;
+
+ALTER TABLE TGIFTCERTIFICATE
+    ADD CONSTRAINT TGIFTCERTIFICATE_FK_2 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TSHIPPINGCOSTCALCULATIONPARAM
+    ADD CONSTRAINT TSHIPPINGCOSTCALCULATIONP_FK_1 FOREIGN KEY (SCCM_UID)
+    REFERENCES TSHIPPINGCOSTCALCULATIONMETHOD (UIDPK)
+;
+
+
+
+ALTER TABLE TSHIPPINGSERVICELEVEL
+    ADD CONSTRAINT TSHIPPINGSERVICELEVEL_FK_1 FOREIGN KEY (SHIPPING_REGION_UID)
+    REFERENCES TSHIPPINGREGION (UIDPK)
+;
+
+ALTER TABLE TSHIPPINGSERVICELEVEL
+    ADD CONSTRAINT TSHIPPINGSERVICELEVEL_FK_2 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSHIPPINGSERVICELEVEL
+    ADD CONSTRAINT TSHIPPINGSERVICELEVEL_FK_3 FOREIGN KEY (SCCM_UID)
+    REFERENCES TSHIPPINGCOSTCALCULATIONMETHOD (UIDPK)
+;
+
+
+
+ALTER TABLE TPICKLIST
+    ADD CONSTRAINT TPICKLIST_FK_1 FOREIGN KEY (WAREHOUSE_UID)
+    REFERENCES TWAREHOUSE (UIDPK)
+;
+
+ALTER TABLE TPICKLIST
+    ADD CONSTRAINT TPICKLIST_FK_2 FOREIGN KEY (CREATED_BY)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TORDERSHIPMENT
+    ADD CONSTRAINT TORDERSHIPMENT_FK_1 FOREIGN KEY (ORDER_ADDRESS_UID)
+    REFERENCES TORDERADDRESS (UIDPK)
+;
+
+ALTER TABLE TORDERSHIPMENT
+    ADD CONSTRAINT TORDERSHIPMENT_FK_2 FOREIGN KEY (SERVICE_LEVEL_UID)
+    REFERENCES TSHIPPINGSERVICELEVEL (UIDPK)
+;
+
+ALTER TABLE TORDERSHIPMENT
+    ADD CONSTRAINT TORDERSHIPMENT_FK_3 FOREIGN KEY (ORDER_UID)
+    REFERENCES TORDER (UIDPK)
+;
+
+ALTER TABLE TORDERSHIPMENT
+    ADD CONSTRAINT TORDERSHIPMENT_FK_4 FOREIGN KEY (PICKLIST_UID)
+    REFERENCES TPICKLIST (UIDPK)
+;
+
+
+
+ALTER TABLE TORDERPAYMENT
+    ADD CONSTRAINT TORDERPAYMENT_FK_1 FOREIGN KEY (ORDER_UID)
+    REFERENCES TORDER (UIDPK)
+;
+
+ALTER TABLE TORDERPAYMENT
+    ADD CONSTRAINT TORDERPAYMENT_FK_2 FOREIGN KEY (GIFTCERTIFICATE_UID)
+    REFERENCES TGIFTCERTIFICATE (UIDPK)
+;
+
+ALTER TABLE TORDERPAYMENT
+    ADD CONSTRAINT TORDERPAYMENT_FK_3 FOREIGN KEY (ORDERSHIPMENT_UID)
+    REFERENCES TORDERSHIPMENT (UIDPK)
+;
+
+
+
+ALTER TABLE TGIFTCERTIFICATETRANSACTION
+    ADD CONSTRAINT TGIFTCERTIFICATETRANSACTI_FK_1 FOREIGN KEY (GIFTCERTIFICATE_UID)
+    REFERENCES TGIFTCERTIFICATE (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TORDERRETURN
+    ADD CONSTRAINT TORDERRETURN_FK_1 FOREIGN KEY (ORDER_UID)
+    REFERENCES TORDER (UIDPK)
+;
+
+ALTER TABLE TORDERRETURN
+    ADD CONSTRAINT TORDERRETURN_FK_2 FOREIGN KEY (CREATED_BY)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+ALTER TABLE TORDERRETURN
+    ADD CONSTRAINT TORDERRETURN_FK_3 FOREIGN KEY (RECEIVED_BY)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+ALTER TABLE TORDERRETURN
+    ADD CONSTRAINT TORDERRETURN_FK_4 FOREIGN KEY (EXCHANGE_ORDER_UID)
+    REFERENCES TORDER (UIDPK)
+;
+
+ALTER TABLE TORDERRETURN
+    ADD CONSTRAINT TORDERRETURN_FK_5 FOREIGN KEY (ORDER_RETURN_ADDRESS_UID)
+    REFERENCES TORDERADDRESS (UIDPK)
+;
+
+
+
+ALTER TABLE TSHIPMENTTAX
+    ADD CONSTRAINT TSHIPMENTTAX_FK_1 FOREIGN KEY (ORDER_SHIPMENT_UID)
+    REFERENCES TORDERSHIPMENT (UIDPK)
+;
+
+ALTER TABLE TSHIPMENTTAX
+    ADD CONSTRAINT TSHIPMENTTAX_FK_2 FOREIGN KEY (ORDER_RETURN_UID)
+    REFERENCES TORDERRETURN (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTTYPE
+    ADD CONSTRAINT TPRODUCTTYPE_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+ALTER TABLE TPRODUCTTYPE
+    ADD CONSTRAINT TPRODUCTTYPE_FK_2 FOREIGN KEY (TAX_CODE_UID)
+    REFERENCES TTAXCODE (UIDPK)
+;
+
+
+
+ALTER TABLE TBRAND
+    ADD CONSTRAINT TBRAND_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCT
+    ADD CONSTRAINT TPRODUCT_FK_1 FOREIGN KEY (PRODUCT_TYPE_UID)
+    REFERENCES TPRODUCTTYPE (UIDPK)
+;
+
+ALTER TABLE TPRODUCT
+    ADD CONSTRAINT TPRODUCT_FK_2 FOREIGN KEY (BRAND_UID)
+    REFERENCES TBRAND (UIDPK)
+;
+
+ALTER TABLE TPRODUCT
+    ADD CONSTRAINT TPRODUCT_FK_3 FOREIGN KEY (TAX_CODE_UID)
+    REFERENCES TTAXCODE (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTATTRIBUTEVALUE
+    ADD CONSTRAINT TPRODUCTATTRIBUTEVALUE_FK_1 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+ALTER TABLE TPRODUCTATTRIBUTEVALUE
+    ADD CONSTRAINT TPRODUCTATTRIBUTEVALUE_FK_2 FOREIGN KEY (PRODUCT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTCATEGORY
+    ADD CONSTRAINT TPRODUCTCATEGORY_FK_1 FOREIGN KEY (PRODUCT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+ALTER TABLE TPRODUCTCATEGORY
+    ADD CONSTRAINT TPRODUCTCATEGORY_FK_2 FOREIGN KEY (CATEGORY_UID)
+    REFERENCES TCATEGORY (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTLDF
+    ADD CONSTRAINT TPRODUCTLDF_FK_1 FOREIGN KEY (PRODUCT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTSKU
+    ADD CONSTRAINT TPRODUCTSKU_FK_1 FOREIGN KEY (PRODUCT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+ALTER TABLE TPRODUCTSKU
+    ADD CONSTRAINT TPRODUCTSKU_FK_2 FOREIGN KEY (DIGITAL_ASSET_UID)
+    REFERENCES TDIGITALASSETS (UIDPK)
+;
+
+
+
+
+
+
+
+
+
+ALTER TABLE TORDERSKU
+    ADD CONSTRAINT TORDERSKU_FK_1 FOREIGN KEY (ORDER_SHIPMENT_UID)
+    REFERENCES TORDERSHIPMENT (UIDPK)
+;
+
+ALTER TABLE TORDERSKU
+    ADD CONSTRAINT TOSKU_FK_TOSKU FOREIGN KEY (PARENT_ITEM_UID)
+    REFERENCES TORDERSKU (UIDPK)
+;
+
+ALTER TABLE TORDERSKU
+    ADD CONSTRAINT TORDERSKU_FK_3 FOREIGN KEY (PRODUCT_SKU_UID)
+    REFERENCES TPRODUCTSKU (UIDPK)
+;
+
+
+
+ALTER TABLE TORDERRETURNSKU
+    ADD CONSTRAINT TORDERRETURNSKU_FK_1 FOREIGN KEY (ORDER_RETURN_UID)
+    REFERENCES TORDERRETURN (UIDPK)
+;
+
+ALTER TABLE TORDERRETURNSKU
+    ADD CONSTRAINT TORDERRETURNSKU_FK_2 FOREIGN KEY (ORDER_SKU_UID)
+    REFERENCES TORDERSKU (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTASSOCIATION
+    ADD CONSTRAINT TPRODUCTASSOCIATION_FK_1 FOREIGN KEY (SOURCE_PRODUCT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+ALTER TABLE TPRODUCTASSOCIATION
+    ADD CONSTRAINT TPRODUCTASSOCIATION_FK_2 FOREIGN KEY (TARGET_PRODUCT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+ALTER TABLE TPRODUCTASSOCIATION
+    ADD CONSTRAINT TPRODUCTASSOCIATION_FK_3 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTSKUATTRIBUTEVALUE
+    ADD CONSTRAINT TPRODUCTSKUATTRIBUTEVALUE_FK_1 FOREIGN KEY (PRODUCT_SKU_UID)
+    REFERENCES TPRODUCTSKU (UIDPK)
+;
+
+ALTER TABLE TPRODUCTSKUATTRIBUTEVALUE
+    ADD CONSTRAINT TPRODUCTSKUATTRIBUTEVALUE_FK_2 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTTYPEATTRIBUTE
+    ADD CONSTRAINT TPRODUCTTYPEATTRIBUTE_FK_1 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+ALTER TABLE TPRODUCTTYPEATTRIBUTE
+    ADD CONSTRAINT TPRODUCTTYPEATTRIBUTE_FK_2 FOREIGN KEY (PRODUCT_TYPE_UID)
+    REFERENCES TPRODUCTTYPE (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTTYPESKUATTRIBUTE
+    ADD CONSTRAINT TPRODUCTTYPESKUATTRIBUTE_FK_1 FOREIGN KEY (ATTRIBUTE_UID)
+    REFERENCES TATTRIBUTE (UIDPK)
+;
+
+ALTER TABLE TPRODUCTTYPESKUATTRIBUTE
+    ADD CONSTRAINT TPRODUCTTYPESKUATTRIBUTE_FK_2 FOREIGN KEY (PRODUCT_TYPE_UID)
+    REFERENCES TPRODUCTTYPE (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TRULE
+    ADD CONSTRAINT SCRULE_FK FOREIGN KEY (SELLING_CTX_UID)
+    REFERENCES TSELLINGCONTEXT (UIDPK)
+;
+
+ALTER TABLE TRULE
+    ADD CONSTRAINT TRULE_FK_2 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TRULE
+    ADD CONSTRAINT TRULE_FK_3 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+ALTER TABLE TRULE
+    ADD CONSTRAINT TRULE_FK_4 FOREIGN KEY (RULE_SET_UID)
+    REFERENCES TRULESET (UIDPK)
+;
+
+
+
+ALTER TABLE TRULEELEMENT
+    ADD CONSTRAINT TRULEELEMENT_FK_1 FOREIGN KEY (RULE_UID)
+    REFERENCES TRULE (UIDPK)
+;
+
+
+
+ALTER TABLE TRULEEXCEPTION
+    ADD CONSTRAINT TRULEEXCEPTION_FK_1 FOREIGN KEY (RULE_ELEMENT_UID)
+    REFERENCES TRULEELEMENT (UIDPK)
+;
+
+
+
+ALTER TABLE TRULEPARAMETER
+    ADD CONSTRAINT TRULEPARAMETER_FK_1 FOREIGN KEY (RULE_ELEMENT_UID)
+    REFERENCES TRULEELEMENT (UIDPK)
+;
+
+ALTER TABLE TRULEPARAMETER
+    ADD CONSTRAINT TRULEPARAMETER_FK_2 FOREIGN KEY (RULE_EXCEPTION_UID)
+    REFERENCES TRULEEXCEPTION (UIDPK)
+;
+
+
+
+ALTER TABLE TSHOPPINGCART
+    ADD CONSTRAINT TSHOPPINGCART_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSHOPPINGCART
+    ADD CONSTRAINT TSHOPPINGCART_FK_SHOPPER FOREIGN KEY (SHOPPER_UID)
+    REFERENCES TSHOPPER (UIDPK)
+;
+
+
+
+ALTER TABLE TCARTITEM
+    ADD CONSTRAINT TCARTITEM_FK_TCARTITEM FOREIGN KEY (PARENT_ITEM_UID)
+    REFERENCES TCARTITEM (UIDPK)
+;
+
+ALTER TABLE TCARTITEM
+    ADD CONSTRAINT TCARTITEM_FK_2 FOREIGN KEY (SKU_UID)
+    REFERENCES TPRODUCTSKU (UIDPK)
+;
+
+
+
+ALTER TABLE TSHOPPINGITEMRECURRINGPRICE
+    ADD CONSTRAINT TSHOPPINGITEMRECURRINGPRI_FK_1 FOREIGN KEY (CARTITEM_UID)
+    REFERENCES TCARTITEM (UIDPK)
+;
+
+ALTER TABLE TSHOPPINGITEMRECURRINGPRICE
+    ADD CONSTRAINT TSHOPPINGITEMRECURRINGPRI_FK_2 FOREIGN KEY (ORDERSKU_UID)
+    REFERENCES TORDERSKU (UIDPK)
+;
+
+
+
+ALTER TABLE TUSERROLEPERMISSIONX
+    ADD CONSTRAINT TUSERROLEPERMISSIONX_FK_1 FOREIGN KEY (ROLE_UID)
+    REFERENCES TUSERROLE (UIDPK)
+;
+
+
+
+ALTER TABLE TSKUOPTION
+    ADD CONSTRAINT TSKUOPTION_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TSKUOPTIONVALUE
+    ADD CONSTRAINT TSKUOPTIONVALUE_FK_1 FOREIGN KEY (SKU_OPTION_UID)
+    REFERENCES TSKUOPTION (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTTYPESKUOPTION
+    ADD CONSTRAINT TPRODUCTTYPESKUOPTION_FK_1 FOREIGN KEY (PRODUCT_TYPE_UID)
+    REFERENCES TPRODUCTTYPE (UIDPK)
+;
+
+ALTER TABLE TPRODUCTTYPESKUOPTION
+    ADD CONSTRAINT TPRODUCTTYPESKUOPTION_FK_2 FOREIGN KEY (SKU_OPTION_UID)
+    REFERENCES TSKUOPTION (UIDPK)
+;
+
+
+
+ALTER TABLE TPRODUCTSKUOPTIONVALUE
+    ADD CONSTRAINT TPRODUCTSKUOPTIONVALUE_FK_1 FOREIGN KEY (PRODUCT_SKU_UID)
+    REFERENCES TPRODUCTSKU (UIDPK)
+;
+
+ALTER TABLE TPRODUCTSKUOPTIONVALUE
+    ADD CONSTRAINT TPRODUCTSKUOPTIONVALUE_FK_2 FOREIGN KEY (OPTION_VALUE_UID)
+    REFERENCES TSKUOPTIONVALUE (UIDPK)
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE TAPPLIEDRULECOUPONCODE
+    ADD CONSTRAINT TAPPLIEDRULECOUPONCODE_FK_1 FOREIGN KEY (APPLIED_RULE_UID)
+    REFERENCES TAPPLIEDRULE (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TTOPSELLERPRODUCTS
+    ADD CONSTRAINT TTOPSELLERPRODUCTS_FK_1 FOREIGN KEY (TOP_SELLER_UID)
+    REFERENCES TTOPSELLER (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TSTOREWAREHOUSE
+    ADD CONSTRAINT TSTOREWAREHOUSE_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSTOREWAREHOUSE
+    ADD CONSTRAINT TSTOREWAREHOUSE_FK_2 FOREIGN KEY (WAREHOUSE_UID)
+    REFERENCES TWAREHOUSE (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORECREDITCARDTYPE
+    ADD CONSTRAINT TSTORECREDITCARDTYPE_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORETAXCODE
+    ADD CONSTRAINT TSTORETAXCODE_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSTORETAXCODE
+    ADD CONSTRAINT TSTORETAXCODE_FK_2 FOREIGN KEY (TAXCODE_UID)
+    REFERENCES TTAXCODE (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORETAXJURISDICTION
+    ADD CONSTRAINT TSTORETAXJURISDICTION_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSTORETAXJURISDICTION
+    ADD CONSTRAINT TSTORETAXJURISDICTION_FK_2 FOREIGN KEY (TAXJURISDICTION_UID)
+    REFERENCES TTAXJURISDICTION (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TSTOREPAYMENTGATEWAY
+    ADD CONSTRAINT TSTOREPAYMENTGATEWAY_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSTOREPAYMENTGATEWAY
+    ADD CONSTRAINT TSTOREPAYMENTGATEWAY_FK_2 FOREIGN KEY (GATEWAY_UID)
+    REFERENCES TPAYMENTGATEWAY (UIDPK)
+;
+
+
+
+ALTER TABLE TPAYMENTGATEWAYPROPERTIES
+    ADD CONSTRAINT TPAYMENTGATEWAYPROPERTIES_FK_1 FOREIGN KEY (PAYMENTGATEWAY_UID)
+    REFERENCES TPAYMENTGATEWAY (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORECATALOG
+    ADD CONSTRAINT TSTORECATALOG_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSTORECATALOG
+    ADD CONSTRAINT TSTORECATALOG_FK_2 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TCMUSERSTORE
+    ADD CONSTRAINT TCMUSERSTORE_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TCMUSERSTORE
+    ADD CONSTRAINT TCMUSERSTORE_FK_2 FOREIGN KEY (USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TCMUSERWAREHOUSE
+    ADD CONSTRAINT TCMUSERWAREHOUSE_FK_1 FOREIGN KEY (WAREHOUSE_UID)
+    REFERENCES TWAREHOUSE (UIDPK)
+;
+
+ALTER TABLE TCMUSERWAREHOUSE
+    ADD CONSTRAINT TCMUSERWAREHOUSE_FK_2 FOREIGN KEY (USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TCMUSERCATALOG
+    ADD CONSTRAINT TCMUSERCATALOG_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+ALTER TABLE TCMUSERCATALOG
+    ADD CONSTRAINT TCMUSERCATALOG_FK_2 FOREIGN KEY (USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TSTOREASSOCIATION
+    ADD CONSTRAINT TSTOREASSOCIATION_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TSTOREASSOCIATION
+    ADD CONSTRAINT TSTOREASSOCIATION_FK_2 FOREIGN KEY (ASSOCIATED_STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+ALTER TABLE TSYNONYMGROUPS
+    ADD CONSTRAINT TSYNONYMGROUPS_FK_1 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TSYNONYM
+    ADD CONSTRAINT TSYNONYM_FK_1 FOREIGN KEY (SYNONYM_UID)
+    REFERENCES TSYNONYMGROUPS (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TRULESTORAGE
+    ADD CONSTRAINT TRULESTORAGE_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+ALTER TABLE TRULESTORAGE
+    ADD CONSTRAINT TRULESTORAGE_FK_2 FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+
+
+ALTER TABLE TADVANCEDSEARCHQUERY
+    ADD CONSTRAINT TADVANCEDSEARCHQUERY_FK_1 FOREIGN KEY (OWNER_ID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORESUPPORTEDCURRENCY
+    ADD CONSTRAINT TSTORESUPPORTEDCURRENCY_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+ALTER TABLE TSTORESUPPORTEDLOCALE
+    ADD CONSTRAINT TSTORESUPPORTEDLOCALE_FK_1 FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TBASEAMOUNT
+    ADD CONSTRAINT TBASEAMOUNT_FK_1 FOREIGN KEY (PRICE_LIST_GUID)
+    REFERENCES TPRICELIST (GUID)
+;
+
+
+
+
+
+
+
+ALTER TABLE TOBJECTMETADATA
+    ADD CONSTRAINT TOBJECTMETADATA_FK_1 FOREIGN KEY (OBJECT_GROUP_MEMBER_UID)
+    REFERENCES TOBJECTGROUPMEMBER (UIDPK)
+;
+
+
+
+ALTER TABLE TCHANGESETUSER
+    ADD CONSTRAINT TCHANGESETUSER_FK_1 FOREIGN KEY (CHANGESET_UID)
+    REFERENCES TCHANGESET (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TSELLINGCONTEXTCONDITION
+    ADD CONSTRAINT FK_SELLCOND_SELLCTX FOREIGN KEY (SELLING_CONTEXT_UID)
+    REFERENCES TSELLINGCONTEXT (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TCSDYNAMICCONTENTDELIVERY
+    ADD CONSTRAINT FK_DELIVERY_DCONTENT FOREIGN KEY (CSDC_CONTENT_UID)
+    REFERENCES TCSDYNAMICCONTENT (UIDPK)
+;
+
+ALTER TABLE TCSDYNAMICCONTENTDELIVERY
+    ADD CONSTRAINT FK_SELLING_CONTEXT FOREIGN KEY (SELLING_CONTEXT_GUID)
+    REFERENCES TSELLINGCONTEXT (GUID)
+;
+
+
+
+
+
+ALTER TABLE TCSPARAMETERVALUE
+    ADD CONSTRAINT FK_PARAMVAL_DCONTENT FOREIGN KEY (CSDYNAMICCONTENT_UID)
+    REFERENCES TCSDYNAMICCONTENT (UIDPK)
+;
+
+
+
+ALTER TABLE TCSPARAMETERVALUELDF
+    ADD CONSTRAINT FK_PARAMVALLOCALE_PARAMVAL FOREIGN KEY (CSPARAMETERVALUE_UID)
+    REFERENCES TCSPARAMETERVALUE (UIDPK)
+;
+
+
+
+ALTER TABLE TCSDYNAMICCONTENTSPACE
+    ADD CONSTRAINT FK_DELSPACE_DELIVERY FOREIGN KEY (DC_DELIVERY_UID)
+    REFERENCES TCSDYNAMICCONTENTDELIVERY (UIDPK)
+;
+
+ALTER TABLE TCSDYNAMICCONTENTSPACE
+    ADD CONSTRAINT FK_DELSPACE_CONTENTSPACE FOREIGN KEY (DC_CONTENTSPACE_UID)
+    REFERENCES TCSCONTENTSPACE (UIDPK)
+;
+
+
+
+
+
+ALTER TABLE TCHANGETRANSACTIONMETADATA
+    ADD CONSTRAINT TCHANGETRANSACTIONMETADAT_FK_1 FOREIGN KEY (CHANGE_TRANSACTION_UID)
+    REFERENCES TCHANGETRANSACTION (UIDPK)
+;
+
+
+
+ALTER TABLE TCHANGEOPERATION
+    ADD CONSTRAINT TCHANGEOPERATION_FK_1 FOREIGN KEY (CHANGE_TRANSACTION_UID)
+    REFERENCES TCHANGETRANSACTION (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TTAGDEFINITION
+    ADD CONSTRAINT FK_TTAGVALUETYPE FOREIGN KEY (TAGVALUETYPE_GUID)
+    REFERENCES TTAGVALUETYPE (GUID)
+;
+
+ALTER TABLE TTAGDEFINITION
+    ADD CONSTRAINT FK_TTAGGROUP FOREIGN KEY (TAGGROUP_UID)
+    REFERENCES TTAGGROUP (UIDPK)
+;
+
+
+
+ALTER TABLE TTAGALLOWEDVALUE
+    ADD CONSTRAINT FK_TAGALLOWEDVAL_TAGTYPE FOREIGN KEY (TAGVALUETYPE_GUID)
+    REFERENCES TTAGVALUETYPE (GUID)
+;
+
+
+
+ALTER TABLE TDATACHANGED
+    ADD CONSTRAINT TDATACHANGED_FK_1 FOREIGN KEY (CHANGE_OPERATION_UID)
+    REFERENCES TCHANGEOPERATION (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TTAGVALUETYPEOPERATOR
+    ADD CONSTRAINT FK_TAGOPERATOR_TAGVALUETYPE FOREIGN KEY (TAGOPERATOR_GUID)
+    REFERENCES TTAGOPERATOR (GUID)
+;
+
+ALTER TABLE TTAGVALUETYPEOPERATOR
+    ADD CONSTRAINT FK_TAGVALUETYPE_TAGOPERATOR FOREIGN KEY (TAGVALUETYPE_GUID)
+    REFERENCES TTAGVALUETYPE (GUID)
+;
+
+
+
+
+
+ALTER TABLE TBUNDLECONSTITUENTX
+    ADD CONSTRAINT TBCX_TPROD_FK FOREIGN KEY (BUNDLE_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+ALTER TABLE TBUNDLECONSTITUENTX
+    ADD CONSTRAINT TBCX_TPROD_C_FK FOREIGN KEY (CONSTITUENT_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+ALTER TABLE TBUNDLECONSTITUENTX
+    ADD CONSTRAINT TBCX_TSKU_C_FK FOREIGN KEY (CONSTITUENT_SKU_UID)
+    REFERENCES TPRODUCTSKU (UIDPK)
+;
+
+
+
+ALTER TABLE TPRICEADJUSTMENT
+    ADD CONSTRAINT FK_TPRICEADJUST_CONST_GUID FOREIGN KEY (CONSTITUENT_GUID)
+    REFERENCES TBUNDLECONSTITUENTX (GUID)
+;
+
+
+
+ALTER TABLE TBUNDLESELECTIONRULE
+    ADD CONSTRAINT TBSR_TPROD_FK FOREIGN KEY (BUNDLE_UID)
+    REFERENCES TPRODUCT (UIDPK)
+;
+
+
+
+ALTER TABLE TSHOPPINGITEMDATA
+    ADD CONSTRAINT TCARTITEM_FK FOREIGN KEY (CARTITEM_UID)
+    REFERENCES TCARTITEM (UIDPK)
+;
+
+
+
+ALTER TABLE TORDERITEMDATA
+    ADD CONSTRAINT TORDERSKU_FK FOREIGN KEY (ORDERSKU_UID)
+    REFERENCES TORDERSKU (UIDPK)
+;
+
+
+
+ALTER TABLE TPRICELISTASSIGNMENT
+    ADD CONSTRAINT CATPLA_FK FOREIGN KEY (CATALOG_UID)
+    REFERENCES TCATALOG (UIDPK)
+;
+
+ALTER TABLE TPRICELISTASSIGNMENT
+    ADD CONSTRAINT PLDPLA_FK FOREIGN KEY (PRLISTDSCR_UID)
+    REFERENCES TPRICELIST (UIDPK)
+;
+
+ALTER TABLE TPRICELISTASSIGNMENT
+    ADD CONSTRAINT SCPLA_FK FOREIGN KEY (SELLING_CTX_UID)
+    REFERENCES TSELLINGCONTEXT (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTNOTIFICATION
+    ADD CONSTRAINT IN_IMPORTJOB_FK FOREIGN KEY (IMPORT_JOB_UID)
+    REFERENCES TIMPORTJOB (UIDPK)
+;
+
+ALTER TABLE TIMPORTNOTIFICATION
+    ADD CONSTRAINT IN_CMUSER_FK FOREIGN KEY (CMUSER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTNOTIFICATIONMETADATA
+    ADD CONSTRAINT INM_IMPORTNOTIFICATION_FK FOREIGN KEY (IMPORT_NOTIFICATION_UID)
+    REFERENCES TIMPORTNOTIFICATION (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTJOBSTATUS
+    ADD CONSTRAINT IJS_IMPORTJOB_FK FOREIGN KEY (IMPORT_JOB_UID)
+    REFERENCES TIMPORTJOB (UIDPK)
+;
+
+ALTER TABLE TIMPORTJOBSTATUS
+    ADD CONSTRAINT IJS_CMUSER_FK FOREIGN KEY (CMUSER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTBADROW
+    ADD CONSTRAINT IBR_IMPORTJOBSTATUS_FK FOREIGN KEY (IMPORT_JOB_STATUS_UID)
+    REFERENCES TIMPORTJOBSTATUS (UIDPK)
+;
+
+
+
+ALTER TABLE TIMPORTFAULT
+    ADD CONSTRAINT IF_IMPORTBADROW_FK FOREIGN KEY (IMPORT_BAD_ROW_UID)
+    REFERENCES TIMPORTBADROW (UIDPK)
+;
+
+
+
+ALTER TABLE TCMUSERPRICELIST
+    ADD CONSTRAINT TCMUSERPRICELIST_FK_1 FOREIGN KEY (PRICELIST_GUID)
+    REFERENCES TPRICELIST (GUID)
+;
+
+ALTER TABLE TCMUSERPRICELIST
+    ADD CONSTRAINT TCMUSERPRICELIST_FK_2 FOREIGN KEY (USER_UID)
+    REFERENCES TCMUSER (UIDPK)
+;
+
+
+
+ALTER TABLE TCOUPONCONFIG
+    ADD CONSTRAINT TCOUPONCONFIG_FK_1 FOREIGN KEY (RULECODE)
+    REFERENCES TRULE (RULECODE)
+;
+
+
+
+ALTER TABLE TCOUPON
+    ADD CONSTRAINT TCOUPON_FK_1 FOREIGN KEY (COUPON_CONFIG_UID)
+    REFERENCES TCOUPONCONFIG (UIDPK)
+;
+
+
+
+ALTER TABLE TCOUPONUSAGE
+    ADD CONSTRAINT TCOUPONUSAGE_FK_1 FOREIGN KEY (COUPON_UID)
+    REFERENCES TCOUPON (UIDPK)
+;
+
+
+
+ALTER TABLE TWISHLIST
+    ADD CONSTRAINT FK_WISHLIST_SHOPPER FOREIGN KEY (SHOPPER_UID)
+    REFERENCES TSHOPPER (UIDPK)
+;
+
+ALTER TABLE TWISHLIST
+    ADD CONSTRAINT FK_STORE FOREIGN KEY (STORECODE)
+    REFERENCES TSTORE (STORECODE)
+;
+
+
+
+ALTER TABLE TWISHLISTITEMS
+    ADD CONSTRAINT TWISHLISTITEMS_FK_1 FOREIGN KEY (WISHLIST_UID)
+    REFERENCES TWISHLIST (UIDPK)
+;
+
+ALTER TABLE TWISHLISTITEMS
+    ADD CONSTRAINT TWISHLISTITEMS_FK_2 FOREIGN KEY (ITEM_UID)
+    REFERENCES TCARTITEM (UIDPK)
+;
+
+
+
+
+
+
+
+ALTER TABLE TEXPERIENCE
+    ADD CONSTRAINT FK_CAMPAIGN_TEXPERIENCE_UID FOREIGN KEY (CAMPAIGN_UID)
+    REFERENCES TCAMPAIGN (UIDPK)
+;
+
+
+
+ALTER TABLE TMARKETTESTINGOFFER
+    ADD CONSTRAINT FK_OFFER_STORE_UID FOREIGN KEY (STORE_UID)
+    REFERENCES TSTORE (UIDPK)
+;
+
+
+
+ALTER TABLE TEXPERIENCEOFFERLOCATION
+    ADD CONSTRAINT FK_TEOL_EXPERIENCE_UID FOREIGN KEY (EXPERIENCE_UID)
+    REFERENCES TEXPERIENCE (UIDPK)
+;
+
+ALTER TABLE TEXPERIENCEOFFERLOCATION
+    ADD CONSTRAINT FK_TEOL_OFFER_UID FOREIGN KEY (OFFER_UID)
+    REFERENCES TMARKETTESTINGOFFER (UIDPK)
+;
+
+
+
+
+
+
+

@@ -1,0 +1,153 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## create.vm
+#set($pageName = "address/create.vm")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "checkoutBreadcrumbs")
+#set($_scripts = "javaScript")
+#setCheckoutVariables()
+#masterTemplate()
+
+#macro(setCheckoutVariables)
+    #set ($isUpdate = false)
+    #set ($returnPageParam = "")
+    #if ($addressID && $addressID != "0" || ($checkoutshipping || $checkoutbilling))
+        #set ($isUpdate = true)
+        #if ($checkoutshipping)
+            #set ($returnPageParam = "?checkoutshipping=true")
+        #elseif ($checkoutbilling)
+            #set ($returnPageParam = "?checkoutbilling=true")
+        #end
+    #end
+#end
+
+#macro(javaScript)
+    <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/geographyController.js'></script>
+    <script language="JavaScript">
+      function reloadSubCountries(field) {
+        var countryCode = field.value;
+        var callMetaData = { callback:loadSubCountriesCallback };
+        geographyController.getSubCountries(countryCode, loadSubCountriesCallback);
+      }
+    
+      function loadSubCountriesCallback(data) {
+        DWRUtil.removeAllOptions(document.getElementById("customerAddress.subCountry"));
+        DWRUtil.addOptions(document.getElementById("customerAddress.subCountry"), data);
+      }
+    
+      function confirmDelete() {
+      	  return confirm ("Are you sure you want to delete this address?");
+      }
+    </script>
+#end
+
+#macro(checkoutBody)
+      <div id="body">
+        <form action="$baseUrl/edit-address.ep$!returnPageParam" method="post" name="address">
+          <fieldset>
+            <legend>#if ($isUpdate) #springMessage("address.edit") #else #springMessage("address.create") #end</legend>
+            <table border="0" cellspacing="0" cellpadding="3">
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.firstName">#springMessage("globals.firstname")*</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.firstName" "maxlength='100'")
+                  #springShowErrors("" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.lastName">#springMessage("globals.lastname")*</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.lastName" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.organization">#springMessage("globals.organization")</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.organization" "maxlength='200'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>              
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.street1">#springMessage("globals.street1")*</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.street1" "maxlength='200'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.street2">#springMessage("globals.street2")&nbsp</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.street2" "maxlength='200'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.city">#springMessage("globals.city")*</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.city" "maxlength='200'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.subCountry">#springMessage("globals.subcountry")*</label></td>
+                <td>
+                  #set($subcountries = $ctxCountries.getSubCountriesWithDisplayName($!customerAddressFormBean.customerAddress.country, $locale))
+                  #springFormSingleSelect("customerAddressFormBean.customerAddress.subCountry" $subcountries "")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.country">#springMessage("globals.country")*</label></td>
+                <td>
+                  #set($countries = $ctxCountries.getCountriesWithDisplayName($locale))
+                  #springFormSingleSelect("customerAddressFormBean.customerAddress.country" $countries "onchange='reloadSubCountries(this)'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.zipOrPostalCode">#springMessage("globals.zippostalcode")*</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.zipOrPostalCode" "maxlength='50'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.customerAddress.phoneNumber">#springMessage("globals.phonenumber")*</label></td>
+                <td>
+                  #springFormInput("customerAddressFormBean.customerAddress.phoneNumber" "maxlength='50'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right"><label for="customerAddressFormBean.preferredBillingAddress">#springMessage("globals.preferredBillingAddress")</label></td>
+                <td>
+                  #springFormCheckboxes("customerAddressFormBean.preferredBillingAddress" $ctxEp.getBoolMap() "" " #if ($customerAddressFormBean.preferredBillingAddress) checked='true' disabled='true' #end ")
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+          <div class="fieldset-footer">
+            <input type="submit" class="button-normal" value="  #if ($isUpdate) #springMessage("address.update") #else #springMessage("address.add") #end   " />
+            #if ($isUpdate)
+              <input type="submit" class="button-normal" name="deleteAddress" value="#springMessage("address.delete")" onClick="return confirmDelete()" />
+
+              <input type="hidden"  name="addressID" value="$addressID" />
+              #if ($checkoutshipping)
+                  <input type="hidden"  name="checkoutshipping" value="$checkoutshipping" />
+              #end
+              #if ($checkoutbilling)
+                  <input type="hidden"  name="checkoutbilling" value="$checkoutbilling" />
+              #end
+
+            #end
+            <input type="button" class="button-normal" value="#springMessage("msg.return")" onClick="history.back()" />
+          </div>
+        </form>
+      </div>
+      <div class="clear20"></div>
+#end
+
+#macro(checkoutBreadcrumbs)
+      <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; <a href="$baseUrl/manage-account.ep">#springMessage("globals.bc.account")</a> &raquo; #if ($isUpdate) #springMessage("address.edit") #else #springMessage("address.create") #end </div>
+#end
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+	<import file="archetype-common.xml" />
+	<import file="pipeline.xml" />
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Release-Archetypes</id>
+		<parent>abstract-archetypes</parent>
+		<scmType>${scmType}-wipe</scmType>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Build</id>
+		<parent>abstract-pipeline-start</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<!-- Temporarily disable Night-Build during 6.5.0 regression testing -->
+		<disabled>false</disabled>
+
+		<triggers>
+			<trigger>
+				<type>${build.trigger.nightly.type}</type>
+				<description>${build.trigger.nightly.description}</description>
+				<expression>${build.trigger.nightly.expression}</expression>
+			</trigger>
+		</triggers>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Archetypes</id>
+		<parent>abstract-pipeline-archetypes</parent>
+		<scmType>${scmType}-wipe</scmType>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Final</id>
+		<parent>abstract-pipeline-finish</parent>
+		<scmType>none</scmType>
+		<jobType>free</jobType>
+
+		<!-- This is used as a trigger for other builds -->
+		<tasks>
+			<shell>
+				<!-- we must have at least one task for this job for jenkins-maven-plugin, it is not actually needed -->
+				<command>echo</command>
+			</shell>
+		</tasks>
+
+		<invoke>
+			<jobs>
+				${jenkinsJobPrefix}-Nightly-Licensing-Report,${jenkins.deploy.jobs},
+			</jobs>
+			<always>true</always>
+			<currentBuildParams>true</currentBuildParams>
+		</invoke>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Licensing-Report</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<mavenGoals>-B -U -e clean deploy</mavenGoals>
+		<pom>non-distributable/licensing-report/pom.xml</pom>
+	</job>
+</jobs>

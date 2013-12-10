@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+<!-- Declare search engine related beans -->
+
+	<bean id="epQLSearchEngine" class="com.elasticpath.search.searchengine.EpQLSearchEngineImpl">
+		<property name="epQueryParser">
+			<ref bean="epQueryParser"/>
+		</property>
+		<property name="indexSearcherMap">
+			<map>
+				<entry key="LUCENE">
+					<ref bean="solrIndexSearcherEpQL"/>	
+				</entry>
+				<entry key="JPQL">
+					<ref bean="jpqlIndexSearcher"/>	
+				</entry>
+				<entry key="SQL">
+					<ref bean="sqlIndexSearcher"/>	
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="jpqlIndexSearcher" class="com.elasticpath.search.searchengine.JPQLIndexSearcherImpl">
+		<property name="persistenceEngine">
+			<ref bean="persistenceEngine" />
+		</property>	
+	</bean>
+
+	<bean id="sqlIndexSearcher" class="com.elasticpath.search.searchengine.SQLIndexSearcherImpl">
+		<property name="persistenceEngine">
+			<ref bean="persistenceEngine" />
+		</property>	
+		<property name="searchResultConverterMap">
+			<map>
+				<entry key="CONFIGURATION">
+					<ref bean="settingSearchResultConverter"/>	
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="solrIndexSearcherEpQL" class="com.elasticpath.search.searchengine.SolrIndexSearcherImpl">
+		<property name="solrProvider" ref="solrManager"/>
+		<property name="typeMap">
+			<map>
+				<entry key="PRODUCT">
+					<value>product</value>
+				</entry>
+				<entry key="CATEGORY">
+					<value>category</value>
+				</entry>
+                <entry key="PROMOTION">
+                    <value>promotion</value>
+                </entry>
+                <entry key="CUSTOMER">
+                    <value>customer</value>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+<!-- Declare common beans which are parser related or conventional objects-->
+
+	<bean id="abstractEpQLObjectConfiguration" abstract="true" class="com.elasticpath.ql.parser.AbstractEpQLCustomConfiguration" init-method="initialize">
+	</bean>
+
+	<bean id="nonLocalizedFieldResolver" class="com.elasticpath.ql.parser.fieldresolver.impl.NonLocalizedFieldResolver"/>
+
+	<bean id="localizedFieldResolver" class="com.elasticpath.ql.parser.fieldresolver.impl.LocalizedFieldResolver">
+		<property name="indexUtility" ref="indexUtility"/>
+	</bean>
+
+
+	<bean id="luceneValueResolver" class="com.elasticpath.ql.parser.valueresolver.impl.LuceneValueResolver">
+		<property name="analyzer" ref="analyzer"/>
+	</bean>
+
+	<bean id="luceneSubQueryBuilder" class="com.elasticpath.ql.parser.querybuilder.impl.LuceneSubQueryBuilder"/>
+
+	<bean id="luceneQueryBuilder" class="com.elasticpath.ql.parser.querybuilder.impl.LuceneQueryBuilder"/>
+
+
+	<bean id="jpqlValueResolver" class="com.elasticpath.ql.parser.valueresolver.impl.JPQLValueResolver"/>	
+
+	<bean id="jpqlQueryBuilder" class="com.elasticpath.ql.parser.querybuilder.impl.JPQLQueryBuilder"/>
+
+	<bean id="jpqlSubQueryBuilder" class="com.elasticpath.ql.parser.querybuilder.impl.JPQLSubQueryBuilder"/>
+
+
+	<bean id="sqlValueResolver" class="com.elasticpath.ql.parser.valueresolver.impl.SQLValueResolver"/>	
+
+	<bean id="sqlQueryBuilder" class="com.elasticpath.ql.parser.querybuilder.impl.SQLQueryBuilder"/>
+
+	<bean id="sqlSubQueryBuilder" class="com.elasticpath.ql.parser.querybuilder.impl.SQLSubQueryBuilder"/>
+
+
+<!-- Inject support for custom domain objects to the parser. Here is the junction point where perser is configured to support particular objects. -->
+
+	<bean id="epQueryParser" class="com.elasticpath.ql.parser.gen.EpQueryParserImpl">
+		<property name="epQueryAssembler">
+			<ref bean="epQueryAssembler"/>
+		</property>
+	</bean>   
+
+	<bean id="epQueryAssembler" class="com.elasticpath.ql.parser.EpQueryAssembler">
+		<property name="epQLObjectConfiguration">
+			<map>
+			    <!-- Note: each entry key must match an enum in EPQueryType. For example, CONTENT_SPACE. -->
+	 			<entry key="PRODUCT">
+		 			<ref bean="productConfiguration"/>
+		 		</entry>
+				<entry key="CATEGORY">
+		 			<ref bean="categoryConfiguration"/>
+		 		</entry>
+				<entry key="CATALOG">
+		 			<ref bean="catalogConfiguration"/>
+		 		</entry>
+				<entry key="PROMOTION">
+		 			<ref bean="promotionConfiguration"/>
+		 		</entry>
+				<entry key="PRICELIST">
+					<ref bean="priceListConfiguration"/>
+				</entry>
+                <entry key="CONFIGURATION">
+                    <ref bean="settingConfiguration"/>
+                </entry>
+                <entry key="CUSTOMER">
+                    <ref bean="customerConfiguration"/>
+                </entry>
+                <entry key="CUSTOMERPROFILE_ATTRIBUTE">
+                    <ref bean="customerProfileAttributeConfiguration"/>
+                </entry>
+				<entry key="PRICELISTASSIGNMENT">
+					<ref bean="priceListAssignmentConfiguration"/>
+				</entry>
+				<entry key="DYNAMICCONTENT">
+					<ref bean="dynamicContentConfiguration"/>
+				</entry>
+                <entry key="DYNAMICCONTENTDELIVERY">
+                    <ref bean="dynamicContentDeliveryConfiguration"/>
+                </entry>
+                <entry key="CONTENT_SPACE">
+                    <ref bean="contentSpaceConfiguration"/>
+                </entry>
+                <entry key="TAXCODE">
+                    <ref bean="taxCodeConfiguration"/>
+                </entry>
+                <entry key="STORE">
+                    <ref bean="storeConfiguration"/>
+                </entry>
+                <entry key="TAXJURISDICTION">
+                    <ref bean="taxJurisdictionConfiguration"/>
+                </entry>
+                <entry key="GIFT_CERTIFICATE">
+                    <ref bean="giftCertificateConfiguration"/>
+                </entry>
+                <entry key="SHIPPING_REGION">
+                    <ref bean="shippingRegionConfiguration"/>
+                </entry>
+                <entry key="SHIPPING_SERVICE_LEVEL">
+                    <ref bean="shippingServiceLevelConfiguration"/>
+                </entry>
+                <entry key="SAVED_CONDITION">
+                    <ref bean="savedConditionConfiguration"/>
+                </entry>
+                <entry key="USER_ROLE">
+                    <ref bean="userRoleConfiguration"/>
+                </entry>
+				<entry key="WAREHOUSE">
+                    <ref bean="warehouseConfiguration"/>
+                </entry>
+                <entry key="CMUSER">
+                    <ref bean="cmUserConfiguration"/>
+                </entry>
+                <entry key="PAYMENTGATEWAY">
+                    <ref bean="paymentGatewayConfiguration"/>
+                </entry>
+                <entry key="CM_IMPORT_JOB">
+                    <ref bean="cmImportJobConfiguration"/>
+                </entry>
+
+			</map>
+		</property>
+	</bean>
+
+<!-- CUSTOM CONFIGURATIONS STARTS FROM HERE -->
+
+<!-- Category configuration -->
+	<bean id="categoryConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.category.CategoryConfiguration">
+		<property name="nonLocalizedFieldResolver">
+			<ref bean="nonLocalizedFieldResolver"/>
+		</property>
+		<property name="localizedFieldResolver">
+			<ref bean="localizedFieldResolver"/>
+		</property>
+		<property name="subQueryBuilder">
+			<ref bean="luceneSubQueryBuilder"/>
+		</property>
+		<property name="completeQueryBuilder">
+			<ref bean="luceneQueryBuilder"/>
+		</property>
+		<property name="epQLValueResolver">
+			<ref bean="luceneValueResolver"/>
+		</property>
+	</bean>
+
+<!-- Product configuration -->
+	<bean id="attributeFieldResolver" class="com.elasticpath.ql.custom.product.AttributeFieldResolver">
+		<property name="indexUtility" ref="indexUtility"/>
+		<property name="attributeService" ref="attributeService"/>
+		<property name="attributeUsage" ref="attributeUsage"/>
+	</bean>
+	
+	<bean id="priceFieldResolver" class="com.elasticpath.ql.custom.product.PriceFieldResolver">
+		<property name="indexUtility" ref="indexUtility"/>
+	</bean>
+
+	<bean id="productStateQueryBuilder" class="com.elasticpath.ql.custom.product.ProductStateQueryBuilder"/>
+
+	<bean id="productConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.product.ProductConfiguration">
+		<property name="nonLocalizedFieldResolver">
+			<ref bean="nonLocalizedFieldResolver"/>
+		</property>
+		<property name="localizedFieldResolver">
+			<ref bean="localizedFieldResolver"/>
+		</property>
+		<property name="attributeFieldResolver">
+			<ref bean="attributeFieldResolver"/>
+		</property>
+		<property name="priceFieldResolver">
+			<ref bean="priceFieldResolver"/>
+		</property>
+		<property name="subQueryBuilder">
+			<ref bean="luceneSubQueryBuilder"/>
+		</property>
+		<property name="productStateQueryBuilder">
+			<ref bean="productStateQueryBuilder"/>
+		</property>
+		<property name="completeQueryBuilder">
+			<ref bean="luceneQueryBuilder"/>
+		</property>
+		<property name="epQLValueResolver">
+			<ref bean="luceneValueResolver"/>
+		</property>
+	</bean>
+
+<!-- Promotion configuration -->
+    <bean id="promotionConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.promotion.PromotionConfiguration">
+        <property name="nonLocalizedFieldResolver">
+            <ref bean="nonLocalizedFieldResolver"/>
+        </property>
+        <property name="subQueryBuilder">
+            <ref bean="luceneSubQueryBuilder"/>
+        </property>
+        <property name="completeQueryBuilder">
+            <ref bean="luceneQueryBuilder"/>
+        </property>
+        <property name="epQLValueResolver">
+            <ref bean="luceneValueResolver"/>
+        </property>
+    </bean>
+
+<!-- Customer configuration -->
+    <bean id="customerConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.customer.CustomerConfiguration">
+        <property name="completeQueryBuilder">
+            <ref bean="luceneQueryBuilder"/>
+        </property>
+        <property name="epQLValueResolver">
+            <ref bean="luceneValueResolver"/>
+        </property>
+    </bean>
+
+<!-- CustomerProfileAttribute configuration -->
+    <bean id="customerProfileAttributeConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.customer.CustomerProfileAttributeConfiguration">
+        <property name="completeQueryBuilder">
+            <ref bean="jpqlQueryBuilder"/>
+        </property>
+        <property name="epQLValueResolver">
+            <ref bean="jpqlValueResolver"/>
+        </property>
+    </bean>
+
+<!-- Catalog configuration -->
+	<bean id="catalogConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.catalog.CatalogConfiguration">
+		<property name="nonLocalizedFieldResolver">
+			<ref bean="nonLocalizedFieldResolver"/>
+		</property>
+		<property name="subQueryBuilder">
+			<ref bean="jpqlSubQueryBuilder"/>
+		</property>
+		<property name="completeQueryBuilder">
+			<ref bean="jpqlQueryBuilder"/>
+		</property>
+		<property name="epQLValueResolver">
+			<ref bean="jpqlValueResolver"/>
+		</property>
+	</bean>
+
+	<bean id="priceListAssignmentConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.pricelist.PriceListAssignmentConfiguration">
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="nonLocalizedFieldResolver" ref="nonLocalizedFieldResolver"/>
+        <property name="subQueryBuilder" ref="jpqlSubQueryBuilder"/>
+	</bean>	
+
+<!-- Setting configuration -->
+	<bean id="sqlSettingSubQueryBuilder" class="com.elasticpath.ql.custom.setting.SQLSettingSubQueryBuilder"/>
+
+	<bean id="sqlSettingValueResolver" class="com.elasticpath.ql.custom.setting.SQLSettingValueResolver"/>	
+
+	<bean id="metadataFieldResolver" class="com.elasticpath.ql.custom.setting.MetadataFieldResolver">
+	</bean>
+	
+	<bean id="settingConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.setting.SettingConfiguration">
+		<property name="nonLocalizedFieldResolver">
+			<ref bean="nonLocalizedFieldResolver"/>
+		</property>
+		<property name="metadataFieldResolver">
+			<ref bean="metadataFieldResolver"/>
+		</property>
+		<property name="subQueryBuilder">
+			<ref bean="sqlSettingSubQueryBuilder"/>
+		</property>
+		<property name="completeQueryBuilder">
+			<ref bean="sqlQueryBuilder"/>                    
+		</property>
+		<property name="epQLValueResolver">
+			<ref bean="sqlSettingValueResolver"/>
+		</property>
+	</bean>	
+
+	<bean id="settingSearchResultConverter" class="com.elasticpath.ql.custom.setting.SettingSearchResultConverter">
+	</bean>
+	
+<!-- Price List configuration -->
+	<bean id="priceListConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.pricelist.PriceListConfiguration">
+		<property name="epQLValueResolver">
+			<ref bean="jpqlValueResolver"/>
+		</property>
+		<property name="nonLocalizedFieldResolver">
+			<ref bean="nonLocalizedFieldResolver"/>
+		</property>
+		<property name="subQueryBuilder">
+			<ref bean="jpqlSubQueryBuilder"/>
+		</property>
+		<property name="completeQueryBuilder">
+			<ref bean="jpqlQueryBuilder"/>
+		</property>
+	</bean>
+
+	<bean id="dynamicContentConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.promotion.DynamicContentConfiguration">
+		<property name="epQLValueResolver">
+			<ref bean="jpqlValueResolver"/>
+		</property>
+		<property name="completeQueryBuilder">
+			<ref bean="jpqlQueryBuilder"/>
+		</property>
+	</bean>
+    
+    <bean id="dynamicContentDeliveryConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.promotion.DynamicContentDeliveryConfiguration">
+        <property name="epQLValueResolver">
+            <ref bean="jpqlValueResolver"/>
+        </property>
+        <property name="completeQueryBuilder">
+            <ref bean="jpqlQueryBuilder"/>
+        </property>
+    </bean>
+    
+    <bean id="contentSpaceConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.promotion.ContentSpaceConfiguration">
+        <property name="epQLValueResolver">
+            <ref bean="jpqlValueResolver"/>
+        </property>
+        <property name="completeQueryBuilder">
+            <ref bean="jpqlQueryBuilder"/>
+        </property>
+    </bean>
+    
+    <bean id="taxCodeConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.tax.TaxCodeConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+    
+    <bean id="taxJurisdictionConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.tax.TaxJurisdictionConfiguration">
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="nonLocalizedFieldResolver" ref="nonLocalizedFieldResolver"/>
+        <property name="subQueryBuilder" ref="jpqlSubQueryBuilder"/>
+    </bean>
+    
+	 <bean id="storeConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.store.StoreConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+        <property name="nonLocalizedFieldResolver" ref="nonLocalizedFieldResolver"/>
+        <property name="subQueryBuilder" ref="jpqlSubQueryBuilder"/>
+    </bean>
+	
+    <bean id="giftCertificateConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.catalog.GiftCertificateConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+    
+    <bean id="shippingServiceLevelConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.shipping.ShippingServiceLevelConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+    
+    <bean id="shippingRegionConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.shipping.ShippingRegionConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+    
+    <bean id="savedConditionConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.promotion.SavedConditionConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+    
+    <bean id="userRoleConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.cmuser.UserRoleConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+
+    <bean id="paymentGatewayConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.store.PaymentGatewayConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+
+	<bean id="warehouseConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.shipping.WarehouseConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>    
+    
+	<bean id="cmUserConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.cmuser.CmUserConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+        <property name="nonLocalizedFieldResolver" ref="nonLocalizedFieldResolver"/>
+        <property name="subQueryBuilder" ref="jpqlSubQueryBuilder"/>
+    </bean>
+    
+    <bean id="cmImportJobConfiguration" parent="abstractEpQLObjectConfiguration" class="com.elasticpath.ql.custom.cmimportjob.CmImportJobConfiguration">
+        <property name="epQLValueResolver" ref="jpqlValueResolver"/>
+        <property name="completeQueryBuilder" ref="jpqlQueryBuilder"/>
+    </bean>
+    
+</beans>

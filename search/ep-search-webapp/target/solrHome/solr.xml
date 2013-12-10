@@ -1,0 +1,11 @@
+<solr persistent="true" sharedLib="lib">
+  <cores adminPath="/admin/cores">
+    <core name="category" instanceDir="." config="category.config.xml" schema="category.schema.xml"/>
+    <core name="customer" instanceDir="." config="customer.config.xml" schema="customer.schema.xml" />
+    <core name="product" instanceDir="." config="product.config.xml" schema="product.schema.xml" />
+    <core name="promotion" instanceDir="." config="promotion.config.xml" schema="promotion.schema.xml" />
+    <core name="cmuser" instanceDir="." config="cmuser.config.xml" schema="cmuser.schema.xml" />
+    <core name="shippingservicelevel" instanceDir="." config="shippingservicelevel.config.xml" schema="shippingservicelevel.schema.xml" />
+    <core name="sku" instanceDir="." config="sku.config.xml" schema="sku.schema.xml" />
+  </cores>
+</solr>

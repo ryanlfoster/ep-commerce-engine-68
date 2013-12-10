@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!--
+
+	Displays the specified image with alternative text.
+
+	Input Parameters:
+	1. imagePath - the path to the image to display.
+	2. altText - the alternative text for the image.
+
+-->
+
+<content-wrapper> 
+	<template-name>imageTemplate.cwt</template-name>
+	<wrapper-id>imageWrapper</wrapper-id>
+	<wrapper-name>Image non-clickable</wrapper-name>
+
+
+	<user-input-settings>
+		<user-input-setting id="imagePath" localizable="true" name="Path to Image File" type="Image" required="true" pass-to-template="true"/>
+		<user-input-setting id="altText" localizable="true" name="Alternative Text" type="StringShort" required="true" pass-to-template="true"/>
+	</user-input-settings>
+
+	
+</content-wrapper>

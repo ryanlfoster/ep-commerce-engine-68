@@ -1,0 +1,1870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>grandparent</artifactId>
+		<version>53</version>
+	</parent>
+
+	<artifactId>parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Elastic Path Parent</name>
+	<version>6.8.0.2013101613-RELEASE</version>
+
+	<inceptionYear>2000</inceptionYear>
+	<url>http://www.elasticpath.com</url>
+
+	<description>Elastic Path Digital Commerce Platform</description>
+
+	<properties>
+		<!-- Versions of dependencies used throughout the product (sorted alphabetically) -->
+		<com.h2database.version>1.3.170</com.h2database.version>
+		<commons-beanutils.version>1.8.3</commons-beanutils.version>
+		<commons-codec.version>1.7</commons-codec.version>
+		<commons-logging.version>99.0-does-not-exist</commons-logging.version>
+		<fitnesse.version>20111025-ep1.2</fitnesse.version>
+		<gemini.blueprint.version>2.0.0.M02</gemini.blueprint.version>
+		<groovy.version>1.8.8</groovy.version>
+		<jackson.version>2.1.2</jackson.version>
+		<jersey.version>1.16</jersey.version>
+		<javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
+		<jmock.version>2.6.0</jmock.version>
+		<junit.version>4.11</junit.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		<keytool.maven.plugin.version>1.0</keytool.maven.plugin.version>
+		<slf4j.version>1.7.2</slf4j.version>
+		<!-- logback is bound to a specific version of slf4j -->
+		<logback.version>1.0.9</logback.version>
+		<log4j.version>1.2.17</log4j.version>
+		<metrics.version>2.1.4</metrics.version>
+		<org.apache.ant.version>1.7.1</org.apache.ant.version>
+		<org.liquibase.version>2.0.3</org.liquibase.version>
+		<org.osgi.version>4.2.0</org.osgi.version>
+		<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
+		<org.springframework.version>3.1.4.RELEASE</org.springframework.version>
+		<xerces.version>2.9.1</xerces.version>
+		<tomcat.maven.plugin.version>1.1</tomcat.maven.plugin.version>
+		<trinidad.plugin.version>20120309</trinidad.plugin.version>
+		<java.jvm.opts>-XX:MaxPermSize=96m -Xmx512m</java.jvm.opts>
+		<org.apache.openjpa.version>1.2.1-ep5.1</org.apache.openjpa.version>
+		<com.sun.istack.version>2.3</com.sun.istack.version>
+		<maven.release.plugin.version>2.4</maven.release.plugin.version>
+		<info.cukes.version>1.1.4</info.cukes.version>
+	</properties>
+
+	<organization>
+		<name>Elastic Path Software, Inc</name>
+		<url>http://www.elasticpath.com</url>
+	</organization>
+
+	<scm>
+		<connection>scm:git:git://github.elasticpath.net/Hive/commerce-engine.git</connection>
+		<developerConnection>scm:git:git@github.elasticpath.net:Hive/commerce-engine.git</developerConnection>
+		<url>https://github.elasticpath.net/Hive/commerce-engine</url>
+		<tag>release-6.8.0.2013101613-RELEASE-26</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>ep-platform-releases</id>
+			<url>${ep.platform.release.repository.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>ep-platform-snapshots</id>
+			<url>${ep.platform.snapshot.repository.url}</url>
+		</snapshotRepository>
+		<site>
+			<id>ep-platform-site</id>
+			<url>${ep.platform.site.url}</url>
+		</site>
+	</distributionManagement>
+
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://jira.elasticpath.com</url>
+	</issueManagement>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springmodules</groupId>
+				<artifactId>spring-modules-validation</artifactId>
+				<version>0.8</version>
+				<exclusions>
+					<!-- This depends on a very old version of spring, and the "spring" artiface is evil, it brings in every single bit of spring, even if it's not really needed. -->
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${org.springframework.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${org.springframework.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${org.springframework.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-remoting</artifactId>
+				<version>${org.springframework.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${org.springframework.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy</artifactId>
+				<version>${groovy.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.gmaven.runtime</groupId>
+				<artifactId>gmaven-runtime-1.8</artifactId>
+				<version>1.4</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.sonatype.gossip</groupId>
+						<artifactId>gossip</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-all</artifactId>
+				<version>${groovy.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-email</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-jpa_3.0_spec</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.icegreen</groupId>
+				<artifactId>greenmail</artifactId>
+				<version>1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils-core</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.yammer.metrics</groupId>
+				<artifactId>metrics-core</artifactId>
+				<version>${metrics.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.xml</groupId>
+				<artifactId>stax-api</artifactId>
+				<version>1.0.1-no-namespace</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.tuckey</groupId>
+				<artifactId>urlrewritefilter</artifactId>
+				<version>3.1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.xml.ws</groupId>
+				<artifactId>jaxws-api</artifactId>
+				<version>2.1-1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>activation</groupId>
+						<artifactId>activation</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.jws</groupId>
+						<artifactId>jsr181</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.xml.stream</groupId>
+						<artifactId>stax-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-vfs</groupId>
+				<artifactId>commons-vfs</artifactId>
+				<version>20070730</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${javax.servlet.servlet-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.media</groupId>
+				<artifactId>jai-core</artifactId>
+				<version>1.1.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.media</groupId>
+				<artifactId>jai-codec</artifactId>
+				<version>1.1.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.activation</groupId>
+				<artifactId>activation</artifactId>
+				<version>1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-csv</artifactId>
+				<version>0.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>1.3.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>1.3.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava-testlib</artifactId>
+				<version>14.0.1</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging-api</artifactId>
+				<version>1.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-cli</groupId>
+				<artifactId>commons-cli</artifactId>
+				<version>1.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springmodules</groupId>
+				<artifactId>spring-modules-jakarta-commons</artifactId>
+				<version>0.5</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xerces</groupId>
+						<artifactId>xerces</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>servletapi</groupId>
+						<artifactId>servletapi</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-validator</groupId>
+						<artifactId>commons-validator</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-collections</groupId>
+						<artifactId>commons-collections</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-digester</groupId>
+						<artifactId>commons-digester</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context-support</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-beans</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-web</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-webmvc</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-support</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- There is an existing bug in the Drools version we are currently using (5.0.1) See: https://issues.jboss.org/browse/JBRULES-2418 It generates extremely rare ConcurrentModificationExceptions in the multithreaded Search Index building pipeline (JP-604)
+				This bug appears to have been fixed in version 5.1.0. When we upgrade to version 5.1.0, the exception handling code in com.elasticpath.search.index.solr.document.impl.ProductSolrInputDocumentCreator.lookupPrice(Product, PriceListDescriptor, Store, BaseAmountDataSourceFactory)
+				should be removed. -->
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-compiler</artifactId>
+				<version>5.0.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-io</groupId>
+						<artifactId>commons-io</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-collections</groupId>
+						<artifactId>commons-collections</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.fitnesse</groupId>
+				<artifactId>fitnesse</artifactId>
+				<version>${fitnesse.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<!-- SLF4J drivers -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.6.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-collections</groupId>
+						<artifactId>commons-collections</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>velocity-tools</groupId>
+				<artifactId>velocity-tools</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.directwebremoting</groupId>
+				<artifactId>dwr</artifactId>
+				<version>2.0.6</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xom</groupId>
+						<artifactId>xom</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa</artifactId>
+				<version>${org.apache.openjpa.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-openjpa</artifactId>
+				<version>0.2.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>${xerces.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Cucumber test dependencies -->
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-spring</artifactId>
+				<version>${info.cukes.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-java</artifactId>
+				<version>${info.cukes.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-junit</artifactId>
+				<version>${info.cukes.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jvnet.jax-ws-commons.spring</groupId>
+				<artifactId>jaxws-spring</artifactId>
+				<version>1.8</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.xml.bind</groupId>
+						<artifactId>jaxb-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-impl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>activation</groupId>
+						<artifactId>activation</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.xml.stream.buffer</groupId>
+						<artifactId>streambuffer</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.jvnet.staxex</groupId>
+						<artifactId>stax-ex</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.istack</groupId>
+				<artifactId>istack-commons-runtime</artifactId>
+				<version>${com.sun.istack.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>3.0.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-codec</groupId>
+						<artifactId>commons-codec</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-base</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-cache</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-persistence-api</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-persistence-openjpa</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-settings</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-core</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-geoip-demo</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-geoip-quova</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-geoip-providers</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-core-itests</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-core-test-utils</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-common-fit-fixtures</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-core-fittests</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-test-utils</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-querylanguage</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-common-web</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-test-application</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-storefront</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-search</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-cmserver</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-search-fittests</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-importexport</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-sync</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-assets</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+				<type>pom</type>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>prepare-assets</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>application-assets</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+				<type>pom</type>
+			</dependency>
+			
+			<!-- Payment Gateway Connectivity -->
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-payment-gateway-connectivity-api</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-test-payment-gateway</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-test-cybersource-gateway</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath</groupId>
+				<artifactId>ep-payment-gateway-connectivity-test-commons</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jmock</groupId>
+				<artifactId>jmock</artifactId>
+				<version>${jmock.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jmock</groupId>
+				<artifactId>jmock-junit4</artifactId>
+				<version>${jmock.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit-dep</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.jmock</groupId>
+				<artifactId>jmock-legacy</artifactId>
+				<version>${jmock.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+				<version>${org.liquibase.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-solrj</artifactId>
+				<version>1.4.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-core</artifactId>
+				<version>1.4.1</version>
+				<exclusions>
+					<exclusion>
+						<!--This artifact has no pom, so we exclude it and use org.codehaus.woodstox:wstx-asl instead. -->
+						<groupId>woodstox</groupId>
+						<artifactId>wstx-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus</groupId>
+						<artifactId>groovy-all</artifactId>
+					</exclusion>
+					<exclusion>
+						<!-- We already depend on commons-io-commons-io (1.3.2 is exactly the same as this) -->
+						<groupId>org.apache.commons</groupId>
+						<artifactId>commons-io</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-core</artifactId>
+				<version>5.0.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-api</artifactId>
+				<version>5.0.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.jws</groupId>
+				<artifactId>jsr181-api</artifactId>
+				<version>1.0-MR1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-rt</artifactId>
+				<version>2.1.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.xml.stream</groupId>
+						<artifactId>stax-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.xml.ws</groupId>
+						<artifactId>jaxws-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>activation</groupId>
+						<artifactId>activation</artifactId>
+					</exclusion>
+					<!-- pom for jaxws-rt specifies saaj 1.3 which is missing META-INF/services dir -->
+					<!-- See http://forums.java.net/jive/thread.jspa?messageID=271162 -->
+					<exclusion>
+						<groupId>com.sun.xml.messaging.saaj</groupId>
+						<artifactId>saaj-impl</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>aopalliance</groupId>
+				<artifactId>aopalliance</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>
+				<version>${hamcrest.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-library</artifactId>
+				<version>${hamcrest.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>2.9.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-spellchecker</artifactId>
+				<version>2.9.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>${org.apache.ant.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>jdom</groupId>
+				<artifactId>jdom</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>stax</groupId>
+				<artifactId>stax</artifactId>
+				<version>1.2.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>stax</groupId>
+						<artifactId>stax-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>stax</groupId>
+				<artifactId>stax-api</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+
+			<dependency>
+				<!-- org.apache.solr:solr-core depends on woodstox:wstx-asl which has no pom.xml, so we exclude it and depend on this instead -->
+				<groupId>org.codehaus.woodstox</groupId>
+				<artifactId>wstx-asl</artifactId>
+				<version>3.2.9</version>
+			</dependency>
+
+			<!-- PayPal DoDirect -->
+			<dependency>
+				<groupId>bouncycastle</groupId>
+				<artifactId>bcprov-jdk14</artifactId>
+				<version>131</version>
+			</dependency>
+
+			<dependency>
+				<groupId>bouncycastle</groupId>
+				<artifactId>bcmail-jdk14</artifactId>
+				<version>136</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google</groupId>
+				<artifactId>google-checkout</artifactId>
+				<version>15.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>1.8.5</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.transaction</groupId>
+						<artifactId>jta</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.owasp.esapi</groupId>
+				<artifactId>esapi</artifactId>
+				<version>2.0.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xom</groupId>
+						<artifactId>xom</artifactId>
+					</exclusion>
+                    <exclusion>
+                        <groupId>xerces</groupId>
+                        <artifactId>xercesImpl</artifactId>
+                    </exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>xmlunit</groupId>
+				<artifactId>xmlunit</artifactId>
+				<version>1.3</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.dozer</groupId>
+				<artifactId>dozer</artifactId>
+				<version>5.3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlbeans</groupId>
+				<artifactId>xmlbeans</artifactId>
+				<version>2.4.0</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.gemini</groupId>
+				<artifactId>org.eclipse.gemini.blueprint.core</artifactId>
+				<version>${gemini.blueprint.version}</version>
+				<exclusions>
+					<!-- see below for the versions we are using -->
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>org.springframework.aop</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>org.springframework.beans</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>org.springframework.context</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>org.springframework.core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.bval</groupId>
+				<artifactId>bval-jsr303</artifactId>
+				<version>0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.0.0.GA</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.bval</groupId>
+				<artifactId>bval-extras</artifactId>
+				<version>0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+				<version>2.7.0</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.7</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>properties-maven-plugin</artifactId>
+					<version>1.0-alpha-2</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<version>2.3.6</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>tomcat-maven-plugin</artifactId>
+					<version>${tomcat.maven.plugin.version}</version>
+					<configuration>
+						<uriEncoding>UTF-8</uriEncoding>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>keytool-maven-plugin</artifactId>
+					<version>${keytool.maven.plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>com.elasticpath.tools</groupId>
+					<artifactId>ep-core-tool</artifactId>
+					<version>6.8.0.2013101613-RELEASE</version>
+					<dependencies>
+						<dependency>
+							<groupId>${epdb.maven.groupId}</groupId>
+							<artifactId>${epdb.maven.artifactId}</artifactId>
+							<version>${epdb.maven.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>com.elasticpath.tools</groupId>
+					<artifactId>ep-properties-plugin</artifactId>
+					<version>0.2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>${org.liquibase.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<fork>true</fork>
+						<compilerArguments>
+							<Xmaxwarns>99999</Xmaxwarns>
+							<Werror />
+						</compilerArguments>
+						<compilerArgument>-Xlint:all,-deprecation,-options,-path</compilerArgument>
+						<showWarnings>true</showWarnings>
+						<showDeprecation>false</showDeprecation>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>openjpa-maven-plugin</artifactId>
+					<version>1.1</version>
+					<configuration>
+						<toolProperties>
+							<property>
+								<name>propertiesFile</name>
+								<value>${project.build.outputDirectory}/META-INF/jpa-persistence.xml</value>
+							</property>
+						</toolProperties>
+					</configuration>
+					<executions>
+						<execution>
+							<id>enhancer</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+							</goals>
+						</execution>
+					</executions>
+					<!-- Include the OpenJPA version you are actually using. -->
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.openjpa</groupId>
+							<artifactId>openjpa</artifactId>
+							<version>${org.apache.openjpa.version}</version>
+							<exclusions>
+								<exclusion>
+									<groupId>junit</groupId>
+									<artifactId>junit</artifactId>
+								</exclusion>
+							</exclusions>
+						</dependency>
+						<dependency>
+							<groupId>log4j</groupId>
+							<artifactId>log4j</artifactId>
+							<version>${log4j.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.gmaven</groupId>
+					<artifactId>gmaven-plugin</artifactId>
+					<version>1.4</version>
+					<configuration>
+						<providerSelection>1.8</providerSelection>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.elasticpath.tools</groupId>
+					<artifactId>ep-symlink-plugin</artifactId>
+					<version>1.4</version>
+				</plugin>
+				<plugin>
+					<groupId>com.google.code.maven-replacer-plugin</groupId>
+					<artifactId>maven-replacer-plugin</artifactId>
+					<version>1.3.2</version>
+					<executions>
+						<execution>
+							<id>suppress-warnings-in-generated-code</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>replace</goal>
+							</goals>
+							<configuration>
+								<includes>
+									<include>target/generated-sources/**/*.java</include>
+								</includes>
+
+								<regex>true</regex>
+								<regexFlags>
+									<regexFlag>MULTILINE</regexFlag>
+								</regexFlags>
+
+								<replacements>
+									<replacement>
+										<!-- regex matches a type definition, eg.
+										  -
+										  - public static final class Foo
+										  -
+										  - or
+										  -
+										  - public
+										  - static
+										  - final
+										  - class Foo
+										  -
+										  - or
+										  -
+										  - public
+										  - abstract interface Bar
+										  -->
+										<token>(\n)([a-z\s\n]+[\s\n]+(class|interface))</token>
+										<value>$1@SuppressWarnings({"cast", "classfile", "deprecation", "dep-ann", "divzero",
+					"empty", "fallthrough", "finally", "options", "overrides",
+					"path", "processing", "rawtypes", "serial", "static",
+					"try", "unchecked", "varargs", "PMD"}) $2</value>
+									</replacement>
+								</replacements>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<!-- By default Maven surefire includes *Test.java and Test*.java. TestBase.java is then picked up by maven because of this and throws an error because it has no tests in it. We will temporarily exclude it, and determine what to do with it in 6.4 -->
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>${java.jvm.opts}</argLine>
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+					<excludes>
+						<exclude>**/TestBase.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>liquibase</module>
+		<module>stores</module>
+		<module>storefront</module>
+		<module>cmserver</module>
+		<module>search</module>
+		<module>importexport</module>
+		<module>sync</module>
+		<module>ep-cryptotool</module>
+		<module>core</module>
+		<module>querylanguage</module>
+		<module>common-web</module>
+		<module>ep-test-utils</module>
+		<module>geoip</module>
+
+		<!-- used in itests -->
+		<module>itests-parent</module>
+		<module>ep-test-application</module>
+		
+		<!-- payment gateway specific projects -->
+		<module>payment-gateway-connectivity</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<!-- Most configuration for these plugins in done in 
+			     with-aggregate-third-party-licensing profile in
+			     grandparent.
+
+			     <inherited>false</inherited> is used in the parent 
+			     pom to prevent these plugins from running in child 
+			     modules.  Unfortunately this excludes cmclient too, 
+			     where they actually SHOULD run.  So shile cmclient is 
+			     under trunk, and parented by the parent pom.xml, 
+			     cmclient/pom.xml defines this profile for itself.
+			-->
+			<id>with-aggregate-third-party-licensing</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.linuxstuff.maven</groupId>
+						<artifactId>licensing-maven-plugin</artifactId>
+						<inherited>false</inherited>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<inherited>false</inherited>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>ep-defaults</id>
+			<properties>
+				<!-- If you are going to overwrite some values with your .m2 settings file or change these values in the grandparent (or any other method you have for modifying these properties) you'll have to call mvn -f stores/snapitup-populate-database/pom.xml
+					process-resources -P update-settings because some settings like the port numbers are stored within your database and you'll have to update them for the changes to be picked up. -->
+
+				<!-- Search Server Settings -->
+				<ep.search.host>localhost</ep.search.host>
+				<ep.search.contextUrl>/searchserver</ep.search.contextUrl>
+				<ep.search.url>http://${ep.search.host}:${ep.search.port.http}${ep.search.contextUrl}</ep.search.url>
+
+				<!-- Where your assets are located on your machine during development. -->
+				<!-- This setting it put into your configured database by the snapitup-data artifact. -->
+				<ep.local.asset.path>${user.home}/ep-assets</ep.local.asset.path>
+
+				<!-- VFS Asset Properties, in development use use file:// to the above property. -->
+				<ep.asset.vfs.protocol>file</ep.asset.vfs.protocol>
+				<ep.asset.vfs.host />
+				<ep.asset.vfs.port />
+				<ep.asset.vfs.username />
+				<ep.asset.vfs.password />
+				<ep.asset.vfs.rootpath>${ep.local.asset.path}</ep.asset.vfs.rootpath>
+
+				<!-- Commerce Manager Settings -->
+				<ep.cm.host>localhost</ep.cm.host>
+				<ep.cm.context>/cmserver</ep.cm.context>
+				<ep.cm.secure.channel>https</ep.cm.secure.channel>
+				<ep.emailCmUrl>http://${ep.cm.host}:${ep.cm.port.http}/${ep.cm.context}</ep.emailCmUrl>
+				<ep.asset.http.host>${ep.cm.host}:${ep.cm.port.http}/${ep.cm.context}</ep.asset.http.host>
+
+				<ep.storefront.contextUrl>/storefront</ep.storefront.contextUrl>
+				<ep.sf.secure.channel>https</ep.sf.secure.channel>
+				<ep.velocity.cache.seconds>-1</ep.velocity.cache.seconds>
+				<ep.velocity.library.autoreload>false</ep.velocity.library.autoreload>
+				<ep.product.attribute.filter.enable>true</ep.product.attribute.filter.enable>
+				<ep.localeUrlTool.localeControllerUrl>locale.ep</ep.localeUrlTool.localeControllerUrl>
+
+				<!--DCAPI settings -->
+				<ep.cortex.contextUrl>/cortex</ep.cortex.contextUrl>
+				<ep.studio.contextUrl>/studio</ep.studio.contextUrl>
+				<ep.cortex.uri.prefix /> <!-- empty by default -->
+
+				<!-- Fitnesse port -->
+				<ep.cortex.fitnesse.port.http>9222</ep.cortex.fitnesse.port.http>
+
+				<!-- Logging properties -->
+				<ep.log.to>CONSOLE, FILE</ep.log.to> <!-- log4j -->
+				<ep.log.to.logback><![CDATA[<appender-ref ref="CONSOLE" /><appender-ref ref="FILE" />]]></ep.log.to.logback> <!-- logback -->
+				<ep.log.level>INFO</ep.log.level>
+				<!-- ep.log.dir is relative to where appserver is started -->
+				<ep.log.dir>target/logs</ep.log.dir>
+
+				<!-- Quartz Jobs -->
+				<ep.cm.triggers.topseller>
+					topSellerSchedulingTriggers<!-- disabled -->
+				</ep.cm.triggers.topseller>
+				<ep.cm.triggers.productrecommendation>
+					productRecommendationScheduling<!-- disabled -->
+				</ep.cm.triggers.productrecommendation>
+				<ep.cm.triggers.auto.shipmentrelease>
+					releaseShipmentSchedulingTriggers<!-- disabled -->
+				</ep.cm.triggers.auto.shipmentrelease>
+				<ep.search.triggers.index>
+					indexBuildTriggers<!-- disabled -->
+				</ep.search.triggers.index>
+				<ep.search.triggers.rulecompile>
+					ruleCompileTriggers<!-- disabled -->
+				</ep.search.triggers.rulecompile>
+				<ep.cm.triggers.searchterms.aggregator>
+					disabled<!-- searchTermsAggregatorTriggers -->
+				</ep.cm.triggers.searchterms.aggregator>
+
+				<ep.cm.topseller.delay>30000</ep.cm.topseller.delay>
+				<ep.cm.topseller.interval>30000</ep.cm.topseller.interval>
+				<ep.cm.productrecommendation.delay>30000</ep.cm.productrecommendation.delay>
+				<ep.cm.productrecommendation.interval>30000</ep.cm.productrecommendation.interval>
+				<ep.cm.searchterms.aggregator.delay>30000</ep.cm.searchterms.aggregator.delay>
+				<ep.cm.searchterms.aggregator.interval>30000</ep.cm.searchterms.aggregator.interval>
+
+				<!-- GeoIP -->
+				<ep.geoip.provider>
+					demo<!--quova -->
+				</ep.geoip.provider>
+
+				<!-- Webapp ports for tomcat -->
+				<ep.storefront.tomcat.port.http>8080</ep.storefront.tomcat.port.http>
+				<ep.storefront.tomcat.port.https>8443</ep.storefront.tomcat.port.https>
+				<ep.cm.tomcat.port.http>8080</ep.cm.tomcat.port.http>
+				<ep.cm.tomcat.port.https>8443</ep.cm.tomcat.port.https>
+				<ep.search.tomcat.port.http>8080</ep.search.tomcat.port.http>
+				<ep.cortex.tomcat.port.http>8080</ep.cortex.tomcat.port.http>
+				<ep.studio.tomcat.port.http>8080</ep.studio.tomcat.port.http>
+
+				<!-- Webapp ports for jboss -->
+				<ep.storefront.jboss.port.http>8080</ep.storefront.jboss.port.http>
+				<ep.storefront.jboss.port.https>8443</ep.storefront.jboss.port.https>
+				<ep.cm.jboss.port.http>8080</ep.cm.jboss.port.http>
+				<ep.cm.jboss.port.https>8443</ep.cm.jboss.port.https>
+				<ep.search.jboss.port.http>8080</ep.search.jboss.port.http>
+				<ep.cortex.jboss.port.http>8080</ep.cortex.jboss.port.http>
+				<ep.studio.jboss.port.http>8080</ep.studio.jboss.port.http>
+
+				<!-- Webapp ports for weblogic -->
+				<ep.storefront.weblogic.port.http>7001</ep.storefront.weblogic.port.http>
+				<ep.storefront.weblogic.port.https>7002</ep.storefront.weblogic.port.https>
+				<ep.cm.weblogic.port.http>7001</ep.cm.weblogic.port.http>
+				<ep.cm.weblogic.port.https>7002</ep.cm.weblogic.port.https>
+				<ep.search.weblogic.port.http>7001</ep.search.weblogic.port.http>
+				<ep.cortex.weblogic.port.http>7001</ep.cortex.weblogic.port.http>
+				<ep.studio.weblogic.port.http>7001</ep.studio.weblogic.port.http>
+
+				<!-- Webapp ports for websphere -->
+				<ep.storefront.websphere.port.http>9080</ep.storefront.websphere.port.http>
+				<ep.storefront.websphere.port.https>9443</ep.storefront.websphere.port.https>
+				<ep.cm.websphere.port.http>9080</ep.cm.websphere.port.http>
+				<ep.cm.websphere.port.https>9443</ep.cm.websphere.port.https>
+				<ep.search.websphere.port.http>9080</ep.search.websphere.port.http>
+				<ep.cortex.websphere.port.http>9080</ep.cortex.websphere.port.http>
+				<ep.studio.websphere.port.http>9080</ep.studio.websphere.port.http>
+
+
+			</properties>
+		</profile>
+
+		<profile>
+			<!-- This profile must be after the ep-defaults profile in order for properties to override correctly. -->
+			<id>ep-developer</id>
+			<properties>
+
+				<!-- Enable velocity template reloading in dev. -->
+				<ep.velocity.cache.seconds>3</ep.velocity.cache.seconds>
+				<ep.velocity.library.autoreload>true</ep.velocity.library.autoreload>
+
+				<!-- Disable some triggers in dev, to speed things up a bit. -->
+				<ep.cm.triggers.topseller><!-- topSellerSchedulingTriggers -->
+					disabled
+				</ep.cm.triggers.topseller>
+				<ep.cm.triggers.productrecommendation><!-- productRecommendationScheduling -->
+					disabled
+				</ep.cm.triggers.productrecommendation>
+
+				<!-- Disable https for CM and WS in dev. -->
+				<ep.cm.secure.channel>http</ep.cm.secure.channel>
+
+				<!-- The default developer configuration is to run tomcat on different ports for each webapp, and no https except for storefront (so no change of port needed) -->
+				<ep.storefront.tomcat.port.http>8080</ep.storefront.tomcat.port.http>
+				<ep.cm.tomcat.port.http>8081</ep.cm.tomcat.port.http>
+				<ep.search.tomcat.port.http>8082</ep.search.tomcat.port.http>
+				<ep.cortex.tomcat.port.http>9080</ep.cortex.tomcat.port.http>
+				<ep.studio.tomcat.port.http>9081</ep.studio.tomcat.port.http>
+
+			</properties>
+		</profile>
+
+		<profile>
+			<id>ep-nightly</id>
+			<!-- This profile must be after the ep-defaults profile in order for properties to override correctly. -->
+			<properties>
+				<!-- Using secure in nightly deploys causes problems for CMClient. -->
+				<ep.cm.secure.channel>http</ep.cm.secure.channel>
+			</properties>
+		</profile>
+
+		<profile>
+			<!-- This profile must be before the <appserver>-developer (eg. tomcat-developer) profiles, and after ep-developer, in order for properties to override correctly. -->
+			<id>wtp-developer</id>
+			<properties>
+				<ep.cm.tomcat.port.http>8080</ep.cm.tomcat.port.http>
+				<ep.search.tomcat.port.http>8080</ep.search.tomcat.port.http>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>tomcat-developer</id>
+			<properties>
+				<ep.storefront.port.http>${ep.storefront.tomcat.port.http}</ep.storefront.port.http>
+				<ep.storefront.port.https>${ep.storefront.tomcat.port.https}</ep.storefront.port.https>
+				<ep.cm.port.http>${ep.cm.tomcat.port.http}</ep.cm.port.http>
+				<ep.cm.port.https>${ep.cm.tomcat.port.https}</ep.cm.port.https>
+				<ep.search.port.http>${ep.search.tomcat.port.http}</ep.search.port.http>
+				<ep.search.port.https>${ep.search.tomcat.port.https}</ep.search.port.https>
+				<ep.cortex.port.http>${ep.cortex.tomcat.port.http}</ep.cortex.port.http>
+				<ep.studio.port.http>${ep.studio.tomcat.port.http}</ep.studio.port.http>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>jboss-developer</id>
+			<properties>
+				<ep.storefront.port.http>${ep.storefront.jboss.port.http}</ep.storefront.port.http>
+				<ep.storefront.port.https>${ep.storefront.jboss.port.https}</ep.storefront.port.https>
+				<ep.cm.port.http>${ep.cm.jboss.port.http}</ep.cm.port.http>
+				<ep.cm.port.https>${ep.cm.jboss.port.https}</ep.cm.port.https>
+				<ep.search.port.http>${ep.search.jboss.port.http}</ep.search.port.http>
+				<ep.search.port.https>${ep.search.jboss.port.https}</ep.search.port.https>
+				<ep.cortex.port.http>${ep.cortex.jboss.port.http}</ep.cortex.port.http>
+				<ep.studio.port.http>${ep.studio.jboss.port.http}</ep.studio.port.http>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>weblogic-developer</id>
+			<properties>
+				<ep.storefront.port.http>${ep.storefront.weblogic.port.http}</ep.storefront.port.http>
+				<ep.storefront.port.https>${ep.storefront.weblogic.port.https}</ep.storefront.port.https>
+				<ep.cm.port.http>${ep.cm.weblogic.port.http}</ep.cm.port.http>
+				<ep.cm.port.https>${ep.cm.weblogic.port.https}</ep.cm.port.https>
+				<ep.search.port.http>${ep.search.weblogic.port.http}</ep.search.port.http>
+				<ep.search.port.https>${ep.search.weblogic.port.https}</ep.search.port.https>
+				<ep.cortex.port.http>${ep.cortex.weblogic.port.http}</ep.cortex.port.http>
+				<ep.studio.port.http>${ep.studio.weblogic.port.http}</ep.studio.port.http>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>websphere-developer</id>
+			<properties>
+				<ep.storefront.port.http>${ep.storefront.websphere.port.http}</ep.storefront.port.http>
+				<ep.storefront.port.https>${ep.storefront.websphere.port.https}</ep.storefront.port.https>
+				<ep.cm.port.http>${ep.cm.websphere.port.http}</ep.cm.port.http>
+				<ep.cm.port.https>${ep.cm.websphere.port.https}</ep.cm.port.https>
+				<ep.search.port.http>${ep.search.websphere.port.http}</ep.search.port.http>
+				<ep.search.port.https>${ep.search.websphere.port.https}</ep.search.port.https>
+				<ep.cortex.port.http>${ep.cortex.websphere.port.http}</ep.cortex.port.http>
+				<ep.studio.port.http>${ep.studio.websphere.port.http}</ep.studio.port.http>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>with-fittests</id>
+			<modules>
+				<module>fittests-parent</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>with-assets</id>
+			<modules>
+				<module>asset-repository</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>with-archetypes</id>
+			<modules>
+				<module>archetype-resources</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>with-osgi-wrappers</id>
+			<modules>
+				<module>osgi-wrappers</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>analysis</id>
+			<!-- The analysis job also turns on the pass-build-even-if-code-compliance-fails profile. -->
+			<properties>
+				<skipTests>true</skipTests>
+				<cpd.skip>true</cpd.skip>
+				<skipFitTests>true</skipFitTests>
+				<skipITests>true</skipITests>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>with-source-release</id>
+			<modules>
+				<module>non-distributable/source-release</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>with-job-generators</id>
+			<modules>
+				<module>build-job-generators/jenkins</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>with-smoketests</id>
+			<modules>
+				<module>ep-smoketests</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>with-internal-ep-modules</id>
+			<modules>
+				<module>stores/snapitup-selenium</module>
+				<module>non-distributable/appserver-setup</module>
+				<module>non-distributable/build.util/email</module>
+				<module>non-distributable/licensing-report</module>
+				<module>non-distributable/squish.util</module>
+				<module>non-distributable/source-release/build-job-generators/jenkins</module>
+				<module>deployment-package</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

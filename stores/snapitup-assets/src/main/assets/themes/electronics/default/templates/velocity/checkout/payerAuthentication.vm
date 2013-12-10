@@ -1,0 +1,40 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## payerAuthentication.vm
+#set($pageName = "checkout/payerAuthentication.vm")
+#templateInit()
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title> Authentication Body</title>
+	<script language="javascript">
+			
+		function OnLoadEvent()
+		{
+			document.downloadForm.submit();
+		}
+	</script>
+  </head>
+  <body onload="OnLoadEvent()">
+    <form name="downloadForm" action="$payerAuthenticationEnrollmentSession.getAcsURL()" method="POST">
+		<noscript>
+			<br/>
+			<br/>
+			<center>
+				<h1>Processing your 3-D Secure Transaction
+				</h1>
+				<h2>JavaScript is currently disabled or is not support by your browser.<br/>
+				</h2>
+				<h3>Click <b>Submit</b> to continue processing your 3-D secure transaction.
+				</h3>
+				<input type="submit" value="Submit"/>
+			</center>
+		</noscript>
+		
+		<input type="hidden" name="TermUrl" value="$payerAuthenticationEnrollmentSession.getTermURL()"/>
+		<input type="hidden" name="MD" value="$payerAuthenticationEnrollmentSession.getMerchantData()"/>
+		<input type="hidden" name="PaReq" value="$payerAuthenticationEnrollmentSession.getPaREQ()"/>
+	</form>
+  </body>
+</html>

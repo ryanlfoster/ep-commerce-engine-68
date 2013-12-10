@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/client/DataSourceProperties.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/client/EngineInitialization.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/client/ImportExportInitialization.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/client/Index.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/client/JPADataSource.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/AbstractDomainAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/associations/ProductAssociationAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/AttributeAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/BrandAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/CatalogAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/CategoryTypeAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/helper/AttributeGroupHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/helper/impl/AttributeGroupHelperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/ProductTypeAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/SkuOptionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/SkuOptionValueAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/catalogs/SynonymGroupAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/category/CategoryAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/category/LinkedCategoryAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/cmimportjob/data/CmImportJobAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/contentspace/ContentSpaceAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/customer/CustomerAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/DomainAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/DtoAssemblerDelegatingAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/dynamiccontent/DynamicContentAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/dynamiccontent/ParameterValueAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/inventory/InventorySkuAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/paymentgateway/PaymentGatewayAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/pricelist/BaseAmountAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/pricing/PriceListAssignmentAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/pricing/PriceListAssignmentAssembler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/pricing/ProductPricesAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/productcategories/ProductCategoryAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/AttributeGroupAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/AttributeValuesAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/DigitalAssetItemAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/ProductAvailabilityAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/ProductSkuAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/ProductSkuOptionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/SeoAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/data/ShippableItemAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/ProductAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/products/ProductBundleAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/AbstractElementAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/ActionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/ConditionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/coupon/CouponConfigAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/coupon/CouponSet.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/coupon/CouponSetAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/coupon/CouponUsageAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/PromotionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/promotion/RuleAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/settings/SettingDefinitionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/settings/SettingValueAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/shipping/ShippingRegionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/shipping/ShippingServiceLevelAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/tag/ConditionalExpressionAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/tag/SavedConditionAssembler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/tag/SellingContextAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/adapters/targetedselling/DynamicContentDeliveryAssembler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/caching/CachingService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/caching/impl/CachingServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/configuration/ConfigurationLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/configuration/ConfigurationOption.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/configuration/PackagerConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/assets/AssetDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/baseamount/BaseAmountsDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/AttributeDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/AttributeTypeType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/AttributeUsageType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/BrandDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/CatalogDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/CatalogType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/CategoryTypeDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/MultiSkuDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/ProductTypeDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/SkuOptionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/SkuOptionValueDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/catalogs/SynonymGroupDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/category/CategoryAvailabilityDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/category/CategoryDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/category/LinkedCategoryDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/cmimportjob/CmImportJobDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/cmimportjob/CmImportMappingDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/cmuser/CmUsersDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/contentspace/ContentSpaceDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/customer/CustomerProfileAttributesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/customer/CustomersDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/dynamiccontent/DynamicContentDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/dynamiccontent/ParameterValueDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/general/PricingMechanismValues.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/giftcertificate/GiftCertificatesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/inventory/InventorySkuDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/inventory/InventoryWarehouseDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/paymentgateway/PaymentGatewaysDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/CatalogPriceDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/CurrencyPriceDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/PriceAlias.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/PriceDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/PriceListAssignmentDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/PriceListsDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/PriceTierDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/ProductPricesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/pricing/SkuPricesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/productassociation/ProductAssociationDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/productassociation/ProductAssociationType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/productcategory/CatalogCategoriesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/productcategory/ProductCategoriesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/productcategory/ProductCategoryDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/AttributeGroupDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/AttributeValuesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/bundles/ProductBundleConstituentCodeDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/bundles/ProductBundleConstituentDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/bundles/ProductBundleDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/bundles/SelectionRuleDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/DigitalAssetItemDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/ProductAvailabilityDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/ProductDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/ProductSkuAvailabilityDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/ProductSkuDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/SeoDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/ShippableItemDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/SkuOptionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/products/UnitDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/cart/ActionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/cart/AvailabilityDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/cart/PromotionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/coupon/CouponCodeDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/coupon/CouponConfigDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/coupon/CouponSetDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/coupon/CouponUsageDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/ExceptionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/ParameterDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/ActionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/AndDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/BooleanComponentDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/ConditionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/ConditionsDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/OrDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/promotion/rule/RuleDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/settings/DefaultValueDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/settings/DefinedValueDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/settings/MetadataDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/settings/SettingDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/shipping/region/ShippingRegionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/shipping/region/ShippingSubRegionsDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/shipping/ShippingCostCalculationMethodDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/shipping/ShippingCostCalculationParameterDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/shipping/ShippingServiceLevelDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/store/StoresDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/storeassociation/StoreAssociationsDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/tag/ConditionalExpressionDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/tag/SellingContextDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/targetedselling/DynamicContentDeliveryDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/tax/TaxCodesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/tax/TaxJurisdictionsDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/userrole/UserRolesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/dto/warehouse/WarehousesDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/ConfigurationException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/EngineRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/EntryException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/ExportRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/ImportDuplicateAssociatedEntityRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/ImportDuplicateEntityRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/ImportRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/MarshallingRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/PopulationRollbackException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/exception/runtime/PopulationRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/ImportExportContextIdNames.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/logging/IEConsoleAppender.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/logging/IESummaryAppender.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/manifest/impl/ManifestBuilderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/manifest/Manifest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/manifest/ManifestBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/marshalling/DefaultValidationEventHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/marshalling/XMLMarshaller.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/marshalling/XMLUnmarshaller.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/policies/ImportExportLocaleFallbackPolicyFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/summary/impl/SimpleSummaryLayout.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/summary/impl/SummaryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/summary/Summary.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/summary/SummaryLayout.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/summary/SummaryLogger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/transformers/impl/AbstractTransformerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/transformers/impl/TransformersChainFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/transformers/Transformer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/transformers/TransformerConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/transformers/TransformersChainFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/types/JobType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/types/OptionalJobType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/types/PackageType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/types/RequiredJobType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/types/TransportType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/assets/AbstractAssetFileManagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/assets/AssetFileManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/assets/ExportAssetFileManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/assets/ExportAssetFileManagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/assets/ImportAssetFileManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/assets/ImportAssetFileManagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/ExtendedUtility.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/Message.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/MessageResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/MessageResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/runner/AbstractPipedStreamRunner.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/runner/PipedStreamRunner.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/common/util/Timer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/configuration/DeliveryConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/configuration/ExportConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/configuration/ExporterConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/configuration/OptionalExporterConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/configuration/search/SearchConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/configuration/search/SearchQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/context/DependencyRegistry.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/context/ExportContext.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/controller/ExportController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/controller/impl/ExportControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/delivery/DeliveryMethod.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/delivery/DeliveryMethodFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/delivery/impl/AbstractDeliveryMethodImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/delivery/impl/DeliveryMethodFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/delivery/impl/FileDeliveryMethodImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exportentry/ExportEntry.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exportentry/impl/FileObjectExportEntry.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exportentry/impl/PipedStreamExportEntry.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/DependentExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/DependentExporterFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/Exporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/ExporterFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/AbstractDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/AbstractExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/AssetExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/AttributeDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/BaseAmountExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/BrandDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CatalogExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CategoryExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CategoryTypeDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CmImportJobExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CmUserExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ConditionRuleExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ContentSpaceExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CouponSetExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CustomerCollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CustomerExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CustomerProfileAttribute.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/CustomerProfileAttributeExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/DependentExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/DynamicContentDeliveryExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/DynamicContentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ExporterFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/GiftCertificateExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/GiftCertificateTransactionDependentExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/InventoryExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/LinkedCategoryDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/PaymentGatewayExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/PriceListAssignmentExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/PriceListExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/PricingExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ProductAssociationExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ProductBundleExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ProductCategoryExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ProductDependencyHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ProductExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ProductTypeDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/SavedConditionExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/SettingDefinitionExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ShippingRegionExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ShippingServiceLevelExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/ShoppingCartPromotionExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/SkuOptionDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/StoreAssociation.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/StoreAssociationExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/StoreExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/SynonymGroupDependentExporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/TaxCodeExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/TaxJurisdictionExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/UserRoleExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/VirtualCatalogDependencyHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/exporters/impl/WarehouseExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/packager/impl/AbstractPackagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/packager/impl/NullPackagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/packager/impl/PackagerFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/packager/impl/ZipPackagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/packager/Packager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/packager/PackagerFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/search/impl/ImportExportSearcherImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/exporter/search/ImportExportSearcher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/changesetsupport/BusinessObjectDescriptorLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/changesetsupport/impl/BusinessObjectDescriptorLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/changesetsupport/impl/CatalogObjectDescriptorPopulator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/changesetsupport/impl/CategoryObjectDescriptorPopulator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/changesetsupport/impl/MethodObjectDescriptorPopulator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/changesetsupport/ObjectDescriptorPopulator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/DependentElementAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/DependentElementConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/DependentElementListConfiguartion.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/ImportConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/ImporterConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/ImporterConfigurationAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/ImportStrategyConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/configuration/RetrievalConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/context/ImportContext.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/impl/ChangeSetImportStageImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/impl/ImportControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/impl/ProcessImportStageImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/impl/ProductRelatedObjectsResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/ImportController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/ImportStage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/ImportStageFailedException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/controller/RelatedObjectsResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/CollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/AbstractImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/AbstractSavingStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/AssetsImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/BaseAmountImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CatalogImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CategoryImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CmImportJobImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CmUserCollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CmUserImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ConditionRuleImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ContentSpaceImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CouponSetImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CustomerImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/CustomerProfileAttributeImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/DynamicContentDeliveryImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/DynamicContentImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/GiftCertificateImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ImporterFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ImportProcessorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ImportStatusHolder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/InventoryImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/LifecycleListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/PaymentGatewayCollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/PaymentGatewayImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/PersistenceSessionSavingManagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/PriceListAssignmentImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/PriceListDescriptorImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/PricingImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ProductAssociationImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ProductBundleImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ProductCategoryImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ProductImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/RuleWrapperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/SavedConditionImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/SavingManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/SettingDefinitionImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ShippingRegionImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ShippingServiceLevelImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/ShoppingCartPromotionImporterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/StoreAssociationImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/StoreCollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/StoreImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/TaxCodeImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/TaxJurisdictionCollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/TaxJurisdictionImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/UpdatableRuleServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/UserRoleCollectionsStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/UserRoleImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/impl/WarehouseImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/Importer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/ImporterFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/ImportProcessor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/objectdescriptorbuilder/impl/AbstractObjectDescriptorBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/objectdescriptorbuilder/impl/ObjectDescriptorBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/RuleWrapper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/importers/SavingStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/retrieval/impl/AbstractRetrievalMethodImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/retrieval/impl/FileRetrievalMethodImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/retrieval/impl/RetrievalMethodFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/retrieval/RetrievalMethod.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/retrieval/RetrievalMethodFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/types/CollectionStrategyType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/types/DependentElementType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/types/ImportStrategyType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/unpackager/impl/AbstractUnpackagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/unpackager/impl/NullUnpackagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/unpackager/impl/UnpackagerFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/unpackager/impl/ZipUnpackagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/unpackager/Unpackager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/importer/unpackager/UnpackagerFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/util/ApplicationPropertiesHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/main/java/com/elasticpath/importexport/util/impl/ApplicationPropertiesHelperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/AbstractDomainAdapterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/associations/ProductAssociationAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/AttributeAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/AttributeGroupHelperImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/BrandAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/CatalogAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/CategoryTypeAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/ProductTypeAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/SkuOptionAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/catalogs/SynonymGroupAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/category/CategoryAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/category/LinkedCategoryAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/cmimportjob/data/CmImportJobAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/inventory/InventorySkuAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/pricelist/BaseAmountAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/pricing/TestAdapterHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/productcategories/ProductCategoryAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/AttributeGroupAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/DigitalAssetItemAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/ProductAvailabilityAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/ProductSkuAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/ProductSkuOptionAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/SeoAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/data/ShippableItemAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/ProductAdapterNewTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/ProductAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/ProductBundleAdapterSelectionRuleTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/products/ProductBundleAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/promotion/AbstractElementAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/promotion/ActionAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/promotion/AttributeAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/promotion/ConditionAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/promotion/PromotionAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/promotion/RuleAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/settings/SettingDefinitionAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/settings/SettingValueAdapterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/adapters/targetedselling/DynamicContentDeliveryAssemblerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/manifest/ManifestBuilderImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/manifest/ManifestTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/marshalling/FakeObjectDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/marshalling/FakeRelatedObjectDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/marshalling/XMLMarshallerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/marshalling/XMLUnmarshallerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/policies/ImportExportLocaleFallbackPolicyFactoryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/transformers/impl/TransformersChainFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/util/AbstractPipedStreamRunnerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/common/util/TimerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleAdapterExt.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleDtoExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleDtoImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleExtDTO.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleExtDtoExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExampleExtDtoImporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExamplePersistence.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/example/ExamplePersistenceExt.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/configuration/ExportConfigurationLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/configuration/search/SearchConfigurationLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/AbstractExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/AssetExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/AttributeDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/BrandDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/CatalogExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/CategoryExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/CategoryTypeDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/GiftCertificateExporterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/GiftCertificateTransactionDependentExporterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/LinkedCategoryDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/PriceListExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ProductAssociationExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ProductBundleExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ProductCategoryExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ProductDependencyHelperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ProductExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ProductTypeDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/SettingDefinitionExporterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/ShoppingCartPromotionExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/SkuOptionDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/SynonymGroupDependentExporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/exporter/exporters/impl/VirtualCatalogDependencyHelperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/configuration/ImportConfigurationLoaderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/controller/impl/ChangeSetImportStageImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/controller/impl/ImportControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/AssetsImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/BaseAmountImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/CatalogImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/CategoryImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/ImporterFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/InventoryImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/PersistenceSessionSavingManagerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/PriceListDescriptorCollectionStrategyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/PriceListDescriptorImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/PricingImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/ProductAssociationImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/ProductBundleImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/ProductCategoryImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/ProductImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/PromotionImportAndShallowCopyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/SavingStrategyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/importers/impl/SettingDefinitionImporterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/retrieval/impl/RetrievalMethodFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/importer/unpackager/impl/UnpackagerFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/ImportExportDTOExtensionTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/PackDeliverRetrievalUnpackFlowTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/importexport/Roundtrip.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/importexport/ep-importexport/src/test/java/com/elasticpath/testutility/JUnitUtil.java">
+</file>
+</checkstyle>

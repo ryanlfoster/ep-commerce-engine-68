@@ -1,0 +1,11 @@
+## simple content wrapper template for test junit purposes
+<table>
+	<tr>
+		<td>param1 = $param1</td>
+	</tr>
+	<tr>
+		<td>param2 = $param2</td>
+	</tr>
+</table>
+
+

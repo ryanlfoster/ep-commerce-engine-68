@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.1/weblogic-web-app.xsd">
+  <wls:context-root>/searchserver</wls:context-root>
+  <wls:container-descriptor>
+    <wls:prefer-application-packages>
+      <wls:package-name>org.apache.openjpa.*</wls:package-name>
+    </wls:prefer-application-packages>
+  </wls:container-descriptor>
+  <wls:resource-description>
+    <wls:res-ref-name>jdbc/epjndi</wls:res-ref-name>
+    <wls:jndi-name>jdbc/epjndi</wls:jndi-name>
+  </wls:resource-description>
+  <wls:session-descriptor>
+    <wls:cookie-name>JSESSIONID</wls:cookie-name>
+    <wls:cookie-path>/</wls:cookie-path>
+		<wls:cookie-http-only>false</wls:cookie-http-only>
+  </wls:session-descriptor>
+</wls:weblogic-web-app>

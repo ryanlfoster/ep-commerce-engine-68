@@ -1,0 +1,183 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## checkoutAddress.vm
+
+#set ($isShipping = $checkoutAddressFormBean.isShippingAddress())
+#set ($editAddressParam = "checkoutbilling=true")
+#if ($isShipping)
+  #set ($editAddressParam = "checkoutshipping=true")
+#end
+
+#set ($showExistingAddresses = ($checkoutAddressFormBean.existingAddresses && $checkoutAddressFormBean.existingAddresses.size() > 0))
+
+#set($pageName = "checkout/checkoutAddress.vm")
+#set($_scripts = "javaScript")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "addressBreadcrumbs")
+#masterTemplate()
+
+#macro(javaScript)
+    <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/geographyController.js'></script>
+    <script language="JavaScript">
+    
+    	function reloadSubCountries(field) {
+    		var countryCode = field.value;
+    		geographyController.getSubCountries(countryCode, loadSubCountriesCallback);
+    	}
+      
+    	function loadSubCountriesCallback(data) {
+    		DWRUtil.removeAllOptions(document.getElementById("newAddress.subCountry"));
+    		DWRUtil.addOptions(document.getElementById("newAddress.subCountry"), data);
+    	}
+      
+    </script>
+#end
+	
+#macro(addressBreadcrumbs)
+  #if ($!isShipping) 
+    #checkoutBreadcrumbShipping() 
+  #else 
+    #checkoutBreadcrumbBilling() 
+  #end
+#end
+
+#macro (displayAddress $address $selected)
+  <tr valign="top" #if(	$mathTool.mod($velocityCount, 2) == 0) class="odd" #end>
+    <td>
+      <input name="address" type="radio" id="$address.uidPk" value="$address.uidPk" #if($selected)checked="checked"#end onclick="document.getElementById('newAddress').style.display='none'"/>
+    </td>
+    <td width="100%"><label for="$address.uidPk"><strong><em>$!address.firstName $!address.lastName</em></strong></label>
+      <div>$!address.street1 #if($address.street2 && $address.street2.length() > 0) <br> $!address.street2 #end</div>
+      <div>$!address.city, #if($address.subCountry && $address.subCountry.length() > 0) $!address.subCountry, #end $!address.zipOrPostalCode, $ctxCountries.getCountryDisplayName($!address.country, $locale)</div>
+      <div><a href="$baseUrl/edit-address.ep?addressID=$!{address.uidPk}&$!{editAddressParam}">#springMessage("checkoutAddress.changeAddress")</a></div>
+    </td>
+  </tr>
+#end
+
+#macro (displayNewAddress)
+  <table border="0" cellspacing="0" cellpadding="3">
+    <tr>
+      <td align="right"><label for="newAddress.firstName">#springMessage("globals.firstname")*</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.firstName" "maxlength='100'")
+        #springShowErrors("" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.lastName">#springMessage("globals.lastname")*</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.lastName" "maxlength='100'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.street1">#springMessage("globals.street1")*</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.street1" "maxlength='200'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.street2">#springMessage("globals.street2") </label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.street2" "maxlength='200'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.city">#springMessage("globals.city")*</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.city" "maxlength='200'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.organization">#springMessage("globals.organization")</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.organization" "maxlength='200'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.subCountry">#springMessage("globals.subcountry")*</label></td>
+      <td>
+		#set($subcountries = $ctxCountries.getSubCountriesWithDisplayName($!checkoutAddressFormBean.newAddress.country, $locale))
+        #springFormSingleSelect("checkoutAddressFormBean.newAddress.subCountry" $subcountries "")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.country">#springMessage("globals.country")*</label></td>
+      <td>
+		#set($countries = $ctxCountries.getCountriesWithDisplayName($locale))
+        #springFormSingleSelect("checkoutAddressFormBean.newAddress.country" $countries "onchange='reloadSubCountries(this)'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.zipOrPostalCode">#springMessage("globals.zippostalcode")*</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.zipOrPostalCode" "maxlength='50'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+    <tr>
+      <td align="right"><label for="newAddress.phoneNumber">#springMessage("globals.phonenumber")*</label></td>
+      <td>
+        #springFormInput("checkoutAddressFormBean.newAddress.phoneNumber" "maxlength='50'")
+        #springShowErrors("<br>" "req")
+      </td>
+    </tr>
+  </table>
+#end
+
+
+#macro(checkoutBody)
+  <!-- START main area -->
+  <div id="body">            
+    #displayGlobalErrors("checkoutAddressFormBean")            
+    <div class="clear20"></div>
+    <div id="checkout-shipping">
+      ## Begin Select Existing Address Form
+      <form #if ($!isShipping) action="$baseUrl/shipping-address.ep" #else action="$baseUrl/billing-address.ep" #end method="post" name="checkoutAddressFormBean">
+        <fieldset>
+          <legend>
+            #if ($!isShipping) 
+              #springMessage("checkoutAddress.whereShipTo") 
+            #else #springMessage("checkoutAddress.whereBillTo")  
+            #end
+          </legend>
+          #if($checkoutAddressFormBean.existingAddresses && $checkoutAddressFormBean.existingAddresses.size() > 0)
+            <table border="0" cellspacing="0" cellpadding="0" width="100%" id="choose-address">
+              #foreach ($currAddress in $checkoutAddressFormBean.existingAddresses)
+                #set ($selected = false)
+                #if($selectedAddress && ($selectedAddress.uidPk == $currAddress.uidPk))
+                  #set ($selected = true)
+                #end
+                #displayAddress($currAddress $selected)
+              #end
+              
+              #set ($springErrors = $springMacroRequestContext.getErrors("checkoutAddressFormBean"))
+              <tr id="new-address">
+                <td valign="top"><input id="newAddressRadio" name="address" type="radio" value="" #if($springErrors.hasErrors() && (!$noServiceErrorNewAddress || $noServiceErrorNewAddress != "false")) checked="checked" #end onClick="document.getElementById('newAddress').style.display='block'" /></td>
+                <td><label><strong>#if ($!isShipping) #springMessage("checkoutAddress.shipNewAddress") #else #springMessage("checkoutAddress.billNewAddress")  #end </strong></label>
+                  <div id="newAddress" #if($springErrors.hasErrors() && (!$noServiceErrorNewAddress || $noServiceErrorNewAddress != "false")) style="display:block" #else style="display:none" #end >
+                    #displayNewAddress()
+                  </div>
+                </td>
+              </tr>
+            </table>
+          #else
+            #displayNewAddress()
+          #end
+        </fieldset>
+      </div>
+      <div id="checkout-cart-summary">
+        #displayOrderSummary($sesShoppingCart $checkoutAddressFormBean.getFrequencyMap())
+        <div class="fieldset-footer">
+          <input type="submit" class="checkout-button" value="#springMessage("checkoutAddress.save")" />
+        </div>
+      </div>
+      <div class="clear10"></div>
+    </div>
+#end
+

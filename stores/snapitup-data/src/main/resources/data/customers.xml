@@ -1,0 +1,2298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customers>
+<customer store_code="SNAPITUP" user_id="alana.abercombie@elasticpath.com" guid="0A618B76-CDAA-B3F4-7F57-AA2773638240">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:20-07:00</last_edited>
+    <password>f9708c2c03e485b937d430c479e88cb579871f15f97a4fb28e7c3b1f9d669fc1</password>
+    <salt>c8a03968f60a1e94db8718eea7529f7bf2a5263ff1d5c4d660014cabc5643f1d</salt>
+    <addresses>
+        <address guid="2B057A60-C6C3-24B0-163F-20D8965E8A41">
+            <last_name>Abercombie</last_name>
+            <first_name>Alana</first_name>
+            <phone_number>4313895083</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Santa Cruz</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>52844</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>2B057A60-C6C3-24B0-163F-20D8965E8A41</preferred_shipping_address>
+    <preferred_billing_address>2B057A60-C6C3-24B0-163F-20D8965E8A41</preferred_billing_address>
+    <credit_cards>
+        <card guid="62BB4E3A-BB78-41C8-842A-8D7469E434A6" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Alana Abercombie</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>2B057A60-C6C3-24B0-163F-20D8965E8A41</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">alana.abercombie@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Alana</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sun Feb 23 00:00:00 1941</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4313895083</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Abercombie</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="alejandra.abrahamian@elasticpath.com" guid="FF4BF52A-F025-430D-585F-D31474DB2962">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>0fe1e5371b2acd674964723c402776514edf7932df515947af1ad0b58d9c5da7</password>
+    <salt>653bde67022b9b1dcf4e43cb03962b2b506a97d0c7621167edc897b2d49c1ad0</salt>
+    <addresses>
+        <address guid="E5E4854E-EA58-B5A8-C0AA-8574446FDCAA">
+            <last_name>Abrahamian</last_name>
+            <first_name>Alejandra</first_name>
+            <phone_number>7832292671</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Point Mugu</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>40303</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>E5E4854E-EA58-B5A8-C0AA-8574446FDCAA</preferred_shipping_address>
+    <preferred_billing_address>E5E4854E-EA58-B5A8-C0AA-8574446FDCAA</preferred_billing_address>
+    <credit_cards>
+        <card guid="9C23434D-A606-429C-ABBD-72B931A3D2A2" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Alejandra Abrahamian</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>E5E4854E-EA58-B5A8-C0AA-8574446FDCAA</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">alejandra.abrahamian@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Abrahamian</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7832292671</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Alejandra</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Fri Jul 26 00:00:00 1946</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="allie.agudelo@elasticpath.com" guid="69337D14-F336-039F-DEE8-456737EDD6C4">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>51f2daf46caa199d833c639ab0f95c408383868360ec7d570aa156f7cfa13a22</password>
+    <salt>991aae5994098aeec11a9cdc085397a2b2d8e119735452f61f7a25fd947b1c40</salt>
+    <addresses>
+        <address guid="C49B4ED6-F146-AAFF-1A1F-134E8576F959">
+            <last_name>Agudelo</last_name>
+            <first_name>Allie</first_name>
+            <phone_number>7847772360</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Hermosa Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>70052</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>C49B4ED6-F146-AAFF-1A1F-134E8576F959</preferred_shipping_address>
+    <preferred_billing_address>C49B4ED6-F146-AAFF-1A1F-134E8576F959</preferred_billing_address>
+    <credit_cards>
+        <card guid="872B080D-F601-4B78-9E6F-400C9EFB714D" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Allie Agudelo</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>C49B4ED6-F146-AAFF-1A1F-134E8576F959</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">allie.agudelo@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Agudelo</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Nov 21 00:00:00 1956</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Allie</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7847772360</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="allyson.akhand@elasticpath.com" guid="E4F9153D-8E69-6B4B-7EC6-7541119E102B">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>7904ad9c631b482dd278eb4ca231093d5ed6208263f6a4059085cf02c29298fa</password>
+    <salt>2c31528f25fc222a81a4fb550426c6372f9abd743ac35449d7fbe0b4dd3b604d</salt>
+    <addresses>
+        <address guid="470FF5AE-7EF7-E380-4E1E-22A60A596C47">
+            <last_name>Akhand</last_name>
+            <first_name>Allyson</first_name>
+            <phone_number>8465744540</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Point Sur</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>52460</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>470FF5AE-7EF7-E380-4E1E-22A60A596C47</preferred_shipping_address>
+    <preferred_billing_address>470FF5AE-7EF7-E380-4E1E-22A60A596C47</preferred_billing_address>
+    <credit_cards>
+        <card guid="D882899C-619D-456E-A5FD-14447130A4BC" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Allyson Akhand</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>470FF5AE-7EF7-E380-4E1E-22A60A596C47</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Allyson</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Akhand</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Tue Mar 10 00:00:00 1936</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">8465744540</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">allyson.akhand@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="althea.albor@elasticpath.com" guid="AD0CFC8D-320E-5171-EC85-3BDF38FFE05B">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>4395c006e95b440b5217817d2c0237a10116008d6e83a120c0a0a5ccfcb53dd2</password>
+    <salt>f5b7cd2c4c16390b6e7d8910b86b91dd01f082fb206ed818204e6af90a3ed80e</salt>
+    <addresses>
+        <address guid="3F6B5F63-8B94-C243-18A3-A324E1B4ECB1">
+            <last_name>Albor</last_name>
+            <first_name>Althea</first_name>
+            <phone_number>6295264061</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Guadalupe</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>86145</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>3F6B5F63-8B94-C243-18A3-A324E1B4ECB1</preferred_shipping_address>
+    <preferred_billing_address>3F6B5F63-8B94-C243-18A3-A324E1B4ECB1</preferred_billing_address>
+    <credit_cards>
+        <card guid="06B8078D-E860-4199-AB7D-95E33BDE99D9" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Althea Albor</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>3F6B5F63-8B94-C243-18A3-A324E1B4ECB1</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">althea.albor@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Jul 29 00:00:00 1940</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Althea</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6295264061</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Albor</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="annabelle.alvirez@elasticpath.com" guid="F19844D9-887B-B464-03BF-91BBE0B78AE2">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>c1d20cdb950f7d2a92b3b15d6169033504a7991cc517a75b35a3031f719d4817</password>
+    <salt>32f9db6696c786d1e758a110d8011d3b1328475bc1d11b45499d1d215cd7f30e</salt>
+    <addresses>
+        <address guid="F5063907-0048-03FB-37F0-5C1E4DE82501">
+            <last_name>Alvirez</last_name>
+            <first_name>Annabelle</first_name>
+            <phone_number>7218783035</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Redondo Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>71521</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>F5063907-0048-03FB-37F0-5C1E4DE82501</preferred_shipping_address>
+    <preferred_billing_address>F5063907-0048-03FB-37F0-5C1E4DE82501</preferred_billing_address>
+    <credit_cards>
+        <card guid="5812A919-A07A-46C8-8D0C-6530C3151373" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Annabelle Alvirez</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>F5063907-0048-03FB-37F0-5C1E4DE82501</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7218783035</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Annabelle</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">annabelle.alvirez@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Mar 28 00:00:00 1949</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Alvirez</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="avis.amous@elasticpath.com" guid="E82A33F5-9687-D617-FFA1-5E5766BF84A5">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>81010d936ad23c2e7589e0bb3893842a0e45cb77bb7faaed5aa19fd4c9683bd9</password>
+    <salt>58a8925a4a6dd947630dc4758c5bbd3e04bd3e860d04d9024b009b2b1498b66e</salt>
+    <addresses>
+        <address guid="195A77BF-6099-A8D0-ADA0-66A9B7D4A49A">
+            <last_name>Amous</last_name>
+            <first_name>Avis</first_name>
+            <phone_number>9392207431</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Nepenthe</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>10041</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>195A77BF-6099-A8D0-ADA0-66A9B7D4A49A</preferred_shipping_address>
+    <preferred_billing_address>195A77BF-6099-A8D0-ADA0-66A9B7D4A49A</preferred_billing_address>
+    <credit_cards>
+        <card guid="37CC6F8F-00BB-4B99-BC6E-BED7C61A6209" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Avis Amous</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>195A77BF-6099-A8D0-ADA0-66A9B7D4A49A</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Fri Feb 05 00:00:00 1965</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">9392207431</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Avis</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">M</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">avis.amous@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Amous</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="benita.aquirre@elasticpath.com" guid="345020D6-4F00-5A31-FBDA-45C74FAD2FCD">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>6ff40c9c791faed981fc9d4a1277261c63c5d673a02f444b13af9c70a51c3772</password>
+    <salt>7db0dbd19e16f60508203cc5c1b19407a718ebf9b3c1f3c545903325014f2203</salt>
+    <addresses>
+        <address guid="8CCB5FFE-5856-F4BE-53FE-51103CA1C13D">
+            <last_name>Aquirre</last_name>
+            <first_name>Benita</first_name>
+            <phone_number>8758267337</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Mission Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>48038</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>8CCB5FFE-5856-F4BE-53FE-51103CA1C13D</preferred_shipping_address>
+    <preferred_billing_address>8CCB5FFE-5856-F4BE-53FE-51103CA1C13D</preferred_billing_address>
+    <credit_cards>
+        <card guid="0B9FC825-B3EA-49F2-8250-0DA695922028" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Benita Aquirre</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>8CCB5FFE-5856-F4BE-53FE-51103CA1C13D</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">8758267337</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Tue Mar 30 00:00:00 1993</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Aquirre</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Benita</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">benita.aquirre@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="carmella.argulewicz@elasticpath.com" guid="E8E5D3ED-29D6-436D-0062-069CD31B1779">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>3f58dc8a7dbc33808f00b60b88b612001efcb98395990135396c29e21b020309</password>
+    <salt>956df9e690447838b6b6afaa23b8657b0913c6e0dac7578761ec513748225d4b</salt>
+    <addresses>
+        <address guid="C6C0BCE7-2DD3-8F22-90D2-CEC77667A0CA">
+            <last_name>Argulewicz</last_name>
+            <first_name>Carmella</first_name>
+            <phone_number>344580598</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>NULL</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>85218</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>C6C0BCE7-2DD3-8F22-90D2-CEC77667A0CA</preferred_shipping_address>
+    <preferred_billing_address>C6C0BCE7-2DD3-8F22-90D2-CEC77667A0CA</preferred_billing_address>
+    <credit_cards>
+        <card guid="DC9FF08C-709D-49C4-A90D-AB1C2B5A0F43" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Carmella Argulewicz</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>C6C0BCE7-2DD3-8F22-90D2-CEC77667A0CA</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">carmella.argulewicz@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Carmella</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Argulewicz</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">344580598</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Jun 19 00:00:00 1968</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="chandra.arroyano@elasticpath.com" guid="F36ACED6-A73C-25B2-29A6-AFA86F15D643">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>63af6b2a17c541461348f85a8cf2f81fa29b4589d900fe8fe38f8e1902136c74</password>
+    <salt>6a38eaa8de22f6716a48acca4c94e617d877832e1d9a54a3c245014987e6349a</salt>
+    <addresses>
+        <address guid="83F7A126-787D-7C8F-E488-D7A0C2901BCF">
+            <last_name>Arroyano</last_name>
+            <first_name>Chandra</first_name>
+            <phone_number>853924638</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Lompoc</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>22691</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>83F7A126-787D-7C8F-E488-D7A0C2901BCF</preferred_shipping_address>
+    <preferred_billing_address>83F7A126-787D-7C8F-E488-D7A0C2901BCF</preferred_billing_address>
+    <credit_cards>
+        <card guid="214F1DAD-47FE-4ADD-85BD-882A51B2F312" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Chandra Arroyano</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>83F7A126-787D-7C8F-E488-D7A0C2901BCF</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">chandra.arroyano@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Arroyano</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">853924638</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Chandra</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Tue Jul 22 00:00:00 1986</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="clare.artez@elasticpath.com" guid="6500D6D6-C6BD-2A2C-6319-265D7B36F541">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>31698163061387d5a3fff2fc3180c12caf427f5a3f4eb23052414fea6003c6da</password>
+    <salt>b8b917e42c71ddccc3667d3c564307b060e2ab24652141055df77d81dabddb63</salt>
+    <addresses>
+        <address guid="84F567E0-DBCB-2134-762E-78B6B9D89562">
+            <last_name>Artez</last_name>
+            <first_name>Clare</first_name>
+            <phone_number>9134222842</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Pismo Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>58710</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>84F567E0-DBCB-2134-762E-78B6B9D89562</preferred_shipping_address>
+    <preferred_billing_address>84F567E0-DBCB-2134-762E-78B6B9D89562</preferred_billing_address>
+    <credit_cards>
+        <card guid="72AF86FD-35B5-42E5-B4B7-83E8052DF229" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Clare Artez</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>84F567E0-DBCB-2134-762E-78B6B9D89562</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">clare.artez@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Clare</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">9134222842</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sat Jun 25 00:00:00 1983</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Artez</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="darcy.aubel@elasticpath.com" guid="2D9998E3-0E2B-9FB3-8373-5043168A5CD2">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>d4e01e3cdf10144ea3fdccd078c518905d4c4498a1adc9415492983bff5efcc4</password>
+    <salt>0b846c851ad7c18179db94a5f6c9299d78c37db8ab50ff97b76b940c183632ca</salt>
+    <addresses>
+        <address guid="6A91524B-E865-DC3A-6038-5C4AE3A3A891">
+            <last_name>Aubel</last_name>
+            <first_name>Darcy</first_name>
+            <phone_number>7617502046</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Limekiln SP</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>70293</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>6A91524B-E865-DC3A-6038-5C4AE3A3A891</preferred_shipping_address>
+    <preferred_billing_address>6A91524B-E865-DC3A-6038-5C4AE3A3A891</preferred_billing_address>
+    <credit_cards>
+        <card guid="6642E416-4786-4CE5-A0A0-5A12A0378586" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Darcy Aubel</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>6A91524B-E865-DC3A-6038-5C4AE3A3A891</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Darcy</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">darcy.aubel@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Oct 12 00:00:00 1955</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">M</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7617502046</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Aubel</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="dona.bacman@elasticpath.com" guid="FA48D7A6-E159-19AE-2F62-D429A24CF898">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>763593d5ccacfac7784a6815450eceab1e7894c4ddbf419ce876902cd3c3fe9a</password>
+    <salt>27a9d1c4ef09b289defab5c164370d3c70b10c979b2a72368233822463e70f49</salt>
+    <addresses>
+        <address guid="1814BD16-3053-5B34-7500-5D2F47F91A6C">
+            <last_name>Bacman</last_name>
+            <first_name>Dona</first_name>
+            <phone_number>6418304311</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Long Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>33782</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>1814BD16-3053-5B34-7500-5D2F47F91A6C</preferred_shipping_address>
+    <preferred_billing_address>1814BD16-3053-5B34-7500-5D2F47F91A6C</preferred_billing_address>
+    <credit_cards>
+        <card guid="716227C3-D99F-4A42-BFF8-418AC3B75EAA" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Dona Bacman</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>1814BD16-3053-5B34-7500-5D2F47F91A6C</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Dona</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bacman</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sat Jul 26 00:00:00 1930</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">dona.bacman@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6418304311</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="earlene.badertscher@elasticpath.com" guid="E6D44716-ED79-F736-5577-62345CA8E802">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>25141aa1a55630dfd6761f82aaea451f74e003840de5d3976da02c0741682490</password>
+    <salt>5f802563310afceff0494a18cbc6cd1d196666ff389ec1fe274eaed79f146347</salt>
+    <addresses>
+        <address guid="06C2240B-4E0C-3F5A-14A3-3CE5F24D49B1">
+            <last_name>Badertscher</last_name>
+            <first_name>Earlene</first_name>
+            <phone_number>9561914705</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>San Pedro</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>32005</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>06C2240B-4E0C-3F5A-14A3-3CE5F24D49B1</preferred_shipping_address>
+    <preferred_billing_address>06C2240B-4E0C-3F5A-14A3-3CE5F24D49B1</preferred_billing_address>
+    <credit_cards>
+        <card guid="0F65626A-0C92-4815-B0A6-9CF13E29ACEF" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Earlene Badertscher</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>06C2240B-4E0C-3F5A-14A3-3CE5F24D49B1</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">9561914705</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Earlene</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Jan 17 00:00:00 1946</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">earlene.badertscher@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Badertscher</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="earnestine.bahe@elasticpath.com" guid="72801A53-90A3-B7E1-BE18-3219E791F0EA">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>438eaa63531b49f9da1d9a321671da95136823cf44e312df1cfe118faf9d24ec</password>
+    <salt>a113129790743380dc71efcfb819587c097228af67071a3dffa01bd90e998c49</salt>
+    <addresses>
+        <address guid="0E23F284-74D7-B9BC-3FAD-C6F305331351">
+            <last_name>Bahe</last_name>
+            <first_name>Earnestine</first_name>
+            <phone_number>8304328563</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Sunset Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>90181</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>0E23F284-74D7-B9BC-3FAD-C6F305331351</preferred_shipping_address>
+    <preferred_billing_address>0E23F284-74D7-B9BC-3FAD-C6F305331351</preferred_billing_address>
+    <credit_cards>
+        <card guid="20C3BDF7-2976-4F69-835A-5542120ECBEB" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Earnestine Bahe</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>0E23F284-74D7-B9BC-3FAD-C6F305331351</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">8304328563</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Earnestine</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">M</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">earnestine.bahe@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sun Aug 10 00:00:00 1941</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bahe</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="edwina.baine@elasticpath.com" guid="A4C2B526-4428-0C2A-4001-F1112BFF4A29">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>3efe7ef8506c845acac68869d33196bf721d3317662b21c426632c38c0a261be</password>
+    <salt>6e63b910ac6fc0d99f2c8871e6ff05415af4ac6404a9d3e7798da6079de9fb9a</salt>
+    <addresses>
+        <address guid="E08F78B8-E959-EA63-D99E-2AA35A2E979E">
+            <last_name>Baine</last_name>
+            <first_name>Edwina</first_name>
+            <phone_number>1769318791</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Bixby Creek</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>59848</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>E08F78B8-E959-EA63-D99E-2AA35A2E979E</preferred_shipping_address>
+    <preferred_billing_address>E08F78B8-E959-EA63-D99E-2AA35A2E979E</preferred_billing_address>
+    <credit_cards>
+        <card guid="65609D27-F182-4AAF-96BA-2C3229860C31" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Edwina Baine</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>E08F78B8-E959-EA63-D99E-2AA35A2E979E</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Baine</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1769318791</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Edwina</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sun Jul 02 00:00:00 1989</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">edwina.baine@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="elinor.bainey@elasticpath.com" guid="26EF35AA-A97E-3DB6-0DAD-BF0D76C01D54">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>325034ab8764336b2526ad67e38a24429b884f867755a42041bb311782de0471</password>
+    <salt>19c2e5fd8088c3f26ba8178db9c81282fa07cb67459bfcf2b55f91c8f18b01b3</salt>
+    <addresses>
+        <address guid="A2940A62-0746-78E4-644F-BD55B7F616BF">
+            <last_name>Bainey</last_name>
+            <first_name>Elinor</first_name>
+            <phone_number>1236037943</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>NULL</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>65235</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>A2940A62-0746-78E4-644F-BD55B7F616BF</preferred_shipping_address>
+    <preferred_billing_address>A2940A62-0746-78E4-644F-BD55B7F616BF</preferred_billing_address>
+    <credit_cards>
+        <card guid="1679C018-BC23-44A6-822D-3FEC67979126" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Elinor Bainey</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>A2940A62-0746-78E4-644F-BD55B7F616BF</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">elinor.bainey@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bainey</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sun Aug 11 00:00:00 1935</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Elinor</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1236037943</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="elnora.bajek@elasticpath.com" guid="494ABC7E-5AB6-CADE-46F2-5BB2D66B7AF4">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>9a3af207f7a16536c0c0859e1ba3c9c8dedc3c32fb6adfde7f6f7252f52ef5c5</password>
+    <salt>22e4e3a2e92f43c061c13ffd404e85aad5e109fe058601245777cb4ef8eee6b6</salt>
+    <addresses>
+        <address guid="8BF918D5-7F07-A1E4-FB15-7EB0B3ACECCA">
+            <last_name>Bajek</last_name>
+            <first_name>Elnora</first_name>
+            <phone_number>4566433727</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Venice Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>67661</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>8BF918D5-7F07-A1E4-FB15-7EB0B3ACECCA</preferred_shipping_address>
+    <preferred_billing_address>8BF918D5-7F07-A1E4-FB15-7EB0B3ACECCA</preferred_billing_address>
+    <credit_cards>
+        <card guid="69987BC9-5EFE-4AF5-9BD8-9CEF7066C325" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Elnora Bajek</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>8BF918D5-7F07-A1E4-FB15-7EB0B3ACECCA</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4566433727</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Elnora</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bajek</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Nov 01 00:00:00 1982</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">elnora.bajek@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="ericka.bald@elasticpath.com" guid="07868617-9CAE-5A8F-667D-87A70FEBF329">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:21-07:00</last_edited>
+    <password>8bc51683266b20fa375b8c19f6a3953a71599203749b6b1137883236a028586d</password>
+    <salt>7a77f6bfc32aae4bb5547ba3cb89c0da5f87b730f8839e382599b6fdfe2be49d</salt>
+    <addresses>
+        <address guid="0F89C0DE-5939-DEEF-2301-0E40F4B33BB0">
+            <last_name>Bald</last_name>
+            <first_name>Ericka</first_name>
+            <phone_number>6910429183</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Solvang</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>5014</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>0F89C0DE-5939-DEEF-2301-0E40F4B33BB0</preferred_shipping_address>
+    <preferred_billing_address>0F89C0DE-5939-DEEF-2301-0E40F4B33BB0</preferred_billing_address>
+    <credit_cards>
+        <card guid="9E1A8877-52C7-4C70-BF08-A5E1726E071D" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Ericka Bald</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>0F89C0DE-5939-DEEF-2301-0E40F4B33BB0</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">ericka.bald@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bald</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6910429183</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Fri Oct 03 00:00:00 1986</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Ericka</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="esmeralda.ballar@elasticpath.com" guid="E163B376-9D8D-DD4B-37A7-7C947D8D201D">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>5eb088b552ea63699818db3b66155c86d726c130faed17749a39b55b40edeffe</password>
+    <salt>f3e818ff1fb0c93738f38657b86c94ac7dd589360f52da1b2fa1e07e8dcdfcf9</salt>
+    <addresses>
+        <address guid="8308FE6D-9E42-E97A-4593-E07E8AF32CC5">
+            <last_name>Ballar</last_name>
+            <first_name>Esmeralda</first_name>
+            <phone_number>4077800937</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Carson</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>63661</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>8308FE6D-9E42-E97A-4593-E07E8AF32CC5</preferred_shipping_address>
+    <preferred_billing_address>8308FE6D-9E42-E97A-4593-E07E8AF32CC5</preferred_billing_address>
+    <credit_cards>
+        <card guid="F028A58B-B0D7-40F6-89B3-3F0D39021EAE" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Esmeralda Ballar</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>8308FE6D-9E42-E97A-4593-E07E8AF32CC5</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Ballar</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">esmeralda.ballar@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Esmeralda</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4077800937</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Feb 27 00:00:00 1933</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="eve.ballesterous@elasticpath.com" guid="28AE1F5E-7192-A5A5-0D29-BFE381B7A0C2">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>c7024c0466e55d03f3cbc4986f57f3a31d793dcbafaa00ffbaa487a86c1cdd29</password>
+    <salt>ffefb1eb2b3a754e9f0b52197b177b97b6fda19c74f87dcb6e6bc4421d17e78f</salt>
+    <addresses>
+        <address guid="2A2F16D3-8BD6-6377-772A-FE063B5A99FA">
+            <last_name>Ballesterous</last_name>
+            <first_name>Eve</first_name>
+            <phone_number>1086028473</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Arroyo Grande</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>78708</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>2A2F16D3-8BD6-6377-772A-FE063B5A99FA</preferred_shipping_address>
+    <preferred_billing_address>2A2F16D3-8BD6-6377-772A-FE063B5A99FA</preferred_billing_address>
+    <credit_cards>
+        <card guid="2560EDB1-C4C5-474D-8F35-F90AF22F2EDA" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Eve Ballesterous</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>2A2F16D3-8BD6-6377-772A-FE063B5A99FA</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">eve.ballesterous@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1086028473</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu May 17 00:00:00 1962</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Eve</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Ballesterous</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="harriett.balzarine@elasticpath.com" guid="1B2C0107-B31F-DA99-E357-0F75F17EA21B">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>e044ff01f857daa95422a6890aee20f48f4a358a1d7aa41c86315b724bdc40e9</password>
+    <salt>ca63c334502d0d5c238db3c3db409b637e6c86ebd16cb71aadf6c3f7b9161f4e</salt>
+    <addresses>
+        <address guid="D269921F-65AB-84D1-6952-9E786B3F8B02">
+            <last_name>Balzarine</last_name>
+            <first_name>Harriett</first_name>
+            <phone_number>2369625734</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Costa Mesa</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>47757</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>D269921F-65AB-84D1-6952-9E786B3F8B02</preferred_shipping_address>
+    <preferred_billing_address>D269921F-65AB-84D1-6952-9E786B3F8B02</preferred_billing_address>
+    <credit_cards>
+        <card guid="D1C933CF-9C72-45EE-B120-45DC5CF58F8E" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Harriett Balzarine</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>D269921F-65AB-84D1-6952-9E786B3F8B02</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Balzarine</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">2369625734</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">harriett.balzarine@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Sep 21 00:00:00 1955</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Harriett</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="hillary.barlak@elasticpath.com" guid="3745D305-C4DF-5870-D208-1BC3DDD03559">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>c7155ecce5e76b91f6a8bb6fae34bb143c54e0ce55e18f5e4a4c98a148ffcd7f</password>
+    <salt>992334a2c5a9ddc220b9a6e201872e51ff361c062f97d3f11cbe99698f995c35</salt>
+    <addresses>
+        <address guid="D241FB99-C959-35B9-4B8B-E15D3802127E">
+            <last_name>Barlak</last_name>
+            <first_name>Hillary</first_name>
+            <phone_number>7089733936</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Pacific Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>35029</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>D241FB99-C959-35B9-4B8B-E15D3802127E</preferred_shipping_address>
+    <preferred_billing_address>D241FB99-C959-35B9-4B8B-E15D3802127E</preferred_billing_address>
+    <credit_cards>
+        <card guid="3A4AEEFB-C5F6-4BD1-9ED7-059C421F28D6" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Hillary Barlak</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>D241FB99-C959-35B9-4B8B-E15D3802127E</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Hillary</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Tue Jun 30 00:00:00 1964</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">hillary.barlak@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7089733936</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Barlak</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="jami.baronne@elasticpath.com" guid="74B9F46F-57D0-7115-D1B2-98FA3A5A1F7D">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>741d59dd2aa5fff36873256b44713baed299cabec248fbb6d82a80a1c399d6d9</password>
+    <salt>3e0e172ef7bb746855e480a166c26b28e10b82c18df9361a51b6e7e69df46a29</salt>
+    <addresses>
+        <address guid="4EF14F88-8F69-C041-8C2F-C75A5191A2FF">
+            <last_name>Baronne</last_name>
+            <first_name>Jami</first_name>
+            <phone_number>6043563764</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Palm Springs</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>6537</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>4EF14F88-8F69-C041-8C2F-C75A5191A2FF</preferred_shipping_address>
+    <preferred_billing_address>4EF14F88-8F69-C041-8C2F-C75A5191A2FF</preferred_billing_address>
+    <credit_cards>
+        <card guid="950585CF-E1C1-4B8B-8A3B-FFA02EFE8D24" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Jami Baronne</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>4EF14F88-8F69-C041-8C2F-C75A5191A2FF</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Baronne</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jami.baronne@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Oct 07 00:00:00 1948</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Jami</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">M</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6043563764</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="jeanie.baseley@elasticpath.com" guid="EACD36BC-4954-EBBB-F526-5D31B619D049">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>26f8f696a23f9f592b8fe8e5a54c39bf157a253b93601c3390563988e499ff3c</password>
+    <salt>cff81d97934613ee922029b95271addf0671dea5dfbe2104645a44f5663da6bd</salt>
+    <addresses>
+        <address guid="E3FFC124-1F3D-342D-5D88-00C4E24F30B9">
+            <last_name>Baseley</last_name>
+            <first_name>Jeanie</first_name>
+            <phone_number>3735919477</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Sacramento</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>64553</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>E3FFC124-1F3D-342D-5D88-00C4E24F30B9</preferred_shipping_address>
+    <preferred_billing_address>E3FFC124-1F3D-342D-5D88-00C4E24F30B9</preferred_billing_address>
+    <credit_cards>
+        <card guid="E3705E12-0A50-42F1-9CB7-C6D0317D37DE" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Jeanie Baseley</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>E3FFC124-1F3D-342D-5D88-00C4E24F30B9</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Jan 02 00:00:00 1991</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Jeanie</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">3735919477</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Baseley</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jeanie.baseley@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="jerri.baumkirchner@elasticpath.com" guid="C688910D-1B9A-B853-AEC9-865FB109189E">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>929cfefa355914e31757e235be81ce403cf1ce691764aa020272c376e4ef5858</password>
+    <salt>ffa078a90630ddbc799975ffca4619535eed2c34b0f829dad5a9840dcb65309d</salt>
+    <addresses>
+        <address guid="3BF079ED-D626-693E-119F-39683448AC64">
+            <last_name>Baumkirchner</last_name>
+            <first_name>Jerri</first_name>
+            <phone_number>4822189633</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Monterey</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>7626</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>3BF079ED-D626-693E-119F-39683448AC64</preferred_shipping_address>
+    <preferred_billing_address>3BF079ED-D626-693E-119F-39683448AC64</preferred_billing_address>
+    <credit_cards>
+        <card guid="35A8BCE9-98A5-4151-A78D-470C9807BD3F" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Jerri Baumkirchner</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>3BF079ED-D626-693E-119F-39683448AC64</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4822189633</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Jerri</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jerri.baumkirchner@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Baumkirchner</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">M</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Jun 09 00:00:00 1952</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="julianne.bax@elasticpath.com" guid="CF77CC42-F1AA-731D-7E0A-D055E26406BE">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>17324b6fd2b5d251ae1e5bf0c9a8ea73fbd37bb430c12ac8658d93ce7f7147de</password>
+    <salt>0264ecae54a31117044868c4f8f83a0a9b66d01354e3e56a2890417b1b054531</salt>
+    <addresses>
+        <address guid="A01DDA15-B8E0-D6C2-4DC4-E7F3375B3697">
+            <last_name>Bax</last_name>
+            <first_name>Julianne</first_name>
+            <phone_number>4395509200</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Buena Park</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>16291</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>A01DDA15-B8E0-D6C2-4DC4-E7F3375B3697</preferred_shipping_address>
+    <preferred_billing_address>A01DDA15-B8E0-D6C2-4DC4-E7F3375B3697</preferred_billing_address>
+    <credit_cards>
+        <card guid="70113BED-DA65-4E3C-8DDB-0CB3B8F8422B" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Julianne Bax</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>A01DDA15-B8E0-D6C2-4DC4-E7F3375B3697</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">julianne.bax@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Apr 05 00:00:00 1945</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Julianne</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4395509200</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bax</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="kathrine.bedenfield@elasticpath.com" guid="F6B3DFEB-4EBF-ACD6-C8E7-09DD1E8A8525">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>f1df22c41a016e974cb224d3abee65f0b9dd29e3a27eb0f017e52c002347bc4c</password>
+    <salt>edbbfbf0ab32232d7b623e1296e67e5d6ecfb745810dee940d53442f9a2c8beb</salt>
+    <addresses>
+        <address guid="4D206B7C-61BF-E829-4323-7DE0EBF03891">
+            <last_name>Bedenfield</last_name>
+            <first_name>Kathrine</first_name>
+            <phone_number>1166127850</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Seal Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>7450</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>4D206B7C-61BF-E829-4323-7DE0EBF03891</preferred_shipping_address>
+    <preferred_billing_address>4D206B7C-61BF-E829-4323-7DE0EBF03891</preferred_billing_address>
+    <credit_cards>
+        <card guid="EE65DD53-BED1-49B9-B325-3CB04981EA08" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Kathrine Bedenfield</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>4D206B7C-61BF-E829-4323-7DE0EBF03891</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bedenfield</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1166127850</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">kathrine.bedenfield@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Kathrine</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Nov 01 00:00:00 1965</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="katy.bedolla@elasticpath.com" guid="6BF01E74-3450-2876-A1F9-AE3E197BFACC">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>524c40446b28c1c66ef054931b99afecc42724718342eb5498471d01538c473d</password>
+    <salt>6f330f59b0ef74ee57503dce89210296d6f348a81197a03beb04d50fe873fb9f</salt>
+    <addresses>
+        <address guid="207BC041-1E69-4E10-CE4F-BADDC21E8856">
+            <last_name>Bedolla</last_name>
+            <first_name>Katy</first_name>
+            <phone_number>8831599544</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Playa del Rey</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>92627</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>207BC041-1E69-4E10-CE4F-BADDC21E8856</preferred_shipping_address>
+    <preferred_billing_address>207BC041-1E69-4E10-CE4F-BADDC21E8856</preferred_billing_address>
+    <credit_cards>
+        <card guid="81F35F3D-07CE-4A77-884C-93BE9A948809" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Katy Bedolla</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>207BC041-1E69-4E10-CE4F-BADDC21E8856</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">katy.bedolla@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bedolla</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">8831599544</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Oct 15 00:00:00 1962</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Katy</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="lenore.behanan@elasticpath.com" guid="EAD58EDA-8F07-91C6-1F11-8B6496EFD771">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>d71e8111a11d572d9e85e9960bc63acf8c3db446740208b028444a0d597a6383</password>
+    <salt>0925ac9effb897608f30734825167a2976f055d37f357995aca44465765d6efc</salt>
+    <addresses>
+        <address guid="5DEDBFE9-50C9-083A-D613-E4B1171A1E82">
+            <last_name>Behanan</last_name>
+            <first_name>Lenore</first_name>
+            <phone_number>7172044845</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Laguna Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>68022</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>5DEDBFE9-50C9-083A-D613-E4B1171A1E82</preferred_shipping_address>
+    <preferred_billing_address>5DEDBFE9-50C9-083A-D613-E4B1171A1E82</preferred_billing_address>
+    <credit_cards>
+        <card guid="293CD268-715F-41A7-87B0-A54B74361AB4" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Lenore Behanan</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>5DEDBFE9-50C9-083A-D613-E4B1171A1E82</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7172044845</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Mon Sep 15 00:00:00 1980</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">lenore.behanan@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Lenore</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Behanan</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="lilia.bening@elasticpath.com" guid="CA56C973-F936-8580-AF3F-0CC9B4288A28">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>f7620cf674316e44c20b402fb5991237f238818f4c84bc29bacda12bbce11a95</password>
+    <salt>c3b0b995bd71237717d1f6f3e126f62567490fb46870e0b2f78ea9136ca472fa</salt>
+    <addresses>
+        <address guid="A77314A7-1D02-8932-575B-1D3843297F5C">
+            <last_name>Bening</last_name>
+            <first_name>Lilia</first_name>
+            <phone_number>7959754421</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Arroyo Grande</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>15966</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>A77314A7-1D02-8932-575B-1D3843297F5C</preferred_shipping_address>
+    <preferred_billing_address>A77314A7-1D02-8932-575B-1D3843297F5C</preferred_billing_address>
+    <credit_cards>
+        <card guid="1F2E984B-4D45-4931-A5A0-B99132547762" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Lilia Bening</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>A77314A7-1D02-8932-575B-1D3843297F5C</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">lilia.bening@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bening</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Lilia</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7959754421</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sat Jan 09 00:00:00 1993</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="liza.bernatchez@elasticpath.com" guid="EFE43385-5C19-BFFD-6A2D-06432AA357FF">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>a28980af7f38345086b0ecf2b88aa5d8c91ba6c799ab37dd81aa701087032367</password>
+    <salt>cf70ba3dc87c6db428864944c09e5af3a81edbf55e99ca33d4e35652f84ae550</salt>
+    <addresses>
+        <address guid="C16C25B9-263E-FD1A-E257-4D617E7C8DC3">
+            <last_name>Bernatchez</last_name>
+            <first_name>Liza</first_name>
+            <phone_number>722702911</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Garden Grove</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>84032</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>C16C25B9-263E-FD1A-E257-4D617E7C8DC3</preferred_shipping_address>
+    <preferred_billing_address>C16C25B9-263E-FD1A-E257-4D617E7C8DC3</preferred_billing_address>
+    <credit_cards>
+        <card guid="751E65AC-A1CF-4E35-8EEF-33CC34AF4AC5" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Liza Bernatchez</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>C16C25B9-263E-FD1A-E257-4D617E7C8DC3</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">liza.bernatchez@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Fri May 21 00:00:00 1976</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Liza</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">722702911</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bernatchez</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="loraine.berrocal@elasticpath.com" guid="26127A00-553E-C8F5-F01B-0EE861E91E54">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>61895b640ddf6f59c18696e3925dd6c3ef0f886acaba6b53df84d625d60230b7</password>
+    <salt>60c6cb482b45d294310825b0d6f9c60507ba3e298b88c800e13ace00451b5704</salt>
+    <addresses>
+        <address guid="EB336986-7F56-9C9B-F730-5C36587C2982">
+            <last_name>Berrocal</last_name>
+            <first_name>Loraine</first_name>
+            <phone_number>125221083</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Trabuco Canyon</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>80523</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>EB336986-7F56-9C9B-F730-5C36587C2982</preferred_shipping_address>
+    <preferred_billing_address>EB336986-7F56-9C9B-F730-5C36587C2982</preferred_billing_address>
+    <credit_cards>
+        <card guid="04B1DA4D-B785-4422-9C64-573F4EB62BAF" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Loraine Berrocal</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>EB336986-7F56-9C9B-F730-5C36587C2982</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">125221083</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Fri Jan 06 00:00:00 1978</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">loraine.berrocal@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Loraine</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Berrocal</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="lorrie.bhaskar@elasticpath.com" guid="D9317CF2-BB69-6CFD-3CA2-2142A386155B">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>144f7e9c0ad8e6aed27e1faa66182df530b0c9d71e8777da5ad376d33b7b6060</password>
+    <salt>e252e841caf8c9dceb573829a8363596d881600a2705f365c8e370cc3cf10be0</salt>
+    <addresses>
+        <address guid="E931CA83-948A-1C7B-9269-C4EB72AE2FCA">
+            <last_name>Bhaskar</last_name>
+            <first_name>Lorrie</first_name>
+            <phone_number>6376009577</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>NULL</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>40663</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>E931CA83-948A-1C7B-9269-C4EB72AE2FCA</preferred_shipping_address>
+    <preferred_billing_address>E931CA83-948A-1C7B-9269-C4EB72AE2FCA</preferred_billing_address>
+    <credit_cards>
+        <card guid="50826B44-7CF2-4AC5-8E15-561A617F1203" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Lorrie Bhaskar</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>E931CA83-948A-1C7B-9269-C4EB72AE2FCA</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6376009577</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Lorrie</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bhaskar</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Oct 12 00:00:00 1950</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">lorrie.bhaskar@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="louisa.biersack@elasticpath.com" guid="E64327EB-7D39-3A8E-4E3C-CD85F9A8D72A">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>7a617c0eacaf88ef18646f8f331faff94c1104a839d0568ce03e6074449c035e</password>
+    <salt>3b456615291c54af7d4d5ad29dc9b0d842688e97d81fa75f53f42c4417d4abb2</salt>
+    <addresses>
+        <address guid="7E412614-B03F-1119-93B5-0B6F80E2C184">
+            <last_name>Biersack</last_name>
+            <first_name>Louisa</first_name>
+            <phone_number>1106854349</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Mission Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>41784</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>7E412614-B03F-1119-93B5-0B6F80E2C184</preferred_shipping_address>
+    <preferred_billing_address>7E412614-B03F-1119-93B5-0B6F80E2C184</preferred_billing_address>
+    <credit_cards>
+        <card guid="A143E099-1419-4E44-9B36-6246EAAE614A" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Louisa Biersack</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>7E412614-B03F-1119-93B5-0B6F80E2C184</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Biersack</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1106854349</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Louisa</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Apr 11 00:00:00 1945</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">louisa.biersack@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="malinda.bigusiak@elasticpath.com" guid="DA82875D-F9F3-0BA7-CD72-F165859BA76D">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>81cc2394af1d6c119377fb498ebf672ce3f92d007beded657c3c04f9f9e87b8a</password>
+    <salt>191daa06dba541696b42bfb67657481102176addbbb75abf4c0243dcb2aa64e9</salt>
+    <addresses>
+        <address guid="9C076879-E782-97F0-44BE-9EFFF54ECE1A">
+            <last_name>Bigusiak</last_name>
+            <first_name>Malinda</first_name>
+            <phone_number>30379536</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>NULL</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>22392</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>9C076879-E782-97F0-44BE-9EFFF54ECE1A</preferred_shipping_address>
+    <preferred_billing_address>9C076879-E782-97F0-44BE-9EFFF54ECE1A</preferred_billing_address>
+    <credit_cards>
+        <card guid="F319FE84-AE68-4C03-A652-0CE4118A3118" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Malinda Bigusiak</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>9C076879-E782-97F0-44BE-9EFFF54ECE1A</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Malinda</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">30379536</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">malinda.bigusiak@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Fri Jul 05 00:00:00 1991</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bigusiak</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="mallory.bjerknes@elasticpath.com" guid="075C52E5-00EF-8AB0-AAC3-5D11672700E2">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>64da8e627ce3063df27e941a299ef4d6f3f1d983f5e0eacfdfb914c7ce72f594</password>
+    <salt>40bb2684c953de24a27fb59600cbb21cecaafad41b8476472fdd1019496a9ca3</salt>
+    <addresses>
+        <address guid="786C0F2B-E84D-887E-94B8-9913906E3D89">
+            <last_name>Bjerknes</last_name>
+            <first_name>Mallory</first_name>
+            <phone_number>4191432099</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Guadalupe</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>65060</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>786C0F2B-E84D-887E-94B8-9913906E3D89</preferred_shipping_address>
+    <preferred_billing_address>786C0F2B-E84D-887E-94B8-9913906E3D89</preferred_billing_address>
+    <credit_cards>
+        <card guid="47FC56A1-EBE0-4588-9AE7-4E7ECA89223F" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Mallory Bjerknes</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>786C0F2B-E84D-887E-94B8-9913906E3D89</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4191432099</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">mallory.bjerknes@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu May 30 00:00:00 1946</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bjerknes</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Mallory</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="marcie.blanko@elasticpath.com" guid="AB2BED36-C411-A4C0-0A02-62ED151B03BC">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>35dff2e4ced3e67616d61880bdbb815160b7ffb67cd148cb2f419ab997d4b7fb</password>
+    <salt>5ea3bc69d96c3c686a284c06c1fc941ad073508e439b6b1cc5b819e8ecbd779c</salt>
+    <addresses>
+        <address guid="6EB33CC1-8899-602D-C197-BB4A6F33C75E">
+            <last_name>Blanko</last_name>
+            <first_name>Marcie</first_name>
+            <phone_number>2081300360</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Cayucos</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>60222</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>6EB33CC1-8899-602D-C197-BB4A6F33C75E</preferred_shipping_address>
+    <preferred_billing_address>6EB33CC1-8899-602D-C197-BB4A6F33C75E</preferred_billing_address>
+    <credit_cards>
+        <card guid="6AC046C4-F8E3-4560-8FC1-43CC9FC41591" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Marcie Blanko</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>6EB33CC1-8899-602D-C197-BB4A6F33C75E</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Marcie</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Blanko</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">2081300360</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">marcie.blanko@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Dec 19 00:00:00 1968</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="margery.blanquart@elasticpath.com" guid="B84B5699-34B4-169D-CB64-C06B527C24AB">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>b7436b97936c60745cad9cc06aa3fb9dcc46bb923c26422c7f151a38447ec8cd</password>
+    <salt>d8697d0b9ba5e77a4461c88748e7c6754067fbbb2dd9dbf0c0c7ec0c3af73675</salt>
+    <addresses>
+        <address guid="1D37EF9E-7180-AEC4-F6A7-563982F53D54">
+            <last_name>Blanquart</last_name>
+            <first_name>Margery</first_name>
+            <phone_number>927192454</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Ragged Point</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>69401</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>1D37EF9E-7180-AEC4-F6A7-563982F53D54</preferred_shipping_address>
+    <preferred_billing_address>1D37EF9E-7180-AEC4-F6A7-563982F53D54</preferred_billing_address>
+    <credit_cards>
+        <card guid="D353D921-DB59-4CC2-AABA-DB6140280B19" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Margery Blanquart</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>1D37EF9E-7180-AEC4-F6A7-563982F53D54</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">margery.blanquart@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Margery</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Blanquart</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Jul 14 00:00:00 1926</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">927192454</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUP" user_id="maricela.blessett@elasticpath.com" guid="07F8BF5C-BFD7-0D62-DD11-3E0BD80FB524">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>921584d4ade0f2698f4a94eab93cdbafefe6e2be929076811fb0491d3494905c</password>
+    <salt>772055ea02ddfc8fd61be4135d1a48875cc36b55b9fecfc02414e78c12774136</salt>
+    <addresses>
+        <address guid="1FF6DC4E-2BD7-70F0-5F79-A7774C4B0E36">
+            <last_name>Blessett</last_name>
+            <first_name>Maricela</first_name>
+            <phone_number>208002382</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Venice Beach</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>33553</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>1FF6DC4E-2BD7-70F0-5F79-A7774C4B0E36</preferred_shipping_address>
+    <preferred_billing_address>1FF6DC4E-2BD7-70F0-5F79-A7774C4B0E36</preferred_billing_address>
+    <credit_cards>
+        <card guid="F7B94ADF-A831-4208-B456-11D45841576C" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Maricela Blessett</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>1FF6DC4E-2BD7-70F0-5F79-A7774C4B0E36</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Blessett</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208002382</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Wed Apr 17 00:00:00 1935</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">maricela.blessett@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Maricela</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="melisa.blide@elasticpath.com" guid="0BD54D20-1CE5-0042-64E9-8862DC304985">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>4961bc27df4b38d88e18ce96ed2699aa986a08175a5b92076f3a91399ab6f945</password>
+    <salt>6a7440b34a76dd7ac6dca1e3a87aaf431f76f0ab51f9f9ef6c9101be40d04b08</salt>
+    <addresses>
+        <address guid="20589CA4-C6E7-8A52-F35C-AD760DDE7085">
+            <last_name>Blide</last_name>
+            <first_name>Melisa</first_name>
+            <phone_number>208921501</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Nottingham,KT0 8WX</city>
+            <subCountry></subCountry>
+            <zip_postal_code>KT0 8WX</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>20589CA4-C6E7-8A52-F35C-AD760DDE7085</preferred_shipping_address>
+    <preferred_billing_address>20589CA4-C6E7-8A52-F35C-AD760DDE7085</preferred_billing_address>
+    <credit_cards>
+        <card guid="13915F78-1DF8-4243-96FB-BA09D155741B" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Melisa Blide</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>20589CA4-C6E7-8A52-F35C-AD760DDE7085</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sun Mar 26 00:00:00 1989</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">melisa.blide@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208921501</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Blide</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Melisa</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="noemi.bloes@elasticpath.com" guid="1C27EA57-4C11-6AE5-5785-0E15DFE5EC3A">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:22-07:00</last_edited>
+    <password>075d39b9450b2a1118c51b4996b567f522905f315fd55e953636a2330b58db56</password>
+    <salt>d7bc1203646e4c4519a56240ea7d5ba72c57ba211036a58e2265d7d8f9acb83d</salt>
+    <addresses>
+        <address guid="77CC1147-1F39-A0B1-410A-B2DC1DC58DD0">
+            <last_name>Bloes</last_name>
+            <first_name>Noemi</first_name>
+            <phone_number>208272069</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Stoke-On-Trent,VU7 9ZL</city>
+            <subCountry></subCountry>
+            <zip_postal_code>VU7 9ZL</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>77CC1147-1F39-A0B1-410A-B2DC1DC58DD0</preferred_shipping_address>
+    <preferred_billing_address>77CC1147-1F39-A0B1-410A-B2DC1DC58DD0</preferred_billing_address>
+    <credit_cards>
+        <card guid="AF1F88E3-A49B-4DA1-8464-91C5C6C2FF14" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Noemi Bloes</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>77CC1147-1F39-A0B1-410A-B2DC1DC58DD0</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bloes</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Noemi</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Aug 10 00:00:00 1978</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">noemi.bloes@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208272069</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="noreen.borell@elasticpath.com" guid="17074054-6785-2E7E-C7F4-61268B7C120A">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>04938e4b319a215a8b927cb565629f37881fe65e0ee04795a43a32fc6e7f4681</password>
+    <salt>9df5d5022128325687d82671c2386b48cf9b274eafb8de41caf00ff5e38a5d76</salt>
+    <addresses>
+        <address guid="9B9CEDD5-3117-FCBD-ED9E-0BDCB815CA00">
+            <last_name>Borell</last_name>
+            <first_name>Noreen</first_name>
+            <phone_number>207100875</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Motherwell,UR7 1LJ</city>
+            <subCountry></subCountry>
+            <zip_postal_code>URL 1LJ</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>9B9CEDD5-3117-FCBD-ED9E-0BDCB815CA00</preferred_shipping_address>
+    <preferred_billing_address>9B9CEDD5-3117-FCBD-ED9E-0BDCB815CA00</preferred_billing_address>
+    <credit_cards>
+        <card guid="730B756F-8693-4FB0-9848-3D1B47EBF0AA" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Noreen Borell</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>9B9CEDD5-3117-FCBD-ED9E-0BDCB815CA00</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Noreen</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">noreen.borell@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">207100875</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Tue Feb 08 00:00:00 1927</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Borell</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="pearlie.bosse@elasticpath.com" guid="3E6DBBCF-3FD4-4DD6-594C-8E79AF7DFF82">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>a5cc428c33a330f6a051de0297d885707c8ea274e949a4a485de7b4150d3f52c</password>
+    <salt>9aab73b78739ed7ac25ae5fb132701fe34431e1d5e44a79260372765fc110130</salt>
+    <addresses>
+        <address guid="FF9B4307-C3CA-8C20-5439-084838261DAC">
+            <last_name>Bosse</last_name>
+            <first_name>Pearlie</first_name>
+            <phone_number>208464726</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Coventry,GU2 2JU</city>
+            <subCountry></subCountry>
+            <zip_postal_code>GU2 2JU</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>FF9B4307-C3CA-8C20-5439-084838261DAC</preferred_shipping_address>
+    <preferred_billing_address>FF9B4307-C3CA-8C20-5439-084838261DAC</preferred_billing_address>
+    <credit_cards>
+        <card guid="6552D6CE-6378-4FB2-BEE2-77F92BA8E0F6" expiry_month="12" expiry_year="2018" type="Mastercard">
+            <holder_name>Pearlie Bosse</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>FF9B4307-C3CA-8C20-5439-084838261DAC</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208464726</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Sun Oct 09 00:00:00 1994</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bosse</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Pearlie</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">pearlie.bosse@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="rae.bourns@elasticpath.com" guid="858E3DCA-5DD0-2918-D3AC-DFC9684093FE">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>626e6388f3a712fef16b9ea39ed55f0b0c78e41b68b94d4b8853bd9f0f22b836</password>
+    <salt>60ae2038e920102fe76b75181e98c962c2a43cdb16b1dcc129622b7380a4a01f</salt>
+    <addresses>
+        <address guid="C5E6A962-2C09-F55C-DC25-3C60BD40C79A">
+            <last_name>Bourns</last_name>
+            <first_name>Rae</first_name>
+            <phone_number>207437289</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Leicester,OH1 1HQ</city>
+            <subCountry></subCountry>
+            <zip_postal_code>OH1 1HQ</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>C5E6A962-2C09-F55C-DC25-3C60BD40C79A</preferred_shipping_address>
+    <preferred_billing_address>C5E6A962-2C09-F55C-DC25-3C60BD40C79A</preferred_billing_address>
+    <credit_cards>
+        <card guid="10D26386-0A1B-4E7C-8AAC-6D37E39C4759" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Rae Bourns</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>C5E6A962-2C09-F55C-DC25-3C60BD40C79A</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">rae.bourns@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bourns</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">207437289</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Jul 29 00:00:00 1976</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">M</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Rae</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="rosalinda.brenes@elasticpath.com" guid="0D45B1AE-AE66-3144-7F74-41D3C9ED044A">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>92692af0e6a52053258769eeced87d985c53d4d55846e153532d97a042d9e45d</password>
+    <salt>4d94af3754d2728ebf59d36f0e6d799d65e375f8b9b6f305b68b8ec90c8498d9</salt>
+    <addresses>
+        <address guid="08636EEE-DCD7-AD0C-59C8-07F0C7F70FCF">
+            <last_name>Brenes</last_name>
+            <first_name>Rosalinda</first_name>
+            <phone_number>208872210</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Sumburgh,UW6 0KI</city>
+            <subCountry></subCountry>
+            <zip_postal_code>UW6 OK1</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>08636EEE-DCD7-AD0C-59C8-07F0C7F70FCF</preferred_shipping_address>
+    <preferred_billing_address>08636EEE-DCD7-AD0C-59C8-07F0C7F70FCF</preferred_billing_address>
+    <credit_cards>
+        <card guid="A8BAA026-D533-4B57-9555-B9598F84B2C5" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Rosalinda Brenes</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>08636EEE-DCD7-AD0C-59C8-07F0C7F70FCF</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208872210</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">rosalinda.brenes@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Brenes</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Jun 30 00:00:00 1960</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Rosalinda</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="roxie.briddick@elasticpath.com" guid="1D640B69-F0C1-AD3B-F8BA-2C3B67364828">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>44b6304a52c14d5edef8e70f509a26af9906684031101bd75a6798f20d3193cc</password>
+    <salt>66057306544afc2ab3c84a305dadfe38620ddfcc7423980f10a5b65e5e7efe43</salt>
+    <addresses>
+        <address guid="5F3B1124-3B97-7A61-E913-C69E29B26145">
+            <last_name>Briddick</last_name>
+            <first_name>Roxie</first_name>
+            <phone_number>208050219</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Norwich,GG8 8CZ</city>
+            <subCountry></subCountry>
+            <zip_postal_code>GG8 8CZ</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>5F3B1124-3B97-7A61-E913-C69E29B26145</preferred_shipping_address>
+    <preferred_billing_address>5F3B1124-3B97-7A61-E913-C69E29B26145</preferred_billing_address>
+    <credit_cards>
+        <card guid="172DB054-5322-4A67-9691-A8719FB65AFE" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Roxie Briddick</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>5F3B1124-3B97-7A61-E913-C69E29B26145</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208050219</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">roxie.briddick@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Thu Mar 01 00:00:00 1979</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Briddick</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Roxie</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="saundra.briles@elasticpath.com" guid="0CDBEACD-6DA9-741B-587C-5A0F96D7BFD7">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>f90a499f8d7f63405aca7905a1acba23530f1722eb69c29ea853a698136d4982</password>
+    <salt>950d698913e24932527a79e1334e33b65ac966a468f51b9608b56fba16f53d3a</salt>
+    <addresses>
+        <address guid="465B935F-ACBC-3101-BED3-1CD736BE083B">
+            <last_name>Briles</last_name>
+            <first_name>Saundra</first_name>
+            <phone_number>208713189</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Stornoway,SC3 9VT</city>
+            <subCountry></subCountry>
+            <zip_postal_code>SC3 9VT</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>465B935F-ACBC-3101-BED3-1CD736BE083B</preferred_shipping_address>
+    <preferred_billing_address>465B935F-ACBC-3101-BED3-1CD736BE083B</preferred_billing_address>
+    <credit_cards>
+        <card guid="6493FE85-CDC9-4C5F-8A27-FCA7325613B7" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Saundra Briles</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>465B935F-ACBC-3101-BED3-1CD736BE083B</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">saundra.briles@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Saundra</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Briles</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">F</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208713189</profile_value>
+        <profile_value type="AttributeType_Date" key="CP_DOB">Tue Jun 18 00:00:00 1929</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="serena.brockmann@elasticpath.com" guid="DDA7662A-E79B-5496-0C94-47122371B193">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>1952ff644075f8c9270fd2019d153a7ca114a4acf208dd858fdf178a05f28835</password>
+    <salt>78f405e0e3a0fa271b450ad553a495fe28e00e95cb842dddf532c8e4ac5670c5</salt>
+    <addresses>
+        <address guid="5ED543BB-1EF6-7C3F-74E5-ED313A591D87">
+            <last_name>Brockmann</last_name>
+            <first_name>Serena</first_name>
+            <phone_number>208595910</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>Manchester</city>
+            <subCountry></subCountry>
+            <zip_postal_code>GH7 9HU</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>5ED543BB-1EF6-7C3F-74E5-ED313A591D87</preferred_shipping_address>
+    <preferred_billing_address>5ED543BB-1EF6-7C3F-74E5-ED313A591D87</preferred_billing_address>
+    <credit_cards>
+        <card guid="531501B8-A71E-403B-951F-9ABBA56A6154" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Serena Brockmann</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>5ED543BB-1EF6-7C3F-74E5-ED313A591D87</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Serena</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">serena.brockmann@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">208595910</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Brockmann</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="SNAPITUPUK" user_id="sharron.bumbray@elasticpath.com" guid="CF59BF40-E8F6-1104-CB76-4FD947334B7F">
+    <status>1</status>
+    <creationDate>2010-06-16T00:00:00-07:00</creationDate>
+    <last_edited>2012-08-02T16:32:23-07:00</last_edited>
+    <password>54bf1f5e6f44fc953503bde3ab56dc6a607647bb80fd4d7549bd062715cf0f9a</password>
+    <salt>410efc5666a98400f51208f81edc18eedcede7f4288407552e11816175615713</salt>
+    <addresses>
+        <address guid="3AA6E353-107E-A290-E857-D687603CF610">
+            <last_name>Bumbray</last_name>
+            <first_name>Sharron</first_name>
+            <phone_number>2083062941</phone_number>
+            <street1>1020 Main Street</street1>
+            <street2></street2>
+            <city>London</city>
+            <subCountry></subCountry>
+            <zip_postal_code>WZ8 9GH</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>3AA6E353-107E-A290-E857-D687603CF610</preferred_shipping_address>
+    <preferred_billing_address>3AA6E353-107E-A290-E857-D687603CF610</preferred_billing_address>
+    <credit_cards>
+        <card guid="CDA004CC-6635-4C24-B6E8-36C712FD45EA" expiry_month="12" expiry_year="2018" type="Visa">
+            <holder_name>Sharron Bumbray</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+            <billing_address_guid>3AA6E353-107E-A290-E857-D687603CF610</billing_address_guid>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">sharron.bumbray@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">2083062941</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bumbray</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Sharron</profile_value>
+    </customer_profile>
+</customer>
+</customers>

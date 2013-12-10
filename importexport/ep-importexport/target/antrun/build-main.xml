@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask" classpathref="maven.plugin.classpath"/>
+  <mkdir dir="target/classes/schema"/>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaGiftCertificate.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/giftcertificate"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaStoreAssociation.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/storeassociation"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCustomerProfileAttribute.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/customer"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/catalogs"/>
+    </src>
+    <exclude name="**/CustomerProfileAttributesDTO.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaUserRole.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/userrole"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCmUser.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/cmuser"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCustomer.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/customer"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/catalogs"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaTaxCode.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/tax"/>
+    </src>
+    <exclude name="**/TaxJurisdictionsDTO.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaStore.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/store"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaWarehouse.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/warehouse"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaPaymentGateway.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/paymentgateway"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaTaxJurisdiction.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/tax"/>
+    </src>
+    <exclude name="**/TaxCodesDTO.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaProduct.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/products"/>
+    </src>
+    <exclude name="**/ProductBundleDTO.java"/>
+    <exclude name="**/PriceAdjustmentDto.java"/>
+    <exclude name="**/ProductBundleConstituentDTO.java"/>
+    <exclude name="**/SelectionRuleDTO.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaDynamicContent.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/dynamiccontent"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaDynamicContentDelivery.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/dynamiccontent"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/targetedselling"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/tag"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaSavedCondition.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/tag"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCatalog.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/catalogs"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaProductAssociation.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/productassociation"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaInventory.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/inventory"/>
+    </src>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaExportConfig.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/exporter/configuration"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/configuration"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/transformers"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/types"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+    </src>
+    <exclude name="search/**"/>
+    <exclude name="ConfigurationLoader.java"/>
+    <exclude name="TransformersChainFactory.java"/>
+    <exclude name="impl/TransformersChainFactoryImpl.java"/>
+    <exclude name="Transformer.java"/>
+    <exclude name="impl/AbstractTransformerImpl.java"/>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaImportConfig.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/importer/configuration"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/importer/types"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/types"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/configuration"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/transformers"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+    </src>
+    <exclude name="ConfigurationLoader.java"/>
+    <exclude name="TransformersChainFactory.java"/>
+    <exclude name="impl/TransformersChainFactoryImpl.java"/>
+    <exclude name="Transformer.java"/>
+    <exclude name="impl/AbstractTransformerImpl.java"/>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <exclude name="OptionalJobType.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaSearchConfig.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/exporter/configuration/search"/>
+    </src>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaProductCategory.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/productcategory"/>
+    </src>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaProductBundle.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/products/bundles"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaPricing.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/pricing"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/tag"/>
+    </src>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaBaseAmounts.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/baseamount"/>
+    </src>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DisplayValue.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCategory.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/category"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/products"/>
+    </src>
+    <exclude name="**/ProductBundle*.java"/>
+    <exclude name="**/SelectionRuleDTO.java"/>
+    <exclude name="PriceAdjustmentDto.java"/>
+    <exclude name="ImportDto.java"/>
+    <exclude name="DigitalAssetItemDTO.java"/>
+    <exclude name="ProductAvailabilityDTO.java"/>
+    <exclude name="ProductDTO.java"/>
+    <exclude name="ProductSkuAvailabilityDTO.java"/>
+    <exclude name="ProductSkuDTO.java"/>
+    <exclude name="ShippableItemDTO.java"/>
+    <exclude name="SkuOptionDTO.java"/>
+    <exclude name="UnitDTO.java"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaAssets.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/assets"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaPromotions.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/promotion"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/tag"/>
+    </src>
+    <exclude name="**/coupon/*"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaRules.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/promotion"/>
+    </src>
+    <exclude name="**/cart/*"/>
+    <exclude name="**/coupon/*"/>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaConfigurationSetting.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/settings"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCartPromotionsCoupon.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/promotion/coupon"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCartPromotionsCoupon.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/promotion/coupon"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaContentSpace.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/contentspace"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaShippingServiceLevel.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/shipping"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaShippingRegion.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/shipping/region"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+  <schemagen destdir="target/classes/schema">
+    <schema file="schemaCmImportJobs.xsd" namespace=""/>
+    <src>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/general"/>
+      <pathelement location="src/main/java/com/elasticpath/importexport/common/dto/cmimportjob"/>
+    </src>
+    <classpath refid="maven.compile.classpath"/>
+  </schemagen>
+</target>
+</project>

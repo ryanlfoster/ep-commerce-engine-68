@@ -1,0 +1,4 @@
+"categoryCode"|"parentCategoryCode"|"displayName_en"|"enableDate"|"disableDate"|"storeVisible"|"ordering"|"seoUrl_en"|"seoTitle_en"|"seoKeyWords_en"|"seoDescription_en"|"catImage"|"catDescription_en"
+100001|NULL|"Office Desks"|"Thu Mar 1 12:00:00 2007"|"Sat Mar 1 12:00:00 2008"|0|1|""|"Office Desks"|"Office desks for your office."|""|NULL|"This is a category for office desks."
+100002|NULL|"Dining Tables"|""|""|0|2|""|"Dining Tables"|"Dining tables for your dining room."|""|NULL|"This is a category for dining tables."
+100003|NULL|"Coffee Tables"|""|""|1|3|""|"Coffee Tables"|"Coffee tables for your living room."|""|NULL|"This is a category for coffee tables."

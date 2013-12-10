@@ -1,0 +1,21 @@
+#set($topSellerList = $currentCatalogViewResult.getTopSellers())
+#if($topSellerList && $topSellerList.size()>0)		
+	#set ($colCount = 0)
+	#set ($totCount = 0)
+	<h3 class="top-sellers">#springMessage("topsellers.topSellers")</h3>
+	 <div class="clear20"></div>
+	<div id="product-grid-2">
+		#foreach ($product in $topSellerList)
+			#set ($productPrice = $catalogViewResultBean.getPrice($product.getCode()))
+			#set ($productCharacteristics = $catalogViewResultBean.getProductCharacteristics($product.code))
+			#set ($totCount = $totCount + 1)
+			#displayProductWithPrice($product $catalog $warehouse $productPrice "-top-seller" false $productCharacteristics)
+			#if($mathTool.mod($totCount, 2) == 0)
+				<div class="clear10"></div>
+			#end
+		#end
+		<div class="clear20"></div>
+	</div>  
+#end        
+
+

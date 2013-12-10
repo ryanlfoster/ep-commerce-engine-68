@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# define solrHome root
+orig_dir=$(pwd)
+cd ${0%/*}/..
+solr_root=$(pwd)
+# path to scripts.conf with configuration settings for master-slave and rsync
+. ${solr_root}/conf/scripts.conf
+
+log=${solr_root}/logs/snapinstaller.ep.log
+
+# run snapinstaller for an each index
+for index in ${indexlist}
+do
+	# Commit snapshots
+	${solr_root}/bin/snapinstaller.ep -M ${master_host} -d ${solr_root}/data/index-${index} -S ${master_status_dir} -h ${solr_hostname} -p ${solr_port} -u ${user} -w ${app_name}/${index} -v 1>>${log} 2>&1
+done

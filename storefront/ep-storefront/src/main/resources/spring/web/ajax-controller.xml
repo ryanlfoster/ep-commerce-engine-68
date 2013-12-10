@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="shoppingCartAjaxController" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces"><value>com.elasticpath.sfweb.ajax.service.ShoppingCartAjaxController</value></property>
+		<property name="interceptorNames">
+			<list>
+				<value>sessionTimeoutInterceptor</value>
+				<value>shoppingCartAjaxControllerTarget</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="shoppingCartAjaxControllerTargetTemplate" abstract="true"
+		class="com.elasticpath.sfweb.ajax.service.impl.ShoppingCartAjaxControllerImpl">
+		<property name="requestHelper">
+			<ref bean="requestHelper" />
+		</property>
+		<property name="checkoutService">
+			<ref bean="checkoutService" />
+		</property>
+		<property name="geography">
+			<ref bean="geography" />
+		</property>
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="moneyFormatter" ref="moneyFormatter" />
+	</bean>
+
+	<bean id="shoppingCartAjaxControllerTarget" parent="shoppingCartAjaxControllerTargetTemplate"/>
+
+	<bean id="geographyController"
+		class="com.elasticpath.sfweb.ajax.service.impl.GeographyControllerImpl">
+		<property name="requestHelper">
+			<ref bean="requestHelper" />
+		</property>
+		<property name="geography">
+			<ref bean="geography" />
+		</property>
+	</bean>
+
+	<bean id="sessionTimeoutInterceptor" class="com.elasticpath.sfweb.ajax.interceptor.SessionTimeoutInterceptor">
+		<property name="requestHelper" ref="requestHelper" />
+		<property name="messageSource" ref="coreMessageSource" />
+	</bean>
+
+
+</beans>

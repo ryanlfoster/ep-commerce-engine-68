@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<groupId>com.elasticpath.stores</groupId>
+	<artifactId>stores-parent</artifactId>
+	<name>Store Data Parent</name>
+
+	<packaging>pom</packaging>
+
+	<description>Parent project to work with store data</description>
+	<inceptionYear>2011</inceptionYear>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.linuxstuff.maven</groupId>
+				<artifactId>licensing-maven-plugin</artifactId>
+				<configuration>
+					<licensingRequirementFiles>
+						<licensingRequirementFile>ep-platform-licensing-requirements.xml</licensingRequirementFile>
+						<licensingRequirementFile>ignore-dev-db-jdbc-drivers-licensing.xml</licensingRequirementFile>
+					</licensingRequirementFiles>
+					<excludedGroups>com.elasticpath</excludedGroups>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>store-data-importer-parent</module>
+		<module>store-data-exporter-parent</module>
+		<module>populate-database</module>
+		<module>dcapi-data</module>
+		<module>dcapi-h2-database</module>
+		<module>dcapi-populate-database</module>
+		<module>snapitup-data</module>
+		<module>snapitup-populate-database</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>store-data-exporter-parent</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>store-data-importer-parent</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>dcapi-data</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>snapitup-data</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.db</groupId>
+				<artifactId>core-schema</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>dcapi-h2-database</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>dcapi-populate-database</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.stores</groupId>
+				<artifactId>snapitup-populate-database</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

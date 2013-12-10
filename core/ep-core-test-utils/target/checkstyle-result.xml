@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/domain/payment/ReAuthorizationItem.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/AdditionalAuthorizationService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/impl/AdditionalAuthorizationServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/impl/PromotionConfigureServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/impl/ShipmentServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/PromotionConfigureService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/ReturnsExchangeService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-test-utils/src/main/java/com/elasticpath/service/ShipmentService.java">
+</file>
+</checkstyle>

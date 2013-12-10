@@ -1,0 +1,112 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## search.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#set($pageName = "search/search.vm")
+#set ($action = "search.ep")
+#initCategoryVariables()
+
+#set($_content = "searchBody")
+#masterTemplate()
+
+#macro(searchBody)
+    #set($featuredProductList = $currentCatalogViewResult.getFeaturedProducts())
+    #if ($featuredProductList.size() >0)
+        #parse("includes/featuredproduct.vm")
+    #end
+    #set($productList = $catalogViewResultBean.getProducts())
+    #if($productList.size() > 0)
+        #parse("includes/productgrid.vm")
+    #else
+		#set ($name = "'$searchRequest.getKeyWords()'")
+        <h1>#springMessage("error.search.yousearchedfor") $name</h1>
+        <p>#springMessage("error.search.noresults") $name.
+        #set ($suggestions = $currentCatalogViewResult.getSuggestions())
+        #set ($length = $suggestions.size())
+        #if (0 < $length)
+            #springMessage("error.search.didyoumean")
+            #set ($i = 0)
+            #foreach ($suggestion in $currentCatalogViewResult.getSuggestions())
+                #set ($q = '"')
+                #set ($text = "<a href=$q$baseUrl/search.ep?keyWords=$suggestion$q>$suggestion</a>")
+                #if ($length - 2 > $i)
+                    #set ($text = $text + ", ")
+                #elseif ($length > 2 && $length - 2 == $i)
+                    #set ($text = $text + ", or ")
+                #elseif ($length - 2 == $i)
+                    #set ($text = $text + " or ")
+                #else
+                    #set ($text = $text + "?")
+                #end
+                $text
+                #set ($i = $i + 1)
+            #end
+        #end
+        </p>
+        <p>
+        #springMessage("error.search.tryagain")</p>
+        </p>
+        
+        <div id="search-again">
+            <form action="$baseUrl/search.ep" method="get" name="searchForm">
+            <fieldset>
+            <legend>#springMessage("error.search.searchagain")</legend>
+            
+            #set ($currentCategory = $currentCatalogViewResult.getCategory())
+            <select id="suggestAgainCategoryId" name="categoryId">
+            <option value="" label="Entire Store">#springMessage("topmenu.entireStore")</option>
+            #if (!$currentCategory)
+                #foreach ($category in $ctxTopCategoriesHelper.resolveTopCategories())
+                    #if ($category.isAvailable())
+                    #set ($categoryID = $category.getUidPk())
+                    #set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+                    <option value="$categoryID" label="$escapeTool.html($categoryDisplayName)">$escapeTool.html($categoryDisplayName)</option>
+                    #end
+                #end
+            #else
+                #set ($parents = $currentCategory.getPathAsList())
+                #set ($children = $currentCategory.getChildren())
+                #foreach ($category in $parents)
+                    #if ($category.isAvailable())
+                        #set ($categoryID = $category.getUidPk())
+                        #set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+                        <option value="$categoryID" label="$escapeTool.html($categoryDisplayName)"
+                        #if ($categoryID == $currentCategory.getUidPk())
+                            selected="selected"
+                        #end
+                        >$escapeTool.html($categoryDisplayName)</option>
+                    #end
+                #end
+                #foreach ($category in $children)
+                    #if ($category.isAvailable())
+                        #set ($categoryID = $category.getUidPk())
+                        #set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+                        <option value="$categoryID" label="$escapeTool.html($categoryDisplayName)">$escapeTool.html($categoryDisplayName)</option>
+                    #end
+                #end
+            #end
+            </select>
+            
+            <input id="suggestAgainKeywords" class="search-box" type="text" name="keyWords" value="" />
+            <input type="submit" class="button" name="submit" value="#springMessage("header.search")" />
+            </fieldset>
+            </form>
+        </div>
+    #end
+    #if($productList.size() > 0)
+        <div id="side-menu">
+            #parse("includes/sidemenu.vm")
+        </div>
+		<div id="promo-banner" style="float: left; padding-top: 22px;">
+			#contentspace('PromoBanner', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>PromoBanner</font></div>")  
+		</div>
+    #end
+    <div class="clear20"></div>
+#end
+
+
+  ## product search autocompletion
+  #set($extraParams = '{keyWords : function() { return jq("#suggestAgainKeywords").val() }, categoryId: function() { return jq("#suggestAgainCategoryId").val() } }')
+  #searchProductSuggestJsScript('suggestAgainKeywords' 50 50 3 350 290 $extraParams)
+  

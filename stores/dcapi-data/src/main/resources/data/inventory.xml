@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inventory>
+<sku code="t384lkef">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="mb_4567890_sku"/>
+
+<sku code="TV_76567_400p"/>
+
+<sku code="tt0068646_sku"/>
+
+<sku code="tt1483735"/>
+
+<sku code="TV_76567_720p"/>
+
+<sku code="tbcp_0123456_sku"/>
+
+<sku code="mb_2893033"/>
+
+<sku code="tt5656565_sku"/>
+
+<sku code="bundle_nopriceitem_sku"/>
+
+<sku code="mb_8974323_sku"/>
+
+<sku code="mb_3456789_sku"/>
+
+<sku code="tt966001av_hd_rent"/>
+
+<sku code="mk34abef">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="tt966001av_sd_buy"/>
+
+<sku code="tt966001av_hd_buy"/>
+
+<sku code="tt966001av_sd_rent"/>
+
+<sku code="mb_7890123_sku"/>
+
+<sku code="mb_8901234_sku"/>
+
+<sku code="tt777789bttf_hd_rent"/>
+
+<sku code="tt777789bttf_hd_buy"/>
+
+<sku code="tt0162661"/>
+
+<sku code="mb_6789012_sku"/>
+
+<sku code="mb_5678901_sku"/>
+
+<sku code="htcevo_sku"/>
+
+<sku code="mb_1234567_sku"/>
+
+<sku code="tbcp_2345678_sku"/>
+
+<sku code="tb_9878943_sku"/>
+
+<sku code="tt999123t_HD"/>
+
+<sku code="tt0373883"/>
+
+<sku code="tt0984938"/>
+
+<sku code="tt64464fn_sd"/>
+
+<sku code="handsfree_shippable_sku"/>
+
+<sku code="tt0034583_sku"/>
+
+<sku code="tbcp_1234567_sku"/>
+
+<sku code="tt64464fn_hd"/>
+
+<sku code="tt1568346_sku"/>
+
+<sku code="mb_9012345_sku"/>
+
+<sku code="tb_dyn12345sku"/>
+
+<sku code="hidden_prod_sku"/>
+
+<sku code="TV_78432_720p"/>
+
+<sku code="TV_78432_400p"/>
+
+<sku code="72542_2"/>
+
+<sku code="72542_1"/>
+
+<sku code="TV_87465_720p"/>
+
+<sku code="TV_87465_400p"/>
+
+<sku code="EAF8C586-4D92-42BE-B721-E7975485B721">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="tt888456tw"/>
+
+<sku code="tt0114369_sdb"/>
+
+<sku code="tt0114369_sdr"/>
+
+<sku code="tt0050083_sku"/>
+
+<sku code="tt0114369_hdb"/>
+
+<sku code="tt8789434_HD_Rent"/>
+
+<sku code="tt8789434_HD_Buy"/>
+
+<sku code="tt8789434_SD_Buy"/>
+
+<sku code="tt8789434_SD_Rent"/>
+
+<sku code="galaxys2_sku">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>10</onhand>
+        <available>10</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="FocUSsku"/>
+
+<sku code="tbcp_4325453"/>
+
+<sku code="tt0926084_sku">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+        <expectedrestockdate>2011-12-28T00:00:00-08:00</expectedrestockdate>
+    </warehouse>
+</sku>
+
+<sku code="sony_bt_sku">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>10</onhand>
+        <available>10</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="tt0970179_sku"/>
+
+<sku code="EAF8C586-4D92-42BE-B721-E7975485B931">
+    <warehouse code="MOBEE_Warehouse">
+        <onhand>0</onhand>
+        <available>0</available>
+        <allocated>0</allocated>
+        <reserved>0</reserved>
+        <reordermin>0</reordermin>
+        <reorderqty>1</reorderqty>
+    </warehouse>
+</sku>
+
+<sku code="mb_2345678_sku"/>
+
+<sku code="movie_555666_bluray"/>
+
+<sku code="movie_555666_regular"/>
+
+<sku code="movie_3456789_sku"/>
+
+<sku code="bundle_disney_sku"/>
+
+<sku code="movie_5678901_sku"/>
+
+<sku code="movie_4567890_sku"/>
+
+<sku code="mb_8909032_sku"/>
+
+<sku code="tt258022dh_HDR"/>
+
+<sku code="tt258022dh_HDB"/>
+
+<sku code="tt258022dh_SD_B"/>
+
+<sku code="mb_4324324_sku"/>
+
+<sku code="tbcp_3456789_sku"/>
+
+<sku code="TV_76567_sku2"/>
+
+<sku code="TV_76567_sku1"/>
+
+<sku code="movie_1234567_sku"/>
+
+<sku code="movie_111222_sku"/>
+
+<sku code="movie_2345678_sku"/>
+
+<sku code="bundle_terminator_sku"/>
+
+<sku code="movie_222333_regular"/>
+
+<sku code="movie_222333_bluray"/>
+
+<sku code="movie_333444_sku"/>
+
+<sku code="movie_444555_sku"/>
+
+<sku code="phyItemNoStockSku"/>
+
+</inventory>

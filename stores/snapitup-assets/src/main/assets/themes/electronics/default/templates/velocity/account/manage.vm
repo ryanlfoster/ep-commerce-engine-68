@@ -1,0 +1,260 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## manage.vm
+#set($pageName = "account/manage.vm")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "manageBreadcrumbs")
+#masterTemplate()
+
+#macro(checkoutBody)
+	#if ($nonPurchasableItemsWereRemoved)
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("warning.cart.items.removed")</div>
+         <div class="error-message-item">#springMessage("globals.cart.non-purchasable-items.removed")
+			<ul>
+			#foreach ($nonPurchasableItemProductName in $nonPurchasableItemsProductNames)
+				<li>$nonPurchasableItemProductName</li>
+			#end	
+			</ul>
+		  </div>
+        </div>
+      #end
+    ## personal Info
+    <div id="account-personal-info">
+        <fieldset>
+            <legend>#springMessage("manage.myPersonalInfo")</legend>
+            #set ($customer = $CS.shopper.customer)
+            <div class="title">#springMessage("manage.name")</div>
+            <div class="value">$!customer.getFirstName() $!customer.getLastName()</div>
+            <div class="title">#springMessage("manage.email")</div>
+            <div class="value">$customer.email</div>
+            <div class="title">#springMessage("manage.password")</div>
+            <div class="value">#springMessage("manage.fakePassword")</div>
+        </fieldset>
+        <div class="fieldset-footer">
+        <form action="$baseUrl/edit-account.ep" method="get" name="editAccountForm">
+            <input value='#springMessage("manage.bEdit")' class="button1" type="submit" />
+        </form>
+        </div>
+    </div>
+    <div class="clear20"></div>
+
+    ## AddressBook
+      <div id="account-address-book">
+        <fieldset>
+          <legend>#springMessage("manage.myAddressBook")</legend>
+          <table cellspacing="0" cellpadding="0" class="general-tbl">
+            <thead>
+              <tr>
+                <td>&nbsp;</td>
+                <td>#springMessage("manage.name")</td>
+                <td>#springMessage("manage.organization")</td>
+                <td>#springMessage("manage.street")</td>
+                <td>#springMessage("manage.city")</td>
+                <td>#springMessage("manage.state")</td>
+                <td>#springMessage("manage.zip")</td>
+                <td>#springMessage("manage.prefferedBilling")</td>
+              </tr>
+            </thead>
+            <tbody>
+              #foreach ($address in $customer.getAddresses())
+                ## Format Address
+				  ## insert comma before street2
+                  #set ($street2 = "")
+                  #if ($address.getStreet2)
+                    #set ($street2 = $address.getStreet2)
+                  #end
+                  #if ($street2 != "")
+                    #set ($street2 = ", " + $street2)
+                  #end
+                  
+                  ## determine preferred billing address
+                  #if ($customer.getPreferredBillingAddress() && $address.getUidPk() == $customer.getPreferredBillingAddress().getUidPk())
+                    #set ($preferredBillingAddress = "<img src ='template-resources/images/ico-checkmark.gif' />")
+                  #else
+                    #set ($preferredBillingAddress = "--")
+                  #end
+
+  
+                #set($class = "")
+                #if($mathTool.mod($velocityCount, 2) == 0)
+                  #set($class="class='odd'")
+                #end                                
+                <tr $!class>
+                  <td><a href="$baseUrl/edit-address.ep?addressID=$address.getUidPk()"><img src="$baseUrl/template-resources/images/ico-edit.gif" alt="#springMessage("manage.altEdit")" border="0" /></a></td>
+                  <td>$!address.getFirstName() $!address.getLastName()</td>
+                  <td>$!address.getOrganization()</td>
+                  <td>$!address.getStreet1() $!street2</td>
+                  <td>$!address.getCity()</td>
+                  <td>$!address.getSubCountry()</td>
+                  <td>$!address.getZipOrPostalCode()</td>
+                  <td>$!preferredBillingAddress</td>  
+                </tr>
+              #end
+            </tbody>
+          </table>
+        </fieldset>
+        <div class="fieldset-footer">
+          <form action="$baseUrl/create-address.ep" method="get" name="createAddressForm">
+            <input value='#springMessage("manage.bAddAddress")' class="button1" type="submit" />
+          </form>
+        </div>
+      </div>      
+
+      <div class="clear20"></div>
+
+	#if($manageAccountFormBean.getStoreCustomerCC() == true)
+    	## Saved CreditCards
+		  <div id="account-credit-cards">
+            <fieldset>
+              <legend>#springMessage("manage.mySavedCreditCards")</legend>
+              <table cellspacing="0" cellpadding="0" class="general-tbl">
+                <thead>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>#springMessage("creditCard.cardType")</td>
+                    <td>#springMessage("creditCard.cardHolderName")</td>
+                    <td>#springMessage("creditCard.cardNumber")</td>
+                    <td>#springMessage("creditCard.expiryDate")</td>
+                    <td>#springMessage("creditCard.defaultCard")</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  #foreach ($creditCard in $customer.getCreditCards())
+                    #set($class = "")
+                    #if($mathTool.mod($velocityCount, 2) == 0)
+                      #set($class="class='odd'")
+                    #end    
+                    <tr $!class>                  
+                      <td><a href="$baseUrl/edit-credit-card.ep?creditCardID=$creditCard.getUidPk()"><img src="$baseUrl/template-resources/images/ico-edit.gif" alt="Edit" border="0" /></a></td>
+                      <td>$!creditCard.getCardType()</td>
+                      <td>$!creditCard.getCardHolderName()</td>
+                      <td>$!creditCard.getMaskedCardNumber()</td>
+                      <td>$!creditCard.getExpiryMonth()/$!creditCard.getExpiryYear()</td>
+                      <td>#if($creditCard.defaultCard)<img src ='template-resources/images/ico-checkmark.gif' /> #else -- #end</td>
+                    </tr>
+                  #end
+                </tbody>
+              </table>
+            </fieldset>
+            <div class="fieldset-footer">
+              <form action="$baseUrl/create-credit-card.ep" method="get" name="createCCForm">
+                <input value='#springMessage("manage.bAddNewCard")' class="button1" type="submit" />
+              </form>
+            </div>
+          </div>  
+          <div class="clear20"></div>
+    #end
+    ## OrderHistory
+    <div id="account-order-history">
+        <fieldset>
+          <legend>#springMessage("manage.myOrderHistory")</legend>
+          <table cellspacing="0" cellpadding="0" class="general-tbl">
+            <thead>
+              <tr>
+                <td></td>
+                <td>#springMessage("globals.order.number")</td>
+                <td>#springMessage("globals.order.store")</td>
+                <td>#springMessage("globals.order.date")</td>
+                <td>#springMessage("globals.total")</td>
+                <td>#springMessage("globals.order.orderStatus")</td>
+              </tr>
+            </thead>
+            <tbody>
+              #foreach($order in $manageAccountFormBean.getOrders())
+                <tr #if($mathTool.mod($velocityCount, 2) == 0) class="odd" #end>
+                    <td><a href="order-details.ep?oID=$order.getOrderNumber()"><img src="$baseUrl/template-resources/images/ico-view.gif" alt="View" border="0" /></a></td>
+                    <td>$!order.getOrderNumber()</td>
+                    <td><a href="$!order.getStore().getUrl()">$!order.getStore().getName()</a></td>
+                    <td>$dateTool.format('default',$!order.getCreatedDate(), $locale)</td>
+                    <td>#displayPriceForCartLocale($!order.getTotalMoney())</td>
+                      #if (!$order.getStatus() || $order.getStatus() == "PLACED")
+                        #set ($orderStatusKey = "orderStatus.processing")
+                      #else
+                        #set ($orderStatusKey = $order.status.propertyKey)
+                      #end
+                    <td>#springMessage($!orderStatusKey)</td>
+                </tr>
+              #end
+              </tbody>
+            </table>
+          </fieldset>
+        </div>
+      ##Coupons begin
+	  <div class="clear20"></div>
+	  <div id="account-coupons">
+	      <form method="post" name="manageAccountFormBean" id="manageAccountFormBean">
+		  <fieldset>
+			  <legend>#springMessage("manage.coupons")</legend>
+			    <table cellspacing="0" cellpadding="0" class="general-tbl">
+                    <thead>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>#springMessage("coupon.code")</td>
+                            <td>#springMessage("coupon.name")</td>
+                            <td>#springMessage("coupon.used")</td>
+                            <td>#springMessage("coupon.limit")</td>
+                            <td>#springMessage("coupon.autoapply")</td>
+                            <td>#springMessage("coupon.expires")</td>					
+                        </tr>
+                    </thead>
+					<tbody>					
+					    #set($couponIndex = 0)						
+					    #foreach ($couponUsage in $manageAccountFormBean.getCustomerCoupons())						
+						#set($class = "")
+						#if($mathTool.mod($velocityCount, 2) == 0)
+						  #set($class="class='odd'")
+						#end    												
+						#set($useCount = $couponUsage.getUseCount())
+						#set($usageLimit = $couponUsage.getCoupon().getCouponConfig().getUsageLimit())						
+						#set($couponName = $manageAccountFormBean.getCouponNames().get($couponUsage.getCoupon().getCouponCode()))
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>$couponUsage.getCoupon().getCouponCode()</td>
+                            <td>$!couponName</td>
+                            <td>#if($couponUsage.getCoupon().getCouponConfig().isUnlimited()) #springMessage("coupon.notused") #else $useCount #end</td>
+                            <td>#if($couponUsage.getCoupon().getCouponConfig().isUnlimited()) #springMessage("coupon.nolimit") #else $usageLimit #end</td>
+                            <td align="center">
+								#if($couponUsage.isActiveInCart()) 
+									#set($checked = "checked")
+								#else 
+								    #set($checked = "")
+								#end
+								<input name="_customerCoupons[$couponIndex].activeInCart" type="hidden">
+								<input name="customerCoupons[$couponIndex].activeInCart" value="1" type="checkbox" $!checked>
+							</td>
+							<td>#if(!$couponUsage.getLimitedDurationEndDate()) #springMessage("coupon.never") #else $dateTool.format('default',$couponUsage.getLimitedDurationEndDate(), $locale) #end</td>
+                        </tr>
+						#set ($couponIndex = $couponIndex + 1)
+						#end
+					</tbody>				
+			</table>
+	    </fieldset>
+        <div class="fieldset-footer">            
+                <input value='#springMessage("coupon.update")' class="button1" type="submit" />            
+        </div>		  
+		</form>
+	  </div>
+      ##Coupons end		
+    <div class="clear20"></div>
+	
+    ## Gift Certificate Balance
+    <div id="search-gift-certificate">
+      <form action="$baseUrl/search-gift-certificate.ep" method="post" name="searchForm">
+        <fieldset>
+          <legend>#springMessage("manage.giftCertificateBalance")</legend>
+          <p>#springMessage("manage.viewGiftCertificateMessage")</p>
+          <b><label for="giftCertificate">#springMessage("manage.giftCertificateNumber")</label></b>
+            <input maxlength="28" class="textbox" type="text" name="giftCertificateCode" value="" />
+          <input type="submit" class="button" name="submit" value="#springMessage("manage.checkBalance")" />
+        </fieldset>
+      </form>
+    </div>
+    <div class="clear20"></div>
+#end
+
+#macro(manageBreadcrumbs)
+    <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; #springMessage("globals.bc.account") </div>
+#end
+

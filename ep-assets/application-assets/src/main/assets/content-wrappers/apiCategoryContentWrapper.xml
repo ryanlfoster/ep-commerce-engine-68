@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- 
+     API Category Content Wrapper displays the category with the specified Category Code.
+
+     Input parameters:
+      1. categoryCode, type "Category".
+      2. imagePath, type "Image".
+-->
+<content-wrapper> 
+	<template-name>apiCategoryTemplate.cwt</template-name>
+	<wrapper-id>ApiCategoryContentWrapper</wrapper-id>
+	<wrapper-name>Digital Commerce API: Category with Image</wrapper-name>
+  
+	<user-input-settings>
+		<user-input-setting id="imagePath" localizable="true" name="Path to Image File" type="Image" required="true" pass-to-template="true"/>
+		<user-input-setting id="categoryCode" localizable="false" name="Category Code" type="Category" required="true" pass-to-template="false"/>
+	</user-input-settings>
+</content-wrapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="localeBean" class="com.elasticpath.persistence.dao.impl.LocalePropertiesDaoLoaderFactoryImpl">
+		<property name="objectType" value="com.elasticpath.persistence.dao.impl.LocalePropertiesDaoLoaderFactoryImplTest.TestLocalePropertyLoaderAwareBean" />
+		<property name="singleton" value="false" />
+		<property name="resourceNamePrefix" value="locale-single" />
+		<property name="resourcePatterns">
+			<list>
+				<value>classpath*:/properties-dao/locale-single*.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipleProperties" class="com.elasticpath.persistence.dao.impl.LocalePropertiesDaoLoaderFactoryImpl">
+		<property name="objectType" value="com.elasticpath.persistence.dao.impl.LocalePropertiesDaoLoaderFactoryImplTest.TestLocalePropertyLoaderAwareBean" />
+		<property name="singleton" value="false" />
+		<property name="resourceNamePrefix" value="locale-single" />
+		<property name="resourcePatterns">
+			<list>
+				<value>classpath*:/properties-dao/locale-single*.properties</value>
+				<value>classpath*:/properties-dao/locale-double*.properties</value>
+			</list>
+		</property>
+	</bean>
+</beans>

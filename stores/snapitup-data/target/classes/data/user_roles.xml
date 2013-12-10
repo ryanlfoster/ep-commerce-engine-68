@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<user_roles>
+<user_role guid="05B08147-E773-2DA4-4E4C-C152873691AF">
+    <name>Promotions</name>
+    <description>Only has manage promotions permissions from store marketing</description>
+    <permissions>
+        <permission>PROMOTION_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="0C5BAFCD-CFEB-B384-542E-ECBF14834726">
+    <name>Only1Permission</name>
+    <permissions>
+        <permission>DYNAMIC_CONTENT_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="201">
+    <name>SUPERUSER</name>
+    <description>System super user role</description>
+    <permissions/>
+</user_role>
+
+<user_role guid="202">
+    <name>CMUSER</name>
+    <description>System CM user role</description>
+    <permissions/>
+</user_role>
+
+<user_role guid="203">
+    <name>WSUSER</name>
+    <description>System WS user role</description>
+    <permissions/>
+</user_role>
+
+<user_role guid="3503FE0F-D099-1367-4188-2A61FD5D1DA8">
+    <name>Store Marketing</name>
+    <permissions>
+        <permission>DYNAMIC_CONTENT_MANAGE</permission>
+        <permission>DYNAMIC_CONTENT_DELIVERY_MANAGE</permission>
+        <permission>CONDITIONAL_EXPRESSION_MANAGE</permission>
+        <permission>PROMOTION_MANAGE</permission>
+        <permission>SHIPPING_SERVICE_LEVELS_MANAGE</permission>
+        <permission>COUPONS_MANAGE</permission>
+        <permission>MANAGE_STORE_SETTINGS</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="47436A8B-10EB-9637-724F-DF1ECAFD5353">
+    <name>ConfigurationWithOnlyManageUsersPermission</name>
+    <description>All permissions in configuration role is disabled except for manage users permission</description>
+    <permissions>
+        <permission>ADMIN_USERS_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="4B9566A2-1C78-85B8-57D6-CAB03341FBA6">
+    <name>ManagePriceListsImportPriceLists</name>
+    <description>Permissions include Manage Price List, and Import Price Lists and all of catalog managements</description>
+    <permissions>
+        <permission>MANAGE_PRODUCT_SKU</permission>
+        <permission>PRICE_MANAGEMENT_MANAGE_PRICE_LISTS</permission>
+        <permission>PRICE_MANAGEMENT_IMPORT_PRICE_LIST_JOB</permission>
+        <permission>CATEGORY_MANAGE</permission>
+        <permission>CATEGORY_INCLUDE_EXCLUDE</permission>
+        <permission>CATALOG_IMPORTS_MANAGE</permission>
+        <permission>CATALOG_MANAGE</permission>
+        <permission>GLOBAL_ATTRIBUTE_EDIT</permission>
+        <permission>INCLUDE_EXCLUDE_PRODUCT</permission>
+        <permission>MANAGE_PRODUCT_MERCHANDISING</permission>
+        <permission>MANAGE_VIRTUAL_CATALOG_LINK_CATEGORY</permission>
+        <permission>CATALOG_IMPORTS_EXECUTE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="5D17E303-322A-4762-192B-D8A94D1D86AC">
+    <name>IncludeExcludeProduct</name>
+    <description>Role made for running Catalog Management Role Validation Test</description>
+    <permissions>
+        <permission>CATEGORY_INCLUDE_EXCLUDE</permission>
+        <permission>INCLUDE_EXCLUDE_PRODUCT</permission>
+        <permission>MANAGE_VIRTUAL_CATALOG_LINK_CATEGORY</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="696C8D33-3E65-D13E-7B3B-AB4FF6E86B6E">
+    <name>Reporting</name>
+    <permissions>
+        <permission>REPORTING_ORDER_SUMMARY_MANAGE</permission>
+        <permission>REPORTING_GIFT_CERTIFICATE_SUMMARY_MANAGE</permission>
+        <permission>REPORTING_STOCK_ALLOCATION_MANAGE</permission>
+        <permission>REPORTING_GIFT_CERTIFICATE_DETAILS_MANAGE</permission>
+        <permission>REPORTING_RETURNS_AND_EXCHANGES_MANAGE</permission>
+        <permission>REPORTING_LOW_STOCK_MANAGE</permission>
+        <permission>REPORTING_PROMOTION_USAGE_MANAGE</permission>
+        <permission>REPORTING_ORDERS_BY_STATUS_MANAGE</permission>
+        <permission>REPORTING_CUSTOMER_REGISTRATION_MANAGE</permission>
+        <permission>REPORTING_PROMOTION_DETAILS_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="7AA191A8-6979-7276-7BC8-FC2BC5845493">
+    <name>Configuration</name>
+    <permissions>
+        <permission>ADMIN_CONFIGURATION_MANAGE</permission>
+        <permission>ADMIN_PAYMENT_GATEWAYS_MANAGE</permission>
+        <permission>ADMIN_WAREHOUSES_MANAGE</permission>
+        <permission>ADMIN_STORES_MANAGE</permission>
+        <permission>TAXES_MANAGE</permission>
+        <permission>ADMIN_USERS_MANAGE</permission>
+        <permission>ADMIN_GIFT_CERTIFICATE_THEMES_MANAGE</permission>
+        <permission>ADMIN_CUSTOMER_PROFILES_MANAGE</permission>
+        <permission>ADMIN_SHIPPING_MANAGE</permission>
+        <permission>ADMIN_TARGETED_SELLING_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="88705C72-7D4D-33AD-0E82-536402F3D441">
+    <name>Shipping Receiving</name>
+    <permissions>
+        <permission>WAREHOUSE_RECEIVE_INVENTORY</permission>
+        <permission>WAREHOUSE_ORDER_SHIPMENT_COMPLETE</permission>
+        <permission>WAREHOUSE_MANAGE_INVENTORY</permission>
+        <permission>WAREHOUSE_IMPORT_INVENTORY</permission>
+        <permission>WAREHOUSE_ORDER_RETURN_EDIT</permission>
+        <permission>WAREHOUSE_FORCE_ORDER_SHIPMENT_COMPLETE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="8BE759EB-AD95-96CA-0348-DC22CA89FB99">
+    <name>Query Management</name>
+    <permissions>
+        <permission>MANAGE_QUERIES</permission>
+        <permission>CREATE_QUERIES</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="90EC180C-A9F3-A426-7070-AFC0CDBCD58A">
+    <name>Customer Service</name>
+    <permissions>
+        <permission>CREATE_EDIT_EXCHANGES</permission>
+        <permission>CREATE_EDIT_RETURNS</permission>
+        <permission>CREATE_REFUND</permission>
+        <permission>ORDER_UNLOCK</permission>
+        <permission>FULFILLMENT_ORDER_EDIT</permission>
+        <permission>CUSTUMER_IMPORTS_EXECUTE</permission>
+        <permission>CUSTUMER_IMPORTS_MANAGE</permission>
+        <permission>VIEW_CREDITCARD_NUMBER</permission>
+        <permission>EDIT_GIFT_CERTIFICATE_RECIPIENT</permission>
+        <permission>CUSTOMER_EDIT</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="9C710878-17BB-A55B-BC12-230431BBAD1F">
+    <name>ManagePriceListsNewRole</name>
+    <description>Permissions include manage price lists and all of catalog management</description>
+    <permissions>
+        <permission>MANAGE_PRODUCT_SKU</permission>
+        <permission>PRICE_MANAGEMENT_MANAGE_PRICE_LISTS</permission>
+        <permission>CATEGORY_MANAGE</permission>
+        <permission>CATEGORY_INCLUDE_EXCLUDE</permission>
+        <permission>CATALOG_IMPORTS_MANAGE</permission>
+        <permission>CATALOG_MANAGE</permission>
+        <permission>GLOBAL_ATTRIBUTE_EDIT</permission>
+        <permission>INCLUDE_EXCLUDE_PRODUCT</permission>
+        <permission>MANAGE_PRODUCT_MERCHANDISING</permission>
+        <permission>MANAGE_VIRTUAL_CATALOG_LINK_CATEGORY</permission>
+        <permission>CATALOG_IMPORTS_EXECUTE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="AAB705C2-54CF-822F-AC97-58F403B2B2F2">
+    <name>Change Set</name>
+    <permissions>
+        <permission>CHANGE_SET_PERMISSIONS_MANAGE</permission>
+        <permission>WORK_WITH_CHANGE_SETS_PERMISSION</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="ABCFCF0B-4CC1-4B01-A193-2DD35F12F8EF">
+    <name>Catalog Management</name>
+    <permissions>
+        <permission>MANAGE_PRODUCT_SKU</permission>
+        <permission>CATEGORY_MANAGE</permission>
+        <permission>CATEGORY_INCLUDE_EXCLUDE</permission>
+        <permission>CATALOG_IMPORTS_MANAGE</permission>
+        <permission>CATALOG_MANAGE</permission>
+        <permission>GLOBAL_ATTRIBUTE_EDIT</permission>
+        <permission>INCLUDE_EXCLUDE_PRODUCT</permission>
+        <permission>MANAGE_PRODUCT_MERCHANDISING</permission>
+        <permission>PRICE_MANAGEMENT_MANAGE_PRODUCT_PRICING</permission>
+        <permission>CATALOG_IMPORTS_EXECUTE</permission>
+        <permission>MANAGE_VIRTUAL_CATALOG_LINK_CATEGORY</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="B78363A8-BCDE-0748-045A-E8E4B944E1CE">
+    <name>CustomerServiceNoCreat/EditOrderPermission</name>
+    <permissions>
+        <permission>CREATE_EDIT_RETURNS</permission>
+        <permission>CREATE_EDIT_EXCHANGES</permission>
+        <permission>CREATE_REFUND</permission>
+        <permission>ORDER_UNLOCK</permission>
+        <permission>CUSTUMER_IMPORTS_EXECUTE</permission>
+        <permission>CUSTUMER_IMPORTS_MANAGE</permission>
+        <permission>VIEW_CREDITCARD_NUMBER</permission>
+        <permission>EDIT_GIFT_CERTIFICATE_RECIPIENT</permission>
+        <permission>CUSTOMER_EDIT</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="C35965F8-8F8E-C56A-F6E1-94DFEEFC18A2">
+    <name>testRoleSingleSubtask</name>
+    <permissions>
+        <permission>CHANGE_SET_PERMISSIONS_MANAGE</permission>
+        <permission>CREATE_REFUND</permission>
+        <permission>WAREHOUSE_ORDER_SHIPMENT_COMPLETE</permission>
+        <permission>PRICE_MANAGEMENT_EXPORT_PRICE_LISTS</permission>
+        <permission>GLOBAL_ATTRIBUTE_EDIT</permission>
+        <permission>COUPONS_MANAGE</permission>
+        <permission>CREATE_QUERIES</permission>
+        <permission>REPORTING_CUSTOMER_REGISTRATION_MANAGE</permission>
+        <permission>OFFERS_PERMISSIONS_MANAGE</permission>
+        <permission>ADMIN_TARGETED_SELLING_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="EF382A34-CD98-84B9-9EC4-E49E249AE12B">
+    <name>ManageCoupons</name>
+    <permissions>
+        <permission>COUPONS_MANAGE</permission>
+    </permissions>
+</user_role>
+
+<user_role guid="F64A4413-C442-980F-CF6B-C195A38CA4FD">
+    <name>ManageProductPricingNewRole</name>
+    <description>Permissions Include: manage ProdctPricing, and all of catalog management</description>
+    <permissions>
+        <permission>MANAGE_PRODUCT_SKU</permission>
+        <permission>CATALOG_IMPORTS_MANAGE</permission>
+        <permission>GLOBAL_ATTRIBUTE_EDIT</permission>
+        <permission>INCLUDE_EXCLUDE_PRODUCT</permission>
+        <permission>CATALOG_IMPORTS_EXECUTE</permission>
+        <permission>PRICE_MANAGEMENT_MANAGE_PRICE_LISTS</permission>
+        <permission>PRICE_MANAGEMENT_IMPORT_PRICE_LIST_JOB</permission>
+        <permission>CATEGORY_MANAGE</permission>
+        <permission>CATEGORY_INCLUDE_EXCLUDE</permission>
+        <permission>PRICE_MANAGEMENT_EXPORT_PRICE_LISTS</permission>
+        <permission>CATALOG_MANAGE</permission>
+        <permission>MANAGE_PRODUCT_MERCHANDISING</permission>
+        <permission>MANAGE_VIRTUAL_CATALOG_LINK_CATEGORY</permission>
+        <permission>PRICE_MANAGEMENT_MANAGE_PRODUCT_PRICING</permission>
+    </permissions>
+</user_role>
+</user_roles>

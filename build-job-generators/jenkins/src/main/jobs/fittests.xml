@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+
+	<job>
+		<id>abstract-fittests</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<abstract>true</abstract>
+		<mavenGoals><![CDATA[-B -U -e clean post-integration-test site-deploy -P${maven.itest.profiles},${fit.test.profiles} -Dep.platform.site.url="${EP_PLATFORM_SITE_URL}"]]></mavenGoals>
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value>${default.ci.site.baseUrl}</value>
+				<description>The BuildRepo URL to upload test results to. Release builds override the default value.</description>
+			</parameter>
+		</parameters>
+		<publishers>
+			<![CDATA[
+				<!-- Archive old FIT reports -->
+				<com.elasticpath.hudson.plugins.fit.FitArchiver>
+				<pathToHtml>**/target/site/fitresults/</pathToHtml>
+				</com.elasticpath.hudson.plugins.fit.FitArchiver>
+			]]>
+
+			<!-- Adding Email Ext configurations because this publishers section overwrites the abstract one -->
+			<![CDATA[${emailExtConfig}]]>
+		</publishers>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-Core</id>
+		<parent>abstract-fittests</parent>
+		<mavenOpts>${mavenOpts.fitTestsCore}</mavenOpts>
+		<pom>core/ep-core-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-ImportExport</id>
+		<parent>abstract-fittests</parent>
+		<pom>importexport/ep-importexport-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-SF</id>
+		<parent>abstract-fittests</parent>
+		<pom>storefront/ep-storefront-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-Search</id>
+		<parent>abstract-fittests</parent>
+		<pom>search/ep-search-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-Auditing</id>
+		<parent>abstract-fittests</parent>
+		<pom>core/ep-audit-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-Sync</id>
+		<parent>abstract-fittests</parent>
+		<mavenOpts>${mavenOpts.syncFitTests}</mavenOpts>
+		<pom>sync/ep-sync-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-FIT-Tests-QL</id>
+		<parent>abstract-fittests</parent>
+		<pom>querylanguage/ep-querylanguage-fittests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Selenium</id>
+		<parent>abstract-fittests</parent>
+		<!-- It's useful to keep longer history of Selenium tests. -->
+		<numToKeep>50</numToKeep>
+		<!-- ep.platform.site.url is set below to work around MSITE-604 and MSITE-501 -->
+		<!-- It's really nested under ${ep.platform.site.url}/selenium -->
+		<mavenGoals><![CDATA[-B -U -e clean verify site-deploy -P${maven.common.profiles},nightly -Dep.platform.site.url="$EP_PLATFORM_SITE_URL/selenium/$DEPLOYMENT_TARGET" -DpathToNonDistributableAutodeployUtil=$WORKSPACE/non-distributable/autodeploy.util -Ddeployment.target=$DEPLOYMENT_TARGET ]]></mavenGoals>
+		<pom>stores/snapitup-selenium/pom.xml</pom>
+		<appendTasks>true</appendTasks>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGET</name>
+				<description>Selenium will be run against the storefront configured in this deployment-target (found in autodeploy.util)</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value />
+				<description>
+					The BuildRepo URL to upload test results to.
+				</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>ARTIFACT_REPOSITORY_ID</name>
+				<value />
+				<description>
+					Email needs to know the repository containing the build artifacts. For Nightly builds, this is the Snapshot repository ID. For Release builds, this is the Release Repository ID.
+				</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<value />
+				<description>
+					The EP Version used by this build.
+				</description>
+			</parameter>
+		</parameters>
+
+		<publishers>
+		<![CDATA[
+			<hudson.plugins.parameterizedtrigger.BuildTrigger>
+				<configs>
+					<hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+						<configs>
+							<hudson.plugins.parameterizedtrigger.CurrentBuildParameters />
+						</configs>
+						<projects>${jenkinsJobPrefix}-Nightly-Email, ep-selenium-webdriver</projects>
+						<condition>UNSTABLE_OR_BETTER</condition>
+						<triggerWithNoParameters>false</triggerWithNoParameters>
+					</hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+				</configs>
+			</hudson.plugins.parameterizedtrigger.BuildTrigger>
+			<hudson.plugins.parameterizedtrigger.BuildTrigger>
+				<configs>
+					<hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+						<configs>
+							<hudson.plugins.parameterizedtrigger.CurrentBuildParameters />
+							<hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+								<properties>SELENIUM_RUN=false</properties>
+							</hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+						</configs>
+						<projects>${jenkinsJobPrefix}-Nightly-Email, ep-selenium-webdriver</projects>
+						<condition>FAILED</condition>
+						<triggerWithNoParameters>false</triggerWithNoParameters>
+					</hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+				</configs>
+			</hudson.plugins.parameterizedtrigger.BuildTrigger>
+			<!-- Archive old FIT reports -->
+			<com.elasticpath.hudson.plugins.fit.FitArchiver>
+			<pathToHtml>**/target/site/fitresults/*</pathToHtml>
+			</com.elasticpath.hudson.plugins.fit.FitArchiver>
+		]]>
+			<!-- Adding Email Ext configurations because this publishers section overwrites the abstract one -->
+			<![CDATA[${emailExtConfig}]]>
+		</publishers>
+		<buildWrappers>
+		<![CDATA[
+			<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+				<timeoutMinutes>60</timeoutMinutes>
+				<failBuild>false</failBuild>
+				<writingDescription>false</writingDescription>
+				<timeoutPercentage>150</timeoutPercentage>
+				<timeoutType>absolute</timeoutType>
+				<timeoutMinutesElasticDefault>60</timeoutMinutesElasticDefault>
+			</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<hudson.plugins.timestamper.TimestamperBuildWrapper />
+		]]>
+		</buildWrappers>
+	</job>
+</jobs>

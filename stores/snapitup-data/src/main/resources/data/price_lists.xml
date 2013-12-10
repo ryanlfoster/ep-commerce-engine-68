@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<price_lists>
+<price_list>
+    <guid>0E6A017A-87CF-480A-69FD-76CC27DA1FE7</guid>
+    <description></description>
+    <currency_code>USD</currency_code>
+    <name>SnapItUpUSD</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>GooglePL</guid>
+    <description>Price List with cheaper prices for selective Flash Memory products</description>
+    <currency_code>USD</currency_code>
+    <name>Google Referral Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>SeniorPL</guid>
+    <description>Price List with cheaper prices for selective Telescope products</description>
+    <currency_code>USD</currency_code>
+    <name>Senior Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>SNAPITUP_GBP</guid>
+    <description>GBP price list for SnapItUp catalog</description>
+    <currency_code>GBP</currency_code>
+    <name>MSRP UK</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>SNAPITUP_USD</guid>
+    <description>USD price list for SnapItUp catalog</description>
+    <currency_code>USD</currency_code>
+    <name>MSRP US</name>
+    <hidden>false</hidden>
+</price_list>
+</price_lists>

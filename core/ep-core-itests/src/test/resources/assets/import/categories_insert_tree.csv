@@ -1,0 +1,8 @@
+"CategoryCode"|"displayName_en"|"displayName_fr"|"CatImage"|"parentCategoryGuid"|"ordering"|"storeVisible"|"CatDesCription_en"|"CatDesCription_fr"|"seoDesCription_en"|"seoDesCription_fr"
+90000001|"Category 1"|"Catégorie 1"|NULL|NULL|1|0||||
+90000002|"Category 2"|"Catégorie 2"|NULL|NULL|2|0||||
+90000003|"Category 3"|"Catégorie 3"|NULL|NULL|3|0||||
+90000004|"Category 1A"|"Catégorie 1A"|NULL|90000001|1|0||||
+90000005|"Category 1B"|"Catégorie 1B"|NULL|90000001|2|0||||
+90000006|"Category 1C"|"Catégorie 1C"|NULL|90000001|3|0||||
+90000007|"Category 1B - A"|"Catégorie 1B - A"|NULL|90000005|1|0||||

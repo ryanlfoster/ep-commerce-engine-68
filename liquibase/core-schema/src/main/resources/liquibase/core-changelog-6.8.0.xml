@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-6.8.0.xml">
+
+	<!-- Reminder:
+		- Table names cannot exceed 30 characters (Oracle limitation)
+		- Column names cannot exceed 30 characters (Oracle limitation)
+		- Index names cannot exceed 18 characters (DB2 limitation)
+
+		 Important:
+		- Using <preCondition> ? read: http://forum.liquibase.org/topic/unexpected-behaviour-of-preconditions-with-updatesql
+		- Using <preCondition> ? Consider adding onUpdateSql="TEST", but understand how it plays with updateSQL!
+	-->
+
+	<changeSet id="6.8.0-hsqldb" author="elasticpath" dbms="hsqldb">
+		<comment>[CUST-824] Add constraint name to TSHOPPINGCART_FK_1 so future changesets just work</comment>
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TSHOPPINGCART</param>
+			<param name="columnName">STORE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint baseTableName="TSHOPPINGCART" baseColumnNames="STORE_UID" constraintName="TSHOPPINGCART_FK_1"
+			referencedTableName="TSTORE" referencedColumnNames="UIDPK" />
+
+		<comment>Remove CUSTOMER_UID foreign key constraint for HSQLDB only</comment>
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TCUSTOMERCREDITCARD</param>
+			<param name="columnName">CUSTOMER_UID</param>
+		</customChange>
+
+		<comment>[CUST-824] Add constraint name to TORDER->TSTORE foreign key so future changesets just work</comment>
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TORDER</param>
+			<param name="columnName">STORE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint baseTableName="TORDER" baseColumnNames="STORE_UID" constraintName="TORDER_FK_1"
+			referencedTableName="TSTORE" referencedColumnNames="UIDPK" />
+
+		<comment>[CUST-824] Add constraint name to TORDERSHIPMENT->TSHIPPINGSERVICELEVEL foreign key so future changesets just work</comment>
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TORDERSHIPMENT</param>
+			<param name="columnName">SERVICE_LEVEL_UID</param>
+		</customChange>
+		<addForeignKeyConstraint baseTableName="TORDERSHIPMENT" baseColumnNames="SERVICE_LEVEL_UID"
+			constraintName="TORDERSHIPMENT_FK_2" referencedTableName="TSHIPPINGSERVICELEVEL" referencedColumnNames="UIDPK" />
+	</changeSet>
+
+	<changeSet id="6.8.0-h2" author="elasticpath" dbms="h2">
+		<comment>[CUST-824] Add constraint name to TSHOPPINGCART_FK_1 so future changesets just work</comment>
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TSHOPPINGCART</param>
+			<param name="columnName">STORE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint baseTableName="TSHOPPINGCART" baseColumnNames="STORE_UID" constraintName="TSHOPPINGCART_FK_1"
+			referencedTableName="TSTORE" referencedColumnNames="UIDPK" />
+
+		<comment>[CUST-824] Add constraint name to TORDERSHIPMENT->TSHIPPINGSERVICELEVEL so future changesets just work</comment>
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TORDERSHIPMENT</param>
+			<param name="columnName">SERVICE_LEVEL_UID</param>
+		</customChange>
+		<addForeignKeyConstraint baseTableName="TORDERSHIPMENT" baseColumnNames="SERVICE_LEVEL_UID"
+			constraintName="TORDERSHIPMENT_FK_2" referencedTableName="TSHIPPINGSERVICELEVEL" referencedColumnNames="UIDPK" />
+
+		<comment>[CUST-824] Add constraint name to TORDER->TSTORE so future changesets just work</comment>
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TORDER</param>
+			<param name="columnName">STORE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint baseTableName="TORDER" baseColumnNames="STORE_UID" constraintName="TORDER_FK_1"
+			referencedTableName="TSTORE" referencedColumnNames="UIDPK" />
+	</changeSet>
+
+	<changeSet id="6.8.0-mysql" author="elasticpath" dbms="mysql">
+		<comment>Remove CUSTOMER_UID foreign key constraint for MySQL only</comment>
+		<dropForeignKeyConstraint constraintName="TCUSTOMERCREDITCARD_FK_1" baseTableName="TCUSTOMERCREDITCARD" />
+	</changeSet>
+
+	<changeSet id="6.8.0-mssql" author="elasticpath" dbms="mssql">
+		<comment>Remove CUSTOMER_UID foreign key constraint for MSSQL only</comment>
+		<dropForeignKeyConstraint constraintName="TCUSTOMERCREDITCARD_FK_1" baseTableName="TCUSTOMERCREDITCARD" />
+
+		<comment>Remove index I_CCC_CUSTOMER_UID on CUSTOMER_UID column from TCUSTOMERCREDITCARD (resolves MSSQL failure)</comment>
+		<dropIndex indexName="I_CCC_CUSTOMER_UID" tableName="TCUSTOMERCREDITCARD" />
+	</changeSet>
+
+	<changeSet id="6.8.0" author="elasticpath">
+		<comment>[CUST-824] Switch ShoppingCartMemento to use store code instead of store uid</comment>
+		<addColumn tableName="TSHOPPINGCART">
+			<column name="STORECODE" type="java.sql.Types.VARCHAR(64)" valueComputed="(select STORECODE from TSTORE where TSHOPPINGCART.STORE_UID = TSTORE.UIDPK)" />
+		</addColumn>
+
+		<addNotNullConstraint tableName="TSHOPPINGCART" columnName="STORECODE" columnDataType="java.sql.Types.VARCHAR(64)" />
+		<createIndex tableName="TSHOPPINGCART" indexName="I_SHOPCART_STORECODE">
+			<column name="STORECODE" />
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="TSHOPPINGCART" baseColumnNames="STORECODE" constraintName="TSHOPPINGCART_STORECODE_FK"
+			referencedTableName="TSTORE" referencedColumnNames="STORECODE" />
+		<dropForeignKeyConstraint baseTableName="TSHOPPINGCART" constraintName="TSHOPPINGCART_FK_1" />
+
+		<comment>[CUST-824]</comment>
+		<dropIndex tableName="TSHOPPINGCART" indexName="I_SHOPCART_STORE_UID" />
+		<dropColumn tableName="TSHOPPINGCART" columnName="STORE_UID" />
+
+		<comment>[CUST-824] Switch Order to use store code instead of store uid</comment>
+		<addColumn tableName="TORDER">
+			<column name="STORECODE" type="java.sql.Types.VARCHAR(64)" valueComputed="(select STORECODE from TSTORE where TORDER.STORE_UID = TSTORE.UIDPK)" />
+		</addColumn>
+
+		<addNotNullConstraint tableName="TORDER" columnName="STORECODE" columnDataType="java.sql.Types.VARCHAR(64)" />
+		<createIndex tableName="TORDER" indexName="I_O_STORECODE">
+			<column name="STORECODE" />
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="TORDER" baseColumnNames="STORECODE" constraintName="TORDER_STORECODE_FK"
+			referencedTableName="TSTORE" referencedColumnNames="STORECODE" />
+		<dropForeignKeyConstraint baseTableName="TORDER" constraintName="TORDER_FK_1" />
+
+		<comment>[CUST-824]</comment>
+		<dropIndex tableName="TORDER" indexName="I_O_STORE_UID" />
+		<dropColumn tableName="TORDER" columnName="STORE_UID" />
+
+		<comment>[CUST-824] Switch PhysicalOrderShipment to use shipping service level guid instead of SSL uid</comment>
+		<addColumn tableName="TORDERSHIPMENT">
+			<column name="SERVICE_LEVEL_GUID" type="java.sql.Types.VARCHAR(64)"
+				valueComputed="(select GUID from TSHIPPINGSERVICELEVEL where TORDERSHIPMENT.SERVICE_LEVEL_UID = TSHIPPINGSERVICELEVEL.UIDPK)" />
+		</addColumn>
+
+		<createIndex tableName="TORDERSHIPMENT" indexName="I_OSHIP_SSL_GUID">
+			<column name="SERVICE_LEVEL_GUID" />
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="TORDERSHIPMENT" baseColumnNames="SERVICE_LEVEL_GUID"
+			constraintName="TORDERSHIPMENT_SHIPLEVEL_FK" referencedTableName="TSHIPPINGSERVICELEVEL" referencedColumnNames="GUID" />
+		<dropForeignKeyConstraint baseTableName="TORDERSHIPMENT" constraintName="TORDERSHIPMENT_FK_2" />
+
+		<comment>[CUST-824]</comment>
+		<dropIndex tableName="TORDERSHIPMENT" indexName="I_OSHIP_SHIPLEVSERV" />
+		<dropColumn tableName="TORDERSHIPMENT" columnName="SERVICE_LEVEL_UID" />
+
+		<comment>To be used to store company name or university/college name</comment>
+		<addColumn tableName="TADDRESS">
+			<column name="ORGANIZATION" type="VARCHAR(200)" />
+		</addColumn>
+		<addColumn tableName="TORDERADDRESS">
+			<column name="ORGANIZATION" type="VARCHAR(200)" />
+		</addColumn>
+
+		<comment>[CE-269]</comment>
+		<createTable tableName="TPAYMENTTOKEN">
+			<column name="UIDPK" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="VALUE" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DISPLAY_VALUE" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="GATEWAY_GUID" type="VARCHAR(64)" />
+		</createTable>
+
+		<createTable tableName="TCUSTOMERPAYMENTMETHOD">
+			<column name="CUSTOMER_UID" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="PAYMENT_METHOD_UID" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+		</createTable>
+
+		<addColumn tableName="TCUSTOMER">
+			<column name="DEFAULT_PAYMENT_METHOD_UID" type="BIGINT" />
+		</addColumn>
+
+		<addColumn tableName="TCARTORDER">
+			<column name="PAYMENT_METHOD_UID" type="BIGINT" />
+		</addColumn>
+
+		<update tableName="JPA_GENERATED_KEYS">
+			<column name="ID" value="PAYMENTMETHOD" />
+			<where>ID = 'TCUSTOMERCREDITCARD'</where>
+		</update>
+
+		<addForeignKeyConstraint constraintName="FK_PAYMENTMETHOD_CUSTOMER_UID" referencedTableName="TCUSTOMER"
+			referencedColumnNames="UIDPK" baseTableName="TCUSTOMERPAYMENTMETHOD" baseColumnNames="CUSTOMER_UID" />
+
+		<comment>Adds generic order data to Order object</comment>
+		<createTable tableName="TORDERDATA" remarks="Key/Value Pairs of Data associated with Orders">
+			<column name="UIDPK" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="ORDER_UID" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="ITEM_KEY" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ITEM_VALUE" type="VARCHAR(1024)" />
+		</createTable>
+
+		<createIndex tableName="TORDERDATA" indexName="I_ORDERDATA_ORDER_UID">
+			<column name="ORDER_UID" />
+		</createIndex>
+
+		<addForeignKeyConstraint constraintName="FK_ORDERDATA_ORDER" baseTableName="TORDERDATA" baseColumnNames="ORDER_UID"
+			referencedTableName="TORDER" referencedColumnNames="UIDPK" />
+
+		<comment>[HIVE-143]</comment>
+		<insert tableName="JPA_GENERATED_KEYS">
+			<column name="ID" value="TORDERITEMDATA" />
+			<column name="LAST_VALUE" valueNumeric="200000" />
+		</insert>
+
+		<comment>HIVE-125: Migrate TCARTORDER.PAYMENTMETHOD_GUID to PAYMENT_METHOD_UID</comment>
+		<sql>
+			UPDATE TCARTORDER
+			SET PAYMENT_METHOD_UID = (SELECT UIDPK FROM TCUSTOMERCREDITCARD
+			WHERE TCUSTOMERCREDITCARD.GUID = TCARTORDER.PAYMENTMETHOD_GUID)
+			WHERE PAYMENTMETHOD_GUID IS NOT NULL AND PAYMENT_METHOD_UID IS NULL;
+		</sql>
+		<!-- Clear PAYMENTMETHOD_GUID column data to ensure that running this script multiple times does not clobber subsequent live production
+			changes. -->
+		<sql>
+			UPDATE TCARTORDER SET PAYMENTMETHOD_GUID = NULL;
+		</sql>
+
+		<comment>HIVE-125: Enable Cortex purchase using customer's default payment token
+				- Remove CUSTOMER_UID column from TCUSTOMERCREDITCARD
+				- Populate TCUSTOMERPAYMENTMETHOD with UIDPK, CUSTOMER_UID pairs from TCUSTOMERCREDITCARD as it's initial data
+			</comment>
+
+		<sql>
+			INSERT INTO TCUSTOMERPAYMENTMETHOD (CUSTOMER_UID, PAYMENT_METHOD_UID)
+			SELECT CUSTOMER_UID, UIDPK FROM TCUSTOMERCREDITCARD
+		</sql>
+
+		<dropColumn tableName="TCUSTOMERCREDITCARD" columnName="CUSTOMER_UID" />
+	</changeSet>
+
+</databaseChangeLog>

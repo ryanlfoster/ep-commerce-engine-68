@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.customer.impl</package>
+	<entity class="PaymentTokenImpl">
+		<named-query name="FIND_PAYMENT_TOKEN_BY_UIDPK">
+			<query>
+				SELECT pt
+				FROM PaymentTokenImpl as pt
+				WHERE pt.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

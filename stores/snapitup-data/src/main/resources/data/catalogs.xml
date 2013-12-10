@@ -1,0 +1,1794 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalogs>
+<catalog>
+    <code>SLRWORLDCATALOG</code>
+    <type>virtual</type>
+    <name>SLR World Virtual Catalog</name>
+    <defaultlanguage>en</defaultlanguage>
+</catalog>
+
+<catalog>
+    <code>SNAPITUPUS</code>
+    <type>virtual</type>
+    <name>US Virtual Catalog</name>
+    <defaultlanguage>en</defaultlanguage>
+</catalog>
+
+<catalog>
+    <code>SNAPITUP</code>
+    <type>master</type>
+    <name>Snap It Up Master Catalog</name>
+    <languages>
+        <language>en</language>
+        <language>fr</language>
+    </languages>
+    <defaultlanguage>en</defaultlanguage>
+    <attributes>
+        <attribute>
+            <key>A01010</key>
+            <name>Optical System / Prism System</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01283</key>
+            <name>Camera / Film Speed Range</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00556</key>
+            <name>Viewfinder / Viewfinder Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00373</key>
+            <name>Miscellaneous / Color</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00140</key>
+            <name>Display (Projector) / Diagonal Size</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01280</key>
+            <name>Camera / Shooting Modes</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01448</key>
+            <name>Optical Viewfinder / Magnification</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00409</key>
+            <name>Flash Memory / Form Factor</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00429</key>
+            <name>System Requirements / OS Required</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01244</key>
+            <name>Optical System / Image Stabilizer</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01287</key>
+            <name>Optical Viewfinder / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00871</key>
+            <name>Audio Input / Microphone Operation Mode</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00919</key>
+            <name>Video Input / Media Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A02805</key>
+            <name>Digital Camera / Digital Camera Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00260</key>
+            <name>Video Input / Digital Video Format</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01072</key>
+            <name>Optical System / Magnification</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>catImage</key>
+            <name>Category Image</name>
+            <usage>Category</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>true</global>
+        </attribute>
+        <attribute>
+            <key>A01006</key>
+            <name>Optical System / Objective Lens Diameter</name>
+            <usage>Product</usage>
+            <type>Integer</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00981</key>
+            <name>Lens System / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01281</key>
+            <name>Camera / Exposure Metering</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00258</key>
+            <name>Video Input / Analog Video Format</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01206</key>
+            <name>Exposure Parameters / Shooting Programs</name>
+            <usage>Product</usage>
+            <type>LongText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01007</key>
+            <name>Optical System / Eye Relief</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01207</key>
+            <name>Video Input / Special Effects</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00973</key>
+            <name>Camera / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A04393</key>
+            <name>Optical System / Product Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>AltImage1</key>
+            <name>Alternative Image 1</name>
+            <usage>Product</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01003</key>
+            <name>Optical System / Telescope Class</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A02299</key>
+            <name>System Requirements / Platform</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00974</key>
+            <name>Camera / Camera Format</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00986</key>
+            <name>Lens System / Min Focus Range</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01584</key>
+            <name>Display (Projector) / Display Form Factor</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01013</key>
+            <name>Optical System / Special Functions</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00978</key>
+            <name>Camera / Timer Functions</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>description</key>
+            <name>Product Description</name>
+            <usage>Product</usage>
+            <type>LongText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>true</global>
+        </attribute>
+        <attribute>
+            <key>A01454</key>
+            <name>Camera / Date Imprint Selections</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00256</key>
+            <name>Video Input / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03379</key>
+            <name>Battery / Manufacturer Battery Name</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01071</key>
+            <name>Lens System / Optical Zoom</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A02638</key>
+            <name>Optical Sensor / Sensor Resolution</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03378</key>
+            <name>Battery / Battery Form Factor</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00995</key>
+            <name>Finderscope / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00600</key>
+            <name>Header / Product Line</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03380</key>
+            <name>Battery / Supported Battery Form Factor</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00548</key>
+            <name>Video Input / Light Sensitivity</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00870</key>
+            <name>Audio Input / Microphone Technology</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>catDescription</key>
+            <name>Category Description</name>
+            <usage>Category</usage>
+            <type>LongText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>true</global>
+        </attribute>
+        <attribute>
+            <key>A01376</key>
+            <name>Optical Sensor / Optical Sensor Size</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00652</key>
+            <name>Video Input / Digital Zoom</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00413</key>
+            <name>Flash Memory / Storage Capacity</name>
+            <usage>Product</usage>
+            <type>Integer</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00601</key>
+            <name>Header / Model</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03517</key>
+            <name>Optical Sensor / Camcorder Sensor Resolution</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01278</key>
+            <name>Optical System / Telescope Aperture</name>
+            <usage>Product</usage>
+            <type>Integer</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00430</key>
+            <name>Service &amp; Support / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01015</key>
+            <name>Camera Flash / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>AltImage4</key>
+            <name>Alternative Image 4</name>
+            <usage>Product</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00920</key>
+            <name>Viewfinder / Viewfinder Color Support</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03519</key>
+            <name>Optical Sensor / Camcorder Effective Video Resolution</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03190</key>
+            <name>Digital Camera / Supported Flash Memory</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00983</key>
+            <name>Lens System / Lens Aperture</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>AltImage2</key>
+            <name>Alternative Image 2</name>
+            <usage>Product</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01250</key>
+            <name>Camera Flash / Flash Modes</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00276</key>
+            <name>Audio Input / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00551</key>
+            <name>Optical Sensor / Optical Sensor Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00984</key>
+            <name>Lens System / Min Focal Length</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01282</key>
+            <name>Camera / Auto Focus</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01002</key>
+            <name>Optical System / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00996</key>
+            <name>Finderscope / Magnification</name>
+            <usage>Product</usage>
+            <type>Integer</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00537</key>
+            <name>Video Input / Still Image Format</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00341</key>
+            <name>Battery / Run Time (Up To)</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00152</key>
+            <name>Display (Projector) / Technology</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01570</key>
+            <name>Video Input / Shooting Modes</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>true</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A02028</key>
+            <name>Camera Flash / Red Eye Reduction</name>
+            <usage>Product</usage>
+            <type>Boolean</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00138</key>
+            <name>Display (Projector) / Type</name>
+            <usage>Product</usage>
+            <type>ShortText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A00985</key>
+            <name>Lens System / Max Focal Length</name>
+            <usage>Product</usage>
+            <type>Decimal</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A03497</key>
+            <name>Optical Sensor / Sensor Qty</name>
+            <usage>Product</usage>
+            <type>Integer</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>AltImage3</key>
+            <name>Alternative Image 3</name>
+            <usage>Product</usage>
+            <type>Image</type>
+            <multilanguage>false</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+        <attribute>
+            <key>A01381</key>
+            <name>Video Input / Digital Scene Transition</name>
+            <usage>Product</usage>
+            <type>LongText</type>
+            <multilanguage>true</multilanguage>
+            <required>false</required>
+            <multivalue>false</multivalue>
+            <global>false</global>
+        </attribute>
+    </attributes>
+    <categorytypes>
+        <categorytype>
+            <name>SnapItUp</name>
+            <template>categoryTemplate</template>
+            <assignedattributes>
+                <attributekey>catDescription</attributekey>
+                <attributekey>catImage</attributekey>
+            </assignedattributes>
+        </categorytype>
+    </categorytypes>
+    <producttypes>
+        <producttype>
+            <name>Camcorders &amp; Digital Cameras</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>A00556</attributekey>
+                <attributekey>A00551</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A00985</attributekey>
+                <attributekey>A00981</attributekey>
+                <attributekey>A02638</attributekey>
+                <attributekey>A01015</attributekey>
+                <attributekey>A03519</attributekey>
+                <attributekey>A00260</attributekey>
+                <attributekey>A01207</attributekey>
+                <attributekey>A00413</attributekey>
+                <attributekey>A00152</attributekey>
+                <attributekey>A00256</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A01381</attributekey>
+                <attributekey>A00341</attributekey>
+                <attributekey>A01584</attributekey>
+                <attributekey>A03497</attributekey>
+                <attributekey>A00919</attributekey>
+                <attributekey>A00920</attributekey>
+                <attributekey>A01071</attributekey>
+                <attributekey>A03378</attributekey>
+                <attributekey>A01570</attributekey>
+                <attributekey>A01206</attributekey>
+                <attributekey>A02028</attributekey>
+                <attributekey>A00430</attributekey>
+                <attributekey>A02805</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>A00409</attributekey>
+                <attributekey>A03380</attributekey>
+                <attributekey>A00652</attributekey>
+                <attributekey>A03379</attributekey>
+                <attributekey>A00548</attributekey>
+                <attributekey>A00983</attributekey>
+                <attributekey>A00870</attributekey>
+                <attributekey>A00373</attributekey>
+                <attributekey>A03517</attributekey>
+                <attributekey>A00276</attributekey>
+                <attributekey>A00537</attributekey>
+                <attributekey>A00258</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>A01244</attributekey>
+                <attributekey>A03190</attributekey>
+                <attributekey>AltImage3</attributekey>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>A00984</attributekey>
+                <attributekey>A00138</attributekey>
+                <attributekey>A00140</attributekey>
+                <attributekey>A00871</attributekey>
+                <attributekey>A01376</attributekey>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Binoculars</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>A01013</attributekey>
+                <attributekey>A00430</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A01007</attributekey>
+                <attributekey>A01010</attributekey>
+                <attributekey>A01072</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A01006</attributekey>
+                <attributekey>A01244</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>A01002</attributekey>
+                <attributekey>A00341</attributekey>
+                <attributekey>AltImage3</attributekey>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>A00984</attributekey>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Software</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>A00429</attributekey>
+                <attributekey>A02299</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Pod Pouch (Multi SKU)</name>
+            <template>guidedSkuTemplate</template>
+            <assignedattributes>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <multisku>
+                <assignedskuoptions>
+                    <skuoption>PodPouchColor</skuoption>
+                    <skuoption>BagSize</skuoption>
+                </assignedskuoptions>
+                <assignedattributes/>
+            </multisku>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Accessories</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>description</attributekey>
+                <attributekey>AltImage3</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Multi-SKU Accessories</name>
+            <template>guidedSkuTemplate</template>
+            <assignedattributes>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>description</attributekey>
+                <attributekey>AltImage3</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <multisku>
+                <assignedskuoptions>
+                    <skuoption>LeatherCaseColor</skuoption>
+                </assignedskuoptions>
+                <assignedattributes/>
+            </multisku>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Film Cameras</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>A01282</attributekey>
+                <attributekey>A02028</attributekey>
+                <attributekey>A00973</attributekey>
+                <attributekey>A01280</attributekey>
+                <attributekey>A00430</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A00985</attributekey>
+                <attributekey>A00981</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>A01454</attributekey>
+                <attributekey>A00983</attributekey>
+                <attributekey>A01015</attributekey>
+                <attributekey>A00373</attributekey>
+                <attributekey>A00974</attributekey>
+                <attributekey>A01281</attributekey>
+                <attributekey>A01283</attributekey>
+                <attributekey>A01287</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>A00978</attributekey>
+                <attributekey>A01250</attributekey>
+                <attributekey>A00986</attributekey>
+                <attributekey>AltImage3</attributekey>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>A01448</attributekey>
+                <attributekey>A01071</attributekey>
+                <attributekey>A00984</attributekey>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Telescopes</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>A00430</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A01006</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>A00995</attributekey>
+                <attributekey>A01003</attributekey>
+                <attributekey>AltImage3</attributekey>
+                <attributekey>A00996</attributekey>
+                <attributekey>A04393</attributekey>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>A01278</attributekey>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Digital Cameras (Multi SKU)</name>
+            <template>guidedSkuTemplate</template>
+            <assignedattributes>
+                <attributekey>A00556</attributekey>
+                <attributekey>A00551</attributekey>
+                <attributekey>AltImage2</attributekey>
+                <attributekey>A00985</attributekey>
+                <attributekey>A00981</attributekey>
+                <attributekey>A02638</attributekey>
+                <attributekey>A01015</attributekey>
+                <attributekey>A03519</attributekey>
+                <attributekey>A00260</attributekey>
+                <attributekey>A01207</attributekey>
+                <attributekey>A00413</attributekey>
+                <attributekey>A00152</attributekey>
+                <attributekey>A00256</attributekey>
+                <attributekey>AltImage1</attributekey>
+                <attributekey>A01381</attributekey>
+                <attributekey>A00341</attributekey>
+                <attributekey>A01584</attributekey>
+                <attributekey>A03497</attributekey>
+                <attributekey>A00919</attributekey>
+                <attributekey>A00920</attributekey>
+                <attributekey>A01071</attributekey>
+                <attributekey>A03378</attributekey>
+                <attributekey>A01570</attributekey>
+                <attributekey>A01206</attributekey>
+                <attributekey>A02028</attributekey>
+                <attributekey>A00430</attributekey>
+                <attributekey>A02805</attributekey>
+                <attributekey>A00601</attributekey>
+                <attributekey>A00409</attributekey>
+                <attributekey>A03380</attributekey>
+                <attributekey>A00652</attributekey>
+                <attributekey>A03379</attributekey>
+                <attributekey>A00548</attributekey>
+                <attributekey>A00983</attributekey>
+                <attributekey>A00870</attributekey>
+                <attributekey>A00373</attributekey>
+                <attributekey>A03517</attributekey>
+                <attributekey>A00276</attributekey>
+                <attributekey>A00537</attributekey>
+                <attributekey>A00258</attributekey>
+                <attributekey>A00600</attributekey>
+                <attributekey>A01244</attributekey>
+                <attributekey>A03190</attributekey>
+                <attributekey>AltImage3</attributekey>
+                <attributekey>AltImage4</attributekey>
+                <attributekey>A00984</attributekey>
+                <attributekey>A00138</attributekey>
+                <attributekey>A00140</attributekey>
+                <attributekey>A00871</attributekey>
+                <attributekey>A01376</attributekey>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <multisku>
+                <assignedskuoptions>
+                    <skuoption>Color</skuoption>
+                </assignedskuoptions>
+                <assignedattributes/>
+            </multisku>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Service Plans</name>
+            <template>productTemplate</template>
+            <assignedattributes/>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Gift Certificates</name>
+            <template>giftCertificate</template>
+            <assignedattributes>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>NONE</defaulttaxcode>
+            <multisku>
+                <assignedskuoptions>
+                    <skuoption>GC_Denomination</skuoption>
+                    <skuoption>GC_Theme</skuoption>
+                </assignedskuoptions>
+                <assignedattributes/>
+            </multisku>
+            <nodiscount>true</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Tutorial</name>
+            <template>productTemplate</template>
+            <assignedattributes>
+                <attributekey>description</attributekey>
+            </assignedattributes>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Tutorial (Multi SKU)</name>
+            <template>guidedSkuTemplate</template>
+            <assignedattributes/>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <multisku>
+                <assignedskuoptions>
+                    <skuoption>Frequency</skuoption>
+                    <skuoption>PSize</skuoption>
+                </assignedskuoptions>
+                <assignedattributes/>
+            </multisku>
+            <nodiscount>false</nodiscount>
+        </producttype>
+        <producttype>
+            <name>Recurring (Multi SKU)</name>
+            <template>guidedSkuTemplate</template>
+            <assignedattributes/>
+            <defaulttaxcode>GOODS</defaulttaxcode>
+            <multisku>
+                <assignedskuoptions>
+                    <skuoption>Frequency</skuoption>
+                </assignedskuoptions>
+                <assignedattributes/>
+            </multisku>
+            <nodiscount>false</nodiscount>
+        </producttype>
+    </producttypes>
+    <skuoptions>
+        <skuoption>
+            <code>GC_Theme</code>
+            <name>
+                <value language="en">Design</value>
+                <value language="fr">Motif</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>hummingbird</code>
+                    <name>
+                        <value language="en">Hummingbird</value>
+                        <value language="fr">Hummingbird</value>
+                    </name>
+                    <image>hummingbird.jpg</image>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>berries</code>
+                    <name>
+                        <value language="en">Berries</value>
+                        <value language="fr">Berries</value>
+                    </name>
+                    <image>berries.jpg</image>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>GC_Denomination</code>
+            <name>
+                <value language="en">Amount</value>
+                <value language="fr">Montant</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>TWENTY</code>
+                    <name>
+                        <value language="en">20</value>
+                        <value language="fr">20</value>
+                    </name>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>ONE_HUNDRED</code>
+                    <name>
+                        <value language="en">100</value>
+                        <value language="fr">100</value>
+                    </name>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>FIFTY</code>
+                    <name>
+                        <value language="en">50</value>
+                        <value language="fr">50</value>
+                    </name>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>Color</code>
+            <name>
+                <value language="en">Color</value>
+                <value language="fr">Couleur</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>RR</code>
+                    <name>
+                        <value language="en">Rockstar Red</value>
+                        <value language="fr">Rouge Rockstar</value>
+                    </name>
+                    <ordering>40</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>VV</code>
+                    <name>
+                        <value language="en">Vivacious Violet</value>
+                        <value language="fr">Violet vif</value>
+                    </name>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>TB</code>
+                    <name>
+                        <value language="en">Tuxedo Black</value>
+                        <value language="fr">Noir Smoking</value>
+                    </name>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>GG</code>
+                    <name>
+                        <value language="en">Glamour Gold</value>
+                        <value language="fr">Or Glamour</value>
+                    </name>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>LeatherCaseColor</code>
+            <name>
+                <value language="en">Color</value>
+                <value language="fr">Couleur</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>Red</code>
+                    <name>
+                        <value language="en">Red</value>
+                        <value language="fr">Rogue</value>
+                    </name>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>Black</code>
+                    <name>
+                        <value language="en">Black</value>
+                        <value language="fr">Noir</value>
+                    </name>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>Green</code>
+                    <name>
+                        <value language="en">Green</value>
+                        <value language="fr">Vert</value>
+                    </name>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>BagSize</code>
+            <name>
+                <value language="en">Size</value>
+                <value language="fr">Taille</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>BSS</code>
+                    <name>
+                        <value language="en">Small</value>
+                        <value language="fr">Petit</value>
+                    </name>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>BSM</code>
+                    <name>
+                        <value language="en">Medium</value>
+                        <value language="fr">Moyen</value>
+                    </name>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>BSL</code>
+                    <name>
+                        <value language="en">Large</value>
+                        <value language="fr">Grand</value>
+                    </name>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>PodPouchColor</code>
+            <name>
+                <value language="en">Color</value>
+                <value language="fr">Couleur</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>PPY</code>
+                    <name>
+                        <value language="en">Yellow</value>
+                        <value language="fr">Jaune</value>
+                    </name>
+                    <image>15599_4_1_sm.jpeg</image>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>PPN</code>
+                    <name>
+                        <value language="en">Navy</value>
+                        <value language="fr">Bleu</value>
+                    </name>
+                    <image>15599_6_1_sm.jpeg</image>
+                    <ordering>40</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>PPO</code>
+                    <name>
+                        <value language="en">Olive</value>
+                        <value language="fr">Vert</value>
+                    </name>
+                    <image>15599_5_1_sm.jpeg</image>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>PPB</code>
+                    <name>
+                        <value language="en">Black</value>
+                        <value language="fr">Noir</value>
+                    </name>
+                    <image>15599_1_1_sm.jpeg</image>
+                    <ordering>50</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>PPR</code>
+                    <name>
+                        <value language="en">Red</value>
+                        <value language="fr">Rouge</value>
+                    </name>
+                    <image>15599_3_1_sm.jpeg</image>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>Frequency</code>
+            <name>
+                <value language="en">Billed</value>
+                <value language="fr">Factures</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>WEEK</code>
+                    <name>
+                        <value language="en">per week</value>
+                        <value language="fr">per semaine</value>
+                    </name>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>MON</code>
+                    <name>
+                        <value language="en">per month</value>
+                        <value language="fr">per mois</value>
+                    </name>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>QUART</code>
+                    <name>
+                        <value language="en">per quarter</value>
+                        <value language="fr">per trimestre</value>
+                    </name>
+                    <ordering>40</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>YEAR</code>
+                    <name>
+                        <value language="en">per year</value>
+                        <value language="fr">per an</value>
+                    </name>
+                    <ordering>50</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>NA</code>
+                    <name>
+                        <value language="en">one time</value>
+                        <value language="fr">une fois</value>
+                    </name>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+        <skuoption>
+            <code>PSize</code>
+            <name>
+                <value language="en">Plan Size</value>
+                <value language="fr">Taille de Regime</value>
+            </name>
+            <skuoptionvalues>
+                <skuoptionvalue>
+                    <code>3</code>
+                    <name>
+                        <value language="en">3 lessons</value>
+                        <value language="fr">3 lecons</value>
+                    </name>
+                    <ordering>20</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>20</code>
+                    <name>
+                        <value language="en">20 prints</value>
+                        <value language="fr">20 d'impressions</value>
+                    </name>
+                    <ordering>40</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>1</code>
+                    <name>
+                        <value language="en">1 lesson</value>
+                        <value language="fr">1 lecon</value>
+                    </name>
+                    <ordering>10</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>5</code>
+                    <name>
+                        <value language="en">5 lessons</value>
+                        <value language="fr">5 lecons</value>
+                    </name>
+                    <ordering>30</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>40</code>
+                    <name>
+                        <value language="en">up to 40 prints</value>
+                        <value language="fr">jusqu'a 40 d'impressions</value>
+                    </name>
+                    <ordering>50</ordering>
+                </skuoptionvalue>
+                <skuoptionvalue>
+                    <code>40Plus</code>
+                    <name>
+                        <value language="en">40+ prints </value>
+                        <value language="fr">40+ d'impressions</value>
+                    </name>
+                    <ordering>60</ordering>
+                </skuoptionvalue>
+            </skuoptionvalues>
+        </skuoption>
+    </skuoptions>
+    <brands>
+        <brand>
+            <code>F00015</code>
+            <name>
+                <value language="en">Battery Technology</value>
+                <value language="fr">Battery Technology</value>
+            </name>
+            <image>bti.png</image>
+        </brand>
+        <brand>
+            <code>F00031</code>
+            <name>
+                <value language="en">SimpleTech</value>
+                <value language="fr">SimpleTech</value>
+            </name>
+            <image>simpletech.png</image>
+        </brand>
+        <brand>
+            <code>F00008</code>
+            <name>
+                <value language="en">Kodak</value>
+                <value language="fr">Kodak</value>
+            </name>
+            <image>kodak.png</image>
+        </brand>
+        <brand>
+            <code>F00024</code>
+            <name>
+                <value language="en">Lowepro</value>
+                <value language="fr">Lowepro</value>
+            </name>
+            <image>lowepro.png</image>
+        </brand>
+        <brand>
+            <code>F00016</code>
+            <name>
+                <value language="en">Battery-Biz</value>
+                <value language="fr">Battery-Biz</value>
+            </name>
+            <image>batterybiz.png</image>
+        </brand>
+        <brand>
+            <code>F00032</code>
+            <name>
+                <value language="en">Tamrac</value>
+                <value language="fr">Tamrac</value>
+            </name>
+            <image>tamrac.png</image>
+        </brand>
+        <brand>
+            <code>F00035</code>
+            <name>
+                <value language="en">Adobe Systems</value>
+                <value language="fr">Adobe Systems</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00007</code>
+            <name>
+                <value language="en">Fujifilm</value>
+                <value language="fr">Fujifilm</value>
+            </name>
+            <image>fujifilm.png</image>
+        </brand>
+        <brand>
+            <code>F00023</code>
+            <name>
+                <value language="en">Lexar Media</value>
+                <value language="fr">Lexar Media</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00037</code>
+            <name>
+                <value language="en">Express Digital</value>
+                <value language="fr">Express Digital</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00033</code>
+            <name>
+                <value language="en">Targus</value>
+                <value language="fr">Targus</value>
+            </name>
+            <image>targus.png</image>
+        </brand>
+        <brand>
+            <code>F00009</code>
+            <name>
+                <value language="en">Minolta</value>
+                <value language="fr">Minolta</value>
+            </name>
+            <image>konicaminolta.png</image>
+        </brand>
+        <brand>
+            <code>F00022</code>
+            <name>
+                <value language="en">Lenmar Enterprises</value>
+                <value language="fr">Lenmar Enterprises</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00034</code>
+            <name>
+                <value language="en">Viking InterWorks</value>
+                <value language="fr">Viking InterWorks</value>
+            </name>
+            <image>vikinginterworks.png</image>
+        </brand>
+        <brand>
+            <code>F00006</code>
+            <name>
+                <value language="en">SanDisk</value>
+                <value language="fr">SanDisk</value>
+            </name>
+            <image>sandisk.png</image>
+        </brand>
+        <brand>
+            <code>F00001</code>
+            <name>
+                <value language="en">Bushnell Performance Optics</value>
+                <value language="fr">Bushnell Performance Optics</value>
+            </name>
+            <image>bushnell.png</image>
+        </brand>
+        <brand>
+            <code>F00030</code>
+            <name>
+                <value language="en">SIGMA</value>
+                <value language="fr">SIGMA</value>
+            </name>
+            <image>sigma.png</image>
+        </brand>
+        <brand>
+            <code>F00014</code>
+            <name>
+                <value language="en">Sony</value>
+                <value language="fr">Sony</value>
+            </name>
+            <image>sony.png</image>
+        </brand>
+        <brand>
+            <code>F00025</code>
+            <name>
+                <value language="en">Mizco International</value>
+                <value language="fr">Mizco International</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00004</code>
+            <name>
+                <value language="en">Meade Instruments</value>
+                <value language="fr">Meade Instruments</value>
+            </name>
+            <image>meade.png</image>
+        </brand>
+        <brand>
+            <code>F00038</code>
+            <name>
+                <value language="en">Nik Multimedia</value>
+                <value language="fr">Nik Multimedia</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00019</code>
+            <name>
+                <value language="en">Energizer</value>
+                <value language="fr">Energizer</value>
+            </name>
+            <image>energizer.png</image>
+        </brand>
+        <brand>
+            <code>F00027</code>
+            <name>
+                <value language="en">North American Battery Company</value>
+                <value language="fr">North American Battery Company</value>
+            </name>
+            <image>nabc.png</image>
+        </brand>
+        <brand>
+            <code>F00011</code>
+            <name>
+                <value language="en">Olympus</value>
+                <value language="fr">Olympus</value>
+            </name>
+            <image>olympus.png</image>
+        </brand>
+        <brand>
+            <code>F00003</code>
+            <name>
+                <value language="en">JVC</value>
+                <value language="fr">JVC</value>
+            </name>
+            <image>jvc.png</image>
+        </brand>
+        <brand>
+            <code>F00012</code>
+            <name>
+                <value language="en">Panasonic</value>
+                <value language="fr">Panasonic</value>
+            </name>
+            <image>panasonic.png</image>
+        </brand>
+        <brand>
+            <code>F00028</code>
+            <name>
+                <value language="en">PNY Technologies</value>
+                <value language="fr">PNY Technologies</value>
+            </name>
+            <image>pny.png</image>
+        </brand>
+        <brand>
+            <code>F00017</code>
+            <name>
+                <value language="en">Delkin Devices</value>
+                <value language="fr">Delkin Devices</value>
+            </name>
+            <image>delkin.jpg</image>
+        </brand>
+        <brand>
+            <code>F00002</code>
+            <name>
+                <value language="en">Canon</value>
+                <value language="fr">Canon</value>
+            </name>
+            <image>canon.png</image>
+        </brand>
+        <brand>
+            <code>F00013</code>
+            <name>
+                <value language="en">Samsung</value>
+                <value language="fr">Samsung</value>
+            </name>
+            <image>samsung.png</image>
+        </brand>
+        <brand>
+            <code>F00029</code>
+            <name>
+                <value language="en">PSA</value>
+                <value language="fr">PSA</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>RoadWired</code>
+            <name>
+                <value language="en">RoadWired</value>
+                <value language="fr">RoadWired</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00021</code>
+            <name>
+                <value language="en">Kingston Technology</value>
+                <value language="fr">Kingston Technology</value>
+            </name>
+            <image>kingston.png</image>
+        </brand>
+        <brand>
+            <code>F00036</code>
+            <name>
+                <value language="en">Corel</value>
+                <value language="fr">Corel</value>
+            </name>
+            <image></image>
+        </brand>
+        <brand>
+            <code>F00026</code>
+            <name>
+                <value language="en">Monster Cable Products</value>
+                <value language="fr">Monster Cable Products</value>
+            </name>
+            <image>monstercable.png</image>
+        </brand>
+        <brand>
+            <code>F00010</code>
+            <name>
+                <value language="en">Nikon</value>
+                <value language="fr">Nikon</value>
+            </name>
+            <image>nikon.png</image>
+        </brand>
+        <brand>
+            <code>F00005</code>
+            <name>
+                <value language="en">Pentax</value>
+                <value language="fr">Pentax</value>
+            </name>
+            <image>pentax.png</image>
+        </brand>
+        <brand>
+            <code>Store</code>
+            <name>
+                <value language="en">Snap It Up</value>
+                <value language="fr">Snap It Up</value>
+            </name>
+            <image>gift-certificate-brand.gif</image>
+        </brand>
+    </brands>
+</catalog>
+
+<catalog>
+    <code>SNAPITUPUK</code>
+    <type>virtual</type>
+    <name>UK Virtual Catalog</name>
+    <defaultlanguage>en</defaultlanguage>
+</catalog>
+</catalogs>

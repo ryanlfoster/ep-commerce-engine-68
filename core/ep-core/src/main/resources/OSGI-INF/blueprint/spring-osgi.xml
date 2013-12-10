@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:osgi="http://www.springframework.org/schema/osgi"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		This file and service definition use the spring-osgi schema so that we can set the context class loader
+		for the CheckoutService to "service-provider". This ensures that calls to CheckoutService have their TCCL set
+		to the classloader of the core-wrapper bundle, and allows the PayPal Do Direct payment gateway to function.
+
+		Although the osgi namespace and this bean could have been added to core-blueprint.xml this helps isolate the
+		scope of the workaround. Because they depend on the spring-osgi namespace this will only work if Eclipse Gemini
+		is used as the blueprint container.
+	-->
+	<osgi:service ref="checkoutService"
+				  interface="com.elasticpath.service.shoppingcart.CheckoutService"
+				  context-class-loader="service-provider" />
+
+</beans>

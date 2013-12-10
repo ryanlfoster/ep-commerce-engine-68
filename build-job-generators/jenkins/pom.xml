@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath.releng.jenkins</groupId>
+		<artifactId>generator-parent</artifactId>
+		<version>0.6</version>
+	</parent>
+
+	<artifactId>commerce-engine-job-generator</artifactId>
+	<version>6.8.0.2013101613-RELEASE</version>
+
+	<name>Platform Jenkins Jobs</name>
+
+	<scm>
+		<connection>scm:git:git://github.elasticpath.net/Hive/commerce-engine.git</connection>
+		<developerConnection>scm:git:git@github.elasticpath.net:Hive/commerce-engine.git</developerConnection>
+		<url>https://github.elasticpath.net/Hive/commerce-engine</url>
+		<tag>release-6.8.0.2013101613-RELEASE-26</tag>
+	</scm>
+
+	<properties>
+		<!-- Build Triggers -->
+		<!-- Main-Build (regular CI) on schedule, while reduced CI polls SCM -->
+		<build.trigger.main-build.type>scm</build.trigger.main-build.type>
+		<build.trigger.main-build.description><![CDATA[Poll source control every 10 minutes]]></build.trigger.main-build.description>
+		<build.trigger.main-build.expression>*/10 * * * *</build.trigger.main-build.expression>
+
+		<!-- Main-Build-DCAPI (reduced CI, assuming no core changes) -->
+		<build.trigger.main-build-dcapi.type>scm</build.trigger.main-build-dcapi.type>
+		<build.trigger.main-build-dcapi.description><![CDATA[Poll source control every 10 minutes]]></build.trigger.main-build-dcapi.description>
+		<build.trigger.main-build-dcapi.expression>*/10 * * * *</build.trigger.main-build-dcapi.expression>
+
+		<!-- Nightly build on schedule-->
+		<build.trigger.nightly.type>timer</build.trigger.nightly.type>
+		<build.trigger.nightly.description><![CDATA[Every night at 11pm]]></build.trigger.nightly.description>
+		<build.trigger.nightly.expression>0 23 * * *</build.trigger.nightly.expression>
+		
+		<!--Nightly deployment targets defined in non-distributable\autodeploy.util\deployment-targets -->
+		<nightlyDeployEnvs>tomcat7-mysql55-141,tomcat6-mysql56-143,tomcat6-oracle11gr2-145,weblogic11g-oracle11gr2-147,tomcat6-mssql-183</nightlyDeployEnvs>
+		
+		<!-- Slaves with this label will be allowed to run the "nightly" job -->
+		<!-- Nightly scripts are written against an older version of vsphere perl toolkit, a dependency not currently tracked by maven. -->
+		<nightlyNodeLabel>slave</nightlyNodeLabel>
+
+		<!--Properties for checking out cortex-populate-database-->
+		<checkout_dir>stores/cortex-dce-populate-database</checkout_dir>
+		<connection_url>scm:svn:https://svn.elasticpath.com/perfect_ep/products/cortex-dce/trunk/store-data/cortex-dce-populate-database/</connection_url>
+		
+		<!-- People to email when your builds breaks. -->
+		<!-- All must be comma separated -->
+		<mailTo>pd-trunk-builds@elasticpath.com</mailTo>
+		<nightlyMailTo>pd-nightly-builds@elasticpath.com</nightlyMailTo>
+
+		<!-- Where to do SCM polling and checkout for the code base -->
+		<scmUrl>https://svn.elasticpath.com/perfect_ep/pd/ep/trunk</scmUrl>
+
+		<!--The next main builds to trigger after this project's Main Build is done 
+			Hard coded since Rest-epCommerce-Trunk-Main-Build is in a separate job generator. 
+			The "Rest-epCommerce" prefix needs to be manually changed to the ${productPrefix} 
+			given to the Rest-epCommerce job generator.)
+		-->
+		<nextProductPrefix>Rest-epCommerce</nextProductPrefix>
+		<nextProductBranch>Trunk</nextProductBranch>
+		<nextProductBuild>${nextProductPrefix}-${nextProductBranch}-Main-Build</nextProductBuild>		
+		
+		<!--The next build to trigger after this project's Nightly-Deploy is done
+			Hard coded since Cortex-DCE-Trunk-Nightly_Fitnesse is in a separate 
+			job generator.  The "Cortex-DCE" prefix needs to be manually 
+			changed to the ${productPrefix} given to the Cortex-DCE job generator.)
+			Also set cortexBranch so nextFitnesseBuild forms correctly.
+		-->
+		<cortexPrefix>Cortex-DCE</cortexPrefix>
+		<cortexBranch>Trunk</cortexBranch>
+		<nextFitnesseBuild>${cortexPrefix}-${cortexBranch}-Nightly-Fitnesse</nextFitnesseBuild>
+
+		<!-- Which version of the EP platform to use during releases -->
+		<ep.platform.version>${project.version}</ep.platform.version>
+
+		<!-- By default, FIT is disabled unless -P with-fittests is passed in -->
+		<withFitTestsProfile />
+		<withNightlyFitTestsProfile />
+		<jenkins.fit.jobs />
+		<jenkins.deploy.jobs />
+
+		<!-- These properties get filled in if you specify with-source-release / with-internal-ep-modules to the job generator. -->
+		<withSourceRelease />
+		<withInternalEpModules />
+
+		<!-- Nexus snapshots group for housing CI and Nightly repositories. Overridden in the with-nexus-jobs profile for branches. -->
+		<projectIdentifier>ep-platform-</projectIdentifier>
+
+		<!--  Nexus release group for housing release repositories. Overridden in the with-nexus-jobs profile for branches. -->
+		<releaseRepoGroup>ep-platform-releases-group</releaseRepoGroup>
+
+		<!-- Profile Combinations for different Jobs -->
+		<!-- You must ensure that mavenOpts.common don't contain arguments that conflict with other mavenOpts settings below -->		
+		<mavenOpts.mainBuild>${mavenOpts.common} -XX:MaxPermSize=786m -Xmx1536m</mavenOpts.mainBuild>
+		<mavenOpts.nightlyBuild>${mavenOpts.common} -XX:MaxPermSize=786m -Xmx2048m -XX:ReservedCodeCacheSize=128m</mavenOpts.nightlyBuild>
+		<mavenOpts.analysis>${mavenOpts.common} -XX:MaxPermSize=786m -Xmx2G -Xms2G -XX:ReservedCodeCacheSize=128m</mavenOpts.analysis>
+		<mavenOpts.package>${mavenOpts.common} -XX:MaxPermSize=786m -Xmx2G -Xms2G -XX:ReservedCodeCacheSize=128m</mavenOpts.package>
+		<!-- The Main-Build job supports being built multi-threaded (mvn -T). How many threads would you like? -->
+		<maven.mainBuildThreads>3</maven.mainBuildThreads>
+
+		<maven.release.profiles>release,with-internal-ep-modules,with-deploy-jobs,${maven.common.profiles},${withFitTestsProfile},${withSourceRelease},${withInternalEpModules},with-aggregate-third-party-licensing,with-source-jars,${withNightlyFitTestsProfile},with-archetypes,with-assets,with-osgi-wrappers,with-job-generators,with-rawe,with-smoketests</maven.release.profiles>
+
+		<maven.itest.profiles>${maven.common.profiles},pass-build-even-if-tests-fail,skip-code-compliance</maven.itest.profiles>
+		<maven.main-build.profiles>${maven.common.profiles},pass-build-even-if-tests-fail,skip-code-compliance,with-source-jars,with-aggregate-third-party-licensing,${withFitTestsProfile},${withNightlyFitTestsProfile},with-archetypes,with-assets,with-osgi-wrappers,with-tomcat-war,with-rawe
+		</maven.main-build.profiles>
+		<maven.javadoc.profiles>${maven.common.profiles},pass-build-even-if-code-compliance-fails,${withFitTestsProfile}</maven.javadoc.profiles>
+		<maven.analysis.profiles>analysis,enforce-code-compliance,${maven.common.profiles},pass-build-even-if-code-compliance-fails,${withFitTestsProfile},${withNightlyFitTestsProfile}</maven.analysis.profiles>
+		<maven.nightly.profiles>${maven.common.profiles},pass-build-even-if-tests-fail,pass-build-even-if-code-compliance-fails,with-aggregate-third-party-licensing,${withFitTestsProfile},${withNightlyFitTestsProfile},with-archetypes,with-tomcat-war,with-assets,with-osgi-wrappers,with-rawe,enforce-code-compliance,nightly
+		</maven.nightly.profiles>
+		
+		<!-- Dummy repo value. Used when a job only uses one of either env.RELEASE_REPOSITORY_ID or env.SNAPSHOT_REPOSITORY_ID as a workaround for a Maven-Invoker-Plugin bug. See http://jira.codehaus.org/browse/MINVOKER-118 -->
+		<dummyRepoValue>dummyRepo</dummyRepoValue>
+
+		<!-- Tie Squish job to use Java 6 because it doesn't support Java 7 -->
+		<squishJdkName>jdk6u38</squishJdkName>
+
+		<!-- Source release smoke test needs to run on special slave instances -->
+		<releaseSmokeTestNodeLabel>pd_31</releaseSmokeTestNodeLabel>
+
+		<!-- PMD reporter config -->
+		<pmdReportConfig>
+<![CDATA[
+<!-- PMD Report -->
+<hudson.plugins.pmd.PmdReporter>
+	<healthy />
+	<unHealthy />
+	<pluginName>[PMD]</pluginName>
+	<thresholdLimit>low</thresholdLimit>
+	<canRunOnFailed>false</canRunOnFailed>
+	<useDeltaValues>false</useDeltaValues>
+	<thresholds>
+		<unstableTotalAll>0</unstableTotalAll>
+		<unstableTotalHigh />
+		<unstableTotalNormal />
+		<unstableTotalLow />
+		<unstableNewAll />
+		<unstableNewHigh />
+		<unstableNewNormal />
+		<unstableNewLow />
+		<failedTotalAll />
+		<failedTotalHigh />
+		<failedTotalNormal />
+		<failedTotalLow />
+		<failedNewAll />
+		<failedNewHigh />
+		<failedNewNormal />
+		<failedNewLow />
+	</thresholds>
+</hudson.plugins.pmd.PmdReporter>
+]]>
+		</pmdReportConfig>
+
+		<!-- Checkstyle reporter config -->
+		<checkstyleReportConfig>
+<![CDATA[
+<!-- Configure the Checkstyle Reporter -->
+<hudson.plugins.checkstyle.CheckStyleReporter>
+	<healthy />
+	<unHealthy />
+	<pluginName>[CHECKSTYLE]</pluginName>
+	<thresholdLimit>low</thresholdLimit>
+	<canRunOnFailed>false</canRunOnFailed>
+	<useDeltaValues>false</useDeltaValues>
+	<thresholds>
+		<unstableTotalAll>0</unstableTotalAll>
+		<unstableTotalHigh />
+		<unstableTotalNormal />
+		<unstableTotalLow />
+		<unstableNewAll />
+		<unstableNewHigh />
+		<unstableNewNormal />
+		<unstableNewLow />
+		<failedTotalAll />
+		<failedTotalHigh />
+		<failedTotalNormal />
+		<failedTotalLow />
+		<failedNewAll />
+		<failedNewHigh />
+		<failedNewNormal />
+		<failedNewLow />
+	</thresholds>
+</hudson.plugins.checkstyle.CheckStyleReporter>
+]]>
+		</checkstyleReportConfig>
+
+		<checkstyleAndPmdPublisher><![CDATA[
+		<!-- Configure the Checkstyle Reporter -->
+<hudson.plugins.checkstyle.CheckStylePublisher>
+	<healthy />
+	<unHealthy />
+	<pluginName>[CHECKSTYLE]</pluginName>
+	<thresholdLimit>low</thresholdLimit>
+	<canRunOnFailed>false</canRunOnFailed>
+	<useDeltaValues>false</useDeltaValues>
+	<thresholds>
+		<unstableTotalAll>0</unstableTotalAll>
+		<unstableTotalHigh />
+		<unstableTotalNormal />
+		<unstableTotalLow />
+		<unstableNewAll />
+		<unstableNewHigh />
+		<unstableNewNormal />
+		<unstableNewLow />
+		<failedTotalAll />
+		<failedTotalHigh />
+		<failedTotalNormal />
+		<failedTotalLow />
+		<failedNewAll />
+		<failedNewHigh />
+		<failedNewNormal />
+		<failedNewLow />
+	</thresholds>
+</hudson.plugins.checkstyle.CheckStylePublisher>
+<!-- PMD Report -->
+<hudson.plugins.pmd.PmdPublisher>
+	<healthy />
+	<unHealthy />
+	<pluginName>[PMD]</pluginName>
+	<thresholdLimit>low</thresholdLimit>
+	<canRunOnFailed>false</canRunOnFailed>
+	<useDeltaValues>false</useDeltaValues>
+	<thresholds>
+		<unstableTotalAll>0</unstableTotalAll>
+		<unstableTotalHigh />
+		<unstableTotalNormal />
+		<unstableTotalLow />
+		<unstableNewAll />
+		<unstableNewHigh />
+		<unstableNewNormal />
+		<unstableNewLow />
+		<failedTotalAll />
+		<failedTotalHigh />
+		<failedTotalNormal />
+		<failedTotalLow />
+		<failedNewAll />
+		<failedNewHigh />
+		<failedNewNormal />
+		<failedNewLow />
+	</thresholds>
+</hudson.plugins.pmd.PmdPublisher>]]>
+		</checkstyleAndPmdPublisher>
+
+		<nightlySnapshotRepoGroup>${jenkinsJobPrefix}-${projectIdentifier}nightly-snapshots-group</nightlySnapshotRepoGroup>
+		<nightlySnapshotRepoPreifx>${jenkinsJobPrefix}-${projectIdentifier}nightly-</nightlySnapshotRepoPreifx>
+		<nightlySnapshotRepoId>${nightlySnapshotRepoPreifx}${mavenBuildNumber}-${mavenSnapshotRepositoryRevision}</nightlySnapshotRepoId>
+		<examplesSnapshotRepoId>${jenkinsJobPrefix}-${projectIdentifier}examples-${mavenBuildNumber}-${mavenSnapshotRepositoryRevision}</examplesSnapshotRepoId>
+
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.releng.jenkins</groupId>
+			<artifactId>ep-jenkins-maven-plugin-lib</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.elasticpath.releng.jenkins</groupId>
+				<artifactId>ep-jenkins-maven-plugin</artifactId>
+				<configuration>
+					<jobFiles>
+						<jobFile>main.xml</jobFile>
+						<jobFile>nightly.xml</jobFile>
+						<jobFile>release.xml</jobFile>
+					</jobFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>with-deploy-jobs</id>
+			<properties>
+				<!-- Shell script to create both the "auto-rotation" file as well as a .csv deployment-targets file (as a job parameter) -->
+				<deploymentTargetsShell><![CDATA[
+rm -f auto-rotation nightly-deploys all-deployments deployment-targets.properties
+#echo tomcat6.0-198 >> auto-rotation # Reserved for RE
+echo tomcat6-mssql-183 >> auto-rotation
+echo tomcat7-mysql55-141 >> nightly-deploys
+echo tomcat6-mysql56-143 >> nightly-deploys
+echo tomcat6-oracle11gr2-145 >> nightly-deploys
+echo weblogic11g-oracle11gr2-147 >> nightly-deploys
+cat auto-rotation nightly-deploys >> all-deployments
+# Create the targets above as a single line CSV.  Reverse the string, trim the comma and put it back in the proper order.
+echo -n "DEPLOYMENT_TARGETS=" >deployment-targets.properties
+cat all-deployments | tr '\n' ',' | rev | cut -b 2- | rev >>deployment-targets.properties
+]]></deploymentTargetsShell>
+				<jenkins.deploy.jobs>${jenkinsJobPrefix}-Nightly-Multi-Deploy</jenkins.deploy.jobs>
+
+				<!-- Version of rest-studio to use. -->
+				<!-- Studio version hard coded as a temporary fix to get the deployments working -->
+				<ep.rest.studio.version>1.8.0-SNAPSHOT</ep.rest.studio.version>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.elasticpath.releng.jenkins</groupId>
+						<artifactId>ep-jenkins-maven-plugin</artifactId>
+						<configuration>
+							<jobFiles combine.children="append">
+								<jobFile>deploy.xml</jobFile>
+							</jobFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>for-ep-releng-testing</id>
+			<properties>
+				<!-- I realize these triggers are a bit of a hack, and I apologize for that. At the time of writing this, there isn't a way to specify a trigger type of 'none'. -->
+				<build.trigger.main-build.type>timer</build.trigger.main-build.type>
+				<build.trigger.main-build.description><![CDATA[Ideally, never.]]>
+				</build.trigger.main-build.description>
+				<build.trigger.main-build.expression><![CDATA[0 12 31 9 6]]>
+				</build.trigger.main-build.expression>
+
+				<build.trigger.nightly.type>timer</build.trigger.nightly.type>
+				<build.trigger.nightly.description><![CDATA[Ideally, never.]]>
+				</build.trigger.nightly.description>
+				<build.trigger.nightly.expression><![CDATA[0 12 31 9 6]]>
+				</build.trigger.nightly.expression>
+				<jenkinsJobPrefix>MAGIC</jenkinsJobPrefix>
+				<mailTo>rel-eng@elasticpath.com</mailTo>
+				<nightlyMailTo>rel-eng@elasticpath.com</nightlyMailTo>
+
+			</properties>
+		</profile>
+		<profile>
+			<id>with-source-release</id>
+			<properties>
+				<withSourceRelease>with-source-release</withSourceRelease>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.elasticpath.releng.jenkins</groupId>
+						<artifactId>ep-jenkins-maven-plugin</artifactId>
+						<configuration>
+							<jobFiles combine.children="append">
+								<jobFile>source-release.xml</jobFile>
+							</jobFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>with-internal-ep-modules</id>
+			<properties>
+				<withInternalEpModules>with-internal-ep-modules</withInternalEpModules>
+			</properties>
+		</profile>
+		<profile>
+			<id>with-fittests</id>
+			<properties>
+				<withFitTestsProfile>with-fittests</withFitTestsProfile>
+				<withNightlyFitTestsProfile>with-nightly-fittests</withNightlyFitTestsProfile>
+				<mavenOpts.fitTestsCore>-XX:MaxPermSize=786m</mavenOpts.fitTestsCore>
+				<mavenOpts.syncFitTests>-Xmx1536m</mavenOpts.syncFitTests>
+				<jenkins.fit.jobs>
+					${jenkinsJobPrefix}-FIT-Tests-Core,${jenkinsJobPrefix}-FIT-Tests-ImportExport,
+					${jenkinsJobPrefix}-FIT-Tests-QL,${jenkinsJobPrefix}-FIT-Tests-SF,
+					${jenkinsJobPrefix}-FIT-Tests-Search,${jenkinsJobPrefix}-FIT-Tests-Auditing,
+					${jenkinsJobPrefix}-FIT-Tests-Sync,
+				</jenkins.fit.jobs>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.elasticpath.releng.jenkins</groupId>
+						<artifactId>ep-jenkins-maven-plugin</artifactId>
+						<configuration>
+							<jobFiles combine.children="append">
+								<jobFile>fittests.xml</jobFile>
+							</jobFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+		
+		</profile>
+		<profile>
+			<id>with-squish</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.elasticpath.releng.jenkins</groupId>
+						<artifactId>ep-jenkins-maven-plugin</artifactId>
+						<configuration>
+							<jobFiles combine.children="append">
+								<jobFile>squish.xml</jobFile>
+							</jobFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>fittest-release</id>
+			<properties>
+				<fit.test.profiles>${withNightlyFitTestsProfile}</fit.test.profiles>
+			</properties>
+		</profile>
+		<profile>
+			<id>with-nexus-jobs</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.elasticpath.releng.jenkins</groupId>
+						<artifactId>ep-jenkins-maven-plugin</artifactId>
+						<configuration>
+							<jobFiles combine.children="append">
+								<jobFile>nexus.xml</jobFile>
+							</jobFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

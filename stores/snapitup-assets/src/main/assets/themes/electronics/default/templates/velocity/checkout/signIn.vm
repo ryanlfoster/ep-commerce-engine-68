@@ -1,0 +1,82 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## signIn.vm
+#set($pageName = "checkout/register.vm")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "checkoutBreadcrumbs")
+#masterTemplate()
+
+#macro(checkoutBody)
+      <!-- START main area -->
+      <div id="body">   
+        <div class="clear20"></div>
+        #if ($login_failed)
+          <div id="alert" class="alert">
+            <div class="error-message-item">#springMessage("signIn.loginFailed")</div>
+          </div>
+        #end                
+        <div id="sign-in-want-account">
+              <fieldset>
+              <legend>#springMessage("signIn.createAccount")</legend>
+              <p>#springMessage("signIn.createAccount.msg")</p>
+              <ul>
+                <li>#springMessage("signIn.advantage1")</li>
+                <li>#springMessage("signIn.advantage2")</li>
+                <li>#springMessage("signIn.advantage3")</li>
+                <li>#springMessage("signIn.advantage4")</li>
+              </ul>
+              
+            </fieldset>
+            <div class="fieldset-footer">
+              <input type="button" class="button-normal" value="#springMessage("signIn.btn.regiester")" onClick="javascript:window.location='checkout-create-account.ep'"/>
+            </div>
+
+        </div>                  
+        <div id="sign-in-have-account">
+          <form action="j_acegi_security_check.ep" method="post" name="signInForm">
+            <fieldset>
+              <legend>#springMessage("signIn.haveAccount")</legend>
+              <p>#springMessage("signIn.haveAccount.msg")</p>
+              <div>
+                #set ($customer = $CS.shopper.customer)
+                <label>#springMessage("signIn.email")*</label>
+                #springBind("signInFormBean.j_username")
+                <input type="text" maxlength="255" style="width: 200px" id="${status.expression}" name="${status.expression}" value="$!customer.getEmail()" />
+                #springShowErrors("<br>" "req")                             
+                #if($customer.isRegistered())
+                  <p>(#springMessage("header.ifYourNot")&nbsp;#limitDisplayLength($customer.getFirstName())&nbsp;#limitDisplayLength($customer.getLastName()),&nbsp;<a href="sign-out-customer-session.ep">#springMessage("header.clickHere")</a>   )</p>
+                #end
+              </div>
+              <div>
+                <label>#springMessage("signIn.password")*</label>
+                #springBind("signInFormBean.j_password")
+                <input type="password" id="${status.expression}" name="${status.expression}" maxlength="35" style="width: 200px" )/>
+                #springShowErrors("<br>" "req")          
+              </div>
+            </fieldset>
+            <div class="fieldset-footer">
+              <input type="submit" class="button-normal" value="#springMessage("signIn.btn.continue")" /> <a href="forgotten-password.ep">#springMessage("signIn.forgotPassword")</a>
+            </div>
+          </form>
+        </div>              
+        #if ($sesCheckoutSignIn)
+          <div id="sign-in-no-account">
+            <form action="anonymous-sign-in.ep" method="post" name="anonymousSignInForm">
+              <fieldset>
+                <legend>#springMessage("signIn.noAccount")</legend>
+                <p>#springMessage("signIn.noAccount.msg")</p>
+                <div>
+                  <label>#springMessage("signIn.email")*</label>
+                  #springFormInput("anonymousSignInFormBean.email" 'maxlength="255" style="width: 200px"')
+                  #springShowErrors("<br>" "req")
+                </div>
+              </fieldset>
+              <div class="fieldset-footer">
+                <input type="submit" class="button-normal" value="#springMessage("signIn.btn.continueToCheckout")" />
+              </div>
+            </form>
+          </div>
+        #end                    
+        <div class="clear10"></div>
+      </div>
+      <!-- END main area -->
+#end

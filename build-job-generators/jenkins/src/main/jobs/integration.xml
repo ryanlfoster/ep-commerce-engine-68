@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="pipeline.xml" />
+
+	<!-- These jobs are designed to work with git only. -->
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Merge</id>
+		<parent>abstract-scm</parent>
+		<jobType>free</jobType>
+
+		<triggers>
+			<trigger>
+				<type>timer</type>
+				<description>Every day at 7pm</description>
+				<expression>0 19 * * *</expression>
+			</trigger>
+		</triggers>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>INTEGRATION_BRANCH_NAME</name>
+				<value>integration</value>
+				<description>Branch to be used as an integration branch. All previous commits on this branch will be wiped out.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>SCM_REVISION</name>
+				<value>master</value>
+				<description>Stable branch to create a merge from.</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+					git update-ref refs/heads/$INTEGRATION_BRANCH_NAME $SCM_REVISION
+					git checkout $INTEGRATION_BRANCH_NAME
+					git for-each-ref refs/remotes/origin/ --format='%(refname)' | while read line; do
+						if test "refs/remotes/origin/$INTEGRATION_BRANCH_NAME" = "$line"; then
+							continue
+						fi
+						git merge $line
+					done || exit 1
+					git push -f origin $INTEGRATION_BRANCH_NAME
+				</command>
+			</shell>
+		</tasks>
+
+		<invoke>
+			<jobs>${jenkinsJobPrefix}-Integration-Build</jobs>
+			<params>
+				SCM_URL=$SCM_URL
+				SCM_REVISION=$INTEGRATION_BRANCH_NAME
+			</params>
+		</invoke>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Build</id>
+		<parent>abstract-pipeline-start</parent>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Archetypes</id>
+		<parent>abstract-pipeline-archetypes</parent>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-CMClient</id>
+		<parent>abstract-pipeline-cmclient</parent>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Final</id>
+		<parent>abstract-pipeline-finish</parent>
+		<abstract>true</abstract>
+
+		<!-- For the purposes of integration builds, we don't need a final build -->
+	</job>
+</jobs>

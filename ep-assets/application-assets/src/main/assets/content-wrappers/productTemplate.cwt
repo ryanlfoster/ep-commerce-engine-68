@@ -1,0 +1,42 @@
+## Template for Product Content Wrapper
+## The list of template parameters can be found in "productContentWrapper.xml"
+##
+
+<!-- Product Wrapper -->
+<div class="offerBleft">
+	<p>
+	
+	#set ($width = "80")
+	#set ($height = "80")
+	#set ($padding = "0")
+	#set ($align = "middle")
+	#set ($border = "0")
+	#set ($alt = "Product Image")
+	#set ($id = "")
+	
+	#set ($widthStr = "")
+  #set ($heightStr = "")
+  #if ($width != "")
+    #set ($widthStr = "width=$!width")
+  #end
+  #if ($height != "")
+    #set ($heightStr = "height=$!height")
+  #end
+  #set($imageUrl="renderImage.image?imageName=$image&amp;width=$!width&amp;height=$!height&amp;padding=$!padding")
+  #if($!id != "")
+    #set($idTag = "id='$!id'")
+  #end
+  <a href="$productUrl">
+    <img src="$baseUrl/$imageUrl" $widthStr $heightStr align="$!align" border="$!border" title="$!alt" alt="$!alt" $!idTag/>
+  </a>
+	
+	</p>
+</div>
+<div class="offerBrightTop">
+	<p class="name"><a href="$productUrl">$name</a></p>
+	<p class="price"><strong>$price</strong></p>
+</div>
+<div class="offerBrightBottom">
+	<p><a href="$productUrl">&nbsp</a></p>
+</div>
+<!-- /Product Wrapper -->

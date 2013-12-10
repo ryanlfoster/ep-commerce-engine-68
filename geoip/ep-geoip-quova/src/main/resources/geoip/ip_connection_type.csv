@@ -1,0 +1,15 @@
+Connection Type;Description
+ocx;Ocx - this represents optical connections which are used by large backbone carriers
+tx;Tx - This includes T-3 circuits and T-1 circuits used by many small and medium sized companies
+consumer satellite;Consumer satellite - this represents high-speed or broadband links
+framerelay;Framerelay - relay circuits may range from low to high-speed
+dsl;Dsl - digital Subscriber Line broadband circuits. 
+cable;Cable - cable Modem broadband circuits, offered by cable TV companies
+isdn;Isdn - high-speed copper-wire technology, offered by some major telcos
+dialup;Dialup - this category represents the consumer dialup modem space.
+fixed wireless;Fixed wireless - connections where the location of the receiver is fixed. WDSL and WiMax
+mobile wireless;Mobile wireless - cellular network providers who employ CDMA, EDGE, EV-DO technologies
+unknown;Unknown - unable to obtain any specific connection type.
+unknown low;Unknown low - Speed low. Unable to obtain any specific connection type
+unknown medium;Unknown medium - Speed medium. Unable to obtain any specific connection type
+unknown high;Unknown high - Speed high. Unable to obtain any specific connection type

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+  <!--
+     NOTE: EP has a com.elasticpath.test.persister package which shouldn't exist.  In there is a TestApplicationContext.useDb which makes
+     a number of assumptions about the system around it which it shouldn't.  Previously it would lookup and execute schema.sql and base-insert.sql on
+     a per-database-type lookup. It would use these to "recreate" the database.
+    -->
+  <!--
+     As a work around until we remove com.elasticpath.test.persister, the lookup-and-execute has been replaced by a call to an application
+     context to create a bean named "liquibaseCoreSchemaInitializerForTestApplication". You do not want to use this bean.  It is an unsupported
+     workaround. -->
+  <!--
+     If you are extending the schema, please override the bean in some other XML file and ensure it makes it into the classpath of the TestApplicationContext.
+    -->
+  <!-- Do not copy this pattern unless you understand why it's here. -->
+  <bean id="liquibaseCoreSchemaInitializerForTestApplication" class="liquibase.integration.spring.SpringLiquibase" scope="prototype" lazy-init="true">
+    <property name="dataSource" ref="dataSource" />
+    <property name="changeLog" value="classpath:liquibase/elasticpath-db-changelog.xml" />
+    <property name="contexts" value="test,pre-6.4" />
+  </bean>
+
+</beans>

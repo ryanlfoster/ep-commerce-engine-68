@@ -1,0 +1,1334 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customers>
+<customer store_code="MOBEE" user_id="oliver.harris@elasticpath.com" guid="67E280AC-7E86-32A3-59B2-610FF2CA38DD">
+    <status>1</status>
+    <creationDate>2011-07-20T14:18:59-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>419e07d899f10120157a49a5df02a2d874c647a5773120277f35e112836bd542</password>
+    <salt>48a8738d5bbc3bb965278ed2143965a72277b94c943da72b58a830d264fbcfbe</salt>
+    <addresses>
+        <address guid="38789699-6428-820F-A7FF-6298CC05F7B7">
+            <last_name>Harris</last_name>
+            <first_name>Oliver</first_name>
+            <phone_number>(333)4956745</phone_number>
+            <fax_number></fax_number>
+            <street1>5833 Movaat St.</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V8C1N1</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="E3466EBD-2E95-EFEB-F228-07AE512D90DD">
+            <last_name>Harris</last_name>
+            <first_name>Karen</first_name>
+            <phone_number>(905) 366-0580</phone_number>
+            <fax_number>(905) 366-0580</fax_number>
+            <street1>#1999 12 floor</street1>
+            <street2>100 City Centre Drive</street2>
+            <city>Mississauga</city>
+            <subCountry>ON</subCountry>
+            <zip_postal_code>L5C 2B9</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="0945F13B-C0B6-CC9A-E417-382DC5F90D7A">
+            <last_name>Harris</last_name>
+            <first_name>Oliver</first_name>
+            <phone_number>(604)329-3333</phone_number>
+            <fax_number></fax_number>
+            <street1>Rm 1022 Tower 3</street1>
+            <street2>3910 Villy Rd.</street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V9C H2A</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>38789699-6428-820F-A7FF-6298CC05F7B7</preferred_shipping_address>
+    <preferred_billing_address>E3466EBD-2E95-EFEB-F228-07AE512D90DD</preferred_billing_address>
+    <credit_cards>
+        <card guid="D67B080C-990A-AB3A-816A-E3084E291CB1" expiry_month="5" expiry_year="2013" type="American Express">
+            <holder_name>Oliver M Harris</holder_name>
+            <card_number>340000000000009</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+        <card guid="18FC6005-3A2C-EC24-8DA1-36C88E0C1BC4" expiry_month="10" expiry_year="2013" type="Visa">
+            <holder_name>Oliver M Harris</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="328CF10F-D3E1-18DB-249C-8C0CCE005D62" expiry_month="4" expiry_year="2012" type="MasterCard">
+            <holder_name>Oliver Harris</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+        <card guid="06FFE0C7-DAA8-7EA8-878C-ABD6010F76CE" expiry_month="3" expiry_year="2013" type="Visa">
+            <holder_name>EXP_AUTH</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">3338473920</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">oliver.harris@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Oliver</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Harris</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="lisa.hunt@elasticpath.com" guid="F742F808-17AC-F1BA-026F-D6360E157214">
+    <status>1</status>
+    <creationDate>2011-08-05T16:51:51-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>34dc011dd1b13e51c356f40afef45bebae6ec75859aa1b7c4bfd5548f80e65da</password>
+    <salt>dcffc930ca7cb5f4229a390c485ee4a35a0d501ff1116087e9f9091120a3a861</salt>
+    <addresses>
+        <address guid="2B961365-0C54-D294-9ECA-130AA4F2B9CE">
+            <last_name>hunt</last_name>
+            <first_name>lisa</first_name>
+            <phone_number>(415) 413-7272</phone_number>
+            <fax_number></fax_number>
+            <street1>1234 Redwood Hwy.</street1>
+            <street2></street2>
+            <city>Corte Madera</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>CA 94727</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="1BB71EB3-F979-16FC-480E-E0C60E0F26CE">
+            <last_name>hunt</last_name>
+            <first_name>joseph</first_name>
+            <phone_number>(678) 288-3400</phone_number>
+            <fax_number>(678) 288-4567</fax_number>
+            <street1>4444 Buford Drive</street1>
+            <street2>Suite# 2099A</street2>
+            <city>Buford</city>
+            <subCountry>GA</subCountry>
+            <zip_postal_code>GA 30412</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="B2D46623-B7A0-F06B-87FB-F0E5B73EB34A">
+            <last_name>hunt</last_name>
+            <first_name>jay</first_name>
+            <phone_number>(604) 353-1330</phone_number>
+            <fax_number>(604) 353-1387</fax_number>
+            <street1>957 West Georgia Street</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V1Y 1F5</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">lisa.hunt@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">89734987423</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">lisa</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">hunt</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="jenny.kay@elasticpath.com" guid="F799CA3C-0DFC-30FE-CA3B-2A2960ACA5EE">
+    <status>1</status>
+    <creationDate>2011-10-19T11:28:25-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>dbb17f68f3e7e7e56f2be9b18664a80fd90f68055a84681a2a49074848a29ef2</password>
+    <salt>18010da95defb617e0337894b7c9e094fd51c5c1dedbbb0d76929a5ea02a6224</salt>
+    <addresses/>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jenny.kay@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">jenny</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">kay</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6048698585</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="anna.whale@elasticpath.com" guid="059D936B-C2D8-88BF-8070-0E0875170FE6">
+    <status>1</status>
+    <creationDate>2011-10-19T11:29:09-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>360b2544484ecb4549ffeafb2e2176a3dceaf8ea70fa8833658ed0d64f8f1e84</password>
+    <salt>26c018bc11881b91d7cbbaf45372670718a95091e117bb1e9d35406ecf622cc9</salt>
+    <addresses>
+        <address guid="FA5B3DAF-0552-BB8A-7F73-2BFB3BD0E36E">
+            <last_name>Whale</last_name>
+            <first_name>Anna</first_name>
+            <phone_number>(605)222-2222-7777</phone_number>
+            <fax_number></fax_number>
+            <street1>2230 Granville St.</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry></subCountry>
+            <zip_postal_code>45435-434</zip_postal_code>
+            <country>GB</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards>
+        <card guid="139E41C6-6C7E-42CD-EA0F-D4541E883BDA" expiry_month="3" expiry_year="2014" type="Visa">
+            <holder_name>Anna Whale</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+        <card guid="0A8D261C-9ED2-72C2-8686-968A0C62B677" expiry_month="9" expiry_year="2013" type="Discover">
+            <holder_name>Anna A.Y. Whale</holder_name>
+            <card_number>6011000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">anna</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">anna.whale@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">whale</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7783948884</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX">6048938222</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="ben.boxer@elasticpath.com" guid="4FEE8C7F-1F50-3D62-08F1-67E3CE1928A3">
+    <status>1</status>
+    <creationDate>2011-11-08T18:04:08-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>4246c4874f474041ed4c87ec713844e6d93bd94e8efef49c63adcde7aef72f6d</password>
+    <salt>1c6388cccc9e6dce7931cbd3426538e0efbb052ed077ea1ca887a51a98fa61e2</salt>
+    <addresses>
+        <address guid="8918BFD4-55FE-0A1C-769A-1E0C6C06DF14">
+            <last_name>boxer</last_name>
+            <first_name>ben</first_name>
+            <phone_number>1-342-323-5435</phone_number>
+            <street1>1234 HappyVille Road</street1>
+            <street2>Siffon Ville</street2>
+            <city>St. Helens</city>
+            <subCountry>MB</subCountry>
+            <zip_postal_code>v8v8v8</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="0687A916-C718-84AA-7F25-DD3946EBE267">
+            <last_name>boxer</last_name>
+            <first_name>ben</first_name>
+            <phone_number>+1 212-349-8286</phone_number>
+            <street1>Hoyip Chinese Restaurant</street1>
+            <street2>110 Liberty Street</street2>
+            <city>New York</city>
+            <subCountry>NY</subCountry>
+            <zip_postal_code>NY 10006</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>0687A916-C718-84AA-7F25-DD3946EBE267</preferred_billing_address>
+    <credit_cards>
+        <card guid="CB4C6CE0-1154-15AB-4B78-AAACC8CFAC36" expiry_month="3" expiry_year="2013" type="MasterCard">
+            <holder_name>Ben Boxer</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="B7571889-CF5C-8D95-58C1-167ECF7858F6" expiry_month="5" expiry_year="2014" type="MasterCard">
+            <holder_name>Ben G Boxer</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1-432-334-1029</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">ben.boxer@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">boxer</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">ben</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="scott.scalo@elasticpath.com" guid="2F6F2286-8E89-7BF9-50BC-4CFA0AE6290F">
+    <status>1</status>
+    <creationDate>2011-11-09T11:47:26-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>969ab44edab50886758e9401200035a157edfa875bab2adddc409312210ba373</password>
+    <salt>e1f95e20b324a10848caa9a6657393224f0537c5a162e22d4150721a4ffd0276</salt>
+    <addresses>
+        <address guid="2583E568-D288-8A66-5686-64DBFB215FC6">
+            <last_name>Scalo</last_name>
+            <first_name>Scott</first_name>
+            <phone_number>416-631-1136</phone_number>
+            <street1>675 Acton Avenue</street1>
+            <street2></street2>
+            <city>Toronto</city>
+            <subCountry>ON</subCountry>
+            <zip_postal_code>M3H 4J1</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="15AB27E4-F624-C65D-8CBF-CAA95773CDE9">
+            <last_name>Scalo</last_name>
+            <first_name>Scott</first_name>
+            <phone_number>250-488-6886</phone_number>
+            <street1>1838 Calgary Avenue</street1>
+            <street2></street2>
+            <city>Penticton</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V2A 2T6</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="5509C170-D555-D033-ED6D-D3C17EB98B24">
+            <last_name>Scalo</last_name>
+            <first_name>Scott</first_name>
+            <phone_number>419-706-5959</phone_number>
+            <street1>5/F, Tower 2</street1>
+            <street2>2987 Still Street</street2>
+            <city>Evansport</city>
+            <subCountry>OH</subCountry>
+            <zip_postal_code>43512</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>2583E568-D288-8A66-5686-64DBFB215FC6</preferred_billing_address>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">scott.scalo@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">1-544-343-3422</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Scott</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Scalo</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="isaac.lee@elasticpath.com" guid="3595EC3A-B3D9-23DE-FF2B-2491E31EC8DA">
+    <status>1</status>
+    <creationDate>2011-11-09T12:06:33-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>bd8f34a2b8768c914467744d77a1cedb9d8accae37a715f1c228db655648d9f3</password>
+    <salt>33d16520f286a539dd753b974c59c148f96ef91b2bce4f47dcce626a48cb3993</salt>
+    <addresses>
+        <address guid="28EB4BC7-0427-0C3B-FE59-86AC062B8358">
+            <last_name>Lee</last_name>
+            <first_name>Isaac</first_name>
+            <phone_number>231-233-3213</phone_number>
+            <street1>139 Bee Street</street1>
+            <street2></street2>
+            <city>Traverse City</city>
+            <subCountry>MI</subCountry>
+            <zip_postal_code>49686</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="43E865CC-C543-7ECC-8D00-6DB2A690C5E3">
+            <last_name>Lee</last_name>
+            <first_name>Isaac</first_name>
+            <phone_number>813-233-3929</phone_number>
+            <street1>#1, 23/F, Rm 2002</street1>
+            <street2>2757 Marion Drive</street2>
+            <city>Tampa</city>
+            <subCountry>FL</subCountry>
+            <zip_postal_code>33602</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>43E865CC-C543-7ECC-8D00-6DB2A690C5E3</preferred_billing_address>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Isaac</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">231-885-9494</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">isaac.lee@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Lee</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="walter.wills@elasticpath.com" guid="EFA44C05-7AAA-44B2-EFDB-E1D2CCE67914">
+    <status>1</status>
+    <creationDate>2011-11-14T14:19:47-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>88bf02e0c5ece9f04274da5e6adf82d816bca29cdc24356396a174414c4aeb10</password>
+    <salt>e0cad621b083fa82738b25bf479b61fb41b21b521c937d5f66f2664320608452</salt>
+    <addresses>
+        <address guid="28132B13-A0D7-1FB0-B689-233030856B03">
+            <last_name>Wills</last_name>
+            <first_name>Walter</first_name>
+            <phone_number>(403) 245-9371</phone_number>
+            <street1>Calgary Mount Royal Bed and Breakfast</street1>
+            <street2>809 18 Avenue S.W.</street2>
+            <city>Calgary</city>
+            <subCountry>AB</subCountry>
+            <zip_postal_code>T2T-0G9</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>28132B13-A0D7-1FB0-B689-233030856B03</preferred_billing_address>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">(403) 245-9371</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">walter.wills@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Wills</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Walter</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="doris.don@elasticpath.com" guid="C3E4D23F-63DA-6E60-0A9A-3DA4A4FBC8FF">
+    <status>1</status>
+    <creationDate>2011-11-14T14:21:31-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>8bb0952464021cff17b9e4eaec2ea92548d15eb7cbbfce4722259ec92f8dd0f0</password>
+    <salt>7ffa687ff1d1672d72d985091846eb7e8b8ef84b8fd98195dc9782c71dd29f91</salt>
+    <addresses>
+        <address guid="E5CF815E-837E-3C7A-6694-725E263D83B3">
+            <last_name>Don</last_name>
+            <first_name>Doris</first_name>
+            <phone_number>416-938-3398</phone_number>
+            <street1>4923 Tycos Dr</street1>
+            <street2></street2>
+            <city>Toronto</city>
+            <subCountry>ON</subCountry>
+            <zip_postal_code>M5T 1T4</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="8A940268-4D07-8E08-F951-4025133F9674">
+            <last_name>Don</last_name>
+            <first_name>Doris</first_name>
+            <phone_number>450-944-3838</phone_number>
+            <street1>1473 rue des Églises Est</street1>
+            <street2></street2>
+            <city>Contrecoeur</city>
+            <subCountry>QC</subCountry>
+            <zip_postal_code>J0L 1C0</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>8A940268-4D07-8E08-F951-4025133F9674</preferred_billing_address>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Doris</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Don</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">doris.don@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">416-839-9292</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="betsy.butler@elasticpath.com" guid="150B1D6E-8655-53AB-944A-992D5E909FBF">
+    <status>1</status>
+    <creationDate>2011-11-14T14:25:24-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>03a41ca7809b745dd6152e4c996a5ff794a2ae8a5092bd43c0762c7b1eef486b</password>
+    <salt>1e74c6fe64ef92adee54c9c1b4499cc99d0820793cd46b54d09a96aca0d347f5</salt>
+    <addresses>
+        <address guid="A8F4B968-44A9-4F75-F59B-9F463A772F2E">
+            <last_name>Butler</last_name>
+            <first_name>Betsy</first_name>
+            <phone_number>416-343-5219</phone_number>
+            <street1>Apt. 1299, 4/F</street1>
+            <street2>2382 Yonge Street</street2>
+            <city>Toronto</city>
+            <subCountry>ON</subCountry>
+            <zip_postal_code>M4W 1J7</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>A8F4B968-44A9-4F75-F59B-9F463A772F2E</preferred_billing_address>
+    <credit_cards>
+        <card guid="1D0729F3-D87F-B748-4526-99690A710178" expiry_month="8" expiry_year="2013" type="Visa">
+            <holder_name>Betsy Butler</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">betsy.butler@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">604-500-8955</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Betsy</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Butler</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="april.adler@elasticpath.com" guid="A9F10F6E-2F36-238E-B326-EFEDD16E1F39">
+    <status>1</status>
+    <creationDate>2011-11-14T14:28:44-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>5527cac075fed6fddc2356aac687ad6b3b8443e6541783975274f126e2ecf2fe</password>
+    <salt>07d2ed8f68c40752d06b9b9f078f17b44c69a9d883ce2227cae8bdfbbff21497</salt>
+    <addresses>
+        <address guid="AEF7FE7B-3D25-5491-BA53-8324125FBB30">
+            <last_name>Adler</last_name>
+            <first_name>April</first_name>
+            <phone_number>647-555-4321</phone_number>
+            <street1>4902 Bay Street</street1>
+            <street2></street2>
+            <city>Toronto</city>
+            <subCountry>ON</subCountry>
+            <zip_postal_code>M5J 2R8</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="24601587-ECAB-CB1C-9656-3288B642F0B1">
+            <last_name>Adler</last_name>
+            <first_name>April</first_name>
+            <phone_number>914-574-4432</phone_number>
+            <street1>#2203-883,</street1>
+            <street2>37 Caxton Place</street2>
+            <city>La Grange (Dutchess)</city>
+            <subCountry>NY</subCountry>
+            <zip_postal_code>NY 12540</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards>
+        <card guid="ED9AD041-3B26-56F8-D13D-C56B6FD0F323" expiry_month="5" expiry_year="2013" type="Visa">
+            <holder_name>April Adler</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">April</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">april.adler@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">647-556-9432</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Adler</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="julia.jackson@elasticpath.com" guid="8185EB09-C494-F4A9-1F70-D71B1DF34846">
+    <status>1</status>
+    <creationDate>2011-11-14T14:36:07-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>70519840c64e150a057e06e949ecbaedef4729a8b01b0b8f85cf78c410cdcf1b</password>
+    <salt>378635b4e1fd8fe2183f771befad0ff3c116944caa80bb60b807169de2af5c77</salt>
+    <addresses>
+        <address guid="50932482-852D-3501-8AAD-F49B4841FDBE">
+            <last_name>Jackson</last_name>
+            <first_name>Julia</first_name>
+            <phone_number>607-449-0392</phone_number>
+            <street1>#849-9944</street1>
+            <street2>3610 Frosty Lane</street2>
+            <city>Schenevus</city>
+            <subCountry>NY</subCountry>
+            <zip_postal_code>12155</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>50932482-852D-3501-8AAD-F49B4841FDBE</preferred_billing_address>
+    <credit_cards>
+        <card guid="CDF918EC-15BC-B9A1-0409-48068FBFAF0F" expiry_month="7" expiry_year="2014" type="Visa">
+            <holder_name>Julia Jackson</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Julia</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">julia.jackson@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Jackson</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">609-333-4039</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="joe.black@elasticpath.com" guid="9534C5CE-2BC0-B26E-D8AD-25B356F182D2">
+    <status>1</status>
+    <creationDate>2011-12-02T14:38:55-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>d9df008c6c741a61723fd127aba4a8239ed6cc4f6052088744a24a57c72fe236</password>
+    <salt>da487e22327b7111e22661fb052969f147460bf494aea7817cb5d0a4a4087444</salt>
+    <addresses>
+        <address guid="29B41F94-5D2D-EDF9-E1EF-8F2B148631A1">
+            <last_name>Black</last_name>
+            <first_name>Joe J</first_name>
+            <phone_number>6049875649</phone_number>
+            <street1>4567 Still Creek Dr</street1>
+            <street2></street2>
+            <city>Burnaby</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V531E2</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="26EBEA28-A3A7-4A11-0CF0-7B167A95AECB">
+            <last_name>Black</last_name>
+            <first_name>Joe</first_name>
+            <phone_number>7789090909</phone_number>
+            <street1>310-5590 5th Avenue</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V2S 6b9</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>26EBEA28-A3A7-4A11-0CF0-7B167A95AECB</preferred_billing_address>
+    <credit_cards>
+        <card guid="A6B33F3D-5A98-BE9E-3A09-3CA7590044D9" expiry_month="06" expiry_year="2017" type="Visa">
+            <holder_name>Joe J. Black</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="F4667B46-9722-94AE-3521-BA33D7E909DA" expiry_month="08" expiry_year="2012" type="MasterCard">
+            <holder_name>Jenny Black</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Joe</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">joe.black@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7782340920</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Black</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="john.smith@elasticpath.com" guid="1D731F11-60C2-5063-5742-350C9DFE43EA">
+    <status>1</status>
+    <creationDate>2011-12-02T16:21:15-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>edaac3febbe06da591c9797468162dc053c4031174c1c834c7132f364e6809a6</password>
+    <salt>6d34dd27d2e63a3ce7783fc5c04e306df100ff4fa762b38dbfde4c0420d6650a</salt>
+    <addresses>
+        <address guid="0BAC425D-8B43-9232-59B4-273F7D70C42D">
+            <last_name>Smith</last_name>
+            <first_name>John</first_name>
+            <phone_number>6042563123</phone_number>
+            <street1>1600 Howe Street</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V6Z 1R8</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="A475E966-515F-875F-8AE0-03872F2CE734">
+            <last_name>Smith</last_name>
+            <first_name>Kelly</first_name>
+            <phone_number>2507986565</phone_number>
+            <street1>#3452 - 134 Holland Street</street1>
+            <street2></street2>
+            <city>Seattle</city>
+            <subCountry>WA</subCountry>
+            <zip_postal_code>45125</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>0BAC425D-8B43-9232-59B4-273F7D70C42D</preferred_shipping_address>
+    <preferred_billing_address>0BAC425D-8B43-9232-59B4-273F7D70C42D</preferred_billing_address>
+    <credit_cards>
+        <card guid="8E26FAEE-8C8A-AA39-EF73-2BD6B00B7FF1" expiry_month="09" expiry_year="2014" type="American Express">
+            <holder_name>John L. Smith</holder_name>
+            <card_number>340000000000009</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="162C15E7-4811-E870-F2E5-F4C8D8E51279" expiry_month="02" expiry_year="2013" type="MasterCard">
+            <holder_name>John Smith</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">john.smith@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Smith</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6049875649</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">John</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="james.bond@elasticpath.com" guid="4B4D9C59-9783-82A9-CC82-BFC15677CD36">
+    <status>1</status>
+    <creationDate>2011-12-02T16:23:52-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>b3a3b5ff20bdb25110c131a5766ba5c6791f450c49a3b5fea588ef6fb0c6cae5</password>
+    <salt>c92ef68fcfbb714a4062a7fc0e51f24eea510e5d7ba071f5a5bbf7ba5ed28878</salt>
+    <addresses>
+        <address guid="1D849A33-D5F6-F507-832B-C748FC1E44B6">
+            <last_name>Bond</last_name>
+            <first_name>James</first_name>
+            <phone_number>(604)6879293</phone_number>
+            <street1>1696 Duranleau Street</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V6H 3S4</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="E294B7FD-569A-66F4-7002-18AE81DA4980">
+            <last_name>Bond</last_name>
+            <first_name>James</first_name>
+            <phone_number>(403) 266-7171</phone_number>
+            <street1>1018 Beach Avenue</street1>
+            <street2></street2>
+            <city>Calgary</city>
+            <subCountry>AB</subCountry>
+            <zip_postal_code>T2P 1J9</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>E294B7FD-569A-66F4-7002-18AE81DA4980</preferred_billing_address>
+    <credit_cards>
+        <card guid="4B743C2A-26B4-F4BE-5B0B-DA6AFF8C3A41" expiry_month="12" expiry_year="2012" type="Visa">
+            <holder_name>James P. Bond</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="922B275E-E93F-0FC1-944D-C814DAD8530E" expiry_month="04" expiry_year="2015" type="American Express">
+            <holder_name>James Bond</holder_name>
+            <card_number>340000000000009</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">James</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7783440909</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">james.bond@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bond</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="jane.brown@elasticpath.com" guid="965A1D2A-9406-0140-8764-28B9366417E9">
+    <status>1</status>
+    <creationDate>2011-12-02T16:28:15-08:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>847223e3823de28b63ff5c72445866d035146a99f75c3ee9aa123bfaceaf5f19</password>
+    <salt>8f6e6ee332845a3b9e8dd2d853a4918749e4bb494e3ba4ff1da1657758727325</salt>
+    <addresses>
+        <address guid="318593F9-DDD9-C46C-3A21-81A8869FA75A">
+            <last_name>Brown</last_name>
+            <first_name>Jane</first_name>
+            <phone_number>(212) 243-3700</phone_number>
+            <street1>222 West 23rd Street</street1>
+            <street2></street2>
+            <city>New York</city>
+            <subCountry>NY</subCountry>
+            <zip_postal_code>10011-2393</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="E5FF9838-FA31-4D18-42AB-0E99D33BC6BB">
+            <last_name>Brown</last_name>
+            <first_name>Jane</first_name>
+            <phone_number>(604) 439-0712</phone_number>
+            <street1>5075 Kingsway</street1>
+            <street2></street2>
+            <city>Burnaby</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V5H 2E6</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>E5FF9838-FA31-4D18-42AB-0E99D33BC6BB</preferred_billing_address>
+    <credit_cards>
+        <card guid="A2B6763A-12A1-B5ED-C1F4-73E4DFAF9A24" expiry_month="03" expiry_year="2014" type="American Express">
+            <holder_name>Jane Brown</holder_name>
+            <card_number>340000000000009</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="1C6BF876-791E-34C4-B65C-C7290AC0A354" expiry_month="12" expiry_year="2013" type="MasterCard">
+            <holder_name>Jane Brown</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7782932934</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Jane</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Brown</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jane.brown@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="jacob.smith@elasticpath.com" guid="7F4E992F-9CFC-E648-BA11-DF1D5B23968F">
+    <status>1</status>
+    <creationDate>2011-10-03T18:12:53-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>18d4c77ea915b930790b84f9d4bc6cec9cbfab43a5536dd2f0a81a25370efad8</password>
+    <salt>3bd36d8c68a3493e8b048b0a2ac3089af1a40b791efd75ee5b6e8a6297514baa</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Jacob</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6045551234</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jacob.smith@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">smith</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="sarah.lee@elasticpath.com" guid="FCC68F68-6D32-11EF-7CCC-B0ECAD266760">
+    <status>1</status>
+    <creationDate>2011-10-03T18:14:25-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>3a42186c5ae8c96b11111d8c6f0512040fa3ade86b0fa102686e8379cd411181</password>
+    <salt>8ef79edeae1731489daaaffdbb29cfa32118374c4d6f6ddcdf16bcb685c9e7be</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">sarah.lee@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">lee</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7781234567</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">sarah</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="hanna.white@elasticpath.com" guid="E169A197-5906-0ACE-7A5A-CF2E29CB8E2E">
+    <status>1</status>
+    <creationDate>2011-10-03T18:15:02-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>41c04b2e583646d18d9c1377d0eea2b383e5b5f2e5499b9cba6e38835be50265</password>
+    <salt>e9d8d32025c5222ef6c43e12cc084c038bb06bee3b3f458112acb84c5c54f9de</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">white</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">hanna.white@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">3948739992</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">hanna</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="jack.clark@elasticpath.com" guid="91042B09-0702-590C-16FC-F6815D073BB8">
+    <status>1</status>
+    <creationDate>2011-10-03T18:15:38-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>19c56e455daa93d783841820b41c2571c5ee2c74531fa3587fe08f9929d0b0d6</password>
+    <salt>e529286c852cfa0f0942baf72f1d04cd15c6afba8e06c3a9bda7a4e884977f03</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">4872229381</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Clark</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">jack.clark@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Jack</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="sean.connery@elasticpath.com" guid="D885DBAE-88EA-17CF-183B-389E49DC1485">
+    <status>1</status>
+    <creationDate>2011-10-27T10:37:16-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>76b3640e48bffd3105fa12555c7740070210684e5ef7815557e4828a2b1c5f62</password>
+    <salt>b3441423d8e2f991b1084fcafcf16b628bcf4b1cb200f984dcd5636a5a2fc377</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Connery</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Sean</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">sean.connery@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7785689991</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="rae.bourns@elasticpath.com" guid="E91FB430-4878-11E1-B86C-0800200C9A66">
+    <status>1</status>
+    <creationDate>2011-10-03T18:12:53-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>95f03c308971cf1b2c9f9e86373367c5f687eb9d0f54b9dc8a77051c64a1b174</password>
+    <salt>94acd911235189f8d2a39c271f8f57e3f648f14f1433bcf0ab5b4b6e937dd129</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">rae.bourns@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6045551234</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bourns</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Rae</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="rockjam" user_id="LiliaBening1@elasticpath.com" guid="0EC74A90-4879-11E1-B86C-0800200C9A66">
+    <status>1</status>
+    <creationDate>2011-10-03T18:12:53-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:48-07:00</last_edited>
+    <password>23a7aa75f7464a55fae42574dcc57e5a0f615ae8bb596270dc023d3d9a9858f8</password>
+    <salt>d3890a72b4ce5bb6a27429073ed39af114688864e807225a38190e34752e2591</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6045551234</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Bourns</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">LiliaBening1@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Lilia</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="toastie" user_id="gary.cook@elasticpath.com" guid="08424DA9-CD58-A905-79DA-B1CF408A1824">
+    <status>1</status>
+    <creationDate>2011-10-12T13:37:21-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:03-07:00</last_edited>
+    <password>b4bac1b2a1ee61ea3e74858523cf3a3561ab0a1cd059dd54515f8d2240bf4816</password>
+    <salt>95cbc8cb9b05b6fcdb604ab737c7f6e5f29b9a9912cc06c619138e8e94015821</salt>
+    <addresses/>
+
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards>
+        <card guid="DE88DA33-919C-C9AE-D170-A44A216E2EA5" expiry_month="11" expiry_year="2014" type="MasterCard">
+            <holder_name>Gary Cook</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">gary.cook@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">gary</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">cook</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">64749573</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="toastie" user_id="daniel.davis@elasticpath.com" guid="982D1A6E-DD1E-81F3-1D2E-392608B4A0F8">
+    <status>1</status>
+    <creationDate>2011-10-12T13:38:43-07:00</creationDate>
+    <last_edited>2012-08-02T15:47:03-07:00</last_edited>
+    <password>78d9499dd249aec39599c42e65dd6952b1a13f56587f52e06c76ce1c79f072db</password>
+    <salt>ced00ced71c855fa90603ad60094a11f52d1ebbeab6c1d873a39fc95f4561038</salt>
+    <addresses>
+        <address guid="4F5794A2-7E10-FA95-1350-401FE2EB038C">
+            <last_name>Davis</last_name>
+            <first_name>Daniel</first_name>
+            <phone_number>6047789687</phone_number>
+            <fax_number></fax_number>
+            <street1>11234 No.10 Road</street1>
+            <street2></street2>
+            <city>Richmond</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V8V2J1</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="AA90A27D-D567-80B5-F445-2A3D345337E5">
+            <last_name>Davis</last_name>
+            <first_name>Donnie</first_name>
+            <phone_number>134324324</phone_number>
+            <fax_number></fax_number>
+            <street1>Apt 2934, 3rd Floor</street1>
+            <street2>3489 Garden Road</street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>v8v8s1</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>4F5794A2-7E10-FA95-1350-401FE2EB038C</preferred_shipping_address>
+    <preferred_billing_address>4F5794A2-7E10-FA95-1350-401FE2EB038C</preferred_billing_address>
+    <credit_cards>
+        <card guid="2CA1159B-4BB7-738D-4C94-AC769AD8009A" expiry_month="4" expiry_year="2014" type="Visa">
+            <holder_name>Daniel Davis</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">davis</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">8734897432</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">daniel.davis@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">daniel</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="harry.potter@elasticpath.com" guid="80E0B57C-EEF0-646D-105E-056DD9C1D25D">
+    <status>1</status>
+    <creationDate>2012-03-21T17:54:37-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>2127524f816440b6b38336c9ed952214cbbb14371579e505697daa44a55eac72</password>
+    <salt>ca7deaaf94087e47e2c6a5f5f151cdbf554909dd605edcfd3232cf2c6cbc86e5</salt>
+    <addresses>
+        <address guid="1E736C40-DA8C-D0AF-A091-7CBBE7B09DFD">
+            <last_name>Potter</last_name>
+            <first_name>Harry</first_name>
+            <phone_number>7789994564</phone_number>
+            <street1>1234 Hogwarts Avenue</street1>
+            <street2></street2>
+            <city>Vancouver</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V6A 1N4</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+        <address guid="40630D63-0276-FAF8-3BA8-76F14EEE7010">
+            <last_name>Potter</last_name>
+            <first_name>James</first_name>
+            <phone_number>7785456323</phone_number>
+            <fax_number>+1 604 154 2356</fax_number>
+            <street1>4567 BumbleBee Dr</street1>
+            <street2>Unit 80</street2>
+            <city>Corte Madera</city>
+            <subCountry>CA</subCountry>
+            <zip_postal_code>94727</zip_postal_code>
+            <country>US</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_shipping_address>1E736C40-DA8C-D0AF-A091-7CBBE7B09DFD</preferred_shipping_address>
+    <preferred_billing_address>1E736C40-DA8C-D0AF-A091-7CBBE7B09DFD</preferred_billing_address>
+    <credit_cards>
+        <card guid="ABCB5588-84C0-E718-AD5A-28D1F50B9AFF" expiry_month="05" expiry_year="2015" type="Visa">
+            <holder_name>Harry Potter</holder_name>
+            <card_number>4111111111111111</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+        <card guid="CE96F084-4EDC-7E87-812F-47E6C7167BFE" expiry_month="09" expiry_year="2020" type="MasterCard">
+            <holder_name>James Potter</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+        <card guid="6975D9A2-53E1-0480-DBF1-922276842A71" expiry_month="07" expiry_year="2017" type="American Express">
+            <holder_name>Lily Potter</holder_name>
+            <card_number>340000000000009</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+        <card guid="B6494FCB-A6A7-405A-24F3-00FD97C42C2A" expiry_month="03" expiry_year="2014" type="Discover">
+            <holder_name>Harry A Potter</holder_name>
+            <card_number>6011000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>false</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">harry.potter@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Potter</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_HTML_EMAIL">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Harry</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_COMPANY"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FAX"></profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_GENDER">-</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6042154651</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="searchbee" user_id="bruce.wayne@elasticpath.com" guid="C487AF38-300E-2156-7962-BFB77BCD0EB8">
+    <status>1</status>
+    <creationDate>2012-03-23T14:53:32-07:00</creationDate>
+    <last_edited>2012-08-02T15:49:03-07:00</last_edited>
+    <password>a3b9068a1e179e159b22f738037bda971452843bc3e17a8c0f442198da52e186</password>
+    <salt>f5981084b7f9a56582de1ffab6a1bd9325c8bec1ce811cde1518a79a22b4bfd7</salt>
+    <addresses>
+        <address guid="42DA59C1-E26E-036C-75BD-14A44ECF1541">
+            <last_name>Wayne</last_name>
+            <first_name>Bruce</first_name>
+            <phone_number>7789994564</phone_number>
+            <street1>789 Honolulu Ave</street1>
+            <street2></street2>
+            <city>Burnaby</city>
+            <subCountry>BC</subCountry>
+            <zip_postal_code>V6A 1N4</zip_postal_code>
+            <country>CA</country>
+            <commercial>false</commercial>
+        </address>
+    </addresses>
+    <groups>
+        <group>400</group>
+    </groups>
+    <preferred_billing_address>42DA59C1-E26E-036C-75BD-14A44ECF1541</preferred_billing_address>
+    <credit_cards>
+        <card guid="CA607207-77BA-8047-FE60-E030A2D71402" expiry_month="05" expiry_year="2015" type="American Express">
+            <holder_name>Bruce Wayne</holder_name>
+            <card_number>340000000000009</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Bruce</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en_CA</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">bruce.wayne@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Wayne</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6041112222</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="peter.parker@elasticpath.com" guid="50A4B553-73B6-11B7-6119-082063504DAD">
+    <status>1</status>
+    <creationDate>2012-05-10T12:18:34-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>3f3ff74b48eb5ea2742a61d62307aafa420dfaad6f3d664b9721c0df764b29b7</password>
+    <salt>8c5ae1f2bba67be9771397c115d5c3b575708dfade454fe67f839393fc056ece</salt>
+    <addresses/>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards>
+        <card guid="56DD31D3-8993-CFC6-4C9F-8F6861359ED5" expiry_month="05" expiry_year="2015" type="MasterCard">
+            <holder_name>Peter Parker</holder_name>
+            <card_number>5500000000000004</card_number>
+            <issue_number>0</issue_number>
+            <default_card>true</default_card>
+        </card>
+    </credit_cards>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">peter.parker@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Peter</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6045553214</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">Parker</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="disabled.user@elasticpath.com" guid="50A4B553-73B6-11B7-6119-701574734DAD">
+    <status>2</status>
+    <creationDate>2012-05-13T11:18:34-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>0a55b230651d6902687c9133ef0c96b10b532708690288928631c2de7b7df3a8</password>
+    <salt>6b2a733fee63ac285e4ee2b2872fdac694df5862fd8884f35cc5db425a7d084d</salt>
+    <addresses/>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">disabled.user@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Disabled</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">6045553214</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">User</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+
+<customer store_code="MOBEE" user_id="pending.approval.user@elasticpath.com" guid="DEF4B553-73B6-3636-6119-701574734DAD">
+    <status>3</status>
+    <creationDate>2012-05-13T11:18:34-07:00</creationDate>
+    <last_edited>2012-08-02T15:59:18-07:00</last_edited>
+    <password>5950ea275ea6a764316bcc62f43640194fc9add3bfcc61bb0ef4ed0f54af82e2</password>
+    <salt>6d007a445bbe8ff83add9e5e28e57ed5afe55ac858b736762978a61c9ec3479b</salt>
+    <addresses/>
+    <groups>
+        <group>400</group>
+    </groups>
+    <credit_cards/>
+    <customer_profile>
+        <profile_value type="AttributeType_ShortText" key="CP_EMAIL">pending.approval.user@elasticpath.com</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PREF_LOCALE">en</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_FIRST_NAME">Pending Approval</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_PHONE">7785553232</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_BE_NOTIFIED">false</profile_value>
+        <profile_value type="AttributeType_ShortText" key="CP_LAST_NAME">User</profile_value>
+        <profile_value type="AttributeType_Boolean" key="CP_ANONYMOUS_CUST">false</profile_value>
+    </customer_profile>
+</customer>
+</customers>

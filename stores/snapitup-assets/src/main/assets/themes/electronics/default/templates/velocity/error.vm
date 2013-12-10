@@ -1,0 +1,44 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## error.vm
+#set($pageName = "error.vm")
+#templateInit()
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #parse("includes/topmenu.vm")
+      <div id="breadcrumb">
+        <a href="$storefrontContextUrl/index.ep">#springMessageText("globals.bc.home" "Home")</a> &raquo; #springMessageText("globals.error" "Error")
+      </div>
+      #set ($errorKey = $errorCode)
+      #if ($request.getParameter("errorCode"))
+        #set ($errorKey = $request.getParameter("errorCode"))
+      #end
+
+     <div id="body">
+	 <div class="alert">
+	  #if ($secureAssetModel)
+        #set ($downloadAssetErrorType = $secureAssetModel.get("DownloadAssetErrorType"))
+        #if ($downloadAssetErrorType == 3)  ##expired
+          #springMessageTextWithArgs("errors.downloadExpire" [$secureAssetModel.get("DigitalAsset").getExpiryDays(), $secureAssetModel.get("OrderNumber")] "Fail to download file.")
+        #elseif ($downloadAssetErrorType == 4) ##exceed times
+          #springMessageTextWithArgs("errors.downloadTimesExceed" [$secureAssetModel.get("DigitalAsset").getMaxDownloadTimes(), $secureAssetModel.get("OrderNumber")] "Fail to download file.")
+        #else
+          #springMessageText("errors.downloadFail" "An error occurred. The requested file is no longer available.")
+        #end
+      #else
+        #springMessageText($errorKey "The request can not be fulfilled successfully. Please contact the store administrator.")
+      #end
+      </div>
+      </div>
+
+    </div>
+    #parse("includes/footer.vm")
+  </body>
+</html>

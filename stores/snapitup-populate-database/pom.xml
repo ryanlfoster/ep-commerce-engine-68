@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>store-data-populate</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+		<relativePath>../populate-database</relativePath>
+	</parent>
+
+	<artifactId>snapitup-populate-database</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Snap It Up Database Populator</name>
+
+	<description>This project is used to populate your current *-dev-db, or
+		any db which honours the epdb.* properties with the data from
+		snapitup-data. Run with -Dimport to activate.</description>
+
+	<properties>
+		<data.artifactId>snapitup-data</data.artifactId>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.stores</groupId>
+			<artifactId>snapitup-data</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

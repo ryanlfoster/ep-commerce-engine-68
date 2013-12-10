@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.targetedselling.impl</package>
+	<entity class="DynamicContentDeliveryImpl">
+		<named-query name="DYNAMIC_CONTENT_IN_USE">
+			<query>
+				SELECT d.uidPk
+				FROM DynamicContentDeliveryImpl d
+				WHERE d.dynamicContent.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_ALL">
+			<query>
+				SELECT dcd
+				FROM DynamicContentDeliveryImpl dcd
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_BY_GUID">
+			<query>
+				SELECT dcd
+				FROM DynamicContentDeliveryImpl dcd
+				WHERE dcd.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_BY_NAME">
+			<query>
+				SELECT dcd
+				FROM DynamicContentDeliveryImpl dcd
+				WHERE dcd.name = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_BY_NAME_LIKE">
+			<query>
+				SELECT dcd
+				FROM DynamicContentDeliveryImpl dcd
+				WHERE dcd.name like ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_BY_CONTENT_SPACE">
+			<query>
+				SELECT distinct dcd
+				FROM DynamicContentDeliveryImpl dcd,
+				IN(dcd.contentspaces) at
+				WHERE at.targetId like ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_BY">
+			<query>
+				SELECT distinct dcd
+				FROM DynamicContentDeliveryImpl dcd,
+				IN(dcd.contentspaces) at
+				WHERE at.targetId like ?3
+				AND dcd.name like ?1
+				AND dcd.dynamicContent.name like ?2
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_FIND_BY_SELLING_CONTEXT_GUID">
+			<query>
+				SELECT dcd
+				FROM DynamicContentDeliveryImpl dcd
+				WHERE dcd.sellingContext.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

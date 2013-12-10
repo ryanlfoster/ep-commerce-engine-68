@@ -1,0 +1,97 @@
+## Copyright (c) Elastic Path Software Inc., 2007
+## view.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#set($pageName = "giftCertificate/view.vm")
+#templateInit()
+#set ($action = "search-gift-certificate.ep")
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #parse("includes/topmenu.vm")
+      <div id="breadcrumb">
+        #parse("includes/breadcrumbs.vm")
+      </div>
+       #if($giftCertificate)
+      <div class="clear10"></div>
+      <!-- Start main area -->
+       <div id="view-gift-certificate">
+        <fieldset>
+
+          <legend>#springMessage("giftCertificate.yourGiftCertificateBalance")</legend>
+          <table cellspacing="0" cellpadding="0" class="general-tbl">
+            <thead>
+              <tr>
+                <td>#springMessage("giftCertificate.number")</td>
+                <td>#springMessage("giftCertificate.dateReceived")</td>
+                <td>#springMessage("giftCertificate.originalBalance")</td>
+                <td>#springMessage("giftCertificate.currentBalance")</td>
+              </tr>
+            </thead>
+            <tbody>			
+                <tr $!class>
+                	#set ($giftCertCode = $giftCertificate.getGiftCertificateCode())
+                  <td>$!giftCertificate.displayMaskedGiftCertificateCode()</td>
+                  <td>$!dateTool.format('MMMM d, yyyy h:mm a',$!giftCertificate.getCreationDate(), $locale)</td>
+                  <td>#displayPriceForCartLocale($giftCertificate.getPurchaseAmountMoney())</td>
+                  <td>#displayPriceForCartLocale($giftCertificate.retrieveBalanceMoney())</td>
+                </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+      #if($orders.size() > 0)
+      <div class="clear10"></div>
+      <div id="gift-certificate-detail">
+        <fieldset>
+          <legend>#springMessage("giftCertificate.orderedPlacedWithGiftCertificate")</legend>
+          <table cellspacing="0" cellpadding="0" class="general-tbl">
+            <thead>
+              <tr>
+                <td>&nbsp</td>
+                <td>#springMessage("giftCertificate.orderNumber")</td>
+                <td>#springMessage("giftCertificate.orderDate")</td>
+                <td>#springMessage("giftCertificate.amountUsed")</td>
+                <td>#springMessage("giftCertificate.remainingBalance")</td>
+              </tr>
+            </thead>
+            <tbody>
+    	     #set ($gcBalance = $!giftCertificate.getPurchaseAmountMoney())
+              #foreach ($order in $orders.keySet().iterator())
+				  <tr>
+    			      <td><a href="order-details.ep?oID=$order.getOrderNumber()"><img src="$baseUrl/template-resources/images/ico-view.gif" alt="#springMessage("manage.altEdit")" border="0" /></a></td>
+                      <td>$order.getOrderNumber()</td>
+					  <td>$!dateTool.format('MMMM d, yyyy h:mm a', $order.getCreatedDate(), $locale)</td>
+					  #set($orderBalance = $orders.get($order)) 
+					  <td>#displayPriceForCartLocale($orderBalance)</td>
+					  #set ($gcBalance = $gcBalance.subtract($orderBalance))
+					  <td>#displayPriceForCartLocale($gcBalance)</td>
+				  </tr>
+              #end				
+            </tbody>
+          </table>
+        </fieldset>
+       </div>
+       #end
+      #else
+ 
+      <div class="wrapper">
+  		<table width="100%" height="280" border="0" cellpadding="0" cellspacing="0">
+    		<tr valign="top">
+      			<td width="" id="right-pane">         				
+            		<div class="alert">#springMessage("giftCertificate.notValid")
+           			</div>        			
+       			</td>
+    		</tr>
+  		</table>
+		</div>
+    #end
+  #parse("includes/footer.vm")
+  </body>
+</html>
+

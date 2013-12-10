@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE jboss-web PUBLIC "-//JBoss//DTD Web Application 5.0//EN" "http://www.jboss.org/j2ee/dtd/jboss-web_5_0.dtd">
+<jboss-web>
+	<context-root>${ep.cm.context}</context-root>
+	<resource-ref>
+		<res-ref-name>jdbc/epjndi</res-ref-name>
+		<jndi-name>jdbc/epjndi</jndi-name>
+	</resource-ref>
+</jboss-web>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>importexport</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>ep-importexport-cli</artifactId>
+	<packaging>pom</packaging>
+
+	<name>ImportExport CLI</name>
+	<description>Elastic Path Import Export Tool (CLI and ZIP Package)</description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-importexport</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<dependency.directory>lib</dependency.directory>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>do-export</id>
+			<dependencies>
+				<dependency>
+					<groupId>${epdb.maven.groupId}</groupId>
+					<artifactId>${epdb.maven.artifactId}</artifactId>
+					<version>${epdb.maven.version}</version>
+				</dependency>
+
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<configuration>
+							<executable>java</executable>
+							<arguments>
+								<argument>-Xms256m</argument>
+								<argument>-Xmx1024m</argument>
+								<argument>-XX:MaxPermSize=256m</argument>
+								<argument>-agentlib:jdwp=transport=dt_socket,address=${ep.debug.port},server=y,suspend=n</argument>
+								<argument>-classpath</argument>
+								<classpath />
+								<argument>com.elasticpath.importexport.client.Index</argument>
+								<argument>-e</argument>
+								<argument>${project.build.outputDirectory}/searchconfiguration.xml</argument>
+								<argument>-c</argument>
+								<argument>${project.build.outputDirectory}/exportconfiguration.xml</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>do-import</id>
+			<dependencies>
+				<dependency>
+					<groupId>${epdb.maven.groupId}</groupId>
+					<artifactId>${epdb.maven.artifactId}</artifactId>
+					<version>${epdb.maven.version}</version>
+				</dependency>
+
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2</version>
+						<configuration>
+							<executable>java</executable>
+							<arguments>
+								<argument>-Xms256m</argument>
+								<argument>-Xmx1024m</argument>
+								<argument>-XX:MaxPermSize=256m</argument>
+								<argument>-agentlib:jdwp=transport=dt_socket,address=${ep.debug.port},server=y,suspend=n5008</argument>
+								<argument>-Djava.compiler=NONE</argument>
+								<argument>-classpath</argument>
+								<classpath />
+								<argument>com.elasticpath.importexport.client.Index</argument>
+								<argument>-i</argument>
+								<argument>-c</argument>
+								<argument>${project.build.outputDirectory}/importconfiguration.xml</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+
+		<!-- This profile is triggered when used within m2eclipse and automatically 
+			includes the JDBC driver in the Maven Dependencies to make things Just Work(tm). -->
+		<profile>
+			<id>m2e-add-jdbc-drivers</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>${epdb.maven.groupId}</groupId>
+					<artifactId>${epdb.maven.artifactId}</artifactId>
+					<version>${epdb.maven.version}</version>
+				</dependency>
+
+			</dependencies>
+
+		</profile>
+	</profiles>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/importexport-as-a-zip.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

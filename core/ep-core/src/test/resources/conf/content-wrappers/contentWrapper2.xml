@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<content-wrapper>
+	<template-name>cs2.cwt</template-name>
+	<wrapper-id>1001</wrapper-id>
+    <wrapper-name>Human readable content wrapper name for UI</wrapper-name>
+</content-wrapper>

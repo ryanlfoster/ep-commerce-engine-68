@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<payment_gateways>
+<payment_gateway>
+    <name>DemoPaymentProcessor</name>
+    <type>paymentGatewayNull</type>
+    <properties/>
+</payment_gateway>
+
+<payment_gateway>
+    <name>CyberSource</name>
+    <type>paymentGatewayCybersource</type>
+    <properties>
+        <property key="targetAPIVersion">1.24</property>
+        <property key="sendToProduction">false</property>
+        <property key="logMaximumSize">10</property>
+        <property key="merchantID">YOUR_MERCHANTID</property>
+        <property key="logDirectory">WEB-INF/log</property>
+        <property key="enableLog">false</property>
+        <property key="keysDirectory">conf//resources//payment//cybersource</property>
+    </properties>
+</payment_gateway>
+
+<payment_gateway>
+    <name>GiftCertificate</name>
+    <type>paymentGatewayGiftCertificate</type>
+    <properties/>
+</payment_gateway>
+
+<payment_gateway>
+    <name>Exchange</name>
+    <type>paymentGatewayExchange</type>
+    <properties/>
+</payment_gateway>
+</payment_gateways>

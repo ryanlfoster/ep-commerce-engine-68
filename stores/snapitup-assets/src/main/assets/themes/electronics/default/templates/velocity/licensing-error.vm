@@ -1,0 +1,50 @@
+## Copyright (c) Elastic Path Software Inc., 2005
+## licensing-error.vm
+##
+## This page contains a XSS.  Don't deploy it to production.
+##
+#set($pageName = "licensing-error.vm")
+#templateInit()
+<!-- header.vm -->
+#set ($springHtmlEscape = true)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/tr/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Elastic Path</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="NOINDEX" />
+    <link rel="stylesheet" href="$baseUrl/template-resources/stylesheet/master-cm.css" type="text/css" />
+    <link rel="stylesheet" href="$baseUrl/template-resources/stylesheet/signin.css" type="text/css" />
+    <!--[if IE]><link rel="stylesheet" type="text/css" href="$baseUrl/template-resources/stylesheet/ie.css" /><![endif]-->
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="box-info">
+        <div class="logo"><img src="$baseUrl/template-resources/images/ep-cm-logo.gif" alt="EP logo" /></div>
+      </div>
+      <div id="box-input">
+        <div id="sign-in">
+          <fieldset>
+            <legend>License Key File Management</legend>
+            #if ($request.getParameter("errorCode"))
+            <div class="error-msg">
+	      Your current Elastic Path license key file is $request.getParameter("errorCode").
+	    </div>
+            #else
+              #set ($globalErrors = $springMacroRequestContext.getErrors($name).getGlobalErrors())
+  	      #if($globalErrors.size() > 0)
+                <div class="error-msg">
+      	        #foreach ($err in $globalErrors)
+                  $springMacroRequestContext.getMessage($err)
+                #end
+                </div>
+              #end
+	    #end
+	    <p>Contact your website administrator or Elastic Path account manager if you do not have one.</p>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

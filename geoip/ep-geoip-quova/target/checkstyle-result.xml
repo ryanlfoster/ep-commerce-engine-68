@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-quova/src/main/java/com/elasticpath/domain/geoip/provider/handler/QuovaGeoIpLocationHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-quova/src/main/java/com/elasticpath/domain/geoip/provider/impl/QuovaGeoIpProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-quova/src/main/java/com/elasticpath/domain/geoip/provider/impl/QuovaSelectableFloatTagValueProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-quova/src/main/java/com/elasticpath/domain/geoip/provider/impl/QuovaSelectableStringTagValueProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/geoip/ep-geoip-quova/src/test/java/com/elasticpath/geoip/test/QuovaTest.java">
+</file>
+</checkstyle>

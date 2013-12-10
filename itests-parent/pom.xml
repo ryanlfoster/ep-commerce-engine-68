@@ -1,0 +1,216 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>itests-parent</artifactId>
+	<name>Integration Tests Parent</name>
+	<packaging>pom</packaging>
+
+	<properties>
+		<pmd.ruleset>rulesets/pmd-elasticpath-itest-rules.xml</pmd.ruleset>
+		<checkstyle.ruleset>rulesets/checkstyle-elasticpath-itest-rules.xml</checkstyle.ruleset>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>run-itests</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<!-- if you update the below version you might also need to update the version of maven-surefire-report-plugin -->
+						<version>2.16</version>
+						<configuration>
+							<skipTests>${skipITests}</skipTests>
+							<redirectTestOutputToFile>true</redirectTestOutputToFile>
+							<argLine>${java.jvm.opts}</argLine>
+							<includes>
+								<include>**/Test*.java</include>
+								<include>**/*Test.java</include>
+							</includes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>integration-test</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>verify</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-site-plugin</artifactId>
+						<configuration>
+							<!-- This entire block is duplicated from grandparent, to add the failsafe reports,
+							because the maven-site-plugin doesn't inherit configuration. -->
+							<reportPlugins>
+								<plugin>
+									<artifactId>maven-project-info-reports-plugin</artifactId>
+									<version>2.2</version>
+									<configuration>
+										<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+										<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+									</configuration>
+								</plugin>
+								<plugin>
+									<artifactId>maven-pmd-plugin</artifactId>
+									<configuration>
+										<!--
+										***************************************************
+										*                    IMPORTANT                    *
+										***************************************************
+										
+										This plugin configuration must be identical to the
+										maven-pmd-plugin configuration below.
+										-->
+										<targetJdk>1.6</targetJdk>
+										<includeTests>true</includeTests>
+										<rulesets>
+											<ruleset>${pmd.ruleset}</ruleset>
+										</rulesets>
+										<includeTests>true</includeTests>
+										<excludeRoots>
+											<excludeRoot>src/main/groovy</excludeRoot>
+											<excludeRoot>target/generated-sources/groovy-stubs/main</excludeRoot>
+											<excludeRoot>target/generated-sources/jaxb</excludeRoot>
+											<excludeRoot>target/generated-sources/plugin</excludeRoot>
+											<excludeRoot>target/generated-sources/jaxws/</excludeRoot> <!-- quova -->
+											<excludeRoot>target/generated-sources/jaxws/wsimport/java</excludeRoot> <!-- ep-connect -->
+											<excludeRoot>target/generated-sources/javacc</excludeRoot> <!-- epql -->
+										</excludeRoots>
+										<!--
+										***************************************************
+										*                    IMPORTANT                    *
+										***************************************************
+										See note above.
+										-->
+									</configuration>
+								</plugin>
+								<plugin>
+									<artifactId>maven-checkstyle-plugin</artifactId>
+									<configuration>
+										<!--
+										***************************************************
+										*                    IMPORTANT                    *
+										***************************************************
+										
+										This plugin configuration must be identical to the
+										maven-checkstyle-plugin configuration below.
+										-->
+										<violationSeverity>warning</violationSeverity>
+										<logViolationsToConsole>true</logViolationsToConsole>
+										<configLocation>${checkstyle.ruleset}</configLocation>
+										<suppressionsLocation>${checkstyle.suppressions.location}</suppressionsLocation>
+										<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+										<includeTestSourceDirectory>true</includeTestSourceDirectory>
+										<!--
+										***************************************************
+										*                    IMPORTANT                    *
+										***************************************************
+										See note above.
+										-->
+									</configuration>
+								</plugin>
+								<plugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-surefire-report-plugin</artifactId>
+									<version>2.16</version>
+									<reportSets>
+										<reportSet>
+											<id>integration-tests</id>
+											<reports>
+												<report>report-only</report>
+											</reports>
+											<configuration>
+												<outputName>failsafe-report</outputName>
+												<reportsDirectories>
+													<reportsDirectory>${project.build.directory}/failsafe-reports</reportsDirectory>
+												</reportsDirectories>
+											</configuration>
+										</reportSet>
+									</reportSets>
+								</plugin>
+							</reportPlugins>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>com.elasticpath</groupId>
+								<artifactId>code-checking-rules</artifactId>
+								<version>${com.elasticpath.code-checking-rules.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+	</profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

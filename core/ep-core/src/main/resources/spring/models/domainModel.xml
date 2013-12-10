@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+
+
+    <!--====================================================================-->
+	<!-- Create the beans used to back the ElasticPath bean. -->
+    <!--====================================================================-->
+
+	<bean id="coreBeanFactory" primary="true"
+		class="com.elasticpath.domain.impl.ApplicationContextBackedBeanFactoryImpl">
+	</bean>
+
+	<bean id="coreMessageSource"
+		class="com.elasticpath.domain.impl.DefaultMessageSourceImpl" />
+
+    <!--====================================================================-->
+	<!--  Define the ElasticPath bean. -->
+    <!--====================================================================-->
+   	<bean id="elasticPath"
+		class="com.elasticpath.domain.impl.ElasticPathImpl"
+		factory-method="getInstance">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="messageSource" ref="coreMessageSource" />
+	</bean>
+
+
+	<bean id="epDomain" abstract="true" class="com.elasticpath.domain.impl.AbstractEpDomainImpl"/>
+
+	<bean id="anonymousCustomer"
+			class="com.elasticpath.domain.customer.impl.CustomerImpl"
+			scope="prototype" parent="epDomain">
+		<property name="customerAuthentication" ref="anonymousCustomerAuthentication"/>
+		<property name="customerGroups">
+			<list>
+				<ref bean="anonymousCustomerGroup" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="anonymousCustomerAuthentication"
+			class="com.elasticpath.domain.customer.impl.CustomerAuthenticationImpl"
+			scope="prototype" parent="epDomain">
+		<property name="clearTextPassword" value="foobar"/>
+	</bean>
+
+	<bean id="anonymousCustomerGroup"
+		class="com.elasticpath.domain.customer.impl.CustomerGroupImpl"
+		scope="prototype" parent="epDomain">
+		<property name="customerRoles">
+			<list>
+				<ref bean="ROLE_ANONYMOUS_CUSTOMER" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="geography" class="com.elasticpath.persistence.dao.impl.GeographyPropertiesDaoLoaderFactoryImpl">
+		<property name="objectType" value="com.elasticpath.domain.misc.impl.GeographyImpl" />
+		<property name="singleton" value="true" />
+		<property name="resourceNamePrefix" value="country" />
+		<property name="subCountryFilePrefix" value="subcountry" />
+		<property name="resourcePatterns">
+			<list>
+				<value>classpath*:/resources/country*.properties</value>
+				<value>classpath*:/resources/subcountry*.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="orderReturnReceivedState"
+			class="com.elasticpath.domain.order.impl.OrderReturnReceivedStateImpl"
+			scope="singleton" parent="epDomain">
+		<property name="propertyName" value="orderReturnReceivedState"/>
+	</bean>
+
+	<bean id="adjustmentQuantityOnHandReason"
+			class="com.elasticpath.domain.store.impl.AdjustmentQuantityOnHandReasonImpl"
+			scope="singleton" parent="epDomain">
+		<property name="propertyName" value="adjustQuantityOnHandReason"/>
+	</bean>
+
+
+	<bean id="orderReturnSkuReason"
+			class="com.elasticpath.domain.order.impl.OrderReturnSkuReasonImpl"
+			scope="singleton" parent="epDomain">
+		<property name="propertyName" value="orderReturnSkuReason"/>
+	</bean>
+
+
+	<!-- PreConfigured Customer Role instances -->
+
+	<bean id="ROLE_CUSTOMER"
+			class="com.elasticpath.domain.customer.impl.CustomerRoleImpl"
+			scope="prototype" parent="epDomain">
+		<property name="authority" value="ROLE_CUSTOMER"/>
+	</bean>
+
+	<bean id="ROLE_ANONYMOUS_CUSTOMER"
+			class="com.elasticpath.domain.customer.impl.CustomerRoleImpl"
+			scope="prototype" parent="epDomain">
+		<property name="authority" value="ROLE_ANONYMOUS_CUSTOMER"/>
+	</bean>
+
+
+	<!-- !!!! DOCdomainModelbeanid -->
+	<bean id="PRODUCT_TYPE_LOAD_TUNER_ALL"
+			class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingAttributes" value="true"/>
+		<property name="loadingSkuOptions" value="true"/>
+	</bean>
+
+	<bean id="PRODUCT_TYPE_LOAD_TUNER_ATTRIBUTES"
+			class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingAttributes" value="true"/>
+		<property name="loadingSkuOptions" value="false"/>
+	</bean>
+
+
+	<bean id="PRODUCT_SKU_LOAD_TUNER_ALL"
+			class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingAttributeValue" value="true"/>
+		<property name="loadingOptionValue" value="true"/>
+		<property name="loadingProduct" value="true"/>
+		<property name="loadingDigitalAsset" value="true"/>
+	</bean>
+
+	<!-- !!!! DOCdomainModelbeanid -->
+
+	<bean id="PRODUCT_SKU_LOAD_TUNER_MINIMAL"
+			class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingOptionValue" value="true"/>
+		<property name="loadingProduct" value="false"/>
+		<property name="loadingDigitalAsset" value="false"/>
+	</bean>
+
+	<bean id="PRODUCT_LOAD_TUNER_ALL"
+			class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingSkus" value="true"/>
+		<property name="loadingProductType" value="true"/>
+		<property name="loadingAttributeValue" value="true"/>
+		<property name="loadingCategories" value="true"/>
+		<property name="loadingDefaultSku" value="true"/>
+		<property name="productSkuLoadTuner" ref="PRODUCT_SKU_LOAD_TUNER_ALL"/>
+		<property name="productTypeLoadTuner" ref="PRODUCT_TYPE_LOAD_TUNER_ALL"/>
+	</bean>
+
+	<bean id="PRODUCT_LOAD_TUNER_MINIMAL"
+			class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingSkus" value="false"/>
+		<property name="loadingProductType" value="true"/>
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingCategories" value="false"/>
+		<property name="loadingDefaultSku" value="false"/>
+	</bean>
+
+	<bean id="PRODUCT_LOAD_TUNER_FOR_UPDATE"
+			class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingSkus" value="true"/>
+		<property name="loadingProductType" value="true"/>
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingCategories" value="true"/>
+		<property name="loadingDefaultSku" value="true"/>
+	</bean>
+
+	<bean id="productLoadTunerForAddToCart"
+			class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingSkus" value="true"/>
+		<property name="loadingProductType" value="true"/>
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingCategories" value="true"/>
+		<property name="loadingDefaultSku" value="true"/>
+		<property name="categoryLoadTuner" ref="CATEGORY_LOAD_TUNER_MASTER_AND_PARENT"/>
+		<property name="productSkuLoadTuner">
+			<bean
+					class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+					scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue" value="false"/>
+				<property name="loadingOptionValue" value="true"/>
+				<property name="loadingProduct" value="true"/>
+				<property name="loadingDigitalAsset" value="true"/>
+			</bean>
+		</property>
+		<property name="productTypeLoadTuner">
+			<bean
+					class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"
+					scope="prototype" parent="epDomain">
+				<property name="loadingAttributes" value="false"/>
+				<property name="loadingSkuOptions" value="true"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="productLoadTunerForAssociation"
+			class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingSkus" value="true"/>
+		<property name="loadingProductType" value="false"/>
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingCategories" value="false"/>
+		<property name="loadingDefaultSku" value="true"/>
+		<property name="productSkuLoadTuner">
+			<bean
+					class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+					scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue" value="false"/>
+				<property name="loadingOptionValue" value="true"/>
+				<property name="loadingProduct" value="true"/>
+				<property name="loadingDigitalAsset" value="true"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="productAssociationLoadTuner"
+	      class="com.elasticpath.domain.catalog.impl.ProductAssociationLoadTunerImpl"
+	      scope="singleton" parent="epDomain">
+	      <property name="loadingCatalog" value="false"/>
+	      <property name="productLoadTuner" ref="productLoadTunerForAssociation"/>
+	</bean>
+
+	<bean id="productLoadTunerForProductPage"
+			class="com.elasticpath.domain.catalog.impl.StoreProductLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingSkus" value="true"/>
+		<property name="loadingProductType" value="true"/>
+		<property name="loadingAttributeValue" value="true"/>
+		<property name="loadingCategories" value="true"/>
+		<property name="loadingDefaultSku" value="true"/>
+		<property name="loadingProductAssociations" value="true"/>
+		<property name="productSkuLoadTuner">
+			<bean
+					class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+					scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue" value="true"/>
+				<property name="loadingOptionValue" value="true"/>
+				<property name="loadingProduct" value="true"/>
+				<property name="loadingDigitalAsset" value="false"/>
+			</bean>
+		</property>
+		<property name="productTypeLoadTuner">
+			<bean
+					class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"
+					scope="prototype" parent="epDomain">
+				<property name="loadingAttributes" value="false"/>
+				<property name="loadingSkuOptions" value="true"/>
+			</bean>
+		</property>
+		<property name="categoryLoadTuner" ref="CATEGORY_LOAD_TUNER_MASTER_AND_PARENT"/>
+	</bean>
+
+	<bean id="CATEGORY_TYPE_LOAD_TUNER_ALL"
+			class="com.elasticpath.domain.catalog.impl.CategoryTypeLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingAttributes" value="true"/>
+	</bean>
+
+	<bean  id="CATEGORY_LOAD_TUNER_MASTER_AND_PARENT"
+		class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingParent" value="true"/>
+		<property name="loadingMaster" value="true"/>
+	</bean>
+
+
+	<bean id="CATEGORY_LOAD_TUNER_ALL"
+			class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingParent" value="true"/>
+		<property name="loadingMaster" value="true"/>
+		<property name="loadingChildren" value="true"/>
+		<!-- the recursion depth for loading children categories if loadingChildren is true, currently only support 1 (default in EP), -1 -->
+		<property name="childCategoryLevel" value="1"/>
+		<property name="loadingCategoryType" value="true"/>
+		<property name="loadingAttributeValue" value="true"/>
+		<property name="categoryTypeLoadTuner" ref="CATEGORY_TYPE_LOAD_TUNER_ALL"/>
+		<property name="loadingLocaleDependantFields" value="true"/>
+	</bean>
+
+	<bean id="CATEGORY_LOAD_TUNER_ALL_DEEP"
+			class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingParent" value="true"/>
+		<property name="loadingMaster" value="true"/>
+		<property name="loadingChildren" value="true"/>
+		<!-- the recursion depth for loading children categories if loadingChildren is true, currently only support 1 (default in EP), -1 -->
+		<property name="childCategoryLevel" value="-1"/>
+		<property name="loadingCategoryType" value="true"/>
+		<property name="loadingAttributeValue" value="true"/>
+		<property name="categoryTypeLoadTuner" ref="CATEGORY_TYPE_LOAD_TUNER_ALL"/>
+		<property name="loadingLocaleDependantFields" value="true"/>
+	</bean>
+
+	<bean id="CATEGORY_LOAD_TUNER_DEFAULT_PLUS_ATTRIBUTES"
+			class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingParent" value="true"/>
+		<property name="loadingChildren" value="true"/>
+		<property name="loadingCategoryType" value="true"/>
+		<property name="loadingAttributeValue" value="true"/>
+		<property name="loadingLocaleDependantFields" value="true"/>
+	</bean>
+
+	<bean id="CATEGORY_LOAD_TUNER_DEFAULT"
+			class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingParent" value="true"/>
+		<property name="loadingChildren" value="true"/>
+		<!-- the recursion depth for loading children categories if loadingChildren is true, currently only support 1 (default in EP), -1 -->
+		<property name="childCategoryLevel" value="1"/>
+		<property name="loadingCategoryType" value="true"/>
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingLocaleDependantFields" value="true"/>
+	</bean>
+
+	<bean id="CATEGORY_LOAD_TUNER_MINIMAL"
+			class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"
+			scope="singleton" parent="epDomain">
+		<property name="loadingParent" value="false"/>
+		<property name="loadingChildren" value="false"/>
+		<property name="loadingCategoryType" value="false"/>
+		<property name="loadingAttributeValue" value="false"/>
+		<property name="loadingLocaleDependantFields" value="false"/>
+	</bean>
+
+	<bean id="SHOPPING_ITEM_LOAD_TUNER_DEFAULT"
+        class="com.elasticpath.domain.catalog.impl.ShoppingItemLoadTunerImpl"
+        scope="singleton" parent="epDomain">
+        <property name="loadingRecursiveDependentItems" value="true" />
+        <property name="loadingDefaultAssociationQuantity" value="true" />
+        <property name="loadingDependentItems" value="true" />
+        <property name="loadingParentItem" value="true" />
+        <property name="loadingProductSku" value="true" />
+        <property name="loadingQuantity" value="true" />
+        <property name="loadingPrice" value="true" />
+    </bean>
+
+	 <bean id="orderCriterion"
+		 class="com.elasticpath.persistence.support.impl.OrderCriterionImpl"
+		 scope="prototype">
+	 </bean>
+
+	<bean id="synonymAnalyzer" class="org.apache.lucene.analysis.snowball.SnowballAnalyzer">
+		<constructor-arg value="English"/>
+	</bean>
+
+	<bean id="creditCardValidator" class="com.elasticpath.commons.validator.impl.EpCreditCardValidator">
+		<property name="creditCardTypes">
+			<list value-type="">
+				<bean id="validatorDinersClub" class="com.elasticpath.commons.validator.impl.EpCreditCardType">
+					<property name="prefixes" value="300,301,302,303,304,305,36,38"/>
+					<property name="supportedLengths" value="14"/>
+				</bean>
+				<bean id="validatorLaser" class="com.elasticpath.commons.validator.impl.EpCreditCardType">
+					<property name="prefixes" value="6304,6706,6771,6709"/>
+					<property name="supportedLengths" value="16,17,18,19"/>
+				</bean>
+				<bean id="validatorJCB" class="com.elasticpath.commons.validator.impl.EpCreditCardType">
+					<property name="prefixes" value="35,1800,2131"/>
+					<property name="supportedLengths" value="15,16"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="categoryGuidUtil" class="com.elasticpath.commons.util.CategoryGuidUtil"/>
+
+	<!-- Promotion actions prototype beans -->
+	<bean id="cartAnySkuAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartAnySkuAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="3"/>
+	</bean>
+	<bean id="cartAnySkuPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartAnySkuPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="cartCategoryAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartCategoryAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="3"/>
+	</bean>
+	<bean id="cartCategoryPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartCategoryPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="cartNFreeSkusAction"
+			class="com.elasticpath.domain.rules.impl.CartNFreeSkusActionImpl"
+			scope="prototype">
+		<property name="salience" value="1"/>
+	</bean>
+	<bean id="cartNthProductPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartNthProductPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="cartProductAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartProductAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="3"/>
+	</bean>
+	<bean id="cartProductPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartProductPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="cartSkuAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartSkuAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="3"/>
+	</bean>
+	<bean id="cartSkuPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartSkuPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="cartSubtotalAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartSubtotalAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="3"/>
+	</bean>
+	<bean id="cartSubtotalPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CartSubtotalPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="10"/>
+	</bean>
+	<bean id="catalogCurrencyAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CatalogCurrencyAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="3"/>
+	</bean>
+	<bean id="catalogCurrencyPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.CatalogCurrencyPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="shippingAmountDiscountAction"
+			class="com.elasticpath.domain.rules.impl.ShippingAmountDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+	<bean id="shippingPercentDiscountAction"
+			class="com.elasticpath.domain.rules.impl.ShippingPercentDiscountActionImpl"
+			scope="prototype">
+		<property name="salience" value="2"/>
+	</bean>
+
+
+	<!--  Wiring in the extensible AttributeUsage.. done this way so we can add with the addedTypes block. -->
+	<!-- add map entries like this in order to add new usage types:                                        -->
+	<!--		  <property name="addedTypes">                                                             -->
+	<!--		  	<map>                                                                                  -->
+	<!--		  		<entry key="100" value="MarketTestingContext" />                                   -->
+	<!--		  	</map>                                                                                 -->
+	<!--		  </property>                                                                              -->
+	<!-- Note: internally we currently use keys 1-4 - make sure keys are unique                            -->
+	<bean id="attributeUsage"
+		  class="com.elasticpath.domain.attribute.impl.AttributeUsageImpl"
+		  scope="prototype">
+	</bean>
+
+
+	<bean id="baseAmountDataSourceFactoryBuilder" class="com.elasticpath.service.pricing.datasource.impl.CollectionBaseAmountDataSourceFactoryBuilderImpl"
+		scope="prototype">
+		<constructor-arg ref="bundleIdentifier" />
+	</bean>
+
+    <bean id="shipmentTypeShoppingCartVisitor" class="com.elasticpath.domain.shoppingcart.impl.ShipmentTypeShoppingCartVisitor" scope="prototype">
+        <constructor-arg>
+            <bean class="com.elasticpath.service.order.impl.ShoppingItemHasRecurringPricePredicate" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="shoppingCartShipmentTypeEvaluator" class="com.elasticpath.domain.shipping.evaluator.impl.ShoppingCartShipmentTypeEvaluator" scope="prototype">
+        <constructor-arg ref="mutuallyExclusiveShipmentTypeEvaluatorStrategy" />
+    </bean>
+
+    <bean id="mutuallyExclusiveShipmentTypeEvaluatorStrategy"
+    		class="com.elasticpath.domain.shipping.evaluator.impl.SingleShipmentTypeEvaluatorStrategy"
+			scope="prototype">
+		<constructor-arg ref="shipmentTypePredicates" />
+	</bean>
+
+	<util:map id="shipmentTypePredicates" key-type="com.elasticpath.domain.shipping.ShipmentType">
+		<entry key="PHYSICAL" value-ref="physicalShipmentTypePredicate" />
+		<entry key="ELECTRONIC" value-ref ="electronicShipmentTypePredicate" />
+	</util:map>
+
+    <bean id="serviceShipmentTypePredicate" class="com.elasticpath.domain.shipping.evaluator.impl.ServiceShipmentTypePredicate" scope="prototype">
+        <constructor-arg>
+            <bean class="com.elasticpath.service.order.impl.ShoppingItemHasRecurringPricePredicate" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="physicalShipmentTypePredicate" class="com.elasticpath.domain.shipping.evaluator.impl.PhysicalShipmentTypePredicate" scope="prototype"/>
+
+    <bean id="electronicShipmentTypePredicate" class="com.elasticpath.domain.shipping.evaluator.impl.ElectronicShipmentTypePredicate" scope="prototype"/>
+
+    <!-- Locale fallback policies -->
+   <bean id="localeFallbackPolicyFactory" class="com.elasticpath.domain.catalog.impl.CatalogLocaleFallbackPolicyFactory"/>
+
+</beans>

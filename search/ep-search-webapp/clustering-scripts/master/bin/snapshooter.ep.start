@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Here parameters and run command should be specified to start snapshooter.ep. All indexes are taken from variable ${indexlist} declared in scripts.conf. And folder containing index files is produced by adding .index-. prefix to the index name. If naming of index folder is changed, snapshooter.ep.start should be updated.  Spell indexes are taken from variable ${spelllist} declared in scripts.conf too.
+
+# define solrHome root
+orig_dir=$(pwd)
+cd ${0%/*}/..
+solr_root=$(pwd)
+# path to scripts.conf with configuration settings for master-slave and rsync
+. ${solr_root}/conf/scripts.conf
+# path to snapshooter.ep.log to direct output to log
+log=${solr_root}/logs/snapshooter.ep.log
+# run snashooter for an each index
+for index in ${indexlist}
+do
+        ${solr_root}/bin/snapshooter.ep -c -d ${solr_root}/data/index-${index} 1>> ${log} 2>&1
+done      
+

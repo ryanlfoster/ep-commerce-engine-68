@@ -1,0 +1,178 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## delivery-options.vm
+#set($pageName = "checkout/deliveryOptions.vm")
+
+#set($_scripts = "javaScript")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "checkoutBreadcrumbShipping")
+#masterTemplate()
+
+#macro(checkoutBody)
+    #set ($sesShoppingCart = $command.getShoppingCart())
+      <div id="body">
+		<div class="clear20"></div>
+		<form action="$baseUrl/delivery-options.ep" method="post" name="deliveryOptions">
+          <div id="checkout-delivery-options">
+            #set ($optionSize = $sesShoppingCart.shippingServiceLevelList.size())
+            #if ($optionSize > 0)
+              <fieldset>
+                <legend>#springMessage("orderDetails.delivery")</legend>
+                <table class="shipping-rates">
+                  #set ($first = true)
+                  #foreach($shippingServiceLevel in $sesShoppingCart.shippingServiceLevelList)
+                    #set ($displayNameForShippingServiceLevel = $shippingServiceLevel.getDisplayName($locale, true))
+                    #set ($selected = 0)
+                    #set ($shippingCost = $shippingServiceLevel.getShippingCost())
+                    <tr>
+                      <td>
+                      	<input type="radio" onClick="onShippingServiceLevelSelect(this);" name="selectedShippingServiceLevel" value="$shippingServiceLevel.uidPk" 
+                      	#if($!sesShoppingCart.getSelectedShippingServiceLevel().getUidPk() == $!shippingServiceLevel.uidPk || $first) 
+                      	checked="true"
+                      	#set ($first = false) 
+                      	#end
+                      	/>
+                      	</td>
+					  <td class="type">$displayNameForShippingServiceLevel</td>
+                      <td class="rate">#displayPriceForCartLocale($shippingCost)</td>
+                    </tr>
+                  #end
+                </table>
+              </fieldset>
+            #else
+              <div id="alert" class="alert">
+                <div class="error-message-title">#springMessage("deliveryOptions.noService")</div>
+              </div>
+            #end
+          </div>
+          <div id="checkout-cart-summary">
+            #displayOrderSummary($sesShoppingCart $command.getFrequencyMap())
+            <div class="fieldset-footer">
+              #if ($optionSize > 0)
+                <input  type="submit" type="submit" class="checkout-button" value="#springMessage("deliveryOptions.save")" />
+              #end
+            </div>
+          </div>
+          <div class="clear10"></div>
+        </form>
+      </div>
+#end
+
+#macro(javaScript)
+    <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/shoppingCartAjaxController.js'></script>
+    <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/moneyFormatter.js'></script>
+    <script language="JavaScript">
+      function onShippingServiceLevelSelect(selectedRadionObj) {
+        shoppingCartAjaxController.calculateForSelectedShippingServiceLevel(selectedRadionObj.value, updateCartSummary);
+      }
+    
+      function updateCartSummary (shoppingCart) {
+    	if (shoppingCart.inclusiveTaxCalculationInUse == false
+    		&& shoppingCart.subtotalDiscountMoney != null && shoppingCart.subtotalDiscountMoney.amount > 0) {
+    	    document.getElementById("promotion-exclusive").style.display="";
+    	    formatMoney(shoppingCart.subtotalDiscountMoney, shoppingCart.locale, "exclusive-discount-value");
+    	} else {
+    	    document.getElementById("promotion-exclusive").style.display="none";
+    	}
+    	formatMoney(shoppingCart.subtotalMoney, shoppingCart.locale, "subTotalValue");
+    	
+    	document.getElementById("shipping").style.display="";
+    	formatMoney(shoppingCart.shippingCost, shoppingCart.locale, "cartShippingCostValue");
+    
+    	var cartSummaryTable = document.getElementById("cart-summary-table");
+       	var rows = cartSummaryTable.getElementsByTagName("tr");
+       	var taxRows = new Array();
+       	for (var i = 0; i < rows.length; i++){
+         	    if(rows[i].id && rows[i].id.match(/tax\d+/)) {
+          		rows[i].parentNode.deleteRow(i);
+          		i--;
+         	    }
+         	}
+    		var hasTax = false;
+    		var naTaxNode = document.getElementById("tax-na");
+    		var count = 1;
+    		if (shoppingCart.localizedTaxMap) {
+    	    for (var taxCategoryName in shoppingCart.localizedTaxMap) {
+    	    	hasTax = true;
+    		    var newRow = cartSummaryTable.tBodies[0].insertRow(naTaxNode.sectionRowIndex);
+    		    newRow.className = "tax";
+    		    newRow.id = "tax" + count;
+    		    count++;
+    
+    		    var tcTD = newRow.insertCell(0);
+    	    	tcTD.setAttribute("class", "title");
+    	    	tcTD.appendChild(document.createTextNode(taxCategoryName + ":"));
+    
+    	    	var valueTD = newRow.insertCell(1);
+    	    	valueTD.setAttribute("class", "value");
+    	    	valueTD.setAttribute("id", taxCategoryName + i);
+    	    	valueTD.appendChild(document.createTextNode(''));
+    	    	
+    	    	formatMoney(shoppingCart.localizedTaxMap[taxCategoryName], shoppingCart.locale, taxCategoryName + i);    
+    	    }
+    	}
+    	if (hasTax) {
+    	    document.getElementById("tax-na").style.display="none";
+    	} else {
+    	    document.getElementById("tax-na").style.display="";
+    	}
+    
+    	if (shoppingCart.inclusiveTaxCalculationInUse == true
+    		&& shoppingCart.subtotalDiscountMoney != null && shoppingCart.subtotalDiscountMoney.amount > 0)  {
+    	    document.getElementById("promotion-inclusive").style.display="";
+    	    formatMoney(shoppingCart.subtotalDiscountMoney, shoppingCart.locale, "inclusive-discount-value");
+    	} else {
+    	    document.getElementById("promotion-inclusive").style.display="none";
+    	}
+    
+    	var giftCertificateRedeemDiv=document.getElementById("gift-certificate-value");
+    	if (giftCertificateRedeemDiv) {
+    		formatMoney(shoppingCart.giftCertificateDiscountMoney, shoppingCart.locale, "gift-certificate-value");
+    	}
+    
+    	formatMoney(shoppingCart.beforeTaxTotal, shoppingCart.locale, "totalBeforeTaxValue");
+    
+    	formatMoney(shoppingCart.totalMoney, shoppingCart.locale, "cartTotalValue");
+      }
+    
+      function setSelectedShippingServiceLevelUidCallBack(shippingCost) {
+        // update the shipping cost and cart total
+        document.getElementById("cartShippingCostValue").innerHTML = shippingCost.currency.symbol + shippingCost.amount.toFixed(2);
+        sesShoppingCart.getTotalMoney(getTotalMoneyCallBack);
+        sesShoppingCart.getBeforeTaxTotal(getBeforeTaxSubTotalCallBack);
+      }
+    
+      function getTotalMoneyCallBack(orderTotal) {
+        document.getElementById("cartTotalValue").innerHTML = orderTotal.currency.symbol + orderTotal.amount.toFixed(2);
+      }
+    
+      function getBeforeTaxSubTotalCallBack(taxSubtotal) {
+        document.getElementById("cartTotalBeforeTaxValue").innerHTML = taxSubtotal.currency.symbol + taxSubtotal.amount.toFixed(2);
+      }
+      
+/**
+* passing extra data to dwr callbacks explained ...
+ * http://directwebremoting.org/dwr/documentation/browser/extra-data.html#extraData3
+ * 
+ */
+function formatMoney(money, locale, elementId) {
+	 moneyFormatter.format(money, true, locale,
+    		createMoneyFormatterCallBack(elementId));
+}
+
+/**
+ * working with JavaScript closures explained ...
+ * http://lmgtfy.com/?q=working+with+javascript+closures
+ */
+
+function createMoneyFormatterCallBack (elementId) {
+	return { callback:function(data) {
+		moneyFormatterCallBack(data, elementId);
+	}}; 
+}
+
+function moneyFormatterCallBack(dataFromServer, elementId) {
+	document.getElementById(elementId).innerHTML = dataFromServer;
+}
+      
+    </script>
+#end

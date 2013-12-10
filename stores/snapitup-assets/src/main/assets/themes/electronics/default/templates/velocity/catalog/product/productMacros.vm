@@ -1,0 +1,1135 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## productMacros.vm
+
+## #macro(productMasterFrame) implements Master Frame for 2 different templates:
+##      ProductTemplate.vm and GuidedSkuTemplate.vm
+
+#*************************************************
+ * 1. Master frame
+ *************************************************#
+#macro(productMainTemplate $productIsGiftCertificate $displayBrand $imageSkuOptionKey $showProductDetails $enableAddToWishList)
+	#set($_scripts = "productScripts")
+	#set($_content = "productContent")
+ 	#setProductVariables()
+	#masterTemplate()
+#end
+
+#macro(setProductVariables)
+    #set ($ldf = $productViewBean.getProduct().getLocaleDependantFields($locale))
+    #set ($localeUrlMap = $requestLocaleUrlTool.getLocaleLinksForProduct($locale, $productViewBean.getProduct().getDefaultCategory(), $productViewBean.getProduct(), $ctxSeoEnabledHelper.getBoolean()))
+    #set ($lastGroup = "")
+    #set($title = $ldf.title)
+    #set ($product = $productViewBean.getProduct())
+    #set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+    #set ($brandName = $product.getBrand().getDisplayName($locale, true))
+    #set ($brandImage = $product.getBrand().getImageUrl())
+    #set ($productPrice = $price)
+	#set ($hasAdjustments = false)
+    #set($productCode = $product.getGuid())
+    #if ($price && $product.isPurchasable() && !$product.isNotSoldSeparately())
+        #set ($addToCartDisabled = false)
+    #else
+        #set ($addToCartDisabled = true)
+    #end
+	#if ($imageSkuOptionKey && $imageSkuOptionKey != "")
+	    #set ($productImage = $product.getDefaultSku().getOptionValueMap().get($imageSkuOptionKey).getImage())
+	#else
+	    #set ($productImage = $product.getDefaultSku().getImage())
+	#end
+#end
+
+
+#macro(productContent)
+    ## Left panel
+    <div id="prod-left">
+        #if($displayBrand && $brandImage != "")
+           <div class="brand-logo">
+              #displayCatalogImage($brandImage "150" "50" "0" "middle" "0" "" "")
+           </div>
+        #end
+
+          <div class="product-img-main">
+              <a id="productImageA" href="$baseUrl/renderImage.image?imageName=$productImage&amp;width=400&amp;height=300&amp;padding=0" rel="lightbox" title="$product.getAttributeValueGroup().getStringAttributeValue("A00600", $locale) $product.getAttributeValueGroup().getStringAttributeValue("A00601", $locale)">
+              <img id="productImage" src="$baseUrl/renderImage.image?imageName=$productImage&amp;width=200&amp;height=200&amp;padding=0" border="0" width="200" height="200" alt="$productName"/>
+              <img src="$baseUrl/template-resources/images/btn-zoom-in.gif" border="0"/>
+            </a>
+          </div>
+
+          #set ($altImage1 = "")
+          #set ($altImage2 = "")
+          #set ($altImage3 = "")
+          #set ($altImage4 = "")
+
+          #if ($product.getAttributeValueGroup().getStringAttributeValue("AltImage1", $locale))
+            #set ($altImage1 = $product.getAttributeValueGroup().getStringAttributeValue("AltImage1", $locale))
+          #end
+          #if ($product.getAttributeValueGroup().getStringAttributeValue("AltImage2", $locale))
+            #set ($altImage2 = $product.getAttributeValueGroup().getStringAttributeValue("AltImage2", $locale))
+          #end
+          #if ($product.getAttributeValueGroup().getStringAttributeValue("AltImage3", $locale))
+            #set ($altImage3 = $product.getAttributeValueGroup().getStringAttributeValue("AltImage3", $locale))
+          #end
+          #if ($product.getAttributeValueGroup().getStringAttributeValue("AltImage4", $locale))
+            #set ($altImage4 = $product.getAttributeValueGroup().getStringAttributeValue("AltImage4", $locale))
+          #end
+          #if($altImage1 != "" || $altImage2 != "" || $altImage3 != "" || $altImage4 != "")
+            <div class="product-alt-images">
+              <div class="swatches-ttl">Alternate Images</div>
+              #if ($altImage1 != "")
+                <div class="product-alt-thumb">#displayCatalogImage($altImage1 "40" "40" "0" "middle" "0" "" "")</div>
+              #end
+              #if ($altImage2 != "")
+                <div class="product-alt-thumb">#displayCatalogImage($altImage2 "40" "40" "0" "middle" "0" "" "")</div>
+              #end
+              #if ($altImage3 != "")
+                <div class="product-alt-thumb">#displayCatalogImage($altImage3 "40" "40" "0" "middle" "0" "" "")</div>
+              #end
+              #if ($altImage4 != "")
+                <div class="product-alt-thumb">#displayCatalogImage($altImage4 "40" "40" "0" "middle" "0" "" "")</div>
+              #end
+              <div class="clear1"></div>
+            </div>
+          #end
+
+
+        ##Display Recently Viewed Items
+        #if(!$recentlyViewedProducts.empty)
+          <h3 class="recently-viewed">#springMessage("globals.merchandizing.recentlyViewed")</h3>
+          <div id="product-grid-1">
+            #foreach($viewHistoryProduct in $recentlyViewedProducts)
+              #displayRecentlyViewed($viewHistoryProduct)
+            #end
+            <div class="clear1"></div>
+          </div>
+        #end
+        <div id="promo-banner" style="float: left; padding-top: 11px;">
+           #contentspace('PromoBanner', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>PromoBanner</font></div>")
+    </div>
+    </div>
+
+     ## Mid panel notice-message-item
+    <div id="prod-middle">
+		#if($errors && $errors.hasGlobalErrors())
+    		<div class="error-message-line">
+    		#foreach ($errorObject in $errors.getGlobalErrors())
+					#springMessageText("$errorObject.getCode()" "$errorObject.getDefaultMessage()") <br />
+			#end
+
+
+
+    		</div>
+		#end
+		<div id="updatePriceServiceCallError" class="error-message-line" style="display:none">#springMessage("errors.productBundle.treeStructure.changed.refreshPage")</div>
+        <form id="skuSelectForm" name="skuSelectForm" method="post">
+        	<input type="hidden" name="_finish" value="true" />
+        	#if($productViewBean.isUpdate())
+          		<input type="hidden" name="update" value="$productViewBean.getUpdatePage()" />
+        	#end
+
+            #set($selectedSkuCode = $command.getCartItems().get(0).getSkuCode())
+        	#if(!$selectedSkuCode)
+        		#set($selectedSkuCode = $product.getDefaultSku().getSkuCode())
+        	#end
+
+            #if($productIsGiftCertificate)
+        				<h1>#springMessage("giftCertificate.electronic")</h1>
+        			#else
+            <h1>$product.getLocaleDependantFields($locale).getDisplayName()</h1>
+            #end
+            <div class="sku" id="skuCode">#springMessage("productTemplate.itemno"): $selectedSkuCode</div>
+
+            #if ($command.getCartItems().get(0).getConstituents().size() > 0)
+            	#displayConstituentsForEdit($command $locale true $addToCartDisabled)
+            #end
+            <div class="product-box">
+            <div class="price-box">
+    			#if ($product.isNotSoldSeparately())
+					<div class="not-sold-separately">#springMessage("productTemplate.nss")</div>
+    			#else
+					<div id="productPrice">
+
+                    #setSchedulesPriceAndFrequency($productPrice)
+
+                    #if ($command.getCartItems().get(0).isCalculatedBundle())
+                        #displayAggregatedPricesForCalculatedBundle()
+                    #elseif ($isRecurring)
+                        <div id="recurringPrices">
+                        #displayPriceSchedules($pricingScheme $recurringSchedules "" false true)
+                        </div>
+                    #else
+                        #displayPrice($effectivePrice false true "" true "")
+                    #end
+
+					</div>
+				#end
+
+                #set($buttonName = "productTemplate.addToCart")
+                #verifyShouldDisableCart()
+
+                <div id="availability-box">
+                      #set ($inventoryDetails = $product.getInventoryDetails($selectedSkuCode))
+                      #set ($messageCode = $inventoryDetails.getMessageCode())
+                      #set ($today = $dateTool.getDate())
+
+                      #if (!$messageCode)
+                        ## message code is null
+                      #elseif($messageCode == "IN_STOCK")
+                        #if ($inventoryDetails.getAvailabilityCriteria() != "ALWAYS_AVAILABLE" && $inventoryDetails.getAvailableQuantityInStock())
+                          <div class="instock" id="inventoryText">#springMessage("productTemplate.inStock"), $inventoryDetails.getAvailableQuantityInStock()&nbsp;#springMessage("productTemplate.itemsAvailable")</div>
+                        #else
+                          <div class="instock" id="inventoryText">#springMessage("productTemplate.inStock")</div>
+                        #end
+                      #elseif($messageCode == "OUT_OF_STOCK")
+                        <div class="outstock" id="inventoryText">#springMessage("productTemplate.outOfStock")</div>
+                        #set($addToCartDisabled = true)
+                        #set($addToCartClass = "add-to-cart off")
+
+                      #elseif($messageCode == "OUT_OF_STOCK_WITH_RESTOCK_DATE")
+                        <div class="outstock" id="inventoryText">#springMessage("productTemplate.outOfStock")</div>
+                        #if($inventoryDetails.getStockDate() && $today.compareTo($inventoryDetails.getStockDate()) < 0)
+                          <div class="restockdate" id="restockDate">(#springMessage("productTemplate.availableOnlyInStockRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$inventoryDetails.getStockDate()))</div>
+                        #end
+                        #set($addToCartDisabled = true)
+                        #set($addToCartClass = "add-to-cart off")
+                      #elseif($messageCode == "AVAILABLE_FOR_PREORDER")
+                        #set($buttonName = "productTemplate.preOrder")
+                        #set($addToCartClass = "pre-order")
+                        <div class="instock" id="inventoryText">#springMessage("productTemplate.availableForPreOrder")</div>
+                        #if ($inventoryDetails.getStockDate())
+                        <div class="sku" id="restockDate">(#springMessage("productTemplate.preOrderRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$inventoryDetails.getStockDate()))</div>
+                        #end
+                      #elseif($messageCode == "AVAILABLE_FOR_BACKORDER")
+                        <div class="instock" id="inventoryText">#springMessage("productTemplate.availableForBackOrder")</div>
+
+                        #if($inventoryDetails.getStockDate() && $today.compareTo($inventoryDetails.getStockDate()) < 0)
+                            <div class="restockdate" id="restockDate">(#springMessage("productTemplate.backOrderRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$inventoryDetails.getStockDate()))</div>
+                        #else
+                            <div class="sku" id="inventoryText">(#springMessage("productTemplate.willShipWhenAvailable"))</div>
+                        #end
+                      #end
+                </div>
+
+            </div>
+            <div class="options-box">
+                #set ($cartItemIndex = 0)
+                #set($currentProductSku = $product.getProductSkus().get($selectedSkuCode))
+                <input type="hidden" id="cartItems[$cartItemIndex].skuCode" name="cartItems[$cartItemIndex].skuCode" value="$selectedSkuCode"/>
+                #if($command.getCartItems().get(0).isForUpdate())
+                	<input type="hidden" id="updateShoppingItemUid" name="cartItems[$cartItemIndex].updateShoppingItemUid" value="$command.getCartItems().get(0).getUpdateShoppingItemUid()"/>
+                #end
+                ## Show SKU options
+                #if($product.hasMultipleSkus())
+                  #foreach ($skuOption in $product.getProductType().getSortedSkuOptionListForRecurringItems($currentProductSku))
+                    <label>$skuOption.getDisplayName($locale, true)
+                      <select name="$skuOption.optionKey" id="$skuOption.optionKey" onchange="handleOptionChange(this);" >
+                        #foreach($optionValue in $skuOption.optionValues)
+                          <option value="$optionValue.optionValueKey">$optionValue.getDisplayName($locale)</option>
+                        #end
+                      </select>
+                      <span id="${skuOption.optionKey}-error"></span>
+                    </label>
+                  #end
+				  <script type='text/javascript'>
+					var selectedValues = new Array();
+					#set($skuOptionValues = $currentProductSku.getOptionValues())
+					#foreach ($skuOptionValue in $skuOptionValues)
+						selectedValues[selectedValues.length] = "${skuOptionValue.getOptionValueKey()}";
+					#end
+
+					// set user selection
+					skuConfigurationService.getAvailableOptionValues(productId, selectedValues,
+						function(options) {
+							// right now it is one way update (left to right)
+							updateOptionValues(options, null, selectedValues, $productViewBean.product.uidPk);
+						}
+					);
+				  </script>
+                #end
+
+                    #set ($minQty = $product.getMinOrderQty())
+
+                    #set ($qtyCount = $minQty + 10)
+                    #if ($productViewBean.getUpdateCartItemQty() > 10)
+                        #set ($qtyCount = $productViewBean.getUpdateCartItemQty() + 10)
+                    #end
+                    #set ($counter = [$minQty..$qtyCount])
+
+                    #if($productIsGiftCertificate)
+                    	<input id="quantitySelect" type="hidden" name="cartItems[$cartItemIndex].quantity" value="1"/>
+                    #else
+                      <label for="quantity">#springMessage("productTemplate.qty")
+                      <select id="quantitySelect" name="cartItems[$cartItemIndex].quantity"
+                            #if ($command.getCartItems().get(0).isCalculatedBundle())
+                                onchange="handleQuantityChangeForCalculatedBundle(this);"
+                            #end
+                        >
+                        #foreach( $index in $counter )
+                          <option value="$index" #if($productViewBean.isUpdate() && $productViewBean.getUpdateCartItemQty() == $index)selected #end>${index}</option>
+                        #end
+                      </select>
+                      </label>
+                    #end
+                    #set ($cartItemIndex = $cartItemIndex + 1)
+                    #if($minQty > 1)
+                        <div class="minqty">#springMessage("productTemplate.minOrderQty") $minQty</div>
+                    #end
+
+                <div class="clear1"></div>
+                <span id="globalInventoryError"></span>
+            </div>
+            #set ($accessories = $product.getAssociationsByType(4))
+            #if($accessories && $accessories.size() > 0 || $warranties && $warranties.size() > 0)
+                <div id="product-grid-1" class="additional-items-box">
+                ##Display product accessories
+                #if($accessories && $accessories.size() > 0)
+                  <h2>#springMessage("productTemplate.accessories")</h2>
+                  #foreach($accessory in $accessories)
+					#set($accprice=$associationPrices.get($accessory.getTargetProduct().getCode()))
+                    #displayProductAssociation($accessory $product $cartItemIndex $!cartItemId $catalog $accprice)
+                    #set ($cartItemIndex = $cartItemIndex + 1)
+                  #end
+                  <div class="clear1"></div>
+                #end
+                ##Display product warranties
+                #if($warranties && $warranties.size() > 0)
+                      #if($productViewBean.isUpdate())
+                    #set($cartItemId = $productViewBean.getUpdateCartItemUid())
+                  #end
+                  <h2>#springMessage("productTemplate.warranties")</h2>
+                  #foreach($warranty in $warranties)
+					#set($warprice=$associationPrices.get($warranty.getTargetProduct().getCode()))
+                    #displayProductAssociation($warranty $product $cartItemIndex $!cartItemId $catalog $warprice)
+                    #set ($cartItemIndex = $cartItemIndex + 1)
+                  #end
+                  <div class="clear1"></div>
+                #end
+                </div>
+              #end
+            </div>
+
+	    #if($productIsGiftCertificate)
+	        #addAdditionalProductFields()
+	    #end
+
+            <div class="add-to-cart-box">
+                #verifyShouldDisableCart()
+                #if($productViewBean.isUpdate())
+                    <input id="addToCartSubmit" name="addToCartSubmit" value="#springMessage("productTemplate.updateItem")" type="submit" class="$!addToCartClass" #if ($addToCartDisabled) disabled="true" #end/>
+                #else
+                    <input id="addToCartSubmit" name="addToCartSubmit" value="#springMessage("$!buttonName")" type="submit" class="$!addToCartClass" #if ($addToCartDisabled) disabled="true" #end/>
+                #end
+                #if($enableAddToWishList && !$product.isNotSoldSeparately())
+					<a href="$baseUrl/add-to-wishlist.ep?skuCode=$product.getDefaultSku().getSkuCode()" id="wishlistA" class="wishlist"><img src="$baseUrl/template-resources/images/ico-wishlist.gif" alt="" width="10" height="10" border="0" /> #springMessage("productTemplate.addToWishlist")</a>
+				#end
+
+            </div>
+            #if($pwrEnabledHelper.getBoolean())
+              ## Display the product review snippet for the product
+              <div class="add-to-cart-box">
+                <script type="text/javascript">snippet(document);</script>
+              </div>
+            #end
+        </form>
+
+  ## Bundle specific javascript
+  <script type="text/javascript" charset="utf-8">
+		var addToCartDisabled = $addToCartDisabled;
+		var currencySymbol = "$currencySymbol";
+		var price = "";
+        #if ($productPrice)
+            var price = $productPrice.getLowestPrice().getAmount().toPlainString();
+        #end
+		var priceTiers = new Array();
+
+		#foreach($tier in $productPrice.getPriceTiers().values())
+			priceTiers[$velocityCount - 1] = $price.getLowestPrice($tier.getMinQty()).getAmount();
+		#end
+
+
+
+		#if ($jsonBundle)
+            //Toggle options after form has been automatically populated with initial selections.
+            jq(document).ready(function () {
+                if (bundle) {
+                    toggleOnUpdate(bundle, bundle.selectionRule);
+                }
+                recalculatePrice(price);
+            });
+
+		#end
+		</script>
+
+    #if($showProductDetails)
+
+        <div class="product-details-box">
+          <h2>#springMessage("productTemplate.productDetails")</h2>
+          <p>$product.getAttributeValueGroup().getStringAttributeValue("description", $locale)</p>
+          <h2>#springMessage("productTemplate.productFeatures")</h2>
+          <table class="attribute-tbl">
+            <tbody>
+                #displayAttributes()
+            </tbody>
+          </table>
+          <div class="clear20"></div>
+          #if($pwrEnabledHelper.getBoolean())
+            ##Display the product reviews summary for this product
+            <a name="ProductReviewSummary"></a><script type="text/javascript">engine(document);</script>
+          #end
+
+          <div class="clear20"></div>
+
+          #if ($command.getCartItems().get(0).getConstituents().size() > 0)
+              <h2>#springMessage("productTemplate.standardItems")</h2>
+              <p>#springMessage("productTemplate.bundleItems")</p>
+              <ul id="constituent-details">
+                  #foreach($constituent in $command.getCartItems().get(0).getConstituents())
+					#set($constituentProduct = $constituent.product)
+                    <li>
+					  <dl class="constituent-detail level$constituent.level">
+						#if($constituentProduct.getImage())
+						  #set ($image = $!constituentProduct.getImage())
+						#else
+						  #set ($image = "")
+						#end
+						#set ($productName = $constituentProduct.getLocaleDependantFields($locale).getDisplayName())
+						#set ($brandName = $constituentProduct.getBrand().getLocalizedProperties().getValue("brandDisplayName", $locale))
+						#parseProductSeoUrl($constituentProduct $constituentProduct.getDefaultCategory())
+						<dt class="product-img"><a href="$productSeoUrl">#displayCatalogImage($image "60" "60" "0" "middle" "0" $productName "")</a></dt>
+						<dt class="product-item-name">
+							<div class="brand-name">$!brandName</div>
+							<div class="prod-name">
+                                <a href="$productSeoUrl">$!productName</a>
+                                #if ($constituent.quantity > 1)
+                                    <span class="constituent-quantity">x $constituent.quantity</span>
+                                #end
+                            </div>
+						</dt>
+					  </dl>
+                    </li>
+                  #end
+              </ul>
+          #end
+
+          #set ($recommendations = $product.getAssociationsByType(6))
+          #if($recommendations && $recommendations.size() > 0)
+            <div id="product-also-purchased">
+              <h2>#springMessage("globals.merchandizing.customersWhoPurchased") $product.getLocaleDependantFields($locale).getDisplayName() #springMessage("globals.merchandizing.alsoPurchased")</h2>
+              <ul>
+
+                #foreach($productAssociation in $recommendations)
+                  #set ($associatedProduct = $productAssociation.getTargetProduct())
+                  #set ($defaultQty = $productAssociation.getDefaultQuantity())
+                  #set ($productName = $associatedProduct.getLocaleDependantFields($locale).getDisplayName())
+                  #parseProductSeoUrl($associatedProduct $associatedProduct.getDefaultCategory())
+                  <li><a href="$productSeoUrl">$productName</a> #displayProductPrice($associatedProduct $associationPrices.get($associatedProduct.getCode()) false false false "-no-css")</li>
+                #end
+              </ul>
+            </div>
+          #end
+        </div>
+    </div>
+    #end
+
+    ## Right panel
+    <div id="prod-right">
+          ##Display replacement products
+          #set ($replacements = $product.getAssociationsByType(5, $cartProducts))
+          #if($replacements && $replacements.size() > 0)
+            <h3 class="upgrade">#springMessage("productTemplate.replacements")</h3>
+            <div id="product-grid-1">
+              #foreach($replacement in $replacements)
+				#set($repprice = $associationPrices.get($replacement.getTargetProduct().getCode()))
+				#set($repcharacteristics = $associationCharacteristics.get($replacement.getTargetProduct().getCode()))
+                #displayProductWithPrice($replacement.getTargetProduct() $catalog $warehouse $repprice "-right-panel" false $repcharacteristics)
+              #end
+              <div class="clear1"></div>
+            </div>
+          #end
+
+          ##Display product upsells
+          #set ($upSells = $product.getAssociationsByType(2, $cartProducts))
+          #if($upSells && $upSells.size() > 0)
+            <h3 class="upgrade">#springMessage("productTemplate.upSells")</h3>
+            <div id="product-grid-1">
+              #foreach($upSell in $upSells)
+				#set($upsellprice = $associationPrices.get($upSell.getTargetProduct().getCode()))
+				#set($upsellcharacteristics = $associationCharacteristics.get($upSell.getTargetProduct().getCode()))
+                #displayProductWithPrice($upSell.getTargetProduct() $catalog $warehouse $upsellprice "-right-panel" false $upsellcharacteristics)
+              #end
+              <div class="clear1"></div>
+            </div>
+          #end
+
+          ##Display product crosssells
+          #set ($crossSells = $product.getAssociationsByType(1, $cartProducts))
+          #if($crossSells && $crossSells.size() > 0)
+            <h3 class="may-also-like">#springMessage("productTemplate.crossSells")</h3>
+            <div id="product-grid-1">
+              #foreach($crossSell in $crossSells)
+				#set($csprice = $associationPrices.get($crossSell.getTargetProduct().getCode()))
+				#set($cscharacteristics = $associationCharacteristics.get($crossSell.getTargetProduct().getCode()))
+                #displayProductWithPrice($crossSell.getTargetProduct() $catalog $warehouse $csprice "-right-panel" false $cscharacteristics)
+              #end
+              <div class="clear1"></div>
+            </div>
+          #end
+    </div>
+    <div class="clear20"></div>
+#end
+
+
+#**
+* Display product association
+*#
+#macro (displayProductAssociation $productAssociation $sourceProduct $nextCartIndex $cartItemId $catalog $price)
+  <ul class="product">
+    #set ($brandName = "")
+    #set ($associateProduct = $productAssociation.getTargetProduct())
+    #set ($associateSku = $associateProduct.getDefaultSku())
+    #set ($productName = $associateProduct.getLocaleDependantFields($locale).getDisplayName())
+    #set ($brandName = $!associateProduct.getBrand().getLocalizedProperties().getValue("brandDisplayName", $locale)     )
+    #set ($defaultQty = $productAssociation.getDefaultQuantity())
+    #parseProductSeoUrl($associateProduct $associateProduct.getDefaultCategory())
+    #set ($image = "")
+    #set ($image = $associateSku.getImage())
+    #if($!cartItemId && $sesShoppingCart.getCartItemById($cartItemId).hasDependentItem($associateSku.skuCode))
+        #set($checked = "checked")
+    #else
+        #set($checked = "")
+    #end
+    <li class="product-select">
+   	<input name="cartItems[$nextCartIndex].quantity" type="checkbox" value="$defaultQty" $!checked/>
+    <input name="cartItems[$nextCartIndex].skuCode" type="hidden" value="$associateProduct.getDefaultSku().getSkuCode()"/>
+    <input name="cartItems[$nextCartIndex].dependent" type="hidden" value="$productAssociation.isSourceProductDependent()"/>
+    </li>
+    #if($image != "" && $productAssociation.getAssociationType() != 3)
+      <li class="product-img">
+      <a href="$productSeoUrl">#displayCatalogImage($image "40" "40" "0" "middle" "0" $productName "")</a>
+      </li>
+    #end
+    <li class="product-item-name">
+      <div class="brand-name">$!brandName</div>
+      <div class="prod-name">
+        #if($productAssociation.getAssociationType() != 3)
+        <a href="$productSeoUrl">$productName</a>
+        #else
+        $productName
+        #end
+      </div>
+    </li>
+    <li class="product-pricing">
+	#set($showStartingFrom = false)
+	#if($associateProduct.isDynamicBundle())
+		#set($showStartingFrom = true)
+	#end
+    #if($associateProduct.hasMultipleSkus())
+    	<div class="starting-from">#springMessage("productgrid.starting")</div>
+	#end
+   	#displayPriceOrPriceSchedules($price $showStartingFrom true true "-accessories")
+    </li>
+  </ul>
+#end
+
+#macro(displayAttributes)
+  #displayAttribute("AudioInput" "A00871")
+  #displayAttribute("AudioInput" "A00870")
+  #displayAttribute("AudioInput" "A00276")
+  #displayAttribute("Battery" "A03378")
+  #displayAttribute("Battery" "A03379")
+  #displayAttribute("Battery" "A00341")
+  #displayAttribute("Battery" "A03380")
+  #displayAttribute("Camera" "A01282")
+  #displayAttribute("Camera" "A00974")
+  #displayAttribute("Camera" "A01454")
+  #displayAttribute("Camera" "A01281")
+  #displayAttribute("Camera" "A01283")
+  #displayAttribute("Camera" "A01280")
+  #displayAttribute("Camera" "A00978")
+  #displayAttribute("Camera" "A00973")
+  #displayAttribute("CameraFlash" "A01250")
+  #displayAttribute("CameraFlash" "A02028")
+  #displayAttribute("CameraFlash" "A01015")
+  #displayAttribute("DigitalCamera" "A02805")
+  #displayAttribute("DigitalCamera" "A03190")
+  #displayAttribute("Display" "A00140")
+  #displayAttribute("Display" "A01584")
+  #displayAttribute("Display" "A00152")
+  #displayAttribute("Display" "A00138")
+  #displayAttribute("ExposureParameters" "A01206")
+  #displayAttribute("Finderscope" "A00996")
+  #displayAttribute("Finderscope" "A00995")
+  #displayAttribute("FlashMemory" "A00409")
+  #displayAttribute("FlashMemory" "A00413")
+  #displayAttribute("Header" "A00601")
+  #displayAttribute("Header" "A00600")
+  #displayAttribute("LensSystem" "A00983")
+  #displayAttribute("LensSystem" "A00985")
+  #displayAttribute("LensSystem" "A00984")
+  #displayAttribute("LensSystem" "A00986")
+  #displayAttribute("LensSystem" "A01071")
+  #displayAttribute("LensSystem" "A00981")
+  #displayAttribute("Miscellaneous" "A00373")
+  #displayAttribute("OpticalSensor" "A03519")
+  #displayAttribute("OpticalSensor" "A03517")
+  #displayAttribute("OpticalSensor" "A01376")
+  #displayAttribute("OpticalSensor" "A00551")
+  #displayAttribute("OpticalSensor" "A03497")
+  #displayAttribute("OpticalSensor" "A02638")
+  #displayAttribute("OpticalSystem" "A01007")
+  #displayAttribute("OpticalSystem" "A01244")
+  #displayAttribute("OpticalSystem" "A01072")
+  #displayAttribute("OpticalSystem" "A01006")
+  #displayAttribute("OpticalSystem" "A01010")
+  #displayAttribute("OpticalSystem" "A04393")
+  #displayAttribute("OpticalSystem" "A01013")
+  #displayAttribute("OpticalSystem" "A01278")
+  #displayAttribute("OpticalSystem" "A01003")
+  #displayAttribute("OpticalSystem" "A01002")
+  #displayAttribute("OpticalViewfinder" "A01448")
+  #displayAttribute("OpticalViewfinder" "A01287")
+  #displayAttribute("ServiceSupport" "A00430")
+  #displayAttribute("VideoInput" "A00258")
+  #displayAttribute("VideoInput" "A01381")
+  #displayAttribute("VideoInput" "A00260")
+  #displayAttribute("VideoInput" "A00652")
+  #displayAttribute("VideoInput" "A00548")
+  #displayAttribute("VideoInput" "A00919")
+  #displayAttribute("VideoInput" "A01570")
+  #displayAttribute("VideoInput" "A01207")
+  #displayAttribute("VideoInput" "A00537")
+  #displayAttribute("VideoInput" "A00256")
+  #displayAttribute("Viewfinder" "A00920")
+  #displayAttribute("Viewfinder" "A00556")
+    #displayAttribute("SystemRequirements" "A00429")
+    #displayAttribute("SystemRequirements" "A02299")
+#end
+
+#macro (displayAttribute $group $key)
+  #if($product.getAttributeValueGroup().getStringAttributeValue($key, $locale) != "")
+    #if($lastGroup != $group)
+      #set ($velocityCount = 0)
+      <tr class="group-ttl">
+        <td colspan="2">#springMessage("productTemplate.$group")</td>
+      </tr>
+    #end
+    #if($mathTool.mod($velocityCount, 2) == 0)
+      #set($class = "class='odd'")
+    #end
+    <tr $!class>
+      <td>#springMessage("productTemplate.$key")</td>
+      <td>$product.getAttributeValueGroup().getStringAttributeValue($key, $locale)</td>
+    </tr>
+    #set ($lastGroup = $group)
+    #set ($velocityCount = $velocityCount + 1)
+  #end
+#end
+
+
+
+#macro(verifyShouldDisableCart)
+    #if ($addToCartDisabled)
+        #set($addToCartClass = "add-to-cart off")
+    #else
+        #set($addToCartClass = "add-to-cart")
+    #end
+#end
+
+#macro(displayConstituentsForEdit $itemFormBean $locale $showSkuOptions $addToCartDisabled)
+    <div id="short-constituents-list">
+		#set($rootSelectionRule = $formBeanSelectionRuleMap.get(""))
+
+        <div class="root-bundle-selection"><h2 id="cartItems[0].selectionRule">
+        #if ($rootSelectionRule && $rootSelectionRule != 0)
+        	#springMessage("select") $rootSelectionRule
+		#else
+        	#springMessage("productTemplate.Includes")
+    	#end
+    	</h2>
+    	</div>
+
+		<script type="text/javascript" charset="utf-8">
+			var bundle = $jsonBundle;
+		</script>
+	 		<script type="text/javascript" src="$baseUrl/template-resources/js/bundle.js"></script>
+		<ul id="constituents-list">
+
+		## iterating items in the bundle
+		#set ($cartItem = $itemFormBean.cartItems.get(0) )
+
+	  	#foreach ($item in $cartItem.constituents)
+	  		#set ($constituentIndex = 0)
+			#set ($itemName = $item.product.getLocaleDependantFields($locale).getDisplayName())
+			#if ($item.fixedSku && $item.product.hasMultipleSkus())
+				#set ($skuDisplayName = $item.productSku.getDisplayName($locale))
+			#end
+			#set ($style = '')
+			#set($levelSelectionRule = $formBeanSelectionRuleMap.get(""))
+
+			##Get the selection rule parameter from the parent index
+			#if ($item.path.lastIndexOf('.') > -1)
+				#set($x = $item.path.substring(0,$item.path.lastIndexOf('.')))
+				#set($levelSelectionRule = $formBeanSelectionRuleMap.get($x))
+			#end
+
+			#set ($style = 'padding-top:7px; border-top:1px solid #d9d9d9;')
+			#if ($levelSelectionRule > 0)
+				#set ($style = $style + ' list-style-type: none')
+			#end
+
+			<li class="constituent-item constituent-level-$item.level" style="$style">
+				##Root level has no parent, which is empty key.
+
+				<input type="hidden" name="cartItems[0].${item.path}.skuCode" id="cartItems[0].${item.path}.skuCode" value="$item.skuCode" />
+				#if ($levelSelectionRule == 0)
+					<span>&bull;</span>
+					<input type="hidden" name="cartItems[0].${item.path}.selected" value="true" checked="true" id="cartItems[0].${item.path}.selected" />
+				#elseif ($levelSelectionRule == 1)
+					<input type="radio" name="cartItems[0].${item.path}.selected" value="true" #if($item.selected) checked="true" #end id="cartItems[0].${item.path}.selected" onclick="toggleSiblingRadio('${item.path}');recalculatePrice(price);">
+				#else
+					<input type="checkbox" name="cartItems[0].${item.path}.selected" value="true" #if($item.selected) checked="true" #end id="cartItems[0].${item.path}.selected" onclick="toggleItemCheckbox('${item.path}', this);validateLevel('${item.path}');recalculatePrice(price);">
+				#end
+				<span class="constituent-name" id="cartItems[0].${item.path}.bundleName">$itemName
+				</span>
+
+				#if ($item.fixedSku)
+					<span class="sku">
+				        	#displaySkuOptionValues($item $locale)
+					</span>
+				#end
+
+				#if ($item.calculatedBundleItem && !$item.calculatedBundle)
+                    ## Adjusted Price.
+                    #set ($lowestMoney = false)
+                    #setSchedulesPriceAndFrequency($item.price)
+                    #set ($lowestMoney = ${effectivePrice.getLowestPrice($item.accumulatedQuantity)})
+
+                    #if (!$lowestMoney)
+                        #set ($lowestMoney = $effectivePrice.getLowestPrice())
+                    #end
+
+                    #set ($adjustedPrice = $lowestMoney.amount)
+                    #if ($item.priceAdjustment)
+                        #set ($adjustedPrice = $lowestMoney.amount.add($item.priceAdjustment.adjustmentAmount))
+                    #end
+
+		            <span id="cartItems[0].${item.path}.price" class="adjustment-amount">
+                        #if ($adjustedPrice && $adjustedPrice > 0)
+                            #displayPriceForLocale($adjustedPrice, $locale)
+                        #else
+                            ${currencySymbol}0.00
+                        #end
+                    </span>
+
+                    ## Frequency.
+                    <span id="cartItems[0].${item.path}.price-frequency" class="adjustment-amount">
+                        #if ($frequency)
+                            #springMessage("productTemplate.recurringPrice.$frequency")
+                        #end
+                    </span>
+                #end
+
+                    ## Price Adjustment.
+                ## Calculated bundle items may dynamically update price adjustments according to their effective price list.
+				## It's updated through ajax.
+				#if ($item.priceAdjustment)
+					#set($hasAdjustments = true)
+                    #if ($item.priceAdjustment.adjustmentAmount > 0)
+                            <span id="cartItems[0].${item.path}.adjustment" class="adjustment-amount">+${currencySymbol}$item.priceAdjustment.adjustmentAmount</span>
+                            <span id="cartItems[0].${item.path}.adjustment-frequency" class="adjustment-amount"></span>
+                    #else
+                            <span id="cartItems[0].${item.path}.adjustment" class="adjustment-amount">
+                            #if ($adjustedPrice && $adjustedPrice > 0)
+                                    -${currencySymbol}$item.priceAdjustment.adjustmentAmount.abs()
+                                #end
+                        </span>
+                            ## Frequency.
+                            <span id="cartItems[0].${item.path}.adjustment-frequency" class="adjustment-amount">
+                                #if ($frequency && $adjustedPrice && $adjustedPrice > 0)
+                                    #springMessage("productTemplate.recurringPrice.$frequency")
+                    #end
+                            </span>
+                        #end
+                #else
+                    ## create an empty span for javascript to use.
+                        <span id="cartItems[0].${item.path}.adjustment" class="adjustment-amount" ></span>
+                        <span id="cartItems[0].${item.path}.adjustment-frequency" class="adjustment-amount"></span>
+				#end
+
+                #if ($item.quantity > 1)
+		           <span id="cartItems[0].${item.path}.quantity" class="constituent-quantity">x $item.quantity</span>
+		        #end
+
+				#set ($selectionRule = "")
+				#set ($selectionRule = $formBeanSelectionRuleMap.get($item.path))
+				#if ($selectionRule && $selectionRule != "" && $selectionRule != 0)
+					<div id="cartItems[0].${item.path}.selectionRule" class="bundle-selection-rule">#springMessage("select") $selectionRule</div>
+				#elseif ($selectionRule && $selectionRule != "" && $selectionRule == 0)
+					<div id="cartItems[0].${item.path}.selectionRule" hidden="true" class="bundle-selection-rule">#springMessage("includes")</div>
+				#else
+					<div id="cartItems[0].${item.path}.selectionRule" hidden="true" class=""></div>
+				#end
+
+
+
+				#if ($showSkuOptions && !$item.fixedSku)
+		            #if ($item.product.hasMultipleSkus())
+		               <div>
+						## iterating through skuOptions of the specified constituent product
+		                  #foreach ($skuOption in $item.product.getProductType().getSortedSkuOptionListForRecurringItems($item.product.getDefaultSku()))
+
+
+							<div style="float: left; margin-right: 11px; margin-top: 4px">
+			                    <label for="$skuOption.optionKey" style="font-weight:bold;">$skuOption.getDisplayName($locale, true)</label><br />
+			                    <select id="cartItems[0].${item.path}.select$velocityCount" onchange="handleConstituentOptionChange('cartItems[0].${item.path}', '$item.product.uidPk');" >
+
+									## iterating through skuOptionValues of specified skuOption
+			                        #foreach($optionValue in $skuOption.optionValues)
+
+										#set($constituentSkuCode = "")
+										#set($selected = "")
+										#foreach($constituentSku in $item.product.getProductSkus().values())
+											#if ($constituentSku.getSkuOptionValue($skuOption)==$optionValue)
+												#set($constituentSkuCode = $constituentSku.getSkuCode())
+												#if ($constituentSkuCode == $item.skuCode)
+													#set($selected = "selected")
+												#end
+											#end
+										#end
+
+										<option value="$optionValue.optionValueKey" $!selected>$optionValue.getDisplayName($locale)</option>
+			                        #end
+
+
+			                    </select>
+			                    #set ($constituentIndex = $constituentIndex + 1)
+			                    <span id="${skuOption.optionKey}-error"></span>
+		                    </div>
+		                  #end
+
+						  <script type='text/javascript'>
+							// load default skus when page first loads
+							#set($selectedValues = "selectedValues" + $velocityCount)
+							var $selectedValues = new Array();
+
+							#set($skuOptionValues = $item.product.getSkuByCode($item.skuCode).getOptionValues())
+							#foreach ($skuOptionValue in $skuOptionValues)
+								$selectedValues[($selectedValues).length] = "${skuOptionValue.getOptionValueKey()}";
+							#end
+
+							skuConfigurationService.getAvailableOptionValues($item.product.uidPk, $selectedValues,
+								function(options) {
+									// right now it is one way update (left to right)
+									updateOptionValues(options, 'cartItems[0].${item.path}', $selectedValues, $item.product.uidPk);
+								}
+							);
+						  </script>
+
+		           </div>
+					   <p style="clear: left;"></p>
+		            #end
+				#end
+			</li>
+	  	#end
+	  	</ul>
+    </div>
+#end
+
+#macro(productScripts)
+    <link rel="stylesheet" href="$baseUrl/template-resources/stylesheet/lightbox.css" type="text/css" />
+    <script type="text/javascript" src="$baseUrl/template-resources/js/lightbox.js"></script>
+    ## Setup the PowerReviews JavaScript
+    <script type = "text/javascript" src="$baseUrl/template-resources/power-reviews/pwr/engine/js/full.js"></script>
+    <script type = "text/javascript">
+      pr_zip_location='$baseUrl/template-resources/power-reviews';
+      pr_style_sheet='$baseUrl/template-resources/stylesheet/powerreviews/product-details-page.css';
+      pr_page_id = '$productViewBean.getProduct().getGuid()';
+      pr_write_review='$baseUrl/product-review.ep?pGUID=$productViewBean.getProduct().getGuid()';
+      pr_read_review='#ProductReviewSummary';
+    </script>
+    <script type="text/javascript" src="$baseUrl/template-resources/js/product.js"></script>
+
+	<script type='text/javascript' src='$baseUrl/dwr/interface/skuConfigurationService.js'></script>
+	<script type='text/javascript' src='$baseUrl/dwr/interface/jsonBundleService.js'></script>
+	<script type='text/javascript'>
+	  var productId = $product.uidPk;
+	  var numOptions = $product.getProductType().getSkuOptions().size();
+	  var currencyCode = "$sesShoppingCart.getCurrency().getCurrencyCode()";
+	  var localeCode = "$locale.toString()";
+	  var defaultLocaleCode = "$sesShoppingCart.getStore().getDefaultLocale()";
+	  var lastSelectedOption = "";
+	  var availableQuantity = 0;
+	  var infiniteQuantity = false;
+
+	  //Set of valid options last returned from the server
+	  var optionSet = null;
+
+	/////////////////// variables accessors ///////////////////////
+	function baseUrl() {
+	    return "$baseUrl";
+	}
+
+	function isUpdate() {
+	    return $productViewBean.isUpdate();
+	}
+
+	function getProductImageFileName(newSkuBean) {
+			  #if ($imageSkuOptionKey != "")
+			  			#set($skuOptionImage = $imageSkuOptionKey + '.image')
+        return newSkuBean.productSku.optionValueMap.$skuOptionImage;
+					#else
+							return newSkuBean.imageUrl;
+					#end
+	}
+
+	//////////// spring accessors  /////////////////////////
+	function springItemNo() {
+		return "#springMessage("productTemplate.itemno")";
+	}
+
+	function springProductWas() {
+		return "#springMessage('productgrid.was')";
+	}
+
+	function springProductIs() {
+	 	return "#springMessage('productgrid.save')";
+	}
+
+	function springPreorder() {
+	    return "#springMessage("productTemplate.preOrder")";
+	}
+
+	function springAddToCart() {
+	    return "#springMessage("productTemplate.addToCart")";
+	}
+
+	function springInStock() {
+	    return "#springMessage("productTemplate.inStock")";
+	}
+
+	function springOutOfStock() {
+	    return "#springMessage('productTemplate.outOfStock')";
+	}
+
+	function springRestockDate() {
+	    return "#springMessage('productTemplate.restockDate')";
+	}
+
+	function springAvailableForPreOrder() {
+	    return "#springMessage("productTemplate.availableForPreOrder")";
+	}
+
+	function springPreOrderRestockDate() {
+	    return "#springMessage("productTemplate.preOrderRestockDate")";
+	}
+
+	function springItemsAvailable() {
+	    return "#springMessage("productTemplate.itemsAvailable")";
+	}
+
+	function springAvailableForBackOrder() {
+	    return "#springMessage("productTemplate.availableForBackOrder")";
+	}
+
+	function springBackOrderRestockDate() {
+	    return "#springMessage("productTemplate.backOrderRestockDate")";
+	}
+
+	function springWillShipWhenAvailable() {
+	    return "#springMessage("productTemplate.willShipWhenAvailable")";
+	}
+
+	function springInsufficientStock() {
+	    return "#springMessage('productTemplate.insufficientStock')";
+	}
+
+	function getExpectedReleaseDate() {
+	    #if ($product.getExpectedReleaseDate())
+	        return "$dateTool.format('E, MMMM d',$product.getExpectedReleaseDate())";
+	    #end
+	    return null;
+	}
+
+	#if($productIsGiftCertificate)
+    #addAdditionalJavaScript()
+
+	#end
+
+</script>
+#end
+
+#macro (addAdditionalJavaScript)
+
+
+	//Tells the check function whether to throw an error or not
+        var over = false;
+        var max = 255;
+        function chars_left(comp)
+        {
+                //Current character count
+                var current = comp.value.length;
+                //How many left?
+                var chars_left = max - current;
+                //Over the limit or not?
+                if(chars_left < 0)
+                {
+                        //Over the limit
+                        over = true;
+                        //Time for a warning
+                        document.getElementById('warning').innerHTML = "Your message will not be sent unless you remove some characters!";
+                }
+                else
+                {
+                        //Reset
+                        over = false;
+                        //Clear any warnings
+                        document.getElementById('warning').innerHTML = "";
+                }
+                //Display the number of chars left.
+                document.getElementById('left').innerHTML = chars_left;
+        }
+
+        function check()
+        {
+                if(over == true)
+                {
+                        alert("Your message is to long, please shorten it.");
+                }
+                else
+                {
+                        alert("Your message is short enough.");
+                }
+        }
+        function isUnsignedInteger(s) {
+			if((s.toString() != "") && (s.toString().search(/^[0-9]+$/)) != 0){
+				document.getElementById('not-int-warning').innerHTML = "The gift certificate value should be a number.";
+				return false;
+			}
+			else {
+				document.getElementById('not-int-warning').innerHTML = "";
+				return true;
+			}
+		}
+
+#end
+
+#macro (addAdditionalProductFields)
+					<div id="gift-certificate-content" class="add-to-cart-box">
+            <table border="0" cellspacing="0" cellpadding="3">
+              <colgroup>
+                <col width="200px">
+                <col>
+              </colgroup>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step1")</span></td>
+              </tr>
+              <tr>
+                <td><label for="cartItems[0].giftCertificateFields.recipientEmail">#springMessage("globals.giftCertificate.recipientEmail"):</label></td>
+                <td>
+                  #springFormInput("command.cartItems[0].giftCertificateFields.recipientEmail" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td><label for="cartItems[0].giftCertificateFields.confirmEmail">#springMessage("giftCertificate.confirmEmail"):</label></td>
+                <td>
+                  #springFormInput("command.cartItems[0].giftCertificateFields.confirmEmail" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step2")</span> (#springMessage("globals.optional"))</td>
+              </tr>
+              <tr>
+                <td><label for="cartItems[0].giftCertificateFields.recipientName">#springMessage("globals.giftCertificate.recipientName"):</label></td>
+                <td>
+                  #springFormInput("command.cartItems[0].giftCertificateFields.recipientName" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td><label for="cartItems[0].giftCertificateFields.senderName">#springMessage("globals.giftCertificate.senderName"):</label></td>
+                <td>
+                  #springFormInput("command.cartItems[0].giftCertificateFields.senderName" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+              	 <td colspan="2" id='not-int-warning' style='color:red;'></td>
+              </tr>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step4")</span> (#springMessage("globals.optional"))</td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  #springFormTextarea("command.cartItems[0].giftCertificateFields.message" "maxlength='255' onKeyUp='javascript:chars_left(this);'")<br>
+                  <br>
+                  #springMessage("giftCertificate.charactersleft"): <span id='left' syle='font-weight:bold;'>255</span>.
+        			<span id='warning' style='color:red;'></span><br />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+            </table>
+    </div>
+#end
+
+## initially display the price strings to avoid flashing
+#macro (displayAggregatedPricesForCalculatedBundle)
+
+    #if ($aggregatedPrices)
+
+        #if ($aggregatedPrices.size() == 1)
+            <div class='tier'>
+                <span class='reg-price'>
+                    &nbsp;$aggregatedPrices.get(0).priceString
+                </span>
+            </div>
+        #else
+
+            #foreach ($aggregatedPrice in $aggregatedPrices)
+                #set ($curMinQty = $aggregatedPrice.minQty)
+                <div>
+                    <span class="tier-level">
+                        $curMinQty #getNextMinQtyOfAggregatedPrice($curMinQty $aggregatedPrices) @
+                    </span>
+                    <span class='reg-price'>
+                        &nbsp;$aggregatedPrice.priceString
+                    </span>
+                </div>
+            #end
+
+        #end
+
+    #end
+
+#end
+
+#**
+* Get the Min Qty from next price tier
+*#
+#macro (getNextMinQtyOfAggregatedPrice $qty $aggregatedPrices)
+  #set ($foundNextMinQty = 0)
+  #foreach ($aggregatedPrice in $aggregatedPrices)
+    #set($upperQty = $aggregatedPrice.minQty)
+    #set($upperQty = $upperQty - 1)
+    #if (($aggregatedPrice.minQty > $qty) && ($foundNextMinQty == 0))
+      #if ($upperQty > $qty)
+        ## This prevents displaying 1 - 1 @ $10.00.
+        - $upperQty
+      #end
+      #set($foundNextMinQty = 1)
+    #end
+  #end
+  #if ($foundNextMinQty == 0)
+    +
+  #end
+#end

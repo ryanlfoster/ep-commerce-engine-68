@@ -1,0 +1,204 @@
+## Copyright (c) Elastic Path Software Inc., 2007
+## create.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#set($pageName = "giftCertificate/create.vm")
+#templateInit()
+#set ($action = "gift-certificate.ep")
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+      	<!--script type="text/javascript" language="JavaScript">
+      		function CountLeft(field, count, max) {
+ 			if (field.value.length > max)
+ 				field.value = field.value.substring(0, max);
+ 			else
+ 				count.value = max - field.value.length;
+ 			}
+  		</script-->
+  		<script type="text/javascript" language="JavaScript">
+  			//Tells the check function whether to throw an error or not
+        var over = false;
+        var max = 255;
+        function chars_left(comp)
+        {
+                //Current character count
+                var current = comp.value.length;
+                //How many left?
+                var chars_left = max - current;
+                //Over the limit or not?
+                if(chars_left < 0)
+                {
+                        //Over the limit
+                        over = true;
+                        //Time for a warning
+                        document.getElementById('warning').innerHTML = "Your message will not be sent unless you remove some characters!";
+                }
+                else
+                {
+                        //Reset
+                        over = false;
+                        //Clear any warnings
+                        document.getElementById('warning').innerHTML = "";
+                }
+                //Display the number of chars left.
+                document.getElementById('left').innerHTML = chars_left;
+        }
+       
+        function check()
+        {
+                if(over == true)
+                {
+                        alert("Your message is to long, please shorten it.");
+                }
+                else
+                {
+                        alert("Your message is short enough.");
+                }
+        }
+        function isUnsignedInteger(s) {
+			if((s.toString() != "") && (s.toString().search(/^[0-9]+$/)) != 0){
+				document.getElementById('not-int-warning').innerHTML = "The gift certificate value should be a number.";
+				return false;
+			}
+			else {
+				document.getElementById('not-int-warning').innerHTML = "";
+				return true;
+			}
+		}
+          			
+		</script>
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #parse("includes/topmenu.vm")
+      <div id="breadcrumb">
+        #parse("includes/breadcrumbs.vm")
+      </div>
+      <div class="clear10"></div>
+      <!-- Start main area -->
+      <div id="gift-certificate-main">
+        <h1>#springMessage("giftCertificate.electronic")</h1>
+        
+        <div id="gift-certificate-content">
+          <form action="$baseUrl/$action" method="post" name="giftCertificateFormBean"> 
+            <table border="0" cellspacing="0" cellpadding="3">
+              <colgroup>
+                <col width="200px">
+                <col>
+              </colgroup>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step1")</span></td>
+              </tr>
+              <tr>
+                <td><label for="giftCertificateFormBean.giftCertificate.recipientEmail">#springMessage("globals.giftCertificate.recipientEmail"):</label></td>
+                <td>
+                  #springFormInput("giftCertificateFormBean.giftCertificate.recipientEmail" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td><label for="giftCertificateFormBean.confirmEmail">#springMessage("giftCertificate.confirmEmail"):</label></td>
+                <td>
+                  #springFormInput("giftCertificateFormBean.confirmEmail" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step2")</span> (#springMessage("globals.optional"))</td>
+              </tr>
+              <tr>
+                <td><label for="giftCertificateFormBean.giftCertificate.recipientName">#springMessage("globals.giftCertificate.recipientName"):</label></td>
+                <td>
+                  #springFormInput("giftCertificateFormBean.giftCertificate.recipientName" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td><label for="giftCertificateFormBean.giftCertificate.senderName">#springMessage("globals.giftCertificate.senderName"):</label></td>
+                <td>
+                  #springFormInput("giftCertificateFormBean.giftCertificate.senderName" "maxlength='100'")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step3")</span></td>
+              </tr>
+              <tr>
+                <td><label for="giftCertificateFormBean.giftCertificate.purchaseAmount">#springMessage("giftCertificate.amount"):</label></td>
+                <td>
+                  #springFormInput("giftCertificateFormBean.giftCertificate.purchaseAmount" "maxlength='100' onKeyUp='isUnsignedInteger(this.value)'").00
+                </td>
+              </tr>
+              <tr>
+                 <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+              	 <td colspan="2" id='not-int-warning' style='color:red;'></td><br />
+              </tr>
+              <tr>
+                <td><label for="giftCertificateFormBean.giftCertificate.theme">#springMessage("globals.giftCertificate.theme"):</label></td>
+                <td>
+                  #set($themeOptions = {})
+                  
+                  #foreach($theme in $gcThemes.keySet())
+                    $!themeOptions.put($theme, $sesShoppingCart.getElasticPath().getMessage("giftCertificate.theme.$theme", null, "$theme", $locale))
+                  #end
+                  #springFormSingleSelect("giftCertificateFormBean.giftCertificate.theme" $themeOptions "")
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+              <tr>
+                <td colspan="2"><span class="step-message">#springMessage("giftCertificate.step4")</span> (#springMessage("globals.optional"))</td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  #springFormTextarea("giftCertificateFormBean.giftCertificate.message" "maxlength='255' onKeyUp='javascript:chars_left(this);'")<br>
+                  #springMessage("giftCertificate.charactersleft"): <span id='left' syle='font-weight:bold;'>255</span>.
+        			<span id='warning' style='color:red;'></span><br />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">#springShowErrors("<br>" "req")</td>
+              </tr>
+            </table>
+            <div class="clear10"></div>
+            <div>
+              #if($cartItemId && $cartItemId != "0")
+                <input type="hidden"  name="cartItemId" value="$cartItemId" />
+                <input id="addToCartSubmit" name="addToCartSubmit" value="#springMessage("giftCertificate.updateItem")" type="submit" class="add-to-cart"/>
+              #else
+                <input id="addToCartSubmit" name="addToCartSubmit" value="#springMessage("giftCertificate.addToCart")" type="submit" class="add-to-cart"/>
+              #end
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="gift-certificate-sidebar">
+        <h3>#springMessage("giftCertificate.availableThemes")</h3>
+        #foreach($theme in $gcThemes.keySet())
+        <div class="gift-certificate-theme">
+          #set($themeName = $!sesShoppingCart.getElasticPath().getMessage("giftCertificate.theme.$theme", null, "$theme", $locale))
+          <img src="$baseUrl/renderImage.image?imageName=$!gcThemes.get($theme)&amp;width=75&amp;height=50&amp;padding=0" border="0" alt="$themeName"/>
+          $themeName
+        </div>
+        #end
+      </div>
+      <div class="clear20"></div>
+    </div>
+    #parse("includes/footer.vm")
+  </body>
+</html>
+

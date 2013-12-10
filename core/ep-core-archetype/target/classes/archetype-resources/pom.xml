@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<groupId>${groupId}</groupId>
+	<version>${version}</version>
+
+	<artifactId>${artifactId}</artifactId>
+	<packaging>bundle</packaging>
+
+	<properties>
+		<licensing.skip>true</licensing.skip>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<toolProperties>
+						<property>
+							<name>propertiesFile</name>
+							<value>${basedir}/src/main/resources/META-INF/jpa-persistence.xml</value>
+						</property>
+					</toolProperties>
+				</configuration>
+				<executions>
+					<execution>
+						<id>enhancer</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.openjpa</groupId>
+						<artifactId>openjpa</artifactId>
+						<version>${org.apache.openjpa.version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>junit</groupId>
+								<artifactId>junit</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>com.elasticpath</groupId>
+						<artifactId>ep-core</artifactId>
+						<version>6.8.0.2013101613-RELEASE</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<runOrder>alphabetical</runOrder>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<!-- Fragment-Host gives the symbolic name of the core wrapper bundle to attach to. -->
+						<Fragment-Host>ep-commerce-engine-wrapper</Fragment-Host>
+
+						<!-- 
+						This bundle does not need to contribute any additional imports to the core bundle which already reside in core.
+						The "!*" text within the <Import-Package> element excludes all package imports within this bundle.
+                                                Any extension added third-party imports should be listed here.
+						{@see http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html}
+
+						Include the manifest header directive value identifying a mandatory resolution type to enable attachment problem logging.
+						With bundle fragments the default is "optional", therefore this needs to be specifically set to "mandatory" otherwise exceptions are 
+						squelched, giving no relevant problem insight. 
+						    ex. Import-Package: org.osgi.framework; resolution:="mandatory"
+						{@see http://www.osgi.org/javadoc/r5/core/org/osgi/framework/Constants.html#RESOLUTION_MANDATORY}
+						-->
+						<Import-Package>
+							!*
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-core</artifactId>
+			<version>6.8.0.2013101613-RELEASE</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

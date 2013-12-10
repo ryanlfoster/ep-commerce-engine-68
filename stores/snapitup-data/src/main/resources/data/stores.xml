@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<stores>
+<store enabled="true" code="SLRWORLD">
+    <globalization default_currency="USD" default_locale="en" content_encoding="UTF-8" sub_country="WA" country="US" timeZone="PST8PDT"/>
+    <url>http://slrworld.elasticpath.com:8080/storefront</url>
+    <name>SLR WORLD</name>
+    <state>200</state>
+    <type>B2B</type>
+    <description>A digital SLR camera demo store.</description>
+    <catalog>SLRWORLDCATALOG</catalog>
+    <display_out_of_stock>true</display_out_of_stock>
+    <email_sender_name>CustomerService@SomeDomain.com</email_sender_name>
+    <email_sender_address>CustomerService@SomeDomain.com</email_sender_address>
+    <store_admin_email>StoreAdmin@SomeDomain.com</store_admin_email>
+    <credit_card_cvv2_enabled>true</credit_card_cvv2_enabled>
+    <store_full_credit_cards>true</store_full_credit_cards>
+    <locales>
+        <locale>en</locale>
+    </locales>
+    <currencies>
+        <currency>USD</currency>
+    </currencies>
+    <warehouses>
+        <warehouse>USWarehouse1</warehouse>
+    </warehouses>
+    <tax_codes>
+        <guid>502</guid>
+        <guid>500</guid>
+    </tax_codes>
+    <tax_jurisdictions>
+        <jurisdiction>FF6E6776-16FB-7BB1-4B7E-DDF2F0D73FE7</jurisdiction>
+    </tax_jurisdictions>
+    <payment_gateways>
+        <gateway>DemoPaymentProcessor</gateway>
+        <gateway>GiftCertificate</gateway>
+    </payment_gateways>
+    <credit_card_types>
+        <type>American Express</type>
+        <type>Visa</type>
+        <type>MasterCard</type>
+    </credit_card_types>
+</store>
+
+<store enabled="true" code="SNAPITUPUK">
+    <globalization default_currency="GBP" default_locale="en" content_encoding="UTF-8" sub_country="" country="GB" timeZone="Europe/London"/>
+    <url>http://snapitupuk.elasticpath.com:8080/storefront</url>
+    <name>SNAP it UP UK</name>
+    <state>200</state>
+    <type>B2B</type>
+    <description>A digital camera demo store for UK customers.</description>
+    <catalog>SNAPITUPUK</catalog>
+    <display_out_of_stock>true</display_out_of_stock>
+    <email_sender_name>SnapItUpUK@snapitupuk.com</email_sender_name>
+    <email_sender_address>SnapItUpUK@snapitupuk.com</email_sender_address>
+    <store_admin_email>StoreAdminUK@snapitupuk.com</store_admin_email>
+    <credit_card_cvv2_enabled>true</credit_card_cvv2_enabled>
+    <store_full_credit_cards>true</store_full_credit_cards>
+    <locales>
+        <locale>en</locale>
+    </locales>
+    <currencies>
+        <currency>GBP</currency>
+    </currencies>
+    <warehouses>
+        <warehouse>UKWarehouse</warehouse>
+    </warehouses>
+    <tax_codes>
+        <guid>502</guid>
+        <guid>500</guid>
+    </tax_codes>
+    <tax_jurisdictions>
+        <jurisdiction>90A40DA5-CB0F-8470-B044-CA06D53F44F6</jurisdiction>
+        <jurisdiction>FF6E6776-16FB-7BB1-4B7E-DDF2F0D73FE7</jurisdiction>
+        <jurisdiction>CC30D469-F32B-106E-60E4-2ECE4A3E5BEA</jurisdiction>
+    </tax_jurisdictions>
+    <payment_gateways>
+        <gateway>DemoPaymentProcessor</gateway>
+        <gateway>GiftCertificate</gateway>
+    </payment_gateways>
+    <credit_card_types>
+        <type>Maestro</type>
+        <type>American Express</type>
+        <type>Visa</type>
+        <type>Solo</type>
+        <type>MasterCard</type>
+    </credit_card_types>
+</store>
+
+<store enabled="true" code="SNAPITUP">
+    <globalization default_currency="USD" default_locale="en" content_encoding="UTF-8" sub_country="US" country="US" timeZone="PST8PDT"/>
+    <url>http://demo.elasticpath.com:8080/storefront</url>
+    <name>SNAP it UP</name>
+    <state>200</state>
+    <type>B2B</type>
+    <description>A digital camera demo store.</description>
+    <catalog>SNAPITUPUS</catalog>
+    <display_out_of_stock>true</display_out_of_stock>
+    <email_sender_name>CustomerService@SomeDomain.com</email_sender_name>
+    <email_sender_address>CustomerService@SomeDomain.com</email_sender_address>
+    <store_admin_email>StoreAdmin@SomeDomain.com</store_admin_email>
+    <credit_card_cvv2_enabled>true</credit_card_cvv2_enabled>
+    <store_full_credit_cards>true</store_full_credit_cards>
+    <locales>
+        <locale>en</locale>
+        <locale>fr</locale>
+    </locales>
+    <currencies>
+        <currency>USD</currency>
+    </currencies>
+    <warehouses>
+        <warehouse>USWarehouse1</warehouse>
+    </warehouses>
+    <tax_codes>
+        <guid>502</guid>
+        <guid>500</guid>
+    </tax_codes>
+    <tax_jurisdictions>
+        <jurisdiction>90A40DA5-CB0F-8470-B044-CA06D53F44F6</jurisdiction>
+        <jurisdiction>FF6E6776-16FB-7BB1-4B7E-DDF2F0D73FE7</jurisdiction>
+        <jurisdiction>CC30D469-F32B-106E-60E4-2ECE4A3E5BEA</jurisdiction>
+    </tax_jurisdictions>
+    <payment_gateways>
+        <gateway>DemoPaymentProcessor</gateway>
+        <gateway>GiftCertificate</gateway>
+    </payment_gateways>
+    <credit_card_types>
+        <type>American Express</type>
+        <type>Visa</type>
+        <type>MasterCard</type>
+    </credit_card_types>
+</store>
+</stores>

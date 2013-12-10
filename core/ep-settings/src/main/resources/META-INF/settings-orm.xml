@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+    <package>com.elasticpath.settings.domain.impl</package>    
+    <entity class="SettingDefinitionImpl">
+        <named-query name="SETTING_DEFINITION_BY_PATH">
+            <query>SELECT settingDefinition FROM SettingDefinitionImpl AS settingDefinition WHERE settingDefinition.path = ?1</query>
+        </named-query>
+        <named-query name="SETTING_DEFINITIONS_BY_PARTIAL_PATH">
+        	<query>SELECT settingDefinition FROM SettingDefinitionImpl AS settingDefinition WHERE settingDefinition.path LIKE ?1</query>
+        </named-query>
+        <named-query name="SETTING_DEFINITIONS_COUNT_BY_PATH">
+        	<query>SELECT COUNT(settingDefinition.uidPk) FROM SettingDefinitionImpl AS settingDefinition WHERE settingDefinition.path = ?1</query>
+        </named-query>
+        <named-query name="SETTING_DEFINITION_MAX_OVERRIDE_VALUES">
+        	<query>SELECT settingDefinition.maxOverrideValues FROM SettingDefinitionImpl AS settingDefinition WHERE settingDefinition.path = ?1</query>
+        </named-query>
+        <named-query name="SETTING_DEFINITIONS_GET_ALL">
+        	<query>SELECT settingDefinition FROM SettingDefinitionImpl AS settingDefinition</query>
+        </named-query>
+        <named-query name="SETTING_DEFINITIONS_BY_METADATA_KEY_VALUE">
+        	<query>SELECT settingDefinition FROM SettingDefinitionImpl settingDefinition JOIN settingDefinition.metadata settingMetadata WHERE settingMetadata.key = ?1 AND settingMetadata.value=?2</query>
+        </named-query>        
+        <named-query name="SETTING_DEFINITIONS_BY_METADATA_KEY">
+        	<query>SELECT settingDefinition FROM SettingDefinitionImpl settingDefinition JOIN settingDefinition.metadata settingMetadata WHERE settingMetadata.key = ?1</query>
+        </named-query> 
+    </entity>
+    
+    <entity class="SettingValueImpl">
+        <named-query name="SETTING_VALUE_BY_PATH_AND_CONTEXT">
+        	<query>SELECT settingValue FROM SettingValueImpl AS settingValue WHERE settingValue.settingDefinition.path = ?1 AND settingValue.context = ?2</query>
+        </named-query>
+        <named-query name="SETTING_VALUES_BY_PATH">
+            <query>SELECT settingValue FROM SettingValueImpl AS settingValue WHERE settingValue.settingDefinition.path = ?1</query>
+        </named-query>
+        <named-query name="SETTING_VALUES_BY_PATH_AND_CONTEXTS">
+            <query>SELECT settingValue FROM SettingValueImpl AS settingValue WHERE settingValue.settingDefinition.path = ?1 AND settingValue.context IN (:list)</query>
+        </named-query>
+        <named-query name="SETTING_VALUE_UIDS_BY_PATH_AND_CONTEXTS">
+            <query>SELECT settingValue.uidPk FROM SettingValueImpl AS settingValue WHERE settingValue.settingDefinition.path = ?1 AND settingValue.context IN (:list)</query>
+        </named-query>
+        <named-query name="DELETE_SETTINGVALUES_BY_UID">
+        	<query>DELETE FROM SettingValueImpl sv WHERE sv.uidPk IN (:list)</query>
+        </named-query>
+        <named-query name="SETTING_VALUES_COUNT_BY_PATH_AND_CONTEXT">
+        	<query>SELECT COUNT(settingValue.uidPk) FROM SettingValueImpl as settingValue WHERE settingValue.settingDefinition.path = ?1 AND settingValue.context = ?2</query>
+        </named-query>
+        <named-query name="SETTING_VALUES_COUNT_BY_PATH">
+        	<query>SELECT COUNT(settingValue.uidPk) FROM SettingValueImpl as settingValue WHERE settingValue.settingDefinition.path = ?1</query>
+        </named-query>
+    </entity>
+</entity-mappings>

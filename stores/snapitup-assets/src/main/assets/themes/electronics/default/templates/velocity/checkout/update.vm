@@ -1,0 +1,50 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## update.vm
+## Not sure if this template is ever invoked
+##
+
+#set($pageName = "checkout/update.vm")
+#templateInit()
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #checkoutBreadcrumbs()
+      <div class="top-menu-bar"></div>
+      <div class="clear20"></div>
+      <!-- START main area -->
+      <div id="body">
+        #if ($login_failed)
+          <div id="alert" class="alert">
+            <div class="error-message-item">#springMessage("signIn.loginFailed")</div>
+          </div>
+        #end
+        <div id="sign-in-want-account">
+          <form action="update-account.ep" method="post" name="createAccountForm">
+            <fieldset>
+              <legend>#springMessage("signIn.createAccount")</legend>
+                #generalSignin()
+                <input type="hidden" id="clearTextPassword" name="clearTextPassword" value="qwertyuiop" />
+              	<input type="hidden" id="confirmClearTextPassword" name="confirmClearTextPassword" value="qwertyuiop" />
+            </fieldset>
+            <div class="fieldset-footer">
+              <input type="submit" class="button-normal" value="#springMessage("signIn.btn.continue")" />
+            </div>
+          </form>
+        </div>
+        <div class="clear10"></div>
+      </div>
+      <!-- END main area -->
+      <div class="clear20"></div>
+    </div>
+    #parse("includes/footer.vm")
+  </body>
+</html>
+

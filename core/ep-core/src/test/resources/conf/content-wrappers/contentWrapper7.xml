@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<content-wrapper> 
+	<template-name>productContentSpace.cwt</template-name>
+	<wrapper-id>2002</wrapper-id>
+	<wrapper-name>product wrapper with non mandatory parameter</wrapper-name>
+	<script-language>groovy</script-language>
+
+	<service-definitions>
+		<service-definition name="loadTuner">productLoadTunerForBrowsingAndSearch</service-definition>
+		<service-definition name="moneyFormatter">moneyFormatter</service-definition>
+		<service-definition name="productService">productService</service-definition>
+		<service-definition name="storeConfig">threadLocalStorage</service-definition>
+		<service-definition name="priceLookupService">priceLookupService</service-definition>
+	</service-definitions>
+
+	<user-input-settings>
+		<user-input-setting localizable="false" name="code1"/>
+		<user-input-setting localizable="true" name="code2"/>
+		<user-input-setting required="false" localizable="true" name="code3"/>
+		<user-input-setting required="true"  localizable="true" name="code4" type="Integer"/>
+		<user-input-setting required="true"  localizable="true" name="code5" type="Image"/>
+		<user-input-setting required="true"  localizable="true" name="code6" type="StringShort"/>
+	</user-input-settings>
+
+	<init>
+		product = productService.findByGuid(code, loadTuner);
+		store = storeConfig.getStore();
+	</init>
+
+	<template-parameters>
+		<template-parameter name="price">
+			<resolver>
+				price = priceLookupService.getProductPrice(product, store.getCatalog(), store.getDefaultCurrency()).getLowestPrice(1);
+				return moneyFormatter.formatCurrency(price, locale);
+			</resolver>
+		</template-parameter>
+		<template-parameter name="name">
+			<resolver>
+				return product.getDisplayName(locale)
+			</resolver>
+		</template-parameter>
+		<template-parameter name="image">
+			<resolver>
+				product.getImage()
+			</resolver>
+		</template-parameter>
+	</template-parameters>
+	
+</content-wrapper>

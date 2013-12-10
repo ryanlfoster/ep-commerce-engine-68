@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dynamic_contents>
+<dynamiccontent guid="CBA761A41-EDFF-9F4F-4AAB-AA92306C69BB">
+    <name>Super Amazing API Image Content</name>
+    <contentwrapperid>ApiImageContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="9A32389A-DDB7-433F-44CE-44831A394444">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/gift_bag.gif</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="C910DCBC-46A9-5DAC-EDF8-87B3C488404D">
+    <name>Samsung Galaxy Q Ad</name>
+    <description>Samsung Galaxy Q Ad</description>
+    <contentwrapperid>ApiProductContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="473FB2E9-501E-0F13-5CFC-864DCCB67629">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">images/color-banner-fr.png</value>
+                <value language="en">images/color-banner-uk.jpg</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="E9C27476-986B-ACAF-94A8-2281D8C99F23">
+            <parametername>productCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">galaxyq</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="A3AD8F1A-6DAF-FC6E-B6CF-BA48C811995C">
+    <name>Angry Birds Seasons - Valentines Ad</name>
+    <description>Angry Birds Seasons - Valentines Ad (product not store visible)</description>
+    <contentwrapperid>ApiProductContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="93E22613-A426-7242-22AD-C1C60090908A">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">flash/banner-us.swf</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="41BCA1A6-ABC6-FA18-0AFA-99B0CD4BFE1A">
+            <parametername>productCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">GA29391</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="7D43F241-D9DD-1C06-7E9C-1D2DA6F7180D">
+    <name>Image Non-clickable Ad</name>
+    <description>Image Non-clickable Ad (unsupported API wrapper)</description>
+    <contentwrapperid>imageWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="E185CD9C-F39D-C996-5100-EBC1B8A0CD36">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/bg_offer_a.gif</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="A2004324-F8CB-5D29-8E07-FD9ECF11C81F">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">unsupported</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="F9761A41-ED5D-9F4F-440B-F792306C69C1">
+    <name>Movies Promo</name>
+    <contentwrapperid>ApiCategoryContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="9F79989A-DDB7-413F-54CE-58831A397D1C">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/gift_bag.gif</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="45BE3B6E-E42E-9778-DAAB-F3D411BF2C85">
+            <parametername>categoryCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">Movies</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="1A43F241-D9BA-A7A5-7E9C-1D2DA6F718DA">
+    <name>Video Games Promo</name>
+    <description>A promotion for the video games category</description>
+    <contentwrapperid>ApiCategoryContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="93E22613-A426-7242-22AD-1D2DA6F718DA">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/color-banner-uk.jpg</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="41BCA1A6-ABC6-FA18-0AFA-1D2DA6F718DA">
+            <parametername>categoryCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">VideoGames</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="DD748AE2-7B57-71CD-EA8F-43E23E49D6C5">
+    <name>Avatar Promo</name>
+    <contentwrapperid>ApiProductContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="C99A855F-F0D0-5285-087F-2AA81C35073E">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/bg_see_details.gif</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="89523F71-A9AD-CB93-8AEA-CECEDA385085">
+            <parametername>productCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">tt966001av</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="49F367A1-56B9-2DE5-BB74-D89CE29DDBA6">
+    <name>HTML Ad</name>
+    <description>HTML Ad (unsupported API wrapper)</description>
+    <contentwrapperid>HTMLWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="A5A6E0A3-8337-FBD6-1C12-082E8A86C005">
+            <parametername>HTML</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">&lt;b&gt;Hello World&lt;/b&gt;</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="1A43F241-D9BA-46DA-7E9C-147869DAEDAE">
+    <name>Video Games Promo For Searchbee</name>
+    <description>A promotion for the video games category of a different store</description>
+    <contentwrapperid>ApiCategoryContentWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="93E22613-A426-9999-22AD-147869DAEDAE">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/color-banner-en.png</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="41BCA1A6-ABC6-9999-0AFA-147869DAEDAE">
+            <parametername>categoryCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">Movies_DVD</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+</dynamic_contents>

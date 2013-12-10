@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<shipping_service_levels>
+<shipping_service_level guid="B3599FB7-5DF4-667E-096D-4E30863B39CF">
+    <shipping_region>Canada</shipping_region>
+    <shipping_cost_calculation_method type="orderTotalPercentageMethod">
+        <displayText>OrderTotalPercentageMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_PercentageOfTotalOrder</param_key>
+                <value>5</value>
+                <display_text>5</display_text>
+                <currency></currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>MOBEE</storecode>
+    <carrier>Canada Post</carrier>
+    <localized_names>
+        <value language="fr_CA">Canada Post 2 days French</value>
+        <value language="en">Canada Post 2 days</value>
+    </localized_names>
+    <code>CanadaPostTwoDays</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="6EF1C4B7-8DF4-E4A9-EBD6-CEBF3C746C2B">
+    <shipping_region>Canada</shipping_region>
+    <shipping_cost_calculation_method type="orderTotalPercentageMethod">
+        <displayText>OrderTotalPercentageMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_PercentageOfTotalOrder</param_key>
+                <value>10</value>
+                <display_text>10</display_text>
+                <currency></currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>MOBEE</storecode>
+    <carrier>Canada Post</carrier>
+    <localized_names>
+        <value language="fr_CA">Canada Post Express French</value>
+        <value language="en">Canada Post Express</value>
+    </localized_names>
+    <code>CanadaPostExpress</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="B0662B88-7430-6F4F-6A7C-0A271654832B">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>100.0</value>
+                <display_text>100.0</display_text>
+                <currency>CAD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>MOBEE</storecode>
+    <carrier>Fed Ex</carrier>
+    <localized_names>
+        <value language="fr_CA">FedEx Express French</value>
+        <value language="en">FedEx Express</value>
+    </localized_names>
+    <code>FedExExpress</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="61B1197E-1CF1-2166-6580-A8AF2EE6236B">
+    <shipping_region>Canada</shipping_region>
+    <shipping_cost_calculation_method type="costPerUnitWeightMethod">
+        <displayText>CostPerUnitWeightMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_CostPerUnitWeigh</param_key>
+                <value>333.33</value>
+                <display_text>333.33</display_text>
+                <currency>INR</currency>
+            </shipping_cost_calculation_param>
+			<shipping_cost_calculation_param>
+                <param_key>CalculationParameter_CostPerUnitWeigh</param_key>
+                <value>1</value>
+                <display_text>1</display_text>
+                <currency>EUR</currency>
+            </shipping_cost_calculation_param>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_CostPerUnitWeigh</param_key>
+                <value>1.3</value>
+                <display_text>1.3</display_text>
+                <currency>CAD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>toastie</storecode>
+    <carrier>Canada Post</carrier>
+    <localized_names>
+        <value language="fr_CA">Canada Post 2 days French CA</value>
+        <value language="en">Canada Post 2 days</value>
+        <value language="fr">Canada Post 2 days French</value>
+        <value language="hi_IN">Canada Post 2 days Hindu</value>
+    </localized_names>
+    <code>ToastieCanadaPostTwoDays</code>
+    <active>true</active>
+</shipping_service_level>
+</shipping_service_levels>

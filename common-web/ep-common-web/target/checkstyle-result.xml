@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/filter/impl/CachingControlFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/filter/impl/EncodingFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/filter/impl/LogoutFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/httpsession/HttpSessionHandle.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/httpsession/impl/ThreadLocalHttpSessionHandleImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/httpsession/settings/impl/HttpSessionRefreshStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/commons/util/impl/ContextAwareWebappResourceLoader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/exception/EpRequestParameterBindingException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/exception/EpWebException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/filters/StoreAccessFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/filters/StoreSelectionFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/security/AccessChecker.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/security/impl/StoreAccessCheckerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/AssetResourceRetrievalStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/CookieHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/FilenameUtils.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/AbstractResourceRetrievalStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/CachingStoreResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/DefaultCookieHandlerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/DynamicContentAssetResourceRetrievalStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/IpAddressResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/PriceFinderForCartImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/RequestHelperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/SeoUrlValidatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/StoreAssetResourceRetrievalStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/StoreResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/StoreThemeAssetResourceRetrievalStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/ThreadLocalStoreConfigProxyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/TransitionalShoppingCartProxy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/UrlRewriteLocaleResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/impl/UrlRewriteResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/IpAddressResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/PriceFinderForCart.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/SeoUrlValidator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/SfRequestHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/sfweb/util/StoreResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/context/impl/EpContextConfigListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/context/impl/EpLog4jConfigListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/controller/impl/ImageControllerHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/security/AbstractSecurityWizardFormController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/security/DatabinderNamespaceHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/security/EsapiServletRequestDataBinder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/security/EsapiServletUtils.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/security/ParameterConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/security/ServletRequestParameterRetrievalStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/service/audit/impl/AuditHttpInvokerServiceExporter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/service/FileDownloadService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/service/impl/FileDownloadServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/main/java/com/elasticpath/web/util/RequestHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/commons/filter/impl/CachingControlFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/filters/StoreAccessFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/filters/StoreSelectionFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/security/impl/StoreAccessCheckerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/FilenameUtilsTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/AbstractResourceRetrievalStrategyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/CachingStoreResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/IpAddressResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/PriceFinderForCartImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/RequestHelperImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/SeoUrlValidatorImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/StoreAssetResourceRetrievalStrategyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/StoreResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/StoreThemeAssetResourceRetrievalStrategyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/UrlRewriteLocaleResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/sfweb/util/impl/UrlRewriteResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/web/controller/impl/ImageControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/web/security/AbstractSecurityWizardFormControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/web/security/DatabinderNamespaceHandlerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/web/security/EsapiServletRequestDataBinderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/common-web/ep-common-web/src/test/java/com/elasticpath/web/security/EsapiServletUtilsTest.java">
+</file>
+</checkstyle>

@@ -1,0 +1,41 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## sendWishList.vm
+
+#set($pageName = "shoppingCart/sendWishList.vm")
+#set($_content = "sendWishListBody")
+#set($_breadcrumbs = "viewWishListBreadcrumbs")
+#masterTemplate()
+
+#macro(viewWishListBreadcrumbs)
+    <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; #springMessage("wishList.breadcrumb")</div>
+#end
+
+#macro(sendWishListBody)
+    <div id="body"> 
+        <div class="clear20"></div> 
+           <form action="send-wishlist.ep" method="post" name="wishListForm" type="org.apache.struts.validator.DynaValidatorForm">
+            <fieldset>
+                <legend>#springMessage("wishList.header")</legend>
+                <p>#springMessage("wishList.tell")</p>
+                <p><b>#springMessage("wishList.senderName"):</b>#springFormInput("wishListMessage.senderName" 'maxlength="100" style="width: 270px"')
+                #springShowErrors("<br>" "req")
+                </p>
+                <b>#springMessage("wishList.recipientEmailsHeader")</b></br>
+                <div class="tiny">#springMessage("wishList.recipientEmailsBody")</div>      
+                <div>#springFormTextarea("wishListMessage.recipientEmails" 'maxlength="1000" rows="3" cols="50"')</div>
+                <div>#springShowErrors("<br>" "req")</div>
+                <div class="clear10"></div>
+                <b>#springMessage("wishList.messageHeader")</b>
+                <div class="tiny">#springMessage("wishList.messageBody")</div>
+                #springFormTextarea("wishListMessage.message" 'maxlength="1000" wrap="virtual" rows="11" cols="50"')
+                #springShowErrors("<br>" "req")
+            </fieldset>
+            <div class="fieldset-footer">
+                <input value='#springMessage("wishList.sendEmail")' class="button-normal" type="submit" />
+            </div>
+        </form>
+        <div class="clear20"></div>      
+    </div>
+#end

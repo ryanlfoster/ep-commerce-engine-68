@@ -1,0 +1,12 @@
+Core Schema and Base Insert
+
+     This project contains the base Elastic Path schema for the data entities in the com.elasticpath.core package. 
+
+
+Recipes for Using Liquibase
+
+  There's a whole page of {{{./liquibase-recipes.html}common recipes}}.  Be adventurous and update it as needed!
+
+Example Database Changes
+
+  See Liquibase's {{{http://www.liquibase.org/manual/home}online manual}}.

@@ -1,0 +1,12 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## receipt.vm
+#set($pageName = "checkout/receipt.vm")
+#set($orderDetails = false)
+
+#set($_content = "orderDetailsBody")
+#set($_breadcrumbs = "noBreadcrumbs")
+#masterTemplate()
+
+#macro(noBreadcrumbs)
+	## no breadcrumbs
+#end

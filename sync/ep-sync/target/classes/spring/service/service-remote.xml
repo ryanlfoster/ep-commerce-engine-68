@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+
+	<!-- The serviceUrl only needs the url suffix for mapping, the rest will be replaced at runtime -->
+	<bean id="remoteResourceRetrievalService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>resourceRetrievalService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.remote.ResourceRetrievalService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="importService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>importService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.dataimport.ImportService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="productService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>productService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.ProductService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="taxCodeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>taxCodeService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.tax.TaxCodeService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="brandService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>brandService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.BrandService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="catalogService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>catalogService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.CatalogService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="attributeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>attributeService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.attribute.AttributeService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="categoryService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>categoryService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.CategoryService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="categoryTypeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>categoryTypeService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.CategoryTypeService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="inventoryService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>productInventoryManagementService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.ProductInventoryManagementService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="productAssociationService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>productAssociationService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.ProductAssociationService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="productRecommendationService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>productRecommendationService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.ProductRecommendationService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="productSkuService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>productSkuService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.ProductSkuService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="productTypeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>productTypeService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.ProductTypeService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="skuOptionService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>skuOptionService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.catalog.SkuOptionService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="customerGroupService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>customerGroupService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.customer.CustomerGroupService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="customerService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>customerService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.customer.CustomerService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="orderService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>orderService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.order.OrderService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="orderLockService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>orderLockService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.order.OrderLockService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+
+	<bean id="returnAndExchangeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>returnAndExchangeService.remote</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.order.ReturnAndExchangeService</value>
+		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="paymentGatewayService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>paymentGatewayService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.payment.PaymentGatewayService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="shippingRegionService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>shippingRegionService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.shipping.ShippingRegionService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="shippingServiceLevelService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>shippingServiceLevelService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.shipping.ShippingServiceLevelService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="storeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>storeService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.store.StoreService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="warehouseService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>warehouseService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.store.WarehouseService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="taxJurisdictionService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>taxJurisdictionService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.tax.TaxJurisdictionService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="cmUserService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>cmUserService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.cmuser.CmUserService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="userRoleService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>userRoleService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.cmuser.UserRoleService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="ruleService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>ruleService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.rules.RuleService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="ruleSetService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>ruleSetService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.rules.RuleSetService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="ruleElementService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>ruleElementService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.rules.RuleElementService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="ruleParameterService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>ruleParameterService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.rules.RuleParameterService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="synonymGroupService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="synonymGroupService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.search.SynonymGroupService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+
+	<bean id="productLoadTunerForSkuConfiguration"
+				class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"
+				scope="prototype" parent="epDomain">
+				<property name="loadingDefaultCategory">
+					<value>false</value>
+				</property>
+				<property name="loadingSkus">
+					<value>true</value>
+				</property>
+				<property name="loadingProductType">
+					<value>true</value>
+				</property>
+				<property name="loadingAttributeValue">
+					<value>false</value>
+				</property>
+				<property name="loadingCategories">
+					<value>false</value>
+				</property>
+				<property name="loadingDefaultSku">
+					<value>true</value>
+				</property>
+				<property name="productTypeLoadTuner">
+					<bean
+						class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"
+						scope="prototype" parent="epDomain">
+						<property name="loadingSkuOptions">
+							<value>true</value>
+						</property>
+					</bean>
+				</property>
+				<property name="productSkuLoadTuner">
+					<bean
+						class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+						scope="prototype" parent="epDomain">
+						<property name="loadingAttributeValue">
+							<value>false</value>
+						</property>
+						<property name="loadingOptionValue">
+							<value>true</value>
+						</property>
+						<property name="loadingProduct">
+							<value>false</value>
+						</property>
+						<property name="loadingDigitalAsset">
+							<value>false</value>
+						</property>
+					</bean>
+				</property>
+	</bean>
+	
+    
+	<bean id="reportService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>reportService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.reporting.ReportService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<!--  Lucene Index related services -->
+	<bean id="analyzer" class="com.elasticpath.service.search.solr.AnalyzerImpl"/>
+	
+	<bean id="queryAnalyzer" class="com.elasticpath.service.search.solr.QueryAnalyzerImpl"/>
+	
+	<bean id="solrIndexSearchResult" class="com.elasticpath.service.search.solr.query.SolrIndexSearchResult" scope="prototype">
+		<property name="indexSearcher" ref="solrIndexSearcher"/>
+	</bean>
+
+	<bean id="emailService" class="com.elasticpath.service.misc.impl.NoOpEmailService"/>
+
+	<!--  Property Service -->
+	<bean id="propertyService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>propertyService.remote</value>
+		</property>
+		<property name="serviceInterface">
+  			<value>com.elasticpath.service.misc.PropertyService</value>
+  		</property>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+  <bean id="taxCalculationService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="taxCalculationService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.tax.TaxCalculationService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+  </bean>
+
+	<!-- Payment Service -->
+	 <bean id="paymentHandlerFactory" class="com.elasticpath.domain.payment.impl.PaymentHandlerFactoryImpl">
+	 	<property name="elasticPath">
+			<ref bean="elasticPath"/>
+		</property>
+	 </bean>
+
+	<bean id="paymentService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="paymentService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.payment.PaymentService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="allocationService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="allocationService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.order.AllocationService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="settingsService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+	  <property name="serviceUrl" value="settingsService.remote"/>
+	  <property name="serviceInterface" value="com.elasticpath.settings.SettingsService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="timeService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+	  <property name="serviceUrl" value="timeService.remote"/>
+	  <property name="serviceInterface" value="com.elasticpath.service.misc.TimeService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="creditCardEncrypter" class="com.elasticpath.commons.util.security.impl.CreditCardEncrypterImpl" scope="singleton">
+		<property name="settingsService" ref="settingsService"/>
+		<property name="encryptionKeyPath" value="COMMERCE/SYSTEM/encryptionKey"/>
+	</bean>
+	<bean id="cardEncrypter" class="com.elasticpath.commons.util.security.impl.CardEncrypterImpl" scope="singleton">
+		<property name="settingsService" ref="settingsService"/>
+		<property name="encryptionKeyPath" value="COMMERCE/SYSTEM/encryptionKey"/>
+	</bean>
+	
+	<!-- Filtered Navigation Configuration is here temporarily only to make ElasticPathImpl happy on the CM Client -->
+	<bean id="filteredNavigationConfigurationParser" 
+		class="com.elasticpath.service.catalogview.filterednavigation.impl.FilteredNavigationConfigurationXmlParserImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="filteredNavigationConfigurationLoader" 
+		class="com.elasticpath.service.catalogview.filterednavigation.impl.CachingFilteredNavigationConfigurationLoaderImpl">
+		<property name="fncLoader">
+			<bean class="com.elasticpath.service.catalogview.filterednavigation.impl.FilteredNavigationConfigurationLoaderImpl">
+				<property name="beanFactory" ref="coreBeanFactory"/>
+				<property name="settingsService" ref="settingsService"/>
+				<property name="parser" ref="filteredNavigationConfigurationParser"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="indexSearchService" 
+		class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="indexSearchService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.search.index.IndexSearchService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+	
+	<bean id="cmPasswordPolicy" class="com.elasticpath.commons.security.impl.CmPasswordPolicyImpl">
+		<property name="settingsService" ref="settingsService" />
+		<property name="passwordGenerator" ref="passwordGenerator" />
+	</bean>
+
+	<bean id="commandService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="commandService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.command.CommandService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="indexBuildStatusService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="indexBuildStatusService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.search.IndexBuildStatusService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="indexNotificationService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="indexNotificationService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.search.IndexNotificationService"/>
+	</bean>
+
+	<bean id="priceListService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="priceListService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.common.pricing.service.PriceListService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="changeSetManagementService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="changeSetManagementService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.changeset.ChangeSetManagementService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+
+	<bean id="changeSetService" class="com.elasticpath.tools.sync.beanfactory.remote.EpHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="changeSetService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.changeset.ChangeSetService"/>
+  		<property name="httpConnectionAuthentication" ref="httpConnectionAuthentication"/>
+	</bean>
+</beans>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- 
+     Product Content Wraper displays the product with the specified Product Code.
+
+     Input parameters:
+      1. productCode, type "Product".
+
+     Template parameters:
+      1. price - Product Price.
+      2. name - Product Name, if longer than 55 characters long it will be truncated and have an ellipsis (...) appended.
+      3. image - Product Image name.
+      4. productUrl - Product Page URL.
+-->
+<content-wrapper> 
+  <template-name>productTemplate.cwt</template-name>
+  <wrapper-id>productWrapper</wrapper-id>
+  <wrapper-name>Product with image and price</wrapper-name>
+  <script-language>groovy</script-language>
+
+  <service-definitions>
+    <service-definition name="loadTuner">productLoadTunerForBrowsingAndSearch</service-definition>
+    <service-definition name="moneyFormatter">moneyFormatter</service-definition>
+    <service-definition name="productRetrieveStrategy">productRetrieveStrategy</service-definition>
+    <service-definition name="storeConfig">threadLocalStorage</service-definition>
+    <service-definition name="seoUrlBuilder">seoUrlBuilderProxy</service-definition>
+    <service-definition name="seoEnabledHelper">seoEnabledHelper</service-definition>
+    <service-definition name="priceLookupFacade">priceLookupFacade</service-definition>   
+    <service-definition name="elasticPathService">elasticPathService</service-definition>   
+    <service-definition name="messageSource">messageSource</service-definition> 
+    <service-definition name="bundleIdentifier">bundleIdentifier</service-definition>
+  </service-definitions>
+
+  <user-input-settings>
+    <user-input-setting id="productCode" localizable="false" name="Product Code" type="Product" required="true" pass-to-template="false"/>
+  </user-input-settings>
+
+  <init>
+  	<![CDATA[
+  	
+
+    product = productRetrieveStrategy.retrieveProduct(productCode, loadTuner);
+    store = storeConfig.getStore();
+    category = product.getDefaultCategory(store.getCatalog());
+    baseUrl = elasticPathService.getStorefrontContextUrl();
+    name = product.getDisplayName(locale);
+    maxLength = 55;
+    if (name.length() > maxLength) {
+      index = name.lastIndexOf(' ', maxLength);
+      if (index < 0) {
+        index = maxLength;
+      }
+      name = name.substring(0,index) + "...";
+    }
+    productPrice =  priceLookupFacade.getPromotedPriceForProduct(product, store, CS.getShopper(), new java.util.HashSet<Long>());
+    
+    pricingScheme = productPrice.getPricingScheme();
+    scheduleForLowestPrice = pricingScheme.getScheduleForLowestPrice();
+    lowestPrice = pricingScheme.getSimplePriceForSchedule(scheduleForLowestPrice).getLowestPrice();
+    price1 = moneyFormatter.formatCurrency(lowestPrice, locale);
+    if (scheduleForLowestPrice.getType().equals(com.elasticpath.domain.catalog.PriceScheduleType.RECURRING)) {
+       // to get the localized text of payment schedule.
+        paySchedule = scheduleForLowestPrice.getPaymentSchedule();
+        key = "productTemplate.recurringPrice." + paySchedule.getName();
+        text = " <span style='font-size: 77%'> " + messageSource.getMessage(key, null, paySchedule.getName(), locale) + "</span>";
+        price1 = price1 + text;       
+     }
+    
+    ]]>
+  </init>
+
+  <template-parameters>
+    <template-parameter id="price" name="price">
+      price1;
+    </template-parameter>
+    <template-parameter id="name" name="name">
+      name;
+    </template-parameter>
+    <template-parameter id="image" name="image">
+      product.getImage();
+    </template-parameter>
+    <template-parameter id="productUrl" name="productUrl">
+    if (seoEnabledHelper.getBoolean()) {
+     	baseUrl + "/" + seoUrlBuilder.productSeoUrl(product, locale, category)
+    } else {
+      	baseUrl + "/product-view.ep?pID=" + product.getGuid();
+    } 
+    </template-parameter>   
+  </template-parameters>
+  
+</content-wrapper>

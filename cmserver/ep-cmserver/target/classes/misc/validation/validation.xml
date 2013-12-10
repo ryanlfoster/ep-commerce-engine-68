@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+
+<form-validation>
+    <formset>
+    	<form name="signInFormBeanImpl">
+			<field property="j_username" depends="required,noLeadingTrailingWhiteSpaces"><arg0 key="account.userName" /></field>
+			<field property="j_password" depends="required,noLeadingTrailingWhiteSpaces,minlength">
+				<arg0 key="account.password" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+				<var>
+                	<var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+			</field>
+		</form>
+
+		<form name="cmUserImpl">
+			<field property="userName" depends="required,noLeadingTrailingWhiteSpaces"><arg0 key="account.email" /></field>
+			<field property="email" depends="required,noLeadingTrailingWhiteSpaces,epEmailmaxlength">
+				<arg0 key="account.email" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+			<field property="firstName" depends="required,maxlength">
+				<arg0 key="account.firstName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="lastName" depends="required,maxlength">
+				<arg0 key="account.lastName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+		</form>
+
+		<form name="forgottenPasswordFormBeanImpl">
+			<field property="email" depends="required,epEmail,noLeadingTrailingWhiteSpaces,maxlength">
+				<arg0 key="account.email" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+		</form>
+
+<form name="customerImpl">
+			<field property="email" depends="required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="globals.emailAddress" />
+				 <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+			<field property="firstName" depends="required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="lastName" depends="required,maxlength">
+				<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="phoneNumber" depends="required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+			<field property="clearTextPassword" depends="passwordRequired,noLeadingTrailingWhiteSpaces,minlength,twofields">
+            	<msg name="twofields" key="errors.twofields" />
+                <arg0 key="globals.password" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <arg1 name="twofields" key="account.confirmPassword" />
+                <var>
+                	<var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                	<var-name>encryptedPasswordProperty</var-name>
+                    <var-value>password</var-value>
+                </var>
+                <var>
+                	<var-name>secondProperty</var-name>
+                    <var-value>confirmClearTextPassword</var-value>
+                </var>
+            </field>
+            <field property="confirmClearTextPassword" depends="passwordRequired,noLeadingTrailingWhiteSpaces,minlength">
+                <arg0 key="globals.confirmpassword" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <var>
+                	<var-name>encryptedPasswordProperty</var-name>
+                    <var-value>password</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+            </field>
+		</form>
+		
+		<form name="editAccountFormBeanImpl">
+			<field property="email" depends="required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="globals.emailAddress" />
+				 <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+			<field property="firstName" depends="required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="lastName" depends="required,maxlength">
+				<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="phoneNumber" depends="required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+			<field property="clearTextPassword" depends="passwordRequired,noLeadingTrailingWhiteSpaces,minlength,twofields">
+            	<msg name="twofields" key="errors.twofields" />
+                <arg0 key="globals.password" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <arg1 name="twofields" key="account.confirmPassword" />
+                <var>
+                	<var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                	<var-name>encryptedPasswordProperty</var-name>
+                    <var-value>password</var-value>
+                </var>
+                <var>
+                	<var-name>secondProperty</var-name>
+                    <var-value>confirmClearTextPassword</var-value>
+                </var>
+            </field>
+            <field property="confirmClearTextPassword" depends="passwordRequired,noLeadingTrailingWhiteSpaces,minlength">
+                <arg0 key="globals.confirmpassword" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <var>
+                	<var-name>encryptedPasswordProperty</var-name>
+                    <var-value>password</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+            </field>
+		</form>
+		
+
+		<form name="customerAddressImpl">
+	        <field property="firstName" depends="required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="lastName" depends="required,maxlength">
+			<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="street1" depends="required,maxlength">
+			<arg0 key="globals.street1" />
+ 				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="street2" depends="maxlength">
+				<arg0 key="globals.street2" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="city"  depends="required,maxlength">
+				<arg0 key="globals.city" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="country" depends="required"><arg0 key="globals.country" /></field>
+			<field property="subCountry" depends="subCountryRequired">
+				<arg0 key="globals.subcountry" />
+				<var>
+                	<var-name>countryProperty</var-name>
+                    <var-value>country</var-value>
+                </var>
+			</field>
+
+			<field property="zipOrPostalCode" depends="required,maxlength">
+				<arg0 key="globals.zippostalcode" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+
+			<field property="phoneNumber" depends="required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+		</form>
+
+		<form name="importStep1FormBeanImpl">
+			<field property="importTaskType" depends="required"><arg0 key="import.importTaskType" /></field>
+		</form>
+		<form name="importStep2FormBeanImpl">
+			<field property="importDataType" depends="required"><arg0 key="import.importDataType" /></field>
+		</form>
+		<form name="importStep3FormBeanImpl">
+			<field property="importType" depends="required"><arg0 key="import.importType" /></field>
+			<field property="columnDelimiter" depends="required,maxlength">
+				<arg0 key="import.columnDelimiter" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+			</field>
+			<field property="textQualifier" depends="required,maxlength">
+				<arg0 key="import.textQualifier" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+			</field>
+		</form>
+
+		<form name="importStep6FormBeanImpl">
+			<field property="importName" depends="requiredWhen">
+				<arg0 key="import.importName" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>saveImport == true</var-value>
+                </var>
+			</field>
+			<field property="saveImport" depends="requiredCondition">
+				<arg0 key="import.saveImport" />
+				<arg1 key="import.execute" />
+				<var>
+                    <var-name>condition1</var-name>
+                    <var-value>saveImport == false</var-value>
+                </var>
+				<var>
+                    <var-name>condition2</var-name>
+                    <var-value>execute == false</var-value>
+                </var>
+			</field>
+			<field property="execute" depends="requiredCondition">
+				<arg0 key="import.execute" />
+				<arg1 key="import.saveImport" />
+				<var>
+                    <var-name>condition1</var-name>
+                    <var-value>execute == false</var-value>
+                </var>
+				<var>
+                    <var-name>condition2</var-name>
+                    <var-value>saveImport == false</var-value>
+                </var>
+			</field>
+		</form>
+
+    </formset>
+</form-validation>

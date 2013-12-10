@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 1.0.1 Build &lt;20051130-1157></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="startDate" id="104">
+            <property name="valueType">static</property>
+            <property name="dataType">dateTime</property>
+            <text-property name="promptText">Start Date</text-property>
+            <property name="allowNull">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="EpScriptedDataSource" id="41"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="OutstandingOrder" id="42">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">CreatedDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">OrderNo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CustName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">CustEmail</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">TotalSales</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">TotalPayment</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">ShipStatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">OrderStatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">TotalOrder</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">CreatedDate</property>
+                    <property name="displayName">Date Created</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OrderNo</property>
+                    <property name="displayName">Order #</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CustName</property>
+                    <property name="displayName">Customer Name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CustEmail</property>
+                    <property name="displayName">Customer Email</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TotalSales</property>
+                    <property name="displayName">Sales Total</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TotalPayment</property>
+                    <property name="displayName">Payment Total</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ShipStatus</property>
+                    <property name="displayName">Shipment Status</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OrderStatus</property>
+                    <property name="displayName">Status</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TotalOrder</property>
+                    <property name="displayName">Total # of order</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">CreatedDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">OrderNo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CustName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">CustEmail</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">TotalSales</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">TotalPayment</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">ShipStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">OrderStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">TotalOrder</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">EpScriptedDataSource</property>
+            <method name="open"><![CDATA[var orderService = new Packages.com.elasticpath.cmweb.reportservice.impl.OrderReportServiceImpl();
+
+var startdate;
+if (params["startDate"].value == null) {
+	startdate = null;
+} else {
+	startdate = params["startDate"];
+}
+orders = orderService.outstandingOrderSummaryReport(startdate);
+totalRows = orders.size();
+
+
+currentRow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentRow >= totalRows) {
+    return false;
+}
+
+var order = orders.get(currentRow);
+
+currentRow++;
+row["CreatedDate"] = order[0];
+row["OrderNo"] = order[1];
+row["CustName"] = order[2];
+row["CustEmail"] = order[3];
+row["TotalSales"] = order[4];
+row["TotalPayment"] = order[5];
+row["ShipStatus"] = order[6];
+row["OrderStatus"] = order[7];
+
+
+return true;]]></method>
+            <method name="close"><![CDATA[orderService = null;
+orders = null;
+
+totalRows = null;
+currentRow = null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="ep-table-header" id="105">
+            <property name="backgroundColor">#CCCCCC</property>
+            <property name="backgroundImage">template-resources/images/bg-bar-tbl-header.gif</property>
+            <property name="backgroundRepeat">repeat-x</property>
+            <property name="fontWeight">normal</property>
+            <property name="color">black</property>
+            <property name="borderBottomColor">#ACA899</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#F7F8F9</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="paddingTop">3px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">3px</property>
+            <property name="paddingRight">2px</property>
+            <property name="textAlign">left</property>
+            <property name="whiteSpace">nowrap</property>
+        </style>
+        <style name="ep-table-group-header-1" id="106">
+            <property name="backgroundColor">#A4C2F5</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">white</property>
+            <property name="borderBottomColor">#E8E4DA</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderTopColor">#E8E4DA</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="paddingTop">2px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">2px</property>
+            <property name="paddingRight">2px</property>
+        </style>
+        <style name="ep-table-detail" id="107">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="borderBottomColor">#F0F0F0</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderRightColor">#F0F0F0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="paddingTop">2px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">2px</property>
+            <property name="paddingRight">2px</property>
+            <structure name="dateTimeFormat">
+                <property name="category">Long Date</property>
+                <property name="pattern">Long Date</property>
+            </structure>
+        </style>
+        <style name="ep-report-header-bg" id="108">
+            <property name="backgroundColor">#5987D6</property>
+            <property name="backgroundImage">template-resources/images/bg-bar-1.gif</property>
+            <property name="backgroundRepeat">repeat-x</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="ep-report-header" id="109">
+            <property name="backgroundImage">template-resources/images/bg-bar-1.gif</property>
+            <property name="backgroundRepeat">repeat</property>
+            <property name="fontSize">1em</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">white</property>
+            <property name="marginTop">2px</property>
+            <property name="marginLeft">6px</property>
+            <property name="marginBottom">2px</property>
+            <property name="marginRight">2px</property>
+            <structure name="dateTimeFormat">
+                <property name="category">Long Date</property>
+                <property name="pattern">Long Date</property>
+            </structure>
+            <property name="lineHeight">1.7em</property>
+            <property name="canShrink">true</property>
+        </style>
+        <style name="report" id="110">
+            <property name="fontFamily">arial</property>
+            <property name="fontSize">1em</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <grid id="3">
+                    <property name="width">100%</property>
+                    <column id="4"/>
+                    <row id="5">
+                        <cell id="6">
+                            <text id="7">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="474">
+            <property name="width">100%</property>
+            <column id="475"/>
+            <row id="476">
+                <cell id="477">
+                    <property name="style">ep-report-header-bg</property>
+                    <text id="65">
+                        <property name="style">ep-report-header</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Outstanding Order Summary <VALUE-OF>params["startDate"]</VALUE-OF> ]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="8">
+                <cell id="9">
+                    <table id="16">
+                        <property name="width">100%</property>
+                        <property name="dataSet">OutstandingOrder</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">CreatedDate</property>
+                                <expression name="expression">dataSetRow["CreatedDate"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                            <structure>
+                                <property name="name">OrderNo</property>
+                                <expression name="expression">dataSetRow["OrderNo"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">CustName</property>
+                                <expression name="expression">dataSetRow["CustName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">CustEmail</property>
+                                <expression name="expression">dataSetRow["CustEmail"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalSales</property>
+                                <expression name="expression">dataSetRow["TotalSales"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalPayment</property>
+                                <expression name="expression">dataSetRow["TotalPayment"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ShipStatus</property>
+                                <expression name="expression">dataSetRow["ShipStatus"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">OrderStatus</property>
+                                <expression name="expression">dataSetRow["OrderStatus"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalOrder</property>
+                                <expression name="expression">Total.countDistinct(row["OrderNo"])</expression>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateOn">order status</property>
+                            </structure>
+                        </list-property>
+                        <column id="44"/>
+                        <column id="45"/>
+                        <column id="46"/>
+                        <column id="47"/>
+                        <column id="48"/>
+                        <column id="49"/>
+                        <column id="504"/>
+                        <header>
+                            <row id="17">
+                                <property name="style">ep-table-header</property>
+                                <cell id="18">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="482">
+                                        <text-property name="text">Date Created</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="19">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="484">
+                                        <text-property name="text">Order #</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="20">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="486">
+                                        <text-property name="text">Customer Name</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="21">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="488">
+                                        <text-property name="text">Customer Email</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="22">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="490">
+                                        <text-property name="text">Sales Total</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="23">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="492">
+                                        <text-property name="text">Payment Total</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="499">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="505">
+                                        <text-property name="text">Shipment Status</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="115">
+                            <property name="groupName">order status</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">desc</property>
+                            <expression name="keyExpr">row["OrderStatus"]</expression>
+                            <expression name="toc">row["OrderStatus"]</expression>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <header>
+                                <row id="116">
+                                    <property name="style">ep-table-group-header-1</property>
+                                    <cell id="117">
+                                        <property name="colSpan">6</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text id="497">
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<B>
+Order Status:   
+</B>]]></text-property>
+                                        </text>
+                                        <data id="496">
+                                            <property name="fontSize">1em</property>
+                                            <property name="resultSetColumn">OrderStatus</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="500">
+                                        <property name="style">ep-table-group-header-1</property>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="125">
+                                    <property name="style">ep-table-group-header-1</property>
+                                    <cell id="126">
+                                        <property name="colSpan">6</property>
+                                        <property name="rowSpan">1</property>
+                                        <text id="498">
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<B>
+Number of Order(s):   
+</B>]]></text-property>
+                                        </text>
+                                        <data id="495">
+                                            <property name="fontSize">1em</property>
+                                            <property name="resultSetColumn">TotalOrder</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="502"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="26">
+                                <property name="style">ep-table-detail</property>
+                                <cell id="27">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="483">
+                                        <property name="resultSetColumn">CreatedDate</property>
+                                    </data>
+                                </cell>
+                                <cell id="28">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="485">
+                                        <property name="resultSetColumn">OrderNo</property>
+                                    </data>
+                                </cell>
+                                <cell id="29">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="487">
+                                        <property name="resultSetColumn">CustName</property>
+                                    </data>
+                                </cell>
+                                <cell id="30">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="489">
+                                        <property name="resultSetColumn">CustEmail</property>
+                                    </data>
+                                </cell>
+                                <cell id="31">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="491">
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$###0.00</property>
+                                        </structure>
+                                        <property name="resultSetColumn">TotalSales</property>
+                                    </data>
+                                </cell>
+                                <cell id="32">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="493">
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$###0.00</property>
+                                        </structure>
+                                        <property name="resultSetColumn">TotalPayment</property>
+                                    </data>
+                                </cell>
+                                <cell id="501">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="506">
+                                        <property name="resultSetColumn">ShipStatus</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="35">
+                                <cell id="36"/>
+                                <cell id="37"/>
+                                <cell id="38"/>
+                                <cell id="39"/>
+                                <cell id="40"/>
+                                <cell id="480"/>
+                                <cell id="503"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

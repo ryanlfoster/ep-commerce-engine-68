@@ -1,0 +1,3556 @@
+
+# -----------------------------------------------------------------------
+# JPA_GENERATED_KEYS
+# -----------------------------------------------------------------------
+CREATE TABLE JPA_GENERATED_KEYS
+(
+        ID VARCHAR(30) NOT NULL,
+        LAST_VALUE BIGINT)Engine=InnoDB;
+
+ ALTER TABLE JPA_GENERATED_KEYS COMMENT 'Contains OpenJPA-generated, unique primary keys for other da';
+
+
+# -----------------------------------------------------------------------
+# TDIGITALASSETS
+# -----------------------------------------------------------------------
+CREATE TABLE TDIGITALASSETS
+(
+        UIDPK BIGINT NOT NULL,
+        FILE_NAME VARCHAR(255) NOT NULL,
+        EXPIRY_DAYS INT,
+        MAX_DOWNLOAD_TIMES INT,
+    PRIMARY KEY(UIDPK),
+    INDEX I_DA_FILE_NAME (FILE_NAME))Engine=InnoDB;
+
+ALTER TABLE TDIGITALASSETS COMMENT 'references to digital good files stored on the file system.';
+
+
+# -----------------------------------------------------------------------
+# TTAXCODE
+# -----------------------------------------------------------------------
+CREATE TABLE TTAXCODE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CODE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTAXCODE_GUID_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TTAXCODE_CODE_UNIQUE UNIQUE (CODE))Engine=InnoDB;
+
+ALTER TABLE TTAXCODE COMMENT 'tax codes. For example, goods and books.';
+
+
+# -----------------------------------------------------------------------
+# TTAXJURISDICTION
+# -----------------------------------------------------------------------
+CREATE TABLE TTAXJURISDICTION
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        REGION_CODE VARCHAR(255) NOT NULL,
+        PRICE_CALCULATION_METH INTEGER default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTAXJURISDICTION_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TTAXJURISDICTION COMMENT 'tax jurisdiction details.';
+
+
+# -----------------------------------------------------------------------
+# TTAXCATEGORY
+# -----------------------------------------------------------------------
+CREATE TABLE TTAXCATEGORY
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        FIELD_MATCH_TYPE INT,
+        TAX_JURISDICTION_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTAXCATEGORY_FK_1 FOREIGN KEY TTAXCATEGORY_FK_1 (TAX_JURISDICTION_UID) REFERENCES TTAXJURISDICTION (UIDPK)
+    ,
+    CONSTRAINT TTAXCATEGORY_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_TAXCAT_TAXJUR_UID (TAX_JURISDICTION_UID))Engine=InnoDB;
+
+ALTER TABLE TTAXCATEGORY COMMENT 'tax categories.';
+
+
+# -----------------------------------------------------------------------
+# TTAXREGION
+# -----------------------------------------------------------------------
+CREATE TABLE TTAXREGION
+(
+        UIDPK BIGINT NOT NULL,
+        REGION_NAME VARCHAR(255) NOT NULL,
+        TAX_CATEGORY_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTAXREGION_FK_1 FOREIGN KEY TTAXREGION_FK_1 (TAX_CATEGORY_UID) REFERENCES TTAXCATEGORY (UIDPK)
+    ,
+    INDEX I_TAXREG_TAXCAT_UID (TAX_CATEGORY_UID))Engine=InnoDB;
+
+ALTER TABLE TTAXREGION COMMENT 'tax region details.';
+
+
+# -----------------------------------------------------------------------
+# TTAXVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TTAXVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        TAX_REGION_UID BIGINT,
+        TAX_CODE_UID BIGINT,
+        VALUE DECIMAL(19,4),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTAXVALUE_FK_1 FOREIGN KEY TTAXVALUE_FK_1 (TAX_REGION_UID) REFERENCES TTAXREGION (UIDPK)
+    ,
+    CONSTRAINT TTAXVALUE_FK_2 FOREIGN KEY TTAXVALUE_FK_2 (TAX_CODE_UID) REFERENCES TTAXCODE (UIDPK)
+    ,
+    INDEX I_TAXVAL_TAXREG_UID (TAX_REGION_UID),
+    INDEX I_TAXVAL_TAXCODE_UID (TAX_CODE_UID))Engine=InnoDB;
+
+ALTER TABLE TTAXVALUE COMMENT 'tax value details for tax jurisdictions and tax categories.';
+
+
+# -----------------------------------------------------------------------
+# TCATALOG
+# -----------------------------------------------------------------------
+CREATE TABLE TCATALOG
+(
+        UIDPK BIGINT NOT NULL,
+        MASTER INTEGER NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DEFAULT_LOCALE VARCHAR(20) NOT NULL,
+        CATALOG_CODE VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCATALOG_CANDIDATE_KEYS UNIQUE (CATALOG_CODE))Engine=InnoDB;
+
+ALTER TABLE TCATALOG COMMENT 'information about catalogs.';
+
+
+# -----------------------------------------------------------------------
+# TATTRIBUTE
+# -----------------------------------------------------------------------
+CREATE TABLE TATTRIBUTE
+(
+        UIDPK BIGINT NOT NULL,
+        ATTRIBUTE_KEY VARCHAR(255) NOT NULL,
+        LOCALE_DEPENDANT INTEGER default 0 NOT NULL,
+        ATTRIBUTE_TYPE INT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        REQUIRED INTEGER default 0,
+        VALUE_LOOKUP_ENABLED INTEGER default 0,
+        MULTI_VALUE_ENABLED INTEGER default 0,
+        ATTRIBUTE_USAGE INT NOT NULL,
+        SYSTEM INTEGER default 0,
+        CATALOG_UID BIGINT,
+        ATTR_GLOBAL INTEGER NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TATTRIBUTE_UNIQUE UNIQUE (ATTRIBUTE_KEY))Engine=InnoDB;
+
+ ALTER TABLE TATTRIBUTE COMMENT 'information about custom properties associated with categori';
+
+
+# -----------------------------------------------------------------------
+# TSETTINGDEFINITION
+# -----------------------------------------------------------------------
+CREATE TABLE TSETTINGDEFINITION
+(
+        UIDPK BIGINT NOT NULL,
+        PATH VARCHAR(255) NOT NULL,
+        DEFAULT_VALUE MEDIUMTEXT,
+        VALUE_TYPE VARCHAR(255) NOT NULL,
+        DESCRIPTION MEDIUMTEXT,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        MAX_OVERRIDE_VALUES BIGINT default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSETTINGDEFINITION_UNIQUE UNIQUE (PATH))Engine=InnoDB;
+
+ALTER TABLE TSETTINGDEFINITION COMMENT 'information about setting definitions.';
+
+
+# -----------------------------------------------------------------------
+# TSETTINGMETADATA
+# -----------------------------------------------------------------------
+CREATE TABLE TSETTINGMETADATA
+(
+        UIDPK BIGINT NOT NULL,
+        SETTING_DEFINITION_UID BIGINT,
+        METADATA_KEY VARCHAR(255) NOT NULL,
+        VALUE VARCHAR(2000),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSETTINGMETADATA_FK_1 FOREIGN KEY TSETTINGMETADATA_FK_1 (SETTING_DEFINITION_UID) REFERENCES TSETTINGDEFINITION (UIDPK)
+    ,
+    INDEX I_SETTINGMETADATA_DEF_UID (SETTING_DEFINITION_UID))Engine=InnoDB;
+
+ALTER TABLE TSETTINGMETADATA COMMENT 'metadata entries for settings definitions.';
+
+
+# -----------------------------------------------------------------------
+# TSETTINGVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TSETTINGVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        SETTING_DEFINITION_UID BIGINT,
+        CONTEXT VARCHAR(255),
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        CONTEXT_VALUE MEDIUMTEXT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSETTINGVALUE_FK_1 FOREIGN KEY TSETTINGVALUE_FK_1 (SETTING_DEFINITION_UID) REFERENCES TSETTINGDEFINITION (UIDPK)
+    )Engine=InnoDB;
+
+ALTER TABLE TSETTINGVALUE COMMENT 'context-specific values for setting definitions.';
+
+
+# -----------------------------------------------------------------------
+# TSTORE
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORE
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        STORECODE VARCHAR(64) NOT NULL,
+        DESCRIPTION MEDIUMTEXT,
+        URL VARCHAR(255),
+        ENABLED INTEGER default 0 NOT NULL,
+        DEFAULT_LOCALE VARCHAR(20),
+        DEFAULT_CURRENCY CHAR(3),
+        SUB_COUNTRY VARCHAR(200),
+        COUNTRY VARCHAR(200) NOT NULL,
+        TIMEZONE VARCHAR(50) NOT NULL,
+        STORE_TYPE CHAR(3) NOT NULL,
+        CONTENT_ENCODING VARCHAR(20) default 'utf-8',
+        CREDIT_CARD_CVV2_ENABLED INTEGER default 0 NOT NULL,
+        CC_PAYER_AUTH_ENABLED INTEGER default 0 NOT NULL,
+        DISPLAY_OUT_OF_STOCK INTEGER default 0 NOT NULL,
+        STORE_FULL_CREDIT_CARDS INTEGER default 1 NOT NULL,
+        EMAIL_SENDER_NAME VARCHAR(255),
+        EMAIL_SENDER_ADDRESS VARCHAR(255),
+        STORE_ADMIN_EMAIL VARCHAR(255),
+        CATALOG_UID BIGINT,
+        STORE_STATE INT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSTORE_FK_1 FOREIGN KEY TSTORE_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TSTORE_CANDIDATE_KEYS UNIQUE (NAME, STORECODE),
+    CONSTRAINT TSTORECODE_UNIQUE UNIQUE (STORECODE),
+    INDEX I_STORE_CATALOG_UID (CATALOG_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORE COMMENT 'store information.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMER
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMER
+(
+        UIDPK BIGINT NOT NULL,
+        USER_ID VARCHAR(255) NOT NULL,
+        PREF_BILL_ADDRESS_UID BIGINT,
+        PREF_SHIP_ADDRESS_UID BIGINT,
+        CREATION_DATE DATETIME NOT NULL,
+        LAST_EDIT_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        STATUS INT NOT NULL,
+        AUTHENTICATION_UID BIGINT,
+        STORE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCUSTOMER_FK_1 FOREIGN KEY TCUSTOMER_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TCUSTOMER_UNIQUE UNIQUE (GUID),
+    INDEX I_CUST_STORE_UID (STORE_UID),
+    INDEX I_C_USERID (USER_ID),
+    INDEX I_CUST_CR_DATE (CREATION_DATE))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMER COMMENT 'customer account information.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERAUTHENTICATION
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERAUTHENTICATION
+(
+        UIDPK BIGINT NOT NULL,
+        PASSWORD VARCHAR(255),
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERAUTHENTICATION COMMENT 'customer authentication details.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERPROFILEVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERPROFILEVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        ATTRIBUTE_TYPE INT NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR(255),
+        LONG_TEXT_VALUE MEDIUMTEXT,
+        INTEGER_VALUE INT,
+        DECIMAL_VALUE DECIMAL(19,2),
+        BOOLEAN_VALUE INTEGER default 0,
+        DATE_VALUE DATETIME,
+        CUSTOMER_UID BIGINT,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCUSTOMERPROFILEVALUE_FK_1 FOREIGN KEY TCUSTOMERPROFILEVALUE_FK_1 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    CONSTRAINT TCUSTOMERPROFILEVALUE_FK_2 FOREIGN KEY TCUSTOMERPROFILEVALUE_FK_2 (CUSTOMER_UID) REFERENCES TCUSTOMER (UIDPK)
+    ,
+    INDEX I_CPV_ATTR_UID (ATTRIBUTE_UID),
+    INDEX I_CPV_CUID_ATTKEY (CUSTOMER_UID, LOCALIZED_ATTRIBUTE_KEY),
+    INDEX I_CPV_STV_ATTVALUE (SHORT_TEXT_VALUE))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERPROFILEVALUE COMMENT 'values associated with customer profiles.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERDELETED
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERDELETED
+(
+        UIDPK BIGINT NOT NULL,
+        CUSTOMER_UID BIGINT NOT NULL,
+        DELETED_DATE DATETIME NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_CUD_DELETED_DATE (DELETED_DATE))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERDELETED COMMENT 'audit information about deleted customers.';
+
+
+# -----------------------------------------------------------------------
+# TADDRESS
+# -----------------------------------------------------------------------
+CREATE TABLE TADDRESS
+(
+        UIDPK BIGINT NOT NULL,
+        LAST_NAME VARCHAR(100),
+        FIRST_NAME VARCHAR(100),
+        PHONE_NUMBER VARCHAR(50),
+        FAX_NUMBER VARCHAR(50),
+        STREET_1 VARCHAR(200),
+        STREET_2 VARCHAR(200),
+        CITY VARCHAR(200),
+        SUB_COUNTRY VARCHAR(200),
+        ZIP_POSTAL_CODE VARCHAR(50),
+        COUNTRY VARCHAR(200),
+        COMMERCIAL INTEGER default 0,
+        GUID VARCHAR(64) NOT NULL,
+        CUSTOMER_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TADDRESS_FK_1 FOREIGN KEY TADDRESS_FK_1 (CUSTOMER_UID) REFERENCES TCUSTOMER (UIDPK)
+    ,
+    CONSTRAINT TADDRESS_UNIQUE UNIQUE (GUID),
+    INDEX I_ADDR_C_UID (CUSTOMER_UID))Engine=InnoDB;
+
+ALTER TABLE TADDRESS COMMENT 'addresses associated with customers.';
+
+
+# -----------------------------------------------------------------------
+# TCATALOGSUPPORTEDLOCALE
+# -----------------------------------------------------------------------
+CREATE TABLE TCATALOGSUPPORTEDLOCALE
+(
+        UIDPK BIGINT NOT NULL,
+        LOCALE VARCHAR(255) NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCATALOGSUPPORTEDLOCALE_FK_1 FOREIGN KEY TCATALOGSUPPORTEDLOCALE_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    INDEX I_CATSUPLOC_CATALOG_UID (CATALOG_UID))Engine=InnoDB;
+
+ALTER TABLE TCATALOGSUPPORTEDLOCALE COMMENT 'the supported locales for each catalog.';
+
+
+# -----------------------------------------------------------------------
+# TCATEGORYTYPE
+# -----------------------------------------------------------------------
+CREATE TABLE TCATEGORYTYPE
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        TEMPLATE VARCHAR(255) NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCATEGORYTYPE_FK_1 FOREIGN KEY TCATEGORYTYPE_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TCATEGORYTYPE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TCATEGORYTYPE_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_CATTYPE_CATALOG_UID (CATALOG_UID))Engine=InnoDB;
+
+ ALTER TABLE TCATEGORYTYPE COMMENT 'category type information. A category type determines the se';
+
+
+# -----------------------------------------------------------------------
+# TCATEGORY
+# -----------------------------------------------------------------------
+CREATE TABLE TCATEGORY
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        PARENT_CATEGORY_UID BIGINT,
+        ORDERING INT,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCATEGORY_FK_1 FOREIGN KEY TCATEGORY_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TCATEGORY_FK_2 FOREIGN KEY TCATEGORY_FK_2 (PARENT_CATEGORY_UID) REFERENCES TCATEGORY (UIDPK)
+    ,
+    INDEX I_CAT_CATALOG_UID (CATALOG_UID),
+    INDEX I_CAT_PARENT_UID (PARENT_CATEGORY_UID),
+    INDEX I_C_MODIFY_DATE (LAST_MODIFIED_DATE))Engine=InnoDB;
+
+ALTER TABLE TCATEGORY COMMENT 'information about categories (both linked and master).';
+
+
+# -----------------------------------------------------------------------
+# TMASTERCATEGORY
+# -----------------------------------------------------------------------
+CREATE TABLE TMASTERCATEGORY
+(
+        UIDPK BIGINT NOT NULL,
+        START_DATE DATETIME NOT NULL,
+        END_DATE DATETIME,
+        HIDDEN INTEGER default 0,
+        CATEGORY_TYPE_UID BIGINT NOT NULL,
+        CODE VARCHAR(64) NOT NULL,
+        VIRTUAL INTEGER,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TMASTERCATEGORY_FK_1 FOREIGN KEY TMASTERCATEGORY_FK_1 (CATEGORY_TYPE_UID) REFERENCES TCATEGORYTYPE (UIDPK)
+    ,
+    CONSTRAINT TCATEGORY_UNIQUE UNIQUE (CODE),
+    INDEX I_CAT_TYPE_UID (CATEGORY_TYPE_UID),
+    INDEX I_C_SE_DATE (START_DATE, END_DATE))Engine=InnoDB;
+
+ALTER TABLE TMASTERCATEGORY COMMENT 'information about standard (non-linked) categories.';
+
+
+# -----------------------------------------------------------------------
+# TLINKEDCATEGORY
+# -----------------------------------------------------------------------
+CREATE TABLE TLINKEDCATEGORY
+(
+        UIDPK BIGINT NOT NULL,
+        MASTER_CATEGORY_UID BIGINT,
+        INCLUDE INTEGER default 1,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TLINKEDCATEGORY_FK_1 FOREIGN KEY TLINKEDCATEGORY_FK_1 (MASTER_CATEGORY_UID) REFERENCES TCATEGORY (UIDPK)
+    ,
+    INDEX I_LCAT_MCAT_UID (MASTER_CATEGORY_UID))Engine=InnoDB;
+
+ ALTER TABLE TLINKEDCATEGORY COMMENT 'information about linked categories. Every linked category i';
+
+
+# -----------------------------------------------------------------------
+# TCATEGORYDELETED
+# -----------------------------------------------------------------------
+CREATE TABLE TCATEGORYDELETED
+(
+        UIDPK BIGINT NOT NULL,
+        CATEGORY_UID BIGINT NOT NULL,
+        DELETED_DATE DATETIME NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_CAD_DELETED_DATE (DELETED_DATE))Engine=InnoDB;
+
+ALTER TABLE TCATEGORYDELETED COMMENT 'audit information about deleted categories.';
+
+
+# -----------------------------------------------------------------------
+# TCATEGORYATTRIBUTEVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TCATEGORYATTRIBUTEVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        ATTRIBUTE_TYPE INT NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR(255),
+        LONG_TEXT_VALUE MEDIUMTEXT,
+        INTEGER_VALUE INT,
+        DECIMAL_VALUE DECIMAL(19,2),
+        BOOLEAN_VALUE INTEGER default 0,
+        DATE_VALUE DATETIME,
+        CATEGORY_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCATEGORYATTRIBUTEVALUE_FK_1 FOREIGN KEY TCATEGORYATTRIBUTEVALUE_FK_1 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    INDEX I_CAV_ATTR_UID (ATTRIBUTE_UID),
+    INDEX I_CAV_CAT_UID (CATEGORY_UID))Engine=InnoDB;
+
+ALTER TABLE TCATEGORYATTRIBUTEVALUE COMMENT 'associations between attribute values and categories.';
+
+
+# -----------------------------------------------------------------------
+# TCATEGORYLDF
+# -----------------------------------------------------------------------
+CREATE TABLE TCATEGORYLDF
+(
+        UIDPK BIGINT NOT NULL,
+        CATEGORY_UID BIGINT NOT NULL,
+        URL VARCHAR(255),
+        KEY_WORDS VARCHAR(255),
+        DESCRIPTION VARCHAR(255),
+        TITLE VARCHAR(255),
+        DISPLAY_NAME VARCHAR(255),
+        LOCALE VARCHAR(20) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_CLDF_CAT_UID (CATEGORY_UID),
+    INDEX I_CLDF_LOCALE_NAME (LOCALE, DISPLAY_NAME))Engine=InnoDB;
+
+ALTER TABLE TCATEGORYLDF COMMENT 'locale-dependent information about a category.';
+
+
+# -----------------------------------------------------------------------
+# TCATEGORYTYPEATTRIBUTE
+# -----------------------------------------------------------------------
+CREATE TABLE TCATEGORYTYPEATTRIBUTE
+(
+        UIDPK BIGINT NOT NULL,
+        ORDERING INT,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        CATEGORY_TYPE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCATEGORYTYPEATTRIBUTE_FK_1 FOREIGN KEY TCATEGORYTYPEATTRIBUTE_FK_1 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    CONSTRAINT TCATEGORYTYPEATTRIBUTE_FK_2 FOREIGN KEY TCATEGORYTYPEATTRIBUTE_FK_2 (CATEGORY_TYPE_UID) REFERENCES TCATEGORYTYPE (UIDPK)
+    ,
+    INDEX I_CTA_ATTR_UID (ATTRIBUTE_UID),
+    INDEX I_CTA_TYPE_UID (CATEGORY_TYPE_UID))Engine=InnoDB;
+
+ALTER TABLE TCATEGORYTYPEATTRIBUTE COMMENT 'associations between category attributes and category types.';
+
+
+# -----------------------------------------------------------------------
+# TCMUSER
+# -----------------------------------------------------------------------
+CREATE TABLE TCMUSER
+(
+        UIDPK BIGINT NOT NULL,
+        USER_NAME VARCHAR(255) NOT NULL,
+        EMAIL VARCHAR(255) NOT NULL,
+        FIRST_NAME VARCHAR(100),
+        LAST_NAME VARCHAR(100),
+        PASSWORD VARCHAR(255) NOT NULL,
+        CREATION_DATE DATETIME NOT NULL,
+        LAST_LOGIN_DATE DATETIME,
+        LAST_CHANGED_PASSWORD_DATE DATETIME,
+        FAILED_LOGIN_ATTEMPTS INT default 0 NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        STATUS INT default 4 NOT NULL,
+        ALL_WAREHOUSE_ACCESS INTEGER default 1 NOT NULL,
+        ALL_CATALOG_ACCESS INTEGER default 1 NOT NULL,
+        ALL_STORE_ACCESS INTEGER default 1 NOT NULL,
+        ALL_PRICELIST_ACCESS INTEGER default 1 NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCMUSER_UNIQUE UNIQUE (USER_NAME),
+    CONSTRAINT TCMUSER_EMAIL_UNIQUE UNIQUE (EMAIL),
+    CONSTRAINT TCMUSER_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TCMUSER COMMENT 'information about each Commerce Manager user.';
+
+
+# -----------------------------------------------------------------------
+# TPASSWORDHISTORY
+# -----------------------------------------------------------------------
+CREATE TABLE TPASSWORDHISTORY
+(
+        UIDPK BIGINT NOT NULL,
+        OLD_PASSWORD VARCHAR(255) NOT NULL,
+        EXPIRATION_DATE DATETIME NOT NULL,
+        CM_USER_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPASSWORDHISTORY_FK_1 FOREIGN KEY TPASSWORDHISTORY_FK_1 (CM_USER_UID) REFERENCES TCMUSER (UIDPK)
+    )Engine=InnoDB;
+
+ ALTER TABLE TPASSWORDHISTORY COMMENT 'the previous passwords of each Commerce Manager user. (Used ';
+
+
+# -----------------------------------------------------------------------
+# TUSERROLE
+# -----------------------------------------------------------------------
+CREATE TABLE TUSERROLE
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TUSERROLE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TUSERROLE_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ ALTER TABLE TUSERROLE COMMENT 'information about user roles, which grant permission to perf';
+
+
+# -----------------------------------------------------------------------
+# TCMUSERROLEX
+# -----------------------------------------------------------------------
+CREATE TABLE TCMUSERROLEX
+(
+        CM_USER_UID BIGINT NOT NULL,
+        USER_ROLE_UID BIGINT NOT NULL,
+    PRIMARY KEY(CM_USER_UID,USER_ROLE_UID),
+    CONSTRAINT TCMUSERROLEX_FK_1 FOREIGN KEY TCMUSERROLEX_FK_1 (USER_ROLE_UID) REFERENCES TUSERROLE (UIDPK)
+    ,
+    CONSTRAINT TCMUSERROLEX_FK_2 FOREIGN KEY TCMUSERROLEX_FK_2 (CM_USER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_CMUSER_ROLE_UID (USER_ROLE_UID),
+    INDEX I_CMUSER_USER_UID (CM_USER_UID))Engine=InnoDB;
+
+ALTER TABLE TCMUSERROLEX COMMENT 'associations between Commerce Manager users and their roles.';
+
+
+# -----------------------------------------------------------------------
+# TSHOPPER
+# -----------------------------------------------------------------------
+CREATE TABLE TSHOPPER
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255) default 'SHOPPER' NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CUSTOMER_GUID VARCHAR(64),
+        STORECODE VARCHAR(64),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_CUSTOMER FOREIGN KEY FK_CUSTOMER (CUSTOMER_GUID) REFERENCES TCUSTOMER (GUID)
+    ,
+    CONSTRAINT TSHOPPER_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ ALTER TABLE TSHOPPER COMMENT 'This table defines Shoppers in the system, which act as inte';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERGROUP
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERGROUP
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCUSTOMERGROUP_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TCUSTOMERGROUP_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERGROUP COMMENT 'customer groups.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERGROUPROLEX
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERGROUPROLEX
+(
+        UIDPK BIGINT NOT NULL,
+        CUSTOMER_GROUP_UID BIGINT NOT NULL,
+        CUSTOMER_ROLE VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCUSTOMERGROUPROLEX_FK_1 FOREIGN KEY TCUSTOMERGROUPROLEX_FK_1 (CUSTOMER_GROUP_UID) REFERENCES TCUSTOMERGROUP (UIDPK)
+    ,
+    INDEX I_CGRX_GROUP_UID (CUSTOMER_GROUP_UID))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERGROUPROLEX COMMENT 'associations between customer group and roles.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERGROUPX
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERGROUPX
+(
+        CUSTOMER_UID BIGINT NOT NULL,
+        CUSTOMERGROUP_UID BIGINT NOT NULL,
+    CONSTRAINT TCUSTOMERGROUPX_FK_1 FOREIGN KEY TCUSTOMERGROUPX_FK_1 (CUSTOMERGROUP_UID) REFERENCES TCUSTOMERGROUP (UIDPK)
+    ,
+    CONSTRAINT TCUSTOMERGROUPX_FK_2 FOREIGN KEY TCUSTOMERGROUPX_FK_2 (CUSTOMER_UID) REFERENCES TCUSTOMER (UIDPK)
+    ,
+    INDEX I_CGX_GROUP_UID (CUSTOMERGROUP_UID),
+    INDEX I_CGX_CUSTOMER_UID (CUSTOMER_UID))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERGROUPX COMMENT 'associations between customers and customer group.';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERSESSION
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERSESSION
+(
+        UIDPK BIGINT NOT NULL,
+        CREATION_DATE DATETIME NOT NULL,
+        LAST_ACCESSED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        SHOPPER_UID BIGINT,
+        LOCALE VARCHAR(255),
+        CURRENCY VARCHAR(3),
+        GUID VARCHAR(64) NOT NULL,
+        IP_ADDRESS VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCUSTOMERSESSION_FK_1 FOREIGN KEY TCUSTOMERSESSION_FK_1 (SHOPPER_UID) REFERENCES TSHOPPER (UIDPK)
+    ,
+    CONSTRAINT TCUSTOMERSESSION_UNIQUE UNIQUE (GUID),
+    INDEX I_CS_SHOPPER_UID (SHOPPER_UID),
+    INDEX I_CS_ACS_DATE (LAST_ACCESSED_DATE),
+    INDEX I_CS_CRT_DATE (CREATION_DATE))Engine=InnoDB;
+
+ ALTER TABLE TCUSTOMERSESSION COMMENT 'information about storefront customers who may not be logged';
+
+
+# -----------------------------------------------------------------------
+# TCUSTOMERCREDITCARD
+# -----------------------------------------------------------------------
+CREATE TABLE TCUSTOMERCREDITCARD
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CARD_TYPE VARCHAR(50) NOT NULL,
+        CARD_HOLDER_NAME VARCHAR(100) NOT NULL,
+        CARD_NUMBER VARCHAR(255) NOT NULL,
+        EXPIRY_YEAR VARCHAR(4) NOT NULL,
+        EXPIRY_MONTH VARCHAR(2) NOT NULL,
+        START_YEAR VARCHAR(4),
+        START_MONTH VARCHAR(2),
+        ISSUE_NUMBER INT,
+        DEFAULT_CARD INTEGER,
+        CUSTOMER_UID BIGINT NOT NULL,
+        BILLING_ADDRESS_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCUSTOMERCREDITCARD_FK_1 FOREIGN KEY TCUSTOMERCREDITCARD_FK_1 (CUSTOMER_UID) REFERENCES TCUSTOMER (UIDPK)
+    ,
+    CONSTRAINT TCUSTOMERCREDITCARD_FK_2 FOREIGN KEY TCUSTOMERCREDITCARD_FK_2 (BILLING_ADDRESS_UID) REFERENCES TADDRESS (UIDPK)
+    ,
+    CONSTRAINT TCUSTCCRD_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_CCC_CUSTOMER_UID (CUSTOMER_UID),
+    INDEX I_CCC_BA_UID (BILLING_ADDRESS_UID))Engine=InnoDB;
+
+ALTER TABLE TCUSTOMERCREDITCARD COMMENT 'information about credit cards associated with customers.';
+
+
+# -----------------------------------------------------------------------
+# TWAREHOUSEADDRESS
+# -----------------------------------------------------------------------
+CREATE TABLE TWAREHOUSEADDRESS
+(
+        UIDPK BIGINT NOT NULL,
+        STREET_1 VARCHAR(200) NOT NULL,
+        STREET_2 VARCHAR(200),
+        CITY VARCHAR(200) NOT NULL,
+        SUB_COUNTRY VARCHAR(200),
+        ZIP_POSTAL_CODE VARCHAR(50) NOT NULL,
+        COUNTRY VARCHAR(200) NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TWAREHOUSEADDRESS COMMENT 'addresses associated with warehouse.';
+
+
+# -----------------------------------------------------------------------
+# TWAREHOUSE
+# -----------------------------------------------------------------------
+CREATE TABLE TWAREHOUSE
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        PICK_DELAY INT,
+        ADDRESS_UID BIGINT,
+        CODE VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TWAREHOUSE_FK_1 FOREIGN KEY TWAREHOUSE_FK_1 (ADDRESS_UID) REFERENCES TWAREHOUSEADDRESS (UIDPK)
+    ,
+    CONSTRAINT TWAREHOUSE_CODE_UNIQUE UNIQUE (CODE),
+    INDEX I_WAREHOUSE_ADDRESS_UID (ADDRESS_UID))Engine=InnoDB;
+
+ ALTER TABLE TWAREHOUSE COMMENT 'information about the warehouses where inventory is kept for';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTJOB
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTJOB
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        CSV_FILE_NAME VARCHAR(255) NOT NULL,
+        COL_DELIMETER CHAR(1),
+        TEXT_QUALIFIER CHAR(1),
+        DATA_TYPE_NAME VARCHAR(255) NOT NULL,
+        IMPORT_TYPE INT NOT NULL,
+        MAX_ALLOW_ERRORS INT NOT NULL,
+        CATALOG_UID BIGINT,
+        STORE_UID BIGINT,
+        WAREHOUSE_UID BIGINT,
+        DEPENDENT_OBJ_GUID VARCHAR(64),
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TIMPORTJOB_FK_1 FOREIGN KEY TIMPORTJOB_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TIMPORTJOB_FK_2 FOREIGN KEY TIMPORTJOB_FK_2 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TIMPORTJOB_FK_3 FOREIGN KEY TIMPORTJOB_FK_3 (WAREHOUSE_UID) REFERENCES TWAREHOUSE (UIDPK)
+    ,
+    CONSTRAINT TIMPORTJOB_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TIMPORTJOB_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_IMPORTJOB_CATALOG_UID (CATALOG_UID),
+    INDEX I_IMPORTJOB_STORE_UID (STORE_UID),
+    INDEX I_IMPORTJOB_WAREHOUSE_UID (WAREHOUSE_UID))Engine=InnoDB;
+
+ALTER TABLE TIMPORTJOB COMMENT 'import jobs.';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTMAPPINGS
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTMAPPINGS
+(
+        UIDPK BIGINT NOT NULL,
+        IMPORT_JOB_UID BIGINT NOT NULL,
+        COL_NUMBER INT NOT NULL,
+        IMPORT_FIELD_NAME VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TIMPORTMAPPINGS_FK_1 FOREIGN KEY TIMPORTMAPPINGS_FK_1 (IMPORT_JOB_UID) REFERENCES TIMPORTJOB (UIDPK)
+    ,
+    INDEX I_IMAP_JOB_UID (IMPORT_JOB_UID))Engine=InnoDB;
+
+ ALTER TABLE TIMPORTMAPPINGS COMMENT 'the mappings between CSV columns and target fields for an im';
+
+
+# -----------------------------------------------------------------------
+# TORDERADDRESS
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERADDRESS
+(
+        UIDPK BIGINT NOT NULL,
+        LAST_NAME VARCHAR(100),
+        FIRST_NAME VARCHAR(100),
+        PHONE_NUMBER VARCHAR(50),
+        FAX_NUMBER VARCHAR(50),
+        STREET_1 VARCHAR(200),
+        STREET_2 VARCHAR(200),
+        CITY VARCHAR(200),
+        SUB_COUNTRY VARCHAR(200),
+        ZIP_POSTAL_CODE VARCHAR(50),
+        COUNTRY VARCHAR(200),
+        COMMERCIAL INTEGER default 0,
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERADDRESS_UNIQUE UNIQUE (GUID),
+    INDEX I_ORDERADDRESS_FIRST_NAME (FIRST_NAME ),
+    INDEX I_ORDERADDRESS_LAST_NAME (LAST_NAME ),
+    INDEX I_ORDERADDRESS_ZIP_POSTAL_CODE (ZIP_POSTAL_CODE ),
+    INDEX I_ORDERADDRESS_PHONE_NUMBER (PHONE_NUMBER ))Engine=InnoDB;
+
+ALTER TABLE TORDERADDRESS COMMENT 'the billing and shipping addresses associated with orders.';
+
+
+# -----------------------------------------------------------------------
+# TORDER
+# -----------------------------------------------------------------------
+CREATE TABLE TORDER
+(
+        UIDPK BIGINT NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        IP_ADDRESS VARCHAR(255),
+        ORDER_BILLING_ADDRESS_UID BIGINT,
+        TOTAL DECIMAL(19,2),
+        STATUS VARCHAR(20),
+        ORDER_NUMBER VARCHAR(64) NOT NULL,
+        EXTERNAL_ORDER_NUMBER VARCHAR(64),
+        CUSTOMER_UID BIGINT,
+        LOCALE VARCHAR(5) NOT NULL,
+        CURRENCY VARCHAR(3),
+        STORE_UID BIGINT,
+        CREATED_BY BIGINT,
+        ORDER_SOURCE VARCHAR(100),
+        EXCHANGE_ORDER INTEGER default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDER_FK_1 FOREIGN KEY TORDER_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TORDER_FK_2 FOREIGN KEY TORDER_FK_2 (ORDER_BILLING_ADDRESS_UID) REFERENCES TORDERADDRESS (UIDPK)
+    ,
+    CONSTRAINT TORDER_FK_3 FOREIGN KEY TORDER_FK_3 (CUSTOMER_UID) REFERENCES TCUSTOMER (UIDPK)
+    ,
+    CONSTRAINT TORDER_UNIQUE UNIQUE (ORDER_NUMBER),
+    INDEX I_O_STORE_UID (STORE_UID),
+    INDEX I_O_OBA_UID (ORDER_BILLING_ADDRESS_UID),
+    INDEX I_O_CUSTOMER_UID (CUSTOMER_UID),
+    INDEX I_O_MODIFY_DATE (LAST_MODIFIED_DATE),
+    INDEX I_O_CREATED_DATE (CREATED_DATE),
+    INDEX I_O_STATUS (STATUS),
+    INDEX I_O_TOTAL (CURRENCY, TOTAL))Engine=InnoDB;
+
+ALTER TABLE TORDER COMMENT 'information about orders.';
+
+
+# -----------------------------------------------------------------------
+# TORDERNUMBERGENERATOR
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERNUMBERGENERATOR
+(
+        UIDPK BIGINT default 1 NOT NULL,
+        NEXT_ORDER_NUMBER VARCHAR(100) NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TORDERNUMBERGENERATOR COMMENT 'the next available order number.';
+
+
+# -----------------------------------------------------------------------
+# TORDERLOCK
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERLOCK
+(
+        UIDPK BIGINT NOT NULL,
+        ORDER_UID BIGINT NOT NULL,
+        USER_UID BIGINT NOT NULL,
+        CREATED_DATE BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERLOCK_FK_1 FOREIGN KEY TORDERLOCK_FK_1 (ORDER_UID) REFERENCES TORDER (UIDPK)
+    ,
+    CONSTRAINT TORDERLOCK_FK_2 FOREIGN KEY TORDERLOCK_FK_2 (USER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    CONSTRAINT TORDERLOCK_UNIQUE UNIQUE (ORDER_UID),
+    INDEX I_ORDERLOCK_USER_UID (USER_UID))Engine=InnoDB;
+
+ALTER TABLE TORDERLOCK COMMENT 'This table is used by the order locking functionality.';
+
+
+# -----------------------------------------------------------------------
+# TORDERAUDIT
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERAUDIT
+(
+        UIDPK BIGINT NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        CREATED_BY BIGINT,
+        DETAIL MEDIUMTEXT,
+        ORDER_UID BIGINT,
+        ORIGINATOR_TYPE VARCHAR(30) NOT NULL,
+        TITLE VARCHAR(255) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERAUDIT_FK_1 FOREIGN KEY TORDERAUDIT_FK_1 (ORDER_UID) REFERENCES TORDER (UIDPK)
+    ,
+    CONSTRAINT TORDERAUDIT_FK_2 FOREIGN KEY TORDERAUDIT_FK_2 (CREATED_BY) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_ON_ORDER_UID (ORDER_UID),
+    INDEX I_ON_USER_UID (CREATED_BY))Engine=InnoDB;
+
+ ALTER TABLE TORDERAUDIT COMMENT 'information related to the events that occur during the life';
+
+
+# -----------------------------------------------------------------------
+# TGIFTCERTIFICATE
+# -----------------------------------------------------------------------
+CREATE TABLE TGIFTCERTIFICATE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        GIFT_CERTIFICATE_CODE VARCHAR(64),
+        CREATED_DATE DATETIME NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        RECIPIENT_NAME VARCHAR(255),
+        SENDER_NAME VARCHAR(255),
+        MESSAGE VARCHAR(255),
+        THEME VARCHAR(255),
+        PURCHASE_AMOUNT DECIMAL(19,2),
+        CURRENCY VARCHAR(255),
+        RECEPIENT_EMAIL VARCHAR(255),
+        CUSTOMER_UID BIGINT,
+        STORE_UID BIGINT NOT NULL,
+        ORDER_GUID VARCHAR(64),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TGIFTCERTIFICATE_FK_1 FOREIGN KEY TGIFTCERTIFICATE_FK_1 (CUSTOMER_UID) REFERENCES TCUSTOMER (UIDPK)
+    ,
+    CONSTRAINT TGIFTCERTIFICATE_FK_2 FOREIGN KEY TGIFTCERTIFICATE_FK_2 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    INDEX I_GCERT_CUSTOMER_UID (CUSTOMER_UID),
+    INDEX I_GCERT_STORE_UID (STORE_UID),
+    INDEX I_P_GCERT_CODE (GIFT_CERTIFICATE_CODE),
+    INDEX I_ORDER_GUID (ORDER_GUID))Engine=InnoDB;
+
+ALTER TABLE TGIFTCERTIFICATE COMMENT 'information about gift certificates.';
+
+
+# -----------------------------------------------------------------------
+# TSHIPPINGREGION
+# -----------------------------------------------------------------------
+CREATE TABLE TSHIPPINGREGION
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        REGION_STR VARCHAR(2000),
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSHIPPINGREGION_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TSHIPPINGREGION_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TSHIPPINGREGION COMMENT 'shipping regions that can associated with shipping services.';
+
+
+# -----------------------------------------------------------------------
+# TSHIPPINGCOSTCALCULATIONMETHOD
+# -----------------------------------------------------------------------
+CREATE TABLE TSHIPPINGCOSTCALCULATIONMETHOD
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ ALTER TABLE TSHIPPINGCOSTCALCULATIONMETHOD COMMENT 'the method used for shipping cost calculation. For example, ';
+
+
+# -----------------------------------------------------------------------
+# TSHIPPINGCOSTCALCULATIONPARAM
+# -----------------------------------------------------------------------
+CREATE TABLE TSHIPPINGCOSTCALCULATIONPARAM
+(
+        UIDPK BIGINT NOT NULL,
+        PARAM_KEY VARCHAR(255) NOT NULL,
+        VALUE VARCHAR(255) NOT NULL,
+        DISPLAY_TEXT VARCHAR(255) NOT NULL,
+        SCCM_UID BIGINT,
+        CURRENCY CHAR(3),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSHIPPINGCOSTCALCULATIONPARAM_FK_1 FOREIGN KEY TSHIPPINGCOSTCALCULATIONPARAM_FK_1 (SCCM_UID) REFERENCES TSHIPPINGCOSTCALCULATIONMETHOD (UIDPK)
+    ,
+    INDEX I_SCCP_SCCM_UID (SCCM_UID))Engine=InnoDB;
+
+ ALTER TABLE TSHIPPINGCOSTCALCULATIONPARAM COMMENT 'parameters used by shipping cost calculation methods, such a';
+
+
+# -----------------------------------------------------------------------
+# TSHIPPINGSERVICELEVEL
+# -----------------------------------------------------------------------
+CREATE TABLE TSHIPPINGSERVICELEVEL
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        SHIPPING_REGION_UID BIGINT NOT NULL,
+        STORE_UID BIGINT NOT NULL,
+        SCCM_UID BIGINT NOT NULL,
+        CARRIER VARCHAR(255),
+        CODE VARCHAR(64) NOT NULL,
+        DEFAULT_COST DECIMAL(19,2),
+        ENABLED INTEGER NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSHIPPINGSERVICELEVEL_FK_1 FOREIGN KEY TSHIPPINGSERVICELEVEL_FK_1 (SHIPPING_REGION_UID) REFERENCES TSHIPPINGREGION (UIDPK)
+    ,
+    CONSTRAINT TSHIPPINGSERVICELEVEL_FK_2 FOREIGN KEY TSHIPPINGSERVICELEVEL_FK_2 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSHIPPINGSERVICELEVEL_FK_3 FOREIGN KEY TSHIPPINGSERVICELEVEL_FK_3 (SCCM_UID) REFERENCES TSHIPPINGCOSTCALCULATIONMETHOD (UIDPK)
+    ,
+    CONSTRAINT TSHIPPINGSERVICELEVEL_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TSHIPPINGSRVLEVEL_CODE_UNIQUE UNIQUE (CODE),
+    INDEX I_SSL_STORE_UID (STORE_UID),
+    INDEX I_SSL_SR_UID (SHIPPING_REGION_UID),
+    INDEX I_SSL_SCCM_UID (SCCM_UID),
+    INDEX I_SSL_MODIFY_DATE (LAST_MODIFIED_DATE))Engine=InnoDB;
+
+ ALTER TABLE TSHIPPINGSERVICELEVEL COMMENT 'shipping options that can be associated with shipping region';
+
+
+# -----------------------------------------------------------------------
+# TPICKLIST
+# -----------------------------------------------------------------------
+CREATE TABLE TPICKLIST
+(
+        UIDPK BIGINT NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        WAREHOUSE_UID BIGINT,
+        CREATED_BY BIGINT,
+        ACTIVE INTEGER default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPICKLIST_FK_1 FOREIGN KEY TPICKLIST_FK_1 (WAREHOUSE_UID) REFERENCES TWAREHOUSE (UIDPK)
+    ,
+    CONSTRAINT TPICKLIST_FK_2 FOREIGN KEY TPICKLIST_FK_2 (CREATED_BY) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_PL_WAREHOUSE_UID (WAREHOUSE_UID),
+    INDEX I_PL_CREATED_BY (CREATED_BY))Engine=InnoDB;
+
+ALTER TABLE TPICKLIST COMMENT 'information about pick lists.';
+
+
+# -----------------------------------------------------------------------
+# TORDERSHIPMENT
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERSHIPMENT
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255) NOT NULL,
+        STATUS VARCHAR(20),
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        SHIPMENT_DATE DATETIME,
+        CARRIER VARCHAR(255),
+        SERVICE_LEVEL VARCHAR(255),
+        TRACKING_CODE VARCHAR(255),
+        ITEM_SUBTOTAL DECIMAL(19,2),
+        BEFORE_TAX_SHIPPING_COST DECIMAL(19,2),
+        ITEM_TAX DECIMAL(19,2),
+        SUBTOTAL_DISCOUNT DECIMAL(19,2),
+        SHIPPING_COST DECIMAL(19,2),
+        SHIPPING_TAX DECIMAL(19,2),
+        SHIPPING_SUBTOTAL DECIMAL(19,2),
+        INCLUSIVE_TAX INT,
+        ORDER_ADDRESS_UID BIGINT,
+        ORDER_UID BIGINT,
+        SERVICE_LEVEL_UID BIGINT,
+        PICKLIST_UID BIGINT,
+        SHIPMENT_NUMBER VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERSHIPMENT_FK_1 FOREIGN KEY TORDERSHIPMENT_FK_1 (ORDER_ADDRESS_UID) REFERENCES TORDERADDRESS (UIDPK)
+    ,
+    CONSTRAINT TORDERSHIPMENT_FK_2 FOREIGN KEY TORDERSHIPMENT_FK_2 (SERVICE_LEVEL_UID) REFERENCES TSHIPPINGSERVICELEVEL (UIDPK)
+    ,
+    CONSTRAINT TORDERSHIPMENT_FK_3 FOREIGN KEY TORDERSHIPMENT_FK_3 (ORDER_UID) REFERENCES TORDER (UIDPK)
+    ,
+    CONSTRAINT TORDERSHIPMENT_FK_4 FOREIGN KEY TORDERSHIPMENT_FK_4 (PICKLIST_UID) REFERENCES TPICKLIST (UIDPK)
+    ,
+    CONSTRAINT TORDERSHIPMENT_UNIQUE UNIQUE (SHIPMENT_NUMBER),
+    INDEX I_OSHIP_SHIPLEVSERV (SERVICE_LEVEL_UID),
+    INDEX I_OSHIP_OA_UID (ORDER_ADDRESS_UID),
+    INDEX I_OSHIP_ORDER_UID (ORDER_UID),
+    INDEX I_OSHIP_PICK_LIST (PICKLIST_UID),
+    INDEX I_OSHIP_MDFY_DATE (LAST_MODIFIED_DATE),
+    INDEX I_OSHIP_STATUS (STATUS))Engine=InnoDB;
+
+ALTER TABLE TORDERSHIPMENT COMMENT 'information about order shipments.';
+
+
+# -----------------------------------------------------------------------
+# TORDERPAYMENT
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERPAYMENT
+(
+        UIDPK BIGINT NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        CARD_TYPE VARCHAR(50),
+        CARD_HOLDER_NAME VARCHAR(100),
+        CARD_NUMBER VARCHAR(255),
+        MASKED_CARD_NUMBER VARCHAR(255),
+        EXPIRY_YEAR VARCHAR(4),
+        EXPIRY_MONTH VARCHAR(2),
+        START_DATE DATETIME,
+        ISSUE_NUMBER VARCHAR(100),
+        PAYMENT_GATEWAY VARCHAR(100),
+        AMOUNT DECIMAL(19,2),
+        REFERENCE_ID VARCHAR(50),
+        REQUEST_TOKEN VARCHAR(255),
+        AUTHORIZATION_CODE VARCHAR(50),
+        TRANSACTION_TYPE VARCHAR(25),
+        CURRENCY VARCHAR(10),
+        EMAIL VARCHAR(100),
+        STATUS VARCHAR(20),
+        ORDER_UID BIGINT,
+        GIFTCERTIFICATE_UID BIGINT,
+        ORDERSHIPMENT_UID BIGINT,
+        PAYMENT_FOR_SUBSCRIPTIONS INT,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERPAYMENT_FK_1 FOREIGN KEY TORDERPAYMENT_FK_1 (ORDER_UID) REFERENCES TORDER (UIDPK)
+    ,
+    CONSTRAINT TORDERPAYMENT_FK_2 FOREIGN KEY TORDERPAYMENT_FK_2 (GIFTCERTIFICATE_UID) REFERENCES TGIFTCERTIFICATE (UIDPK)
+    ,
+    CONSTRAINT TORDERPAYMENT_FK_3 FOREIGN KEY TORDERPAYMENT_FK_3 (ORDERSHIPMENT_UID) REFERENCES TORDERSHIPMENT (UIDPK)
+    ,
+    INDEX I_OP_GCERT_BY (GIFTCERTIFICATE_UID),
+    INDEX I_OP_ORDERSHIPMENT_BY (ORDERSHIPMENT_UID),
+    INDEX I_OP_ORDER_UID (ORDER_UID))Engine=InnoDB;
+
+ALTER TABLE TORDERPAYMENT COMMENT 'customer payments made against orders.';
+
+
+# -----------------------------------------------------------------------
+# TGIFTCERTIFICATETRANSACTION
+# -----------------------------------------------------------------------
+CREATE TABLE TGIFTCERTIFICATETRANSACTION
+(
+        UIDPK BIGINT NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        AMOUNT DECIMAL(19,2),
+        AUTHORIZATION_CODE VARCHAR(50),
+        TRANSACTION_TYPE VARCHAR(25),
+        GIFTCERTIFICATE_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TGIFTCERTIFICATETRANSACTION_FK_1 FOREIGN KEY TGIFTCERTIFICATETRANSACTION_FK_1 (GIFTCERTIFICATE_UID) REFERENCES TGIFTCERTIFICATE (UIDPK)
+    ,
+    INDEX I_GCT_GCERT_BY (GIFTCERTIFICATE_UID))Engine=InnoDB;
+
+ALTER TABLE TGIFTCERTIFICATETRANSACTION COMMENT 'gift certificate payment transactions.';
+
+
+# -----------------------------------------------------------------------
+# TRMAGENERATOR
+# -----------------------------------------------------------------------
+CREATE TABLE TRMAGENERATOR
+(
+        UIDPK BIGINT default 1 NOT NULL,
+        NEXT_RMA VARCHAR(100) NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TRMAGENERATOR COMMENT 'the next available RMA.';
+
+
+# -----------------------------------------------------------------------
+# TORDERRETURN
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERRETURN
+(
+        UIDPK BIGINT NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        RMA_CODE VARCHAR(255),
+        RETURN_COMMENT VARCHAR(2000),
+        ORDER_UID BIGINT,
+        CREATED_BY BIGINT,
+        STATUS VARCHAR(50),
+        RETURN_TYPE VARCHAR(255),
+        PHYSICAL_RETURN INTEGER default 0,
+        EXCHANGE_ORDER_UID BIGINT,
+        ORDER_PAYMENT_UID BIGINT,
+        LESS_RESTOCK_AMOUNT DECIMAL(19,2),
+        SHIPPING_COST DECIMAL(19,2) default 0 NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        RECEIVED_BY BIGINT,
+        VERSION INT,
+        ORDER_RETURN_ADDRESS_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERRETURN_FK_1 FOREIGN KEY TORDERRETURN_FK_1 (ORDER_UID) REFERENCES TORDER (UIDPK)
+    ,
+    CONSTRAINT TORDERRETURN_FK_2 FOREIGN KEY TORDERRETURN_FK_2 (CREATED_BY) REFERENCES TCMUSER (UIDPK)
+    ,
+    CONSTRAINT TORDERRETURN_FK_3 FOREIGN KEY TORDERRETURN_FK_3 (RECEIVED_BY) REFERENCES TCMUSER (UIDPK)
+    ,
+    CONSTRAINT TORDERRETURN_FK_4 FOREIGN KEY TORDERRETURN_FK_4 (EXCHANGE_ORDER_UID) REFERENCES TORDER (UIDPK)
+    ,
+    CONSTRAINT TORDERRETURN_FK_5 FOREIGN KEY TORDERRETURN_FK_5 (ORDER_RETURN_ADDRESS_UID) REFERENCES TORDERADDRESS (UIDPK)
+    ,
+    INDEX I_OR_ORDER_UID (ORDER_UID),
+    INDEX I_OR_CREATED_BY (CREATED_BY),
+    INDEX I_OR_RECEIVED_BY (RECEIVED_BY),
+    INDEX I_OR_EXCHANGE_ORDER_UID (EXCHANGE_ORDER_UID),
+    INDEX I_OR_RETURN_ADDRESS (ORDER_RETURN_ADDRESS_UID),
+    INDEX I_OR_RMA_CODE (RMA_CODE))Engine=InnoDB;
+
+ALTER TABLE TORDERRETURN COMMENT 'order return information.';
+
+
+# -----------------------------------------------------------------------
+# TSHIPMENTTAX
+# -----------------------------------------------------------------------
+CREATE TABLE TSHIPMENTTAX
+(
+        UIDPK BIGINT NOT NULL,
+        TAX_CATEGORY_NAME VARCHAR(255) NOT NULL,
+        TAX_CATEGORY_DISPLAY_NAME VARCHAR(255) NOT NULL,
+        VALUE DECIMAL(19,2),
+        ORDER_SHIPMENT_UID BIGINT,
+        ORDER_RETURN_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSHIPMENTTAX_FK_1 FOREIGN KEY TSHIPMENTTAX_FK_1 (ORDER_SHIPMENT_UID) REFERENCES TORDERSHIPMENT (UIDPK)
+    ,
+    CONSTRAINT TSHIPMENTTAX_FK_2 FOREIGN KEY TSHIPMENTTAX_FK_2 (ORDER_RETURN_UID) REFERENCES TORDERRETURN (UIDPK)
+    ,
+    INDEX I_ST_ORDER_SHIPMENT_UID (ORDER_SHIPMENT_UID),
+    INDEX I_ST_OR_UID (ORDER_RETURN_UID))Engine=InnoDB;
+
+ALTER TABLE TSHIPMENTTAX COMMENT 'information about taxes paid on order shipments.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTTYPE
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPE
+(
+        UIDPK BIGINT NOT NULL,
+        WITH_MULTIPLE_SKUS INTEGER default 0 NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        TEMPLATE VARCHAR(255) NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        TAX_CODE_UID BIGINT NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+        EXCLUDE_FROM_DISCOUNT INTEGER default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTTYPE_FK_1 FOREIGN KEY TPRODUCTTYPE_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTTYPE_FK_2 FOREIGN KEY TPRODUCTTYPE_FK_2 (TAX_CODE_UID) REFERENCES TTAXCODE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTTYPE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TPRODUCTTYPE_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_PRODTYPE_CATALOG_UID (CATALOG_UID),
+    INDEX I_PRODTYPE_TAXCODE_UID (TAX_CODE_UID))Engine=InnoDB;
+
+ ALTER TABLE TPRODUCTTYPE COMMENT 'product types. A product type determines the set of attribut';
+
+
+# -----------------------------------------------------------------------
+# TBRAND
+# -----------------------------------------------------------------------
+CREATE TABLE TBRAND
+(
+        UIDPK BIGINT NOT NULL,
+        CODE VARCHAR(255) NOT NULL,
+        IMAGE_URL VARCHAR(255),
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TBRAND_FK_1 FOREIGN KEY TBRAND_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TBRAND_UNIQUE UNIQUE (CODE),
+    INDEX I_B_CATALOG_UID (CATALOG_UID))Engine=InnoDB;
+
+ALTER TABLE TBRAND COMMENT 'product manufacturer/brand information.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCT
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCT
+(
+        UIDPK BIGINT NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        START_DATE DATETIME NOT NULL,
+        END_DATE DATETIME,
+        IMAGE VARCHAR(255),
+        PRODUCT_TYPE_UID BIGINT NOT NULL,
+        BRAND_UID BIGINT,
+        DEFAULT_SKU_UID BIGINT,
+        CODE VARCHAR(64) NOT NULL,
+        MIN_QUANTITY INT default 1 NOT NULL,
+        EXPECTED_RELEASE_DATE DATETIME,
+        HIDDEN INTEGER default 0,
+        SALES_COUNT INT default 0,
+        TAX_CODE_UID BIGINT,
+        PRE_OR_BACK_ORDER_LIMIT INT,
+        AVAILABILITY_CRITERIA VARCHAR(30),
+        TYPE VARCHAR(255),
+        NOT_SOLD_SEPARATELY INTEGER default 0,
+        CALCULATED INTEGER default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCT_FK_1 FOREIGN KEY TPRODUCT_FK_1 (PRODUCT_TYPE_UID) REFERENCES TPRODUCTTYPE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCT_FK_2 FOREIGN KEY TPRODUCT_FK_2 (BRAND_UID) REFERENCES TBRAND (UIDPK)
+    ,
+    CONSTRAINT TPRODUCT_FK_3 FOREIGN KEY TPRODUCT_FK_3 (TAX_CODE_UID) REFERENCES TTAXCODE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCT_UNIQUE UNIQUE (CODE),
+    INDEX I_P_TYPE_UID (PRODUCT_TYPE_UID),
+    INDEX I_P_BRAND_UID (BRAND_UID),
+    INDEX I_P_TAXCODE_UID (TAX_CODE_UID),
+    INDEX I_P_MODIFY_DATE (LAST_MODIFIED_DATE),
+    INDEX I_P_SE_DATE (START_DATE, END_DATE))Engine=InnoDB;
+
+ ALTER TABLE TPRODUCT COMMENT 'information about products. A product must have at least one';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTATTRIBUTEVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTATTRIBUTEVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        ATTRIBUTE_TYPE INT NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR(255),
+        LONG_TEXT_VALUE MEDIUMTEXT,
+        INTEGER_VALUE INT,
+        DECIMAL_VALUE DECIMAL(19,2),
+        BOOLEAN_VALUE INTEGER default 0,
+        DATE_VALUE DATETIME,
+        PRODUCT_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTATTRIBUTEVALUE_FK_1 FOREIGN KEY TPRODUCTATTRIBUTEVALUE_FK_1 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTATTRIBUTEVALUE_FK_2 FOREIGN KEY TPRODUCTATTRIBUTEVALUE_FK_2 (PRODUCT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    INDEX I_PAV_ATTR_UID (ATTRIBUTE_UID),
+    INDEX I_PAV_PROD_UID (PRODUCT_UID))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTATTRIBUTEVALUE COMMENT 'product attribute values.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTCATEGORY
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTCATEGORY
+(
+        UIDPK BIGINT NOT NULL,
+        PRODUCT_UID BIGINT NOT NULL,
+        CATEGORY_UID BIGINT NOT NULL,
+        FEAT_PRODUCT_ORDER INT default 0,
+        DEFAULT_CATEGORY INTEGER,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTCATEGORY_FK_1 FOREIGN KEY TPRODUCTCATEGORY_FK_1 (PRODUCT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTCATEGORY_FK_2 FOREIGN KEY TPRODUCTCATEGORY_FK_2 (CATEGORY_UID) REFERENCES TCATEGORY (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTCATEGORY_UNIQUE UNIQUE (PRODUCT_UID, CATEGORY_UID),
+    INDEX I_PC_PUID (PRODUCT_UID),
+    INDEX I_PC_CUID (CATEGORY_UID))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTCATEGORY COMMENT 'associations between categories and products.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTLDF
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTLDF
+(
+        UIDPK BIGINT NOT NULL,
+        PRODUCT_UID BIGINT NOT NULL,
+        URL VARCHAR(255),
+        KEY_WORDS VARCHAR(255),
+        DESCRIPTION VARCHAR(255),
+        TITLE VARCHAR(255),
+        DISPLAY_NAME VARCHAR(255),
+        LOCALE VARCHAR(20) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTLDF_FK_1 FOREIGN KEY TPRODUCTLDF_FK_1 (PRODUCT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    INDEX I_PLDF_PUID (PRODUCT_UID),
+    INDEX I_PLDF_LOCALE_NAME (LOCALE, DISPLAY_NAME))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTLDF COMMENT 'locale-dependent information about products.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTSKU
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTSKU
+(
+        UIDPK BIGINT NOT NULL,
+        START_DATE DATETIME NOT NULL,
+        END_DATE DATETIME,
+        SKUCODE VARCHAR(255) NOT NULL,
+        GUID VARCHAR(255) NOT NULL,
+        IMAGE VARCHAR(255),
+        PRODUCT_UID BIGINT NOT NULL,
+        SHIPPABLE INTEGER default 1,
+        WEIGHT DECIMAL(19,2) default 0,
+        HEIGHT DECIMAL(19,2) default 0,
+        WIDTH DECIMAL(19,2) default 0,
+        LENGTH DECIMAL(19,2) default 0,
+        PRE_OR_BACK_ORDERED_QUANTITY INT,
+        DIGITAL INTEGER default 0,
+        DIGITAL_ASSET_UID BIGINT,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTSKU_FK_1 FOREIGN KEY TPRODUCTSKU_FK_1 (PRODUCT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTSKU_FK_2 FOREIGN KEY TPRODUCTSKU_FK_2 (DIGITAL_ASSET_UID) REFERENCES TDIGITALASSETS (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTSKU_UNIQUE UNIQUE (SKUCODE),
+    CONSTRAINT TPRODUCTSKU_GUID UNIQUE (GUID),
+    INDEX I_PS_PRODUCT_UID (PRODUCT_UID),
+    INDEX I_PS_DIGASSET_UID (DIGITAL_ASSET_UID),
+    INDEX I_PS_SE_DATE (START_DATE, END_DATE))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTSKU COMMENT 'information related to product SKUs.';
+
+
+# -----------------------------------------------------------------------
+# TINVENTORY
+# -----------------------------------------------------------------------
+CREATE TABLE TINVENTORY
+(
+        UIDPK BIGINT NOT NULL,
+        QUANTITY_ON_HAND INT,
+        RESERVED_QUANTITY INT,
+        REORDER_MINIMUM INT default 0,
+        REORDER_QUANTITY INT default 0,
+        RESTOCK_DATE DATETIME,
+        ALLOCATED_QUANTITY INT,
+        WAREHOUSE_UID BIGINT NOT NULL,
+        PRODUCTSKU_SKUCODE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TINVENTORY_UNIQUE UNIQUE (WAREHOUSE_UID, PRODUCTSKU_SKUCODE),
+    INDEX I_INVENTORY_WAREHOUSE_UID (WAREHOUSE_UID),
+    INDEX I_INVENTORY_SKUCODE (PRODUCTSKU_SKUCODE))Engine=InnoDB;
+
+ALTER TABLE TINVENTORY COMMENT 'SKU inventory information.';
+
+
+# -----------------------------------------------------------------------
+# TINVENTORYJOURNAL
+# -----------------------------------------------------------------------
+CREATE TABLE TINVENTORYJOURNAL
+(
+        UIDPK BIGINT NOT NULL,
+        ALLOCATED_QUANTITY_DELTA INT NOT NULL,
+        QUANTITY_ON_HAND_DELTA INT NOT NULL,
+        SKUCODE VARCHAR(255) NOT NULL,
+        WAREHOUSE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_INV_JOURNAL_SKU_WAREHOUSE (SKUCODE, WAREHOUSE_UID))Engine=InnoDB;
+
+ALTER TABLE TINVENTORYJOURNAL COMMENT 'Inventory Journal';
+
+
+# -----------------------------------------------------------------------
+# TINVENTORYJOURNALLOCK
+# -----------------------------------------------------------------------
+CREATE TABLE TINVENTORYJOURNALLOCK
+(
+        UIDPK BIGINT NOT NULL,
+        SKUCODE VARCHAR(255) NOT NULL,
+        WAREHOUSE_UID BIGINT NOT NULL,
+        LOCKCOUNT INT NOT NULL,
+        VERSION INT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT U_INV_JNL_LOCK_CANDIDATE_KEYS UNIQUE (SKUCODE, WAREHOUSE_UID))Engine=InnoDB;
+
+ALTER TABLE TINVENTORYJOURNALLOCK COMMENT 'Dedicated optimistic lock table for Inventory Journal';
+
+
+# -----------------------------------------------------------------------
+# TORDERSKU
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERSKU
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        PARENT_ITEM_UID BIGINT,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        SKUCODE VARCHAR(255) NOT NULL,
+        TAXCODE VARCHAR(255) NOT NULL,
+        PRODUCT_SKU_UID BIGINT,
+        ORDER_SHIPMENT_UID BIGINT,
+        QUANTITY INT,
+        DISPLAY_NAME VARCHAR(255) NOT NULL,
+        AMOUNT DECIMAL(19,2),
+        TAX_AMOUNT DECIMAL(19,2),
+        LIST_UNIT_PRICE DECIMAL(19,2),
+        SALE_UNIT_PRICE DECIMAL(19,2),
+        PROMO_UNIT_PRICE DECIMAL(19,2),
+        UNIT_PRICE DECIMAL(19,2),
+        DISCOUNT_AMOUNT DECIMAL(19,2),
+        DISPLAY_SKU_OPTIONS VARCHAR(255),
+        IMAGE VARCHAR(255),
+        WEIGHT INT default 0,
+        DIGITAL_ASSET_UID BIGINT,
+        ALLOCATED_QUANTITY BIGINT,
+        CURRENCY VARCHAR(3),
+        ORDERING INT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERSKU_FK_1 FOREIGN KEY TORDERSKU_FK_1 (ORDER_SHIPMENT_UID) REFERENCES TORDERSHIPMENT (UIDPK)
+    ,
+    CONSTRAINT TOSKU_FK_TOSKU FOREIGN KEY TOSKU_FK_TOSKU (PARENT_ITEM_UID) REFERENCES TORDERSKU (UIDPK)
+    ,
+    CONSTRAINT TORDERSKU_FK_3 FOREIGN KEY TORDERSKU_FK_3 (PRODUCT_SKU_UID) REFERENCES TPRODUCTSKU (UIDPK)
+    ,
+    CONSTRAINT TORDERSKU_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_OS_SHIPMENT_UID (ORDER_SHIPMENT_UID),
+    INDEX I_OS_PARENT_ITEM_UID (PARENT_ITEM_UID),
+    INDEX I_OS_PRODUCT_SKU_UID (PRODUCT_SKU_UID),
+    INDEX I_OSHIP_PRODUCTSKU (SKUCODE),
+    INDEX I_OS_DIGITALASSET_UID (DIGITAL_ASSET_UID))Engine=InnoDB;
+
+ALTER TABLE TORDERSKU COMMENT 'information about order line items (SKU, quantity, etc.).';
+
+
+# -----------------------------------------------------------------------
+# TORDERRETURNSKU
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERRETURNSKU
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        ORDER_SKU_UID BIGINT,
+        ORDER_RETURN_UID BIGINT,
+        QUANTITY INT,
+        RETURN_AMOUNT DECIMAL(19,2),
+        RECEIVED_QUANTITY INT,
+        RECEIVED_STATE VARCHAR(255),
+        RETURN_REASON VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERRETURNSKU_FK_1 FOREIGN KEY TORDERRETURNSKU_FK_1 (ORDER_RETURN_UID) REFERENCES TORDERRETURN (UIDPK)
+    ,
+    CONSTRAINT TORDERRETURNSKU_FK_2 FOREIGN KEY TORDERRETURNSKU_FK_2 (ORDER_SKU_UID) REFERENCES TORDERSKU (UIDPK)
+    ,
+    INDEX I_ORS_OR_UID (ORDER_RETURN_UID),
+    INDEX I_ORS_OS_UID (ORDER_SKU_UID))Engine=InnoDB;
+
+ALTER TABLE TORDERRETURNSKU COMMENT 'quantities of SKUs returned for orders.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTASSOCIATION
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTASSOCIATION
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        ASSOCIATION_TYPE INT NOT NULL,
+        SOURCE_PRODUCT_UID BIGINT NOT NULL,
+        TARGET_PRODUCT_UID BIGINT NOT NULL,
+        CATALOG_UID BIGINT,
+        START_DATE DATETIME NOT NULL,
+        END_DATE DATETIME,
+        DEFAULT_QUANTITY INT default 1 NOT NULL,
+        SOURCE_PRODUCT_DEPENDENT INTEGER default 0,
+        ORDERING INT default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTASSOCIATION_FK_1 FOREIGN KEY TPRODUCTASSOCIATION_FK_1 (SOURCE_PRODUCT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTASSOCIATION_FK_2 FOREIGN KEY TPRODUCTASSOCIATION_FK_2 (TARGET_PRODUCT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTASSOCIATION_FK_3 FOREIGN KEY TPRODUCTASSOCIATION_FK_3 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    INDEX I_PA_SRCPROD_UID (SOURCE_PRODUCT_UID),
+    INDEX I_PA_TGTPROD_UID (TARGET_PRODUCT_UID),
+    INDEX I_PA_CATALOG_UID (CATALOG_UID),
+    INDEX I_PR_SE_DATE (START_DATE, END_DATE))Engine=InnoDB;
+
+ ALTER TABLE TPRODUCTASSOCIATION COMMENT 'merchandizing associations between products (cross-sells, up';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTSKUATTRIBUTEVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTSKUATTRIBUTEVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        ATTRIBUTE_TYPE INT NOT NULL,
+        LOCALIZED_ATTRIBUTE_KEY VARCHAR(255) NOT NULL,
+        SHORT_TEXT_VALUE VARCHAR(255),
+        LONG_TEXT_VALUE MEDIUMTEXT,
+        INTEGER_VALUE INT,
+        DECIMAL_VALUE DECIMAL(19,2),
+        BOOLEAN_VALUE INTEGER default 0,
+        DATE_VALUE DATETIME,
+        PRODUCT_SKU_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTSKUATTRIBUTEVALUE_FK_1 FOREIGN KEY TPRODUCTSKUATTRIBUTEVALUE_FK_1 (PRODUCT_SKU_UID) REFERENCES TPRODUCTSKU (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTSKUATTRIBUTEVALUE_FK_2 FOREIGN KEY TPRODUCTSKUATTRIBUTEVALUE_FK_2 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    INDEX I_PSAV_SKU_UID (PRODUCT_SKU_UID),
+    INDEX I_PSAV_ATTR_UID (ATTRIBUTE_UID))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTSKUATTRIBUTEVALUE COMMENT 'associations between attribute values and products.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTTYPEATTRIBUTE
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPEATTRIBUTE
+(
+        UIDPK BIGINT NOT NULL,
+        ORDERING INT,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        PRODUCT_TYPE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTTYPEATTRIBUTE_FK_1 FOREIGN KEY TPRODUCTTYPEATTRIBUTE_FK_1 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTTYPEATTRIBUTE_FK_2 FOREIGN KEY TPRODUCTTYPEATTRIBUTE_FK_2 (PRODUCT_TYPE_UID) REFERENCES TPRODUCTTYPE (UIDPK)
+    ,
+    INDEX I_PTA_ATTR_UID (ATTRIBUTE_UID),
+    INDEX I_PTA_TYPE_UID (PRODUCT_TYPE_UID))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTTYPEATTRIBUTE COMMENT 'associations between product attributes and product types.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTTYPESKUATTRIBUTE
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPESKUATTRIBUTE
+(
+        UIDPK BIGINT NOT NULL,
+        ORDERING INT,
+        ATTRIBUTE_UID BIGINT NOT NULL,
+        PRODUCT_TYPE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTTYPESKUATTRIBUTE_FK_1 FOREIGN KEY TPRODUCTTYPESKUATTRIBUTE_FK_1 (ATTRIBUTE_UID) REFERENCES TATTRIBUTE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTTYPESKUATTRIBUTE_FK_2 FOREIGN KEY TPRODUCTTYPESKUATTRIBUTE_FK_2 (PRODUCT_TYPE_UID) REFERENCES TPRODUCTTYPE (UIDPK)
+    ,
+    INDEX I_PTSA_ATTR_UID (ATTRIBUTE_UID),
+    INDEX I_PTSA_TYPE_UID (PRODUCT_TYPE_UID))Engine=InnoDB;
+
+ ALTER TABLE TPRODUCTTYPESKUATTRIBUTE COMMENT 'associations between product SKU attributes and product type';
+
+
+# -----------------------------------------------------------------------
+# TSELLINGCONTEXT
+# -----------------------------------------------------------------------
+CREATE TABLE TSELLINGCONTEXT
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+        PRIORITY INT NOT NULL,
+        TYPE VARCHAR(100) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSELLINGCONTEXT_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ ALTER TABLE TSELLINGCONTEXT COMMENT 'selling contexts, used to target dynamic content, price list';
+
+
+# -----------------------------------------------------------------------
+# TRULESET
+# -----------------------------------------------------------------------
+CREATE TABLE TRULESET
+(
+        UIDPK BIGINT NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        SCENARIO INT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TRULESET_UNIQUE UNIQUE (NAME))Engine=InnoDB;
+
+ALTER TABLE TRULESET COMMENT 'promotion rule sets.';
+
+
+# -----------------------------------------------------------------------
+# TRULE
+# -----------------------------------------------------------------------
+CREATE TABLE TRULE
+(
+        UIDPK BIGINT NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        RULECODE VARCHAR(64) NOT NULL,
+        START_DATE DATETIME,
+        END_DATE DATETIME,
+        ELIGIBILITY_OPERATOR INTEGER default 0,
+        CONDITION_OPERATOR INTEGER default 0,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+        RULE_SET_UID BIGINT,
+        STORE_UID BIGINT,
+        CATALOG_UID BIGINT,
+        CM_USER_UID BIGINT,
+        ENABLED INTEGER NOT NULL,
+        CURRENT_LUP_NUMBER BIGINT,
+        SELLING_CTX_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT SCRULE_FK FOREIGN KEY SCRULE_FK (SELLING_CTX_UID) REFERENCES TSELLINGCONTEXT (UIDPK)
+    ,
+    CONSTRAINT TRULE_FK_2 FOREIGN KEY TRULE_FK_2 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TRULE_FK_3 FOREIGN KEY TRULE_FK_3 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TRULE_FK_4 FOREIGN KEY TRULE_FK_4 (RULE_SET_UID) REFERENCES TRULESET (UIDPK)
+    ,
+    CONSTRAINT TRULE_UNIQUE UNIQUE (NAME),
+    CONSTRAINT TRULE_CODE_UNIQUE UNIQUE (RULECODE),
+    INDEX I_R_SET_STORE_UID (STORE_UID),
+    INDEX I_R_SET_CATALOG_UID (CATALOG_UID),
+    INDEX I_R_SET_UID (RULE_SET_UID),
+    INDEX I_R_SE_DATE (START_DATE, END_DATE))Engine=InnoDB;
+
+ALTER TABLE TRULE COMMENT 'rule that can be applied by the rules engine.';
+
+
+# -----------------------------------------------------------------------
+# TRULEELEMENT
+# -----------------------------------------------------------------------
+CREATE TABLE TRULEELEMENT
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255) NOT NULL,
+        KIND VARCHAR(255) NOT NULL,
+        RULE_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TRULEELEMENT_FK_1 FOREIGN KEY TRULEELEMENT_FK_1 (RULE_UID) REFERENCES TRULE (UIDPK)
+    ,
+    INDEX I_RE_RULE_UID (RULE_UID))Engine=InnoDB;
+
+ ALTER TABLE TRULEELEMENT COMMENT 'the conditions and actions associated with (promotion) rules';
+
+
+# -----------------------------------------------------------------------
+# TRULEEXCEPTION
+# -----------------------------------------------------------------------
+CREATE TABLE TRULEEXCEPTION
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255) NOT NULL,
+        RULE_ELEMENT_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TRULEEXCEPTION_FK_1 FOREIGN KEY TRULEEXCEPTION_FK_1 (RULE_ELEMENT_UID) REFERENCES TRULEELEMENT (UIDPK)
+    ,
+    INDEX I_REXP_RE_UID (RULE_ELEMENT_UID))Engine=InnoDB;
+
+ALTER TABLE TRULEEXCEPTION COMMENT 'exceptions associated with rule actions and conditions.';
+
+
+# -----------------------------------------------------------------------
+# TRULEPARAMETER
+# -----------------------------------------------------------------------
+CREATE TABLE TRULEPARAMETER
+(
+        UIDPK BIGINT NOT NULL,
+        PARAM_KEY VARCHAR(255) NOT NULL,
+        PARAM_VALUE VARCHAR(255) NOT NULL,
+        DISPLAY_TEXT VARCHAR(255),
+        RULE_ELEMENT_UID BIGINT,
+        RULE_EXCEPTION_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TRULEPARAMETER_FK_1 FOREIGN KEY TRULEPARAMETER_FK_1 (RULE_ELEMENT_UID) REFERENCES TRULEELEMENT (UIDPK)
+    ,
+    CONSTRAINT TRULEPARAMETER_FK_2 FOREIGN KEY TRULEPARAMETER_FK_2 (RULE_EXCEPTION_UID) REFERENCES TRULEEXCEPTION (UIDPK)
+    ,
+    INDEX I_RP_RE_UID (RULE_ELEMENT_UID),
+    INDEX I_RP_REXP_UID (RULE_EXCEPTION_UID))Engine=InnoDB;
+
+ ALTER TABLE TRULEPARAMETER COMMENT 'the parameters associated with each rule condition, such as ';
+
+
+# -----------------------------------------------------------------------
+# TSHOPPINGCART
+# -----------------------------------------------------------------------
+CREATE TABLE TSHOPPINGCART
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(100) NOT NULL,
+        STORE_UID BIGINT NOT NULL,
+        SHOPPER_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSHOPPINGCART_FK_1 FOREIGN KEY TSHOPPINGCART_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSHOPPINGCART_FK_SHOPPER FOREIGN KEY TSHOPPINGCART_FK_SHOPPER (SHOPPER_UID) REFERENCES TSHOPPER (UIDPK)
+    ,
+    CONSTRAINT TSHOPPINGCART_UNIQUE UNIQUE (GUID),
+    INDEX I_SHOPCART_STORE_UID (STORE_UID),
+    INDEX I_SHOPCART_SHOPPER_UID (SHOPPER_UID))Engine=InnoDB;
+
+ALTER TABLE TSHOPPINGCART COMMENT 'information about customers'' shopping carts.';
+
+
+# -----------------------------------------------------------------------
+# TCARTITEM
+# -----------------------------------------------------------------------
+CREATE TABLE TCARTITEM
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        SKU_UID BIGINT NOT NULL,
+        QUANTITY INT NOT NULL,
+        CURRENCY VARCHAR(3),
+        LIST_UNIT_PRICE DECIMAL(19,2),
+        SALE_UNIT_PRICE DECIMAL(19,2),
+        PROMO_UNIT_PRICE DECIMAL(19,2),
+        DISCOUNT_AMOUNT DECIMAL(19,2),
+        TAX_AMOUNT DECIMAL(19,2),
+        PARENT_ITEM_UID BIGINT,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        ORDERING INT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCARTITEM_FK_TCARTITEM FOREIGN KEY TCARTITEM_FK_TCARTITEM (PARENT_ITEM_UID) REFERENCES TCARTITEM (UIDPK)
+    ,
+    CONSTRAINT TCARTITEM_FK_2 FOREIGN KEY TCARTITEM_FK_2 (SKU_UID) REFERENCES TPRODUCTSKU (UIDPK)
+    ,
+    INDEX I_CARTI_SKU_UID (SKU_UID),
+    INDEX I_CARTITEM_GUID (GUID),
+    INDEX I_CARTITEM_PARENT_ITEM_UID (PARENT_ITEM_UID))Engine=InnoDB;
+
+ALTER TABLE TCARTITEM COMMENT 'information about the SKUs in each shopping cart.';
+
+
+# -----------------------------------------------------------------------
+# TSHOPPINGITEMRECURRINGPRICE
+# -----------------------------------------------------------------------
+CREATE TABLE TSHOPPINGITEMRECURRINGPRICE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        PAYMENT_SCHEDULE_NAME VARCHAR(255) NOT NULL,
+        FREQ_AMOUNT DECIMAL(19,8) NOT NULL,
+        FREQ_UNIT VARCHAR(255) NOT NULL,
+        DURATION_AMOUNT DECIMAL(19,8),
+        DURATION_UNIT VARCHAR(255),
+        CARTITEM_UID BIGINT,
+        ORDERSKU_UID BIGINT,
+        LIST_UNIT_PRICE DECIMAL(19,2),
+        SALE_UNIT_PRICE DECIMAL(19,2),
+        PROMO_UNIT_PRICE DECIMAL(19,2),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSHOPPINGITEMRECURRINGPRICE_FK_1 FOREIGN KEY TSHOPPINGITEMRECURRINGPRICE_FK_1 (CARTITEM_UID) REFERENCES TCARTITEM (UIDPK)
+    ,
+    CONSTRAINT TSHOPPINGITEMRECURRINGPRICE_FK_2 FOREIGN KEY TSHOPPINGITEMRECURRINGPRICE_FK_2 (ORDERSKU_UID) REFERENCES TORDERSKU (UIDPK)
+    ,
+    INDEX I_SIRP_CARTITEM_UID (CARTITEM_UID),
+    INDEX I_SIRP_ORDERSKU_UID (ORDERSKU_UID))Engine=InnoDB;
+
+ALTER TABLE TSHOPPINGITEMRECURRINGPRICE COMMENT 'the recurring price elements of a ShoppingItem.';
+
+
+# -----------------------------------------------------------------------
+# TUSERROLEPERMISSIONX
+# -----------------------------------------------------------------------
+CREATE TABLE TUSERROLEPERMISSIONX
+(
+        UIDPK BIGINT NOT NULL,
+        ROLE_UID BIGINT NOT NULL,
+        USER_PERMISSION VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TUSERROLEPERMISSIONX_FK_1 FOREIGN KEY TUSERROLEPERMISSIONX_FK_1 (ROLE_UID) REFERENCES TUSERROLE (UIDPK)
+    ,
+    INDEX I_URPXI_ROLE_UID (ROLE_UID))Engine=InnoDB;
+
+ALTER TABLE TUSERROLEPERMISSIONX COMMENT 'the associations between permissions and user roles.';
+
+
+# -----------------------------------------------------------------------
+# TSKUOPTION
+# -----------------------------------------------------------------------
+CREATE TABLE TSKUOPTION
+(
+        UIDPK BIGINT NOT NULL,
+        OPTION_KEY VARCHAR(100) NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSKUOPTION_FK_1 FOREIGN KEY TSKUOPTION_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TSKUOPTION_UNIQUE UNIQUE (OPTION_KEY),
+    INDEX I_SKUOPT_CATALOG_UID (CATALOG_UID))Engine=InnoDB;
+
+ALTER TABLE TSKUOPTION COMMENT 'the SKU options. For example, Size and Color.';
+
+
+# -----------------------------------------------------------------------
+# TSKUOPTIONVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TSKUOPTIONVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        OPTION_VALUE_KEY VARCHAR(255) NOT NULL,
+        ORDERING INT,
+        SKU_OPTION_UID BIGINT NOT NULL,
+        IMAGE VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSKUOPTIONVALUE_FK_1 FOREIGN KEY TSKUOPTIONVALUE_FK_1 (SKU_OPTION_UID) REFERENCES TSKUOPTION (UIDPK)
+    ,
+    CONSTRAINT TSKUOPTVAL_UNIQ UNIQUE (OPTION_VALUE_KEY),
+    INDEX I_SOV_SO_UID (SKU_OPTION_UID))Engine=InnoDB;
+
+ ALTER TABLE TSKUOPTIONVALUE COMMENT 'the supported values for each SKU option. For example, a SKU';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTTYPESKUOPTION
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTTYPESKUOPTION
+(
+        PRODUCT_TYPE_UID BIGINT NOT NULL,
+        SKU_OPTION_UID BIGINT NOT NULL,
+    CONSTRAINT TPRODUCTTYPESKUOPTION_FK_1 FOREIGN KEY TPRODUCTTYPESKUOPTION_FK_1 (PRODUCT_TYPE_UID) REFERENCES TPRODUCTTYPE (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTTYPESKUOPTION_FK_2 FOREIGN KEY TPRODUCTTYPESKUOPTION_FK_2 (SKU_OPTION_UID) REFERENCES TSKUOPTION (UIDPK)
+    ,
+    INDEX I_PTSO_PT_UID (PRODUCT_TYPE_UID),
+    INDEX I_PTSO_SO_UID (SKU_OPTION_UID))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTTYPESKUOPTION COMMENT 'the associations between SKU options and product types.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTSKUOPTIONVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTSKUOPTIONVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        PRODUCT_SKU_UID BIGINT NOT NULL,
+        OPTION_KEY VARCHAR(100) NOT NULL,
+        OPTION_VALUE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRODUCTSKUOPTIONVALUE_FK_1 FOREIGN KEY TPRODUCTSKUOPTIONVALUE_FK_1 (PRODUCT_SKU_UID) REFERENCES TPRODUCTSKU (UIDPK)
+    ,
+    CONSTRAINT TPRODUCTSKUOPTIONVALUE_FK_2 FOREIGN KEY TPRODUCTSKUOPTIONVALUE_FK_2 (OPTION_VALUE_UID) REFERENCES TSKUOPTIONVALUE (UIDPK)
+    ,
+    INDEX I_PSSO_PS_UID (PRODUCT_SKU_UID),
+    INDEX I_PSSO_SKUOV_UID (OPTION_VALUE_UID))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTSKUOPTIONVALUE COMMENT 'the associations between product SKUs and SKU option values.';
+
+
+# -----------------------------------------------------------------------
+# TPRODUCTDELETED
+# -----------------------------------------------------------------------
+CREATE TABLE TPRODUCTDELETED
+(
+        UIDPK BIGINT NOT NULL,
+        PRODUCT_UID BIGINT NOT NULL,
+        DELETED_DATE DATETIME NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_PD_DELETED_DATE (DELETED_DATE))Engine=InnoDB;
+
+ALTER TABLE TPRODUCTDELETED COMMENT 'audit information for deleted products.';
+
+
+# -----------------------------------------------------------------------
+# TOBJECTDELETED
+# -----------------------------------------------------------------------
+CREATE TABLE TOBJECTDELETED
+(
+        UIDPK BIGINT NOT NULL,
+        OBJECT_TYPE VARCHAR(255) NOT NULL,
+        OBJECT_UID BIGINT NOT NULL,
+        DELETED_DATE DATETIME NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_OD_DELETED_DATE (DELETED_DATE))Engine=InnoDB;
+
+ALTER TABLE TOBJECTDELETED COMMENT 'audit information for deleted objects.';
+
+
+# -----------------------------------------------------------------------
+# TLOCALIZEDPROPERTIES
+# -----------------------------------------------------------------------
+CREATE TABLE TLOCALIZEDPROPERTIES
+(
+        UIDPK BIGINT NOT NULL,
+        OBJECT_UID BIGINT,
+        LOCALIZED_PROPERTY_KEY VARCHAR(255) NOT NULL,
+        VALUE VARCHAR(255) NOT NULL,
+        TYPE VARCHAR(31) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_LP_OBJECT_UID (OBJECT_UID))Engine=InnoDB;
+
+ALTER TABLE TLOCALIZEDPROPERTIES COMMENT 'localized properties. (For example, product names).';
+
+
+# -----------------------------------------------------------------------
+# TDIGITALASSETAUDIT
+# -----------------------------------------------------------------------
+CREATE TABLE TDIGITALASSETAUDIT
+(
+        UIDPK BIGINT NOT NULL,
+        ORDERSKU_UID BIGINT NOT NULL,
+        DIGITALASSET_UID BIGINT NOT NULL,
+        DOWNLOAD_TIME DATETIME NOT NULL,
+        IP_ADDRESS VARCHAR(255),
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TDIGITALASSETAUDIT COMMENT 'audit details related to digital asset download attempts.';
+
+
+# -----------------------------------------------------------------------
+# TAPPLIEDRULE
+# -----------------------------------------------------------------------
+CREATE TABLE TAPPLIEDRULE
+(
+        UIDPK BIGINT NOT NULL,
+        ORDER_UID BIGINT NOT NULL,
+        RULE_UID BIGINT NOT NULL,
+        RULE_NAME VARCHAR(255) NOT NULL,
+        RULE_CODE MEDIUMTEXT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_TAR_ORDER_UID (ORDER_UID),
+    INDEX I_TAR_RULE_UID (RULE_UID))Engine=InnoDB;
+
+ALTER TABLE TAPPLIEDRULE COMMENT 'the (promotion) rules that have been applied to orders.';
+
+
+# -----------------------------------------------------------------------
+# TAPPLIEDRULECOUPONCODE
+# -----------------------------------------------------------------------
+CREATE TABLE TAPPLIEDRULECOUPONCODE
+(
+        UIDPK BIGINT NOT NULL,
+        APPLIED_RULE_UID BIGINT NOT NULL,
+        COUPONCODE VARCHAR(255) NOT NULL,
+        USECOUNT INT default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TAPPLIEDRULECOUPONCODE_FK_1 FOREIGN KEY TAPPLIEDRULECOUPONCODE_FK_1 (APPLIED_RULE_UID) REFERENCES TAPPLIEDRULE (UIDPK)
+    )Engine=InnoDB;
+
+ ALTER TABLE TAPPLIEDRULECOUPONCODE COMMENT 'the associations between applied coupon codes and applied (p';
+
+
+# -----------------------------------------------------------------------
+# TTOPSELLER
+# -----------------------------------------------------------------------
+CREATE TABLE TTOPSELLER
+(
+        UIDPK BIGINT NOT NULL,
+        CATEGORY_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTOPSELLER_UNIQUE UNIQUE (CATEGORY_UID))Engine=InnoDB;
+
+ALTER TABLE TTOPSELLER COMMENT 'categories of top selling products.';
+
+
+# -----------------------------------------------------------------------
+# TTOPSELLERPRODUCTS
+# -----------------------------------------------------------------------
+CREATE TABLE TTOPSELLERPRODUCTS
+(
+        UIDPK BIGINT NOT NULL,
+        TOP_SELLER_UID BIGINT NOT NULL,
+        PRODUCT_UID BIGINT NOT NULL,
+        SALES_COUNT INT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TTOPSELLERPRODUCTS_FK_1 FOREIGN KEY TTOPSELLERPRODUCTS_FK_1 (TOP_SELLER_UID) REFERENCES TTOPSELLER (UIDPK)
+    ,
+    CONSTRAINT TTOPSELLERPRODUCTS_UNIQUE UNIQUE (TOP_SELLER_UID, PRODUCT_UID),
+    INDEX I_TSP_TS_UID (TOP_SELLER_UID))Engine=InnoDB;
+
+ALTER TABLE TTOPSELLERPRODUCTS COMMENT 'top selling product information.';
+
+
+# -----------------------------------------------------------------------
+# TSFSEARCHLOG
+# -----------------------------------------------------------------------
+CREATE TABLE TSFSEARCHLOG
+(
+        UIDPK BIGINT NOT NULL,
+        SEARCH_TIME DATETIME NOT NULL,
+        KEYWORDS VARCHAR(255),
+        RESULT_COUNT INT NOT NULL,
+        SUGGESTIONS_GENERATED INTEGER default 0,
+        CATEGORY_RESTRICTION BIGINT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TSFSEARCHLOG COMMENT 'a history of searches performed in the storefront.';
+
+
+# -----------------------------------------------------------------------
+# TSTOREWAREHOUSE
+# -----------------------------------------------------------------------
+CREATE TABLE TSTOREWAREHOUSE
+(
+        STORE_UID BIGINT NOT NULL,
+        WAREHOUSE_UID BIGINT NOT NULL,
+    CONSTRAINT TSTOREWAREHOUSE_FK_1 FOREIGN KEY TSTOREWAREHOUSE_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSTOREWAREHOUSE_FK_2 FOREIGN KEY TSTOREWAREHOUSE_FK_2 (WAREHOUSE_UID) REFERENCES TWAREHOUSE (UIDPK)
+    ,
+    INDEX I_WAREHOUSE_WH_UID (WAREHOUSE_UID),
+    INDEX I_WAREHOUSE_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTOREWAREHOUSE COMMENT 'the associations between stores and warehouses.';
+
+
+# -----------------------------------------------------------------------
+# TSTORECREDITCARDTYPE
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORECREDITCARDTYPE
+(
+        UIDPK BIGINT NOT NULL,
+        TYPE VARCHAR(255),
+        STORE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSTORECREDITCARDTYPE_FK_1 FOREIGN KEY TSTORECREDITCARDTYPE_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    INDEX I_CREDITCARDTYPES_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORECREDITCARDTYPE COMMENT 'the supported credit card types for each store.';
+
+
+# -----------------------------------------------------------------------
+# TSTORETAXCODE
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORETAXCODE
+(
+        STORE_UID BIGINT NOT NULL,
+        TAXCODE_UID BIGINT NOT NULL,
+    CONSTRAINT TSTORETAXCODE_FK_1 FOREIGN KEY TSTORETAXCODE_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSTORETAXCODE_FK_2 FOREIGN KEY TSTORETAXCODE_FK_2 (TAXCODE_UID) REFERENCES TTAXCODE (UIDPK)
+    ,
+    INDEX I_TAXCODE_TAXCODE_UID (TAXCODE_UID),
+    INDEX I_TAXCODE_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORETAXCODE COMMENT 'the associations between stores and tax codes.';
+
+
+# -----------------------------------------------------------------------
+# TSTORETAXJURISDICTION
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORETAXJURISDICTION
+(
+        STORE_UID BIGINT NOT NULL,
+        TAXJURISDICTION_UID BIGINT NOT NULL,
+    CONSTRAINT TSTORETAXJURISDICTION_FK_1 FOREIGN KEY TSTORETAXJURISDICTION_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSTORETAXJURISDICTION_FK_2 FOREIGN KEY TSTORETAXJURISDICTION_FK_2 (TAXJURISDICTION_UID) REFERENCES TTAXJURISDICTION (UIDPK)
+    ,
+    INDEX I_TAXJURISDICTION_JUR_UID (TAXJURISDICTION_UID),
+    INDEX I_TAXJURISDICTION_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORETAXJURISDICTION COMMENT 'the associations between stores and tax jurisdictions.';
+
+
+# -----------------------------------------------------------------------
+# TPAYMENTGATEWAY
+# -----------------------------------------------------------------------
+CREATE TABLE TPAYMENTGATEWAY
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        TYPE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPAYMENTGATEWAY_NAME UNIQUE (NAME))Engine=InnoDB;
+
+ALTER TABLE TPAYMENTGATEWAY COMMENT 'the payment gateways defined in the system.';
+
+
+# -----------------------------------------------------------------------
+# TSTOREPAYMENTGATEWAY
+# -----------------------------------------------------------------------
+CREATE TABLE TSTOREPAYMENTGATEWAY
+(
+        STORE_UID BIGINT NOT NULL,
+        GATEWAY_UID BIGINT NOT NULL,
+    CONSTRAINT TSTOREPAYMENTGATEWAY_FK_1 FOREIGN KEY TSTOREPAYMENTGATEWAY_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSTOREPAYMENTGATEWAY_FK_2 FOREIGN KEY TSTOREPAYMENTGATEWAY_FK_2 (GATEWAY_UID) REFERENCES TPAYMENTGATEWAY (UIDPK)
+    ,
+    INDEX I_PAYMENTGATEWAY_PGW (GATEWAY_UID),
+    INDEX I_PAYMENTGATEWAY_STORE (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTOREPAYMENTGATEWAY COMMENT 'the associations between payment gateways and stores.';
+
+
+# -----------------------------------------------------------------------
+# TPAYMENTGATEWAYPROPERTIES
+# -----------------------------------------------------------------------
+CREATE TABLE TPAYMENTGATEWAYPROPERTIES
+(
+        UIDPK BIGINT NOT NULL,
+        PROPKEY VARCHAR(255) NOT NULL,
+        PROPVALUE VARCHAR(255),
+        PAYMENTGATEWAY_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPAYMENTGATEWAYPROPERTIES_FK_1 FOREIGN KEY TPAYMENTGATEWAYPROPERTIES_FK_1 (PAYMENTGATEWAY_UID) REFERENCES TPAYMENTGATEWAY (UIDPK)
+    ,
+    INDEX I_PGPROPS_PG_UID (PAYMENTGATEWAY_UID))Engine=InnoDB;
+
+ ALTER TABLE TPAYMENTGATEWAYPROPERTIES COMMENT 'properties (name/value pairs) associated with payment gatewa';
+
+
+# -----------------------------------------------------------------------
+# TSTORECATALOG
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORECATALOG
+(
+        UIDPK BIGINT NOT NULL,
+        STORE_UID BIGINT NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSTORECATALOG_FK_1 FOREIGN KEY TSTORECATALOG_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSTORECATALOG_FK_2 FOREIGN KEY TSTORECATALOG_FK_2 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    INDEX I_STORECAT_CATALOG_UID (CATALOG_UID),
+    INDEX I_STORECAT_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORECATALOG COMMENT 'the associations between stores and catalogs.';
+
+
+# -----------------------------------------------------------------------
+# TCMUSERSTORE
+# -----------------------------------------------------------------------
+CREATE TABLE TCMUSERSTORE
+(
+        USER_UID BIGINT NOT NULL,
+        STORE_UID BIGINT NOT NULL,
+    PRIMARY KEY(USER_UID,STORE_UID),
+    CONSTRAINT TCMUSERSTORE_FK_1 FOREIGN KEY TCMUSERSTORE_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TCMUSERSTORE_FK_2 FOREIGN KEY TCMUSERSTORE_FK_2 (USER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_CMUSERSTORE_STORE_UID (STORE_UID),
+    INDEX I_CMUSERSTORE__USER_UID (USER_UID))Engine=InnoDB;
+
+ ALTER TABLE TCMUSERSTORE COMMENT 'the associations between stores and Commerce Manager client ';
+
+
+# -----------------------------------------------------------------------
+# TCMUSERWAREHOUSE
+# -----------------------------------------------------------------------
+CREATE TABLE TCMUSERWAREHOUSE
+(
+        USER_UID BIGINT NOT NULL,
+        WAREHOUSE_UID BIGINT NOT NULL,
+    PRIMARY KEY(USER_UID,WAREHOUSE_UID),
+    CONSTRAINT TCMUSERWAREHOUSE_FK_1 FOREIGN KEY TCMUSERWAREHOUSE_FK_1 (WAREHOUSE_UID) REFERENCES TWAREHOUSE (UIDPK)
+    ,
+    CONSTRAINT TCMUSERWAREHOUSE_FK_2 FOREIGN KEY TCMUSERWAREHOUSE_FK_2 (USER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_CMUSERWH_WAREHOUSE_UID (WAREHOUSE_UID),
+    INDEX I_CMUSERWH__USER_UID (USER_UID))Engine=InnoDB;
+
+ ALTER TABLE TCMUSERWAREHOUSE COMMENT 'the associations between warehouses and Commerce Manager cli';
+
+
+# -----------------------------------------------------------------------
+# TCMUSERCATALOG
+# -----------------------------------------------------------------------
+CREATE TABLE TCMUSERCATALOG
+(
+        USER_UID BIGINT NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(USER_UID,CATALOG_UID),
+    CONSTRAINT TCMUSERCATALOG_FK_1 FOREIGN KEY TCMUSERCATALOG_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT TCMUSERCATALOG_FK_2 FOREIGN KEY TCMUSERCATALOG_FK_2 (USER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_CMUSERCATALOG_CATALOG_UID (CATALOG_UID),
+    INDEX I_CMUSERCATALOG__USER_UID (USER_UID))Engine=InnoDB;
+
+ ALTER TABLE TCMUSERCATALOG COMMENT 'the associations between catalogs and Commerce Manager clien';
+
+
+# -----------------------------------------------------------------------
+# TSTOREASSOCIATION
+# -----------------------------------------------------------------------
+CREATE TABLE TSTOREASSOCIATION
+(
+        STORE_UID BIGINT NOT NULL,
+        ASSOCIATED_STORE_UID BIGINT NOT NULL,
+    PRIMARY KEY(STORE_UID,ASSOCIATED_STORE_UID),
+    CONSTRAINT TSTOREASSOCIATION_FK_1 FOREIGN KEY TSTOREASSOCIATION_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TSTOREASSOCIATION_FK_2 FOREIGN KEY TSTOREASSOCIATION_FK_2 (ASSOCIATED_STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    INDEX I_STORE_ASSOCIATE_UID (STORE_UID),
+    INDEX I_STORE_ASSOCIATION_UID (ASSOCIATED_STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTOREASSOCIATION COMMENT 'store login sharing associations.';
+
+
+# -----------------------------------------------------------------------
+# TSYNONYMGROUPS
+# -----------------------------------------------------------------------
+CREATE TABLE TSYNONYMGROUPS
+(
+        UIDPK BIGINT NOT NULL,
+        CONCEPT_TERM VARCHAR(255) NOT NULL,
+        LOCALE VARCHAR(20) NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSYNONYMGROUPS_FK_1 FOREIGN KEY TSYNONYMGROUPS_FK_1 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    INDEX I_SYNONYMGR_CATLOG_UID (CATALOG_UID))Engine=InnoDB;
+
+ALTER TABLE TSYNONYMGROUPS COMMENT 'the synonym groups for a store. (Not currently used.)';
+
+
+# -----------------------------------------------------------------------
+# TSYNONYM
+# -----------------------------------------------------------------------
+CREATE TABLE TSYNONYM
+(
+        UIDPK BIGINT NOT NULL,
+        SYNONYM_UID BIGINT NOT NULL,
+        SYNONYM_WORD VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSYNONYM_FK_1 FOREIGN KEY TSYNONYM_FK_1 (SYNONYM_UID) REFERENCES TSYNONYMGROUPS (UIDPK)
+    ,
+    INDEX I_SYNONYM_SYNONYMGR_UID (SYNONYM_UID))Engine=InnoDB;
+
+ALTER TABLE TSYNONYM COMMENT 'synonyms for synonym groups. (Not currently used.)';
+
+
+# -----------------------------------------------------------------------
+# TINDEXNOTIFY
+# -----------------------------------------------------------------------
+CREATE TABLE TINDEXNOTIFY
+(
+        UIDPK BIGINT NOT NULL,
+        INDEX_TYPE VARCHAR(100) NOT NULL,
+        UPDATE_TYPE VARCHAR(64) NOT NULL,
+        AFFECTED_UID BIGINT,
+        ENTITY_TYPE VARCHAR(64),
+        QUERY_STRING MEDIUMTEXT,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ALTER TABLE TINDEXNOTIFY COMMENT 'indexer notifications.';
+
+
+# -----------------------------------------------------------------------
+# TRULESTORAGE
+# -----------------------------------------------------------------------
+CREATE TABLE TRULESTORAGE
+(
+        UIDPK BIGINT NOT NULL,
+        STORE_UID BIGINT,
+        CATALOG_UID BIGINT,
+        SCENARIO INT NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        RULEBASE LONGBLOB NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TRULESTORAGE_FK_1 FOREIGN KEY TRULESTORAGE_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TRULESTORAGE_FK_2 FOREIGN KEY TRULESTORAGE_FK_2 (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    INDEX I_RS_STRE_UID (STORE_UID),
+    INDEX I_RS_CAT_UID (CATALOG_UID))Engine=InnoDB;
+
+ALTER TABLE TRULESTORAGE COMMENT 'compiled rule bases for rules (promotions).';
+
+
+# -----------------------------------------------------------------------
+# TADVANCEDSEARCHQUERY
+# -----------------------------------------------------------------------
+CREATE TABLE TADVANCEDSEARCHQUERY
+(
+        UIDPK BIGINT NOT NULL,
+        QUERY_ID BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION MEDIUMTEXT,
+        QUERY_VISIBILITY VARCHAR(20) NOT NULL,
+        OWNER_ID BIGINT,
+        QUERY_TYPE VARCHAR(20) NOT NULL,
+        QUERY_CONTENT MEDIUMTEXT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TADVANCEDSEARCHQUERY_FK_1 FOREIGN KEY TADVANCEDSEARCHQUERY_FK_1 (OWNER_ID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_ON_OWNER_UID (OWNER_ID))Engine=InnoDB;
+
+ALTER TABLE TADVANCEDSEARCHQUERY COMMENT 'advanced search queries.';
+
+
+# -----------------------------------------------------------------------
+# TSTORESUPPORTEDCURRENCY
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORESUPPORTEDCURRENCY
+(
+        UIDPK BIGINT NOT NULL,
+        CURRENCY VARCHAR(255) NOT NULL,
+        STORE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSTORESUPPORTEDCURRENCY_FK_1 FOREIGN KEY TSTORESUPPORTEDCURRENCY_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    INDEX I_STORESUPCURR_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORESUPPORTEDCURRENCY COMMENT 'the supported currencies for each store.';
+
+
+# -----------------------------------------------------------------------
+# TSTORESUPPORTEDLOCALE
+# -----------------------------------------------------------------------
+CREATE TABLE TSTORESUPPORTEDLOCALE
+(
+        UIDPK BIGINT NOT NULL,
+        LOCALE VARCHAR(255) NOT NULL,
+        STORE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TSTORESUPPORTEDLOCALE_FK_1 FOREIGN KEY TSTORESUPPORTEDLOCALE_FK_1 (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    INDEX I_STORESUPLOC_STORE_UID (STORE_UID))Engine=InnoDB;
+
+ALTER TABLE TSTORESUPPORTEDLOCALE COMMENT 'the supported locales for each store.';
+
+
+# -----------------------------------------------------------------------
+# TINDEXBUILDSTATUS
+# -----------------------------------------------------------------------
+CREATE TABLE TINDEXBUILDSTATUS
+(
+        UIDPK BIGINT NOT NULL,
+        INDEX_TYPE VARCHAR(100) NOT NULL,
+        LAST_BUILD_DATE DATETIME,
+        INDEX_STATUS VARCHAR(100) default 'MISSING' NOT NULL,
+        TOTAL_RECORDS INT default -1,
+        PROCESSED_RECORDS INT default -1,
+        OPERATION_START_DATE DATETIME,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ ALTER TABLE TINDEXBUILDSTATUS COMMENT 'build status information for the search indexes defined in t';
+
+
+# -----------------------------------------------------------------------
+# TPRICELIST
+# -----------------------------------------------------------------------
+CREATE TABLE TPRICELIST
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        CURRENCY VARCHAR(255) NOT NULL,
+        DESCRIPTION MEDIUMTEXT,
+        HIDDEN INTEGER default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TPRICELIST_GUID_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TPRICELIST_NAME_UNIQUE UNIQUE (NAME))Engine=InnoDB;
+
+ALTER TABLE TPRICELIST COMMENT 'This table holds information about price lists.';
+
+
+# -----------------------------------------------------------------------
+# TBASEAMOUNT
+# -----------------------------------------------------------------------
+CREATE TABLE TBASEAMOUNT
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        OBJECT_GUID VARCHAR(64) NOT NULL,
+        OBJECT_TYPE VARCHAR(100) NOT NULL,
+        QUANTITY DECIMAL(19,2) NOT NULL,
+        LIST DECIMAL(19,2),
+        SALE DECIMAL(19,2),
+        PRICE_LIST_GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TBASEAMOUNT_FK_1 FOREIGN KEY TBASEAMOUNT_FK_1 (PRICE_LIST_GUID) REFERENCES TPRICELIST (GUID)
+    ,
+    CONSTRAINT TBASEAMOUNT_UNIQUE UNIQUE (OBJECT_GUID, OBJECT_TYPE, QUANTITY, PRICE_LIST_GUID),
+    CONSTRAINT TBASEAMOUNT_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_TBASEAMOUNT_FK_GUID (PRICE_LIST_GUID),
+    INDEX I_TBASEAMOUNT_OBJECTS (PRICE_LIST_GUID, OBJECT_GUID))Engine=InnoDB;
+
+ALTER TABLE TBASEAMOUNT COMMENT 'information about base amounts.';
+
+
+# -----------------------------------------------------------------------
+# TOBJECTGROUPMEMBER
+# -----------------------------------------------------------------------
+CREATE TABLE TOBJECTGROUPMEMBER
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        OBJECT_GROUP_ID VARCHAR(64) NOT NULL,
+        OBJECT_TYPE VARCHAR(100) NOT NULL,
+        OBJECT_IDENTIFIER VARCHAR(100) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TOBJECTGROUP_UNIQUE UNIQUE (OBJECT_GROUP_ID, OBJECT_TYPE, OBJECT_IDENTIFIER),
+    CONSTRAINT TOBJECTGROUP_GUID_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ ALTER TABLE TOBJECTGROUPMEMBER COMMENT 'the associations between business object groups and their me';
+
+
+# -----------------------------------------------------------------------
+# TCHANGESET
+# -----------------------------------------------------------------------
+CREATE TABLE TCHANGESET
+(
+        UIDPK BIGINT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+        OBJECT_GROUP_ID VARCHAR(64) NOT NULL,
+        CREATED_DATE DATETIME NOT NULL,
+        CREATED_BY_USER_GUID VARCHAR(64) NOT NULL,
+        STATE_CODE VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCHANGESET_GROUP_ID_UNIQUE UNIQUE (OBJECT_GROUP_ID))Engine=InnoDB;
+
+ALTER TABLE TCHANGESET COMMENT 'information about change sets in the system.';
+
+
+# -----------------------------------------------------------------------
+# TOBJECTMETADATA
+# -----------------------------------------------------------------------
+CREATE TABLE TOBJECTMETADATA
+(
+        UIDPK BIGINT NOT NULL,
+        OBJECT_GROUP_MEMBER_UID BIGINT NOT NULL,
+        METADATA_KEY VARCHAR(255) NOT NULL,
+        METADATA_VALUE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TOBJECTMETADATA_FK_1 FOREIGN KEY TOBJECTMETADATA_FK_1 (OBJECT_GROUP_MEMBER_UID) REFERENCES TOBJECTGROUPMEMBER (UIDPK)
+    ,
+    INDEX I_TOBJECTMETADATA_MBR_UID (OBJECT_GROUP_MEMBER_UID))Engine=InnoDB;
+
+ALTER TABLE TOBJECTMETADATA COMMENT 'information associated with business object group members.';
+
+
+# -----------------------------------------------------------------------
+# TCHANGESETUSER
+# -----------------------------------------------------------------------
+CREATE TABLE TCHANGESETUSER
+(
+        UIDPK BIGINT NOT NULL,
+        USER_GUID VARCHAR(255) NOT NULL,
+        CHANGESET_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCHANGESETUSER_FK_1 FOREIGN KEY TCHANGESETUSER_FK_1 (CHANGESET_UID) REFERENCES TCHANGESET (UIDPK)
+    ,
+    INDEX I_TCHANGESETUSER_CS_UID (CHANGESET_UID),
+    INDEX I_TCHANGESETUSER_USER_GUID (USER_GUID))Engine=InnoDB;
+
+ALTER TABLE TCHANGESETUSER COMMENT 'the associations between users and change sets.';
+
+
+# -----------------------------------------------------------------------
+# TTAGDICTIONARY
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGDICTIONARY
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        PURPOSE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TAGDICTIONARY_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGDICTIONARY COMMENT 'the tag dictionaries defined in the system.';
+
+
+# -----------------------------------------------------------------------
+# TTAGCONDITION
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGCONDITION
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(4000),
+        CONDITION_STRING VARCHAR(4000) NOT NULL,
+        TAGDICTIONARY_GUID VARCHAR(64),
+        NAMED INTEGER default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TAGCONDITION_UNIQUE UNIQUE (GUID),
+    INDEX I_TAGDICTIONARY_FK (TAGDICTIONARY_GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGCONDITION COMMENT 'the conditions defined in the system.';
+
+
+# -----------------------------------------------------------------------
+# TSELLINGCONTEXTCONDITION
+# -----------------------------------------------------------------------
+CREATE TABLE TSELLINGCONTEXTCONDITION
+(
+        SELLING_CONTEXT_UID BIGINT NOT NULL,
+        CONDITION_GUID VARCHAR(64) NOT NULL,
+    CONSTRAINT FK_SELLCOND_SELLCTX FOREIGN KEY FK_SELLCOND_SELLCTX (SELLING_CONTEXT_UID) REFERENCES TSELLINGCONTEXT (UIDPK)
+    )Engine=InnoDB;
+
+ ALTER TABLE TSELLINGCONTEXTCONDITION COMMENT 'the associations between selling contexts and their conditio';
+
+
+# -----------------------------------------------------------------------
+# TCSDYNAMICCONTENT
+# -----------------------------------------------------------------------
+CREATE TABLE TCSDYNAMICCONTENT
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CONTENT_WRAPPER_ID VARCHAR(255) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(4000),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCSDYNAMICCONTENT_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TCSDYNAMICCONTENT_UNIQUE_NAME UNIQUE (NAME))Engine=InnoDB;
+
+ALTER TABLE TCSDYNAMICCONTENT COMMENT 'dynamic content definitions.';
+
+
+# -----------------------------------------------------------------------
+# TCSDYNAMICCONTENTDELIVERY
+# -----------------------------------------------------------------------
+CREATE TABLE TCSDYNAMICCONTENTDELIVERY
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+        PRIORITY INT NOT NULL,
+        CSDC_CONTENT_UID BIGINT NOT NULL,
+        SELLING_CONTEXT_GUID VARCHAR(64),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_DELIVERY_DCONTENT FOREIGN KEY FK_DELIVERY_DCONTENT (CSDC_CONTENT_UID) REFERENCES TCSDYNAMICCONTENT (UIDPK)
+    ,
+    CONSTRAINT FK_SELLING_CONTEXT FOREIGN KEY FK_SELLING_CONTEXT (SELLING_CONTEXT_GUID) REFERENCES TSELLINGCONTEXT (GUID)
+    ,
+    CONSTRAINT TCSDCA_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TCSDYNAMICCONTENTDELIVERY COMMENT 'dynamic content delivery information.';
+
+
+# -----------------------------------------------------------------------
+# TCSCONTENTSPACE
+# -----------------------------------------------------------------------
+CREATE TABLE TCSCONTENTSPACE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        TARGET_ID VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCSCONTENTSPACE_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TCSCONTENTSPACE_UNIQUE_TARGET UNIQUE (TARGET_ID))Engine=InnoDB;
+
+ALTER TABLE TCSCONTENTSPACE COMMENT 'content space definitions.';
+
+
+# -----------------------------------------------------------------------
+# TCSPARAMETERVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TCSPARAMETERVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CSDYNAMICCONTENT_UID BIGINT NOT NULL,
+        PARAMETER_NAME VARCHAR(255) NOT NULL,
+        LOCALIZABLE INTEGER default 0 NOT NULL,
+        DESCRIPTION VARCHAR(4000),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_PARAMVAL_DCONTENT FOREIGN KEY FK_PARAMVAL_DCONTENT (CSDYNAMICCONTENT_UID) REFERENCES TCSDYNAMICCONTENT (UIDPK)
+    ,
+    CONSTRAINT TCSPARAMETERVALUE_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ ALTER TABLE TCSPARAMETERVALUE COMMENT 'information about dynamic content parameters (parameter name';
+
+
+# -----------------------------------------------------------------------
+# TCSPARAMETERVALUELDF
+# -----------------------------------------------------------------------
+CREATE TABLE TCSPARAMETERVALUELDF
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        LOCALE VARCHAR(20) NOT NULL,
+        LDVALUE VARCHAR(4000) NOT NULL,
+        CSPARAMETERVALUE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_PARAMVALLOCALE_PARAMVAL FOREIGN KEY FK_PARAMVALLOCALE_PARAMVAL (CSPARAMETERVALUE_UID) REFERENCES TCSPARAMETERVALUE (UIDPK)
+    ,
+    CONSTRAINT TCSPARAMETERVALUELDF_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TCSPARAMETERVALUELDF COMMENT 'localized dynamic content parameter values.';
+
+
+# -----------------------------------------------------------------------
+# TCSDYNAMICCONTENTSPACE
+# -----------------------------------------------------------------------
+CREATE TABLE TCSDYNAMICCONTENTSPACE
+(
+        DC_DELIVERY_UID BIGINT NOT NULL,
+        DC_CONTENTSPACE_UID BIGINT NOT NULL,
+    CONSTRAINT FK_DELSPACE_DELIVERY FOREIGN KEY FK_DELSPACE_DELIVERY (DC_DELIVERY_UID) REFERENCES TCSDYNAMICCONTENTDELIVERY (UIDPK)
+    ,
+    CONSTRAINT FK_DELSPACE_CONTENTSPACE FOREIGN KEY FK_DELSPACE_CONTENTSPACE (DC_CONTENTSPACE_UID) REFERENCES TCSCONTENTSPACE (UIDPK)
+    ,
+    CONSTRAINT TCSDYNAMICCONTENTSPACE_CK_1 UNIQUE (DC_DELIVERY_UID, DC_CONTENTSPACE_UID))Engine=InnoDB;
+
+ ALTER TABLE TCSDYNAMICCONTENTSPACE COMMENT 'the associations between dynamic content deliveries and cont';
+
+
+# -----------------------------------------------------------------------
+# TCHANGETRANSACTION
+# -----------------------------------------------------------------------
+CREATE TABLE TCHANGETRANSACTION
+(
+        UIDPK BIGINT NOT NULL,
+        TRANSACTION_ID VARCHAR(255) NOT NULL,
+        CHANGE_DATE DATETIME NOT NULL,
+    PRIMARY KEY(UIDPK))Engine=InnoDB;
+
+ ALTER TABLE TCHANGETRANSACTION COMMENT 'information about change transactions. (Used for auditing pu';
+
+
+# -----------------------------------------------------------------------
+# TCHANGETRANSACTIONMETADATA
+# -----------------------------------------------------------------------
+CREATE TABLE TCHANGETRANSACTIONMETADATA
+(
+        UIDPK BIGINT NOT NULL,
+        CHANGE_TRANSACTION_UID BIGINT NOT NULL,
+        METADATA_KEY VARCHAR(255) NOT NULL,
+        METADATA_VALUE VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCHANGETRANSACTIONMETADATA_FK_1 FOREIGN KEY TCHANGETRANSACTIONMETADATA_FK_1 (CHANGE_TRANSACTION_UID) REFERENCES TCHANGETRANSACTION (UIDPK)
+    )Engine=InnoDB;
+
+ ALTER TABLE TCHANGETRANSACTIONMETADATA COMMENT 'metadata associated with change transactions. (Used for audi';
+
+
+# -----------------------------------------------------------------------
+# TCHANGEOPERATION
+# -----------------------------------------------------------------------
+CREATE TABLE TCHANGEOPERATION
+(
+        UIDPK BIGINT NOT NULL,
+        OPERATION_ORDER INT NOT NULL,
+        ROOT_OBJECT_NAME VARCHAR(255),
+        ROOT_OBJECT_UID BIGINT,
+        ROOT_OBJECT_GUID VARCHAR(255),
+        CHANGE_TYPE VARCHAR(255) NOT NULL,
+        CHANGE_TRANSACTION_UID BIGINT NOT NULL,
+        QUERY_STRING VARCHAR(1000),
+        QUERY_PARAMETERS VARCHAR(255),
+        TYPE VARCHAR(20),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCHANGEOPERATION_FK_1 FOREIGN KEY TCHANGEOPERATION_FK_1 (CHANGE_TRANSACTION_UID) REFERENCES TCHANGETRANSACTION (UIDPK)
+    )Engine=InnoDB;
+
+ ALTER TABLE TCHANGEOPERATION COMMENT 'the details of a change operation. (Used for auditing purpos';
+
+
+# -----------------------------------------------------------------------
+# TTAGVALUETYPE
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGVALUETYPE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        JAVA_TYPE VARCHAR(50),
+        UI_PICKER_KEY VARCHAR(50),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TAGVALUETYPE_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ ALTER TABLE TTAGVALUETYPE COMMENT 'the tag value types that can be associated with tag definiti';
+
+
+# -----------------------------------------------------------------------
+# TTAGGROUP
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGGROUP
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TAGGROUP_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGGROUP COMMENT 'the tag groups used to organize tag definitions.';
+
+
+# -----------------------------------------------------------------------
+# TTAGDEFINITION
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGDEFINITION
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(255),
+        TAGVALUETYPE_GUID VARCHAR(64) NOT NULL,
+        TAGGROUP_UID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_TTAGVALUETYPE FOREIGN KEY FK_TTAGVALUETYPE (TAGVALUETYPE_GUID) REFERENCES TTAGVALUETYPE (GUID)
+    ,
+    CONSTRAINT FK_TTAGGROUP FOREIGN KEY FK_TTAGGROUP (TAGGROUP_UID) REFERENCES TTAGGROUP (UIDPK)
+    ,
+    CONSTRAINT TAGDEFINITION_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGDEFINITION COMMENT 'the tag definitions in the system.';
+
+
+# -----------------------------------------------------------------------
+# TTAGALLOWEDVALUE
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGALLOWEDVALUE
+(
+        UIDPK BIGINT NOT NULL,
+        VALUE VARCHAR(255) NOT NULL,
+        TAGVALUETYPE_GUID VARCHAR(64) NOT NULL,
+        DESCRIPTION VARCHAR(4000),
+        ORDERING INT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_TAGALLOWEDVAL_TAGTYPE FOREIGN KEY FK_TAGALLOWEDVAL_TAGTYPE (TAGVALUETYPE_GUID) REFERENCES TTAGVALUETYPE (GUID)
+    ,
+    CONSTRAINT TAGALLOWEDVALUE_UNIQUE UNIQUE (VALUE, TAGVALUETYPE_GUID),
+    CONSTRAINT TAGALLOWEDVALUE_UNIQUE2 UNIQUE (ORDERING, TAGVALUETYPE_GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGALLOWEDVALUE COMMENT 'the allowed values for each tag value type.';
+
+
+# -----------------------------------------------------------------------
+# TDATACHANGED
+# -----------------------------------------------------------------------
+CREATE TABLE TDATACHANGED
+(
+        UIDPK BIGINT NOT NULL,
+        CHANGE_TYPE VARCHAR(255) NOT NULL,
+        FIELD_NAME VARCHAR(255),
+        FIELD_OLD_VALUE MEDIUMTEXT,
+        FIELD_NEW_VALUE MEDIUMTEXT,
+        OBJECT_NAME VARCHAR(255),
+        OBJECT_UID BIGINT,
+        OBJECT_GUID VARCHAR(255),
+        CHANGE_OPERATION_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TDATACHANGED_FK_1 FOREIGN KEY TDATACHANGED_FK_1 (CHANGE_OPERATION_UID) REFERENCES TCHANGEOPERATION (UIDPK)
+    )Engine=InnoDB;
+
+ ALTER TABLE TDATACHANGED COMMENT 'information about changes made to objects. (Used for auditin';
+
+
+# -----------------------------------------------------------------------
+# TTAGDICTIONARYTAGDEFINITION
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGDICTIONARYTAGDEFINITION
+(
+        TAGDICTIONARY_GUID VARCHAR(64) NOT NULL,
+        TAGDEFINITION_GUID VARCHAR(64) NOT NULL,
+    CONSTRAINT TAGDICTIONARYTAGDEF_UNIQUE UNIQUE (TAGDICTIONARY_GUID, TAGDEFINITION_GUID))Engine=InnoDB;
+
+ ALTER TABLE TTAGDICTIONARYTAGDEFINITION COMMENT 'the associations between tag dictionaries and tag definition';
+
+
+# -----------------------------------------------------------------------
+# TTAGOPERATOR
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGOPERATOR
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TAGOPERATOR_UNIQUE UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGOPERATOR COMMENT 'the tag operators that can be used in conditions.';
+
+
+# -----------------------------------------------------------------------
+# TTAGVALUETYPEOPERATOR
+# -----------------------------------------------------------------------
+CREATE TABLE TTAGVALUETYPEOPERATOR
+(
+        TAGVALUETYPE_GUID VARCHAR(64) NOT NULL,
+        TAGOPERATOR_GUID VARCHAR(64) NOT NULL,
+    CONSTRAINT FK_TAGOPERATOR_TAGVALUETYPE FOREIGN KEY FK_TAGOPERATOR_TAGVALUETYPE (TAGOPERATOR_GUID) REFERENCES TTAGOPERATOR (GUID)
+    ,
+    CONSTRAINT FK_TAGVALUETYPE_TAGOPERATOR FOREIGN KEY FK_TAGVALUETYPE_TAGOPERATOR (TAGVALUETYPE_GUID) REFERENCES TTAGVALUETYPE (GUID)
+    ,
+    CONSTRAINT TTAGVALUETYPEOPERATOR_UNIQUE UNIQUE (TAGVALUETYPE_GUID, TAGOPERATOR_GUID))Engine=InnoDB;
+
+ALTER TABLE TTAGVALUETYPEOPERATOR COMMENT 'the associations between tag value types and tag operators.';
+
+
+# -----------------------------------------------------------------------
+# TVALIDATIONCONSTRAINTS
+# -----------------------------------------------------------------------
+CREATE TABLE TVALIDATIONCONSTRAINTS
+(
+        UIDPK BIGINT NOT NULL,
+        OBJECT_UID BIGINT,
+        ERROR_MESSAGE_KEY VARCHAR(255) NOT NULL,
+        VALIDATION_CONSTRAINT VARCHAR(4000) NOT NULL,
+        TYPE VARCHAR(31) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    INDEX I_VC_OBJECT_UID (OBJECT_UID))Engine=InnoDB;
+
+ ALTER TABLE TVALIDATIONCONSTRAINTS COMMENT 'the VALANG validation constraints associated tag value types';
+
+
+# -----------------------------------------------------------------------
+# TBUNDLECONSTITUENTX
+# -----------------------------------------------------------------------
+CREATE TABLE TBUNDLECONSTITUENTX
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        BUNDLE_UID BIGINT NOT NULL,
+        CONSTITUENT_UID BIGINT,
+        CONSTITUENT_SKU_UID BIGINT,
+        QUANTITY INT default 1 NOT NULL,
+        ORDERING INT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TBCX_TPROD_FK FOREIGN KEY TBCX_TPROD_FK (BUNDLE_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    CONSTRAINT TBCX_TPROD_C_FK FOREIGN KEY TBCX_TPROD_C_FK (CONSTITUENT_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    CONSTRAINT TBCX_TSKU_C_FK FOREIGN KEY TBCX_TSKU_C_FK (CONSTITUENT_SKU_UID) REFERENCES TPRODUCTSKU (UIDPK)
+    ,
+    CONSTRAINT TBCX_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_BCX_BUNDLE_UID (BUNDLE_UID),
+    INDEX I_BCX_CONSTITUENT_UID (CONSTITUENT_UID),
+    INDEX I_BCX_CONSTITUENT_SKU_UID (CONSTITUENT_SKU_UID))Engine=InnoDB;
+
+ ALTER TABLE TBUNDLECONSTITUENTX COMMENT 'the many-to-many relationships between product bundles and b';
+
+
+# -----------------------------------------------------------------------
+# TPRICEADJUSTMENT
+# -----------------------------------------------------------------------
+CREATE TABLE TPRICEADJUSTMENT
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        CONSTITUENT_GUID VARCHAR(64) NOT NULL,
+        AMOUNT DECIMAL(19,2),
+        PRICE_LIST_GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_TPRICEADJUST_CONST_GUID FOREIGN KEY FK_TPRICEADJUST_CONST_GUID (CONSTITUENT_GUID) REFERENCES TBUNDLECONSTITUENTX (GUID)
+    ,
+    CONSTRAINT TPRICEADJUSTMENT_GUID_UNIQUE UNIQUE (GUID),
+    INDEX I_TPRICEADJUSTMENT_FK_PL_GUID (PRICE_LIST_GUID),
+    INDEX I_TPRICEADJUSTMENT_FK_BCX_GUID (CONSTITUENT_GUID),
+    INDEX I_TPRICEADJUSTMENT_KEYS (PRICE_LIST_GUID, CONSTITUENT_GUID))Engine=InnoDB;
+
+ALTER TABLE TPRICEADJUSTMENT COMMENT 'price adjustments in a price list.';
+
+
+# -----------------------------------------------------------------------
+# TBUNDLESELECTIONRULE
+# -----------------------------------------------------------------------
+CREATE TABLE TBUNDLESELECTIONRULE
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        PARAMETER INT NOT NULL,
+        BUNDLE_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TBSR_TPROD_FK FOREIGN KEY TBSR_TPROD_FK (BUNDLE_UID) REFERENCES TPRODUCT (UIDPK)
+    ,
+    INDEX I_BSR_BUNDLE_UID (BUNDLE_UID))Engine=InnoDB;
+
+ALTER TABLE TBUNDLESELECTIONRULE COMMENT 'the available bundle item selection rules.';
+
+
+# -----------------------------------------------------------------------
+# TSHOPPINGITEMDATA
+# -----------------------------------------------------------------------
+CREATE TABLE TSHOPPINGITEMDATA
+(
+        UIDPK BIGINT NOT NULL,
+        ITEM_KEY MEDIUMTEXT NOT NULL,
+        ITEM_VALUE MEDIUMTEXT,
+        CARTITEM_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCARTITEM_FK FOREIGN KEY TCARTITEM_FK (CARTITEM_UID) REFERENCES TCARTITEM (UIDPK)
+    ,
+    INDEX I_CARTITEM_UID (CARTITEM_UID))Engine=InnoDB;
+
+ALTER TABLE TSHOPPINGITEMDATA COMMENT 'key/value pairs of data associated with shopping items.';
+
+
+# -----------------------------------------------------------------------
+# TORDERITEMDATA
+# -----------------------------------------------------------------------
+CREATE TABLE TORDERITEMDATA
+(
+        UIDPK BIGINT NOT NULL,
+        ITEM_KEY MEDIUMTEXT NOT NULL,
+        ITEM_VALUE MEDIUMTEXT,
+        ORDERSKU_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TORDERSKU_FK FOREIGN KEY TORDERSKU_FK (ORDERSKU_UID) REFERENCES TORDERSKU (UIDPK)
+    ,
+    INDEX I_ORDERSKU_UID (ORDERSKU_UID))Engine=InnoDB;
+
+ALTER TABLE TORDERITEMDATA COMMENT 'key/value pairs of data associated with order SKUs.';
+
+
+# -----------------------------------------------------------------------
+# TPRICELISTASSIGNMENT
+# -----------------------------------------------------------------------
+CREATE TABLE TPRICELISTASSIGNMENT
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        DESCRIPTION VARCHAR(4000),
+        PRIORITY INT default 1 NOT NULL,
+        CATALOG_UID BIGINT NOT NULL,
+        PRLISTDSCR_UID BIGINT NOT NULL,
+        SELLING_CTX_UID BIGINT,
+        HIDDEN INTEGER default 0,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT CATPLA_FK FOREIGN KEY CATPLA_FK (CATALOG_UID) REFERENCES TCATALOG (UIDPK)
+    ,
+    CONSTRAINT PLDPLA_FK FOREIGN KEY PLDPLA_FK (PRLISTDSCR_UID) REFERENCES TPRICELIST (UIDPK)
+    ,
+    CONSTRAINT SCPLA_FK FOREIGN KEY SCPLA_FK (SELLING_CTX_UID) REFERENCES TSELLINGCONTEXT (UIDPK)
+    ,
+    CONSTRAINT TPLA_GUID_UNIQUE UNIQUE (GUID),
+    CONSTRAINT TPLA_NAME_UNIQUE UNIQUE (NAME),
+    INDEX I_CATALOG_UID (CATALOG_UID),
+    INDEX I_PRLISTDSCR_UID (PRLISTDSCR_UID))Engine=InnoDB;
+
+ ALTER TABLE TPRICELISTASSIGNMENT COMMENT 'This table associates price lists to catalogs and selling co';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTNOTIFICATION
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTNOTIFICATION
+(
+        UIDPK BIGINT NOT NULL,
+        REQUEST_ID VARCHAR(64) NOT NULL,
+        ACTION VARCHAR(64) NOT NULL,
+        IMPORT_JOB_UID BIGINT NOT NULL,
+        DATE_CREATED TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+        CMUSER_UID BIGINT NOT NULL,
+        NOTIFICATION_STATE VARCHAR(64) NOT NULL,
+        CHANGESET_GUID VARCHAR(64),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT IN_IMPORTJOB_FK FOREIGN KEY IN_IMPORTJOB_FK (IMPORT_JOB_UID) REFERENCES TIMPORTJOB (UIDPK)
+    ,
+    CONSTRAINT IN_CMUSER_FK FOREIGN KEY IN_CMUSER_FK (CMUSER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_IN_IMPORTJOB_FK (IMPORT_JOB_UID),
+    INDEX I_IN_CMUSER_FK (CMUSER_UID))Engine=InnoDB;
+
+ALTER TABLE TIMPORTNOTIFICATION COMMENT 'import job notifications.';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTNOTIFICATIONMETADATA
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTNOTIFICATIONMETADATA
+(
+        UIDPK BIGINT NOT NULL,
+        METADATA_KEY VARCHAR(255),
+        METADATA_VALUE VARCHAR(255),
+        IMPORT_NOTIFICATION_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT INM_IMPORTNOTIFICATION_FK FOREIGN KEY INM_IMPORTNOTIFICATION_FK (IMPORT_NOTIFICATION_UID) REFERENCES TIMPORTNOTIFICATION (UIDPK)
+    ,
+    INDEX I_INM_IMPORTNOTIFICATION_FK (IMPORT_NOTIFICATION_UID))Engine=InnoDB;
+
+ALTER TABLE TIMPORTNOTIFICATIONMETADATA COMMENT 'import job notification metadata.';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTJOBSTATUS
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTJOBSTATUS
+(
+        UIDPK BIGINT NOT NULL,
+        PROCESS_ID VARCHAR(64) NOT NULL,
+        IMPORT_JOB_UID BIGINT NOT NULL,
+        CMUSER_UID BIGINT NOT NULL,
+        START_DATE DATETIME,
+        END_DATE DATETIME,
+        TOTAL_ROWS INT,
+        FAILED_ROWS INT,
+        CURRENT_ROW INT,
+        STATE VARCHAR(64) NOT NULL,
+        LAST_MODIFIED_DATE TIMESTAMP default CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT IJS_IMPORTJOB_FK FOREIGN KEY IJS_IMPORTJOB_FK (IMPORT_JOB_UID) REFERENCES TIMPORTJOB (UIDPK)
+    ,
+    CONSTRAINT IJS_CMUSER_FK FOREIGN KEY IJS_CMUSER_FK (CMUSER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_IJS_IMPORTJOB_FK (IMPORT_JOB_UID),
+    INDEX I_IJS_CMUSER_FK (CMUSER_UID))Engine=InnoDB;
+
+ALTER TABLE TIMPORTJOBSTATUS COMMENT 'information about the status of running import jobs.';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTBADROW
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTBADROW
+(
+        UIDPK BIGINT NOT NULL,
+        IMPORT_JOB_STATUS_UID BIGINT NOT NULL,
+        ROW_NUMBER INT NOT NULL,
+        ROW_DATA MEDIUMTEXT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT IBR_IMPORTJOBSTATUS_FK FOREIGN KEY IBR_IMPORTJOBSTATUS_FK (IMPORT_JOB_STATUS_UID) REFERENCES TIMPORTJOBSTATUS (UIDPK)
+    ,
+    INDEX I_IBR_IMPORTJOBSTATUS_FK (IMPORT_JOB_STATUS_UID))Engine=InnoDB;
+
+ ALTER TABLE TIMPORTBADROW COMMENT 'information about rows that failed to import during import j';
+
+
+# -----------------------------------------------------------------------
+# TIMPORTFAULT
+# -----------------------------------------------------------------------
+CREATE TABLE TIMPORTFAULT
+(
+        UIDPK BIGINT NOT NULL,
+        IMPORT_BAD_ROW_UID BIGINT NOT NULL,
+        LEVEL_NUMBER INT,
+        CODE VARCHAR(255),
+        SOURCE_MESSAGE MEDIUMTEXT,
+        ARGS VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT IF_IMPORTBADROW_FK FOREIGN KEY IF_IMPORTBADROW_FK (IMPORT_BAD_ROW_UID) REFERENCES TIMPORTBADROW (UIDPK)
+    ,
+    INDEX I_IF_IMPORTBADROW_FK (IMPORT_BAD_ROW_UID))Engine=InnoDB;
+
+ALTER TABLE TIMPORTFAULT COMMENT 'information about faults that occurred during import jobs.';
+
+
+# -----------------------------------------------------------------------
+# TCMUSERPRICELIST
+# -----------------------------------------------------------------------
+CREATE TABLE TCMUSERPRICELIST
+(
+        USER_UID BIGINT NOT NULL,
+        PRICELIST_GUID VARCHAR(64) NOT NULL,
+    PRIMARY KEY(USER_UID,PRICELIST_GUID),
+    CONSTRAINT TCMUSERPRICELIST_FK_1 FOREIGN KEY TCMUSERPRICELIST_FK_1 (PRICELIST_GUID) REFERENCES TPRICELIST (GUID)
+    ,
+    CONSTRAINT TCMUSERPRICELIST_FK_2 FOREIGN KEY TCMUSERPRICELIST_FK_2 (USER_UID) REFERENCES TCMUSER (UIDPK)
+    ,
+    INDEX I_CMUSERPL_GUID (PRICELIST_GUID),
+    INDEX I_CMUSERPL_USER_UID (USER_UID))Engine=InnoDB;
+
+ALTER TABLE TCMUSERPRICELIST COMMENT 'user to price lists associations.';
+
+
+# -----------------------------------------------------------------------
+# TCOUPONCONFIG
+# -----------------------------------------------------------------------
+CREATE TABLE TCOUPONCONFIG
+(
+        UIDPK BIGINT NOT NULL,
+        RULECODE VARCHAR(64) NOT NULL,
+        USAGE_LIMIT INT NOT NULL,
+        USAGE_TYPE VARCHAR(255) NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        LIMITED_DURATION INTEGER default 0 NOT NULL,
+        DURATION_DAYS INT,
+        MULTI_USE_PER_ORDER INTEGER default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCOUPONCONFIG_FK_1 FOREIGN KEY TCOUPONCONFIG_FK_1 (RULECODE) REFERENCES TRULE (RULECODE)
+    ,
+    CONSTRAINT TCOUPONCONFIG_GUID_UNQ UNIQUE (GUID),
+    CONSTRAINT TCOUPONCONFIG_RULECODE_UNQ UNIQUE (RULECODE))Engine=InnoDB;
+
+ALTER TABLE TCOUPONCONFIG COMMENT 'coupon configuration information.';
+
+
+# -----------------------------------------------------------------------
+# TCOUPON
+# -----------------------------------------------------------------------
+CREATE TABLE TCOUPON
+(
+        UIDPK BIGINT NOT NULL,
+        COUPONCODE VARCHAR(255) NOT NULL,
+        COUPON_CONFIG_UID BIGINT NOT NULL,
+        SUSPENDED INTEGER default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCOUPON_FK_1 FOREIGN KEY TCOUPON_FK_1 (COUPON_CONFIG_UID) REFERENCES TCOUPONCONFIG (UIDPK)
+    ,
+    CONSTRAINT TCOUPON_RULE_COUPON_UNQ UNIQUE (COUPONCODE))Engine=InnoDB;
+
+ALTER TABLE TCOUPON COMMENT 'the coupon definitions and their state.';
+
+
+# -----------------------------------------------------------------------
+# TCOUPONUSAGE
+# -----------------------------------------------------------------------
+CREATE TABLE TCOUPONUSAGE
+(
+        UIDPK BIGINT NOT NULL,
+        COUPON_UID BIGINT NOT NULL,
+        USECOUNT INT NOT NULL,
+        ACTIVE_IN_CART INTEGER default 0 NOT NULL,
+        CUSTOMER_EMAIL_ADDRESS VARCHAR(255) NOT NULL,
+        LIMITED_DURATION_END_DATE DATETIME,
+        SUSPENDED INTEGER default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCOUPONUSAGE_FK_1 FOREIGN KEY TCOUPONUSAGE_FK_1 (COUPON_UID) REFERENCES TCOUPON (UIDPK)
+    ,
+    CONSTRAINT TCOUPON_EMAIL_COUPON_UNQ UNIQUE (COUPON_UID, CUSTOMER_EMAIL_ADDRESS))Engine=InnoDB;
+
+ALTER TABLE TCOUPONUSAGE COMMENT 'the usage count of limited use coupons.';
+
+
+# -----------------------------------------------------------------------
+# TWISHLIST
+# -----------------------------------------------------------------------
+CREATE TABLE TWISHLIST
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(100) NOT NULL,
+        STORECODE VARCHAR(64),
+        SHOPPER_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_WISHLIST_SHOPPER FOREIGN KEY FK_WISHLIST_SHOPPER (SHOPPER_UID) REFERENCES TSHOPPER (UIDPK)
+    ,
+    CONSTRAINT FK_STORE FOREIGN KEY FK_STORE (STORECODE) REFERENCES TSTORE (STORECODE)
+    ,
+    CONSTRAINT TWISHLIST_UNIQUE UNIQUE (GUID),
+    INDEX I_TWISHLIST_SHOPPER_UID (SHOPPER_UID))Engine=InnoDB;
+
+ALTER TABLE TWISHLIST COMMENT 'information about customers'' wish lists.';
+
+
+# -----------------------------------------------------------------------
+# TWISHLISTITEMS
+# -----------------------------------------------------------------------
+CREATE TABLE TWISHLISTITEMS
+(
+        WISHLIST_UID BIGINT NOT NULL,
+        ITEM_UID BIGINT NOT NULL,
+    PRIMARY KEY(WISHLIST_UID,ITEM_UID),
+    CONSTRAINT TWISHLISTITEMS_FK_1 FOREIGN KEY TWISHLISTITEMS_FK_1 (WISHLIST_UID) REFERENCES TWISHLIST (UIDPK)
+    ,
+    CONSTRAINT TWISHLISTITEMS_FK_2 FOREIGN KEY TWISHLISTITEMS_FK_2 (ITEM_UID) REFERENCES TCARTITEM (UIDPK)
+    )Engine=InnoDB;
+
+ALTER TABLE TWISHLISTITEMS COMMENT 'join table between wishlist and shopping item';
+
+
+# -----------------------------------------------------------------------
+# TSHOPPINGCARTITEMS
+# -----------------------------------------------------------------------
+CREATE TABLE TSHOPPINGCARTITEMS
+(
+        SHOPPING_CART_UID BIGINT NOT NULL,
+        ITEM_UID BIGINT NOT NULL,
+    INDEX I_TSCI_CART_UID (SHOPPING_CART_UID))Engine=InnoDB;
+
+ ALTER TABLE TSHOPPINGCARTITEMS COMMENT 'OpenJPA managed join table between shopping cart and shoppin';
+
+
+# -----------------------------------------------------------------------
+# TCAMPAIGN
+# -----------------------------------------------------------------------
+CREATE TABLE TCAMPAIGN
+(
+        UIDPK BIGINT NOT NULL,
+        THIRD_PARTY_ID VARCHAR(255) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        START_DATE DATETIME,
+        END_DATE DATETIME,
+        STATE INT default 0 NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT TCAMPAIGN_NAME_UNQ UNIQUE (NAME),
+    CONSTRAINT TCAMPAIGN_THIRD_PARTY_ID_UNQ UNIQUE (THIRD_PARTY_ID))Engine=InnoDB;
+
+ALTER TABLE TCAMPAIGN COMMENT 'Site Optimization - Campaign';
+
+
+# -----------------------------------------------------------------------
+# TEXPERIENCE
+# -----------------------------------------------------------------------
+CREATE TABLE TEXPERIENCE
+(
+        UIDPK BIGINT NOT NULL,
+        THIRD_PARTY_ID VARCHAR(255) NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        GUID VARCHAR(100) NOT NULL,
+        CAMPAIGN_UID BIGINT NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_CAMPAIGN_TEXPERIENCE_UID FOREIGN KEY FK_CAMPAIGN_TEXPERIENCE_UID (CAMPAIGN_UID) REFERENCES TCAMPAIGN (UIDPK)
+    ,
+    CONSTRAINT TEXPERIENCE_GUID_UNIQ UNIQUE (GUID))Engine=InnoDB;
+
+ALTER TABLE TEXPERIENCE COMMENT 'Site Optimization - Experience';
+
+
+# -----------------------------------------------------------------------
+# TMARKETTESTINGOFFER
+# -----------------------------------------------------------------------
+CREATE TABLE TMARKETTESTINGOFFER
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(100) NOT NULL,
+        NAME VARCHAR(255),
+        STORE_UID BIGINT,
+        OFFER_VALUE_ENTITY_UID BIGINT,
+        OFFER_TYPE VARCHAR(255),
+        LAST_SYNC_DATE DATETIME,
+        OFFER_TYPE_NAME VARCHAR(255),
+        CAMPAIGN_STATE INT default 1 NOT NULL,
+        EXTERNAL_ID BIGINT,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_OFFER_STORE_UID FOREIGN KEY FK_OFFER_STORE_UID (STORE_UID) REFERENCES TSTORE (UIDPK)
+    ,
+    CONSTRAINT TMARKETOFFER_GUID_UNQ UNIQUE (GUID),
+    CONSTRAINT TMARKETTESTINGOFFER_NAME_UNQ UNIQUE (NAME))Engine=InnoDB;
+
+ALTER TABLE TMARKETTESTINGOFFER COMMENT 'Site Optimization - Market Testing Offer';
+
+
+# -----------------------------------------------------------------------
+# TEXPERIENCEOFFERLOCATION
+# -----------------------------------------------------------------------
+CREATE TABLE TEXPERIENCEOFFERLOCATION
+(
+        UIDPK BIGINT NOT NULL,
+        EXPERIENCE_UID BIGINT NOT NULL,
+        OFFER_UID BIGINT NOT NULL,
+        OFFER_LOCATION VARCHAR(255) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT FK_TEOL_EXPERIENCE_UID FOREIGN KEY FK_TEOL_EXPERIENCE_UID (EXPERIENCE_UID) REFERENCES TEXPERIENCE (UIDPK)
+    ,
+    CONSTRAINT FK_TEOL_OFFER_UID FOREIGN KEY FK_TEOL_OFFER_UID (OFFER_UID) REFERENCES TMARKETTESTINGOFFER (UIDPK)
+    ,
+    CONSTRAINT TEOL_ALL_COLUMNS_UNQ UNIQUE (EXPERIENCE_UID, OFFER_UID, OFFER_LOCATION))Engine=InnoDB;
+
+ALTER TABLE TEXPERIENCEOFFERLOCATION COMMENT 'Site Optimization - Experience Offer Location';
+
+
+# -----------------------------------------------------------------------
+# TCARTORDER
+# -----------------------------------------------------------------------
+CREATE TABLE TCARTORDER
+(
+        UIDPK BIGINT NOT NULL,
+        GUID VARCHAR(64) NOT NULL,
+        BILLING_GUID VARCHAR(64),
+        SHOPPINGCART_GUID VARCHAR(100) NOT NULL,
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT UNQ_CARTORDER_GUID UNIQUE (GUID),
+    CONSTRAINT UNQ_CARTORDER_SC_GUID UNIQUE (SHOPPINGCART_GUID))Engine=InnoDB;
+
+ALTER TABLE TCARTORDER COMMENT 'Cart Order';
+
+
+# -----------------------------------------------------------------------
+# TOAUTHACCESSTOKEN
+# -----------------------------------------------------------------------
+CREATE TABLE TOAUTHACCESSTOKEN
+(
+        UIDPK BIGINT NOT NULL,
+        TOKEN_ID VARCHAR(255) NOT NULL,
+        EXPIRY_DATE DATETIME NOT NULL,
+        TOKEN_TYPE VARCHAR(255) NOT NULL,
+        USERNAME VARCHAR(255) NOT NULL,
+        CREDENTIALS VARCHAR(255) NOT NULL,
+        STORECODE VARCHAR(255) NOT NULL,
+        CLIENT_ID VARCHAR(255) NOT NULL,
+        CLIENT_SECRET VARCHAR(255),
+    PRIMARY KEY(UIDPK),
+    CONSTRAINT UNQ_TOAT_TOKEN_TOKEN_ID UNIQUE (TOKEN_ID),
+    INDEX I_TOAT_EXPIRY_DATE (EXPIRY_DATE))Engine=InnoDB;
+
+ALTER TABLE TOAUTHACCESSTOKEN COMMENT 'OAuth2 access token';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

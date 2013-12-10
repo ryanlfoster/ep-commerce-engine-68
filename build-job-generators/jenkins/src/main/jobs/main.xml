@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+	<import file="archetype-common.xml" />
+	<import file="nexus-common.xml" />
+
+	<!--
+		Main Build Job. Compiles and deploys everything including itests. Does not run any code compliance (PMD/FindBugs/Checkstyle).
+		Triggers a Javadoc build as well as PMD and Core Integration tests. This build has env.SNAPSHOT_REPOSITORY_ID set as a property,
+		which seems a bit weird. All builds triggered from this one will have an environment variable called SNAPSHOT_REPOSITORY_ID set on
+		them as a 'build parameter'. In the settings.xml for CI we use ${env.SNAPSHOT_REPOSITORY_ID} to use the value of that property.
+	-->
+
+	<job>
+		<id>${jenkinsJobPrefix}-Main-Build</id>
+		<parent>abstract-nexus-job</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<mavenOpts>${mavenOpts.mainBuild}</mavenOpts>
+		<mavenGoals>
+		<![CDATA[
+			-T ${maven.mainBuildThreads} -B -U -e clean deploy -P ,${maven.main-build.profiles} -DskipExtensions -DskipITests -DskipFitTests
+			-Denv.RELEASE_REPOSITORY_ID=${dummyRepoValue} -Denv.SNAPSHOT_REPOSITORY_ID="${nexusJobCISnapshotRepoId}"
+			-Dinvoker.settingsFile="$WORKSPACE/${settingsLocation}"
+		]]>
+		</mavenGoals>
+	</job>
+
+	<job>
+		<id>Extension-CI-Trigger</id>
+		<abstract>true</abstract>
+		<!-- This job is meant as an extension point for users wanting to extend the build process. -->
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Tutorial-Build</id>
+		<abstract>true</abstract>
+		<scmType>${scmType}-wipe</scmType>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Javadoc</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<mavenGoals><![CDATA[-B -U -e clean javadoc:aggregate -P ,${maven.javadoc.profiles} -DskipAllTests]]></mavenGoals>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Archetypes</id>
+		<parent>abstract-archetypes</parent>
+		<scmType>${scmType}-wipe</scmType>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Analysis</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<mavenOpts>${mavenOpts.analysis}</mavenOpts>
+		<mavenGoals><![CDATA[-B -U -e clean install -P ,${maven.analysis.profiles} -DskipExtensions -Drun.license.plugin=false]]></mavenGoals>
+
+	<reporters>
+		<![CDATA[
+		${checkstyleReportConfig}
+		${pmdReportConfig}
+		<hudson.plugins.findbugs.FindBugsReporter>
+			<healthy />
+			<unHealthy />
+			<pluginName>[FINDBUGS]</pluginName>
+			<thresholdLimit>low</thresholdLimit>
+			<canRunOnFailed>false</canRunOnFailed>
+			<useDeltaValues>false</useDeltaValues>
+			<thresholds>
+				<unstableTotalAll>0</unstableTotalAll>
+				<unstableTotalHigh />
+				<unstableTotalNormal />
+				<unstableTotalLow />
+				<unstableNewAll />
+				<unstableNewHigh />
+				<unstableNewNormal />
+				<unstableNewLow />
+				<failedTotalAll />
+				<failedTotalHigh />
+				<failedTotalNormal />
+				<failedTotalLow />
+				<failedNewAll />
+				<failedNewHigh />
+				<failedNewNormal />
+				<failedNewLow />
+			</thresholds>
+		</hudson.plugins.findbugs.FindBugsReporter>
+		]]>
+		</reporters>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Trigger-Integration-Tests</id>
+		<parent>abstract-triggered</parent>
+		<scmType>none</scmType>
+		<jobType>free</jobType>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value>${default.ci.site.baseUrl}</value>
+				<description>The BuildRepo URL to upload test results to. Release builds override the default value.</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<!-- we must have at least one task for this job for jenkins-maven-plugin, it is not actually needed -->
+				<command>echo</command>
+			</shell>
+		</tasks>
+
+		<invoke>
+			<jobs>
+				${jenkinsJobPrefix}-Integration-Tests-Core,${jenkinsJobPrefix}-Integration-Tests-SF,
+				${jenkinsJobPrefix}-Integration-Tests-CMServer,${jenkins.fit.jobs}
+			</jobs>
+			<unstable>true</unstable>
+			<currentBuildParams>true</currentBuildParams>
+		</invoke>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Tests-Core</id>
+		<parent>abstract-itests</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<pom>core/ep-core-itests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Tests-SF</id>
+		<parent>abstract-itests</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<pom>storefront/ep-storefront-itests/pom.xml</pom>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Integration-Tests-CMServer</id>
+		<parent>abstract-itests</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<pom>cmserver/ep-cmserver-itests/pom.xml</pom>
+	</job>
+	
+	<job>
+		<id>${jenkinsJobPrefix}-Deployment-Package</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<pom>deployment-package/pom.xml</pom>
+		<mavenOpts>${mavenOpts.package}</mavenOpts>
+		<mavenGoals>
+		<![CDATA[
+			-T ${maven.mainBuildThreads} -B -U -e clean deploy -DskipExtensions -DskipITests -DskipFitTests
+			-Dinvoker.settingsFile="$WORKSPACE/${settingsLocation}"
+		]]>
+		</mavenGoals>
+	</job>
+	
+</jobs>

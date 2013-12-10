@@ -1,0 +1,38 @@
+2013-12-10 12:27:22,673 [main] WARN com.elasticpath.importexport.common.adapters.catalogs.CatalogAdapter - IE-10000 [zu]
+2013-12-10 12:27:22,860 [main] WARN com.elasticpath.importexport.common.adapters.category.CategoryAdapter - IE-10100 [parentCategoryCode]
+2013-12-10 12:27:22,950 [main] ERROR com.elasticpath.importexport.common.adapters.inventory.InventorySkuAdapter - message INVENTORY
+2013-12-10 12:27:22,952 [main] ERROR com.elasticpath.importexport.common.adapters.inventory.InventorySkuAdapter - IE-10500 INVENTORY [UnknownWarehouse]
+2013-12-10 12:27:23,096 [main] ERROR com.elasticpath.importexport.common.adapters.productcategories.ProductCategoryAdapter - IE-10201 PRODUCTCATEGORYASSOCIATION [nullCategory]
+2013-12-10 12:27:23,142 [main] ERROR com.elasticpath.importexport.common.adapters.products.data.ProductAvailabilityAdapter - IE-10323 [productCode]
+2013-12-10 12:27:23,386 [main] ERROR com.elasticpath.importexport.common.adapters.products.ProductAdapter - IE-10320 [P111]
+2013-12-10 12:27:23,454 [main] ERROR com.elasticpath.importexport.common.adapters.products.ProductBundleAdapter - Trying update an existing bundle constituent with GUID guid by changing its code or type
+2013-12-10 12:27:23,476 [main] ERROR com.elasticpath.importexport.common.adapters.products.ProductBundleAdapter - Assigned bundle: CODE_1 contains Recurring charge constituent.
+2013-12-10 12:27:23,488 [main] ERROR com.elasticpath.importexport.common.adapters.products.ProductBundleAdapter - Unhandled product bundle constituent pricingMechanism: calculated expect: assigned
+2013-12-10 12:27:23,884 [Thread-2] ERROR com.elasticpath.importexport.common.util.runner.AbstractPipedStreamRunner - Intentional exception
+com.elasticpath.importexport.common.exception.runtime.ImportRuntimeException: Intentional exception
+	at com.elasticpath.importexport.common.util.AbstractPipedStreamRunnerTest$2.runInternal(AbstractPipedStreamRunnerTest.java:59)
+	at com.elasticpath.importexport.common.util.runner.AbstractPipedStreamRunner.run(AbstractPipedStreamRunner.java:55)
+	at java.lang.Thread.run(Thread.java:724)
+2013-12-10 12:27:23,995 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-enumeration-valid: Value 'INVALID' is not facet-valid with respect to enumeration '[PRODUCT, CATALOG, CATEGORY, PROMOTION, PRICELISTDESCRIPTOR, SYSTEMCONFIGURATION, CONTENTSPACE, DYNAMICCONTENT, DYNAMICCONTENTDELIVERY, PRICELISTASSIGNMENT, PAYMENTGATEWAY, TAXCODE, TAXJURISDICTION, WAREHOUSE, STORE, STORE_ASSOCIATION, CUSTOMER, CMUSER, USER_ROLE, CUSTOMERPROFILE_ATTRIBUTE, COUPONSET, GIFT_CERTIFICATE, SHIPPING_SERVICE_LEVEL, SHIPPING_REGION, SAVED_CONDITION, CM_IMPORT_JOB]'. It must be a value from the enumeration.
+2013-12-10 12:27:24,023 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'commonexportproperties'. One of '{packager}' is expected.
+2013-12-10 12:27:24,048 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'commonexportproperties'. One of '{packager}' is expected.
+2013-12-10 12:27:24,070 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'commonexportproperties'. One of '{packager}' is expected.
+2013-12-10 12:27:24,095 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-enumeration-valid: Value 'INVALID' is not facet-valid with respect to enumeration '[FILE]'. It must be a value from the enumeration.
+2013-12-10 12:27:24,119 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'commonexportproperties'. One of '{packager}' is expected.
+2013-12-10 12:27:24,139 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'exporter'. One of '{delivery}' is expected.
+2013-12-10 12:27:24,182 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'unknowntag'. One of '{epql, query}' is expected.
+2013-12-10 12:27:24,225 [main] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20500 [PRODUCT, [1]]
+2013-12-10 12:27:24,225 [main] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20501 [PRODUCT, 0]
+2013-12-10 12:27:24,935 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.3: Element 'importstrategy' cannot have character [children], because the type's content type is element-only.
+2013-12-10 12:27:25,001 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.3: Element 'importstrategy' cannot have character [children], because the type's content type is element-only.
+2013-12-10 12:27:25,024 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'importstrategy'. One of '{xmlvalidation}' is expected.
+2013-12-10 12:27:25,050 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.3: Element 'importstrategy' cannot have character [children], because the type's content type is element-only.
+2013-12-10 12:27:25,075 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.4.a: Invalid content was found starting with element 'retrieval'. One of '{xmlvalidation}' is expected.
+2013-12-10 12:27:25,096 [main] ERROR com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler - cvc-complex-type.2.3: Element 'importstrategy' cannot have character [children], because the type's content type is element-only.
+2013-12-10 12:27:25,103 [main] ERROR com.elasticpath.importexport.importer.controller.impl.ChangeSetImportStageImpl - IE-30406 [abc, com.elasticpath.importexport.common.dto.catalogs.CatalogDTO, Cannot add object to a change set with null or invalid GUID: abc and object descriptor]
+2013-12-10 12:27:25,458 [Thread-5] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20500 [PRODUCT, [0]]
+2013-12-10 12:27:25,459 [Thread-5] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20501 [PRODUCT, 0]
+2013-12-10 12:27:25,591 [Thread-6] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20500 [PRODUCT, [0]]
+2013-12-10 12:27:25,591 [Thread-6] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20501 [PRODUCT, 0]
+2013-12-10 12:27:25,620 [Thread-7] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20500 [PRODUCT, [0]]
+2013-12-10 12:27:25,620 [Thread-7] ERROR com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl - IE-20501 [PRODUCT, 0]

@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tax_jurisdictions>
+<jurisdiction guid="90A40DA5-CB0F-8470-B044-CA06D53F44F6">
+    <region_code>CA</region_code>
+    <priceCalculationMethod>false</priceCalculationMethod>
+    <tax_categories>
+        <tax_category guid="140A23B1-E64E-406E-A331-088912B18253">
+            <name>PST</name>
+            <fieldMatch>FIELD_MATCH_SUBCOUNTRY</fieldMatch>
+            <localized_properties/>
+            <regions>
+                <region region_name="PE">
+                    <values>
+                        <value percent="1.0000" code="GOODS"/>
+                        <value percent="1.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NB">
+                    <values>
+                        <value percent="8.0000" code="GOODS"/>
+                        <value percent="8.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NU">
+                    <values>
+                        <value percent="8.0000" code="GOODS"/>
+                        <value percent="8.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="BC">
+                    <values>
+                        <value percent="7.0000" code="GOODS"/>
+                        <value percent="7.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="SK">
+                    <values>
+                        <value percent="7.0000" code="GOODS"/>
+                        <value percent="7.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MB">
+                    <values>
+                        <value percent="7.0000" code="GOODS"/>
+                        <value percent="7.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NS">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="AB">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NL">
+                    <values>
+                        <value percent="8.0000" code="GOODS"/>
+                        <value percent="8.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="QC">
+                    <values>
+                        <value percent="7.5000" code="GOODS"/>
+                        <value percent="7.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="YT">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="ON">
+                    <values>
+                        <value percent="8.0000" code="GOODS"/>
+                        <value percent="8.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NT">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+            </regions>
+        </tax_category>
+        <tax_category guid="C922928F-08F9-CA7D-47E2-8F42B208E663">
+            <name>GST</name>
+            <fieldMatch>FIELD_MATCH_COUNTRY</fieldMatch>
+            <localized_properties/>
+            <regions>
+                <region region_name="CA">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+            </regions>
+        </tax_category>
+    </tax_categories>
+</jurisdiction>
+
+<jurisdiction guid="CC30D469-F32B-106E-60E4-2ECE4A3E5BEA">
+    <region_code>GB</region_code>
+    <priceCalculationMethod>true</priceCalculationMethod>
+    <tax_categories>
+        <tax_category guid="EC626066-E08B-CC01-72A6-CCAE6341B309">
+            <name>VAT</name>
+            <fieldMatch>FIELD_MATCH_COUNTRY</fieldMatch>
+            <localized_properties/>
+            <regions>
+                <region region_name="GB">
+                    <values>
+                        <value percent="17.5000" code="GOODS"/>
+                        <value percent="17.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+            </regions>
+        </tax_category>
+    </tax_categories>
+</jurisdiction>
+
+<jurisdiction guid="FF6E6776-16FB-7BB1-4B7E-DDF2F0D73FE7">
+    <region_code>US</region_code>
+    <priceCalculationMethod>false</priceCalculationMethod>
+    <tax_categories>
+        <tax_category guid="282E11EC-B9D9-EF39-36D8-AB2BFB851931">
+            <name>States Sales Tax</name>
+            <fieldMatch>FIELD_MATCH_SUBCOUNTRY</fieldMatch>
+            <localized_properties/>
+            <regions>
+                <region region_name="NJ">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="FL">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MI">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MO">
+                    <values>
+                        <value percent="4.2250" code="GOODS"/>
+                        <value percent="4.2250" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="VA">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="CO">
+                    <values>
+                        <value percent="2.9000" code="GOODS"/>
+                        <value percent="2.9000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="WV">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NC">
+                    <values>
+                        <value percent="4.5000" code="GOODS"/>
+                        <value percent="4.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="AR">
+                    <values>
+                        <value percent="7.0000" code="GOODS"/>
+                        <value percent="7.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="SC">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MS">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="AK">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="UT">
+                    <values>
+                        <value percent="4.7500" code="GOODS"/>
+                        <value percent="4.7500" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="VT">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="HI">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="AZ">
+                    <values>
+                        <value percent="5.6000" code="GOODS"/>
+                        <value percent="5.6000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MT">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="GA">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="DE">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="PA">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="KY">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="SD">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NE">
+                    <values>
+                        <value percent="5.5000" code="GOODS"/>
+                        <value percent="5.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="IN">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="OR">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="OK">
+                    <values>
+                        <value percent="4.5000" code="GOODS"/>
+                        <value percent="4.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="CT">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="RI">
+                    <values>
+                        <value percent="7.0000" code="GOODS"/>
+                        <value percent="7.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="IA">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="KS">
+                    <values>
+                        <value percent="5.3000" code="GOODS"/>
+                        <value percent="5.3000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="ID">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MA">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NM">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="DC">
+                    <values>
+                        <value percent="5.7500" code="GOODS"/>
+                        <value percent="5.7500" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="TX">
+                    <values>
+                        <value percent="6.2500" code="GOODS"/>
+                        <value percent="6.2500" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="AL">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="CA">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="WI">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NV">
+                    <values>
+                        <value percent="6.5000" code="GOODS"/>
+                        <value percent="6.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="OH">
+                    <values>
+                        <value percent="6.0000" code="GOODS"/>
+                        <value percent="6.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="WA">
+                    <values>
+                        <value percent="6.5000" code="GOODS"/>
+                        <value percent="6.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="ME">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NY">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="IL">
+                    <values>
+                        <value percent="6.2500" code="GOODS"/>
+                        <value percent="6.2500" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MN">
+                    <values>
+                        <value percent="6.5000" code="GOODS"/>
+                        <value percent="6.5000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="ND">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="TN">
+                    <values>
+                        <value percent="7.0000" code="GOODS"/>
+                        <value percent="7.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="MD">
+                    <values>
+                        <value percent="5.0000" code="GOODS"/>
+                        <value percent="5.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="NH">
+                    <values>
+                        <value percent="0.0000" code="GOODS"/>
+                        <value percent="0.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="LA">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+                <region region_name="WY">
+                    <values>
+                        <value percent="4.0000" code="GOODS"/>
+                        <value percent="4.0000" code="SHIPPING"/>
+                    </values>
+                </region>
+            </regions>
+        </tax_category>
+    </tax_categories>
+</jurisdiction>
+</tax_jurisdictions>

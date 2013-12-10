@@ -1,0 +1,3 @@
+#!/bin/bash
+# removes the current crontab
+crontab -r

@@ -1,0 +1,6 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## guidedSkuTemplate.vm
+
+#set($pageName = "catalog/product/guidedSkuTemplate.vm")
+#productMainTemplate(false true "" true true)
+

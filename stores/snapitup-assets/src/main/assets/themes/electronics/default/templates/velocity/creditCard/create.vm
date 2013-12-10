@@ -1,0 +1,82 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## create.vm
+#set($pageName = "creditCard/create.vm")
+
+#set ($isUpdate = false)
+#if ($creditCard.cardUidPk && $creditCard.cardUidPk != "0")
+    #set ($isUpdate = true)
+#end
+
+#set($_content = "creditCardBody")
+#set($_breadcrumbs = "creditCardBreadCrumb")
+#masterTemplate()
+
+
+#macro(creditCardBreadCrumb)
+      <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">Home</a></strong> &raquo; #if ($isUpdate) #springMessage("creditCard.edit") #else #springMessage("creditCard.create") #end </div>
+#end
+
+#macro(creditCardBody)
+    #displayGlobalErrors("creditCard")
+    <form action="$baseUrl/edit-credit-card.ep" method="post" name="creditCard">
+      <fieldset>
+        <legend>#if ($isUpdate) #springMessage("creditCard.edit") #else #springMessage("creditCard.create")  #end</legend>
+        <table border="0" cellspacing="0" cellpadding="3">
+          <tr>
+            <td align="right"><label for="creditCard.cardType">#springMessage("creditCard.cardType")*</label></td>
+            <td>
+              #springFormSingleSelect("creditCard.cardType" $cardTypeMap " #if($isUpdate) disabled='true' #end ")
+              #springShowErrors("<br>" "req")
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label for="creditCard.cardHolderName">#springMessage("creditCard.cardHolderName")*</label></td>
+            <td>
+              #springFormInput("creditCard.cardHolderName" "maxlength='100' #if($isUpdate) disabled='true' #end ")
+              #springShowErrors("<br>" "req")
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label for="creditCard.cardNumber">#springMessage("creditCard.cardNumber")*</label></td>
+            <td>
+              #if ($isUpdate)
+                <input type="text" value='$creditCard.getMaskedCardNumber()' disabled="true" />
+              #else
+                #springFormInput("creditCard.cardNumber" "maxlength='16' ")
+                #springShowErrors("<br>" "req")
+              #end
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label for="creditCard.expiryMonth">#springMessage("creditCard.expiryMonth")*</label></td>
+            <td>
+              #springFormSingleSelect("creditCard.expiryMonth" $monthMap "")
+              #springShowErrors("<br>" "req")
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label for="creditCard.expiryYear">#springMessage("creditCard.expiryYear")*</label></td>
+            <td>
+              #springFormSingleSelect("creditCard.expiryYear" $yearMap "")
+              #springShowErrors("<br>" "req")
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label for="creditCard.defaultCard">#springMessage("creditCard.defaultCard")</label></td>
+            <td>
+              #springFormCheckboxes("creditCard.defaultCard" $ctxEp.getBoolMap() "" " #if ($creditCard.defaultCard) checked='true' disabled='true' #end ")
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+
+      <div class="fieldset-footer">
+        <input type="submit" class="button-normal" value="  #if ($isUpdate) #springMessage("creditCard.update") #else #springMessage("creditCard.add") #end   " />
+        #if ($isUpdate)
+          <input type="submit" class="button-normal" name="deleteCreditCard" value="#springMessage("creditCard.delete")" />
+        #end
+        <input type="button" class="button-normal" value="#springMessage("msg.return")" onClick="history.back()" />
+      </div>
+    </form>
+    <div class="clear20"></div>
+#end

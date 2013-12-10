@@ -1,0 +1,75 @@
+## Master template layout:
+## -------------------------------------------------------
+## | ---Header-----------------------------------------  |
+## | |        HtmlHeader                              |  |
+## | |        Script (javascript, css, and            |  |
+## | |          variables initializing) $_scripts     |  |
+## | |        Main menu                               |  |
+## | |        Search                                  |  |
+## | |        Breadcrumbs               $_breadcrumbs |  |
+## | --------------------------------------------------  |
+## | ---Content----------------------------------------  |
+## | |  $_content                                     |  |
+## | |                                                |  |
+## | |                                                |  |
+## | |                                                |  |
+## | |                                                |  |
+## | --------------------------------------------------  |
+## | ----Footer----------------------------------------  |
+## | |        HtmlFooter                              |  |
+## | --------------------------------------------------  |
+## -------------------------------------------------------
+##
+## Before invoking this template you need to bind macros to variables:
+## $_scripts - a macro implementing css and js includes, javascript and so on 
+## $_content - the page content
+## $_breadcrumbs - displays breadcrumbs
+##    Default breadcrumb implementation - #regularBreadcrumbs()
+##  Multi-step checkout breadcrumbs is one of the possible alternatives
+##  to regular breadcrumbs
+
+#macro(masterTemplate)
+    #templateInit()
+    <?xml version="1.0" encoding="utf-8"?>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            #parse("includes/head.vm")
+            #runMacro($_scripts)
+        </head>
+        <body>
+            <div id="wrapper">
+                #parse("includes/header.vm")
+                #parse("includes/topmenu.vm")
+				## Note below the double quotes are important - causes contents to be evaluated
+				#contentspace('top_banner', "<div style='color: #000; background-color: #fff'>No default content has been specified for this Content Space. <font style='color: #f00;'>top_banner</font></div>")
+                #runMacro($_breadcrumbs, "regularBreadcrumbs")
+                <div class="clear10"></div>
+                #runMacro($_content)
+            </div>
+            #parse("includes/footer.vm")
+        </body>
+    </html>
+#end
+
+#macro(regularBreadcrumbs)
+    <div id="breadcrumb">
+        #parse("includes/breadcrumbs.vm")
+    </div>
+#end
+
+
+## Invokes a macro which name is provided as a first parameter.
+## If the macro name is null, invokes the default macro.
+## If no default macro name provided does nothing.
+#macro(runMacro $macroName $defaultMacroName)
+    #if($macroName)
+       #evaluate("#$macroName()")
+    #else
+        #if($defaultMacroName)
+           #evaluate("#$defaultMacroName()")
+        #end
+    #end
+#end
+

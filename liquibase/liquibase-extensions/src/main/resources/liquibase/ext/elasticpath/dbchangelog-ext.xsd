@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	
+	elementFormDefault="qualified">
+
+	<xsd:element name="addGuidColumn">
+		<xsd:complexType>
+			<xsd:attribute name="schemaName" type="xsd:string" />
+			<xsd:attribute name="tableName" type="xsd:string" use="required" />
+			<xsd:attribute name="primaryKey" type="xsd:string" use="required" />
+			<xsd:attribute name="columnName" type="xsd:string" use="optional" default="GUID" />
+			<xsd:attribute name="columnType" type="xsd:string" use="optional" default="VARCHAR(64)" />
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

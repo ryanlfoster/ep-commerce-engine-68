@@ -1,0 +1,11 @@
+body	{ background:#fff; color:#333; margin:0; padding:0; border:0; font-family:verdana, arial, helvetica, sans-serif; font-size:8.5pt;	}
+
+h1 { float:left; color:#f60; font-weight:bold; font-size:11pt; margin-bottom:10px; }
+
+#close-window {  float:right; margin-bottom:10px; }
+#large-view-box { margin:10px; padding:10px; }
+#large-view { text-align:center; border-top:1px solid #999; border-bottom:1px solid #999; padding:10px 0px 10px 0px;}
+
+#alt-pic-box { width:100px; height:100%; padding-top:5px; border-right:1px solid #999; }
+#alt-pic { padding:5px 5px 5px 5px; border-bottom:1px solid #999; }
+#instructions {margin-top:10px;}

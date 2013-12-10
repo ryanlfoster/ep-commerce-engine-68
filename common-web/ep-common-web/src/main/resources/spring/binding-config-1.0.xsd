@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.elasticpath.com/schema/binding-config" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:beans="http://www.springframework.org/schema/beans" targetNamespace="http://www.elasticpath.com/schema/binding-config"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans" />
+
+	<xsd:element name="binding">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="pattern" type="xsd:string" use="required">
+						<xsd:annotation>
+							<xsd:documentation>
+								Parameter pattern that should be matched to activate this rule. Supports
+								"xxx*", "*xxx" and "*xxx*" patterns.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="rule" type="xsd:string" default="">
+						<xsd:annotation>
+							<xsd:documentation>
+								ESAPI validation rule to use for validating this field. Leave blank for the default validation.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="allowEmpty" type="xsd:boolean" default="false">
+						<xsd:annotation>
+							<xsd:documentation>
+								Whether nulls or an empty string is valid input.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="maxLength" type="xsd:integer" default="2000">
+						<xsd:annotation>
+							<xsd:documentation>
+								The maximum length of this field.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="policy" default="blank">
+						<xsd:annotation>
+							<xsd:documentation>
+								Policy that will be used when a parameter fails to validate against a rule.
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="blank">
+									<xsd:annotation>
+										<xsd:documentation>Blanks the entire value if it doesn't match the rule precisely.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="filter">
+									<xsd:annotation>
+										<xsd:documentation>Filters out any offending values which don't match the rule.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="ignore">
+									<xsd:annotation>
+										<xsd:documentation>Ignores any violations.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

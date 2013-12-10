@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="nullProvider"
+		class="com.elasticpath.domain.geoip.provider.impl.NullGeoIpProviderImpl">
+		<property name="locations">
+			<map>
+				<entry>
+					<key>
+						<value>65.79.32.12</value>
+					</key>
+					<ref bean="geoLocation1" />
+				</entry>
+				<entry>
+					<key>
+						<value>12.68.78.1</value>
+					</key>
+					<ref bean="geoLocation2" />
+				</entry>
+				<entry>
+					<key>
+						<value>127.23.56.111</value>
+					</key>
+					<ref bean="geoLocation3" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="geoLocation1"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-001" />
+		<property name="carrierName" value="wireless" />
+		<property name="city" value="Kiev" />
+		<property name="connectionSpeed" value="256 kb\s" />
+		<property name="connectionType" value="wlan" />
+		<property name="continent" value="eurasia" />
+		<property name="countryCode" value="ua" />
+		<property name="ipRoutingType" value="fixed" />
+		<property name="latitude" value="89.98" />
+		<property name="longitude" value="45.23" />
+		<property name="phoneNumber" value="1231234234" />
+		<property name="region" value="kiev" />
+		<property name="registeredOrganization" value="luxoft-ua" />
+		<property name="secondLevelDomain" value="luxoft" />
+		<property name="state" value="ukraine" />
+		<property name="gmtTimeZone" value="+2" />
+		<property name="topLevelDomain" value="ua" />
+		<property name="zipCode" value="878978" />
+	</bean>
+
+	<bean id="geoLocation2"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-002" />
+		<property name="carrierName" value="coaxial" />
+		<property name="city" value="Moscow" />
+		<property name="connectionSpeed" value="128 Kb\s" />
+		<property name="connectionType" value="dial-up" />
+		<property name="continent" value="eurasia" />
+		<property name="countryCode" value="ru" />
+		<property name="ipRoutingType" value="anonymizer" />
+		<property name="latitude" value="55.75" />
+		<property name="longitude" value="53.23" />
+		<property name="phoneNumber" value="3453453425" />
+		<property name="region" value="moscow" />
+		<property name="registeredOrganization" value="luxoft-ru" />
+		<property name="secondLevelDomain" value="luxoft" />
+		<property name="state" value="russia" />
+		<property name="gmtTimeZone" value="+1" />
+		<property name="topLevelDomain" value="ru" />
+		<property name="zipCode" value="2341234" />
+	</bean>
+
+	<bean id="geoLocation3"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-003" />
+		<property name="carrierName" value="optical" />
+		<property name="city" value="Vancouver" />
+		<property name="connectionSpeed" value="10 Mb\s" />
+		<property name="connectionType" value="broadband" />
+		<property name="continent" value="north america" />
+		<property name="countryCode" value="ca" />
+		<property name="ipRoutingType" value="aol" />
+		<property name="latitude" value="23.56" />
+		<property name="longitude" value="12.56" />
+		<property name="phoneNumber" value="134869786" />
+		<property name="region" value="bc" />
+		<property name="registeredOrganization" value="ep" />
+		<property name="secondLevelDomain" value="elasticpath" />
+		<property name="state" value="canada" />
+		<property name="gmtTimeZone" value="-10" />
+		<property name="topLevelDomain" value="com" />
+		<property name="zipCode" value="vb24bn" />
+	</bean>
+
+</beans>

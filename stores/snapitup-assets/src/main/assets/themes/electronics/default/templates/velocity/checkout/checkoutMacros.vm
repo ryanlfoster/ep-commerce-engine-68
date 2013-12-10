@@ -1,0 +1,632 @@
+///////////////  Breadcrumbs //////////////////
+#**
+ * Default implementation. works for signin.vm and register.vm
+ *#
+#macro(checkoutBreadcrumbs)
+  #if ($sesCheckoutSignIn)
+    #checkoutBreadcrumbSigning()
+  #end
+#end
+
+#macro(checkoutBreadcrumbSigning)
+    #checkoutBreadcrumb(1)
+#end
+
+#macro(checkoutBreadcrumbShipping)
+    #checkoutBreadcrumb(2)
+#end
+
+#macro(checkoutBreadcrumbBilling)
+    #checkoutBreadcrumb(3)
+#end
+
+#macro(checkoutBreadcrumb, $option)
+    <div id="top-menu">
+        <div id="checkout-breadcrumb">
+          <ul>
+            <li #if ($option == 1) class="on" #end>1: #springMessage("globals.bc.signin")</li>
+            <li #if ($option == 2) class="on" #end>2: #springMessage("globals.bc.shipping")</li>
+            <li #if ($option == 3) class="on" #end>3: #springMessage("globals.bc.billing")</li>
+          </ul>
+        </div>
+    </div>
+#end
+
+//////////////  Shared  macros //////////////////////////////
+
+#macro(generalSignin)
+  <p>#springMessage("signIn.createAccount.msg")</p>
+  <ul>
+    <li>#springMessage("signIn.advantage1")</li>
+    <li>#springMessage("signIn.advantage2")</li>
+    <li>#springMessage("signIn.advantage3")</li>
+    <li>#springMessage("signIn.advantage4")</li>
+  </ul>
+  <div>
+    <label>#springMessage("signIn.firstName")*</label>
+    #springFormInput("customer.firstName" 'maxlength="100" style="width: 200px"')
+    #springShowErrors("<br>" "req")          
+  </div>
+  <div>
+    <label>#springMessage("signIn.lastName")*</label>
+    #springFormInput("customer.lastName" 'maxlength="100" style="width: 200px"')
+    #springShowErrors("<br>" "req")          
+  </div>
+  <div>
+    <label>#springMessage("signIn.email")*</label>
+    #springFormInput("customer.email" 'maxlength="255" style="width: 200px"')
+    #springShowErrors("<br>" "req")
+  </div>
+  <div>
+    <label>#springMessage("signIn.phoneNumber")*</label>
+    #springFormInput("customer.phoneNumber" 'maxlength="50" style="width: 200px"')
+    #springShowErrors("<br>" "req")
+  </div>
+  <br>
+  <div>
+    #springFormCheckboxes("customer.toBeNotified" $ctxEp.getBoolMap() "" "")    
+    #springMessage("signIn.beNotified")
+    #springShowErrors("<br>" "req")                
+  </div>
+#end
+
+
+#**
+* Display the order summary
+*#
+#macro (displayOrderSummary $sesShoppingCart $frequencyMap)
+  <fieldset>
+    <legend>#springMessage("globals.ordersummary.ordersummary")</legend>
+             <fieldset>
+                 <legend class="dueNow">#springMessage("viewCart.dueNow")</legend>
+                  <table width="100%" border="0" cellpadding="2" cellspacing="0" id="cart-summary-table">
+                    ##discount for exclusive tax calculation method
+                    #if(!$sesShoppingCart.hasSubtotalDiscount() || $sesShoppingCart.isInclusiveTaxCalculationInUse())
+                        #set($exclusivePromotionStyle="style='display:none'")
+                    #end
+                      <tr class="sub-total" id="sub-total">
+                        <td class="title"><strong>#springMessage("globals.ordersummary.subtotal"):</strong></td>
+                        <td class="value" id="subTotalValue">#displayPriceForCartLocale($sesShoppingCart.getSubtotalMoney())</td>
+                   </tr>
+                    <tr class="promotion" id="promotion-exclusive" $!exclusivePromotionStyle>
+                    <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+                    <td id="exclusive-discount-value" class="value"> #displayPriceForCartLocale($sesShoppingCart.getSubtotalDiscountMoney())</td>
+                   </tr>
+                      <tr class="shipping" id="shipping">
+                     <td class="title">#springMessage("globals.ordersummary.shipping"):</td>
+                     #if($!sesShoppingCart.getShippingCost().getAmount().setScale(0,0).intValue() > 0)
+                       <td class="value" id="cartShippingCostValue">#displayPriceForCartLocale($sesShoppingCart.getShippingCost())</td>
+                     #else
+                       <td class="value" id="cartShippingCostValue">N/A</td>
+                     #end
+                   </tr>
+                       <tr class="delimiter" id="delimiter"><td></td><td></td></tr>
+                       <tr class="sub-total" id="total-before-tax">
+                       <td class="title"><strong>#springMessage("globals.ordersummary.totalBeforeTax"):</strong></td>
+                       <td class="value" id="totalBeforeTaxValue">#displayPriceForCartLocale($sesShoppingCart.getBeforeTaxTotal())</td>
+                   </tr>
+
+                    #set ($taxMap = $sesShoppingCart.getTaxMap())
+                    #if ($taxMap.keySet().size() > 0)
+                        #set($taxStyle="style='display:none'")
+                    #end
+                    <tr id="tax-na" class="tax" $!taxStyle>
+                        <td class="title">#springMessage("globals.ordersummary.tax"): </td>
+                        <td class="value">N/A</td>
+                    </tr>
+                    #if ($taxMap.keySet().size()>0)
+                        #set ($count = 1)
+                        #foreach ($taxCategory in $taxMap.keySet())
+                            <tr class="tax" id="tax$count">
+                                <td id="title">$!taxCategory.getDisplayName($locale):</td>
+                                <td id="value">#displayPriceForCartLocale($taxMap.get($taxCategory))</td>
+                            </tr>
+                            #set($count=$count+1)
+                        #end
+                    #end
+                    ##discount for inclusive tax calculation method
+                    #if(!$sesShoppingCart.hasSubtotalDiscount() || !$sesShoppingCart.isInclusiveTaxCalculationInUse())
+                        #set($inclusivePromotionStyle="style='display:none'")
+                    #end
+                    <tr class="promotion" id="promotion-inclusive" $!inclusivePromotionStyle>
+                        <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+                        <td id="inclusive-discount-value" class="value"> #displayPriceForCartLocale($sesShoppingCart.getSubtotalDiscountMoney())</td>
+                    </tr>
+                    #if($sesShoppingCart.getAppliedGiftCertificates().isEmpty())
+                        #set($giftCertificateStyle="style='display:none'")
+                    #end
+                    <tr class="gift-certificate" id="gift-certificate" $!giftCertificateStyle>
+                        <td class="title">#springMessage("globals.giftCertificate.giftCertificates"):</td>
+                        <td id="gift-certificate-value" class="value"> #displayPriceForCartLocale($sesShoppingCart.getGiftCertificateDiscountMoney())</td>
+                    </tr>
+                    <tr class="delimiter" id="delimiter"><td></td><td></td></tr>
+                    <tr class="total" id="total">
+                        <td class="title">#springMessage("globals.ordersummary.totalNow"):</td>
+                        <td class="value" id="cartTotalValue">#displayPriceForCartLocale($sesShoppingCart.getTotalMoney())</td>
+                    </tr>
+                  </table>
+             </fieldset>
+             #displayFrequencySummary ($frequencyMap "viewCart.recurringPricesTitle")
+  </fieldset>
+#end
+
+#**
+ * Template for a fieldset with a legend and a submit button
+ *#
+#macro(fieldsetBox $id $legend $body $button)
+    <div id="$id">
+          <fieldset>
+          <legend>#springMessage("$legend")</legend>
+          $body
+        </fieldset>
+        <div class="fieldset-footer">
+            $button
+        </div>
+    </div>                  
+#end
+
+#**
+ * orderDetailsBody implements pages
+ * receipt.vm and orderDetails.vm
+ *#
+#macro(orderDetailsBody)
+    #if ($orderDetails)
+        #if (!$order) ## check if we do not have specified order and set the complete order instead
+            #set ($order = $sesShoppingCart.getCompletedOrder())
+        #end
+    #end
+
+  <div class="clear20"></div>
+  <div id="body">
+    #if ($!checkoutResults && $!checkoutResults.isEmailFailed())
+      <div id="info" class="info">
+        <div class="notice-message-item">#springMessage("error.warning")</div>
+        <div class="info-message-item">#springMessage("checkout.emailError")</div>
+      </div>
+	#end
+	## Review order billing
+    <div id="checkout-review-order-details-billing">
+      <fieldset>
+        #set ($billingAddress = $order.getBillingAddress())
+        <legend>#springMessage("receipt.billingAddress")</legend>
+        #if ($order.orderPayment.paymentMethod == "PAYPAL_EXPRESS")
+        <div style="margin-bottom: 1.5em;">PayPal Account: $order.orderPayment.email</div>
+        <div class="via">
+          <strong>#springMessage("receipt.paymentMethod")</strong>
+        </div>
+        <div style="line-height: 2em;">
+          PayPal &nbsp;<img style="vertical-align: middle;" src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif"/>
+        </div>
+        #else
+        <div>$!billingAddress.firstName $!billingAddress.lastName<br />
+          $!billingAddress.street1<br />
+          #if ($billingAddress.street2 && $billingAddress.street2.length() > 0)
+            $!billingAddress.street2<br />
+          #end
+          $!billingAddress.city
+          #if($billingAddress.subCountry)$!billingAddress.subCountry,#end $!billingAddress.zipOrPostalCode<br />
+          $ctxCountries.getCountryDisplayName($!billingAddress.country, $locale)<br />
+          $!billingAddress.phoneNumber<br></div>
+        #if($order.orderPayment)
+        <div class="via">
+          <strong>#springMessage("receipt.paymentMethod")</strong>
+        </div>
+        <div>#springMessage($order.orderPayment.paymentMethod.propertyKey)<br />
+          #if ($order.orderPayment.paymentMethod == "CREDITCARD")
+            $order.orderPayment.cardType: $order.orderPayment.displayValue #springMessage("orderDetails.expiry") $order.orderPayment.expiryMonth/$order.orderPayment.expiryYear.substring(2,4)
+          #end
+        </div>
+        #end
+        #end
+      </fieldset>
+    </div>
+
+	## Review order details
+    <div id="checkout-review-order-details">
+      <fieldset>
+        <legend>#springMessage("receipt.orderDetails")</legend>
+            <table class="order-details">
+                <tr class="order-details" id="order-status">
+                    <td class="title">#springMessage("receipt.orderdetails.status"):</td>
+                    <td class="value" id="status">#springMessage($!order.status.propertyKey)</td>
+                </tr>
+                <tr class="order-details" id="order-number">
+                    <td class="title">#springMessage("receipt.orderdetails.number"):</td>
+                    <td class="value" id="number" align="left"> $!order.orderNumber</td>
+                </tr>
+                <tr class="order-details" id="order-date">
+                    <td class="title">#springMessage("receipt.orderdetails.date"):</td>
+                    <td class="value" id="date">$dateTool.format('long', $!order.getCreatedDate(), $locale)</td>
+                </tr>
+            </table>
+            <div class="clear60"></div>
+            <div class="clear20" id="checkout-receipt-print"> <img src="$baseUrl/template-resources/images/ico-print.gif" width="17" height="13" align="absmiddle" /> <a href="javascript:window.print()">#springMessage("receipt.printACopy")</a> </div>
+      </fieldset>
+    </div>
+	
+	## Process shipments
+    #foreach($shipment in $order.getAllShipments())
+        <div class="clear20"></div>
+        <div id="shipment">
+          <fieldset>
+            #if($shipment.orderShipmentType == "PHYSICAL")
+                #set($shippingAddres = $shipment.shipmentAddress)
+                <legend>#springMessage("receipt.physicalShipment") $shipment.shipmentNumber</legend>
+            #elseif($shipment.orderShipmentType == "ELECTRONIC")
+                <legend>#springMessage("receipt.electronicShipment")</legend>
+            #elseif($shipment.orderShipmentType == "SERVICE")
+                <legend>#springMessage("receipt.recurringShipment")</legend>
+			#end
+			
+			## Shipment details
+            #if ($orderDetails)
+                <table class="shipment-details">
+                    <tr class="shipment-details" id="shipping-status">
+                        <td class="title">#springMessage("receipt.shipment.status"):</td>
+                        <td class="value" id="address">#springMessage($shipment.shipmentStatus.propertyKey)</td>
+                    </tr>
+                </table>
+            #end
+            <table class="shipment-details">
+                #if($shipment.orderShipmentType == "PHYSICAL")
+                    ## Shipping Address
+				    <tr class="shipment-details" id="shipping-address">
+                        <td class="title">#springMessage("receipt.shipping.address"):</td>
+                        <td class="value" id="address">
+                            $!shippingAddres.firstName $!shippingAddres.lastName,
+                            $!shippingAddres.street1, 
+                            #if ($shippingAddres.street2 && $shippingAddres.street2.length() > 0)
+                                $!shippingAddres.street2,
+                            #end
+                            $!shippingAddres.city,
+                            #if($shippingAddres.subCountry)$!shippingAddres.subCountry,
+                            #end $!shippingAddres.zipOrPostalCode,
+                            $ctxCountries.getCountryDisplayName($!shippingAddres.country, $locale)
+                        </td>
+                    </tr>
+
+                    ## Shipping Method
+                    <tr class="shipment-details" id="shipping-method">
+                        <td class="title">#springMessage("receipt.shipping.method"):</td>
+                        <td class="value" id="address">$shipment.serviceLevel</td>
+                    </tr>
+                    #if ($orderDetails)
+                        <tr class="shipment-details" id="shipping-tracking">
+                            <td class="title">#springMessage("receipt.shipment.tracking"):</td>
+                            ## Format ShippingInfo
+							  
+                              #set ($shipmentDate = "")
+                              #set ($shipmentTrackingCode = "")
+                            
+                              ## prepare shipment info for display
+                                #if ($shipment.getShipmentDate())
+                                    #set ($shipmentDate = $shipment.getShipmentDate())
+                                #end
+                                #if ($shipment.getTrackingCode())
+                                    #set ($shipmentTrackingCode = $shipment.getTrackingCode())
+                                #else
+                                    #set ($shipmentTrackingCode = "")
+                                #end
+                              
+                              ## prepare tracking info for display
+                              
+                              ## sample tracking numbers:
+                              ## Fedex: 999999999999
+                              ## UPS: 1Z3Y320A0340565235
+                              ## USPS: 03040370000224521267
+                              ## DHL: 2858795881
+                              ## Canada Post: CE017101598CA
+                              
+                              #set ($shipmentCarrier = $shipment.carrier)
+                            
+                              #if ($shipmentTrackingCode)
+                                #if ($shipmentCarrier == "Fedex")
+                                  #set ($shipmentTrackingURL = "http://www.fedex.com/Tracking?tracknumbers=")
+                                #elseif ($shipmentCarrier == "UPS")
+                                  #set ($shipmentTrackingURL = "http://wwwapps.ups.com/WebTracking/processInputRequest?tracknum=")
+                                #elseif ($shipmentCarrier == "USPS")
+                                  #set ($shipmentTrackingURL = "http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?CAMEFROM=OK&strOrigTrackNum=")
+                                #elseif ($shipmentCarrier == "DHL")
+                                  #set ($shipmentTrackingURL = "http://track.dhl-usa.com/TrackByNbr.asp?ShipmentNumber=")
+                                #elseif ($shipmentCarrier == "Canada Post")
+                                  #set ($shipmentTrackingURL = "https://em.canadapost.ca/emo/basicPin.do?action=query&amp;trackingId=")
+                                #end
+                              #end  
+
+                            #if ($shipmentDate == "")
+                                <td class="value">N/A</td>
+                            #else
+                                <td class="value">
+                                    <a href='$shipmentTrackingURL$shipmentTrackingCode' target='shipment_tracking_window'>$shipmentTrackingCode</a>
+                                </td>
+                            #end
+                        </tr>
+                    #end
+                #end
+            </table>
+            <div class="clear10"></div>
+            ##Display cart
+            <div id="cart">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="img">&nbsp;</td>
+                            <td class="desc">#springMessage("globals.description")</td>
+                            <td class="unit-price">#springMessage("globals.unitPrice")</td>
+						#if($shipment.orderShipmentType == "SERVICE")
+							<td class="frequency">#springMessage("viewCart.frequency")</td>
+						#end
+                            <td class="qty">#springMessage("globals.qty")</td>
+						#if($shipment.orderShipmentType != "SERVICE")
+							<td class="total-price">#springMessage("globals.total")</td>
+						#end
+                        </tr>
+                    </thead>
+                    <tbody>
+					  #set($orderItemFormBeans = $orderItemFormBeanMap.get($shipment.getUidPk()))
+                      #foreach($orderItemFormBean in $orderItemFormBeans)
+                        ## Display Order LineItem
+                        #set ($warehouse = $order.getStore().getWarehouse())
+                        #if($orderItemFormBean.getImage())
+                          #set($image = $!orderItemFormBean.getImage())
+                        #else
+                          #set($image = "")
+                        #end
+                        <tr class="line">
+                          <td class="img">
+                            #if($image != "")
+                                #displayCatalogImage($image "50" "50" "0" "middle" "0" $!orderItemFormBean.getDisplayName() "")
+                            #end
+                          </td>
+                          <td class="desc">
+                        
+                            #if ($!orderItemFormBean.getProductsku().getProduct().isHidden())
+                                $!orderItemFormBean.getDisplayName() <br />
+                            #else
+                                <a href="$baseUrl/product-view.ep?pID=$orderItemFormBean.getProductSku().getProduct().getGuid()">$!orderItemFormBean.getDisplayName()</a><br />
+                            #end
+                        
+                            #if($!orderItemFormBean.getDisplaySkuOptions())
+                              #displaySkuOptionValues($orderItemFormBean $locale)
+                            #end
+
+                            #if ($orderItemFormBean.isViewFlagOn("gc"))
+				    <div class="sku">#springMessage("email.sendTo"): $orderItemFormBean.getOrderItemFields().get("giftCertificate.recipientEmail")</div>
+	                            <div class="sku">#springMessage("email.to"): $orderItemFormBean.getOrderItemFields().get("giftCertificate.recipientName")</div>
+	                            <div class="sku">#springMessage("email.from"): $orderItemFormBean.getOrderItemFields().get("giftCertificate.senderName")</div>
+                            #else
+                                <div class="sku">$!orderItemFormBean.skuCode</div>
+                                #if($shipment.getShipmentStatus() != "SHIPPED")
+                                    #set($availability = $orderItemFormBean.getProductSku().getProduct().getAvailabilityCriteria())
+                                    #if(!$orderItemFormBean.isAllocated())
+                                        #if($availability == "AVAILABLE_FOR_PRE_ORDER")
+                                            #set($releaseDate = $orderItemFormBean.getProductSku().getProduct().getExpectedReleaseDate())
+                                            <div class="availability" id="inventoryText">#springMessage("orderDetails.availabilityMessage.preOrder")&nbsp;#springMessage("orderDetails.availabilityMessage.shipmentDate")&nbsp;$dateTool.format('E, MMMM d',$releaseDate)</div>
+                                        #elseif($availability == "AVAILABLE_FOR_BACK_ORDER")
+                                            #set($releaseDate = $orderItemFormBean.getProductSku().getInventory($warehouse.getUidPk()).getRestockDate())
+                                            #if ($releaseDate)
+                                                <div class="availability" id="inventoryText">#springMessage("orderDetails.availabilityMessage.backOrder")&nbsp;#springMessage("orderDetails.availabilityMessage.shipmentDate")&nbsp;$dateTool.format('E, MMMM d',$releaseDate)</div>
+                                            #else
+                                                <div class="availability" id="inventoryText">#springMessage("orderDetails.availabilityMessage.backOrder")</div>
+                                            #end
+                                        #end
+                                    #elseif(!$orderItemFormBean.getDigitalAsset())
+                                            <div class="availability" id="inventoryText">#springMessage("orderDetails.availabilityMessage.allocated")</div>
+                                    #end
+                                #end
+                            #end
+                            ##Display the download link for digital goods
+                            #displayDigitalAsset ($orderItemFormBean.getDigitalAsset())
+							
+                            #if ($orderItemFormBean.getChildren().size() > 0)
+		  						#displayOrderItemChildren($orderItemFormBean, $locale)
+	  						#end
+                          </td>
+                          <td class="unit-price">
+                            #if ($shipment.orderShipmentType == "SERVICE")
+                                #set ($recurringSchedules = $!orderItemFormBean.getPrice().getPricingScheme().getRecurringSchedules())
+                                #if ($recurringSchedules.size() >0)
+                                   #set ($recurringSchedule = $recurringSchedules.iterator().next())
+                                   #set ($recurringPrice = $orderItemFormBean.price.getPricingScheme().getSimplePriceForSchedule($recurringSchedule))
+                                   #set ($listPrice = "#displayPriceForCartLocale($recurringPrice.listPrice)")
+                                   #set ($unitPrice = "#displayPriceForCartLocale($recurringPrice.lowestPrice)")
+                                #set ($onSale = $recurringPrice.lowestPrice.lessThan($$recurringPrice.listPrice, $locale))
+                               #end
+							#else
+    							#set ($listPrice = "#displayPriceForCartLocale($orderItemFormBean.getListPriceMoney())")
+                                #set ($unitPrice = "#displayPriceForCartLocale($orderItemFormBean.getUnitPriceMoney())")
+    							#set ($onSale = $orderItemFormBean.getListPriceMoney() != $null && $!orderItemFormBean.getUnitPriceMoney().lessThan($orderItemFormBean.getListPriceMoney()))
+							#end
+                            #if($onSale && $orderItemFormBean.getChildren().size() == 0)
+                              #if ($shipment.orderShipmentType == "SERVICE")
+                                #set ($dollarSavings = $!recurringPrice.getDollarSavings())
+                              #else
+                                #set ($dollarSavings = $!orderItemFormBean.getDollarSavingsMoney())
+                              #end
+                              #if ($shipment.orderShipmentType == "SERVICE" && $orderItemFormBean.isCalculatedBundle())
+                                ## do nothing
+                              #else
+                                <div class="sale-price-for-cart">$unitPrice</div>
+                                ##kept using was-save style to put it on new line due to float setting
+                                <div class="was-save-for-cart">#springMessage("globals.cart.was") $!listPrice, #springMessage("globals.cart.save") #displayPriceForCartLocale($dollarSavings)</div>
+                              #end
+                            #else
+                              #if ($shipment.orderShipmentType == "SERVICE" && $orderItemFormBean.isCalculatedBundle())
+                                ## do nothing
+                              #else
+                                <div class="reg-price-for-cart">$unitPrice</div>
+                              #end
+                            #end
+                          </td>
+                        #if ($shipment.orderShipmentType == "SERVICE")
+						  <td class="frequency">
+                            #if ($orderItemFormBean.isCalculatedBundle() == false)
+                              #displayPriceScheduleFrequency($recurringSchedule)
+                            #end
+						  </td>
+						#end
+                          <td class="qty">
+                            $!orderItemFormBean.getQuantity()
+                          </td>
+						#if ($shipment.orderShipmentType != "SERVICE")
+						  <td class="total-price">#displayPriceForCartLocale($orderItemFormBean.getTotalMoney())</td>
+						#end
+                        </tr>
+                      #end
+                    </tbody>
+                </table>
+            </div>
+			
+		#if ($shipment.orderShipmentType != "SERVICE")
+			#set($itemSubtotal = "#displayPriceForCartLocale($shipment.getItemSubtotalMoney())")
+
+			## Shipment Financial Info
+			<div>
+                ## begin shipment financial info
+                <table width="50%" border="0" cellpadding="2" cellspacing="0" align="right">
+                  ##discount for exclusive tax calculation method
+		          <tr class="promotion" id="promotion-exclusive" #if($shipment.hasSubtotalDiscount()&&!$shipment.isInclusiveTaxCalculation()) #else style="display:none"#end>
+		            <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+		            <td id="exclusive-discount-value" class="value"> #displayPriceForCartLocale($shipment.getSubtotalDiscountMoney())</td>
+		          </tr>                  
+                  <tr align="right">
+                    <td nowrap="nowrap"><strong>#springMessage("globals.ordersummary.subtotal"):</strong></td>
+                    <td class="subtotal">$!itemSubtotal</td>
+                  </tr>
+                  #if($shipment.orderShipmentType == "PHYSICAL")
+                  <tr align="right">
+                    <td>#springMessage("globals.ordersummary.shipping"):</td>
+                    <td>#displayPriceForCartLocale($shipment.getShippingCostMoney())</td>
+                  </tr>
+                  ##empty lines
+                  <tr align="right"><td></td><td></td></tr>
+                  <tr align="right"><td></td><td></td></tr>
+                  <tr align="right"><td></td><td></td></tr>
+                  ##
+                  <tr align="right">
+                    <td><strong>#springMessage("globals.ordersummary.totalBeforeTax"):</strong></td>
+                    <td>#displayPriceForCartLocale($shipment.getTotalBeforeTaxMoney())</td>
+                  </tr>
+                  #end
+                  <tr align="right">
+                    <td>#springMessage("globals.ordersummary.tax.items"):</td>
+                    <td>#displayPriceForCartLocale($shipment.getItemTaxMoney())</td>
+                  </tr>
+                  #if($shipment.orderShipmentType == "PHYSICAL")
+                  <tr align="right">
+                    <td>#springMessage("globals.ordersummary.tax.shipping"):</td>
+                    <td>#displayPriceForCartLocale($shipment.getShippingTaxMoney())</td>
+                  </tr>
+                  #end
+			      ##discount for inclusive tax calculation method
+			      #if(!$shipment.hasSubtotalDiscount() || !$shipment.isInclusiveTaxCalculationInUse())
+			        #set($inclusivePromotionStyle="style='display:none'")
+			      #end
+			      <tr class="promotion" id="promotion-inclusive" $!inclusivePromotionStyle>
+			        <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+			        <td id="inclusive-discount-value" class="value"> #displayPriceForCartLocale($shipment.getSubtotalDiscountMoney())</td>
+			      </tr>                  
+                  ##empty lines
+                  <tr align="right"><td></td><td></td></tr>
+                  <tr align="right"><td></td><td></td></tr>
+                  <tr align="right"><td></td><td></td></tr>
+                  ##
+                  <tr align="right">
+                    <td><strong>#springMessage("globals.ordersummary.shipmenttotal"):</strong></td>
+                    <td class="total">#displayPriceForCartLocale($shipment.getTotalMoney())</td>
+                  </tr>
+                </table>
+                ## end shipment financial info
+            </div>
+		#end
+          </fieldset>
+        </div>
+    #end
+    <div class="clear10"></div>
+    <div id="checkout-review-totals">
+      <fieldset>
+        <legend>#springMessage("globals.ordersummary.ordersummary")</legend>
+         <div id="due-now">
+             <fieldset> 
+                 <legend class="dueNow">#springMessage("viewCart.dueNow")</legend>
+        <table width="100%" border="0" cellpadding="2" cellspacing="0">
+          ##discount for exclusive tax calculation method
+          <tr class="promotion" id="promotion-exclusive" #if($order.hasSubtotalDiscount()&&!$order.isInclusiveTaxCalculation()) #else style="display:none"#end>
+            <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+            <td id="exclusive-discount-value" class="value"> #displayPriceForCartLocale($order.getSubtotalDiscountMoney())</td>
+          </tr>
+          <tr align="right">
+            <td nowrap="nowrap"><strong>#springMessage("globals.ordersummary.subtotal"):</strong></td>
+            <td class="subtotal">#displayPriceForCartLocale($order.getSubtotalMoney())</td>
+          </tr>
+          <tr align="right">
+            <td>#springMessage("globals.ordersummary.shipping"):</td>
+            #if($!order.getTotalShippingCostMoney().getAmount().setScale(0,0).intValue()>0)
+            <td>#displayPriceForCartLocale($order.getTotalShippingCostMoney(), $locale)</td>
+            #else
+            <td>N/A</td>
+            #end
+          </tr>
+          ##empty lines
+          <tr align="right"><td></td><td></td></tr>
+          <tr align="right"><td></td><td></td></tr>
+          <tr align="right"><td></td><td></td></tr>
+          ##
+          <tr align="right">
+            <td><strong>#springMessage("globals.ordersummary.totalBeforeTax"):</strong></td>
+            <td>#displayPriceForCartLocale($order.getTotalBeforeTaxMoney())</td>
+          </tr>
+          <tr align="right">
+            <td>#springMessage("globals.ordersummary.tax.items"):</td>
+            <td>#displayPriceForCartLocale($order.getTotalItemTaxesMoney())</td>
+          </tr>
+          <tr align="right">
+            <td>#springMessage("globals.ordersummary.tax.shipping"):</td>
+            <td>#displayPriceForCartLocale($order.getTotalShippingTaxesMoney())</td>
+          </tr>
+          ##discount for inclusive tax calculation method
+          <tr class="promotion" id="promotion-inclusive" #if($order.hasSubtotalDiscount()&&$order.isInclusiveTaxCalculation()) #else style="display:none"#end>
+            <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+            <td id="inclusive-discount-value" class="value"> #displayPriceForCartLocale($order.getSubtotalDiscountMoney())</td>
+          </tr>
+            #if($order.getTotalGiftCertificateDiscount() > 0)
+                <tr class="gift-certificate" id="gift-certificate">
+                    <td class="title">#springMessage("globals.giftCertificate.giftCertificates"):</td>
+                    <td id="gift-certificate-value" class="value"> #displayPriceForCartLocale($order.getTotalGiftCertificateDiscountMoney())</td>
+                </tr>
+            #end
+          ##empty lines
+          <tr align="right"><td></td><td></td></tr>
+          <tr align="right"><td></td><td></td></tr>
+          <tr align="right"><td></td><td></td></tr>
+          ##
+          <tr align="right">
+            <td><strong>#springMessage("globals.ordersummary.grandtotal"):</strong></td>
+            <td class="total">#displayPriceForCartLocale($order.getTotalMoney())</td>
+          </tr>
+        </table>
+       </fieldset>#displayFrequencySummary($frequencyMap "globals.ordersummary.recurringPricesTitle")
+       </div>
+      </fieldset>     
+    </div>
+    <div class="clear10"></div>
+  </div>      
+#end
+
+
+#macro(displayOrderItemChildren $itemFormBean $locale)
+    <div id="short-constituents-list">
+        <h2>#springMessage("productTemplate.Includes")</h2>
+		<ul id="constituents-list"> 
+		
+		## iterating constituentView items in the bundle
+	  	#foreach ($item in $itemFormBean.getChildren())
+	  		
+	  		#displayConstituent ($item $item.displayName $item.displaySkuOptions $item.quantity $item.level $locale)
+	
+			#displayDigitalAsset ($item.getDigitalAsset())
+		#end
+
+		</ul>
+    </div>
+#end

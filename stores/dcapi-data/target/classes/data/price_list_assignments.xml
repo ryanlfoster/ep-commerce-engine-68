@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<price_list_assignments>
+<price_list_assignment>
+    <guid>00F68BF7-7554-3640-EEF3-6C7717D9FEAE</guid>
+    <name>Default Pricing for Search</name>
+    <priority>5</priority>
+    <catalog_guid>search_catalog</catalog_guid>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+    <selling_context>
+        <guid>4D1BC08A-1190-4B45-72A6-2752D28A4243</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>6BC3D107-E6FF-A19D-9109-62B77721067F</guid>
+                <name>1392040988413931</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'searchbee' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>5D66DC98-A458-1916-2B6A-1EBD369E3BE4</guid>
+    <name>Europe Pricing for Toastie</name>
+    <priority>5</priority>
+    <catalog_guid>Toastie</catalog_guid>
+    <price_list_guid>F8C6DDBE-DB57-950C-1734-21DA07D5FDD7</price_list_guid>
+    <selling_context>
+        <guid>E622ACC6-339B-1F57-FBEF-1E700B19F9FA</guid>
+        <name>SELLING_CONTEXT_NAME_Europe Pricing for Toastie</name>
+        <description>SELLING_CONTEXT_DESCR_Europe Pricing for Toastie</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>5AED7600-2238-F9F1-98F8-58639804022C</guid>
+                <name>858957410956219</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'toastie' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>7A377FD5-46C2-75BB-98B2-1C18DE1B6123</guid>
+    <name>Default Pricing for Mobee store in CAD</name>
+    <priority>5</priority>
+    <catalog_guid>Mobile</catalog_guid>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+    <selling_context>
+        <guid>76DED38E-7020-3281-114C-EE7A16BB6C3A</guid>
+        <name>SELLING_CONTEXT_NAME_Default Pricing for Mobee store in CAD</name>
+        <description>SELLING_CONTEXT_DESCR_Default Pricing for Mobee store in CAD</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>5530FE53-2DC2-DE57-0DB5-F4C47B47F7A3</guid>
+                <name>1321595719194057</name>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1321062480000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>420A59B7-D64B-F57B-4DAA-29C3E67A55AC</guid>
+                <name>858930963305906</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>A645A716-5713-530C-628F-2E72F36D5A9E</guid>
+    <name>Default Pricing for Toastie</name>
+    <priority>5</priority>
+    <catalog_guid>Toastie</catalog_guid>
+    <price_list_guid>011D3611-7551-86C3-0E77-D3594AFA9961</price_list_guid>
+    <selling_context>
+        <guid>0CB42C4A-6EF5-56B7-9D2F-30919DD4FAFA</guid>
+        <name>SELLING_CONTEXT_NAME_Default Pricing for Toastie</name>
+        <description>SELLING_CONTEXT_DESCR_Default Pricing for Toastie</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>6916B0ED-B146-FBE1-AE0C-F9BCAC8BBEF6</guid>
+                <name>858878372025118</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'toastie' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>C28B1F3C-46F5-7350-56F6-C7C2A6595054</guid>
+    <name>Default Pricing for Tobee123</name>
+    <priority>5</priority>
+    <catalog_guid>MobileCatalog</catalog_guid>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+    <selling_context>
+        <guid>48DF63CC-EBE7-0F12-0974-7182ABA15CE2</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>A2DA53A0-1F1F-F73D-12DD-D4D54C2BF12F</guid>
+                <name>338887071934026</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'tobee123' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>E16AAA75-1E6C-F58D-A07C-525C136AF327</guid>
+    <name>Default Pricing for Kobee</name>
+    <priority>5</priority>
+    <catalog_guid>Mobile</catalog_guid>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+    <selling_context>
+        <guid>AFF14C3E-1EA9-325B-502F-AF938A8864A2</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>BFB29ABD-7965-7698-F99A-C7922860099D</guid>
+                <name>871346632584789</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'Kobee' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+</price_list_assignments>

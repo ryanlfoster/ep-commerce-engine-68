@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<amounts>
+<base_amount>
+    <guid>E43D3209-B401-58E9-C614-53219FC70E9E</guid>
+    <object_guid>tt777789bttf_hd_rent</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>10.99</list_price>
+    <sale_price>6.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+<base_amount>
+    <guid>BFB49C7E-5532-8559-DCC4-088584376F89</guid>
+    <object_guid>tt0970179</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>45.99</list_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+<base_amount>
+    <guid>0A969DC2-7CA6-381B-40E2-E2D1404162AD</guid>
+    <object_guid>movie_222333</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>30.50</list_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>3A4F619B-B611-E874-2EEE-A080FFDE831F</guid>
+    <object_guid>ps94949</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.00</list_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>C32903F3-8494-0D57-2C2B-908108BB0BD8</guid>
+    <object_guid>mb_3456789</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>129.50</list_price>
+    <sale_price>99.50</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>92BDEB89-4B3F-EF45-2E57-12A186FD2FC9</guid>
+    <object_guid>tt258022dh_SD_B</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>4.99</list_price>
+    <sale_price>3.50</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>58B1528D-F963-CDA6-4CB8-788B04B2364D</guid>
+    <object_guid>tt1483735</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>9.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>9664CAA0-0429-7565-5E16-D89C797FA50D</guid>
+    <object_guid>tt258022dh_SD_B</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>55.00</list_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>506F55AC-D4DB-6028-7EC8-8CBA38B628D8</guid>
+    <object_guid>tt0162661</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>BACBAD88-9AB8-9403-8612-F9E7C08D2322</guid>
+    <object_guid>handsfree_efah1234</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>120.00</list_price>
+    <sale_price>119.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>2C996179-A6C8-D5DD-0563-5C78809D427B</guid>
+    <object_guid>TV_76567</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>17.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>8119B6DF-6F8A-78E5-2C56-96521033BF9B</guid>
+    <object_guid>tt966001av</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>4E97E744-46C4-C07F-6C7A-06D32273F89B</guid>
+    <object_guid>tt966001av</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>54.50</list_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>DEE6C041-CFBD-F155-2A7A-279CC5EBD835</guid>
+    <object_guid>tt258022dh_SD_B</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>7.00</list_price>
+    <sale_price>5.00</sale_price>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>96C62385-C765-3D22-1F81-BA0ED43E157F</guid>
+    <object_guid>mb_2345678</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>60.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>CAF1623D-AF9E-27AF-0158-AECE4E622FB6</guid>
+    <object_guid>tb_dyn12345</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>45.00</list_price>
+    <sale_price>40.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>56315BDB-7C26-C917-E93F-E040EEB39691</guid>
+    <object_guid>GA19920</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>24FBC417-7E2E-8D75-78CE-961DECFF3AA8</guid>
+    <object_guid>tt999123t_HD</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>14.99</list_price>
+    <sale_price>12.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>7F519B56-7287-1048-EDDE-EB8A0DD4487C</guid>
+    <object_guid>tt8789434</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>2.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>8FFF5818-8AE4-3E05-92E5-D3FD1AC98603</guid>
+    <object_guid>tt258022dh_HDR</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>5.99</list_price>
+    <sale_price>4.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>5E593436-44AC-4724-B906-67A26CDC792C</guid>
+    <object_guid>handsfree_urik1121</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>103.09</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>059DD555-0650-F568-0DEF-877F9CA4287B</guid>
+    <object_guid>movie_1234567</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.99</list_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>A1671B0E-91C4-E0D7-817F-30365BADE397</guid>
+    <object_guid>tt0373883</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>10.99</list_price>
+    <sale_price>8.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>C584ADC6-C35D-C775-4D41-0FB9ED47398F</guid>
+    <object_guid>TV_76522</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>22.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>71E7B2BA-2F14-EBC4-6BB2-59433BB9C595</guid>
+    <object_guid>GI29389</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>C28F71FA-D886-7C32-BF85-644A0D2FA61F</guid>
+    <object_guid>tbcp_0123456</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>34.00</list_price>
+    <sale_price>30.00</sale_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>59C77ADC-2251-09FD-F715-B9C8A2726C44</guid>
+    <object_guid>tt0970179</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.99</list_price>
+    <price_list_guid>F8C6DDBE-DB57-950C-1734-21DA07D5FDD7</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>DC7881DB-4F6C-B81F-2E56-31D8E6D2C756</guid>
+    <object_guid>TV_76567_sku1</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>11.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>170EDCC4-6E96-A07C-9DA5-C382C5A52CD6</guid>
+    <object_guid>tt258022dh</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>13.00</list_price>
+    <sale_price>11.00</sale_price>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>85E865F0-2864-9327-0D00-B8ED4D4E8F57</guid>
+    <object_guid>tt0926084</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>27.14</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>275E4C23-43F4-A835-A875-CAAC73179A2A</guid>
+    <object_guid>TV_78432</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>21.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>49F75B9F-CBB5-1782-23E3-ED2878FC986C</guid>
+    <object_guid>movie_555666</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>48.00</list_price>
+    <sale_price>42.00</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>79C84F5A-AAAA-8850-F42E-F81B292BCEAB</guid>
+    <object_guid>galaxyq</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>75.00</list_price>
+    <sale_price>70.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>E8E86958-86DA-B1B8-DA00-DB15C7341106</guid>
+    <object_guid>GA29391</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>245680BD-D040-5A13-20F8-310CC64DBBF8</guid>
+    <object_guid>movie_5678901</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>30.00</list_price>
+    <sale_price>20.00</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>0F8564C6-FCC2-C0CB-0199-5D8FDB8F48A0</guid>
+    <object_guid>hidden_prod</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>150.00</list_price>
+    <sale_price>129.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>18E68CEA-4677-6ECD-846E-03D00BFE3CCB</guid>
+    <object_guid>movie_2345678</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>15.99</list_price>
+    <sale_price>12.50</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>34A9847B-F0B1-6EC9-BFC4-428CE2D212AA</guid>
+    <object_guid>xperiapro</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>59.00</list_price>
+    <sale_price>58.09</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>5EA9EA67-40FC-AA4F-D456-6DB861CE43F8</guid>
+    <object_guid>tt777789bttf_hd_buy</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>15.99</list_price>
+    <sale_price>10.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>7416F937-CA14-F065-ACA5-F6EE2C97C6C1</guid>
+    <object_guid>mb_1234567</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>23.00</list_price>
+    <sale_price>19.00</sale_price>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>E6B1982B-3BC6-B7D4-6188-23397CB4F276</guid>
+    <object_guid>tt1568346</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>28.12</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>181747C7-5A46-65BF-81F3-2B8CEDE7D903</guid>
+    <object_guid>handsfree_efah1234</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>5.00</quantity>
+    <list_price>110.00</list_price>
+    <sale_price>100.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>372A8BA4-F109-1E2A-047C-5C06276A009D</guid>
+    <object_guid>tt64464fn_hd</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>30.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>DA8E834E-FF46-CC51-D610-305E516CAA0C</guid>
+    <object_guid>movie_3456789</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>35.00</list_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>BBCF766F-9188-53A5-CCF6-BF32938B9BBC</guid>
+    <object_guid>tt5656565</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>40.00</list_price>
+    <sale_price>38.00</sale_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>2A2DBDE0-A76A-603E-8E6A-1BC785692EE4</guid>
+    <object_guid>movie_111222</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>13.99</list_price>
+    <sale_price>9.99</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>8970E7C9-85F6-7F98-BFCB-FCECC707D019</guid>
+    <object_guid>movie_222333_bluray</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>34.50</list_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>5B70F542-82B0-7733-A49C-6E66BFF3017E</guid>
+    <object_guid>tt258022dh</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>85.50</list_price>
+    <sale_price>75.00</sale_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>AE0058A7-6245-B73C-7374-877910539412</guid>
+    <object_guid>xperiapro</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>29.99</list_price>
+    <price_list_guid>011D3611-7551-86C3-0E77-D3594AFA9961</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>0AF744F0-CE61-395B-3644-A447CAE2CE50</guid>
+    <object_guid>GM10293</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>2E067586-82E9-4A1D-45B5-C85FE62CD18D</guid>
+    <object_guid>tt0984938</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>21.99</list_price>
+    <sale_price>20.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>D320F055-E1D9-2D72-90AA-1E4F99DB52ED</guid>
+    <object_guid>tt5656565</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>7E8B0A04-1113-DDE1-174C-1F21ED3F9174</guid>
+    <object_guid>portable_tv</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>150.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>F72EB1AF-AD89-A38C-90D9-47BCAE3BB0CE</guid>
+    <object_guid>mb_5678901</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>50.60</list_price>
+    <sale_price>45.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>0729CF80-C1CE-20BB-5877-EEB040731D4B</guid>
+    <object_guid>tt64464fn_sd</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>35.99</list_price>
+    <sale_price>25.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>52071A13-D5AD-0BC7-8A9B-FDB4325EC69B</guid>
+    <object_guid>tt0068646</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.00</list_price>
+    <sale_price>0.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>A87051C5-43D9-E2CD-750F-ABC38FC77C7B</guid>
+    <object_guid>mb_9012345</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>150.99</list_price>
+    <sale_price>99.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>69B9675A-7CB0-C9A9-844C-A8D752072772</guid>
+    <object_guid>tt258022dh_HDR</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>75.00</list_price>
+    <sale_price>69.00</sale_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>BCDA5492-15C3-76CC-B32B-F20D52206F61</guid>
+    <object_guid>tt258022dh_HDR</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>3.00</list_price>
+    <sale_price>1.00</sale_price>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>185D9960-85AD-A384-D6C2-8BD5A32DD7A0</guid>
+    <object_guid>bundle_terminator</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>59.50</list_price>
+    <sale_price>50.00</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>98675C34-9D59-DA19-24DC-549F8EEE74DF</guid>
+    <object_guid>FoCUs</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>150.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>B150CE48-B871-DA44-0834-AF5393C49A63</guid>
+    <object_guid>handsfree_sony9191</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>55.50</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>0C5C4816-742C-A94A-E51E-22958BE6C0D5</guid>
+    <object_guid>mb_1234567</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>34.00</list_price>
+    <sale_price>29.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>60B7FC82-9628-DA8B-A984-C00691A68FD1</guid>
+    <object_guid>TV_87465</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>12.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>445E6BD2-26BC-D3EB-7364-FFFAF00216DB</guid>
+    <object_guid>mb_8901234</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>149.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>1C0E0B13-84EF-EF99-D877-4F0833AD650A</guid>
+    <object_guid>tt0034583</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.00</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>14FF2A1D-36B2-9848-E25D-FDB1E29272B5</guid>
+    <object_guid>tt258022dh</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>15.99</list_price>
+    <sale_price>9.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>F79518D8-C19E-C29B-1A39-DA1BEE822CD1</guid>
+    <object_guid>tt0970179</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>34.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>DCEC881B-FF41-E779-914A-9533444CF539</guid>
+    <object_guid>tt888456tw</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>48.48</list_price>
+    <sale_price>47.47</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>028DB056-089E-C07E-BF76-BABF10D90A07</guid>
+    <object_guid>GI18293</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>E892A1E9-9FBA-C15A-BEFE-801A0123BDB7</guid>
+    <object_guid>tbcp_0123456</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>50.50</list_price>
+    <sale_price>30.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>134EDE6C-5044-C1BC-8C74-AC6E1698EA14</guid>
+    <object_guid>TV_72542</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>46.99</list_price>
+    <sale_price>41.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>179A68F6-16B5-AE62-B7D9-87CB3083DA04</guid>
+    <object_guid>movie_444555</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>14.20</list_price>
+    <sale_price>13.00</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>A43FC933-300A-618D-69EB-B5E696BE3981</guid>
+    <object_guid>tt966001av_sd_buy</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>28.99</list_price>
+    <sale_price>25.99</sale_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>CE6FA4CD-88E1-2140-B99B-B782CD09F2FA</guid>
+    <object_guid>tt0050083</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>0.00</list_price>
+    <sale_price>0.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>1A615047-722E-AC24-426B-7D06AAB64DBA</guid>
+    <object_guid>movie_4567890</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>25.99</list_price>
+    <sale_price>22.99</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>A49297AB-E49C-397F-0762-AB4F60801A01</guid>
+    <object_guid>movie_555666_bluray</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>45.00</list_price>
+    <sale_price>35.00</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>E3DC3554-61C3-F558-7FD7-EA42D33E6A18</guid>
+    <object_guid>tt258022dh_HDB</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>20.99</list_price>
+    <sale_price>18.99</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>C45221E0-15E8-367E-0041-5EA0180A206B</guid>
+    <object_guid>movie_333444</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>20.00</list_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>B1F13D1F-0F52-83BA-4303-53C359825217</guid>
+    <object_guid>mb_4567890</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>86.70</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>843DDD4A-81B8-67EC-0447-F3B849B0E1EB</guid>
+    <object_guid>tt258022dh_HDB</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.00</list_price>
+    <sale_price>17.00</sale_price>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>63362FDB-D735-2511-2DB1-34CC343A79AC</guid>
+    <object_guid>handsfree_efah1234</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>129.99</list_price>
+    <sale_price>109.99</sale_price>
+    <price_list_guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>7A0B8818-8007-E6AC-9FC3-F79757EB108D</guid>
+    <object_guid>xperiapro</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>19.99</list_price>
+    <sale_price>18.99</sale_price>
+    <price_list_guid>F8C6DDBE-DB57-950C-1734-21DA07D5FDD7</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>E9A6656D-13E7-118E-EEC8-4CC972098C32</guid>
+    <object_guid>tt0970179</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>33.00</list_price>
+    <sale_price>31.00</sale_price>
+    <price_list_guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>426B66BB-6FC3-80D2-31AF-3A3C2930841F</guid>
+    <object_guid>handsfree_shippable</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>120.00</list_price>
+    <sale_price>100.00</sale_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>AFC288BE-228A-4B60-2B65-022DA6324750</guid>
+    <object_guid>tbcp_1234567</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>79.99</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>943780E4-9C2F-CBFF-77D6-CB317972A085</guid>
+    <object_guid>bundle_disney</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1.00</quantity>
+    <list_price>150.00</list_price>
+    <sale_price>109.99</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+
+<base_amount>
+    <guid>46AA15F9-D362-CE66-63CD-4BBF4CBA8DEE</guid>
+    <object_guid>movie_555666_regular</object_guid>
+    <object_type>SKU</object_type>
+    <quantity>1.00</quantity>
+    <list_price>25.00</list_price>
+    <sale_price>20.00</sale_price>
+    <price_list_guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</price_list_guid>
+</base_amount>
+<base_amount>
+    <guid>DD2631D1-947B-8D63-E86F-6D3CE4C89F5B</guid>
+    <object_guid>NoStockPhysicalItem</object_guid>
+    <object_type>PRODUCT</object_type>
+    <quantity>1</quantity>
+    <list_price>1</list_price>
+    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+</base_amount>
+</amounts>

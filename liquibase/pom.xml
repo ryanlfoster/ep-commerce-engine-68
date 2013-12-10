@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<groupId>com.elasticpath.db</groupId>
+	<artifactId>database-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Database Parent</name>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.elasticpath.db</groupId>
+				<artifactId>core-schema</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.db</groupId>
+				<artifactId>liquibase-extensions</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.elasticpath.db</groupId>
+				<artifactId>schema-extension-archetype</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+				<type>maven-archetype</type>
+			</dependency>
+
+			<dependency>
+				<groupId>com.elasticpath.db</groupId>
+				<artifactId>schema-documentation</artifactId>
+				<version>6.8.0.2013101613-RELEASE</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>${org.liquibase.version}</version>
+					<configuration>
+						<propertyFileWillOverride>true</propertyFileWillOverride>
+						<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+						<verbose>true</verbose>
+						<driver>${epdb.jdbc.driver}</driver>
+						<url>${epdb.url}</url>
+						<username>${epdb.username}</username>
+						<password>${epdb.password}</password>
+						<expressionVars>
+							<property>
+								<name>epdb.schemaname</name>
+								<value>${epdb.schemaname}</value>
+							</property>
+						</expressionVars>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.elasticpath.db</groupId>
+							<artifactId>liquibase-extensions</artifactId>
+							<version>${project.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>${epdb.maven.groupId}</groupId>
+							<artifactId>${epdb.maven.artifactId}</artifactId>
+							<version>${epdb.maven.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<modules>
+		<module>core-schema</module>
+		<module>schema-extension-archetype</module>
+		<module>liquibase-extensions</module>
+
+		<!-- Requires a live database -->
+<!--		<module>schema-documentation</module>-->
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<modules>
+				<module>schema-documentation</module>
+			</modules>
+		</profile>
+	</profiles>
+</project>

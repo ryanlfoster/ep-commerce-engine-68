@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.order.impl</package>
+	<entity class="OrderImpl">
+		<named-query name="ORDER_RETURN_LIST">
+			<query>
+				SELECT r
+				FROM OrderImpl AS o JOIN o.returns AS r
+				WHERE o.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_SELECT_BY_ORDERNUMBER">
+			<query>
+				SELECT o
+				FROM OrderImpl as o
+				WHERE o.orderNumber = ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_SELECT_BY_CUSTOMER_GUID_AND_STORECODE">
+			<query>
+				SELECT o
+				FROM OrderImpl as o
+				WHERE o.customer.guid = ?1
+				AND o.storeCode = ?2
+				AND o.status &lt;&gt; 'FAILED'
+				ORDER BY o.orderNumber
+			</query>
+		</named-query>
+		<named-query name="ORDER_RETURN_LIST_BY_RETURN_TYPE">
+			<query>
+				SELECT r
+				FROM OrderImpl AS o JOIN o.returns AS r
+				WHERE o.uidPk = ?1
+				AND r.returnType = ?2
+			</query>
+		</named-query>
+		<named-query name="ORDER_SELECT_BY_CREATED_DATE">
+			<query>
+				SELECT o
+				FROM OrderImpl as o
+				WHERE o.createdDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_SELECT_ALL">
+			<query>
+				SELECT o
+				FROM OrderImpl as o
+			</query>
+		</named-query>
+		<named-query name="ORDER_NUM_SELECT_BY_ORDERSKU_ID">
+			<query>
+				SELECT distinct o.orderNumber
+				FROM OrderImpl as o, IN(o.shipments) as ship, IN(ship.shipmentOrderSkusInternal) as oku
+				WHERE oku.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_UIDS_ALL">
+			<query>
+				SELECT o.uidPk
+				FROM OrderImpl as o
+			</query>
+		</named-query>
+		<named-query name="ORDER_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT p.uidPk
+				FROM OrderImpl as p
+				WHERE p.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_BY_UIDS">
+			<query>
+				SELECT o
+				FROM OrderImpl as o
+				WHERE o.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="CUSTOMER_PRODUCTS_PURCHASED">
+			<query>
+				<![CDATA[
+				SELECT o.customer.uidPk, oku.productSkuInternal.productInternal.uidPk
+				FROM OrderImpl as o, IN(o.shipments) as ship, IN(ship.shipmentOrderSkusInternal) as oku
+				WHERE oku.productSkuInternal.productInternal.uidPk IS NOT NULL
+				AND o.createdDate >= ?1
+				AND o.storeCode = ?2
+				AND o.status <> 'FAILED'
+				]]>
+			</query>
+		</named-query>
+		<named-query name="ORDERS_BY_ORDER_STATUS_AND_SHIPMENT_STATUS">
+			<query>
+				SELECT o
+				FROM OrderImpl AS o, IN(o.shipments) as ship
+				WHERE o.status in (:listOrderStatus)
+				AND ship.status = :shipmentStatus
+			</query>
+		</named-query>
+		<named-query name="PHYSICAL_SHIPMENTS_BY_STATUS_AND_WAREHOUSE">
+			<query>
+				SELECT ship
+				FROM PhysicalOrderShipmentImpl ship, StoreImpl store, IN(store.warehouses) warehouse
+				WHERE ship.status = ?1
+				AND ship.orderInternal.storeCode = store.code
+				AND warehouse.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="COUNT_PHYSICAL_SHIPMENTS_BY_STATUS_AND_WAREHOUSE">
+			<query>
+				SELECT COUNT(ship.uidPk)
+				FROM PhysicalOrderShipmentImpl ship, StoreImpl store, IN(store.warehouses) warehouse
+				WHERE ship.status = ?1
+				AND ship.orderInternal.storeCode = store.code
+				AND warehouse.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="ORDERS_BY_GIFT_CERTIFICATE">
+			<query>
+				SELECT DISTINCT o
+				FROM OrderImpl o JOIN o.orderPayments op
+				WHERE op.giftCertificate.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_COUNT_BY_EMAIL">
+			<query>
+				SELECT COUNT(o.uidPk)
+				FROM OrderImpl AS o, StoreImpl AS s
+				WHERE o.customer.userId = ?1
+				AND o.storeCode = s.code
+				AND s.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="ORDER_UID_FOR_FAILED_ORDERS_BEFORE_DATE">
+			<query>
+				SELECT o.uidPk
+				FROM OrderImpl AS o
+				WHERE o.status = 'FAILED'
+				AND o.createdDate &lt;= ?1
+				ORDER BY o.createdDate
+			</query>
+		</named-query>
+		<named-query name="DELETE_ORDER_BY_ORDER_UID_LIST">
+			<query>DELETE
+				FROM OrderImpl o
+				WHERE o.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="FIND_ORDER_GUIDS_BY_CART_ORDER_GUID">
+			<query>
+				SELECT o.orderNumber
+				FROM OrderImpl AS o
+				WHERE o.cartOrderGuid = ?1
+				ORDER BY o.createdDate desc
+			</query>
+		</named-query>
+		<named-query name="FIND_ORDER_NUMBERS_BY_CUSTOMER_GUID">
+			<query>
+				SELECT o.orderNumber
+				FROM OrderImpl AS o
+				WHERE o.customer.guid = ?1
+				AND o.storeCode = ?2
+			</query>
+		</named-query>
+	</entity>
+	<entity class="OrderLockImpl">
+		<named-query name="ORDER_LOCK_BY_ORDER_UID">
+			<query>
+				SELECT ol
+				FROM OrderLockImpl AS ol
+				WHERE ol.order.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_LOCK_BY_TIME">
+			<query>
+				SELECT ol
+				FROM OrderLockImpl AS ol
+				WHERE ol.createdDate &lt; ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="OrderReturnImpl">
+		<named-query name="ORDER_RETURN_UIDS_LIST">
+			<query>
+				SELECT r.uidPk
+				FROM OrderReturnImpl r
+			</query>
+		</named-query>
+		<named-query name="ORDER_RETURNS_BY_UIDS">
+			<query>
+				SELECT r
+				FROM OrderReturnImpl as r
+				WHERE r.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="ORDER_RETURN_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT p.uidPk
+				FROM OrderReturnImpl as p
+				WHERE p.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="EXCHANGE_BY_EXCHANGE_ORDER_UID">
+			<query>
+				SELECT r
+				FROM OrderReturnImpl as r
+				WHERE r.exchangeOrder.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="OrderSkuImpl">
+		<named-query name="ORDER_SKU_SELECT_BY_ID">
+			<query>
+				SELECT oku
+				FROM OrderSkuImpl as oku
+				WHERE oku.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="ORDER_SKU_SELECT_BY_CODE_AND_STATUS">
+			<query>
+				SELECT oku
+				FROM OrderSkuImpl oku, StoreImpl store, IN(store.warehouses) war
+				WHERE oku.skuCode = ?1
+				AND oku.shipment.status = ?2
+				AND oku.shipment.orderInternal.storeCode = store.code
+				AND war.uidPk = ?3
+				ORDER BY oku.createdDate
+			</query>
+		</named-query>
+		<named-query name="ORDER_SKU_SELECT_BY_SKUCODE">
+			<query>
+				SELECT oku
+				FROM OrderSkuImpl as oku
+				WHERE oku.skuCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_ORDER_SKUS_FOR_SKUCODE">
+			<query>
+				SELECT count(oku.uidPk)
+				FROM OrderSkuImpl as oku
+				WHERE oku.skuCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_ORDER_SKU_BY_ORDER_DATE">
+			<query>
+				<![CDATA[
+				SELECT SUM(sos.quantityInternal), sos.productSkuInternal.productInternal.uidPk
+				FROM AbstractOrderShipmentImpl as aos INNER JOIN aos.shipmentOrderSkusInternal as sos
+				WHERE aos.uidPk = sos.shipment.uidPk
+				AND sos.productSkuInternal.productInternal.uidPk IS NOT NULL
+				AND aos.orderInternal.createdDate >= ?1
+				AND aos.orderInternal.status <> 'FAILED'
+				GROUP BY sos.productSkuInternal.productInternal.uidPk
+				]]>
+			</query>
+		</named-query>
+		<named-query name="FIND_PRODUCT_CODES_PURCHASED_BY_USER">
+			<query>
+				<![CDATA[
+				SELECT DISTINCT p.code
+				FROM ProductImpl p, OrderSkuImpl osku, AbstractOrderShipmentImpl oship, OrderImpl o, CustomerImpl c
+				WHERE p.uidPk = osku.productSkuInternal.productInternal.uidPk
+				AND osku.shipment.uidPk = oship.uidPk
+				AND o.customer.uidPk = c.uidPk
+				AND oship.orderInternal.uidPk = o.uidPk
+				AND c.userId = ?1
+				AND o.storeCode = ?2
+				AND o.status <> 'FAILED'
+				AND o.createdDate<= ?3
+				]]>
+			</query>
+		</named-query>
+		<named-query name="FIND_PRODUCT_CODES_PURCHASED_BY_USER_BETWEEN_DATES">
+			<query>
+				<![CDATA[
+				SELECT DISTINCT p.code
+				FROM ProductImpl p, OrderSkuImpl osku, AbstractOrderShipmentImpl oship, OrderImpl o, CustomerImpl c
+				WHERE p.uidPk = osku.productSkuInternal.productInternal.uidPk
+				AND osku.shipment.uidPk = oship.uidPk
+				AND o.customer.uidPk = c.uidPk
+				AND oship.orderInternal.uidPk = o.uidPk
+				AND c.userId = ?1
+				AND o.storeCode = ?2
+				AND o.status <> 'FAILED'
+				AND o.createdDate<= ?3
+				AND o.createdDate >= ?4
+				]]>
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ElectronicOrderShipmentImpl">
+		<named-query name="ELECTRONIC_SHIPMENT_BY_SHIPMENT_NUMBER">
+			<query>
+				SELECT s
+				FROM ElectronicOrderShipmentImpl s
+				WHERE s.shipmentNumber = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="PhysicalOrderShipmentImpl">
+		<named-query name="PHYSICAL_ORDER_SHIPMENT_BY_UIDS">
+			<query>
+				SELECT pos
+				FROM PhysicalOrderShipmentImpl as pos
+				WHERE pos.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="PHYSICAL_SHIPMENT_BY_SHIPMENT_NUMBER">
+			<query>
+				SELECT s
+				FROM PhysicalOrderShipmentImpl s
+				WHERE s.shipmentNumber = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ServiceOrderShipmentImpl"/>
+
+</entity-mappings>
+

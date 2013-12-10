@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Defines the beans required to really send email.  integration-core-context.xml defines and uses a fake email service by default.
+    To use the real email, rather than the fake one simply import this file after integration-core-context.xml
+
+    Do not use this unless you have the appropriate Velocity libraries in the correct place, otherwise you will see an
+    OutOfMemoryError as Velocity fails to start and orphans a VelocityEngine instance and it's related objects.
+-->
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="emailService"
+		class="com.elasticpath.service.misc.impl.EmailServiceImpl" >
+		<property name="emailComposer">
+			<ref bean="emailComposer" />
+		</property>
+		<property name="emailSender">
+			<ref bean="emailSender" />
+		</property>
+		<property name="emailNotificationHelper">
+			<ref bean="emailNotificationHelper" />
+		</property>
+		<property name="settingsReader" ref="settingsService"/>
+	</bean>
+
+	<bean id="emailComposerTemplate" abstract="true"
+		  class="com.elasticpath.commons.util.email.impl.EmailComposerImpl">
+		<property name="emailContextFactory" ref="emailContextFactory"/>
+		<property name="velocityEngineFactory" ref="velocityEngineFactory" />
+		<property name="storeService" ref="storeService" />
+		<property name="storeConfig" ref="threadLocalStorage" />
+		<property name="settingsReader" ref="settingsService" />
+		<property name="storeMessageSource" ref="storeMessageSourceDelegate"/>
+	</bean>
+
+	<bean id="emailComposer" parent="emailComposerTemplate" />
+
+	<bean id="emailContextFactoryTemplate" abstract="true"
+		  class="com.elasticpath.commons.util.email.impl.EmailContextFactoryImpl">
+		<property name="geography" ref="geography" />
+		<property name="moneyFormatter" ref="moneyFormatter" />
+		<property name="storeThemeMessageSource" ref="storeMessageSource"/>
+	</bean>
+
+	<bean id="emailContextFactory" parent="emailContextFactoryTemplate" />
+
+	<bean id="emailSender" class="com.elasticpath.commons.util.email.impl.EmailSenderImpl"
+		scope="singleton">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="velocityEngineFactory" class="com.elasticpath.commons.util.impl.VelocityEngineInstanceFactoryImpl" >
+        <property name="velocityProperties">
+			<ref bean="velocityProperties"/>
+	    </property>
+	</bean>
+
+
+	<bean id="velocityProperties" class="java.util.Hashtable" depends-on="storeResourceManager">
+   		<constructor-arg>
+   			<map>
+				<entry key="resource.loader" value="class"/>
+				<entry key="class.resource.loader.class" value="com.elasticpath.test.MultiClasspathResourceLoader"/>
+				<entry key="class.resource.loader.basepaths" value="${runtime.assets.dir},assets,assets/themes"/>
+				<entry key="velocimacro.library" value="VM_global_library.vm"/>
+   	           <entry key="velocimacro.library.autoreload"><value>true</value></entry>
+       	       <entry key="velocimacro.permissions.allow.inline"><value>true</value></entry>
+           	   <entry key="velocimacro.permissions.allow.inline.to.replace.global"><value>true</value></entry>
+   	           <entry key="velocimacro.permissions.allow.inline.local.scope"><value>true</value></entry>
+       	       <entry key="velocimacro.context.localscope"><value>false</value></entry>
+       	       <entry key="velocimacro.messages.on"><value>false</value></entry>
+   	           <entry key="runtime.log.logsystem.class"><value>org.apache.velocity.runtime.log.NullLogSystem</value></entry>
+   	           <entry key="template.encoding"><value>UTF-8</value></entry>
+   	           <entry key="resource.manager.class"><value>com.elasticpath.commons.util.impl.StoreResourceManagerProxyImpl</value></entry>
+   	           <entry key="input.encoding"><value>UTF-8</value></entry>
+   	           <entry key="output.encoding"><value>UTF-8</value></entry>
+       	   </map>
+ 		</constructor-arg>
+    </bean>
+
+	<bean id="realEmailFacade" class="com.elasticpath.test.RealEmailFacade"/>
+</beans>

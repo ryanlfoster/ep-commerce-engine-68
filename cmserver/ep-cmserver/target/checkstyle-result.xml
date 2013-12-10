@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/EpController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/AbstractEpControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/AbstractEpFormController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/AssetImageControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/CacheInvalidationControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/DiagnosticControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/ImageControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/InvalidAccessControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/controller/impl/SimplePageControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/EpCmWebException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/exceptionhandler/EpSystemExceptionHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/filters/CmUserSessionFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/filters/EpFilterToBeanProxy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/ForgottenPasswordFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/ForgottenPasswordFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/ImportStep1FormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/ImportStep2FormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/ImportStep3FormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/ImportStep5FormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/ImportStep6FormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/impl/SignInFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/ImportStep1FormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/ImportStep2FormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/ImportStep3FormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/ImportStep5FormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/ImportStep6FormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/formbean/SignInFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/jobs/impl/SearchTermsAggregatorJobImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/jobs/SearchTermsAggregatorJob.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/security/impl/CmAccessDeniedHandlerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/security/impl/CmRemoteAuthenticationManagerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/security/impl/CmSpringSecurityListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/util/CmRequestHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/util/impl/EpRoleVoter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/main/java/com/elasticpath/cmweb/util/impl/RequestHelperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/test/java/com/elasticpath/cmweb/controller/impl/AssetImageControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/cmserver/ep-cmserver/src/test/java/com/elasticpath/cmweb/jobs/impl/SearchTermsAggregatorJobImplTest.java">
+</file>
+</checkstyle>

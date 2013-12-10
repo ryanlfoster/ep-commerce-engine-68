@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath.osgi.wrappers</groupId>
+		<artifactId>osgi-wrappers</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>com.elasticpath.cmclient.libs</artifactId>
+	<packaging>bundle</packaging>
+	<name>CMClient OSGi Wrappers</name>
+	<description>A bucket of JAR files wrapped with an OSGi manifest for use within CMClient's OSGi environment.</description>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+						<Bundle-Name>%pluginName</Bundle-Name>
+						<Bundle-Vendor>%pluginProvider</Bundle-Vendor>
+						<Embed-Dependency>!(ep-core|ep-base|ep-cache|ep-persistence-api|ep-persistence-openjpa|ep-settings);scope=compile|runtime</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<_exportcontents>
+							com.elasticpath.ql.custom.category,
+							com.elasticpath.ql.parser.querybuilder,
+							com.elasticpath.ql.parser.query,
+							com.elasticpath.ql.parser,
+							com.elasticpath.ql.parser.gen,
+							com.elasticpath.search.searchengine,
+							com.elasticpath.ql.custom.setting,
+							com.elasticpath.ql.parser.fieldresolver,
+							com.elasticpath.ql.parser.valueresolver,
+							com.elasticpath.ql.custom.promotion,
+							com.elasticpath.ql.custom.pricelist,
+							com.elasticpath.ql.custom.product,
+							com.elasticpath.ql.custom.catalog,
+							com.elasticpath.plugin.*,
+							*.impl,
+							!com.elasticpath.*,*
+						</_exportcontents>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- ${project.version} seems to pull the version relative to the project it is in so explicitly specifying the version of core, ql and so here seems to be necessary -->
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-jaxrs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-core-asl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-mapper-asl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-payment-gateway-connectivity-api</artifactId>
+			<version>6.8.0.2013101613-RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-search</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-querylanguage</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.0.1-FINAL</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.woodstox</groupId>
+			<artifactId>wstx-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-core</artifactId>
+			<version>2.1.9.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.codehaus.jettison</groupId>
+					<artifactId>jettison</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+</project>

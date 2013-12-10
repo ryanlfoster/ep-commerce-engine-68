@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:binding-config="http://www.elasticpath.com/schema/binding-config"
+		xsi:schemaLocation="
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.elasticpath.com/schema/binding-config http://www.elasticpath.com/schema/binding-config/binding-config.xsd
+		">
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessException">dataAccessFailure</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="localeResolverTemplate" abstract="true"
+		  class="com.elasticpath.sfweb.servlet.CustomerSessionLocaleResolver">
+		<property name="requestHelper" ref="requestHelper"/>
+	</bean>
+
+	<bean id="localeResolver" parent="localeResolverTemplate" />
+
+	<bean id="shoppingItemDtoFactory" class="com.elasticpath.common.dto.sellingchannel.impl.ShoppingItemDtoFactoryImpl"/>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+	<!-- Allows for the merging of URL mappings, for example if defined in some bean. -->
+	<bean id="SimpleUrlHandlerMapping"
+			class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"
+			parent="AbstractSimpleUrlHandlerMapping"/>
+
+	<bean id="AbstractSimpleUrlHandlerMapping"
+			class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"
+			abstract="true">
+		<!-- property name="interceptors">
+			<list>
+			<ref bean="shoppingCartInterceptor"/>
+			<ref bean="localeCurrencyInterceptor"/>
+			</list>
+			</property-->
+		<property name="mappings">
+			<props>
+				<prop key="/index.ep">indexController</prop>
+				<prop key="/shop.ep">indexController</prop>
+				<prop key="/sign-in.ep">signInFormController</prop>
+				<prop key="/anonymous-sign-in.ep">anonymousSignInFormController</prop>
+				<prop key="/checkout-create-account.ep">checkoutCreateAccountFormController</prop>
+				<prop key="/manage-account.ep">manageAccountController</prop>
+				<prop key="/edit-account.ep">editAccountFormController</prop>
+				<prop key="/create-address.ep">addressFormController</prop>
+				<prop key="/edit-address.ep">addressFormController</prop>
+				<prop key="/create-credit-card.ep">creditCardFormController</prop>
+				<prop key="/edit-credit-card.ep">creditCardFormController</prop>
+				<prop key="/forgotten-password.ep">forgottenPasswordFormController</prop>
+				<prop key="/locale.ep">localeController</prop>
+				<prop key="/add-to-cart-simple.ep">addToCartSimpleController</prop>
+				<prop key="/add-to-wishlist.ep">addToWishListController</prop>
+				<prop key="/move-to-wishlist.ep">moveToWishListController</prop>
+				<prop key="/move-to-cart.ep">moveToCartController</prop>
+				<prop key="/view-cart.ep">shoppingCartController</prop>
+				<prop key="/view-wishlist.ep">viewWishListController</prop>
+				<prop key="/send-wishlist.ep">sendWishListController</prop>
+				<prop key="/remove-cart-item.ep">removeCartItemController</prop>
+				<prop key="/remove-wishlist-item.ep">removeWishListItemController</prop>
+				<prop key="/checkout.ep">checkoutController</prop>
+				<prop key="/shipping-address.ep">shippingAddressFormController</prop>
+				<prop key="/billing-address.ep">billingAddressFormController</prop>
+				<prop key="/delivery-options.ep">deliveryOptionsFormController</prop>
+				<prop key="/billing-and-review.ep">billingAndReviewFormController</prop>
+				<prop key="/paypal-express-checkout.ep">paypalExpressCheckout</prop>
+				<prop key="/receipt.ep">receiptController</prop>
+				<prop key="/print-receipt.ep">printReceiptController</prop>
+				<prop key="/order-details.ep">viewOrderController</prop>
+				<prop key="/search.ep">searchController</prop>
+				<prop key="/advanced-search.ep">advancedSearchController</prop>
+				<prop key="/browse.ep">browsingController</prop>
+				<prop key="/product-lookup.ep">productLookupController</prop>
+				<prop key="/product-view.ep">shoppingItemConfigController</prop>
+				<prop key="/product-review.ep">productReviewController</prop>
+				<prop key="/error.ep">errorController</prop>
+				<prop key="/invalid-access.ep">invalidAccessController</prop>
+				<prop key="/renderImage.image">imageController</prop>
+				<prop key="/sec-asset.ep">secureAssetController</prop>
+				<prop key="/licensing-error.ep">licensingController</prop>
+				<prop key="/sitemap.ep">sitemapController</prop>
+				<prop key="/search-gift-certificate.ep">viewGiftCertificateController</prop>
+				<prop key="/check-gift-cert-balance.ep">checkGiftCertBalance</prop>
+				<prop key="/paypal-shortcut-begin.ep">payPalShortcutBeginController</prop>
+				<prop key="/paypal-shortcut-checkout.ep">payPalShortcutReturnController</prop>
+				<prop key="/payer-authentication-return.ep">payerAuthenticationReturnController</prop>
+				<prop key="/payer-authentication-enrollment.ep">payerAuthticationEnrollmentController</prop>
+				<!-- CM Client Sign in -->
+				<prop key="/cmclient-signin.ep">cmclientSignInController</prop>
+
+				<!--  Maintenance page for stores that are in restricted state -->
+				<prop key="/maintenance.ep">maintenanceController</prop>
+
+				<!--
+					Mappings for template-resources, if you add a new directory you
+					want to make publicly viewable you must add the directory here.
+				 -->
+				<prop key="/power-reviews/pwr/engine/js/**/*">storeAssetResourceController</prop>
+				<prop key="/power-reviews/pwr/engine/**/*">storeAssetResourceController</prop>
+				<prop key="/power-reviews/pwr/content/**/*">storeAssetResourceController</prop>
+
+				<!--
+					Dynamic Content
+					this controller should be hit with a url pattern starting /content/
+					if you do change you need to review Dynamic Content Strategy so that
+					the file path is resolved correctly.
+				-->
+				<prop key="/dcassets/**/*">dynamicContentController</prop>
+
+				<!-- Store Themes -->
+				<prop key="/images/**/*">storeThemeAssetResourceController</prop>
+				<prop key="/stylesheet/**/*">storeThemeAssetResourceController</prop>
+				<prop key="/js/**/*">storeThemeAssetResourceController</prop>
+
+				<!--
+					SF Template/Properties Cache Invalidation URL.
+					This implementation should not be used in production.
+				 -->
+				<prop key="/invalidate-cache.ep">cacheInvalidationController</prop>
+				<!--
+					Promotion sample page
+				-->
+				<prop key="/promotion.ep">promotionController</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<!--  exception handler -->
+	<bean id="epSystemExceptionHandler" class="com.elasticpath.sfweb.exceptionhandler.EpSystemExceptionHandler">
+		<property name="order" value="100"/>
+		<property name="viewName" value="error"/>
+	</bean>
+	<!--  end of exception handler -->
+
+	<bean id="abstractEpController" abstract="true" class="com.elasticpath.sfweb.controller.impl.AbstractEpControllerImpl">
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="errorController"
+			class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl"
+			parent="abstractEpController">
+		<property name="viewName" value="error"/>
+	</bean>
+
+	<bean id="invalidAccessController"
+			class="com.elasticpath.sfweb.controller.impl.InvalidAccessControllerImpl"
+			parent="abstractEpController">
+		<property name="viewName" value="error"/>
+	</bean>
+
+	<bean id="dummyController"
+			class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl"
+			parent="abstractEpController">
+		<property name="viewName" value="dummy"/>
+	</bean>
+
+	<bean id="indexController" class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl">
+		<property name="viewName" value="index"/>
+	</bean>
+
+	<bean id="checkGiftCertBalance" class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl">
+		<property name="viewName" value="giftCertificate/checkBalance"/>
+	</bean>
+
+	<bean id="abstractEpFormController" abstract="true" class="com.elasticpath.sfweb.controller.impl.AbstractEpFormController">
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="disallowedFormFields" value="*uidPk, guid, code, elasticPath, utility, *Service"/>
+	</bean>
+
+	<bean id="addressFormController"
+			class="com.elasticpath.sfweb.controller.impl.AddressFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="customerAddressFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.CustomerAddressFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="formView" value="address/create"/>
+		<property name="successView" value="redirect:/manage-account.ep"/>
+		<property name="checkoutShippingAddressView" value="redirect:/shipping-address.ep"/>
+		<property name="checkoutBillingAddressView" value="redirect:/billing-address.ep"/>
+	</bean>
+
+	<bean id="creditCardFormController"
+			class="com.elasticpath.sfweb.controller.impl.CreditCardFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="creditCard"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.CreditCardFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="settingsReader" ref="settingsService"/>
+		<property name="utility" ref="utility"/>
+		<property name="formView" value="creditCard/create"/>
+		<property name="successView" value="redirect:/manage-account.ep"/>
+		<property name="checkoutView" value="redirect:/billing-and-review.ep"/>
+		<property name="errorView" value="error"/>
+	</bean>
+
+	<bean id="manageAccountController"
+			class="com.elasticpath.sfweb.controller.impl.ManageAccountControllerImpl"
+			parent="abstractEpFormController">
+		<property name="customerService" ref="customerService"/>
+		<property name="orderService" ref="orderService"/>
+		<property name="ruleService" ref="ruleService"/>
+		<property name="productSkuService" ref="productSkuService"/>
+		<property name="sessionForm" value="true"/>
+		<property name="commandName" value="manageAccountFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.ManageAccountFormBeanImpl"/>
+		<property name="couponUsageService" ref="couponUsageService"/>
+		<property name="settingsReader" ref="settingsService"/>
+		<property name="unauthorizedView" value="redirect:/sign-in.ep"/>
+		<property name="successView" value="account/manage"/>
+		<property name="formView" value="account/manage"/>
+	</bean>
+
+	<bean id="editAccountFormController"
+			class="com.elasticpath.sfweb.controller.impl.EditAccountFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="editAccountFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.EditAccountFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="customerSessionService" ref="customerSessionService"/>
+		<property name="unauthorizedView" value="redirect:/sign-in.ep"/>
+		<property name="successView" value="redirect:/manage-account.ep"/>
+		<property name="formView" value="account/edit"/>
+	</bean>
+
+	<bean id="forgottenPasswordFormController"
+			class="com.elasticpath.sfweb.controller.impl.ForgottenPasswordFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="forgottenPasswordFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.ForgottenPasswordFormBeanImpl"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="sessionForm" value="true"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="formView" value="account/forgottenPassword"/>
+		<property name="successView" value="account/passwordConfirmation"/>
+	</bean>
+
+
+	<bean id="signInFormController"
+			class="com.elasticpath.sfweb.controller.impl.SignInFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="commandName" value="signInFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.SignInFormBeanImpl"/>
+		<property name="anonymousSignInFormController" ref="anonymousSignInFormController"/>
+		<property name="formView" value="checkout/signIn"/>
+		<property name="successView" value="redirect:/manage-account.ep"/>
+	</bean>
+
+	<bean id="anonymousSignInFormController"
+			class="com.elasticpath.sfweb.controller.impl.AnonymousSignInFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="commandName" value="anonymousSignInFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.AnonymousSignInFormBeanImpl"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="checkoutSignInFormController" ref="signInFormController"/>
+		<property name="webCustomerSessionService" ref="webCustomerSessionService"/>
+		<property name="formView" value="checkout/signIn"/>
+		<property name="successView" value="redirect:/checkout.ep"/>
+	</bean>
+
+	<bean id="checkoutCreateAccountFormController"
+			class="com.elasticpath.sfweb.controller.impl.CheckoutCreateAccountFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="customer"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.CustomerFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="webCustomerSessionService" ref="webCustomerSessionService"/>
+		<property name="formView" value="checkout/register"/>
+		<property name="successView" value="redirect:/manage-account.ep"/>
+	</bean>
+
+	<bean id="localeController"
+			class="com.elasticpath.sfweb.controller.impl.LocaleControllerImpl"
+			parent="abstractEpController">
+		<property name="customerSessionService" ref="customerSessionService"/>
+		<property name="storefrontContextUrl" value="${ep.storefront.contextUrl}"/>
+	</bean>
+
+	<bean id="shoppingCartController"
+			class="com.elasticpath.sfweb.controller.impl.ShoppingCartControllerImpl"
+			parent="abstractEpFormController">
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler"/>
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="sessionForm" value="true"/>
+		<property name="giftCertificateService" ref="giftCertificateService"/>
+		<property name="shippingServiceLevelService" ref="shippingServiceLevelService"/>
+		<property name="productInventoryShoppingService" ref="productInventoryShoppingService"/>
+		<property name="productAssociationService" ref="productAssociationService"/>
+		<property name="shoppingCartFormBeanFactory" ref="shoppingCartFormBeanFactory"/>
+		<property name="formView" value="shoppingCart/viewCart"/>
+		<property name="shoppingCartView" value="redirect:/view-cart.ep"/>
+		<property name="checkoutView" value="redirect:/checkout.ep"/>
+		<property name="payPalShortcutView" value="redirect:/paypal-shortcut-begin.ep"/>
+		<property name="disallowedFormFields" value="*uidPk, *guid, cmUserUID, codeValid, exchangeOrderShoppingCart"/>
+		<property name="cartDirector" ref="cartDirector"/>
+		<property name="priceLookupFacade" ref="priceLookupFacade"/>
+		<property name="ruleEngine" ref="epRuleEngine"/>
+		<property name="ruleService" ref="ruleService"/>
+		<property name="productCharacteristicsService" ref="productCharacteristicsService"/>
+	</bean>
+
+	<bean id="viewWishListController"
+			class="com.elasticpath.sfweb.controller.impl.ViewWishListController"
+			parent="abstractEpController">
+		<property name="viewName" value="shoppingCart/viewWishList"/>
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler"/>
+		<property name="productInventoryShoppingService" ref="productInventoryShoppingService"/>
+		<property name="wishListService" ref="wishListService"/>
+	</bean>
+
+	<bean id="sendWishListController"
+			class="com.elasticpath.sfweb.controller.impl.WishListControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="wishListMessage"/>
+		<property name="commandClass" value="com.elasticpath.domain.shoppingcart.impl.WishListMessageImpl"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="sessionForm" value="true"/>
+		<property name="wishListService" ref="wishListService"/>
+		<property name="wishListEmailService" ref="wishListEmailService"/>
+		<property name="formView" value="shoppingCart/sendWishList"/>
+		<property name="successView" value="redirect:/view-wishlist.ep"/>
+	</bean>
+
+	<bean id="addToCartSimpleController"
+			class="com.elasticpath.sfweb.controller.impl.AddToCartSimpleControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="redirect:/view-cart.ep"/>
+		<property name="errorView" value="forward:/view-cart.ep"/>
+		<property name="cartDirector" ref="cartDirector"/>
+		<property name="shoppingItemDtoFactory" ref="shoppingItemDtoFactory"/>
+	</bean>
+
+	<bean id="moveToCartController"
+			class="com.elasticpath.sfweb.controller.impl.MoveToCartControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="redirect:/view-cart.ep"/>
+		<property name="errorView" value="forward:/view-cart.ep"/>
+		<property name="cartDirector" ref="cartDirector"/>
+		<property name="shoppingItemDtoFactory" ref="shoppingItemDtoFactory"/>
+	</bean>
+
+	<bean id="addToWishListController"
+			class="com.elasticpath.sfweb.controller.impl.AddToWishListControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="redirect:/view-wishlist.ep"/>
+		<property name="errorView" value="forward:/view-cart.ep"/>
+		<property name="cartDirector" ref="cartDirector"/>
+	</bean>
+
+	<bean id="moveToWishListController"
+			class="com.elasticpath.sfweb.controller.impl.MoveToWishListControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="redirect:/view-wishlist.ep"/>
+		<property name="errorView" value="forward:/view-cart.ep"/>
+		<property name="cartDirector" ref="cartDirector"/>
+	</bean>
+
+	<bean id="removeCartItemController"
+			class="com.elasticpath.sfweb.controller.impl.RemoveCartItemControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="redirect:/view-cart.ep"/>
+		<property name="cartDirector" ref="cartDirector"/>
+	</bean>
+
+	<bean id="removeWishListItemController"
+			class="com.elasticpath.sfweb.controller.impl.RemoveWishListItemControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="redirect:/view-wishlist.ep"/>
+		<property name="wishListService" ref="wishListService"/>
+	</bean>
+
+	<bean id="checkoutController"
+			class="com.elasticpath.sfweb.controller.impl.CheckoutControllerImpl"
+			parent="abstractEpController">
+		<property name="shippingAddressView" value="redirect:/shipping-address.ep"/>
+		<property name="billingAddressView" value="redirect:/billing-address.ep"/>
+		<property name="orderView" value="redirect:/billing-and-review.ep"/>
+	</bean>
+
+	<bean id="shippingAddressFormController"
+			class="com.elasticpath.sfweb.controller.impl.ShippingAddressFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="checkoutAddressFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.CheckoutAddressFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="formView" value="checkout/checkoutAddress"/>
+		<property name="successView" value="redirect:/delivery-options.ep"/>
+	</bean>
+
+	<bean id="billingAddressFormController"
+			class="com.elasticpath.sfweb.controller.impl.BillingAddressFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="checkoutAddressFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.CheckoutAddressFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="formView" value="checkout/checkoutAddress"/>
+		<property name="successView" value="redirect:/billing-and-review.ep"/>
+	</bean>
+
+	<bean id="deliveryOptionsFormController"
+			class="com.elasticpath.sfweb.controller.impl.DeliveryOptionsFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="sessionForm" value="true"/>
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="formView" value="checkout/deliveryOptions"/>
+		<property name="successView" value="redirect:/billing-and-review.ep"/>
+	</bean>
+
+	<bean id="billingAndReviewFormController"
+			class="com.elasticpath.sfweb.controller.impl.BillingAndReviewFormControllerImpl"
+			parent="abstractEpFormController">
+		<property name="commandName" value="billingAndReviewFormBean"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.BillingAndReviewFormBeanImpl"/>
+		<property name="sessionForm" value="true"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="shoppingCartEventListeners">
+			<list>
+				<bean class="com.elasticpath.sfweb.listeners.SuccessfulCheckoutTagger"/>
+			</list>
+		</property>
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler"/>
+		<property name="productInventoryShoppingService" ref="productInventoryShoppingService"/>
+		<property name="returnURL" value="paypal-express-checkout.ep"/>
+		<property name="termURL" value="payer-authentication-return.ep"/>
+		<property name="enrollmentURL" value="payer-authentication-enrollment.ep"/>
+		<property name="formView" value="checkout/billingAndReview"/>
+		<property name="successView" value="redirect:/receipt.ep"/>
+		<property name="continueShoppingPage" value="redirect:/shop.ep"/>
+		<property name="settingsReader" ref="settingsService"/>
+		<property name="billingAndReviewFormBeanFactory" ref="billingAndReviewFormBeanFactory"/>
+	</bean>
+
+	<bean id="paypalExpressCheckout"
+			class="com.elasticpath.sfweb.controller.impl.PayPalExpressCheckoutController"
+			parent="abstractEpController">
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="successView" value="redirect:/receipt.ep"/>
+		<property name="standardReturnView" value="redirect:/billing-and-review.ep"/>
+	</bean>
+
+	<bean id="payerAuthenticationReturnController"
+			class="com.elasticpath.sfweb.controller.impl.PayerAuthenticationReturnController"
+			parent="abstractEpController">
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="successView" value="redirect:/receipt.ep"/>
+		<property name="returnView" value="redirect:/billing-and-review.ep"/>
+	</bean>
+
+	<bean id="payerAuthticationEnrollmentController" class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl">
+		<property name="viewName" value="checkout/payerAuthentication"/>
+	</bean>
+
+	<bean id="receiptController"
+			class="com.elasticpath.sfweb.controller.impl.ViewReceiptControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="checkout/receipt"/>
+		<property name="cookieHandler" ref="cookieHandler"/>
+		<property name="orderPresentationHelper" ref="orderPresentationHelper"/>
+	</bean>
+
+	<bean id="printReceiptController"
+			class="com.elasticpath.sfweb.controller.impl.ViewOrderControllerImpl"
+			parent="abstractEpController">
+		<property name="orderService" ref="orderService"/>
+		<property name="successView" value="checkout/print-receipt"/>
+		<property name="requestType" value="ViewPrintReceipt"/>
+		<property name="orderPresentationHelper" ref="orderPresentationHelper"/>
+	</bean>
+
+	<bean id="viewOrderController"
+			class="com.elasticpath.sfweb.controller.impl.ViewOrderControllerImpl"
+			parent="abstractEpController">
+		<property name="orderService" ref="orderService"/>
+		<property name="successView" value="checkout/orderDetails"/>
+		<property name="requestType" value="ViewOrderDetails"/>
+		<property name="orderPresentationHelper" ref="orderPresentationHelper"/>
+	</bean>
+
+	<bean id="viewGiftCertificateController"
+			class="com.elasticpath.sfweb.controller.impl.ViewGiftCertificateControllerImpl"
+			parent="abstractEpController">
+		<property name="giftCertificateService" ref="giftCertificateService"/>
+		<property name="successView" value="giftCertificate/view"/>
+		<property name="errorView" value="error"/>
+		<property name="validator" ref="defaultBeanValidator"/>
+	</bean>
+
+	<bean id="searchController"
+			class="com.elasticpath.sfweb.controller.impl.SearchControllerImpl"
+			parent="abstractEpController">
+		<property name="searchService" ref="searchService"/>
+		<property name="successView" value="search/search"/>
+		<property name="errorView" value="error"/>
+		<property name="productLoadTuner" ref="productLoadTunerForBrowsingAndSearch"/>
+		<property name="seoUrlBuilder" ref="seoUrlBuilderProxy"/>
+		<property name="priceFinderForCart" ref="priceFinderForCart"/>
+		<property name="storefrontContextUrl" value="${ep.storefront.contextUrl}"/>
+		<property name="catalogViewResultBeanCreator" ref="catalogViewResultBeanCreator"/>
+		<property name="storeSearchRequestFactory" ref="storeSearchRequestFactory"/>
+	</bean>
+
+	<bean id="advancedSearchController"
+			class="com.elasticpath.sfweb.controller.impl.AdvancedSearchControllerImpl"
+			parent="abstractEpFormController">
+		<property name="errorView" value="error"/>
+		<property name="successView" value="search/advancedSearch"/>
+		<property name="formView" value="search/advancedSearch"/>
+		<property name="commandClass" value="com.elasticpath.sfweb.formbean.impl.AdvancedSearchControllerFormBeanImpl"/>
+		<property name="commandName" value="advancedSearchControllerFormBean"/>
+		<property name="storeProductLoadTuner" ref="productLoadTunerForBrowsingAndSearch"/>
+		<property name="catalogViewResultBeanCreator" ref="catalogViewResultBeanCreator"/>
+		<property name="advancedStoreSearchRequestFactory" ref="advancedStoreSearchRequestFactory"/>
+		<property name="advancedSearchService" ref="advancedSearchService"/>
+		<property name="advancedSearchConfigurationProvider" ref="advancedSearchConfigurationProvider"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="parameterMapper" ref="parameterMapper"/>
+		<property name="validator" ref="advancedSearchFormBeanValidator"/>
+	</bean>
+
+	<bean id="browsingController"
+			class="com.elasticpath.sfweb.controller.impl.BrowsingControllerImpl"
+			parent="abstractEpController">
+		<property name="browsingService" ref="browsingService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="storeProductLoadTuner" ref="productLoadTunerForBrowsingAndSearch"/>
+		<property name="seoUrlValidator" ref="seoUrlValidator"/>
+		<property name="priceFinderForCart" ref="priceFinderForCart"/>
+		<property name="catalogViewResultBeanCreator" ref="catalogViewResultBeanCreator"/>
+		<property name="productCharacteristicsService" ref="productCharacteristicsService"/>
+	</bean>
+
+	<bean id="sitemapController"
+			class="com.elasticpath.sfweb.controller.impl.SitemapControllerImpl"
+			parent="abstractEpController">
+		<property name="brandService" ref="brandService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="sitemapService" ref="sitemapService"/>
+		<property name="successView" value="catalog/sitemap"/>
+		<property name="storeProductLoadTuner" ref="productLoadTunerForBrowsingAndSearch"/>
+		<property name="seoUrlValidator" ref="seoUrlValidator"/>
+		<property name="paginationService" ref="paginationService"/>
+	</bean>
+
+	<bean id="productLookupController"
+			class="com.elasticpath.sfweb.controller.impl.ProductLookupControllerImpl"
+			parent="abstractEpController">
+		<property name="productXmlService" ref="productXmlService"/>
+	</bean>
+
+	<bean id="shoppingItemConfigController" class="com.elasticpath.sfweb.controller.impl.ShoppingItemConfigControllerImpl">
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="templateModelFactory" ref="templateModelFactory"/>
+		<property name="productViewService" ref="productViewService"/>
+		<property name="storeProductLoadTuner" ref="productLoadTunerForProductPage"/>
+		<property name="validateOnBinding" value="false"/>
+		<!-- This property contains the map from type names to the ProductConfigController which handles the specialisation.-->
+		<property name="productTypeNameControllerMap">
+			<map>
+				<entry key="Gift Certificates" value-ref="giftCertificateProductConfigController"/>
+			</map>
+		</property>
+		<property name="defaultProductConfigController" ref="defaultProductConfigController"/>
+		<property name="productSkuService" ref="productSkuService"/>
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="bindingConfig">
+			<list>
+				<binding-config:binding pattern="cartItems[*].skuCode"/>
+				<binding-config:binding pattern="cartItems[*].quantity"/>
+				<binding-config:binding pattern="cartItems[*].dependent"/>
+				<binding-config:binding pattern="cartItems[*].updateShoppingItemUid"/>
+				<binding-config:binding pattern="cartItems[*].constituents[*]*.skuCode"/>
+				<binding-config:binding pattern="cartItems[*].constituents[*]*.selected"/>
+				<binding-config:binding pattern="cartItems[*].giftCertificateFields.*Email" policy="ignore"/>
+				<binding-config:binding pattern="cartItems[*].giftCertificateFields.senderName" policy="ignore"/>
+				<binding-config:binding pattern="cartItems[*].giftCertificateFields.recipientName" policy="ignore"/>
+				<binding-config:binding pattern="cartItems[*].giftCertificateFields.message" policy="ignore"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="defaultProductConfigController" class="com.elasticpath.sfweb.controller.impl.DefaultProductConfigControllerImpl">
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="cartFormBeanFactory" ref="cartFormBeanFactory"/>
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler"/>
+		<property name="cartDirector" ref="cartDirector"/>
+		<property name="shoppingItemDtoMapper" ref="shoppingItemDtoMapper"/>
+		<property name="successView" value="redirect:/view-cart.ep"/>
+		<property name="checkoutView" value="redirect:/billing-and-review.ep"/>
+		<property name="shoppingItemValidator" ref="productFormBeanValidator"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="priceLookupFacade" ref="priceLookupFacade"/>
+		<property name="productSkuService" ref="productSkuService"/>
+		<property name="jsonBundleFactory" ref="jsonBundleFactory"/>
+		<property name="jsonBundleService" ref="jsonBundleService"/>
+	</bean>
+
+	<bean id="giftCertificateProductConfigController" parent="defaultProductConfigController">
+		<property name="shoppingItemValidator" ref="giftCertificateFormBeanValidator"/>
+	</bean>
+
+	<bean id="productReviewController"
+			class="com.elasticpath.sfweb.controller.impl.ProductReviewControllerImpl"
+			parent="abstractEpController">
+		<property name="successView" value="catalog/product/productReview"/>
+		<property name="productService" ref="productService"/>
+		<property name="productViewService" ref="productViewService"/>
+	</bean>
+
+	<bean id="imageController"
+			class="com.elasticpath.sfweb.controller.impl.ImageControllerImpl"
+			parent="abstractEpController">
+		<property name="imageService" ref="imageService"/>
+		<property name="imageControllerHelper" ref="imageControllerHelper"/>
+	</bean>
+
+	<bean id="dynamicContentController"
+			class="com.elasticpath.sfweb.controller.impl.AssetResourceControllerImpl"
+			parent="abstractEpController">
+		<property name="resourceRetrievalStrategy" ref="dynamicContentAssetRetrievalStrategy"/>
+	</bean>
+
+	<!-- Resource controllers for resource retrieval -->
+	<bean id="storeThemeAssetResourceController"
+			class="com.elasticpath.sfweb.controller.impl.AssetResourceControllerImpl"
+			parent="abstractEpController">
+		<property name="resourceRetrievalStrategy" ref="storeThemeAssetRetrievalStrategy"/>
+	</bean>
+
+	<bean id="storeAssetResourceController"
+			class="com.elasticpath.sfweb.controller.impl.AssetResourceControllerImpl"
+			parent="abstractEpController">
+		<property name="resourceRetrievalStrategy" ref="storeResourceRetrievalStrategy"/>
+	</bean>
+
+	<!-- Strategies for retrieving resources -->
+	<bean id="storeThemeAssetRetrievalStrategy" class="com.elasticpath.sfweb.util.impl.StoreThemeAssetResourceRetrievalStrategy">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="assetRepository" ref="assetRepository"/>
+	</bean>
+
+	<bean id="storeResourceRetrievalStrategy" class="com.elasticpath.sfweb.util.impl.StoreAssetResourceRetrievalStrategy">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="assetRepository" ref="assetRepository"/>
+	</bean>
+
+	<bean id="dynamicContentAssetRetrievalStrategy" class="com.elasticpath.sfweb.util.impl.DynamicContentAssetResourceRetrievalStrategy">
+		<property name="assetRepository" ref="assetRepository"/>
+	</bean>
+
+
+	<bean id="secureAssetController"
+			class="com.elasticpath.sfweb.controller.impl.SecureAssetControllerImpl"
+			parent="abstractEpController">
+		<property name="errorView" value="error"/>
+		<property name="digitalAssetAuditService" ref="digitalAssetAuditService"/>
+		<property name="fileDownloadService" ref="fileDownloadService"/>
+		<property name="assetRepository" ref="assetRepository"/>
+		<property name="ipAddressResolver" ref="ipAddressResolver"/>
+
+	</bean>
+
+	<bean id="licensingController" class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl">
+		<property name="viewName" value="licensing-error"/>
+	</bean>
+
+	<bean id="payPalShortcutBeginController"
+			class="com.elasticpath.sfweb.controller.impl.PayPalShortcutBeginControllerImpl"
+			parent="abstractEpController">
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="returnUrl" value="paypal-shortcut-checkout.ep"/>
+		<property name="cancelUrl" value="view-cart.ep"/>
+	</bean>
+
+	<bean id="payPalShortcutReturnController"
+			class="com.elasticpath.sfweb.controller.impl.PayPalShortcutReturnControllerImpl"
+			parent="abstractEpController">
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="checkoutService" ref="checkoutService"/>
+		<property name="webCustomerSessionService" ref="webCustomerSessionService"/>
+		<property name="geography" ref="geography"/>
+		<property name="standardShippingView" value="redirect:/delivery-options.ep"/>
+		<property name="standardNoShippingView" value="redirect:/billing-address.ep"/>
+	</bean>
+
+
+	<bean id="cmclientSignInController"
+			class="com.elasticpath.sfweb.controller.impl.CmclientSignInControllerImpl"
+			parent="abstractEpController">
+		<property name="webCustomerSessionService" ref="webCustomerSessionService"/>
+        <property name="logoutView" value="redirect:/sign-out-customer-session.ep"/>
+		<property name="failureView" value="redirect:/sign-in.ep"/>
+		<property name="successView" value="redirect:/index.ep"/>
+		<property name="customerService" ref="customerService"/>
+		<property name="cmUserService" ref="cmUserService"/>
+		<property name="cookieHandler" ref="cookieHandler"/>
+	</bean>
+
+	<bean id="cacheInvalidationController" class="com.elasticpath.sfweb.controller.impl.CacheInvalidationControllerImpl">
+		<property name="viewName" value="admin/cache-invalidated"/>
+		<property name="cacheInvalidationStrategy" ref="triggeredCacheInvalidationStrategy"/>
+	</bean>
+
+	<bean id="maintenanceController"
+			class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl"
+			parent="abstractEpController">
+		<property name="viewName" value="maintenance"/>
+	</bean>
+
+	<bean id="promotionController" class="com.elasticpath.sfweb.controller.impl.SimplePageControllerImpl">
+		<property name="viewName" value="promotion"/>
+	</bean>
+</beans>

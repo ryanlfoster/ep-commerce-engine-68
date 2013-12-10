@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+       
+
+
+	<bean id="changeSetAdapter" class="com.elasticpath.tools.sync.job.descriptor.impl.ChangeSetAdapterImpl">
+		<property name="changeSetManagementService" ref="changeSetManagementService"/>
+		<property name="changeSetPolicy" ref="changeSetPolicy"/>
+		<property name="commandResolver" ref="commandResolver"/>
+	</bean>
+	
+	<bean id="commandResolver" class="com.elasticpath.tools.sync.job.descriptor.impl.CommandResolverImpl">
+		<property name="entityLocator" ref="entityLocator"/>
+		<property name="changeSetPolicy" ref="changeSetPolicy"/>
+	</bean>
+	
+
+	<bean id="transactionJobBuilder" class="com.elasticpath.tools.sync.job.impl.TransactionJobBuilderImpl">
+		<property name="entityLocator" ref="entityLocator"/>
+		<property name="daoAdapterFactory" ref="daoAdapterFactory"/>
+	</bean>
+
+    <bean id="sourceObjectLoadingTaskExecutor"
+        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="daemon" value="true" />
+        <property name="maxPoolSize" value="10" />
+        <property name="corePoolSize" value="10" />
+     </bean>
+                
+<!--     <task:executor id="sourceObjectLoadingTaskExecutor"  -->
+<!--         pool-size="0-10"/> -->
+
+    <bean id="sourceObjectSemaphore" class="java.util.concurrent.Semaphore">
+        <constructor-arg type="int"><value>512</value></constructor-arg>
+        
+        <constructor-arg type="boolean"><value>true</value></constructor-arg>
+    </bean>
+    
+    <bean id="sourceObjectCache" class="com.elasticpath.tools.sync.job.impl.SourceObjectCacheImpl">
+        <property name="sourceObjectLoadingTaskExecutor" ref="sourceObjectLoadingTaskExecutor"/>
+        <property name="entityLocator" ref="entityLocator"/>
+        <property name="availablePermits" ref="sourceObjectSemaphore"/>
+    </bean>
+
+    <bean id="cachingTransactionJobBuilder"
+        class="com.elasticpath.tools.sync.job.impl.CacheAwareTransactionJobBuilderImpl">
+        <property name="entityLocator" ref="entityLocator" />
+        <property name="daoAdapterFactory" ref="daoAdapterFactory" />
+        <property name="sourceObjectCache" ref="sourceObjectCache" />
+    </bean>
+    
+	<bean id="demarcationProvider" class="com.elasticpath.tools.sync.job.transaction.impl.TransactionDemarcationProviderImpl">
+		<property name="transactionIteratorFactory" ref="transactionIteratorFactory"/>		
+	</bean>
+
+	<bean id="transactionIteratorFactory" class="com.elasticpath.tools.sync.job.transaction.impl.TransactionIteratorFactoryImpl">
+		<property name="iteratorMap">
+			<map>
+				<entry key="JOB"><ref bean="transactionPerJobIterator"/></entry>
+				<entry key="JOBENTRY"><ref bean="transactionPerJobEntryIterator"/></entry>
+				<entry key="JOBENTRY_QTY"><ref bean="transactionPerJobEntryQtyIterator"/></entry>
+				<entry key="JOBENTRY_TYPE"><ref bean="trasnactionGroupByTypeIterator"/></entry>
+				<entry key="JOBENTRY_TYPE_AND_COMMAND"><ref bean="trasnactionGroupByCommandAndTypeIterator"/></entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="transactionPerJobEntryQtyIterator" class="com.elasticpath.tools.sync.job.transaction.impl.TransactionPerGivenQtyJobEntryIterator" scope="prototype"/>
+
+	<bean id="transactionPerJobIterator" class="com.elasticpath.tools.sync.job.transaction.impl.TransactionPerGivenQtyJobEntryIterator" scope="prototype">
+		<property name="offset"><value>-1</value></property>
+	</bean>
+
+	<bean id="transactionPerJobEntryIterator" class="com.elasticpath.tools.sync.job.transaction.impl.TransactionPerGivenQtyJobEntryIterator" scope="prototype">
+		<property name="offset"><value>1</value></property>
+	</bean>
+
+	<bean id="trasnactionGroupByCommandAndTypeIterator" class="com.elasticpath.tools.sync.job.transaction.impl.TrasnactionGroupByCommandAndTypeIterator"/>
+
+	<bean id="trasnactionGroupByTypeIterator" class="com.elasticpath.tools.sync.job.transaction.impl.TrasnactionGroupByTypeIterator"/>
+
+</beans>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<import resource="classpath:integration-core-context.xml" />
+
+
+	<bean id="startShoppingTimeTagger" class="com.elasticpath.sfweb.listeners.StartShoppingTimeTagger" />
+	<bean id="customerProfileTagger" class="com.elasticpath.sfweb.listeners.CustomerProfileTagger">
+		<property name="orderService" ref="orderService" />
+	</bean>
+	<bean id="targetUrlTagger" class="com.elasticpath.sfweb.listeners.TargetUrlTagger"/>
+	<bean id="referringUrlTagger" class="com.elasticpath.sfweb.listeners.ReferringUrlTagger"/>
+	<bean id="referralSearchEngineQueryTagger" class="com.elasticpath.sfweb.listeners.ReferralSearchEngineQueryTagger"/>
+	<bean id="sellingChannelTagger" class="com.elasticpath.sfweb.listeners.SellingChannelTagger"/>
+
+	<!-- Create an alias which replaces the definition of settingsReader with the cached version -->
+	<!-- Because this is the last alias for settingsReader that is read it will override the alias in service.xml -->
+	<alias name="cachedSettingsReader" alias="settingsReader"/>
+
+	<!--   bean id="geoIpTagger" class="com.elasticpath.sfweb.listeners.GeoIpTagger">
+		<property name="geoProviderService">
+		     <ref bean="geoProviderService"/>
+		</property>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+	</bean -->
+
+	<bean id="cartDirector" class="com.elasticpath.sellingchannel.director.impl.CartDirectorImpl">
+		<property name="shoppingCartService" ref="shoppingCartService" />
+		<property name="priceLookupFacade" ref="priceLookupFacade" />
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler" />
+		<property name="shoppingItemDtoFactory" ref="shoppingItemDtoFactory" />
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="productSkuService" ref="productSkuService"/>
+		<property name="storeProductLoadTuner" ref="productLoadTunerForSFAddToCart" />
+		<property name="wishListService" ref="wishListService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="shoppingCartRefresher" class="com.elasticpath.sfweb.listeners.ShoppingCartRefresher">
+		<property name="cartDirector" ref="cartDirector" />
+	</bean>
+
+	<bean id="couponAutoApplier" class="com.elasticpath.sfweb.listeners.CouponAutoApplier">
+		<property name="couponUsageService" ref="couponUsageService" />
+		<property name="couponService" ref="couponService" />
+	</bean>
+
+
+	<bean id="webCustomerSessionService"
+		class="com.elasticpath.sfweb.service.impl.WebCustomerSessionServiceImpl">
+		<property name="beanFactory">
+			<ref bean="coreBeanFactory" />
+		</property>
+		<property name="customerSessionService">
+			<ref bean="customerSessionService" />
+		</property>
+		<property name="shoppingCartService">
+			<ref bean="shoppingCartService" />
+		</property>
+		<property name="storeProductService">
+			<ref bean="storeProductService" />
+		</property>
+		<property name="newHttpSessionEventListeners">
+			<list>
+				<ref bean="startShoppingTimeTagger" />
+				<ref bean="customerProfileTagger" />
+				<ref bean="targetUrlTagger" />
+				<ref bean="referringUrlTagger" />
+				<ref bean="referralSearchEngineQueryTagger" />
+				<ref bean="sellingChannelTagger" />
+				<!-- ref bean="geoIpTagger" / -->
+				<ref bean="shoppingCartRefresher" />
+				<ref bean="couponAutoApplier" />
+			</list>
+		</property>
+		<property name="customerLoginEventListeners">
+			<list>
+				<ref bean="customerProfileTagger" />
+				<ref bean="sellingChannelTagger" />
+				<ref bean="shoppingCartRefresher" />
+				<ref bean="couponAutoApplier" />
+			</list>
+		</property>
+		<property name="anonymousCustomerLoginEventListeners">
+			<list>
+				<ref bean="couponAutoApplier" />
+			</list>
+		</property>
+		<property name="timeService">
+			<ref bean="timeService" />
+		</property>
+		<property name="priceListLookupService">
+			<ref bean="priceListLookupService" />
+		</property>
+		<property name="shopperService" ref="shopperService" />
+	</bean>
+
+	<!-- for JSONBundle FIT tests -->
+
+	<bean id="jsonBundleFactoryTemplate" abstract="true" class="com.elasticpath.sfweb.ajax.service.impl.JsonBundleFactoryImpl">
+        <property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="priceBuilder" ref="priceBuilder"/>
+    </bean>
+
+	<bean id="jsonBundleFactory" parent="jsonBundleFactoryTemplate" />
+
+	<bean id="jsonBundleService" class="com.elasticpath.sfweb.ajax.service.impl.JsonBundleServiceImpl">
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="priceLookupFacade" ref="priceLookupFacade" />
+		<property name="requestHelper" ref="requestHelperForJsonBundleTest" />
+		<property name="productSkuService" ref="productSkuService" />
+		<property name="messageSource" ref="storeMessageSource"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="priceBuilder" ref="priceBuilder" />
+	</bean>
+    
+	<!-- ***NOTE*** if the id is requestHelper, it will be auto wired to other beans and cause urlrewriter fit tests fail. -->
+	<!-- note the overriding for localeResolver -->
+	<bean id="requestHelperForJsonBundleTest" class="com.elasticpath.sfweb.util.impl.RequestHelperImpl">
+    	<property name="elasticPath"><ref bean="elasticPath"/></property>
+    	<property name="storeConfig"><ref bean="threadLocalStorage"/></property>
+		<property name="customerSessionService"><ref bean="customerSessionService" /></property>
+    	
+		<property name="localeResolver">
+			<bean id="localeResolver1" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+		</property>
+    </bean>
+	
+	<bean id="cartFormBeanFactory" class="com.elasticpath.sfweb.controller.impl.ShoppingItemFormBeanContainerFactoryImpl" >
+        <property name="productSkuService" ref="productSkuService" />
+        <property name="productViewService" ref="productViewService" />
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="priceLookupFacade" ref="priceLookupFacade" />
+		<property name="storeProductLoadTuner" ref="productLoadTunerForProductPage" />
+        <property name="jsonBundleFactory" ref="jsonBundleFactory" />
+        <property name="jsonBundleService" ref="jsonBundleService" />
+	 	<property name="beanFactory" ref="coreBeanFactory" />
+	 	<property name="shoppingItemAssembler" ref="shoppingItemAssembler" />
+	 	<property name="cartDirector" ref="cartDirector" />
+	</bean>
+
+	<bean id="shoppingItemFormBean" class="com.elasticpath.sfweb.formbean.impl.ShoppingItemFormBeanImpl" scope="prototype" />
+	
+	<bean id="jsonBundle" class="com.elasticpath.sfweb.ajax.bean.impl.JsonBundleItemBeanImpl" scope="prototype"/>
+	
+</beans>

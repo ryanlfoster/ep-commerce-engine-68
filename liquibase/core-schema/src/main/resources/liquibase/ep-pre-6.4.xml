@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+   logicalFilePath="com/elasticpath/core/db/ep-pre-6.4.xml">
+
+  <changeSet id="baseline-hsqldb" author="elasticpath" dbms="hsqldb">
+  <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+    <not>
+      <tableExists tableName="TPRODUCT"/>
+    </not>
+  </preConditions>
+    <sqlFile path="liquibase/pre-6.4-sql/hsqldb/schema.sql" encoding="UTF-8"/>
+    <sqlFile path="liquibase/pre-6.4-sql/hsqldb/base-insert.sql" encoding="UTF-8"/>
+  </changeSet>
+
+  <changeSet id="baseline-mssql" author="elasticpath" dbms="mssql" context="pre-6.4">
+  <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+    <not>
+      <tableExists tableName="TPRODUCT"/>
+    </not>
+  </preConditions>
+    <sqlFile path="liquibase/pre-6.4-sql/mssql/schema.sql" encoding="UTF-8"/>
+    <sqlFile path="liquibase/pre-6.4-sql/mssql/base-insert.sql" encoding="UTF-8"/>
+  </changeSet>
+
+  <changeSet id="baseline-mysql" author="elasticpath" dbms="mysql" context="pre-6.4">
+  <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+    <not>
+      <tableExists tableName="TPRODUCT"/>
+    </not>
+  </preConditions>
+    <sqlFile path="liquibase/pre-6.4-sql/mysql/schema.sql" encoding="UTF-8"/>
+    <sqlFile path="liquibase/pre-6.4-sql/mysql/base-insert.sql" encoding="UTF-8"/>
+  </changeSet>
+  
+  <changeSet id="baseline-h2" author="elasticpath" dbms="h2" context="pre-6.4">
+    <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+      <not>
+	<tableExists tableName="TPRODUCT"/>
+      </not>
+    </preConditions>
+    <sqlFile path="liquibase/pre-6.4-sql/h2/schema.sql" encoding="UTF-8"/>
+    <sqlFile path="liquibase/pre-6.4-sql/h2/base-insert.sql" encoding="UTF-8"/>
+  </changeSet>
+
+  <changeSet id="baseline-oracle" author="elasticpath" dbms="oracle" context="pre-6.4">
+  <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+    <not>
+      <tableExists tableName="TPRODUCT"/>
+    </not>
+  </preConditions>
+    <sqlFile path="liquibase/pre-6.4-sql/oracle/schema.sql" encoding="UTF-8"/>
+    <sqlFile path="liquibase/pre-6.4-sql/oracle/base-insert.sql" encoding="UTF-8"/>
+  </changeSet>
+
+</databaseChangeLog>

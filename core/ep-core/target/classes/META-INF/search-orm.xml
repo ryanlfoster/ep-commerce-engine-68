@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.search.impl</package>
+	<entity class="IndexNotificationImpl">
+		<named-query name="INDEXNOTIFY_FIND_BY_INDEX_TYPE">
+			<query>
+				SELECT inot
+				FROM IndexNotificationImpl inot
+				WHERE inot.indexTypeInternal = :type
+				ORDER BY inot.uidPk
+			</query>
+		</named-query>
+		<named-query name="INDEXNOTIFY_FIND_BY_INDEX_AND_UPDATE_TYPE">
+			<query>
+				SELECT inot
+				FROM IndexNotificationImpl inot
+				WHERE inot.indexTypeInternal = ?1
+				AND inot.updateType = ?2
+				ORDER BY inot.uidPk
+			</query>
+		</named-query>
+	</entity>
+	<entity class="SynonymGroupImpl">
+		<named-query name="SYNONYM_GROUP_FIND_BY_CATALOG">
+			<query>
+				SELECT sg
+				FROM SynonymGroupImpl sg
+				WHERE sg.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SYNONYM_GROUP_FIND_BY_CONCEPTTERM_CATALOG">
+			<query>
+				SELECT sg
+				FROM SynonymGroupImpl sg
+				WHERE sg.catalog.uidPk = ?1
+				AND sg.conceptTerm = ?2
+			</query>
+		</named-query>
+	</entity>
+	<entity class="IndexBuildStatusImpl">
+		<named-query name="INDEXBUILDSTATUS_FIND_ALL">
+			<query>
+				SELECT ids
+				FROM IndexBuildStatusImpl ids
+			</query>
+		</named-query>
+		<named-query name="INDEXBUILDSTATUS_FIND_BY_TYPE">
+			<query>
+				SELECT ids
+				FROM IndexBuildStatusImpl ids
+				WHERE ids.indexTypeInternal = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="com.elasticpath.domain.search.query.impl.SearchTermsMementoImpl">
+		<named-query name="FIND_SEARCH_TERMS_BY_GUID">
+			<query>
+				SELECT stm
+				FROM SearchTermsMementoImpl stm
+				WHERE stm.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="SEARCH_TERMS_EXIST">
+			<query>
+				SELECT stm.guid
+				FROM SearchTermsMementoImpl stm
+				WHERE stm.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="DELETE_SEARCH_TERMS_BY_GUID">
+			<query>
+				DELETE FROM SearchTermsMementoImpl stm
+				WHERE stm.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

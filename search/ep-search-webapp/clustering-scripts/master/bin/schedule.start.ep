@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# define solrHome root
+orig_dir=$(pwd)
+cd ${0%/*}/..
+solr_root=$(pwd)
+
+cat <<EOF > ${solr_root}/bin/crontab.ep
+#### crontab.ep file ####
+
+# On master, uncomment to automatically run take snapshots with specified frequency
+# By default, it is set to run every 5 minutes
+*/5 * * * * ${solr_root}/bin/snapshooter.ep.start
+
+# Schedule snapcleaner.ep.start to regularly clean unnecessary snapshots on both master and slave
+# By default, it is executed hourly
+0 * * * * ${solr_root}/bin/snapcleaner.ep.start
+
+EOF
+
+
+# make schedule active
+crontab ${solr_root}/bin/crontab.ep

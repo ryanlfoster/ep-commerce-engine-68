@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentspaces>
+<contentspace guid="5A1898C1-A4A6-4ADD-9157-E31CE7C704C2">
+    <name>HomepageHero</name>
+    <description>768px Width x Variable Height (200px suggested)</description>
+</contentspace>
+
+<contentspace guid="5484D29B-5005-4B1E-92B6-87D75CAACC58">
+    <name>HomepageOfferBottomLeft</name>
+    <description>384px Width x 225px Height</description>
+</contentspace>
+
+<contentspace guid="2E72D444-B260-4EB2-960E-DD60DD20DED6">
+    <name>HomepageOfferBottomRight</name>
+    <description>384px Width x 225px Height</description>
+</contentspace>
+
+<contentspace guid="4562B511-E86E-46AF-ACB2-29B9DFFC8324">
+    <name>HomepageOfferTopLeft</name>
+    <description>250px Width x 110px Height</description>
+</contentspace>
+
+<contentspace guid="31D55BF3-41E6-4CD3-AA5D-4C09FD08A59C">
+    <name>HomepageOfferTopMiddle</name>
+    <description>250px Width x 110px Height</description>
+</contentspace>
+
+<contentspace guid="37538B70-9455-4731-835F-02A0332B3D2F">
+    <name>HomepageOfferTopRight</name>
+    <description>250px Width x 110px Height</description>
+</contentspace>
+
+<contentspace guid="F8E2609D-484D-4655-A0CD-072CD7CFC92A">
+    <name>PromoBanner</name>
+    <description>160px Width x Variable Height (110px suggested)</description>
+</contentspace>
+
+<contentspace guid="89CB03BB-EE85-4363-86B9-59582CB60A97">
+    <name>top_banner</name>
+    <description>768px Width x Variable Height (40px suggested)</description>
+</contentspace>
+</contentspaces>

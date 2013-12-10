@@ -1,0 +1,15 @@
+#!/bin/bash
+orig_dir=$(pwd)
+cd ${0%/*}/..
+solr_root=$(pwd)
+
+. ${solr_root}/conf/scripts.conf
+
+log=${solr_root}/logs/snappuller.ep.log
+# run snappuler for an each index
+for index in ${indexlist}
+do
+	# take snapshot
+	${solr_root}/bin/snappuller.ep -M ${master_host} -P ${rsyncd_port} -D ${solrPathMaster}/data/index-${index} -d ${solr_root}/data/index-${index} -S ${master_status_dir} -i index-${index} -v 1 >> ${log} 2>&1
+done
+

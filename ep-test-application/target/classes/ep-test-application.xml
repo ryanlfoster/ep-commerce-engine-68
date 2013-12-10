@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config/>
+
+	<import resource="classpath:liquibase-for-testapplication.xml" />
+	<import resource="test-datasource.xml" />
+    <import resource="persisters.xml" />
+
+	<!-- Make sure that the database is created before we try to connect to it through OpenJPA --> 
+	<bean id="entityManagerFactory" parent="abstractEntityManagerFactory"
+		depends-on="preEntityManagerInitializationList">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="preEntityManagerInitializationList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="liquibaseCoreSchemaInitializerForTestApplication"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="searchServerLauncher" class="com.elasticpath.test.util.search.SearchServerLauncher"/>
+
+	<bean id="testApplicationContext" class="com.elasticpath.test.persister.TestApplicationContext" 
+		init-method="init"/>
+
+	<bean id="testConfigFactory" class="com.elasticpath.test.persister.TestConfigurationFactory">
+		<property name="resourceProvider">
+			<bean class="com.elasticpath.test.persister.TestConfigurationFactory.FileSystemResourceProvider"/>
+		</property>
+	</bean>
+	
+	<bean id="testConfig" class="com.elasticpath.test.persister.TestConfig" 
+		factory-bean="testConfigFactory" 
+		factory-method="createTestConfig"/>
+
+	<bean id="testDataPersisterFactory" class="com.elasticpath.test.persister.TestDataPersisterFactory"/>
+
+	<bean id="dataSourceInitializerFactory" class="com.elasticpath.test.persister.DatasourceInitializerFactory"/>
+	
+	<bean id="customerScenario" class="com.elasticpath.test.persister.testscenarios.CustomerScenario"/>
+
+	<bean id="simpleStoreScenario" class="com.elasticpath.test.persister.testscenarios.SimpleStoreScenario"/>
+
+	<bean id="importJobScenario" class="com.elasticpath.test.persister.testscenarios.ImportJobScenario"/>
+
+	<bean id="shoppingCartSimpleStoreScenario" class="com.elasticpath.test.persister.testscenarios.ShoppingCartSimpleStoreScenario"/>
+	
+	<bean id="singleStoreMultiCatalogScenario" class="com.elasticpath.test.persister.testscenarios.SingleStoreMultiCatalogScenario"/>
+	
+</beans>

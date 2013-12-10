@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint
+		xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<!-- Type converters -->
+	<type-converters>
+		<bean id="springBlueprintConverter" class="com.elasticpath.service.osgi.SpringBlueprintConverter"/>
+	</type-converters>
+
+	<reference id="dataSource" interface="javax.sql.DataSource"/>
+
+	<!-- export services -->
+	<service ref="storeService"
+			 interface="com.elasticpath.service.store.StoreService" />
+
+	<service ref="productService"
+			 interface="com.elasticpath.service.catalog.ProductService" />
+
+	<service ref="productSkuService"
+			 interface="com.elasticpath.service.catalog.ProductSkuService" />
+
+	<service ref="multiSkuProductConfigurationService"
+			 interface="com.elasticpath.service.catalog.MultiSkuProductConfigurationService"/>
+
+	<service ref="skuOptionService"
+			 interface="com.elasticpath.service.catalog.SkuOptionService" />
+
+	<service ref="customerService"
+			 interface="com.elasticpath.service.customer.CustomerService" />
+
+	<service ref="settingsService"
+			 interface="com.elasticpath.settings.SettingsService" />
+
+	<service ref="shopperService"
+			 interface="com.elasticpath.service.shopper.ShopperService" />
+
+	<service ref="shoppingCartService"
+			 interface="com.elasticpath.service.shoppingcart.ShoppingCartService" />
+
+	<service ref="customerSessionService"
+			 interface="com.elasticpath.service.customer.CustomerSessionService" />
+
+	<service ref="coreBeanFactory"
+			 interface="com.elasticpath.commons.beanframework.BeanFactory" />
+
+	<service ref="storeProductService"
+			 interface="com.elasticpath.service.catalogview.StoreProductService" />
+
+	<service ref="oAuth2AccessTokenService"
+			 interface="com.elasticpath.service.auth.OAuth2AccessTokenService" />
+
+	<service ref="priceListLookupService"
+			 interface="com.elasticpath.common.pricing.service.PriceListLookupService" />
+
+	<service ref="priceLookupFacadeImpl"
+			 interface="com.elasticpath.common.pricing.service.PriceLookupFacade" />
+
+	<service ref="cartDirector"
+			 interface="com.elasticpath.sellingchannel.director.CartDirector" />
+
+	<service ref="shoppingItemDtoFactory"
+			 interface="com.elasticpath.common.dto.sellingchannel.ShoppingItemDtoFactory" />
+
+	<service ref="shoppingItemAssembler"
+			 interface="com.elasticpath.sellingchannel.director.ShoppingItemAssembler" />
+
+	<service ref="shoppingItemFactory"
+			 interface="com.elasticpath.sellingchannel.ShoppingItemFactory" />
+
+	<service ref="cartOrderService"
+			 interface="com.elasticpath.service.cartorder.CartOrderService" />
+
+	<service ref="shippingServiceLevelService"
+			 interface="com.elasticpath.service.shipping.ShippingServiceLevelService"/>
+
+	<service ref="orderService"
+			 interface="com.elasticpath.service.order.OrderService" />
+
+	<service ref="bundleIdentifier"
+			 interface="com.elasticpath.service.catalog.BundleIdentifier"/>
+
+	<service ref="itemConfigurationService"
+			 interface="com.elasticpath.service.catalog.ItemConfigurationService"/>
+
+	<service ref="itemCharacteristicsService"
+			 interface="com.elasticpath.service.catalog.ItemCharacteristicsService" />
+
+	<service ref="timeService"
+			 interface="com.elasticpath.service.misc.TimeService"/>
+
+	<service ref="indexSearchService"
+			 interface="com.elasticpath.service.search.index.IndexSearchService" />
+
+	<service ref="categoryService"
+			 interface="com.elasticpath.service.catalog.CategoryService" />
+
+	<service ref="searchTermsService"
+			 interface="com.elasticpath.service.search.query.SearchTermsService" />
+
+	<service ref="contentspaceService"
+			 interface="com.elasticpath.service.contentspace.ContentSpaceService" />
+			 
+	<service ref="moneyFormatter"
+			 interface="com.elasticpath.domain.misc.MoneyFormatter" />
+
+	<service ref="contentSpaceQueryService"
+			 interface="com.elasticpath.service.query.QueryService">
+		<service-properties>
+			<entry key="typeArg" value="ContentSpace"/>
+		</service-properties>
+	</service>
+
+	<service ref="productTypeService"
+			 interface="com.elasticpath.service.catalog.ProductTypeService"/>
+
+	<service ref="productQueryService"
+			 interface="com.elasticpath.service.query.QueryService">
+		<service-properties>
+			<entry key="typeArg" value="Product"/>
+		</service-properties>
+	</service>
+
+	<service ref="dynamicContentRuntimeService"
+			 interface="com.elasticpath.service.contentspace.DynamicContentRuntimeService" />
+
+	<service ref="assetRepository"
+			 interface="com.elasticpath.commons.util.AssetRepository" />
+
+	<service ref="productImageDiscoveryService"
+			 interface="com.elasticpath.service.asset.ImageDiscoveryService">
+		<service-properties>
+			<entry key="typeArg" value="Product"/>
+		</service-properties>
+	</service>
+
+
+	<service ref="cachingProductCharacteristicsService"
+			 interface="com.elasticpath.service.catalog.ProductCharacteristicsService" />
+
+	<service ref="skuImageDiscoveryService"
+			 interface="com.elasticpath.service.asset.ImageDiscoveryService">
+		<service-properties>
+			<entry key="typeArg" value="ProductSku"/>
+		</service-properties>
+	</service>
+
+	<service ref="indexUtility"
+			 interface="com.elasticpath.service.search.solr.IndexUtility" />
+
+	<service ref="paymentMethodTransformerFactory"
+			 interface="com.elasticpath.service.payment.gateway.PaymentMethodTransformerFactory" />
+</blueprint>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	  
+	<configuration>
+		<custom-converters>
+			<!-- Responsible for mapping everything between OrderShipment and OrderShipmentDto -->
+			<converter type="com.elasticpath.service.payment.gateway.impl.OrderShipmentDtoConverter">
+				<class-a>com.elasticpath.domain.order.OrderShipment</class-a>
+				<class-b>com.elasticpath.plugin.payment.dto.OrderShipmentDto</class-b>
+			</converter>
+
+			<!-- Responsible for mapping everything between ShoppingCart and ShoppingCartDto -->
+			<converter type="com.elasticpath.service.payment.gateway.impl.ShoppingCartDtoConverter">
+				<class-a>com.elasticpath.domain.shoppingcart.ShoppingCart</class-a>
+				<class-b>com.elasticpath.plugin.payment.dto.ShoppingCartDto</class-b>
+			</converter>
+		</custom-converters>    
+	</configuration>
+  
+	<!-- OrderSku to OrderSkuDto -->
+	<mapping>
+		<class-a>com.elasticpath.domain.order.OrderSku</class-a>
+		<class-b>com.elasticpath.plugin.payment.dto.OrderSkuDto</class-b>
+		<field>
+			<a>tax.amount</a>
+			<b>taxAmount</b>
+		</field>
+	</mapping>
+
+	<!-- OrderPayment to GiftCertificateOrderPaymentDto -->
+	<mapping>
+		<class-a>com.elasticpath.domain.order.OrderPayment</class-a>
+		<class-b>com.elasticpath.service.payment.gateway.GiftCertificateOrderPaymentDto</class-b>
+		<field copy-by-reference="true">
+			<a>giftCertificate</a>
+			<b>giftCertificate</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.aAV</a>
+			<b>payerAuthValidationValueDto.aAV</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.paRES</a>
+			<b>payerAuthValidationValueDto.paRES</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.commerceIndicator</a>
+			<b>payerAuthValidationValueDto.commerceIndicator</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.xID</a>
+			<b>payerAuthValidationValueDto.xID</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.eCI</a>
+			<b>payerAuthValidationValueDto.eCI</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.paRES</a>
+			<b>payerAuthValidationValueDto.paRES</b>
+		</field>
+		<field>
+			<a>payerAuthValidationValue.ucafCollectionIndicator</a>
+			<b>payerAuthValidationValueDto.ucafCollectionIndicator</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.elasticpath.domain.order.OrderPayment</class-a>
+		<class-b>com.elasticpath.service.payment.gateway.GiftCertificateCaptureRequest</class-b>
+		<field copy-by-reference="true">
+			<a>giftCertificate</a>
+			<b>giftCertificate</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>com.elasticpath.domain.order.OrderPayment</class-a>
+		<class-b>com.elasticpath.service.payment.gateway.GiftCertificateAuthorizationRequest</class-b>
+		<field copy-by-reference="true">
+			<a>giftCertificate</a>
+			<b>giftCertificate</b>
+		</field>
+	</mapping>
+</mappings>

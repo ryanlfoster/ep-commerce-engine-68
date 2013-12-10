@@ -1,0 +1,12 @@
+#**
+* Renders the content space of a velocity template given
+* the appropriate parameters; will display defaultContent if any error occurs.
+*#
+#macro (contentspace $name $defaultContent)
+	#set ($renderResult = $renderMediator.render($name, $locale))
+	#if($renderResult.equals("<<error>>"))
+		$defaultContent
+	#else
+		$renderResult
+	#end
+#end

@@ -1,0 +1,32 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## productReview.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+#set($pageName = "catalog/product/productReview.vm")
+#templateInit()
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #parse("includes/head.vm")
+</head>
+<body>
+<div id="wrapper">
+#parse("includes/header.vm")
+#parse("includes/topmenu.vm")
+  <div id="breadcrumb">
+    #parse("includes/breadcrumbs.vm")
+  </div>
+  <div class="clear10"></div>
+  ## PowerReviews review submission iFrame
+  <script type = "text/javascript">
+    var pr_page_id='$productViewBean.getProduct().getGuid()';
+	var pr_merchant_id = $merchantID;
+	var pr_source = "web";
+  </script>
+  <script type = "text/javascript" src="$baseUrl/template-resources/power-reviews/pwr/engine/js/appLaunch.js"></script>
+
+</div>
+#parse("includes/footer.vm")
+</body>
+</html>

@@ -1,0 +1,246 @@
+#emailInit()
+#set ($customer = $order.getCustomer())
+#set ($billingAddress = $order.getBillingAddress())
+#set ($shippingAddress = $order.getShippingAddress())
+#emailMessage("email.orderConf.header") #if($customer.firstName && $customer.lastName)$!customer.firstName $!customer.lastName#else$!billingAddress.firstName $!billingAddress.lastName#end,
+
+#emailMessage("email.orderConf.printOut")
+
+#emailMessage("email.orderConf.account"): $storeUrl/manage-account.ep
+
+## Display order information
+#emailMessage("email.orderConf.orderInfo"):
+
+#emailMessage("email.emailAddress"): $!customer.email
+#emailMessage("email.orderConf.orderNumber"): $!order.orderNumber
+#emailMessage("email.orderConf.orderDate"): $dateTool.format('long', $!order.getCreatedDate())
+#emailMessage("email.orderConf.store"): $!order.getStore().getName()
+#if($order.hasSubtotalDiscount()&&!$order.isInclusiveTaxCalculation())
+#emailMessage("email.orderConf.orderdiscount"): #displayPriceForLocale($order.getSubtotalDiscountMoney(), $order.locale)
+#end
+#emailMessage("email.subtotal"): #displayPriceForLocale($order.getSubtotalMoney(), $order.locale)
+#if($!order.getTotalShippingCostMoney().getAmount().setScale(0,0).intValue()>0)
+#emailMessage("email.orderConf.shipping"): #displayPriceForLocale($order.getTotalShippingCostMoney(), $order.locale)
+#end
+#emailMessage("email.tax"): #displayPriceForLocale($order.getTotalTaxMoney(), $order.locale)
+#emailMessage("globals.total"): #displayPriceForLocale($order.getTotalMoney(), $order.locale)
+
+#emailMessage("email.orderConf.paidBy"): $order.orderPayment.paymentMethod
+#if ($order.orderPayment.paymentMethod == "CREDITCARD")
+$order.orderPayment.cardType: $order.orderPayment.displayValue #emailMessage("email.orderConf.expires") $order.orderPayment.expiryMonth/$order.orderPayment.expiryYear.substring(2,4)
+#end
+
+## Display Billing Address
+#if($billingAddress)
+#emailMessage("email.orderConf.billingAddress"):
+$!billingAddress.firstName $!billingAddress.lastName
+$!billingAddress.street1
+#if ($billingAddress.street2 && $billingAddress.street2.length() > 0)$!billingAddress.street2#end
+$!billingAddress.city
+#if($billingAddress.subCountry)$!billingAddress.subCountry,#end $!billingAddress.zipOrPostalCode
+$ctxCountries.getCountryDisplayName($!billingAddress.country, ${order.locale})
+$!billingAddress.phoneNumber
+#end
+
+##Loop through shipments
+#foreach($shipment in $order.getAllShipments())
+--------------------------------------------
+#if ($shipment.orderShipmentType == "PHYSICAL")
+#set($shippingAddress = $shipment.shipmentAddress)
+#emailMessage("email.orderConf.physicalShipment") $shipment.shipmentNumber
+
+#emailMessage("email.orderConf.shipping.address"):
+$!shippingAddress.firstName $!shippingAddress.lastName,
+$!shippingAddress.street1, 
+#if ($shippingAddress.street2 && $shippingAddress.street2.length() > 0)$!shippingAddress.street2,#end
+$!shippingAddress.city, #if($shippingAddres.subCountry)$!shippingAddres.subCountry,#end $!shippingAddres.zipOrPostalCode
+$ctxCountries.getCountryDisplayName($!shippingAddres.country, ${order.locale})
+
+#emailMessage("email.orderConf.subtotal"): #displayPriceForLocale($shipment.getItemSubTotalMoney(), $order.locale)
+#emailMessage("email.orderConf.shipping"): #displayPriceForLocale($shipment.getShippingCostMoney(), $order.locale)
+#emailMessage("email.orderConf.shipping.method"): $shipment.serviceLevel
+#if($shipment.hasSubtotalDiscount() && !$shipment.isInclusiveTax())
+#emailMessage("email.orderConf.orderdiscount"): #displayPriceForLocale($shipment.getSubtotalDiscountMoney(), $order.locale)
+#end
+#emailMessage("email.orderConf.totalBeforeTax"): #displayPriceForLocale($shipment.getTotalBeforeTaxMoney(), $order.locale)
+#emailMessage("email.orderConf.tax.shipping"): #displayPriceForLocale($shipment.getShippingTaxMoney(), $order.locale)
+#emailMessage("email.orderConf.tax.items"): #displayPriceForLocale($shipment.getItemTaxMoney(), $order.locale)
+#emailMessage("email.total"): #displayPriceForLocale($shipment.getTotalMoney(), $order.locale)
+## START subtotal discount
+#if($shipment.hasSubtotalDiscount() && $shipment.isInclusiveTax())
+#emailMessage("email.orderConf.orderdiscount"): #displayPriceForLocale($shipment.getSubtotalDiscountMoney(), $order.locale)</td>
+#end
+#elseif ($shipment.orderShipmentType == "SERVICE")
+## RECURRING ITEMS
+#emailMessage("email.orderConf.recurringShipment")
+#elseif ($shipment.orderShipmentType == "ELECTRONIC")
+## ELECTRONIC SHIPMENT
+#emailMessage("email.orderConf.electronicShipment")
+
+#emailMessage("email.orderConf.subtotal"): #displayPriceForLocale($shipment.getItemSubTotalMoney(), $order.locale)
+#if($shipment.hasSubtotalDiscount() && !$shipment.isInclusiveTax())
+#emailMessage("email.orderConf.orderdiscount"): #displayPriceForLocale($shipment.getSubtotalDiscountMoney(), $order.locale)
+#end
+#emailMessage("email.orderConf.totalBeforeTax"): #displayPriceForLocale($shipment.getTotalBeforeTaxMoney(), $order.locale)
+#emailMessage("email.orderConf.tax.items"): #displayPriceForLocale($shipment.getItemTaxMoney(), $order.locale)
+#emailMessage("email.total"): #displayPriceForLocale($shipment.getTotalMoney(), $order.locale)
+#else
+## OOPS! A new kind of item?!
+#end ## end orderShipmentType
+
+#emailMessage("email.description"):
+#set($orderItemFormBeans = $orderItemFormBeanMap.get($shipment.getUidPk()))
+## LOOP THROUGH OrderSkus
+#foreach($orderItemFormBean in $orderItemFormBeans)
+#set ($onSale = false)
+#setRecurringPriceAndFrequencyText($orderItemFormBean.getPrice())                                               
+#if ($shipment.orderShipmentType == "SERVICE")
+#setDisplayPricesText(true)
+#else
+#setDisplayPricesText(false)
+#end                       
+## Display skucode
+$orderItemFormBean.skuCode $orderItemFormBean.displayName #displaySkuOptionValues($orderItemFormBean $order.locale)
+
+## Display shipment/inventory allocation
+#if($shipment.getShipmentStatus() != "SHIPPED")
+#set($availability = $orderItemFormBean.getProductSku().getProduct().getAvailabilityCriteria())
+#set($releaseDate = $orderItemFormBean.getProductSku().getProduct().getExpectedReleaseDate())
+#set($reorderDate = $orderItemFormBean.getProductSku().getInventory($store.getWarehouse().getUidPk()).getRestockDate())
+#if(!$orderItemFormBean.isAllocated())
+#if($availability.toString() == "AVAILABLE_FOR_PRE_ORDER")
+#emailMessage("email.orderConf.availabilityMessage.preOrder")&nbsp;$dateTool.format('E, MMMM d',$releaseDate)
+#elseif($availability.toString() == "AVAILABLE_FOR_BACK_ORDER")
+#emailMessage("email.orderConf.availabilityMessage.backOrder")&nbsp;$dateTool.format('E, MMMM d',$reorderDate)
+#end
+#elseif(!$orderItemFormBean.getDigitalAsset())
+#emailMessage("email.orderConf.availabilityMessage.allocated")
+#end
+#end                                                   
+#isOrderItemFormBeanABundle($orderItemFormBean) 
+#if ($shipment.orderShipmentType == "SERVICE")
+#if(!$isBundle)
+$!orderItemFormBean.getQuantity() @ $unitPrice #getPriceScheduleFrequency($recurringSchedule)
+#end
+#else
+$!orderItemFormBean.getQuantity() @ $unitPrice 
+#end
+#if($onSale)
+#if ($shipment.orderShipmentType == "SERVICE")
+#set ($dollarSavings = $!recurringPrice.getDollarSavings())
+#else
+#set ($dollarSavings = $!orderItemFormBean.getPrice().getDollarSavings())
+#end
+###if($onSale) Only display sale information if on sale and not a recurring bundle
+#if ($onSale && !($shipment.orderShipmentType=="SERVICE" && $isBundle))
+#emailMessage("email.orderConf.was") $!listPrice, #emailMessage("email.orderConf.save") #displayPriceForLocale($dollarSavings, $order.locale)
+#end
+#end
+#if($orderItemFormBean.getDigitalAsset())
+#set ($digitalAsset = $!orderItemFormBean.getDigitalAsset())
+$digitalAsset.getFileNameWithoutPath()
+$storeUrl/sec-asset.ep?assetID=$digitalAsset.getEncryptedUidPk()&orderSKUID=$orderItemFormBean.getEncryptedUidPk()
+#end
+#if ($orderItemFormBean.getChildren().size() > 0)
+#displayOrderItemChildrenText($orderItemFormBean, ${order.locale}, false)
+#end
+#displayPriceForLocale($orderItemFormBean.getAmountMoney(), $order.locale)
+#end 
+#end
+## END FOREACH ORDERITEMFORMBEAN ITERATION
+
+#emailMessage("email.orderConf.thankYou")
+
+--------------------------------------
+$store.getName()
+$store.getUrl()
+
+#**
+* Sets the recurring price and frequency for the given price object
+*NOTE: variables are global.
+*# 
+#macro (setRecurringPriceAndFrequencyText $price)
+#set ($recurringSchedules = false)
+#set ($recurringSchedule = false)
+#set ($recurringPrice = false)
+#set ($effectivePrice = false)    
+#set ($frequency = false)
+#set ($isRecurring  = false)      
+#set ($recurringSchedules = $price.pricingScheme.recurringSchedules)         
+#if ($recurringSchedules && $recurringSchedules.size() > 0)
+#set ($recurringSchedule = $recurringSchedules.iterator().next())
+#set ($recurringPrice = $price.getPricingScheme().getSimplePriceForSchedule($recurringSchedule))
+#set ($effectivePrice = $!recurringPrice)
+#set ($frequency = $recurringSchedule.getPaymentSchedule().getName())
+#set ($isRecurring  = true)
+#else
+#set ($effectivePrice = $price)
+#end
+#end
+
+#macro (isOrderItemFormBeanABundle $orderItemFormBean )
+#set ($prodSku = $orderItemFormBean.getProductSku())
+#set ($productBundle = $prodSku.getProduct()) #set ($isBundle = false)
+#set ($isBundle = $productBundle.isCalculated())
+#set ($productBundle = false)
+#end 
+
+## MACRO TO DISPLAY ORDERITEMS AS TEXT
+#macro(displayOrderItemChildrenText $itemFormBean $locale $showSkuOptions)
+#emailMessage("email.orderConf.includes"):
+## iterating constituentView items in the bundle
+#foreach ($item in $itemFormBean.getChildren())
+#setRecurringPriceAndFrequencyText($item.price)  
+#displayConstituentText ($item.displayName $item $item.quantity $item.level $locale $showSkuOptions, $effectivePrice)
+
+
+#end
+
+#end
+
+## MACRO TO DISPLAY BUNDLE CONSTITUENTS AS TEXT
+#macro(displayConstituentText $productDisplayName $item $quantity $level $itemFormBean $itemLocale $showSkuOptions $efffectivePrice)
+#set($tabString = " ")
+#tabLevel($level)
+#isOrderItemFormBeanABundle($item)
+$tabString $productDisplayName #if ($quantity > 1)x $quantity #end 
+
+#if($!orderItemFormBean.getDisplaySkuOptions())
+$tabString #displaySkuOptionValues($item $order.getLocale()) #end
+#if ($isRecurring && !$isBundle)$tabString$quantity @ #displayPriceForLocale($recurringPrice.lowestPrice, $order.locale) #getPriceScheduleFrequency($recurringSchedule)#end
+#end
+
+
+## Copied from orderConf.html.vm
+#macro (getPriceScheduleFrequency $schedule)
+#emailMessage("productTemplate.recurringPrice.${schedule.paymentSchedule.name}")
+
+#end
+
+## MACRO to indent different levels in a bundle hierarchy.
+#macro (tabLevel $level)
+#set ($tabString = "")
+#foreach($i in [1..$level])
+#set($tabString = $tabString+"    ")
+#end
+#end
+
+#macro (displaySkuOptionValues $item  $locale)
+$item.getFilteredSkuOptionValues($locale)
+#end
+
+##
+##Sets the list, unit and sale price from the recurring price.
+##
+#macro( setDisplayPricesText $isRecurringItem)
+#if ($isRecurringItem == true)
+#set ($listPrice = "#displayPriceForLocale($recurringPrice.listPrice, $order.locale)")
+#set ($unitPrice = "#displayPriceForLocale($recurringPrice.lowestPrice, $order.locale)")
+#set ($onSale = $recurringPrice.lowestPrice.lessThan($$recurringPrice.listPrice))
+#else
+#set ($listPrice = "#displayPriceForLocale($orderItemFormBean.getListPriceMoney(), $order.locale)")
+#set ($unitPrice = "#displayPriceForLocale($orderItemFormBean.getUnitPriceMoney(), $order.locale)")
+#set ($onSale = $!orderItemFormBean.getUnitPriceMoney().lessThan($orderItemFormBean.getListPriceMoney()))
+#end
+#set ($effectivePrice = $orderItemFormBean.getPrice())
+#end

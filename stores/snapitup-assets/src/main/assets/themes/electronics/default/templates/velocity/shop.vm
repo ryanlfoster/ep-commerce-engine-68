@@ -1,0 +1,28 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## shop.vm
+#set($pageName = "shop.vm")
+#templateInit()
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #parse("includes/topmenu.vm")
+      <div id="breadcrumb">
+        <a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a>
+      </div>
+      <div class="clear10"></div>
+      #parse("includes/productgrid.vm")
+      #parse("includes/sidemenu.vm")
+      <div class="clear20"></div>
+    </div>
+  </div>
+  #parse("includes/footer.vm")
+</body>
+</html>
+

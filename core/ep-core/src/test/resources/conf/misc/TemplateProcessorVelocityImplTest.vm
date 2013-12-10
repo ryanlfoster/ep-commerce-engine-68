@@ -1,0 +1,4 @@
+Dear $!customerName:
+Email address: $!customer.email 
+Password: $!password
+

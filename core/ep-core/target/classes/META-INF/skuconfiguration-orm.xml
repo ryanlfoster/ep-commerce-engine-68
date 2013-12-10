@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.skuconfiguration.impl</package>
+	<entity class="SkuOptionImpl">
+		<named-query name="SKU_OPTION_FIND_BY_KEY">
+			<query>
+				SELECT s
+				FROM SkuOptionImpl s
+				WHERE s.optionKey = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_VALUE_FIND_BY_KEY">
+			<query>
+				SELECT s
+				FROM SkuOptionValueImpl s
+				WHERE s.optionValueKey = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_FIND_UIDPK_BY_KEY">
+			<query>
+				SELECT s.uidPk
+				FROM SkuOptionImpl s
+				WHERE s.optionKey = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_SELECT_ALL">
+			<query>
+				SELECT s
+				FROM SkuOptionImpl s
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_SELECT_ALL_EAGER">
+			<query>
+				SELECT s
+				FROM SkuOptionImpl s
+				LEFT OUTER JOIN FETCH s.optionValueMap
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_IN_USE_PRODUCT_TYPE">
+			<query>
+				SELECT so.uidPk
+				FROM ProductTypeImpl p
+				LEFT OUTER JOIN p.skuOptions so
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTIONVALUE_IN_USE_PRODUCT_TYPE">
+			<query>
+				SELECT DISTINCT pskuvalue.skuOptionValue.uidPk
+				FROM JpaAdaptorOfSkuOptionValueImpl pskuvalue
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTIONVALUE_FIND_UIDPK_BY_KEY">
+			<query>
+				SELECT s.uidPk
+				FROM SkuOptionValueImpl s
+				WHERE s.optionValueKey = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTIONVALUE_FIND_BY_KEY">
+			<query>
+				SELECT s
+				FROM SkuOptionValueImpl s
+				WHERE s.optionValueKey = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_SELECT_CATALOG_ALL_EAGER">
+			<query>
+				SELECT s
+				FROM SkuOptionImpl s
+				WHERE s.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTION_IN_USE_PRODUCT_TYPE_SINGLE">
+			<query>
+				SELECT so.uidPk
+				FROM ProductTypeImpl p
+				LEFT OUTER JOIN p.skuOptions so
+				WHERE so.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_OPTIONVALUE_IN_USE_PRODUCT_TYPE_SINGLE">
+			<query>
+				SELECT sov.skuOptionValue.uidPk
+				FROM JpaAdaptorOfSkuOptionValueImpl sov
+				WHERE sov.skuOptionValue.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

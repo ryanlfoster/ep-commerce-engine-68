@@ -1,0 +1,185 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## breadcrumbs.vm
+#**
+* Display seo bread crumbs for browsing filters
+*#
+#macro (displayFilterSeoBreadCrumbs $currentCategory $browsingRequest)
+	#set ($filterSeoUrls = $browsingRequest.getFilterSeoUrls())
+	#foreach ($filterSeoUrl in $filterSeoUrls)
+		#set ($name = $filterSeoUrl.getDisplayName())
+		#set ($seoUrlDownToThisFilter = $escapeTool.html($filterSeoUrl.getUrlFragment()))
+		#set ($seoUrlWithoutThisFilter = $escapeTool.html($filterSeoUrl.getUrlFragmentWithoutThisCrumb()))
+		&nbsp;&raquo;&nbsp;<a href="${baseUrl}/${seoUrlDownToThisFilter}">$name</a>
+		<a href="${baseUrl}/${seoUrlWithoutThisFilter}">
+			<img src="$baseUrl/template-resources/images/ico-filter-close.gif" width="9" height="9" border="0" alt="#springMessage("globals.remove")"/>
+		</a>
+	#end
+#end
+
+#**
+* Display  bread crumbs for browsing filters
+*#
+#macro (displayFilterBreadCrumbs $currentCategory $browsingRequest)
+	#set ($filterQueryStrings = $browsingRequest.getFilterQueryStrings())
+	#foreach ($filterQueryString in $filterQueryStrings)
+		#set ($name = $filterQueryString.getDisplayName())
+		#set ($queryStringDownToThisFilter = $filterQueryString.getUrlFragment())
+		#set ($queryStringWithoutThisFilter = $filterQueryString.getUrlFragmentWithoutThisCrumb())
+		&nbsp;&raquo;&nbsp;<a href="$escapeTool.html("$baseUrl/browse.ep?${categoryQueryString}filters=${queryStringDownToThisFilter}")">$name</a>
+		#if (($queryStringWithoutThisFilter) && ($queryStringWithoutThisFilter.length() > 0))
+		<a href="$escapeTool.html("$baseUrl/$action?${categoryQueryString}filters=${queryStringWithoutThisFilter}")" />
+		#else
+		<a href="$escapeTool.html("$baseUrl")/">
+		#end			<img src="$baseUrl/template-resources/images/ico-filter-close.gif" width="9" height="9" border="0" />
+		</a>
+	#end
+#end
+
+#**
+* Display advanced search bread crumbs for browsing filters
+*#
+#macro (displayAdvancedSearchFilterBreadCrumbs $browsingRequest)
+	#set ($breadcrumbs = $browsingRequest.getFilterQueryStrings())
+	#foreach ($breadcrumb in $breadcrumbs)
+		#set ($name = $breadcrumb.getDisplayName())
+		#if ($navigationFiltersExist)
+    		#set ($queryStringDownToThisFilter = $breadcrumb.getUrlFragment())
+    		#set ($queryStringWithoutThisFilter = $breadcrumb.getUrlFragmentWithoutThisCrumb())
+    		&nbsp;&raquo;&nbsp;<a href="$escapeTool.html("$baseUrl/$action?filters=${queryStringDownToThisFilter}${browsingRequest.getSorterAsString()}")">$name</a>
+    		#if (($queryStringWithoutThisFilter) && ($queryStringWithoutThisFilter.length() > 0))
+    		<a href="$escapeTool.html("$baseUrl/$action?filters=${queryStringWithoutThisFilter}${browsingRequest.getSorterAsString()}")" />
+    		#else
+    		<a href="$escapeTool.html("$baseUrl")/">
+    		#end
+    			<img src="$baseUrl/template-resources/images/ico-filter-close.gif" width="9" height="9" border="0" />    		</a>
+		#end
+		#if ($name == '|')
+			#set ($navigationFiltersExist = true)
+		#end
+	#end
+#end
+
+#**
+* Display a bread crumb for search history
+*#
+#macro (displaySearchBreadCrumbs $searchRequest)
+	&nbsp;&raquo;&nbsp;#springMessage("breadcrumbs.search")
+	#set ($name = "'$searchRequest.getKeyWords()'")
+	#set ($keyWordQueryString = "keyWords=$searchRequest.getEncodedKeyWords()")
+	#set ($categoryQueryString = "")
+	#if (0 < $searchRequest.getCategoryUid())
+		#set ($categoryQueryString = "categoryId=$searchRequest.getCategoryUid()&")
+	#end
+	&nbsp;&raquo;&nbsp;<a href="$escapeTool.html("$baseUrl/search.ep?${categoryQueryString}${keyWordQueryString}&sorter=${searchRequest.getSortTypeOrderString()}")">$name</a>
+	#set ($filterQueryStrings = $searchRequest.getFilterQueryStrings())
+	#foreach ($filterQueryString in $filterQueryStrings)
+		#set ($name = $filterQueryString.getDisplayName())
+		#set ($queryStringDownToThisFilter = $filterQueryString.getUrlFragment())
+		#set ($queryStringWithoutThisFilter = $filterQueryString.getUrlFragmentWithoutThisCrumb())
+		&nbsp;&raquo;&nbsp;<a href="$escapeTool.html("$baseUrl/search.ep?${categoryQueryString}${keyWordQueryString}&filters=${queryStringDownToThisFilter}${searchRequest.getSorterAsString()}")">$name</a>
+		<a href="$escapeTool.html("$baseUrl/search.ep?${categoryQueryString}${keyWordQueryString}&filters=${queryStringWithoutThisFilter}${searchRequest.getSorterAsString()}")">
+			<img src="$baseUrl/template-resources/images/ico-filter-close.gif" alt="remover filter" width="9" height="8" border="0" />
+		</a>
+	#end
+#end
+
+#**
+* Display a bread crumb for advanced search
+*#
+#macro (displayAdvancedSearchBreadCrumb $advancedSearchSummaryOptionsBean)
+	##only show the options string (ie. results of search parameters) if set
+	#if ($advancedSearchSummaryOptionsBean)
+		## set the attributes options string first
+		#set ($attributesOptionsString = '')
+		#foreach ($attributeKey in $advancedSearchSummaryOptionsBean.attributeMap.keySet())
+			#set ($productTemplateKey = "productTemplate.${attributeKey}")
+			#set ($localizedAttributeName = "#springMessage($productTemplateKey)")
+			#set ($localizedDisplayValue = $advancedSearchSummaryOptionsBean.attributeMap.get($attributeKey))
+			#set ($attributesOptionsString = "$attributesOptionsString $localizedAttributeName : $localizedDisplayValue, ")  
+		#end 
+		
+		##remove the last two places including the comma
+		#set ($attributesOptionsString = "$stringUtils.chop($attributesOptionsString, 2)")
+		
+		#set ($priceString = "$advancedSearchSummaryOptionsBean.priceString")
+		##determine dropping comma is neccessary
+		#if ($advancedSearchSummaryOptionsBean.brandString == '' && $advancedSearchSummaryOptionsBean.attributeMap.size() == 0)
+			#set ($priceString = "$stringUtils.chop($priceString, 1)")
+		#end
+		
+		#set ($brandString = "$advancedSearchSummaryOptionsBean.brandString")
+		##determine if dropping comma is neccessary
+		#if ($advancedSearchSummaryOptionsBean.attributeMap.size() == 0)
+			#set ($brandString = "$stringUtils.chop($brandString, 1)")
+		#end
+		
+		## set the options string
+		#set ($optionsString = "&nbsp;&raquo;&nbsp; $priceString $brandString $attributesOptionsString")
+	#end
+	&nbsp;&raquo;&nbsp;<a href="$escapeTool.html("$baseUrl/advanced-search.ep")">#springMessage("breadcrumbs.advancedSearch")</a> $!optionsString 
+	#displayAdvancedSearchFilterBreadCrumbs($catalogViewResultBean.currentCatalogViewResult.catalogViewRequest)
+#end
+#**
+	 * Display a bread crumb for a category
+	 *#
+#macro (displayCategoryBreadCrumbs $currentCategory)
+	#foreach($cursor in $currentCategory.getPathAsList())
+		#set ($name = $cursor.getLocaleDependantFields($locale).getDisplayName())
+		#parseCategorySeoUrl($cursor 1)
+		&nbsp;&raquo;&nbsp;<a href="${categorySeoUrl}">$name</a>
+	#end
+#end
+
+#**
+ * Display the browsing bread crumb.
+ *
+ *#
+#macro (displayBrowsingBreadCrumbs $category $browsingRequest)
+	&nbsp;&raquo;&nbsp;#springMessage("breadcrumbs.browsing")
+	#set ($categoryQueryString = "")
+		#if ($browsingRequest.getFilters().size() == 0)
+			#displayCategoryBreadCrumbs($category)
+		#end
+		#if ($ctxSeoEnabledHelper.getBoolean())
+			#displayFilterSeoBreadCrumbs($category $browsingRequest)
+		#else
+			#displayFilterBreadCrumbs($category $browsingRequest)
+		#end
+#end
+
+<a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a>
+#if($productViewBean)
+	#if ($productViewBean.isFromSearch())
+		#set ($lastSearchRequest = $productViewBean.getCurrentCatalogViewResult().getCatalogViewRequest())
+		#displaySearchBreadCrumbs($lastSearchRequest)
+	#elseif ($productViewBean.isFromBrowsing())
+		#set ($lastBrowsingRequest = $productViewBean.getCurrentCatalogViewResult().getCatalogViewRequest())
+		#set ($lastBrowsingCategory = $productViewBean.getCurrentCatalogViewResult().getCategory())
+		#displayBrowsingBreadCrumbs($lastBrowsingCategory $lastBrowsingRequest)
+	#else
+		#set ($defaultCategory = $productViewBean.getProductCategory())
+		#displayCategoryBreadCrumbs($defaultCategory)
+	#end
+#else
+	#if($action == "browse.ep")
+		#displayBrowsingBreadCrumbs($currentCategory $currentCatalogViewRequest)
+	#elseif($action == "sitemap.ep")
+		#if($sitemapResultBean.currentSitemapResult.products)
+			&nbsp;&raquo;&nbsp;<a href="$baseUrl/sitemap.ep">#springMessage("globals.bc.sitemap")</a>&nbsp;&raquo;&nbsp;#if($sitemapResultBean.currentSitemapResult.category)$sitemapResultBean.currentSitemapResult.category.getDisplayName($locale)#else$sitemapResultBean.currentSitemapResult.brand.getDisplayName($locale, false)#end
+		#else
+			&nbsp;&raquo;&nbsp;#springMessage("globals.bc.sitemap")
+		#end
+	#elseif($action == "gift-certificate.ep")
+		&nbsp;&raquo;&nbsp;#springMessage("globals.bc.giftCertificates")
+	#elseif($action == "search-gift-certificate.ep")
+		&nbsp;&raquo;&nbsp;#springMessage("globals.bc.giftCertificates")
+	#elseif($action == "search.ep")
+		#displaySearchBreadCrumbs($searchRequest)
+	#elseif($action == "advanced-search.ep")
+		#displayAdvancedSearchBreadCrumb($advancedSearchSummaryOptionsBean)
+	#else
+		#displaySearchBreadCrumbs($currentCatalogViewRequest.currentSearchResult)
+	#end
+#end

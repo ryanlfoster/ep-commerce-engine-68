@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<content-wrapper>
+	<template-name>productContentSpace.cwt</template-name>
+	<wrapper-id>1000</wrapper-id>
+	<wrapper-name>Human readable content wrapper name for UI</wrapper-name>
+	<service-definitions>
+		<service-definition name="loadTuner">productLoadTunerForBrowsingAndSearch</service-definition>
+		<service-definition name="productService">productService</service-definition>
+		<service-definition name="storeConfig">threadLocalStorage</service-definition>
+	</service-definitions>
+
+	<user-input-settings>
+		<user-input-setting localizable="false" name="code"/>
+	</user-input-settings>
+
+	<init>
+		x = 10;
+		y = 11;
+	</init>
+
+
+	<template-parameters>
+		<template-parameter name="price">
+			<resolver>
+				groovy expression
+			</resolver>
+		</template-parameter>
+		<template-parameter localizable="true" name="name"/>
+		<template-parameter localizable="false" name="image"/>
+	</template-parameters>
+
+	
+</content-wrapper>

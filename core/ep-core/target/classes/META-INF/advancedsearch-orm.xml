@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.advancedsearch.impl</package>
+	<entity class="AdvancedSearchQueryImpl">
+		<named-query name="ADVANCED_QUERY_FIND_VISIBLE_WITH_TYPES">
+			<query>
+				SELECT asqi
+				FROM AdvancedSearchQueryImpl asqi
+				WHERE (asqi.owner.uidPk = :uidPk OR asqi.queryVisibility = :queryVisibility)
+				AND asqi.queryType in (:listQueryType)
+			</query>
+		</named-query>
+		<named-query name="ADVANCED_QUERY_FIND_ALL_WITH_TYPES">
+			<query>
+				SELECT asqi
+				FROM AdvancedSearchQueryImpl asqi
+				WHERE asqi.queryType in (:list)
+			</query>
+		</named-query>
+		<named-query name="ADVANCED_QUERY_FIND_BY_NAME">
+			<query>
+				SELECT asqi
+				FROM AdvancedSearchQueryImpl asqi
+				WHERE LOWER(asqi.name) = :name
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

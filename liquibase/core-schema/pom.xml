@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.db</groupId>
+		<artifactId>database-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>core-schema</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Schema and Base Data</name>
+	<description>This artifact contains the core schema and base inserts needed to create an "empty" Elastic Path database.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath.db</groupId>
+			<artifactId>liquibase-extensions</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+
+<build>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>${org.liquibase.version}</version>
+					<configuration>
+						<changeLogFile>liquibase/core-changelog-master.xml</changeLogFile>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

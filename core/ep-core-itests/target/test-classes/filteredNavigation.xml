@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Configuration file for filtered navigation
+	-->
+	<!--
+		For range values, lower bounds are inclusive, upper values are
+		exclusive.
+	-->
+<IntelligentBrowsing>
+	<price currency="USD" localized="false">
+		<range lower="" upper="100" id="_100">
+			<display language="en">
+				<value>Under $100</value>
+				<seo>under-usd100</seo>
+			</display>
+			<display language="fr">
+				<value>au-dessous de $100</value>
+				<seo>au-dessousd-de-usd100</seo>
+			</display>
+		</range>
+		<range lower="100" upper="300" id="100_300">
+			<display language="en">
+				<value>$100 to $300</value>
+				<seo>usd100-to-300</seo>
+			</display>
+			<display language="fr">
+				<value>$100 et $300</value>
+				<seo>usd100-et-300</seo>
+			</display>
+			<range lower="100" upper="200" id="100_200">
+				<display language="en">
+					<value>$100 to $200</value>
+					<seo>usd100-to-200</seo>
+				</display>
+				<display language="fr">
+					<value>$100 et $200</value>
+					<seo>usd100-et-200</seo>
+				</display>
+			</range>
+			<range lower="200" upper="300" id="200_300">
+				<display language="en">
+					<value>$200 to $300</value>
+					<seo>usd200-to-300</seo>
+				</display>
+				<display language="fr">
+					<value>$200 et $300</value>
+					<seo>usd200-et-300</seo>
+				</display>
+			</range>
+		</range>
+		<range lower="300" upper="500" id="300_500">
+			<display language="en">
+				<value>$300 to $500</value>
+				<seo>usd300-to-500</seo>
+			</display>
+			<display language="fr">
+				<value>$300 et $500</value>
+				<seo>usd300-et-500</seo>
+			</display>
+			<range lower="300" upper="400" id="300_400">
+				<display language="en">
+					<value>$300 to $400</value>
+					<seo>usd300-to-400</seo>
+				</display>
+				<display language="fr">
+					<value>$300 et $400</value>
+					<seo>usd300-et-400</seo>
+				</display>
+			</range>
+			<range lower="400" upper="500" id="400_500">
+				<display language="en">
+					<value>$400 to $500</value>
+					<seo>usd400-to-500</seo>
+				</display>
+				<display language="fr">
+					<value>$400 et $500</value>
+					<seo>usd400-et-500</seo>
+				</display>
+			</range>
+		</range>
+		<range lower="500" upper="700" id="500_700">
+			<display language="en">
+				<value>$500 to $700</value>
+				<seo>usd500-to-700</seo>
+			</display>
+			<display language="fr">
+				<value>$500 et $700</value>
+				<seo>usd500-et-700</seo>
+			</display>
+			<range lower="500" upper="600" id="500_600">
+				<display language="en">
+					<value>$500 to $600</value>
+					<seo>usd500-to-600</seo>
+				</display>
+				<display language="fr">
+					<value>$500 et $600</value>
+					<seo>usd500-et-600</seo>
+				</display>
+			</range>
+			<range lower="600" upper="700" id="600_700">
+				<display language="en">
+					<value>$600 to $700</value>
+					<seo>usd600-to-700</seo>
+				</display>
+				<display language="fr">
+					<value>$600 et $700</value>
+					<seo>usd600-et-700</seo>
+				</display>
+			</range>
+		</range>
+		<range lower="700" upper="900" id="700_900">
+			<display language="en">
+				<value>$700 to $900</value>
+				<seo>usd700-to-900</seo>
+			</display>
+			<display language="fr">
+				<value>$700 et $900</value>
+				<seo>usd700-et-900</seo>
+			</display>
+			<range lower="700" upper="800" id="700_800">
+				<display language="en">
+					<value>$700 to $800</value>
+					<seo>usd700-to-800</seo>
+				</display>
+				<display language="fr">
+					<value>$700 et $800</value>
+					<seo>usd700-et-800</seo>
+				</display>
+			</range>
+			<range lower="800" upper="900" id="800_900">
+				<display language="en">
+					<value>$800 to $900</value>
+					<seo>usd800-to-900</seo>
+				</display>
+				<display language="fr">
+					<value>$800 et $900</value>
+					<seo>usd800-et-900</seo>
+				</display>
+			</range>
+		</range>
+		<range lower="900" upper="" id="900_">
+			<display language="en">
+				<value>More than $900</value>
+				<seo>more-than-usd900</seo>
+			</display>
+			<display language="fr">
+				<value>au-dessous de $900</value>
+				<seo>au-dessousd-de-usd900</seo>
+			</display>
+		</range>
+	</price>
+</IntelligentBrowsing>

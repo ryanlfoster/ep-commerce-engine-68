@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<toolbox>
+  <tool>
+     <key>dateTool</key>
+     <scope>application</scope>
+     <class>org.apache.velocity.tools.generic.DateTool</class>
+  </tool>
+  <tool>
+     <key>mathTool</key>
+     <scope>application</scope>
+     <class>org.apache.velocity.tools.generic.MathTool</class>
+  </tool>
+  <tool>
+     <key>numberTool</key>
+     <scope>application</scope>
+     <class>org.apache.velocity.tools.generic.NumberTool</class>
+  </tool>
+  <tool>
+     <key>iteratorTool</key>
+     <scope>application</scope>
+     <class>org.apache.velocity.tools.generic.IteratorTool</class>
+  </tool>
+  <tool>
+     <key>listTool</key>
+     <scope>application</scope>
+     <class>org.apache.velocity.tools.generic.ListTool</class>
+  </tool>
+  <tool>
+    <key>escapeTool</key>
+    <scope>application</scope>
+    <class>org.apache.velocity.tools.generic.EscapeTool</class>
+  </tool> 
+   <!--tool>
+     <key>webFormTool</key>
+     <scope>application</scope>
+     <class>com.elasticpath.system.web.util.velocityTools.impl.WebFormToolImpl</class>
+  </tool-->
+
+  <!--tool>
+     <key>sdf</key>
+     <scope>application</scope>
+     <class>com.elasticpath.sfweb.struts.commons.velocitytools.SimpleDateFormatTool</class>
+  </tool-->
+</toolbox>

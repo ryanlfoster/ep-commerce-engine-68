@@ -1,0 +1,280 @@
+
+options {
+    STATIC = false;
+    JAVA_UNICODE_ESCAPE = true;
+    USER_CHAR_STREAM = true;
+}
+
+PARSER_BEGIN(EpQueryParserImpl)
+package com.elasticpath.ql.parser.gen;
+
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.elasticpath.ql.parser.EpQuery;
+import com.elasticpath.ql.parser.EpQLTerm;
+import com.elasticpath.ql.parser.EpQueryAssembler;
+import com.elasticpath.ql.parser.EpQueryParser;
+import com.elasticpath.ql.parser.EpQLParseException;
+import com.elasticpath.ql.parser.query.NativeBooleanClause;
+import com.elasticpath.ql.parser.query.NativeQuery;
+
+public class EpQueryParserImpl implements EpQueryParser {
+ 
+    private EpQueryAssembler epQueryAssembler;
+
+	/**
+	 * Constructs a query parser.
+	 */
+    public EpQueryParserImpl() {
+        this(new FastCharStream(new StringReader("")));
+    }
+
+    /**
+     * Sets query assembler helping to populate EpQuery.
+     * 
+     * @param epQueryAssembler assembler of EpQuery
+     */
+    public void setEpQueryAssembler(final EpQueryAssembler epQueryAssembler) {
+        this.epQueryAssembler = epQueryAssembler;
+    }
+
+	/**
+	 * Parses a query string, returning a {@link org.apache.lucene.search.Query}.
+	 * 
+	 * @param query the query string to be parsed.
+     * @throws ParseException if the parsing fails
+     */
+    public EpQuery parse(final String query) throws EpQLParseException {
+		if (epQueryAssembler == null) {
+			throw new EpQLParseException("Ep Query Composer wasn't set properly.");
+		}
+		final EpQuery epQuery = new EpQuery();
+		ReInit(new FastCharStream(new StringReader(query)));
+		try {
+			NativeQuery res = topLevelQuery(epQuery);
+			res = epQueryAssembler.postParseHandling(epQuery, res);
+			epQuery.setNativeQuery(res);
+			return epQuery;
+		} catch (ParseException tme) {
+			// rethrow to include the original query:
+			throw new EpQLParseException("Cannot parse '" + query + "': " + tme.getMessage());
+		} catch (TokenMgrError tme) {
+			throw new EpQLParseException("Cannot parse '" + query + "': " + tme.getMessage());
+		} catch (RuntimeException exception) {
+			throw new EpQLParseException("Cannot parse '" + query + ":" +  exception.getMessage());
+		}
+	}
+
+    /**
+	 * Verify a query string, returning a {@link org.apache.lucene.search.Query}.
+	 * 
+	 * @param query the query string to be parsed.
+	 * @return string representation of lucene query
+	 * @throws EpQLParseException if the parsing fails
+	 */
+	public String verify(final String query) throws EpQLParseException {
+		if (epQueryAssembler == null) {
+			throw new EpQLParseException("Ep Query Composer wasn't set properly.");
+		}
+		final EpQuery epQuery = new EpQuery();
+		epQuery.setValidateOnly(true);
+		ReInit(new FastCharStream(new StringReader(query)));
+
+		try {
+			NativeQuery res = topLevelQuery(epQuery);
+			res = epQueryAssembler.postParseHandling(epQuery, res);
+			epQuery.setNativeQuery(res);			
+			return epQuery.toString();
+		} catch (ParseException tme) {
+			throw new EpQLParseException("Cannot parse '" + query + "': " + tme.getMessage());
+		} catch (TokenMgrError tme) {
+			throw new EpQLParseException("Cannot parse '" + query + "': " + tme.getMessage());
+		} catch (RuntimeException exception) {
+			throw new EpQLParseException("Cannot parse '" + query + ":" +  exception.getMessage());
+		}
+	}
+}
+
+PARSER_END(EpQueryParserImpl)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\r"
+| "\n"
+}
+TOKEN:
+{
+	< AND :          ("AND" | "&&") >
+|   < OR :           ("OR" | "||") >
+|   < NOT :          "NOT">
+|	< FIND :         "FIND">
+|   < UID :          "UID" >
+|   < GUID :         "GUID" >
+|   < WHERE :        "WHERE" >
+|   < LIMIT :        "LIMIT" >
+|   < START :        "START" >
+|   < EQ :           "=" >
+|   < NOT_EQ :       "!=" >
+|   < LESS_EQ :      "<=" >
+|   < LESS :         "<" >
+|   < MORE_EQ :      ">=" >
+|   < MORE_:         ">" >
+|   < QUOTED :       "'" ( (~["'","\\"]) | ("\\" ["\\", "'"])  )* "'">
+|   < ATTR_NAME :    "{" ( (~["{","}","\\"]) | ("\\" ["\\", "{", "}"])  )* "}">
+|   < LCURLY :       "{" >
+|   < RCURLY :       "}" >
+|   < LROUND :       "(" >
+|   < RROUND :       ")" >
+|   < LSQUARE :          "[" >
+|   < RSQUARE :          "]" >
+|   < DECIMAL_LITERAL: ((["1"-"9"] (["0"-"9"])*) | "0")>
+|   < FLOATING_POINT_LITERAL: (["0"-"9"])* (".")? (["0"-"9"])+>
+|   < BOOLEAN_LITERAL: ("TRUE" | "FALSE" | "true" | "false") >
+|   < TERM_CHAR : ( ~[ "'", "<", ">", "!", "=", " ", "\t", "\n", "\r", "(", ")",
+                     "[", "]", "\"", "{", "}"])>
+|   < TERM :         <TERM_CHAR> (<TERM_CHAR>)*  >
+}
+
+/**
+ * Note: in future we can also have the following syntax: <FIND> getQueryType() <BY> getFetchType() <WHERE> {q = query();} [limit()] <EOF><br>
+ * allowing us to specify return type.
+ */
+NativeQuery topLevelQuery(final EpQuery epQuery) :
+{ NativeQuery q = null; }
+{
+    <FIND> getQueryType(epQuery) [<WHERE> {q = query(epQuery);}] [range(epQuery)] <EOF>
+    { return q; }
+}
+
+void range(final EpQuery epQuery) :
+{}
+{
+	(limit(epQuery) [start(epQuery)] | start(epQuery) [limit(epQuery)])
+}
+
+void getQueryType(final EpQuery epQuery) :
+{ Token type; }
+{
+    type = <TERM>
+    { epQueryAssembler.checkQueryType(epQuery, type.image); }
+}
+
+void getFetchType(final EpQuery epQuery) :
+{ Token type; }
+{
+    (type = <UID> | type = <GUID>)	
+    { epQueryAssembler.checkFetchType(epQuery, type.image); }
+}
+
+void limit(final EpQuery epQuery) :
+{ Token limit; }
+{
+
+	<LIMIT> limit = <DECIMAL_LITERAL> 
+	{ epQueryAssembler.checkLimit(epQuery, limit.image); }
+}
+
+void start(final EpQuery epQuery) :
+{ Token start; }
+{
+	<START> start = <DECIMAL_LITERAL> 
+	{epQueryAssembler.checkStartIndex(epQuery, start.image);}
+}
+
+NativeQuery query(final EpQuery epQuery) :
+{
+    final List<NativeBooleanClause> clauses = new ArrayList<NativeBooleanClause>();
+    NativeQuery q = null;
+}
+{
+    q = andExpression(epQuery)
+    { epQueryAssembler.addClause(epQuery, clauses, CONJ_NONE, q, ""); }
+    (     
+        <OR> q = andExpression(epQuery)
+        { epQueryAssembler.addClause(epQuery, clauses, CONJ_OR, q, ""); }
+    )*
+    {
+        return epQueryAssembler.getBooleanQuery(epQuery, clauses);
+    }
+}
+
+NativeQuery andExpression(EpQuery epQuery) :
+{
+    final List<NativeBooleanClause> clauses = new ArrayList<NativeBooleanClause>();
+    NativeQuery q = null;	    
+}
+{
+	q = notExpression(epQuery)
+	{ epQueryAssembler.addClause(epQuery, clauses, CONJ_NONE, q, ""); }
+    (
+        <AND> q = notExpression(epQuery)
+        { epQueryAssembler.addClause(epQuery, clauses, CONJ_AND, q, ""); }
+    )*
+    {
+        return epQueryAssembler.getBooleanQuery(epQuery, clauses);
+    }
+}
+
+NativeQuery notExpression(EpQuery epQuery) :
+{
+	final List<NativeBooleanClause> clauses = new ArrayList<NativeBooleanClause>();
+	NativeQuery q = null;
+}
+{
+	(
+		q = clause(epQuery, CONJ_NONE, clauses)
+		| <NOT> q = clause(epQuery, CONJ_NOT, clauses)
+	)
+	{
+		return epQueryAssembler.getBooleanQuery(epQuery, clauses);
+	}
+}
+
+NativeQuery clause(final EpQuery epQuery, int conj, final List<NativeBooleanClause> clauses) :
+{
+	NativeQuery q;
+    Token fieldToken = null;
+    Token parameter2Token = null;
+    String field = null;
+    Token operator = null;	  	  	  
+    Token parameter1Token = null;
+    Token term;
+}
+{
+	(LOOKAHEAD(2)
+	    (
+	        (fieldToken = <TERM> [parameter2Token = <ATTR_NAME>] [<LSQUARE> parameter1Token = <TERM> <RSQUARE>] )
+
+	        (operator = <EQ>
+	         |operator = <NOT_EQ>
+	         |operator = <LESS>
+	         |operator = <LESS_EQ>
+	         |operator = <MORE_>
+	         |operator = <MORE_EQ>)
+
+	        (term = <TERM> | term = <QUOTED> | term = <FLOATING_POINT_LITERAL> | term = <DECIMAL_LITERAL> | term = <BOOLEAN_LITERAL>)
+	        {
+	            EpQLTerm epQLTerm = new EpQLTerm(fieldToken.image, parameter1Token == null ? null : parameter1Token.image,
+	                parameter2Token == null ? null : parameter2Token.image.substring(1, parameter2Token.image.length() - 1),
+	                operator.image, term.image);
+	            q = epQueryAssembler.getFieldQuery(epQuery, epQLTerm); 
+	        }
+	    )
+	    |
+	    (
+	        <LROUND> q = query(epQuery) <RROUND>
+	    )
+	)
+	{
+	    if (operator == null) {
+	        epQueryAssembler.addClause(epQuery, clauses, conj, q, "");
+	    } else {
+	        epQueryAssembler.addClause(epQuery, clauses, conj, q, operator.image);
+	    }
+	    return q;
+	}
+}

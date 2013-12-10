@@ -1,0 +1,1685 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<categories>
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>90000005</code>
+    <name>
+        <value language="en">Optics</value>
+        <value language="fr">Optique</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>4</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>cat-optics.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en">&lt;p&gt;Bring life closer with the best telescopes and binoculars from great brands like Meade and Bushnell. Learn astronomy with beginner telescopes or master space with an advanced telescope.&lt;/p&gt;&lt;p&gt;Or, get close to birds and wildlife with spotting scopes and binoculars at great prices.&lt;/p&gt;</value>
+            <value language="fr">Apportez la vie plus étroite avec les meilleurs télescopes et jumelles de grandes marques comme Meade et Bushnell. Apprenez l'astronomie avec des télescopes de débutant ou l'espace principal avec un télescope avançé.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>90000002</code>
+    <name>
+        <value language="en">Camcorders</value>
+        <value language="fr">Caméscopes</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>cat-camcorders.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en">&lt;p&gt;From beginner video cameras to professional camcorders, we have all the camera gear necessary to make you a great videographer.&lt;/p&gt;&lt;p&gt;Capture your family memories on a range of digital video camera equipment from the best camcorder makers going.&lt;/p&gt;</value>
+            <value language="fr">Des appareils-photo visuels de débutant aux caméscopes professionnels, nous avons toute la vitesse d'appareil-photo nécessaire pour vous faire un grand videographer.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>90000003</code>
+    <name>
+        <value language="en">Digital Cameras</value>
+        <value language="fr">Appareils photos numériques</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>cat-digitalcameras.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en">&lt;p&gt;Looking for a digital camera for beginners like a point and shoot? Maybe a high end digital camera like a SLR? We have all the camera gear necessary to make your photography come to life.&lt;/p&gt;&lt;p&gt;Cameras can be the best way to save a moment, and doesn't that deserve the best digital camera at the best price possible?&lt;/p&gt;</value>
+            <value language="fr">Recherche d'un appareil-photo numérique pour des débutants comme un point et une pousse ? Peut-être un appareil-photo numérique d'extrémité élevée aiment un SLR ? Nous avons toute la vitesse d'appareil-photo nécessaire pour faire votre photographie venir à la vie.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>90000004</code>
+    <name>
+        <value language="en">Film Cameras</value>
+        <value language="fr">Appareils photo</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>cat-filmcameras.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en">&lt;p&gt;Looking for a camera for beginners like a point and shoot? Maybe a high end film cameras from the best camera company? We have all the photo gear necessary to make your shots come to life.&lt;/p&gt;&lt;p&gt;Cameras can be the best way to save a moment, and doesn't that deserve the best film camera at the best price possible?&lt;/p&gt;</value>
+            <value language="fr">Recherche d'un appareil-photo pour des débutants comme un point et une pousse ? Peut-être hauts appareils-photo d'un film d'extrémité de la meilleure compagnie d'appareil-photo ? Nous avons toute la vitesse de photo nécessaire pour faire vos projectiles venir à la vie.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>90000006</code>
+    <name>
+        <value language="en">Accessories</value>
+        <value language="fr">Accessoires</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>5</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>cat-accessories.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en">&lt;p&gt;Buy discount video and photo equipment like photo accessories, camera cases, digital camera batteries, lenses, and camera memory cards at the best price.&lt;/p&gt;</value>
+            <value language="fr">Achetez la vidéo d'escompte et l'équipement de photo aiment des accessoires de photo, des caisses d'appareil-photo, des batteries numériques d'appareil-photo, des objectifs, et des cartes de mémoire d'appareil-photo au meilleur prix.</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000005</parentcategory>
+    <code>90000015</code>
+    <name>
+        <value language="en">Telescopes</value>
+        <value language="fr">Télescopes</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>I144017.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000004</parentcategory>
+    <code>90000012</code>
+    <name>
+        <value language="en">Waterproof camera</value>
+        <value language="fr">Etanche</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>5</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000028</code>
+    <name>
+        <value language="en">Carrying Cases</value>
+        <value language="fr">Cas Portants</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000022</code>
+    <name>
+        <value language="en">Digital8</value>
+        <value language="fr">Digital8</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000004</parentcategory>
+    <code>90000010</code>
+    <name>
+        <value language="en">Single use camera</value>
+        <value language="fr">À usage unique</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000030</code>
+    <name>
+        <value language="en">Power Devices &amp; Batteries</value>
+        <value language="fr">Dispositifs Et Batteries De Puissance</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>CAT_TUT</code>
+    <name>
+        <value language="en">Tutorials</value>
+        <value language="fr">Tutoriel</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>8</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2009-11-24T00:00:00-08:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value/>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en"/>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>8</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000003</parentcategory>
+    <code>90000018</code>
+    <name>
+        <value language="en">Digital Style SLRs</value>
+        <value language="fr">Modèle SLRs De Digital</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>I144017.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000004</parentcategory>
+    <code>90000011</code>
+    <name>
+        <value language="en">SLR camera</value>
+        <value language="fr">Réflex à un objectif</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>4</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000024</code>
+    <name>
+        <value language="en">S-VHS C</value>
+        <value language="fr">S-VHS C</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>5</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000034</code>
+    <name>
+        <value language="en">Accessories</value>
+        <value language="fr">Accessoires</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>7</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>7</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>7</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>7</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000003</parentcategory>
+    <code>90000017</code>
+    <name>
+        <value language="en">Digital SLRs</value>
+        <value language="fr">SLRs De Digital</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>I38753.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>90000007</code>
+    <name>
+        <value language="en">Service Plan</value>
+        <value language="fr">Service Plan</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>6</order>
+    <availability>
+        <storevisible>false</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>cat-accessories.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000004</parentcategory>
+    <code>90000008</code>
+    <name>
+        <value language="en">Point &amp; Shoot / Zoom camera</value>
+        <value language="fr">Pointer et tirer / Zoom</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000029</code>
+    <name>
+        <value language="en">Flash Memory</value>
+        <value language="fr">Mémoire Instantanée</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000021</code>
+    <name>
+        <value language="en">Mini DV</value>
+        <value language="fr">Mini DV</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000025</code>
+    <name>
+        <value language="en">8mm &amp; Hi8</value>
+        <value language="fr">8mm &amp; Hi8</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>6</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000033</code>
+    <name>
+        <value language="en">Photo &amp; Video Accessories</value>
+        <value language="fr">Accessoires De Photo Et De Vidéo</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>6</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000020</code>
+    <name>
+        <value language="en">All Camcorders</value>
+        <value language="fr">Tout le Caméscopes</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000004</parentcategory>
+    <code>90000009</code>
+    <name>
+        <value language="en">Point &amp; Shoot camera</value>
+        <value language="fr">Pointer et tirer</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000026</code>
+    <name>
+        <value language="en">3&quot; DVD</value>
+        <value language="fr">3&quot; DVD</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>7</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>7</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>7</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000005</parentcategory>
+    <code>90000014</code>
+    <name>
+        <value language="en">Binoculars</value>
+        <value language="fr">Jumelles</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>I38753.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000003</parentcategory>
+    <code>90000019</code>
+    <name>
+        <value language="en">Digital with Printer Dock</value>
+        <value language="fr">Digital avec le dock d'imprimeur</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>I144017.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000032</code>
+    <name>
+        <value language="en">Cables</value>
+        <value language="fr">Objectifs</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>5</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000015</parentcategory>
+    <code>90000016</code>
+    <name>
+        <value language="en">Tripods</value>
+        <value language="fr">Trépieds</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>I144017.jpg</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000004</parentcategory>
+    <code>90000013</code>
+    <name>
+        <value language="en">Waterproof single use camera</value>
+        <value language="fr">Appareil photo jetable étanche</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>6</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>6</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000035</code>
+    <name>
+        <value language="en">Software</value>
+        <value language="fr">Logiciel</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>8</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>8</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>8</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>8</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000006</parentcategory>
+    <code>90000031</code>
+    <name>
+        <value language="en">Lenses</value>
+        <value language="fr">Lenses</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>4</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SLRWORLDCATALOG">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory>90000002</parentcategory>
+    <code>90000023</code>
+    <name>
+        <value language="en">Micro MV</value>
+        <value language="fr">MV Micro</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>4</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="SNAPITUP">
+    <parentcategory></parentcategory>
+    <code>80000050</code>
+    <name>
+        <value language="en">Gift Certificates</value>
+        <value language="fr">Chèques-cadeaux</value>
+    </name>
+    <type>SnapItUp</type>
+    <order>8</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2008-07-03T00:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>berries.jpg</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value language="en">&lt;p&gt;Spread the love - buy a gift certificate&lt;/p&gt;</value>
+            <value language="fr"/>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </url>
+        <title>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </title>
+        <keywords>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </keywords>
+        <description>
+            <value language="en"></value>
+            <value language="fr"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="SNAPITUPUS">
+            <order>8</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="SNAPITUPUK">
+            <order>8</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+</categories>

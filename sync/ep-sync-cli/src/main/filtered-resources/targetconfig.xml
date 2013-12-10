@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<connectionconfiguration type="local">
+	<url>${epdb.url}</url>
+	<login>${epdb.username}</login>
+	<pwd>${epdb.password}</pwd>
+	<driver>${epdb.jdbc.driver}</driver>
+</connectionconfiguration>

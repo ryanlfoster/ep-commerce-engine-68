@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!--
+
+	Wrapper that displays a category's name, description and image.
+
+	Input Parameters:
+	1. categoryCode - the code for category
+
+	The wraper uses threadLocalStrorage and categoryService in order to determine
+	the category with the specified categoryCode in the current store.
+
+	Template Parameters:
+	1. catName - the name of category
+	2. catDesc - the description
+	3. catImage - the image for this category
+
+-->
+<content-wrapper> 
+
+	<template-name>categoryTemplate.cwt</template-name>
+	<wrapper-id>categoryWrapper</wrapper-id>
+	<wrapper-name>Category with image</wrapper-name>
+	<script-language>groovy</script-language>
+
+	<service-definitions>
+		<service-definition name="categoryService">categoryService</service-definition>					
+		<service-definition name="storeConfig">threadLocalStorage</service-definition>
+	</service-definitions>
+
+	<user-input-settings>
+		<user-input-setting id="categoryCode" localizable="false" name="Category Code" type="Category" required="true" pass-to-template="false"/>
+	</user-input-settings>
+
+	<init>
+		store = storeConfig.getStore();
+		currentCategory = categoryService.findByGuid(categoryCode,store.getCatalog().getGuid());
+		
+	</init>
+	
+	<template-parameters>
+		<template-parameter id="catImage" name="catImage">
+			currentCategory.getAttributeValueGroup().getStringAttributeValue("catImage", locale);
+		</template-parameter>
+		<template-parameter id="catName" name="catName">
+			currentCategory.getLocaleDependantFields(locale).getDisplayName();
+		</template-parameter>
+		<template-parameter id="catDesc" name="catDesc">
+			currentCategory.getAttributeValueGroup().getStringAttributeValue("catDescription", locale);
+		</template-parameter>
+	</template-parameters>
+
+</content-wrapper>

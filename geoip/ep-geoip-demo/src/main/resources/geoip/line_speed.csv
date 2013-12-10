@@ -1,0 +1,5 @@
+Line speed;Description
+high;High - ocx, tx, and framerelay
+medium;Medium - consumer satellite, dsl, cable, fixed wireless, and isdn
+low;Low - dialup and mobile wireless
+unknown;Unknown - unable to obtain any line speed information

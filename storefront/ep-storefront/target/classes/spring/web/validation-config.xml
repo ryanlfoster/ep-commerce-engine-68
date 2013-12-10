@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="validatorFactory" class="org.springmodules.validation.commons.DefaultValidatorFactory">
+        <property name="validationConfigLocations">
+            <list>
+                <value>classpath:misc/validation/validation.xml</value>
+                <value>classpath:misc/validation/validator-rules.xml</value>
+            </list>
+        </property>
+    </bean>
+	
+    <bean id="defaultBeanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
+        <property name="validatorFactory"><ref bean="validatorFactory"/></property>
+    </bean>
+
+	<bean class="com.elasticpath.commons.validator.impl.EpFieldChecks">
+		<property name="creditCardValidator">
+			<ref bean="creditCardValidator"/>
+		</property>
+		<property name="timeService">
+			<ref bean="timeService" />
+		</property>
+	</bean>
+    <!--bean id="attributeValidator" class="com.elasticpath.system.misc.validator.AttributeValidator" /-->
+    
+    <!-- 
+    <bean id="attributeValidator" class="com.elasticpath.system.commons.validation.AttributeValidator">
+        <property name="attributeValueValidator"><ref bean="attributeValueValidator"/></property>
+    </bean>
+     -->
+     
+    <bean id="giftCertificateFormBeanValidator" class="com.elasticpath.sfweb.formbean.validator.impl.GiftCertificateFormBeanValidator" 
+    		parent="productFormBeanValidator" >
+    	<property name="errorCodeMap">
+   			<map>
+   				<entry key="errorInvalidRecipientEmail" value="errors.email.address.is.required"/>
+   				<entry key="errorInvalidConfirmEmail" value="errors.confirm.email.address.is.required"/>
+   				<entry key="errorInvalidEmailsAreNotEqual" value="errors.twoEmails"/>
+   				<entry key="errorInvalidStringValue" value="errors.invalid.string.value"/>
+   			</map>
+    	</property>
+    </bean>
+
+    <bean id="productFormBeanValidator" class="com.elasticpath.sfweb.formbean.validator.impl.ProductFormBeanValidator" >
+    	<property name="errorInvalidQuantity" value="methodInvocation.quantity" />
+    </bean>
+        
+    <bean id="advancedSearchFormBeanValidator" class="com.elasticpath.sfweb.formbean.validator.impl.AdvancedSearchFormBeanValidator">
+    	<property name="parameterMapper" ref="parameterMapper"></property>
+    	<property name="errorCodeMap">
+   			<map>
+   				<entry key="errorLowerLimitRequired" value="errors.advancedSearch.lower.limit.required"/>
+   				<entry key="errorUpperLimitRequired" value="errors.advancedSearch.upper.limit.required"/>
+   				<entry key="errorInvalidLowerLimit" value="errors.advancedSearch.lower.limit.invalid.number"/>
+   				<entry key="errorInvalidUpperLimit" value="errors.advancedSearch.upper.limit.invalid.number"/>
+   				<entry key="errorNegative" value="typeMismatch.quantity"/>
+   				<entry key="errorUpperLessThanLower" value="errors.advancedSearch.upper.limit.less.than.lower.limit"/>
+   				
+   			</map>
+   		</property>
+    </bean>
+</beans>

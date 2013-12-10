@@ -1,0 +1,17 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2007
+*#
+## sendRegisteredCustomerPasswd.txt.vm
+#emailInit()
+$dateTool.get('MMMM d, yyyy')
+    
+#emailMessage("email.globals.dear") $!customer.firstName $!customer.lastName,
+    
+#emailMessage("email.sendRegisteredCustomerPasswd.message1")#**#
+$newPassword
+
+#emailMessage("email.sendRegisteredCustomerPasswd.message2")#**#
+$store.getUrl()/manage-account.ep   
+
+$store.getName()
+$store.getUrl()

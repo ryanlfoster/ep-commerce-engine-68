@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+
+	<bean id="syncService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tools.sync.target.impl.SyncServiceImpl">
+				<property name="mergeEngine" ref="mergeEngine" />
+				<property name="daoAdapterFactory" ref="daoAdapterFactory" />
+				<property name="hookCallbacks"> <!-- Callbacks will fire in supplied order -->
+					<list>
+						<ref bean="indexNotifierCallback" />
+						<ref bean="productAssociationRemoverJobTransactionCallback" />
+						<ref bean="baseAmountJobTransactionCallbackListener"/>
+<!--                         <ref bean="persistenceChangesTransactionCallbackListener"/> -->
+                        <ref bean="persistenceFlusherTransactionCallback"/>                       
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+
+   	<!-- These Callback Listeners are programatically injected into SyncJobObjectsProcessor since they are in separate Spring Contexts -->
+   	<!-- Items in this list should implement the JobUnitTransactionCallbackListener interface. -->
+	<bean id="callbackListeners" class="java.util.ArrayList">
+	    <constructor-arg>
+	        <list>
+			    <ref bean="baseAmountJobTransactionCallbackListener"/>
+                <ref bean="categoryNotificationJobTransactionCallbackListener"/>
+	        </list>
+	    </constructor-arg>
+	</bean>
+
+    <bean id="baseAmountJobTransactionCallbackListener" 
+    		class="com.elasticpath.tools.sync.target.impl.BaseAmountJobTransactionCallbackListener" scope="singleton">
+    	<property name="coreBeanFactory" ref="coreBeanFactory"/>
+    </bean>
+    
+
+    <bean id="persistenceChangesTransactionCallbackListener" 
+            class="com.elasticpath.tools.sync.target.impl.PersistenceChangesTransactionCallbackListener">
+        <property name="persistenceEngine" ref="persistenceEngineTarget"/>
+        <property name="classesToIgnore">
+            <list>
+              <value>com.elasticpath.domain.pricing.BaseAmount</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="persistenceFlusherTransactionCallback" 
+            class="com.elasticpath.tools.sync.target.impl.PersistenceFlusherTransactionCallback">
+        <property name="persistenceEngine" ref="persistenceEngine"/>
+    </bean>
+    
+    <bean id="productDaoImpl" class="com.elasticpath.persistence.dao.impl.ProductDaoImpl">
+        <property name="persistenceEngine" ref="persistenceEngine" />
+        <property name="productLoadTunerAll" ref="PRODUCT_LOAD_TUNER_ALL" />
+        <property name="productLoadTunerMinimal" ref="PRODUCT_LOAD_TUNER_MINIMAL" />
+        <property name="productLoadTunerForUpdate" ref="PRODUCT_LOAD_TUNER_FOR_UPDATE" />
+        <property name="fetchPlanHelper" ref="fetchPlanHelper" />
+        <property name="beanFactory" ref="coreBeanFactory" />
+        <property name="timeService" ref="timeService" />
+        <!-- arbitrary method replacement -->
+        <replaced-method name="findUidsByCategoryUids"
+            replacer="replacement">
+            <arg-type>Collection</arg-type>
+        </replaced-method>
+    </bean>
+  
+<!--     <bean id="replacement" -->
+<!--         class="com.elasticpath.tools.sync.target.impl.CategoryNotificationJobTransactionCallbackListener"> -->
+<!--     </bean> -->
+        <bean id="replacement"
+        class="com.elasticpath.tools.sync.target.impl.ProductDaoReplacer">
+    </bean>
+        <bean id="categoryNotificationJobTransactionCallbackListener" 
+            class="com.elasticpath.tools.sync.target.impl.CategoryNotificationJobTransactionCallbackListener">
+               <property name="productDaoReplacer" ref="replacement" />
+               <property name="productDao"  ref="productDao" />
+    </bean>
+    
+    
+	
+	<bean id="productBundleDaoAdapter" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductBundleDaoAdapterImpl" parent="abstractDaoAdapter">
+        <property name="productBundleService" ref="productBundleService"/>
+        <property name="beanFactory" ref="coreBeanFactory"/>
+    </bean>
+
+	<bean id="indexNotifierCallback"
+		class="com.elasticpath.tools.sync.target.impl.IndexNotificationJobTransactionCallback">
+		<property name="indexNotificationService" ref="indexNotificationService" />
+		<property name="indexNameMap">
+			<map>
+				<entry key="com.elasticpath.domain.catalog.Product"><util:constant static-field="com.elasticpath.service.search.IndexType.PRODUCT"/></entry>
+				<entry key="com.elasticpath.domain.catalog.ProductBundle"><util:constant static-field="com.elasticpath.service.search.IndexType.PRODUCT"/></entry>
+				<entry key="com.elasticpath.domain.catalog.Category"><util:constant static-field="com.elasticpath.service.search.IndexType.CATEGORY"/></entry>
+				<entry key="com.elasticpath.domain.customer.Customer"><util:constant static-field="com.elasticpath.service.search.IndexType.CUSTOMER"/></entry>
+				<entry key="com.elasticpath.domain.rules.Rule"><util:constant static-field="com.elasticpath.service.search.IndexType.PROMOTION"/></entry>
+				<entry key="com.elasticpath.domain.cmuser.CmUser"><util:constant static-field="com.elasticpath.service.search.IndexType.CMUSER"/></entry>
+				<entry key="com.elasticpath.domain.shipping.ShippingServiceLevel"><util:constant static-field="com.elasticpath.service.search.IndexType.SHIPPING_SERVICE_LEVEL"/></entry>
+			</map>
+		</property>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="productAssociationRemoverJobTransactionCallback"
+		class="com.elasticpath.tools.sync.target.impl.ProductAssociationRemoverJobTransactionCallback">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="productAssociationService" ref="productAssociationService"/>
+	</bean>
+	
+	<!-- !!!! DOCsync-serviceXML1 -->
+	<bean id="daoAdapterFactory" parent="abstractDaoAdapterFactory"/>
+	<bean id="abstractDaoAdapterFactory" abstract="true" class="com.elasticpath.tools.sync.target.DaoAdapterFactory">
+		<property name="syncAdapters">
+			<map>
+				<entry key="com.elasticpath.domain.catalog.Product" value-ref="productDaoAdapter"/>
+				<entry key="com.elasticpath.domain.catalog.ProductSku" value-ref="productSkuDaoAdapter"/>
+				<entry key="com.elasticpath.domain.rules.Rule" value-ref="promotionDaoAdapter"/>
+				<entry key="com.elasticpath.domain.catalog.Category" value-ref="categoryDaoAdapter"/>
+				<entry key="com.elasticpath.domain.catalog.Catalog" value-ref="catalogDaoAdapter"/>
+				<entry key="com.elasticpath.domain.catalog.ProductBundle" value-ref="productBundleDaoAdapter"/>
+				<entry key="com.elasticpath.domain.pricing.PriceListDescriptor" value-ref="priceListDescriptorDaoAdapter"/>
+				<entry key="com.elasticpath.domain.pricing.BaseAmount" value-ref="baseAmountDaoAdapter"/>
+				<entry key="com.elasticpath.domain.pricing.PriceListAssignment" value-ref="priceListAssignmentDaoAdapter"/>
+				<entry key="com.elasticpath.domain.contentspace.DynamicContent" value-ref="dynamicContentDaoAdapter"/>
+				<entry key="com.elasticpath.tags.domain.ConditionalExpression" value-ref="conditionalExpressionDaoAdapter"/>
+				<entry key="com.elasticpath.domain.targetedselling.DynamicContentDelivery" value-ref="dynamicContentDeliveryDaoAdapter"/>
+				<entry key="com.elasticpath.domain.catalog.ProductAssociation" value-ref="productAssociationDaoAdapter" />
+				<entry key="com.elasticpath.domain.rules.CouponConfig" value-ref="couponConfigDaoAdapter"/>
+				<entry key="com.elasticpath.domain.rules.Coupon" value-ref="couponDaoAdapter"/>	
+				<entry key="com.elasticpath.domain.rules.CouponUsage" value-ref="couponUsageDaoAdapter"/>	
+        		<entry key="com.elasticpath.domain.skuconfiguration.SkuOption" value-ref="skuOptionDaoAdapter"/>
+        		<entry key="com.elasticpath.domain.skuconfiguration.SkuOptionValue" value-ref="skuOptionValueDaoAdapter"/>
+        		<entry key="com.elasticpath.domain.catalog.CategoryType" value-ref="categoryTypeDaoAdapter"/>
+        		<entry key="com.elasticpath.domain.catalog.ProductType" value-ref="productTypeDaoAdapter"/>
+        		<entry key="com.elasticpath.domain.catalog.Brand" value-ref="brandDaoAdapter"/>
+        		<entry key="com.elasticpath.domain.attribute.Attribute" value-ref="attributeDaoAdapter"/>
+        		<entry key="com.elasticpath.domain.catalog.ProductCategory" value-ref="productCategoryDaoAdapter"/>
+			</map>
+		</property>
+	</bean>
+	<!-- !!!! DOCsync-serviceXML1 -->
+
+	<bean id="abstractDaoAdapter" class="" abstract="true">
+		<property name="entityLocator" ref="entityLocator"/>
+	</bean>
+	
+	<bean id="dynamicContentDaoAdapter" class="com.elasticpath.tools.sync.target.impl.DynamicContentDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="dynamicContentService" ref="dynamicContentService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="priceListAssignmentDaoAdapter" class="com.elasticpath.tools.sync.target.impl.PriceListAssignmentDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="priceListAssignmentService" ref="priceListAssignmentService" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+	</bean>
+
+	<bean id="dynamicContentDeliveryDaoAdapter" class="com.elasticpath.tools.sync.target.impl.DynamicContentDeliveryDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="dynamicContentDeliveryService" ref="dynamicContentDeliveryService"/>
+		<property name="sellingContextService" ref="sellingContextService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="priceListDescriptorDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.PriceListDescriptorDaoAdapterImpl">
+		<property name="priceListDescriptorService" ref="priceListDescriptorService" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+	</bean>
+
+	<bean id="baseAmountDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.BaseAmountDaoAdapterImpl">
+		<property name="baseAmountDao" ref="baseAmountDao" />
+		<property name="baseAmountService" ref="baseAmountService" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+	</bean>
+
+  <bean id="skuOptionDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.SkuOptionDaoAdapterImpl">
+    <property name="beanFactory" ref="coreBeanFactory"/>
+    <property name="skuOptionService" ref="skuOptionService"/>
+  </bean>
+	
+  <bean id="skuOptionValueDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.SkuOptionValueDaoAdapterImpl">
+    <property name="beanFactory" ref="coreBeanFactory"/>
+    <property name="skuOptionService" ref="skuOptionService"/>
+  </bean>
+  
+  <bean id="categoryTypeDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.CategoryTypeDaoAdapterImpl">
+    <property name="categoryTypeService" ref="categoryTypeService"/>
+    <property name="beanFactory" ref="coreBeanFactory"/>
+  </bean>
+  
+  <bean id="productTypeDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.ProductTypeDaoAdapterImpl">
+    <property name="productTypeService" ref="productTypeService"/>
+    <property name="beanFactory" ref="coreBeanFactory"/>
+  </bean>
+  
+  <bean id="brandDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.BrandDaoAdapterImpl">
+    <property name="brandService" ref="brandService"/>
+    <property name="beanFactory" ref="coreBeanFactory"/>
+  </bean>
+	
+  <bean id="attributeDaoAdapter"  parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.AttributeDaoAdapter">
+	<property name="attributeService" ref="attributeService"/>
+    <property name="beanFactory" ref="coreBeanFactory"/>
+  </bean>
+	
+	<!-- !!!! DOCsync-serviceXML2 -->
+	<bean id="productDaoAdapter" class="com.elasticpath.tools.sync.target.impl.ProductDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="productService" ref="productService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="associatedTypes">
+			<list>
+				<value>com.elasticpath.domain.catalog.ProductAssociation</value>
+			</list>
+		</property>
+	</bean>
+	<!-- !!!! DOCsync-serviceXML2 -->
+
+	<bean id="productSkuDaoAdapter" class="com.elasticpath.tools.sync.target.impl.ProductSkuDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="productSkuService" ref="productSkuService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="promotionDaoAdapter" class="com.elasticpath.tools.sync.target.impl.PromotionDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="ruleService" ref="ruleService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="associatedTypes">
+			<list>
+				<value>com.elasticpath.domain.rules.CouponConfig</value>
+				<value>com.elasticpath.domain.rules.Coupon</value>
+				<value>com.elasticpath.domain.rules.CouponUsage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="couponConfigDaoAdapter" class="com.elasticpath.tools.sync.target.impl.CouponConfigDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="couponConfigService" ref="couponConfigService" />
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+ 
+	<bean id="couponDaoAdapter" class="com.elasticpath.tools.sync.target.impl.CouponDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="couponService" ref="couponService" />
+		<property name="couponConfigService" ref="couponConfigService" />		
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+	
+	<bean id="couponUsageDaoAdapter" class="com.elasticpath.tools.sync.target.impl.CouponUsageDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="couponUsageService" ref="couponUsageService"/>
+		<property name="couponService" ref="couponService" />
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="productAssociationDaoAdapter" class="com.elasticpath.tools.sync.target.impl.ProductAssociationDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="productAssociationService" ref="productAssociationService" />
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="productAssociationLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductAssociationLoadTunerImpl">
+				<property name="loadingCatalog" value="true"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean id="categoryDaoAdapter" class="com.elasticpath.tools.sync.target.impl.CategoryDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="categoryService" ref="categoryService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="associatedTypes">
+			<list>
+				<value>com.elasticpath.domain.catalog.ProductCategory</value>
+			</list>
+		</property>		
+	</bean>
+
+	<bean id="catalogDaoAdapter" class="com.elasticpath.tools.sync.target.impl.CatalogDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="catalogService" ref="catalogService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+    <bean id="productCategoryDaoAdapter" parent="abstractDaoAdapter" class="com.elasticpath.tools.sync.target.impl.ProductCategoryDaoAdapterImpl">
+		<property name="productCategoryService" ref="productCategoryService"/>
+	</bean>
+
+    <bean id="conditionalExpressionDaoAdapter" class="com.elasticpath.tools.sync.target.impl.ConditionalExpressionDaoAdapterImpl" parent="abstractDaoAdapter">
+		<property name="tagConditionService" ref="tagConditionService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="mergeEngine" class="com.elasticpath.tools.sync.merge.impl.MergeEngineImpl">
+		<property name="mergeBoundarySpecification" ref="mergeBoundarySpecification"/>
+		<property name="entityLocator" ref="entityLocator"/>
+		<property name="guidLocator" ref="guidLocator"/>
+		<property name="beanCreator" ref="defaultBeanCreator"/>
+		<property name="jpaPersistentStateLocator" ref="jpaPersistentStateLocator"/>
+		<property name="guidComparator" ref="guidComparator"/>
+		<property name="syncUtils" ref="syncUtils"/>
+		<property name="valueObjectMerger" ref="valueObjectMerger"/>
+		<property name="mergeFilters">
+			<map>
+				<entry key="com.elasticpath.tags.domain.impl.ConditionalExpressionImpl" value-ref="conditionalExpressionFilter"/>
+			</map>		
+		</property>          
+	</bean>
+
+	<bean id="conditionalExpressionFilter" class="com.elasticpath.tools.sync.merge.configuration.impl.ConditionalExpressionFilter"/>
+
+	<bean id="defaultBeanCreator" class="com.elasticpath.tools.sync.merge.impl.DefaultBeanCreator"/>
+
+	<bean id="jpaPersistentStateLocator" class="com.elasticpath.tools.sync.merge.impl.JPAPersistentStateLocatorImpl">
+		<property name="syncUtils" ref="syncUtils"/>
+		<property name="filter" ref="mergeFilter"/>
+	</bean>
+
+	<bean id="guidComparator" class="com.elasticpath.tools.sync.utils.GuidComparator">
+		<property name="guidLocator" ref="guidLocator"/>
+	</bean>
+
+	<bean id="syncUtils" class="com.elasticpath.tools.sync.utils.impl.SyncUtilsImpl"/>
+
+	<!-- !!!! DOCsync-serviceXML3 -->
+	<bean id="valueObjectMerger" class="com.elasticpath.tools.sync.merge.configuration.impl.ValueObjectMergerImpl">
+		<property name="syncUtils" ref="syncUtils" />
+		<property name="fieldMethodNames">
+			<map>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductCategoryImpl">
+					<util:set id="productCategoryFieldMethodNames">
+						<value>isDefaultCategory</value>
+						<value>getFeaturedProductOrder</value>
+					</util:set>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- !!!! DOCsync-serviceXML3 -->
+
+	<!-- !!!! DOCsync-serviceXML -->
+	<bean id="mergeFilter" class="com.elasticpath.tools.sync.merge.impl.SimpleMergeFilter">
+		 <property name="mergeAll">
+			<value>true</value>
+		 </property>
+         <property name="excludeMethods">
+			<map>
+				<entry key="com.elasticpath.domain.rules.impl.PromotionRuleImpl">
+					<set>
+						<value>getCmUser</value>
+						<value>getCurrentLupNumber</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl">
+					<set>
+						<value>getOptionValues</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CategoryImpl">
+					<set>
+						<value>getChildren</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductSkuImpl">
+					<set>
+						<value>getInventories</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.rules.impl.CouponUsageImpl">
+					<set>
+						<value>getUseCount</value>
+						<value>getLimitedDurationEndDate</value>
+						<value>isSuspended</value>
+					</set>
+				</entry>
+			</map>
+		 </property>
+	</bean>
+	<!-- !!!! DOCsync-serviceXML -->
+
+	<bean id="persistenceEngineInitialization" 
+			class="com.elasticpath.tools.sync.configuration.dao.PersistenceEngineInitialization"
+			init-method="init">
+		<property name="persistenceEngine" ref="persistenceEngineTarget"/>
+		<property name="flushModeType">
+			<value type="javax.persistence.FlushModeType">COMMIT</value>
+		</property>
+	</bean>
+</beans>

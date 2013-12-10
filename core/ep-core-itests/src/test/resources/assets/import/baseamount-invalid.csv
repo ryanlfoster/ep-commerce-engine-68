@@ -1,0 +1,7 @@
+productCode|skuCode|quantity|listPrice|salePrice
+AAA||5|60|4
+AAA|BBB|1|56|76
+CCC||3|10|9.75
+|DDD|2|9|8.75
+EEE||100||2
+EEE|FFF||110|100

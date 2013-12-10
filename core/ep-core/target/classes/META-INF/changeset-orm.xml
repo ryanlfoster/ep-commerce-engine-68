@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<entity class="com.elasticpath.domain.changeset.impl.ChangeSetImpl">
+		<named-query name="FIND_CHANGESET_BY_GUID">
+			<query>
+				SELECT cs
+				FROM ChangeSetImpl cs
+				WHERE cs.objectGroupId = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_CHANGESETS_BY_GUIDS">
+			<query>
+				SELECT cs
+				FROM ChangeSetImpl cs
+				WHERE cs.objectGroupId IN (?1)
+			</query>
+		</named-query>
+		<named-query name="SELECT_ALL_CHANGESETS_BY_USERGUID">
+			<query>
+				SELECT cs
+				FROM ChangeSetImpl cs, IN(cs.assignedUsers) a
+				WHERE a.userGuid = ?1 ORDER BY cs.name, cs.createdDate
+			</query>
+		</named-query>
+		<named-query name="DELETE_CHANGESET_BY_GUID">
+			<query>DELETE
+				FROM ChangeSetImpl cs
+				WHERE cs.objectGroupId = ?1
+			</query>
+		</named-query>
+		<named-query name="SELECT_ALL_CHANGESETS">
+			<query>
+				SELECT cs
+				FROM ChangeSetImpl cs ORDER BY cs.name, cs.createdDate
+			</query>
+		</named-query>
+		<named-query name="FIND_AVAILABLE_CHANGESETUSERS">
+			<query>
+				SELECT NEW com.elasticpath.domain.changeset.ChangeSetUserView(cm.firstName, cm.lastName, cm.userName, cm.guid)
+				FROM CmUserImpl cm, IN(cm.userRoles) ur, IN(ur.userPermissions) up
+				WHERE up.authority IN (:list)
+			</query>
+		</named-query>
+		<named-query name="FIND_AVAILABLE_SUPERUSERS">
+			<query>
+				SELECT NEW com.elasticpath.domain.changeset.ChangeSetUserView(cm.firstName, cm.lastName, cm.userName, cm.guid)
+				FROM CmUserImpl cm, IN(cm.userRoles) ur
+				WHERE ur.name = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_AVAILABLE_CHANGESETUSERS">
+			<query>
+				SELECT NEW com.elasticpath.domain.changeset.ChangeSetUserView(cm.firstName, cm.lastName, cm.userName, cm.guid)
+				FROM CmUserImpl cm
+			</query>
+		</named-query>
+		<named-query name="FIND_CHANGESETUSERVIEWS_BY_GUIDS">
+			<query>
+				SELECT NEW com.elasticpath.domain.changeset.ChangeSetUserView(cm.firstName, cm.lastName, cm.userName, cm.guid)
+				FROM CmUserImpl cm
+				WHERE cm.guid IN (?1)
+			</query>
+		</named-query>
+		<named-query name="FIND_CHANGESET_GUID_BY_LIST_OF_GUIDS_AND_STATES">
+			<query>
+				SELECT cs.objectGroupId
+				FROM ChangeSetImpl cs
+				WHERE cs.stateCodeName IN (?1)
+				AND cs.objectGroupId IN (?2)
+			</query>
+		</named-query>
+	</entity>
+
+	<entity class="com.elasticpath.domain.objectgroup.impl.BusinessObjectGroupMemberImpl">
+		<named-query name="DELETE_GROUP_MEMBER_BY_OBJ_TYPE_AND_ID_AND_GROUP_ID">
+			<query>
+				DELETE FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.objectType = ?1
+				AND gm.objectIdentifier = ?2
+				AND gm.groupId = ?3
+			</query>
+		</named-query>
+		<named-query name="DELETE_MEMBERS_BY_GROUP_ID">
+			<query>
+				DELETE FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.groupId = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_OBJECT_MEMBERS_BY_GROUPID">
+			<query>
+				SELECT gm
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.groupId = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_OBJECT_MEMBER_BY_GUID">
+			<query>
+				SELECT gm
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="GROUP_MEMBER_EXISTS_BY_OBJ_TYPE_AND_ID">
+			<query>
+				SELECT gm.uidPk
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.objectType = ?1
+				AND gm.objectIdentifier = ?2
+			</query>
+		</named-query>
+		<named-query name="FIND_GROUP_IDS_BY_OBJ_TYPE_AND_ID">
+			<query>
+				SELECT gm.groupId
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.objectType = ?1
+				AND gm.objectIdentifier = ?2
+			</query>
+		</named-query>
+		<named-query name="FIND_OBJECT_MEMBER_BY_OBJ_TYPE_AND_ID">
+			<query>
+				SELECT gm
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.objectType = ?1
+				AND gm.objectIdentifier = ?2
+			</query>
+		</named-query>
+		<named-query name="UPDATE_CHANGESETOBJECTS_FOR_GUIDS">
+			<query>
+				UPDATE BusinessObjectGroupMemberImpl bog
+				SET bog.groupId = ?1
+				WHERE bog.groupId = ?2
+				AND bog.objectType = ?3
+				AND bog.objectIdentifier = ?4
+			</query>
+		</named-query>
+		<named-query name="COUNT_MEMBERS_BY_GROUP_ID">
+			<query>
+				SELECT COUNT(gm)
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.groupId = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_FILTERED_MEMBERS_BY_GROUP_ID">
+			<query>
+				SELECT COUNT(gm)
+				FROM BusinessObjectGroupMemberImpl gm
+				WHERE gm.groupId = ?1
+				AND gm.objectType NOT IN (?2)
+			</query>
+		</named-query>
+	</entity>
+
+	<entity class="com.elasticpath.domain.objectgroup.impl.BusinessObjectMetadataImpl">
+		<named-query name="FIND_OBJECT_METADATA_BY_GROUPID">
+			<query>
+				SELECT bom
+				FROM BusinessObjectMetadataImpl bom
+				WHERE bom.businessObjectGroupMember.groupId = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_OBJECT_METADATA_BY_OBJ_TYPE_AND_ID">
+			<query>
+				SELECT bom
+				FROM BusinessObjectMetadataImpl bom
+				WHERE bom.businessObjectGroupMember.objectType = ?1
+				AND bom.businessObjectGroupMember.objectIdentifier = ?2
+			</query>
+		</named-query>
+		<named-query name="FIND_OBJECT_METADATA_BY_GROUPID_OBJ_TYPE_AND_ID">
+			<query>
+				SELECT bom
+				FROM BusinessObjectMetadataImpl bom
+				WHERE bom.businessObjectGroupMember.groupId = ?1
+				AND bom.businessObjectGroupMember.objectType = ?2
+				AND bom.businessObjectGroupMember.objectIdentifier = ?3
+			</query>
+		</named-query>
+		<named-query name="DELETE_OBJECT_METADATA_BY_OBJ_TYPE_AND_ID_AND_GROUP_ID">
+			<query>
+				DELETE FROM BusinessObjectMetadataImpl bom
+				WHERE bom.businessObjectGroupMember.objectType = ?1
+				AND bom.businessObjectGroupMember.objectIdentifier = ?2
+				AND bom.businessObjectGroupMember.groupId = ?3
+			</query>
+		</named-query>
+		<named-query name="DELETE_OBJECT_METADATA_BY_GROUP_ID">
+			<query>
+				DELETE FROM BusinessObjectMetadataImpl bom
+				WHERE bom.businessObjectGroupMember.groupId = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_OBJECT_METADATA_BY_GROUPID_AND_KEY">
+			<query>
+				SELECT bom
+				FROM BusinessObjectMetadataImpl bom
+				WHERE bom.businessObjectGroupMember.groupId = ?1
+				AND bom.metadataKey = ?2
+			</query>
+		</named-query>
+	</entity>
+
+</entity-mappings>

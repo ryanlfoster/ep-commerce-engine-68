@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dynamic_content_deliveries>
+<dynamic_content_delivery>
+    <name>Canon EOS Digital Rebel XT Promo SLRWorld</name>
+    <guid>Canon EOS Digital Rebel XT Promo SLRWorld</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Canon EOS Digital Rebel XT (SLRWorld)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>2E72D444-B260-4EB2-960E-DD60DD20DED6</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>780E1D3F-A583-8FCF-71C0-88D5CCDE0AE8</guid>
+        <name>DCA SellingContext for Canon EOS Digital Rebel XT Promo SLRWorld</name>
+        <description>DCA SellingContext for Canon EOS Digital Rebel XT Promo SLRWorld</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>02EE799F-AA8D-D65E-389B-5CFAFB3B900C</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>75342AA6-B3C2-EB5E-D72F-C01BF3491357</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Canon EOS Digital Rebel XT Promo UK</name>
+    <guid>Canon EOS Digital Rebel XT Promo UK</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Canon EOS Digital Rebel XT (UK)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>2E72D444-B260-4EB2-960E-DD60DD20DED6</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>4E9FF189-D176-4EA7-6335-48550A245E0D</guid>
+        <name>DCA SellingContext for Canon EOS Digital Rebel XT Promo UK</name>
+        <description>DCA SellingContext for Canon EOS Digital Rebel XT Promo UK</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>700B861A-4BFE-91B8-EB1D-F686286223BC</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>A9B4B96C-CDAC-D05A-B6D4-49D4FDB2CC22</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Canon EOS Digital Rebel XT Promo US</name>
+    <guid>Canon EOS Digital Rebel XT Promo US</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Canon EOS Digital Rebel XT (US)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>2E72D444-B260-4EB2-960E-DD60DD20DED6</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>984BFBF7-E809-0AA8-8D32-04A0F48117A9</guid>
+        <name>DCA SellingContext for Canon EOS Digital Rebel XT Promo US</name>
+        <description>DCA SellingContext for Canon EOS Digital Rebel XT Promo US</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>D7EC7043-D238-5004-0BA5-9B201E76E5FB</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>BF7DA950-C326-2140-023A-41664619FEB3</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Canon PowerShot Promo UK</name>
+    <guid>Canon PowerShot Promo UK</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Get one in every color (UK)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>5484D29B-5005-4B1E-92B6-87D75CAACC58</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>8217D6C0-A420-E0BF-9F83-F20E4907D541</guid>
+        <name>DCA SellingContext for Canon PowerShot Promo UK</name>
+        <description>DCA SellingContext for Canon PowerShot Promo UK</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>F790FF2F-9845-EA08-E6C0-DF8F95623423</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>459DE57D-CC5B-EC0C-C388-12DC7E8C5262</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Canon PowerShot Promo US</name>
+    <guid>Canon PowerShot Promo US</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Get one in every color (US)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>5484D29B-5005-4B1E-92B6-87D75CAACC58</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>5266CAA8-13FD-2810-A567-1C9C0E16895F</guid>
+        <name>DCA SellingContext for Canon PowerShot Promo US</name>
+        <description>DCA SellingContext for Canon PowerShot Promo US</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>CFD7D772-A8E0-532E-D216-2E6171C17588</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>BA481DBA-C0A3-7D55-9422-5EE01B8CB865</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Default Shopper</name>
+    <guid>Default Shopper</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Kodak DCS Pro SLR</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>31D55BF3-41E6-4CD3-AA5D-4C09FD08A59C</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>A34C932D-C875-6F39-D3C2-1A456A371BD0</guid>
+        <name>DCA SellingContext for Default Shopper</name>
+        <description>DCA SellingContext for Default Shopper</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>4C226799-D767-2EA6-D19A-AB72CEB6B9FC</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>E76F2A6A-C5B1-CE12-B7F4-800A2BAF8F12</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Female Shopper</name>
+    <guid>Female Shopper</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>Kodak EasyShare V705</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>31D55BF3-41E6-4CD3-AA5D-4C09FD08A59C</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>48B66B22-86AE-4A9F-9BA6-4A41A6CE2B9B</guid>
+        <name>DCA SellingContext for Female Shopper</name>
+        <description>DCA SellingContext for Female Shopper</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>A1815C65-1171-7A84-C384-76BD1E352660</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>B261064E-DD3B-E21B-28D4-8C32ED9C3B51</guid>
+                <name>name_SHOPPER</name>
+                <description>desc_SHOPPER</description>
+                <condition_string> { AND { AND { CUSTOMER_GENDER.equalTo 'F' }  }  } </condition_string>
+                <dictionary_guid>SHOPPER</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>94F2BB7E-E8E9-D62F-9C4A-C818485388F2</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Flash Memory and Batteries Promo</name>
+    <guid>Flash Memory and Batteries Promo</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>20% Off Flash Memory &amp; Batteries Banner</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>37538B70-9455-4731-835F-02A0332B3D2F</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>06E24E4F-3EB0-32EE-516B-79472D74A0AB</guid>
+        <name>DCA SellingContext for Flash Memory and Batteries Promo</name>
+        <description>DCA SellingContext for Flash Memory and Batteries Promo</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>DC248CA2-5032-9EFB-F58A-94503A0C3876</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>100A8D82-F0F7-B2F1-8346-A264A6B12CC3</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Free Camera Bag Promo</name>
+    <guid>Free Camera Bag Promo</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Buy any SLR camera get a free camera bag</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>F8E2609D-484D-4655-A0CD-072CD7CFC92A</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>E6E201B8-C283-0FD3-ABCC-07735F56B2FC</guid>
+        <name>DCA SellingContext for Free Camera Bag Promo</name>
+        <description>DCA SellingContext for Free Camera Bag Promo</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>63FE55BA-A4F4-2B71-3E7E-938A74AD3C8A</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>78762B22-7995-51BA-2055-DD81945366DF</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Free Shipping Promo UK</name>
+    <guid>Free Shipping Promo UK</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Free shipping Banner (UK)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>89CB03BB-EE85-4363-86B9-59582CB60A97</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>A9BDEC4A-47EA-E3E4-67F5-F4A12F963810</guid>
+        <name>DCA SellingContext for Free Shipping Promo UK</name>
+        <description>DCA SellingContext for Free Shipping Promo UK</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>56FF7120-34CC-8097-9688-C4769B408F63</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>06776A5B-BE96-422C-64E2-957C488DFE44</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Free Shipping Promo US</name>
+    <guid>Free Shipping Promo US</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Free shipping Banner (US)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>89CB03BB-EE85-4363-86B9-59582CB60A97</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>64C059FC-09BB-7213-C004-FE20C896499B</guid>
+        <name>DCA SellingContext for Free Shipping Promo US</name>
+        <description>DCA SellingContext for Free Shipping Promo US</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>22CF644E-0B2D-4E01-19AC-58DF82BEE631</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>6066E918-ED78-05A1-7460-DA216B1AFE7C</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Gift Certificates Promo</name>
+    <guid>Gift Certificates Promo</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Gift Certificates Banner</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>4562B511-E86E-46AF-ACB2-29B9DFFC8324</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>FCC7BFC1-295F-83E3-3A06-6F1AF9202DF4</guid>
+        <name>DCA SellingContext for Gift Certificates Promo</name>
+        <description>DCA SellingContext for Gift Certificates Promo</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>A72BB65D-E27A-4063-3E86-F70B9E0E986D</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>3B972D04-B44E-142B-14F9-21E8B0B5F8F9</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Rotating Flash Banner Promo UK</name>
+    <guid>Rotating Flash Banner Promo UK</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>3 rotating slides UK (camera, binocular &amp; camera bags)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>5A1898C1-A4A6-4ADD-9157-E31CE7C704C2</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>510CD759-FC2C-6F5F-581C-B00EF8FF0CC2</guid>
+        <name>DCA SellingContext for Rotating Flash Banner Promo UK</name>
+        <description>DCA SellingContext for Rotating Flash Banner Promo UK</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>B28DB92F-6A26-6767-E2FA-B2B738ECDBDE</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>121CE2E8-D4C9-3991-8B3A-01912CA18AFE</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Rotating Flash Banner Promo US</name>
+    <guid>Rotating Flash Banner Promo US</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>3 rotating slides US (camera, binocular &amp; camera bags)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>5A1898C1-A4A6-4ADD-9157-E31CE7C704C2</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>99C5D827-9DC9-9C50-DAB0-E7F7F1C77719</guid>
+        <name>DCA SellingContext for Rotating Flash Banner Promo US</name>
+        <description>DCA SellingContext for Rotating Flash Banner Promo US</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>803C4513-13AD-180F-70D9-DCCF22796E00</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>23EFD475-19C9-B021-23B4-EFE048911FA1</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Seasonal Sale Nikon N 90s in SLRWorld</name>
+    <guid>Seasonal Sale Nikon N 90s in SLRWorld</guid>
+    <priority>10</priority>
+    <dynamiccontent_guid>Seasonal Sale Nikon N 90s (SLRWORLD)</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>5484D29B-5005-4B1E-92B6-87D75CAACC58</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>7332902E-F9FF-E7A3-95B7-ACE82493FD31</guid>
+        <name>DCA SellingContext for Seasonal Sale Nikon N 90s in SLRWorld</name>
+        <description>DCA SellingContext for Seasonal Sale Nikon N 90s in SLRWorld</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>4910BEF6-6C7F-6FA0-9408-0AE9B9487EA7</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>77C41DBF-3FB8-00C9-242C-3E88A19B5E64</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Senior Shopper</name>
+    <guid>Senior Shopper</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>Meade LXD75 Series AR-5 EC Refractor Telescope</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>31D55BF3-41E6-4CD3-AA5D-4C09FD08A59C</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>F92C9FCB-E750-660D-EC8F-629A12FA2892</guid>
+        <name>DCA SellingContext for Senior Shopper</name>
+        <description>DCA SellingContext for Senior Shopper</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>3E258823-94DE-3BF2-EC94-D71C5625E2B0</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1230796800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>16AECAAF-A24D-5702-C3F8-716E3A3D4156</guid>
+                <name>name_SHOPPER</name>
+                <description>desc_SHOPPER</description>
+                <condition_string> { AND { AND { CUSTOMER_AGE_YEARS.greaterThan (65i) }  }  } </condition_string>
+                <dictionary_guid>SHOPPER</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>285FEF26-9E3C-364C-5EBA-E9AC34C627B6</guid>
+                <name>name_STORES</name>
+                <description>desc_STORES</description>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'SNAPITUP' }  { SELLING_CHANNEL.equalTo 'SNAPITUPUK' }  { SELLING_CHANNEL.equalTo 'SLRWORLD' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+</dynamic_content_deliveries>

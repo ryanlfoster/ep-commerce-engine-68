@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd ">
+
+	<bean id="productCache" parent="abstractCacheBean" />
+	
+	<bean id="sellingContextDataCache" parent="abstractCacheBean" />
+	
+	<bean id="productAssociationCache" parent="abstractCacheBean" /> 
+
+	<bean id="productWithFetchGroupLoadTunerCache" parent="abstractCacheBean" /> 
+
+	<bean id="productBundleCache" parent="abstractCacheBean">
+		<property name="timeToLive" value="30"/>
+		<property name="timeToIdle" value="30"/>
+	</bean>
+	
+	<bean id="ruleEngineDataCache" parent="abstractCacheBean">
+		<property name="timeToLive" value="10"/>
+		<property name="timeToIdle" value="10"/>
+	</bean>
+	
+    <bean id="storeCache" parent="abstractCacheBean">
+        <property name="timeToLive" value="10"/>
+        <property name="timeToIdle" value="10"/>
+    </bean>
+
+	<bean id="shippingServiceLevelCache" parent="abstractCacheBean"/>
+
+	<bean id="cachingProductRetrieveStrategy" class="com.elasticpath.sfweb.service.impl.EhCacheProductRetrieveStrategyImpl">
+		<property name="productService" ref="productService" />
+		<property name="cache" ref="productCache" />
+		<property name="productBundleCache" ref="productBundleCache" />
+		<property name="productWithFetchGroupLoadTunerCache" ref="productWithFetchGroupLoadTunerCache" />
+		<property name="productQueryService" ref="productQueryService"/>
+	</bean>
+
+	<bean id="cachingRuleEngineDataStrategy" class="com.elasticpath.sfweb.service.impl.EhCacheRuleEngineDataRetrievalStrategyImpl">
+		<property name="cache" ref="ruleEngineDataCache" />
+		<property name="fallback" ref="dbRuleEngineDataStrategy" />
+	</bean>
+	
+	<bean id="cachingSellingContextDataStrategy" class="com.elasticpath.sfweb.service.impl.EhCacheSellingContextRetrievalStrategyImpl">
+		<property name="cache" ref="sellingContextDataCache" />
+		<property name="sellingContextService" ref="sellingContextService" />
+	</bean>
+	
+	<bean id="cachingProductAssociationRetrieveStrategy" class="com.elasticpath.sfweb.service.impl.EhCacheProductAssociationRetrieveStrategyImpl">
+		<property name="cache" ref="productAssociationCache" />
+		<property name="productAssociationService" ref="productAssociationService"/>
+	</bean>
+
+    <bean id="cachingStoreRetrieveStrategy" class="com.elasticpath.sfweb.service.impl.EhCacheStoreRetrieveStrategyImpl">
+        <property name="storeCache" ref="storeCache" />
+    </bean>
+
+	<bean id="shippingServiceLevelEntityCache" class="com.elasticpath.sfweb.service.impl.EntityCacheImpl">
+		<property name="entityName" value="shippingServiceLevel"/>
+		<property name="keyProperties">
+			<list>
+				<value>uidPk</value>
+				<value>code</value>
+				<value>guid</value>
+			</list>
+		</property>
+		<property name="cache" ref="shippingServiceLevelCache"/>
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+	</bean>
+
+</beans>

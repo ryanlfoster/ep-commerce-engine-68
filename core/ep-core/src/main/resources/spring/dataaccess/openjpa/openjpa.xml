@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		">
+
+	<!-- empty for use in extension projects -->
+	<util:list id="persistenceMappingExcludedFiles"/>
+
+	<util:list id="persistenceUnitPostProcessors">
+		<bean class="com.elasticpath.persistence.openjpa.impl.MergingPersistenceUnitPostProcessor">
+			<property name="excludedMappingFiles" ref="persistenceMappingExcludedFiles"/>
+		</bean>
+		<bean class="com.elasticpath.persistence.openjpa.impl.RemoveTrailingBackslashPersistenceUnitPostProcessor"/>
+	</util:list>
+
+	<bean id="persistenceUnitManager" class="com.elasticpath.persistence.openjpa.impl.OverrideAllowingPersistenceUnitManager">
+		<property name="defaultPersistenceUnitName" value="commerce-persistence-unit"/>
+		<property name="persistenceXmlLocation" value="classpath*:META-INF/jpa-persistence.xml"/>
+		<property name="persistenceUnitPostProcessors" ref="persistenceUnitPostProcessors"/>
+	</bean>
+
+	<bean id="abstractEntityManagerFactory" class="com.elasticpath.persistence.openjpa.impl.ConfigurableLocalContainerEntityManagerFactoryBean" init-method="getObject"
+			abstract="true">
+		<property name="persistenceUnitManager" ref="persistenceUnitManager"/>
+	</bean>
+
+	<!-- Entity Manager Factory -->
+	<bean id="entityManagerFactory" parent="abstractEntityManagerFactory">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="sharedEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+		<property name="entityManagerFactory">
+			<ref bean="entityManagerFactory"/>
+		</property>
+	</bean>
+
+	<bean id="sessionFactory" class="com.elasticpath.persistence.openjpa.impl.JpaSessionFactoryImpl">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+	<bean id="lastModifiedEntityListener" class="com.elasticpath.persistence.impl.LastModifiedEntityListener">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="objectDeletedEntityListener" class="com.elasticpath.persistence.impl.ObjectDeletedEntityListener">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="auditEntityListener" class="com.elasticpath.persistence.impl.AuditEntityListener">
+		<property name="persistenceEngine" ref="persistenceEngineTarget"/>
+		<property name="auditableClasses">
+			<set>
+				<value>com.elasticpath.domain.attribute.impl.AbstractAttributeValueImpl</value>
+				<value>com.elasticpath.domain.attribute.impl.ProductAttributeValueImpl</value>
+				<value>com.elasticpath.domain.attribute.impl.SkuAttributeValueImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.DigitalAssetImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.AbstractLocaleDependantFieldsImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.ProductAssociationImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.ProductCategoryImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.ProductImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.ProductLocaleDependantFieldsImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.ProductSkuImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.ProductTypeImpl</value>
+				<value>com.elasticpath.domain.skuconfiguration.impl.JpaAdaptorOfSkuOptionValueImpl</value>
+				<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</value>
+				<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl</value>
+				<value>com.elasticpath.domain.misc.impl.SkuOptionValueLocalizedPropertyValueImpl</value>
+				<value>com.elasticpath.domain.misc.impl.SkuOptionLocalizedPropertyValueImpl</value>
+				<value>com.elasticpath.domain.rules.impl.AbstractRuleElementImpl</value>
+				<value>com.elasticpath.domain.rules.impl.CatalogCurrencyAmountDiscountActionImpl</value>
+				<value>com.elasticpath.domain.rules.impl.LimitedUseCouponCodeConditionImpl</value>
+				<value>com.elasticpath.domain.rules.impl.CartAnySkuPercentDiscountActionImpl</value>
+				<value>com.elasticpath.domain.rules.impl.SkuInCartConditionImpl</value>
+				<value>com.elasticpath.domain.rules.impl.ProductConditionImpl</value>
+				<value>com.elasticpath.domain.rules.impl.AbstractRuleExceptionImpl</value>
+				<value>com.elasticpath.domain.rules.impl.AbstractRuleImpl</value>
+				<value>com.elasticpath.domain.sellingcontext.impl.SellingContextImpl</value>
+				<value>com.elasticpath.domain.rules.impl.AppliedRuleImpl</value>
+				<value>com.elasticpath.domain.rules.impl.PromotionRuleImpl</value>
+				<value>com.elasticpath.domain.rules.impl.RuleParameterImpl</value>
+				<value>com.elasticpath.domain.rules.impl.RuleSetImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.CatalogLocaleImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.CategoryImpl</value>
+				<value>com.elasticpath.domain.catalog.impl.LinkedCategoryImpl</value>
+				<value>com.elasticpath.domain.attribute.impl.AttributeGroupAttributeImpl</value>
+				<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+				<value>com.elasticpath.domain.store.impl.StoreImpl</value>
+				<value>com.elasticpath.domain.store.impl.WarehouseImpl</value>
+				<value>com.elasticpath.domain.attribute.impl.ProductTypeProductAttributeImpl</value>
+				<value>com.elasticpath.domain.pricing.impl.BaseAmountImpl</value>
+			</set>
+		</property>
+		<property name="nonAuditableNamedQueries">
+			<set>
+				<!-- <value>DELETE_SHOPPING_CONTEXT_BY_UID_LIST</value> -->
+			</set>
+		</property>
+		<property name="auditDao" ref="auditDao"/>
+		<property name="metadataMap" ref="persistenceListenerMetadataMap"/>
+	</bean>
+
+	<bean id="changeSetPersistenceListener" class="com.elasticpath.persistence.impl.ChangeSetPersistenceListener">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="persistenceEngine" ref="persistenceEngineTarget"/>
+		<property name="metadataMap" ref="persistenceListenerMetadataMap"/>
+		<property name="ignoreClasses">
+			<set>
+				<value>com.elasticpath.domain.changeset.impl.ChangeSetImpl</value>
+				<value>com.elasticpath.domain.objectgroup.impl.BusinessObjectGroupMemberImpl</value>
+				<value>com.elasticpath.domain.objectgroup.impl.BusinessObjectMetadataImpl</value>
+				<value>com.elasticpath.domain.pricing.impl.BaseAmountImpl</value>
+			</set>
+		</property>
+	</bean>
+
+	<bean id="auditDao" class="com.elasticpath.service.audit.impl.AuditDaoImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="persistenceEngine" ref="persistenceEngineTarget"/>
+	</bean>
+	<bean id="persistenceEngineTarget" class="com.elasticpath.persistence.openjpa.impl.JpaPersistenceEngineImpl">
+		<property name="entityManager" ref="sharedEntityManager"/>
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="persistenceEngineEntityListeners">
+			<list>
+				<ref bean="lastModifiedEntityListener"/>
+				<ref bean="objectDeletedEntityListener"/>
+				<ref bean="changeSetPersistenceListener"/>
+				<!-- <ref bean="auditEntityListener"></ref> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- Has a dependency of an applicationInitialization bean which can do any initialization the application requires -->
+	<!-- before the persistence engine is created. -->
+	<bean id="persistenceEngine" class="org.springframework.aop.framework.ProxyFactoryBean" depends-on="applicationInitialization">
+		<property name="proxyInterfaces" value="com.elasticpath.persistence.api.PersistenceEngine"/>
+		<property name="target">
+			<ref local="persistenceEngineTarget"/>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+</beans>

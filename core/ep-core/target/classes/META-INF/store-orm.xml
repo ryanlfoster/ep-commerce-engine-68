@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.store.impl</package>
+	<entity class="StoreImpl">
+		<named-query name="FIND_ALL_STORE_UIDS">
+			<query>
+				SELECT s.uidPk
+				FROM StoreImpl s
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_COMPLETE_STORE_UIDS">
+			<query>
+				SELECT s.uidPk
+				FROM StoreImpl s
+				WHERE s.storeState &lt; ?1
+				OR s.storeState &gt;= ?2
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_STORES">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_COMPLETE_STORES">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.storeState &lt; ?1
+				OR s.storeState &gt;= ?2
+			</query>
+		</named-query>
+		<named-query name="FIND_STORE_WITH_CODE">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE UPPER(s.code) = UPPER(?1)
+			</query>
+		</named-query>
+		<named-query name="FIND_CATALOG_CODE_WITH_STORE_CODE">
+			<query>
+				SELECT store.catalog.code
+				FROM StoreImpl store
+				WHERE store.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_STORE_BY_NAME">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.name = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_STORE_BY_UID">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_STORES_WITH_STATE">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.storeState = ?1
+			</query>
+		</named-query>
+		<named-query name="TAX_CODES_WITH_STORE">
+			<query>
+				SELECT DISTINCT t.code
+				FROM StoreImpl s
+				JOIN s.taxCodes t
+			</query>
+		</named-query>
+		<named-query name="TAX_JURISDICTION_UIDS_WITH_STORE">
+			<query>
+				SELECT DISTINCT j.uidPk
+				FROM StoreImpl s
+				JOIN s.taxJurisdictions j
+			</query>
+		</named-query>
+		<named-query name="PAYMENT_GATEWAYS_WITH_STORE">
+			<query>
+				SELECT DISTINCT p.uidPk
+				FROM StoreImpl s
+				JOIN s.paymentGateways p
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_ORDER_IN_USE">
+			<query>
+				SELECT s.uidPk
+				FROM OrderImpl o, StoreImpl s
+				WHERE o.storeCode = s.code AND s.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_USER_IN_USE">
+			<query>
+				SELECT s.uidPk
+				FROM CmUserImpl c
+				JOIN c.stores s
+				WHERE s.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_SHIPPING_SERVICE_LEVEL_IN_USE">
+			<query>
+				SELECT s.store.uidPk
+				FROM ShippingServiceLevelImpl s
+				WHERE s.store.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_PROMOTION_IN_USE">
+			<query>
+				SELECT p.store.uidPk
+				FROM PromotionRuleImpl p
+				WHERE p.store.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_IMPORTJOB_IN_USE">
+			<query>
+				SELECT i.store.uidPk
+				FROM ImportJobImpl i
+				WHERE i.store.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_STORE_ASSOCIATION_IN_USE">
+			<query>
+				SELECT s.uidPk
+				FROM StoreImpl s
+				WHERE ?1 MEMBER OF s.associatedStoreUids.uidPk
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_UIDS">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_CATALOG_UID">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.catalog.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="STORE_WITH_CATALOG_GUID">
+			<query>
+				SELECT s
+				FROM StoreImpl s
+				WHERE s.catalog.code = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_DISPLAYABLE_FLAG">
+			<query>
+				SELECT s.displayOutOfStock
+				FROM StoreImpl s
+				WHERE s.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="STORE_NAME">
+			<query>
+				SELECT s.name
+				FROM StoreImpl s
+				WHERE s.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_CURRENCY_SELECT_ALL_SUPPORTED">
+			<query>
+				SELECT s
+				FROM StoreCurrencyImpl s
+			</query>
+		</named-query>
+	</entity>
+	<entity class="WarehouseImpl">
+		<named-query name="FIND_ALL_WAREHOUSE_UIDS">
+			<query>
+				SELECT w.uidPk
+				FROM WarehouseImpl w
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_WAREHOUSES">
+			<query>
+				SELECT w
+				FROM WarehouseImpl w
+			</query>
+		</named-query>
+		<named-query name="FIND_WAREHOUSE_BY_NAME">
+			<query>
+				SELECT w
+				FROM WarehouseImpl w
+				WHERE w.name = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_WAREHOUSE_UIDS_IN_STORE_USE">
+			<query>
+				SELECT w.uidPk
+				FROM StoreImpl s JOIN s.warehouses w
+				WHERE w.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_WAREHOUSE_UIDS_IN_USER_USE">
+			<query>
+				SELECT w.uidPk
+				FROM CmUserImpl c
+				JOIN c.warehouses w
+				WHERE w.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_WAREHOUSE_UIDS_IN_IMPORTJOB_USE">
+			<query>
+				SELECT i.warehouse.uidPk
+				FROM ImportJobImpl i
+				WHERE i.warehouse.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_WAREHOUSE_BY_CODE">
+			<query>
+				SELECT w
+				FROM WarehouseImpl w
+				WHERE w.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_WAREHOUSE_UIDS_IN_INVENTORY_USE">
+			<query>
+				SELECT i.warehouseUid
+				FROM InventoryImpl i
+				WHERE i.warehouseUid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

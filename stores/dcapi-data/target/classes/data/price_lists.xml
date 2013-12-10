@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<price_lists>
+<price_list>
+    <guid>011D3611-7551-86C3-0E77-D3594AFA9961</guid>
+    <description></description>
+    <currency_code>CAD</currency_code>
+    <name>Toastie CAD Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>0877BE38-1DD9-FD28-9F2F-6511C6967BBC</guid>
+    <description>Tobee123 Price List</description>
+    <currency_code>CAD</currency_code>
+    <name>Tobee123 Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>1A971BA1-D81F-A164-0FF0-53817D83B107</guid>
+    <description></description>
+    <currency_code>CAD</currency_code>
+    <name>Mobile Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>5241CE7D-3A39-6DAF-FA32-384C2B2A81CB</guid>
+    <description></description>
+    <currency_code>CAD</currency_code>
+    <name>Search Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>77B24E48-D11B-E3C1-3B44-6F67F80B41E0</guid>
+    <description></description>
+    <currency_code>CAD</currency_code>
+    <name>Kobee Price List</name>
+    <hidden>false</hidden>
+</price_list>
+
+<price_list>
+    <guid>F8C6DDBE-DB57-950C-1734-21DA07D5FDD7</guid>
+    <description></description>
+    <currency_code>EUR</currency_code>
+    <name>Toastie EUR Price List</name>
+    <hidden>false</hidden>
+</price_list>
+</price_lists>

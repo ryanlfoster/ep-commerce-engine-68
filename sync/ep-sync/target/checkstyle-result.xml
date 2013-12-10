@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/ContextInitializer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/ContextInitializerFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/impl/LocalContextInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/impl/ProxyBeanFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/impl/RemoteContextInitializerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/impl/SyncBeanFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/local/DataSourceProperties.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/local/JPADataSource.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/local/LocalPersistenceEngineInitialization.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/remote/AuthenticationServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/remote/EpAuthenticationSimpleHttpInvokerRequestExecutor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/remote/EpHttpInvokerProxyFactoryBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/remote/HttpConnectionAuthentication.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/SyncBeanFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/beanfactory/SyncBeanFactoryMutator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/exception/ExceptionHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/exception/impl/ChangeSetExceptionHandlerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/exception/impl/DefaultExceptionHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/exception/impl/TranasactionRollbackExceptionHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/AbstractObjectEventDistributor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/AbstractSyncController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/ExportController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/FileSystemHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/FullController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/LoadController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/SyncJobObjectEventDistributor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/impl/SyncToolControllerFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/SyncToolController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/controller/SyncToolControllerFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/impl/SyncToolConfigurationImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/MissingSyncToolOptionException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/SynchronizationTool.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/SyncToolConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/SyncToolControllerType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/client/SyncToolLauncher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/configuration/ConnectionConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/configuration/dao/ConnectionConfigurationDao.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/configuration/dao/impl/ConnectionConfigurationDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/configuration/dao/PersistenceEngineInitialization.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/configuration/marshal/XMLMarshaller.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/configuration/marshal/XMLUnmarshaller.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/exception/ChangeSetNotFoundException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/exception/SyncToolConfigurationException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/exception/SyncToolRuntimeException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/Command.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/custom/CategorySortingPolicy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/custom/ProductBundleSortingPolicy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/dao/impl/NullTransactionJobDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/dao/impl/TransactionJobDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/dao/TransactionJobDao.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/CommandResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/dao/impl/JobDescriptorDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/dao/impl/NullJobDescriptorDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/dao/JobDescriptorDao.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/impl/ChangeSetAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/impl/CommandResolverImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/impl/JobDescriptorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/impl/TransactionJobDescriptorEntryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/impl/TransactionJobDescriptorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/JobDescriptor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/SourceSyncRequestAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/TransactionJobDescriptor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/descriptor/TransactionJobDescriptorEntry.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/DomainSorter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/GlobalEpDependencyDescriptor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/CacheAwareJobEntryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/CacheAwareTransactionJobBuilderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/DomainSorterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/GlobalEpDependencyDescriptorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/JobEntryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/SourceObjectCacheImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/SynchronizationDataDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/TransactionJobBuilderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/TransactionJobImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/impl/TransactionJobUnitImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/JobEntry.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/JobEntryCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/SortingPolicy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/SourceObjectCache.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/SynchronizationDataDao.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/AbstractTransactionListIterator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/TransactionDemarcationProviderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/TransactionIteratorFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/TransactionListIterator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/TransactionPerGivenQtyJobEntryIterator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/TrasnactionGroupByCommandAndTypeIterator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/impl/TrasnactionGroupByTypeIterator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/TransactionAttribute.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/TransactionDemarcationProvider.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/TransactionIteratorFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/transaction/TransactionSettings.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/TransactionJob.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/TransactionJobBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/job/TransactionJobUnit.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/BeanCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/EntityFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/EntityLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/GuidLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/AbstractEntityLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/AttributeLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/BaseAmountLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/BrandLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/CatalogLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/CategoryLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/CategoryTypeLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ConditionalExpressionFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ConditionalExpressionLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ContentSpaceLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/CouponConfigLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/CouponLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/CouponUsageLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/DynamicContentDeliveryLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/DynamicContentLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/EntityLocatorDelegateImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/GuidLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/MergeBoundarySpecificationImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/PriceListAssignmentLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/PriceListDescriptorLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductAssociationLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductBundleDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductBundleLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductCategoryLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductSkuLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductTypeLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/RuleLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/RuleSetLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/SellingContextLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/SkuOptionLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/SkuOptionValueLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/StoreLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/TaxCodeLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/impl/ValueObjectMergerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/MergeBoundarySpecification.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/configuration/ValueObjectMerger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/impl/CollectionElementsRemoveManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/impl/CyclicDependencyManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/impl/DefaultBeanCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/impl/JPAPersistentStateLocatorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/impl/MergeEngineImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/impl/SimpleMergeFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/MergeEngine.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/MergeFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/merge/PersistentStateLocator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/AbstractAggregationObjectProvider.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/AbstractObjectProvider.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/impl/NoProcessingJobObjectsProcessorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/impl/SyncJobObjectsProcessorImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/ObjectProcessingException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/SerializableObject.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/SerializableObjectListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/SingleObjectProvider.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/processing/SyncJobObjectProcessor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/AssociatedDaoAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/DaoAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/DaoAdapterFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/AbstractDaoAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/AbstractJobTransactionCallbackAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/AttributeDaoAdapter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/BaseAmountDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/BaseAmountJobTransactionCallbackListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/BrandDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CatalogDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CategoryDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CategoryNotificationJobTransactionCallbackListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CategoryTypeDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ConditionalExpressionDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CouponConfigDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CouponDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/CouponUsageDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/DynamicContentDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/DynamicContentDeliveryDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/IndexNotificationJobTransactionCallback.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/PersistenceChangesTransactionCallbackListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/PersistenceFlusherTransactionCallback.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/PriceListAssignmentDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/PriceListDescriptorDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductAssociationDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductAssociationRemoverJobTransactionCallback.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductCategoryDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductDaoReplacer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductSkuDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/ProductTypeDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/PromotionDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/SkuOptionDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/SkuOptionValueDaoAdapterImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/impl/SyncServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/JobTransactionCallback.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/JobUnitTransactionCallbackListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/result/impl/SummaryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/result/Summary.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/result/SyncErrorResultItem.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/result/SyncResultItem.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/SyncService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/target/SyncServiceTransactionRollBackException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/utils/GuidComparator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/utils/impl/SyncUtilsImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/utils/MethodComparator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/main/java/com/elasticpath/tools/sync/utils/SyncUtils.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/integration/sorting/JobEntrySortingTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/beanfactory/ContextInitializerFactoryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/client/controller/impl/AbstractSyncControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/client/controller/impl/FullControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/client/controller/impl/SyncToolControllerFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/custom/CategorySortingPolicyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/descriptor/impl/ChangeSetAdapterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/descriptor/impl/CommandResolverImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/CacheAwareJobEntryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/CacheAwareTransactionJobBuilderImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/DomainSorterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/SourceObjectCacheImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/TransactionJobBuilderImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/TransactionJobImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/impl/TransactionJobUnitImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/transaction/impl/AbstractTransactionListIteratorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/transaction/impl/TransactionDemarcationProviderImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/transaction/impl/TransactionPerGivenQtyJobEntryIteratorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/job/transaction/impl/TrasnactionGroupByCommandAndTypeIteratorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/merge/configuration/impl/EntityLocatorDelegateImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/merge/configuration/impl/ProductLocatorImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/merge/impl/JPAPersistentStateLocatorImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/merge/impl/MergeEngineImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/merge/impl/SimpleMergeFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/MockInterface.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/processing/AbstractAggregationObjectProviderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/processing/AbstractObjectProviderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/processing/impl/SyncJobObjectsProcessorImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/impl/BaseAmountDaoAdapterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/impl/CouponUsageDaoAdapterImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/impl/PersistenceChangesTransactionCallbackListenerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/impl/PersistenceFlusherTransactionCallbackTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/impl/ProductDaoReplacerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/impl/SyncServiceIndexingNotificationTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/target/result/impl/SummaryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/utils/impl/SyncUtilsImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/sync/ep-sync/src/test/java/com/elasticpath/tools/sync/utils/MethodComparatorTest.java">
+</file>
+</checkstyle>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+		<relativePath>../..</relativePath>
+	</parent>
+
+	<artifactId>ep-geoip-providers</artifactId>
+	<name>OOTB GeoIP Providers</name>
+	<description>
+	  Artifact to include the OOTB GeoIP providers.  Uses ep.geoip.provider property to determine which to wire into Spring.
+	</description>
+
+	<dependencies>
+	  <dependency>
+	    <groupId>com.elasticpath</groupId>
+	    <artifactId>ep-geoip-demo</artifactId>
+	    <scope>runtime</scope>
+	  </dependency>
+	  <dependency>
+	    <groupId>com.elasticpath</groupId>
+	    <artifactId>ep-geoip-quova</artifactId>
+	    <scope>runtime</scope>
+	  </dependency>
+	</dependencies>
+</project>

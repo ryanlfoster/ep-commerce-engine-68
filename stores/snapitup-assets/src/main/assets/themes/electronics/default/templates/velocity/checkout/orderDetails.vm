@@ -1,0 +1,14 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## orderDetails.vm
+#set($pageName = "checkout/orderDetails.vm")
+#set($_content = "orderDetailsBody")
+#set($_breadcrumbs = "breadcrumbs")
+#set($orderDetails = true)
+#masterTemplate()
+
+#macro(breadcrumbs)
+    <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; <a href="$baseUrl/manage-account.ep">#springMessage("globals.bc.account")</a> &raquo; #springMessage("globals.bc.orderDetails") </div>
+#end
+
+
+			

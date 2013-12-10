@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="messageSourceCache" class="com.elasticpath.commons.util.impl.MessageSourceCacheImpl" init-method="init">
+		<property name="assetRepository" ref="assetRepository"/>
+		<property name="defaultLanguage" value="en"/>
+	</bean>
+	<!-- message source to be used by velocity templates -->
+    <bean id="storeMessageSource" class="com.elasticpath.commons.util.impl.StoreThemeMessageSource" >
+        <property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="storeMessageSource" ref="storeMessageSourceDelegate"/>
+            <!-- True if you want missing messages to show up as just the key used to look for them. e.g. user.firstname.
+			 False will allow exception to be thrown, and stop template render. -->
+		<property name="useCodeAsDefaultMessage">
+            <value>true</value>
+        </property>
+    </bean>
+	<bean id="storeMessageSourceDelegate" class="com.elasticpath.commons.util.impl.StoreMessageSourceImpl">
+		<property name="messageSourceCache">
+            <ref bean="messageSourceCache"/>
+        </property>
+		<property name="globalMessageSource">
+            <ref bean="globalMessageSource"/>
+        </property>
+		<property name="assetRepository" ref="assetRepository"/>
+		<property name="settingsReader" ref="settingsReader"/>
+	</bean>
+
+	
+	<!-- !!!! DOCvelocityxml -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="parentMessageSource">
+	        <ref bean="globalMessageSource"/>
+	    </property>
+
+	    <property name="cacheSeconds"><value>${ep.velocity.cache.seconds}</value></property>
+	    <property name="defaultEncoding"><value>UTF-8</value></property>
+	</bean>
+
+    <bean id="globalMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+        	<list>
+        		<value>/WEB-INF/misc/message-source/application</value>
+   	            <value>/WEB-INF/templates/velocity/globals</value>
+        		<value>org.springframework.security/messages</value>
+        	</list>
+        </property>
+         <!-- Set cacheSeconds to -1 in Production Environment -->
+	    <property name="cacheSeconds"><value>${ep.velocity.cache.seconds}</value></property>
+	    <property name="defaultEncoding"><value>UTF-8</value></property>
+    </bean>
+	<!-- !!!! DOCvelocityxml -->
+
+	<bean id="velocityEngineFactory" class="com.elasticpath.commons.util.impl.VelocityEngineInstanceFactoryImpl" >
+        <property name="velocityProperties">
+			<ref bean="velocityProperties"/>
+	    </property>
+	</bean>
+
+   	<bean id="storeResourceManager"	class="com.elasticpath.commons.util.impl.StoreResourceManagerImpl" factory-method="getInstance">
+		<property name="storeConfig" ref="threadLocalStorage" />
+		<property name="assetRepository" ref="assetRepository" />
+	</bean>
+
+	<bean id="velocityProperties" class="java.util.Hashtable">
+    		<constructor-arg>
+    			<map>
+    			   <entry key="resource.loader"><value>file, class, webapp</value></entry>
+    	           <entry key="file.resource.loader.instance">
+						<bean class="com.elasticpath.commons.util.impl.ContextAwareFileResourceLoader">
+							<property name="assetRepository">
+								<ref bean="assetRepository"/>
+							</property>
+                    	</bean>
+				   </entry>
+    	           <entry key="webapp.resource.loader.instance">
+						<bean class="com.elasticpath.commons.util.impl.ContextAwareWebappResourceLoader"/>
+				   </entry>
+    	           <entry key="file.resource.loader.cache"><value>false</value></entry>
+        	       <entry key="velocimacro.library"><value>electronics/default/templates/velocity/VM_global_library.vm</value></entry>
+            	   <!-- Set velocimacro.library.autoreload to false in Production Environment -->
+    	           <entry key="velocimacro.library.autoreload"><value>true</value></entry>
+        	       <entry key="velocimacro.permissions.allow.inline"><value>true</value></entry>
+            	   <entry key="velocimacro.permissions.allow.inline.to.replace.global"><value>true</value></entry>
+    	           <entry key="velocimacro.permissions.allow.inline.local.scope"><value>true</value></entry>
+        	       <entry key="velocimacro.context.localscope"><value>false</value></entry>
+    	           <!-- To turn off the message output from velocity macro -->
+        	       <entry key="velocimacro.messages.on"><value>false</value></entry>
+    	           <!-- To complete turn off all logging from velocity -->
+    	           <entry key="runtime.log.logsystem.class"><value>org.apache.velocity.runtime.log.NullLogSystem</value></entry>
+    	           <entry key="template.encoding"><value>UTF-8</value></entry>
+    	           <entry key="resource.manager.class"><value>com.elasticpath.commons.util.impl.StoreResourceManagerProxyImpl</value></entry>
+    	           <entry key="input.encoding"><value>UTF-8</value></entry>
+    	           <entry key="output.encoding"><value>UTF-8</value></entry>
+    	           <entry key="class.resource.loader.class"><value>org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</value></entry>
+        	   </map>
+       		</constructor-arg>
+    </bean>
+
+</beans>

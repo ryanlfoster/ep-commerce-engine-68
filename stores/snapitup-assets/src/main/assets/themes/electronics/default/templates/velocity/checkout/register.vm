@@ -1,0 +1,40 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## register.vm
+#set($pageName = "checkout/register.vm")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "checkoutBreadcrumbs")
+#masterTemplate()
+
+#macro(checkoutBody)
+    <div id="body">   
+        <div class="clear20"></div>
+        #if ($login_failed)
+          <div id="alert" class="alert">
+            <div class="error-message-item">#springMessage("signIn.loginFailed")</div>
+          </div>
+        #end                
+        <div id="sign-in-want-account">
+          <form action="checkout-create-account.ep" method="post" name="createAccountForm">   
+            <fieldset>
+              <legend>#springMessage("signIn.createAccount")</legend>
+              #generalSignin()
+              <div>
+                <label>#springMessage("signIn.password")*</label>
+                #springFormPasswordInput("customer.clearTextPassword" 'maxlength="35" style="width: 200px"')
+                #springShowErrors("<br>" "req")          
+              </div>
+              <div style="font-size:92%;color:#666;">(#springMessage("signIn.password.rule"))</div>
+              <div>
+                <label>#springMessage("signIn.confirmPassword")*</label>
+                #springFormPasswordInput("customer.confirmClearTextPassword" 'maxlength="35" style="width: 200px"')
+                #springShowErrors("<br>" "req")          
+              </div>
+            </fieldset>
+            <div class="fieldset-footer">
+              <input type="submit" class="button-normal" value="#springMessage("signIn.btn.continue")" />
+            </div>
+          </form>
+        </div>                  
+        <div class="clear10"></div>
+    </div>
+#end

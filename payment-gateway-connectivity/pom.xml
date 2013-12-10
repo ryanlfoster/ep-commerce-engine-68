@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>payment-gateway-connectivity</artifactId>
+	<packaging>pom</packaging>
+	<name>Payment Gateway Connectivity Projects</name>
+
+	<modules>
+		<module>ep-payment-gateway-connectivity-api</module>
+		<module>ep-payment-gateway-connectivity-api-itests</module>
+		<module>ep-payment-gateway-connectivity-test-commons</module>
+		<module>ep-test-payment-gateway</module>
+		<module>ep-test-cybersource-gateway</module>
+	</modules>
+</project>

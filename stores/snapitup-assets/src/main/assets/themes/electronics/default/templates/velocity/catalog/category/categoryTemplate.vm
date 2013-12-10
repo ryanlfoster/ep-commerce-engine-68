@@ -1,0 +1,67 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## categoryTemplate.vm
+#set($pageName = "catalog/category/categoryTemplate.vm")
+#initCategoryVariables()
+
+#set ($action = "browse.ep")
+#set($title = $currentCatalogViewRequest.getTitle($currentCategory))
+#set ($catImage = $currentCategory.getAttributeValueGroup().getStringAttributeValue("catImage", $locale))
+#set ($catName = $currentCategory.getLocaleDependantFields($locale).getDisplayName())
+#set ($catDesc = $currentCategory.getAttributeValueGroup().getStringAttributeValue("catDescription", $locale))
+
+#set($_content = "categoryBody")
+#masterTemplate()
+
+#macro(categoryBody)
+      #set($productList = $catalogViewResultBean.getProducts())
+      #set($featuredProductList = $currentCatalogViewResult.getFeaturedProducts())
+      #if($productList.size() > 0)
+      <h1 class="category">$currentCatalogViewRequest.getTitle($currentCategory)</h1>
+      #end
+      #if ($currentCatalogViewRequest.isAllCategoryFilters() && $featuredProductList.size() >0)
+        #parse("includes/featuredproduct.vm")
+      #end
+        #if(!$currentPageNumber)
+          #set ($currentPageNumber = 1)
+        #end
+        #if($productList.size() > 0)
+          #parse("includes/productgrid.vm")
+        #else
+        <div class="clear10"></div>
+        <div id="main-content">
+          <div class="category-header">
+          <div class="category-image">#displayCatalogImage($catImage "286" "184" "0" "middle" "0" "Category Image" "")</div>
+          <div class="category-description-box">
+            <div class="category-description">
+            <h1>$catName</h1>
+            <div class="text">#if ($catDesc) $catDesc #end</div>
+            </div>
+          </div>
+          <div class="clear10"></div>
+        </div>
+        #parse("includes/topsellers.vm")
+        </div>
+        #end
+    <div id="side-menu">
+      #parse("includes/sidemenu.vm")
+    </div>
+    #if($productList.size() > 0)
+		<div id="promo-banner" style="float: left; padding-top: 22px;">
+	    	  #contentspace('PromoBanner', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>PromoBanner</font></div>")  
+		</div>
+	#end
+    <div class="clear20"></div>
+    #if(!$recentlyViewedProducts.empty)
+      <div id="recently-viewed">
+        <fieldset>
+          <legend>#springMessage("globals.merchandizing.recentlyViewed")</legend>
+          <div id="product-grid-2">
+            #foreach($viewHistoryProduct in $recentlyViewedProducts)
+              #displayRecentlyViewed($viewHistoryProduct)
+            #end
+          </div>
+        </fieldset>
+      </div>
+      <div class="clear20"></div>
+    #end
+#end

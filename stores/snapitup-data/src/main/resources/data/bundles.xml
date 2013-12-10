@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bundles>
+<bundle code="AdvLearn">
+    <constituents>
+        <constituent>
+            <guid>7A9D6884-D7B9-66A6-46F0-94317D9C3918</guid>
+            <code type="sku">AdvancePlus</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFFFCFF-F718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-12.00</adjustment_amount>
+                </adjustment>
+                <adjustment>
+                    <guid>FFFFFDFF-FF18-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SeniorPL</price_list_guid>
+                    <adjustment_amount>-13.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>A04959F9-60C9-5B38-EC61-FBCCADBE7984</guid>
+            <code type="product">TutPlan</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFFFEFF-F718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-2.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>50F86607-E0EA-DC09-D9B4-ADCE9D4D326D</guid>
+            <code type="sku">SS-01</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFFAAFF-F718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-2.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="BEG_SUPP_BUN">
+    <constituents>
+        <constituent>
+            <guid>6CD3C891-31C4-FA04-A5EE-D94B3F860683</guid>
+            <code type="sku">0350B003</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>B195D8E5-CE45-05D6-38F1-04C6DECF69F6</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-40.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>FF438481-7218-7A2B-8C1C-F63F8B2A6CE2</guid>
+            <code type="product">10050004</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>024DE997-F3E7-C970-0F91-453DC10FD2C3</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-60.00</adjustment_amount>
+                </adjustment>
+                <adjustment>
+                    <guid>69FAD894-6CAB-3950-6986-5E8025A5E3EB</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-50.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>B07D29E9-C206-F8B4-0E00-42A8BC880696</guid>
+            <code type="product">LEARN</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>59DF4B17-0B89-0876-D573-15AE00440A2A</guid>
+            <code type="product">Support</code>
+            <quantity>1</quantity>
+            <ordering>3</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="BUN_ACC">
+    <constituents>
+        <constituent>
+            <guid>4B222A55-CC74-EF62-52FF-10EF85055722</guid>
+            <code type="product">BUN_ACC_PCH</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>E5898109-3AB6-E905-9892-C071722EF799</guid>
+            <code type="product">BUN_ACC_BAT</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="BUN_ACC_BAT">
+    <constituents>
+        <constituent>
+            <guid>8788879E-A3C6-364A-86CE-B06CE30459BB</guid>
+            <code type="product">10000440</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>A91E5498-7861-C45D-D98E-13B2826B9B85</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>10.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>BA7EBE6C-70B8-356B-75E4-A1BE451D1358</guid>
+            <code type="product">10000381</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>36077AB7-BBAF-761A-F426-188EC87AA07A</guid>
+            <code type="product">10000472</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>B1A31319-EE7F-A15F-E533-C661EB8872F2</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>5.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="BUN_ACC_PCH">
+    <constituents>
+        <constituent>
+            <guid>A78CA070-C7BA-8067-98AD-A9C78503C196</guid>
+            <code type="product">10000522</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>805AFFB4-194E-27E5-C9DA-B147158359B6</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>5.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>7D53B785-4366-93C4-0AFB-3175A5E28EBB</guid>
+            <code type="product">10000039</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>A49183C9-B002-B540-ECEC-2B9240F447AD</guid>
+            <code type="product">10000880</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="BUN_DIG_ADV">
+    <constituents>
+        <constituent>
+            <guid>CB45CB42-90DB-D392-245A-629AF3E094EF</guid>
+            <code type="product">BUN_DIG_CAM</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>CE20A549-05F7-7E21-625B-EEE5B5860C6F</guid>
+            <code type="product">BUN_ACC</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="BUN_DIG_BEG">
+    <constituents>
+        <constituent>
+            <guid>0F7C2816-3B0A-CF17-4F8E-76CE7CAEEE61</guid>
+            <code type="product">BUN_DIG_CAM</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>0C07AD3C-AC4D-723A-A153-A37BA3BB9A35</guid>
+            <code type="product">BUN_ACC_PCH</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>8C41AD31-0965-ED19-DAFE-176513DFDF95</guid>
+            <code type="product">BUN_TUT_1</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="BUN_DIG_CAM">
+    <constituents>
+        <constituent>
+            <guid>C4AF2DE8-3BB7-DECC-A6F5-C7EF364D53AB</guid>
+            <code type="product">10030115</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>A9C62AD0-4081-A718-EBBD-57BFF2A6B5B2</guid>
+            <code type="product">10030781</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>1D78F007-8ACB-CA00-D479-7B65AC69CBD3</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>50.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>D376F631-AF7E-416B-A617-F072D17A2300</guid>
+            <code type="product">10030037</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>CB7DE435-866F-79EF-B5CD-C1AAF508CE28</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>500.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="BUN_TUT_1">
+    <constituents>
+        <constituent>
+            <guid>CC6AB52D-D0E3-707C-F8D8-739A6E48D82F</guid>
+            <code type="product">TUT_BAS_DIG</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>49861047-5B57-7924-8E62-630DC9765F6B</guid>
+            <code type="product">TUT_ADV_DIG</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>8AAAD9F5-C590-C94D-EB8A-A66708BD8B56</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>59.99</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>93B70821-EEBA-07BB-64EC-0ADC603AA9F2</guid>
+            <code type="product">TUT_STU_LTG</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>4D26D2F0-AE2B-AD91-3133-CD938E63239C</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>59.99</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>01C96042-4D15-38EE-3CAB-D42F2F0D0DA4</guid>
+            <code type="product">TUT_STU_POR</code>
+            <quantity>1</quantity>
+            <ordering>3</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>02283170-C718-6E04-151A-A79E8A9ECE79</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>59.99</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>46268677-460A-721F-758A-361CC8CCD10D</guid>
+            <code type="product">TUT_PSP_FUN</code>
+            <quantity>1</quantity>
+            <ordering>4</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>2</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="CANON_CAMERA_WITH_COLOR_CASE_AND_BACKPACK">
+    <constituents>
+        <constituent>
+            <guid>12F542E5-E076-BD29-7D91-C10C547F6393</guid>
+            <code type="product">11101042</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>007D19DF-2B57-7814-DB1C-069D7CEA25B3</guid>
+            <code type="product">RWPodPouch</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>AF32A017-986D-1204-E735-30AE6EE7A18A</guid>
+            <code type="product">0350B001</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="CANON_CAMERA_WITH_COLOR_CASE_AND_BATTERIES">
+    <constituents>
+        <constituent>
+            <guid>B3A9DF4C-7B49-B521-182E-609709351966</guid>
+            <code type="product">0350B001</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>B0F17EF2-92F0-D461-1FFA-60261C7C0B49</guid>
+            <code type="product">11101042</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>91A80432-15D6-8025-78E0-D2A74992A71C</guid>
+            <code type="product">10000036</code>
+            <quantity>2</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="CANON_CAMERA_WITH_LEATHER_CASE">
+    <constituents>
+        <constituent>
+            <guid>C1B83899-0FB6-FEBB-CA06-4822AAF6D886</guid>
+            <code type="product">0350B001</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>CC58B19A-70D1-8FC0-6B6D-7C2A28BF72D1</guid>
+            <code type="product">10001042</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="LEARN">
+    <constituents>
+        <constituent>
+            <guid>D9719AEE-F36A-3437-40D6-5524DED49BFD</guid>
+            <code type="product">PhotoDev_Bundle</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>DAFBDFA2-D5CD-7E20-5C5A-AB25249C349D</guid>
+            <code type="product">Tutorial_Bundle</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="PhotoDev_Bundle">
+    <constituents>
+        <constituent>
+            <guid>AE2AEA73-9E5D-8B75-3EDC-6CA6ECBC73BF</guid>
+            <code type="sku">Basic</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FF283259-C718-6E04-151A-A79E8A9ECFFF</guid>
+                    <price_list_guid>SeniorPL</price_list_guid>
+                    <adjustment_amount>-1.00</adjustment_amount>
+                </adjustment>
+                <adjustment>
+                    <guid>FF283259-C718-6E04-151A-A79E8A9ECEFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-1.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>AE0A71D7-142F-FA28-FBBE-BEDAED9272DC</guid>
+            <code type="sku">Advance</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFF3259-C718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SeniorPL</price_list_guid>
+                    <adjustment_amount>-2.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>0C97CC2A-4417-2C13-B041-E3A2829E7071</guid>
+            <code type="sku">AdvancePlus</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFFF259-C718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-10.00</adjustment_amount>
+                </adjustment>
+                <adjustment>
+                    <guid>FFFFFF59-C718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SeniorPL</price_list_guid>
+                    <adjustment_amount>-10.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="SONY_CAMERA_WITH_BAG_AND_TRIPOD">
+    <constituents>
+        <constituent>
+            <guid>C8B28C50-BBB4-33CA-5DD6-5C7725C47D01</guid>
+            <code type="product">10030506</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>357F651C-6817-AFB0-E497-B565AC9267D9</guid>
+            <code type="product">TARGUS_BAG_WITH_TRIPOD</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="SONY_CAMERA_WITH_BATTERIES">
+    <constituents>
+        <constituent>
+            <guid>EE1DE915-5539-755B-AB8F-DE393A845FC9</guid>
+            <code type="product">10030506</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>4E72AFFA-1942-C084-2125-14B9CF404615</guid>
+            <code type="product">10000036</code>
+            <quantity>2</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="TARGUS_BAG_WITH_TRIPOD">
+    <constituents>
+        <constituent>
+            <guid>00BBD092-5259-EE6A-B412-A4B318128059</guid>
+            <code type="product">10050030</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>564B91C3-33E0-3825-44C5-63518242C5D9</guid>
+            <code type="product">10000988</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="Tutorial_Bundle">
+    <constituents>
+        <constituent>
+            <guid>114AAC29-E84E-C02B-2CF4-15221C300464</guid>
+            <code type="sku">TUT-OT</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>B477C3EB-E7AA-332D-A2D5-B9484FE38CB0</guid>
+            <code type="sku">TUT-1</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>B64D0193-540F-2080-DC44-CF8E91220E82</guid>
+            <code type="sku">TUT-3</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFFFAF9-C718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-3.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>5563B89C-1560-C06B-CD7F-8A2CD8331992</guid>
+            <code type="sku">TUT-5</code>
+            <quantity>1</quantity>
+            <ordering>3</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>FFFFFBFF-C718-6E04-151A-A79E8A9FFFFF</guid>
+                    <price_list_guid>SNAPITUP_USD</price_list_guid>
+                    <adjustment_amount>-4.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+</bundles>

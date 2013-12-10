@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gift_certificates>
+<gift_certificate guid="664029B3-CB9F-C38D-54CF-E3DA3123FDCC">
+    <code>snapitupusgc100</code>
+    <creation_date>2010-06-16T00:00:00-07:00</creation_date>
+    <last_modified>2010-06-16T00:00:00-07:00</last_modified>
+    <recipient_name></recipient_name>
+    <sender_name></sender_name>
+    <theme>SomeTheme</theme>
+    <purchase_amount>100.00</purchase_amount>
+    <store_code>SNAPITUP</store_code>
+    <currency_code>USD</currency_code>
+</gift_certificate>
+
+<gift_certificate guid="4C415DD1-4171-9133-F964-BA897D7110BC">
+    <code>slrworldgc100</code>
+    <creation_date>2010-06-16T00:00:00-07:00</creation_date>
+    <last_modified>2010-06-16T00:00:00-07:00</last_modified>
+    <recipient_name></recipient_name>
+    <sender_name></sender_name>
+    <theme>SomeTheme</theme>
+    <purchase_amount>100.00</purchase_amount>
+    <store_code>SLRWORLD</store_code>
+    <currency_code>USD</currency_code>
+</gift_certificate>
+
+<gift_certificate guid="40E31509-1E61-4CA3-4413-2CB2E419811A">
+    <code>snapitupukgc100</code>
+    <creation_date>2010-06-16T00:00:00-07:00</creation_date>
+    <last_modified>2010-06-16T00:00:00-07:00</last_modified>
+    <recipient_name></recipient_name>
+    <sender_name></sender_name>
+    <theme>SomeTheme</theme>
+    <purchase_amount>100.00</purchase_amount>
+    <store_code>SNAPITUPUK</store_code>
+    <currency_code>GBP</currency_code>
+</gift_certificate>
+</gift_certificates>

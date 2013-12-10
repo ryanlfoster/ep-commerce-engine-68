@@ -1,0 +1,89 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## sidemenu.vm
+#**
+* Display filter options.
+*#
+	#macro (displayFilterOptions $filterOptions)
+	#foreach($filterOption in $filterOptions)
+		#set($hitsNumber = $filterOption.getHitsNumber())
+		#set($displayName = $filterOption.getDisplayName($locale))
+		#set($queryString = $filterOption.getQueryString())
+		#if ($ctxSeoEnabledHelper.getBoolean() && $action == "browse.ep")
+			#set($queryString = $filterOption.getSeoUrl())
+			#set ($filterOptionUrl = "$baseUrl/$queryString")
+		#else
+		    #set($queryString = $filterOption.getQueryString())
+			#set ($filterOptionUrl = "$baseUrl/$action?$queryString")
+		#end
+		<li><a href="$escapeTool.html($filterOptionUrl)">$escapeTool.html($displayName)</a> ($hitsNumber)</li>
+	#end
+#end
+#**
+	 * Display category filters.
+*#
+#if ($currentCatalogViewResult.getCategoryFilterOptions() && $currentCatalogViewResult.getCategoryFilterOptions().size() > 0)
+	<h2>#springMessage("sidemenu.shopbycategory")</h2>
+	<ul>
+		#displayFilterOptions($currentCatalogViewResult.getCategoryFilterOptions())
+	</ul>
+#elseif ($action == "browse.ep" && $currentCatalogViewResult.getProducts().size() == 0 && $currentCatalogViewResult.getCategory().getAvailableChildren().size() > 0)
+	<h2>#springMessage("sidemenu.shopbycategory")</h2>
+	<ul>
+		#foreach($category in $currentCatalogViewResult.getCategory().getAvailableChildren())
+			#set ($categoryID = $category.getUidPk())
+			#set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+			#parseCategorySeoUrl($category 1)
+			<li><a href="$escapeTool.html($categorySeoUrl)">$escapeTool.html($categoryDisplayName)</a></li>
+		#end
+	</ul>
+#end
+#**
+* Display price filters.
+*#
+#set($priceFilterOptions = $currentCatalogViewResult.getPriceFilterOptions())
+#if ($priceFilterOptions.size() >0)
+	<h2>#springMessage("sidemenu.shopbyprice")</h2>
+	<ul>
+		#displayFilterOptions($priceFilterOptions)
+	</ul>
+#end
+#**
+* Display brand filters.
+*#
+#set($brandFilterOptions = $currentCatalogViewResult.getBrandFilterOptions())
+#if ($brandFilterOptions.size() >0)
+	<h2>#springMessage("sidemenu.shopbybrand")</h2>
+	<ul>
+		#displayFilterOptions($brandFilterOptions)
+	</ul>
+#end
+
+#set($attributeValueFilterOptions = $currentCatalogViewResult.getAttributeValueFilterOptions())
+#if ($attributeValueFilterOptions && ($attributeValueFilterOptions.size() >0))
+	#foreach($attributeValueFilter in $attributeValueFilterOptions.keySet())
+		#set($filterOptions = $attributeValueFilterOptions.get($attributeValueFilter))
+		#if ($filterOptions.size() >0)
+    		#set($key = $attributeValueFilter.getKey())
+    	<h2>#springMessage("sidemenu.shopby") #springMessage("productTemplate.$key")</h2>
+    	<ul>
+    		#displayFilterOptions($filterOptions)
+    	</ul>
+		#end
+	#end
+#end
+
+#set($attributeRangeFilterOptions = $currentCatalogViewResult.getAttributeRangeFilterOptions())
+#if ($attributeRangeFilterOptions && ($attributeRangeFilterOptions.size() >0))
+	#foreach($attributeRangeFilter in $attributeRangeFilterOptions.keySet())
+		#set($filterOptions = $attributeRangeFilterOptions.get($attributeRangeFilter))
+		#if ($filterOptions.size() >0)
+    		#set($key = $attributeRangeFilter.getKey())
+    	<h2>#springMessage("sidemenu.shopby") #springMessage("productTemplate.$key")</h2>
+    	<ul>
+    		#displayFilterOptions($filterOptions)
+    	</ul>
+		#end
+	#end
+#end

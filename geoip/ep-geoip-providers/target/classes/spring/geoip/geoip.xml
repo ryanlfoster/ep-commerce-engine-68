@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Hi there. What we have here is a Spring context that is referred to 
+		by storefront and cmserver. This file in turn depends on both Quova and our 
+		Demo GeoIP implementations and then wires in bean names based on the property 
+		value in ep.geoip.provider. The *value* is brought into your build via either 
+		the ep-developer profile in elasticpath-grandparent or overridden via -D 
+		or your local settings.xml. The setting of the value is done via module.properties 
+		in the various WAR projects. -->
+
+	<!-- Why? What we'd love to simply have is one import statement like below, 
+		but put ${ep.geoip.provider} in the resource name, but this isn't supported 
+		until Spring 3.1. -->
+
+	<!-- Spring 3.1: 1) Rename the beans in geoip-demo.xml and geoip-quova.xml, 
+		removing the -demo and -quova. 2) Remove the aliases from this file. 3) Change 
+		the imports below to what we described above. 4) Put a copy of "geoProviderService" 
+		in both the geoip-demo and geoip-quova files and remove it from here. -->
+
+	<!-- Oh and 5) remove these comments. -->
+	<import resource="classpath:spring/geoip/geoip-demo.xml" />
+	<import resource="classpath:spring/geoip/geoip-quova.xml" />
+
+	<alias name="timeZoneSelectableValueProvider-${ep.geoip.provider}"
+		alias="timeZoneSelectableValueProvider" />
+	<alias name="countryCodeSelectableValueProvider-${ep.geoip.provider}"
+		alias="countryCodeSelectableValueProvider" />
+	<alias name="ipRoutingTypeSelectableValueProvider-${ep.geoip.provider}"
+		alias="ipRoutingTypeSelectableValueProvider" />
+	<alias name="ipConnectionTypeSelectableValueProvider-${ep.geoip.provider}"
+		alias="ipConnectionTypeSelectableValueProvider" />
+	<alias name="continentSelectableValueProvider-${ep.geoip.provider}"
+		alias="continentSelectableValueProvider" />
+	<alias name="stateSelectableValueProvider-${ep.geoip.provider}"
+		alias="stateSelectableValueProvider" />
+	<alias name="citySelectableValueProvider-${ep.geoip.provider}"
+		alias="citySelectableValueProvider" />
+
+
+	<bean id="geoProviderService" class="com.elasticpath.service.geoip.impl.GeoIpServiceImpl">
+		<property name="provider">
+			<ref bean="${ep.geoip.provider}Provider" />
+		</property>
+	</bean>
+
+
+</beans>

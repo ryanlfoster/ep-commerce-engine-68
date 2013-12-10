@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+	
+	<artifactId>querylanguage</artifactId>
+	<packaging>pom</packaging>
+	<name>Query Language Build Driver</name>
+	
+	<modules>
+		<module>ep-querylanguage</module>
+	</modules>
+	
+	<profiles>
+		<profile>
+			<id>with-fittests</id>
+			<modules>
+				<module>ep-querylanguage-fittests</module>
+			</modules>
+		</profile>
+	</profiles>
+</project>
+

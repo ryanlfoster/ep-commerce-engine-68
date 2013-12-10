@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>core</artifactId>
+	<packaging>pom</packaging>
+	<name>Core Build Driver</name>
+
+	<modules>
+		<module>ep-base</module>
+		<module>ep-cache</module>
+		<module>ep-persistence-api</module>
+		<module>ep-persistence-openjpa</module>
+		<module>ep-core</module>
+		<module>ep-core-tool</module>
+		<module>ep-core-tool-cli</module>
+		<module>ep-core-tool-logic</module>
+		<module>ep-core-archetype</module>
+		<module>ep-core-test-utils</module>
+		<module>ep-core-itests</module>
+		<module>ep-settings</module>
+		<module>ep-settings-itests</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>with-fittests</id>
+			<modules>
+				<module>ep-common-fit-fixtures</module>
+				<module>ep-core-fittests</module>
+				<module>ep-audit-fittests</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>with-nightly-fittests</id>
+			<modules>
+				<module>ep-paymentgateway-fittests</module>
+			</modules>
+		</profile>
+        <profile>
+            <id>with-cucumber-tests</id>
+            <modules>
+                <module>ep-core-cucumber-itests</module>
+            </modules>
+        </profile>
+	</profiles>
+
+
+</project>

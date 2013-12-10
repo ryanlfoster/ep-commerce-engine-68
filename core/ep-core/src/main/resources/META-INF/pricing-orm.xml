@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.pricing.impl</package>
+	<entity class="PriceListDescriptorImpl">
+		<named-query name="PRICE_LIST_DESCRIPTOR_BY_GUID">
+			<query>
+				SELECT descriptor
+				FROM PriceListDescriptorImpl AS descriptor
+				WHERE descriptor.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_DESCRIPTOR_BY_NAME">
+			<query>
+				SELECT descriptor
+				FROM PriceListDescriptorImpl AS descriptor
+				WHERE descriptor.name = ?1
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_DESCRIPTOR_ALL">
+			<query>
+				SELECT descriptor
+				FROM PriceListDescriptorImpl AS descriptor
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_DESCRIPTOR_ALL_NON_HIDDEN">
+			<query>
+				SELECT descriptor
+				FROM PriceListDescriptorImpl AS descriptor
+				WHERE descriptor.hidden = false
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_DESCRIPTORS_BY_GUIDS">
+			<query>
+				SELECT descriptor
+				FROM PriceListDescriptorImpl AS descriptor
+				WHERE descriptor.guid in (:list)
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_DESCRIPTOR_NAME_BY_GUID">
+			<query>
+				SELECT descriptor.name
+				FROM PriceListDescriptorImpl AS descriptor
+				WHERE descriptor.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="PriceAdjustmentImpl">
+		<named-query name="PRICE_ADJUSTMENT_BY_PL_BCGUID_OLD">
+			<query>
+				SELECT bc.priceAdjustments
+				FROM BundleConstituentImpl AS bc
+				JOIN bc.priceAdjustments AS pa
+				WHERE pa.priceListGuid = ?1
+				AND bc.guid in (:list)
+			</query>
+		</named-query>
+
+		<named-query name="PRICE_ADJUSTMENT_AND_BCGUID_BY_PL_BCGUID">
+			<query>
+				SELECT bc.guid, pa
+				FROM BundleConstituentImpl AS bc, IN(bc.priceAdjustments) AS pa
+				WHERE pa.priceListGuid = :plGuid
+				AND bc.guid in (:list)
+			</query>
+		</named-query>
+
+		<named-query name="PRICE_ADJUSTMENT_BY_PL_BCGUID">
+			<query>
+				SELECT bc
+				FROM BundleConstituentImpl as bc
+				WHERE bc.guid in (:list)
+			</query>
+		</named-query>
+
+		<named-query name="PRICE_ADJUSTMENT_BY_GUID">
+			<query>
+				SELECT adjustment
+				FROM PriceAdjustmentImpl AS adjustment
+				WHERE adjustment.guid = ?1
+			</query>
+		</named-query>
+
+		<named-query name="PRICE_ADJUSTMENT_BY_PL_GUID">
+			<query>
+				SELECT adjustment
+				FROM PriceAdjustmentImpl AS adjustment
+				WHERE adjustment.priceListGuid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="BaseAmountImpl">
+		<named-query name="BASE_AMOUNT_BY_PLDG_OBJECTG">
+			<query>
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE ba.priceListDescriptorGuid IN (:pricelists)
+				AND ba.objectGuid IN (:productskus)
+			</query>
+		</named-query>
+		<!-- the query is duplicated because Derby does not support null in sql -->
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_LOWVALUE_UPVALUE_PROVIDED">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+					AND (LOWER(ba.objectGuid) LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND ((ba.listValueInternal BETWEEN ?4
+				AND ?5)
+					OR (ba.saleValueInternal BETWEEN ?4
+				AND ?5))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_LOWVALUE_PROVIDED">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+					AND (LOWER(ba.objectGuid) LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND ((ba.listValueInternal >= ?4)
+					OR (ba.saleValueInternal >= ?4))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_UPVALUE_PROVIDED">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+					AND (LOWER(ba.objectGuid) LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND ((ba.listValueInternal<= ?5)
+					OR (ba.saleValueInternal<= ?5))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+				AND (LOWER(ba.objectGuid) LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<!-- this query has a syntax error? -->
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_CASE_SENSITIVE_LOWVALUE_UPVALUE_PROVIDED">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+				AND ba.objectGuid LIKE ?3 OR ?3 IS NULL)
+				OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND ((ba.listValueInternal BETWEEN ?4
+				AND ?5)
+					OR (ba.saleValueInternal BETWEEN ?4
+				AND ?5))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_CASE_SENSITIVE_LOWVALUE_PROVIDED">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+				AND (ba.objectGuid LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND ((ba.listValueInternal >= ?4)
+					OR (ba.saleValueInternal >= ?4))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_CASE_SENSITIVE_UPVALUE_PROVIDED">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+				AND (ba.objectGuid LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND ((ba.listValueInternal<= ?5)
+					OR (ba.saleValueInternal<= ?5))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_EXT_FILTER_CASE_SENSITIVE">
+			<query>
+				<![CDATA[
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE (ba.priceListDescriptorGuid = ?1 OR ?1 IS NULL)
+				AND ((ba.objectType = ?2 OR ?2 IS NULL)
+				AND (ba.objectGuid LIKE ?3 OR ?3 IS NULL)
+					OR (ba.objectGuid IN (:list)
+				AND (ba.objectType <> ?2 OR ?2 IS NULL)))
+				AND (ba.quantityInternal = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNTS_BY_PRICELIST_BY_OBJECTS">
+			<query>
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE ba.priceListDescriptorGuid = :priceListDescriptorGuid
+				AND ba.objectType = :objectType
+				AND ba.objectGuid IN (:objectGuids)
+			</query>
+		</named-query>
+
+		<named-query name="BASE_AMOUNT_BY_GUID">
+			<query>
+				SELECT ba
+				FROM BaseAmountImpl AS ba
+				WHERE ba.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="DELETE_BASE_AMOUNTS">
+			<query>
+				DELETE FROM BaseAmountImpl AS ba
+				WHERE ba.objectGuid = ?1
+				AND ba.objectType = ?2
+			</query>
+		</named-query>
+		<named-query name="DELETE_BASE_AMOUNTS_BY_PRICE_LIST_GUID">
+			<query>
+				DELETE FROM BaseAmountImpl AS ba
+				WHERE ba.priceListDescriptorGuid = ?1
+			</query>
+		</named-query>
+		<named-query name="BASE_AMOUNT_GUID_SELECT_BY_GUID">
+			<query>
+				SELECT ba.guid
+				FROM BaseAmountImpl ba
+				WHERE ba.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="PriceListAssignmentImpl">
+		<named-query name="PRICE_LIST_ASSIGNMENTS_ALL">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_ALL_VISIBLE_ONLY">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.hidden = false
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_CATALOG_CURRENCY">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.catalog.code = ?1
+				AND pla.priceListDescriptor.currencyCode = ?2
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_CATALOG_CURRENCY_VISIBLE_ONLY">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.catalog.code = ?1
+				AND pla.priceListDescriptor.currencyCode = ?2
+				AND pla.hidden = false
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_CATALOG_PRICELIST">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE (?1 IS NULL OR pla.catalog.name LIKE ?1)
+				AND (?2 IS NULL OR pla.priceListDescriptor.name LIKE ?2)
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_CATALOG_PRICELIST_VISIBLE_ONLY">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE (?1 IS NULL OR pla.catalog.name LIKE ?1)
+				AND (?2 IS NULL OR pla.priceListDescriptor.name LIKE ?2)
+				AND pla.hidden = false
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_CATALOG_CODE">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.catalog.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_CATALOG_CODE_VISIBLE_ONLY">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.catalog.code = ?1
+				AND pla.hidden = false
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_FIND_BY_GUID">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_FIND_BY_NAME">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.name = ?1
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENTS_PRICE_LIST_GUID">
+			<query>
+				SELECT pla
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.priceListDescriptor.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_GUIDS_THAT_HAVE_PLAS">
+			<query>
+				SELECT DISTINCT pla.catalog.code
+				FROM PriceListAssignmentImpl AS pla
+			</query>
+		</named-query>
+		<named-query name="PRICE_LIST_ASSIGNMENT_NAME_BY_GUID">
+			<query>
+				SELECT pla.name
+				FROM PriceListAssignmentImpl as pla
+				WHERE pla.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>

@@ -1,0 +1,55 @@
+FAQ
+---
+
+Q: How do I add my changeSet to the changeLog?
+
+A: Find the "core-changelog-VERSION.xml" file (where VERSION is the
+version you're working on), and add your changeSet to the bottom.  
+NEVER modify a changeSet once it has been committed; always create a new
+changeSet when making a new change.
+
+	- Use "elasticpath" as the author.
+	- Use the JIRA issue appended with a dot an incrementing number as the id. 
+		Ex.  For the first changeSet for JIRA issue BN-64, use: id="BN-64.1"
+	  		 For the second changeSet for JIRA issue BN-64, use: id="BN-64.2"
+	  		 .. Etc.
+			 
+A full list of syntax for defining database changes in Liquibase ChangeSets can 
+be found in the Liquibase Manual here: http://www.liquibase.org/manual/refactoring_commands
+
+Q: What do I do if I can't find a "core-changelog-VERSION.xml" file?
+
+A: Create a new one.  Use the header from "core-changelog-6.4.xml" and change:
+
+   1. logicalFilePath
+   2. remove existing changeLogs :-) (please leave the comments, add to them as you need!)
+   3. Add to source control.
+   4. Add an <include/> to the bottom of core-changelog-master.xml
+
+FILES
+-----
+
+elasticpath-db-changelog.xml
+----------------------------
+
+This file is referenced by projects that have liquibase extensions.  It
+is the "everything Elastic Path related" file.  This is effectively
+the "public API". You can safely change everything else except this filename
+and not break projects created with the core-schema-extension archetype.
+
+core-changelog-master.xml
+-------------------------
+
+This file has all the Liquibase changes for core.  To make it maintainable
+it has an include for each version.
+
+ep-pre-6.4.xml
+--------------
+
+This file contains all the database changes made before 6.4.0.
+
+core-changelog-6.4.0.xml
+------------------------
+
+This file contains the database changes made in 6.4.0.
+

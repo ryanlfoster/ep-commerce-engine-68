@@ -1,0 +1,8 @@
+If you're setting up build slaves which will use these generated jobs you will need:
+
+1) a maven-security.xml which can decrypt the keys in ci-settings.xml
+2) the "svn" binary (even with Jenkins)
+3) the "git" binary
+
+You cannot have multiple slaves using the same ~/.m2/repository as the Main-Build job will delete ~/.m2/repository/com/elasticpath before running.
+(This prevents our build relying on our build. :-)

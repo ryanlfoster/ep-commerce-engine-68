@@ -1,0 +1,14 @@
+#### crontab.ep file ####
+
+# on slave schedule snappuller.ep.start, snapinstaller.ep.start to regularly take a snapshot from master and install it
+# for now they are executed every 5 minutes
+#0,5,10,15,20,25,30,35,40,45,50,55 * * * * /data1/jboss421_ep610final/server/default/deploy/searchserver.war/WEB-INF/solrHome/bin/snappuller.ep.start;/data1/jboss421_ep610final/server/default/deploy/searchserver.war/WEB-INF/solrHome/bin/snapinstaller.ep.start
+
+# uncomment on master if you want to automatically run snapshooter.ep.start with specified frequency.
+# for now it is set to run every hour
+#0 * * * * /data1/jboss421_ep610final/server/default/deploy/searchserver.war/WEB-INF/solrHome/bin/snapshooter.ep.start
+
+# schedule snapcleaner.ep.start to regularly clean unnecessary snapshots on both master and slave
+# for now it is executed daily at midnight
+0 0 * * * /data1/jboss421_ep610final/server/default/deploy/searchserver.war/WEB-INF/solrHome/bin/snapcleaner.ep.start
+

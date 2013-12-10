@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<connectionconfiguration type="local">
+	<url>jdbc:oracle:thin:@NY375WV-2V8FFT1.PEROOT.com:1521:XE</url>
+	<login>pearson</login>
+	<pwd>pearson</pwd>
+	<driver>oracle.jdbc.driver.OracleDriver</driver>
+</connectionconfiguration>

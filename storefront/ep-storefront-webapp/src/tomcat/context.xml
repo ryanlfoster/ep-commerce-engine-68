@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Context>
+	<Resource auth="Container" name="mail/Session" type="javax.mail.Session"/>
+	<Resource name="jdbc/epjndi"
+		auth="Container"
+		scope="Shareable"
+		type="javax.sql.DataSource"
+		maxActive="100"
+		maxIdle="30"
+		maxWait="10000"
+		removeAbandoned="true"
+		username="${epdb.username}"
+		password="${epdb.password}"
+		driverClassName="${epdb.jdbc.driver}"
+		url="${epdb.url}"
+		/>
+</Context>
+

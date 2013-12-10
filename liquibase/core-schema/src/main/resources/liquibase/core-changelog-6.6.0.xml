@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-6.6.0.xml">
+
+	<!-- Reminder:
+		- Table names cannot exceed 30 characters (Oracle limitation)
+		- Column names cannot exceed 30 characters (Oracle limitation)
+		- Index names cannot exceed 18 characters (DB2 limitation)
+		
+		 Important:
+		- Using <preCondition> ? read: http://forum.liquibase.org/topic/unexpected-behaviour-of-preconditions-with-updatesql
+		- Using <preCondition> ? Consider adding onUpdateSql="TEST", but understand how it plays with updateSQL!
+	-->
+
+	<changeSet id="6.6.0-hsqldb-specific" author="elasticpath" dbms="hsqldb">
+		<comment>[BN-549] Refactor Site Optimization foreign key constraints so that a general script can handle removal</comment>
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TEXPERIENCEOFFERLOCATION</param>
+			<param name="columnName">EXPERIENCE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_TEOL_EXPERIENCE_UID" referencedTableName="TEXPERIENCE"
+			baseColumnNames="EXPERIENCE_UID" baseTableName="TEXPERIENCEOFFERLOCATION" referencedColumnNames="UIDPK" />
+			
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TEXPERIENCEOFFERLOCATION</param>
+			<param name="columnName">OFFER_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_TEOL_OFFER_UID" referencedTableName="TMARKETTESTINGOFFER"
+			baseColumnNames="OFFER_UID" baseTableName="TEXPERIENCEOFFERLOCATION" referencedColumnNames="UIDPK" />
+			
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TMARKETTESTINGOFFER</param>
+			<param name="columnName">STORE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_OFFER_STORE_UID" referencedTableName="TSTORE"
+			baseColumnNames="STORE_UID" baseTableName="TMARKETTESTINGOFFER" referencedColumnNames="UIDPK" />
+			
+		<customChange class="liquibase.ext.elasticpath.HsqlDropForeignKey">
+			<param name="tableName">TEXPERIENCE</param>
+			<param name="columnName">CAMPAIGN_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_CAMPAIGN_TEXPERIENCE_UID" referencedTableName="TCAMPAIGN"
+			baseColumnNames="CAMPAIGN_UID" baseTableName="TEXPERIENCE" referencedColumnNames="UIDPK" />
+	</changeSet>
+
+	<changeSet id="6.6.0-h2-specific" author="elasticpath" dbms="h2">
+		<comment>[BN-549] Refactor Site Optimization foreign key constraints so that a general script can handle removal</comment>
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TEXPERIENCEOFFERLOCATION</param>
+			<param name="columnName">EXPERIENCE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_TEOL_EXPERIENCE_UID" referencedTableName="TEXPERIENCE"
+			baseColumnNames="EXPERIENCE_UID" baseTableName="TEXPERIENCEOFFERLOCATION" referencedColumnNames="UIDPK" />
+			
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TEXPERIENCEOFFERLOCATION</param>
+			<param name="columnName">OFFER_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_TEOL_OFFER_UID" referencedTableName="TMARKETTESTINGOFFER"
+			baseColumnNames="OFFER_UID" baseTableName="TEXPERIENCEOFFERLOCATION" referencedColumnNames="UIDPK" />
+			
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TMARKETTESTINGOFFER</param>
+			<param name="columnName">STORE_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_OFFER_STORE_UID" referencedTableName="TSTORE"
+			baseColumnNames="STORE_UID" baseTableName="TMARKETTESTINGOFFER" referencedColumnNames="UIDPK" />
+			
+		<customChange class="liquibase.ext.elasticpath.H2DropForeignKey">
+			<param name="tableName">TEXPERIENCE</param>
+			<param name="columnName">CAMPAIGN_UID</param>
+		</customChange>
+		<addForeignKeyConstraint constraintName="FK_CAMPAIGN_TEXPERIENCE_UID" referencedTableName="TCAMPAIGN"
+			baseColumnNames="CAMPAIGN_UID" baseTableName="TEXPERIENCE" referencedColumnNames="UIDPK" />
+	</changeSet>
+
+	<changeSet id="6.6.0" author="elasticpath">
+		<comment>[BN-549] Clean up residual Site Optimization remnants.</comment>
+		<dropForeignKeyConstraint baseTableName="TEXPERIENCEOFFERLOCATION" constraintName="FK_TEOL_EXPERIENCE_UID" />
+		<dropForeignKeyConstraint baseTableName="TEXPERIENCEOFFERLOCATION" constraintName="FK_TEOL_OFFER_UID" />
+		<dropTable tableName="TEXPERIENCEOFFERLOCATION" />
+		
+		<dropForeignKeyConstraint baseTableName="TMARKETTESTINGOFFER" constraintName="FK_OFFER_STORE_UID" />
+		<dropTable tableName="TMARKETTESTINGOFFER" />
+		
+		<dropForeignKeyConstraint baseTableName="TEXPERIENCE" constraintName="FK_CAMPAIGN_TEXPERIENCE_UID" />
+		<dropTable tableName="TEXPERIENCE" />
+		
+		<dropTable tableName="TCAMPAIGN" />
+		
+		<delete tableName="JPA_GENERATED_KEYS">
+			<where>ID LIKE '%TEXPERIENCEOFFERLOCATION%'</where>
+		</delete>
+		<delete tableName="JPA_GENERATED_KEYS">
+			<where>ID LIKE '%TMARKETTESTINGOFFER%'</where>
+		</delete>
+		<delete tableName="JPA_GENERATED_KEYS">
+			<where>ID LIKE '%TEXPERIENCE%'</where>
+		</delete>
+		<delete tableName="JPA_GENERATED_KEYS">
+			<where>ID LIKE '%TCAMPAIGN%'</where>
+		</delete>
+
+		<comment>[BN-724] Clean up residual Site Optimization remnants.</comment>
+		<delete tableName="TTAGDEFINITION">
+			<where>GUID LIKE '%OFFERS%'</where>
+		</delete>
+
+		<delete tableName="TTAGGROUP">
+			<where>GUID LIKE '%SITE_OPTIMIZATION%'</where>
+		</delete>
+	</changeSet>
+
+	<!-- ======================================================================================= -->
+
+	<!-- Include base data that is needed for this version of the schema. This should be the last entry in this changelog. -->
+	<include file="liquibase/core-changelog-6.6.0-basedata.xml"/>
+	
+</databaseChangeLog>

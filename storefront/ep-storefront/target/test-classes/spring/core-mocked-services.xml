@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stub="http://www.dinstone.com/schema/stub"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- This needs to be an empty list -->
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+
+	<!-- Define a no-datasource version of the entity manager factory as datasource is only defined at the web-app level -->
+	<bean id="entityManagerFactory" parent="abstractEntityManagerFactory" />
+
+	<!-- These two beans are application-specific dependencies, so we will stub them with no-op beans -->
+	<bean id="searchConfigFactory" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.service.search.SearchConfigFactory" />
+	</bean>
+
+	<bean id="emailService" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.service.misc.EmailService" />
+	</bean>
+
+    <!-- Create no-op beans for those beans which try to do some startup-initialization requiring the persistence layer -->
+	<bean id="inventoryFacade" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.inventory.InventoryFacade" />
+	</bean>
+
+	<bean id="asyncService" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.service.async.AsyncService" />
+	</bean>
+
+	<bean id="assetRepository" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.commons.util.AssetRepository" />
+	</bean>
+
+	<bean id="messageSourceCache" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.commons.util.MessageSourceCache" />
+	</bean>
+
+	<bean id="geoProviderService" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.service.geoip.GeoIpService" />
+	</bean>
+	
+	<bean id="notificationService" class="com.elasticpath.commons.beanframework.NoOpProxyFactoryBean">
+		<property name="serviceInterface" value="com.elasticpath.service.misc.EmailHttpInvokerProxyFactoryBean" />
+	</bean>
+	
+</beans>

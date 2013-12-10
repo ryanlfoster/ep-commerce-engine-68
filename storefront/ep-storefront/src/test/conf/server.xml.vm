@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <Server port="8105" shutdown="SHUTDOWN">
+
+  <Listener className="org.apache.catalina.core.AprLifecycleListener"/>
+  <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener"/>
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+  <Listener className="org.apache.catalina.storeconfig.StoreConfigLifecycleListener"/>
+
+  <!-- Global JNDI resources -->
+  <GlobalNamingResources>
+
+    <!-- Test entry for demonstration purposes -->
+    <Environment name="simpleValue" type="java.lang.Integer" value="30"/>
+
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users -->
+    <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+
+  </GlobalNamingResources>
+
+  <!-- Define the Tomcat Stand-Alone Service -->
+  <Service name="Catalina">
+
+
+    <!-- Define a non-SSL HTTP/1.1 Connector on port ${tomcat_http_port} -->
+    <Connector acceptCount="100" connectionTimeout="20000" disableUploadTimeout="true" enableLookups="false" maxHttpHeaderSize="8192" maxSpareThreads="75" maxThreads="150" minSpareThreads="25" port="${tomcat_http_port}" redirectPort="${tomcat_https_port}"/>
+    <!-- Note : To disable connection timeouts, set connectionTimeout value
+     to 0 -->
+	
+    <!-- Define a SSL HTTP/1.1 Connector on port ${tomcat_https_port} -->
+    <Connector acceptCount="100" clientAuth="false" disableUploadTimeout="true" enableLookups="false" maxHttpHeaderSize="8192" maxSpareThreads="75" maxThreads="150" minSpareThreads="25" port="${tomcat_https_port}" scheme="https" secure="true" sslProtocol="TLS"/>
+
+    <!-- Define an AJP 1.3 Connector on port 9009 -->
+    <Connector enableLookups="false" port="9009" protocol="AJP/1.3" redirectPort="${tomcat_https_port}"/>
+
+
+    <!-- You should set jvmRoute to support load-balancing via AJP ie :
+    <Engine name="Standalone" defaultHost="localhost" jvmRoute="jvm1">         
+    --> 
+         
+    <!-- Define the top level container in our container hierarchy -->
+    <Engine defaultHost="localhost" name="Catalina">
+
+      <!--
+      <Valve className="org.apache.catalina.valves.RequestDumperValve"/>
+      -->
+
+      <!-- Because this Realm is here, an instance will be shared globally -->
+
+      <!-- This Realm uses the UserDatabase configured in the global JNDI
+           resources under the key "UserDatabase".  Any edits
+           that are performed against this UserDatabase are immediately
+           available for use by the Realm.  -->
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+
+      <!-- Comment out the old realm but leave here for now in case we
+           need to go back quickly -->
+      <!--
+      <Realm className="org.apache.catalina.realm.MemoryRealm" />
+      -->
+
+      <!-- Replace the above Realm with one of the following to get a Realm
+           stored in a database and accessed via JDBC -->
+
+      <!-- Define the default virtual host
+           Note: XML Schema validation will not work with Xerces 2.2.
+       -->
+      <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true" xmlNamespaceAware="false" xmlValidation="false">
+
+	 	 	<Context docBase="/${cactus_context}" path="/${cactus_context}" 
+	 			reloadable="true">
+					<Resource auth="Container" 
+					driverClassName="${db_connection_driver_class}" 
+					maxActive="100" 
+					maxIdle="30" 
+					maxWait="10000" 
+					name="jdbc/epjndi" 
+					username="${db_connection_username}"
+					password="${db_connection_password}" 
+					scope="Shareable" 
+					type="javax.sql.DataSource" 
+					url="jdbc:mysql://${db_connection_host}:${db_connection_port}/${db_name}?useUnicode=true&amp;characterEncoding=UTF8" 
+					/>
+			</Context>
+	</Host>
+    </Engine>
+
+  </Service>
+
+</Server>

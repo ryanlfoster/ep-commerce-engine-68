@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Renders the provided HTML to the content space.
+     Input parameters:  
+        1. HTML, type "HTML".
+-->
+
+<content-wrapper>
+    <template-name>htmlTemplate.cwt</template-name>
+    <wrapper-id>HTMLWrapper</wrapper-id>
+    <wrapper-name>HTML</wrapper-name>
+
+    <user-input-settings>
+	<user-input-setting id="HTML" localizable="true" name="HTML (raw)" type="HTML" required="true" pass-to-template="true"/>
+    </user-input-settings>
+
+</content-wrapper>
+

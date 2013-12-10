@@ -1,0 +1,34 @@
+"categoryCode"|"displayName_en"|"displayName_fr"|"catImage"|"parentCategoryGuid"|"ordering"|"storeVisible"|"catDescription_en"|"catDescription_fr"|"seoDescription_en"|"seoDescription_fr"
+90000002|"Camcorders"|"Caméscopes"|"cat-camcorders.jpg"|NULL|1|0|<p>From beginner video cameras to professional camcorders, we have all the camera gear necessary to make you a great videographer.</p><p>Capture your family memories on a range of digital video camera equipment from the best camcorder makers going.</p>|Des appareils-photo visuels de débutant aux caméscopes professionnels, nous avons toute la vitesse d'appareil-photo nécessaire pour vous faire un grand videographer.||
+90000003|"Digital Cameras"|"Appareils photos numériques"|"cat-digitalcameras.jpg"|NULL|2|0|<p>Looking for a digital camera for beginners like a point and shoot? Maybe a high end digital camera like a SLR? We have all the camera gear necessary to make your photography come to life.</p><p>Cameras can be the best way to save a moment, and doesn't that deserve the best digital camera at the best price possible?</p>|Recherche d'un appareil-photo numérique pour des débutants comme un point et une pousse ? Peut-être un appareil-photo numérique d'extrémité élevée aiment un SLR ? Nous avons toute la vitesse d'appareil-photo nécessaire pour faire votre photographie venir à la vie.||
+90000004|"Film Cameras"|"Appareils photo"|"cat-filmcameras.jpg"|NULL|3|0|<p>Looking for a camera for beginners like a point and shoot? Maybe a high end film cameras from the best camera company? We have all the photo gear necessary to make your shots come to life.</p><p>Cameras can be the best way to save a moment, and doesn't that deserve the best film camera at the best price possible?</p>|Recherche d'un appareil-photo pour des débutants comme un point et une pousse ? Peut-être hauts appareils-photo d'un film d'extrémité de la meilleure compagnie d'appareil-photo ? Nous avons toute la vitesse de photo nécessaire pour faire vos projectiles venir à la vie.||
+90000005|"Optics"|"Optique"|"cat-optics.jpg"|NULL|4|0|<p>Bring life closer with the best telescopes and binoculars from great brands like Meade and Bushnell. Learn astronomy with beginner telescopes or master space with an advanced telescope.</p><p>Or, get close to birds and wildlife with spotting scopes and binoculars at great prices.</p>|Apportez la vie plus étroite avec les meilleurs télescopes et jumelles de grandes marques comme Meade et Bushnell. Apprenez l'astronomie avec des télescopes de débutant ou l'espace principal avec un télescope avançé.||
+90000006|"Accessories"|"Accessoires"|"cat-accessories.jpg"|NULL|5|0|<p>Buy discount video and photo equipment like photo accessories, camera cases, digital camera batteries, lenses, and camera memory cards at the best price.</p>|Achetez la vidéo d'escompte et l'équipement de photo aiment des accessoires de photo, des caisses d'appareil-photo, des batteries numériques d'appareil-photo, des objectifs, et des cartes de mémoire d'appareil-photo au meilleur prix.||
+90000007|"Service Plan"|"Service Plan"|"cat-accessories.jpg"|NULL|6|1||||
+90000008|"Point & Shoot / Zoom camera"|"Pointer et tirer / Zoom"|NULL|90000004|1|0||||
+90000009|"Point & Shoot camera"|"Pointer et tirer"|NULL|90000004|2|0||||
+90000010|"Single use camera"|"À usage unique"|NULL|90000004|3|0||||
+90000011|"SLR camera"|"Réflex à un objectif"|NULL|90000004|4|0||||
+90000012|"Waterproof camera"|"Etanche"|NULL|90000004|5|0||||
+90000013|"Waterproof single use camera"|"Appareil photo jetable étanche"|NULL|90000004|6|0||||
+90000014|"Binoculars"|"Jumelles"|"I38753.jpg"|90000005|1|0||||
+90000015|"Telescopes"|"Télescopes"|"I144017.jpg"|90000005|2|0||||
+90000016|"Tripods"|"Trépieds"|"I144017.jpg"|90000015|1|0||||
+90000017|"Digital SLRs"|"SLRs De Digital"|"I38753.jpg"|90000003|1|0||||
+90000018|"Digital Style SLRs"|"Modèle SLRs De Digital"|"I144017.jpg"|90000003|2|0||||
+90000019|"Digital with Printer Dock"|"Digital avec le dock d'imprimeur"|"I144017.jpg"|90000003|3|0||||
+90000020|"All Camcorders"|"Tout le Caméscopes"|NULL|90000002|1|0||||
+90000021|"Mini DV"|"Mini DV"|NULL|90000002|2|0||||
+90000022|"Digital8"|"Digital8"|NULL|90000002|3|0||||
+90000023|"Micro MV"|"MV Micro"|NULL|90000002|4|0||||
+90000024|"S-VHS C"|"S-VHS C"|NULL|90000002|5|0||||
+90000025|"8mm & Hi8"|"8mm & Hi8"|NULL|90000002|6|0||||
+90000026|"3"" DVD"|"3"" DVD"|NULL|90000002|7|0||||
+90000028|"Carrying Cases"|"Cas Portants"|NULL|90000006|1|0||||
+90000029|"Flash Memory"|"Mémoire Instantanée"|NULL|90000006|2|0||||
+90000030|"Power Devices & Batteries"|"Dispositifs Et Batteries De Puissance"|NULL|90000006|3|0||||
+90000031|"Lenses"|"Lenses"|NULL|90000006|4|0||||
+90000032|"Cables"|"Objectifs"|NULL|90000006|5|0||||
+90000033|"Photo & Video Accessories"|"Accessoires De Photo Et De Vidéo"|NULL|90000006|6|0||||
+90000034|"Accessories"|"Accessoires"|NULL|90000006|7|0||||
+90000035|"Software"|"Logiciel"|NULL|90000006|8|0||||

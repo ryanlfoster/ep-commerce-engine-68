@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.shipping.impl</package>
+	<entity class="ShippingRegionImpl">
+		<named-query name="SHIPPINGREGION_SELECT_ALL">
+			<query>
+				SELECT sr
+				FROM ShippingRegionImpl sr
+				ORDER BY sr.name
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGREGION_FIND_BY_NAME">
+			<query>
+				SELECT s
+				FROM ShippingRegionImpl s
+				WHERE s.name = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ShippingServiceLevelImpl">
+		<named-query name="SHIPPINGSERVICELEVEL_SELECT_ALL">
+			<query>
+				SELECT ssl
+				FROM ShippingServiceLevelImpl ssl
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_SELECT_BY_STORE">
+			<query>
+				SELECT ssl
+				FROM ShippingServiceLevelImpl ssl
+				LEFT OUTER JOIN FETCH ssl.shippingRegion
+				LEFT OUTER JOIN FETCH ssl.shippingCostCalculationMethod
+				WHERE ssl.store.code = ?1
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_SELECT_BY_STORE_AND_STATE">
+			<query>
+				SELECT ssl
+				FROM ShippingServiceLevelImpl ssl
+				LEFT OUTER JOIN FETCH ssl.shippingRegion
+				LEFT OUTER JOIN FETCH ssl.shippingCostCalculationMethod
+				WHERE ssl.store.code = ?1
+				AND ssl.enabled = ?2
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_UIDS_SELECT_BY_STORE_AND_STATE">
+			<query>
+				SELECT ssl.uidPk
+				FROM ShippingServiceLevelImpl ssl
+				LEFT OUTER JOIN FETCH ssl.shippingRegion
+				LEFT OUTER JOIN FETCH ssl.shippingCostCalculationMethod
+				WHERE ssl.store.code = ?1
+				AND ssl.enabled = ?2
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGREGION_UID_IN_USE">
+			<query>
+				SELECT ssl.shippingRegion.uidPk
+				FROM ShippingServiceLevelImpl ssl
+				LEFT OUTER JOIN FETCH ssl.shippingRegion
+				GROUP BY ssl.shippingRegion.uidPk
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGREGION_IN_USE">
+			<query>
+				SELECT DISTINCT ssl.shippingRegion
+				FROM ShippingServiceLevelImpl ssl
+				LEFT OUTER JOIN FETCH ssl.shippingRegion
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_UID_IN_USE">
+			<query>
+				SELECT DISTINCT ph.shippingServiceLevelInternal.uidPk
+				FROM PhysicalOrderShipmentImpl ph
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_CODE_BY_UID">
+			<query>
+				SELECT ssl.code
+				FROM ShippingServiceLevelImpl ssl
+				WHERE ssl.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_FIND_BY_CODE">
+			<query>
+				SELECT ssl
+				FROM ShippingServiceLevelImpl ssl
+				WHERE ssl.code = ?1
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_FIND_BY_GUID">
+			<query>
+				SELECT ssl
+				FROM ShippingServiceLevelImpl ssl
+				WHERE ssl.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_CODE_EXIST">
+			<query>
+				SELECT ssl.code
+				FROM ShippingServiceLevelImpl ssl
+				WHERE ssl.code = ?1
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT ssl.uidPk
+				FROM ShippingServiceLevelImpl ssl
+				WHERE ssl.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVEL_UIDS_ALL">
+			<query>
+				SELECT ssl.uidPk
+				FROM ShippingServiceLevelImpl ssl
+			</query>
+		</named-query>
+		<named-query name="SHIPPINGSERVICELEVELS_BY_UIDS">
+			<query>
+				SELECT ssl
+				FROM ShippingServiceLevelImpl ssl
+				WHERE ssl.uidPk in (:list)
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>

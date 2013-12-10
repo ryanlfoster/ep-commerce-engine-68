@@ -1,0 +1,1535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.catalog.impl</package>
+	<entity class="AbstractCategoryImpl">
+		<named-query name="CATEGORY_LIST_ROOT">
+			<query>
+				SELECT ac
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal IS NULL
+				AND ac.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_ROOT_CATEGORIES">
+			<query>
+				SELECT COUNT(ac.uidPk)
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal IS NULL
+				AND ac.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_LIST_SUBCATEGORY_UIDS">
+			<query>
+				SELECT ac.uidPk
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_LIST_SUBCATEGORY">
+			<query>
+				SELECT ac
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UIDS_ALL">
+			<query>
+				SELECT ac.uidPk
+				FROM AbstractCategoryImpl ac
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT ac.uidPk
+				FROM AbstractCategoryImpl ac
+				WHERE ac.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UID_SELECT_BY_CHILDREN_UIDS">
+			<query>
+				SELECT ac.parentInternal.uidPk
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal.uidPk IS NOT null
+				AND ac.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UID_SELECT_BY_PARENT_UIDS">
+			<query>
+				SELECT ac.uidPk
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_BY_UIDS">
+			<query>
+				SELECT ac
+				FROM AbstractCategoryImpl ac
+				WHERE ac.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UIDS_FOR_CATALOG">
+			<query>
+				SELECT ac.uidPk
+				FROM AbstractCategoryImpl ac
+				WHERE ac.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UIDS_FOR_CATALOG_BY_CODE">
+			<query>
+				SELECT ac.uidPk
+				FROM AbstractCategoryImpl ac
+				WHERE ac.catalog.code = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_SUBCATEGORIES_IN_CATEGORY">
+			<query>
+				SELECT count(ac.uidPk)
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SUBCATEGORY_SELECT_BY_PARENTUID">
+			<query>
+				SELECT ac
+				FROM AbstractCategoryImpl ac
+				WHERE ac.parentInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_CATALOG_FOR_CATEGORY">
+			<query>
+				SELECT c.catalog
+				FROM AbstractCategoryImpl c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="LIST_CATALOGS_BY_GUIDS">
+			<query>
+				SELECT c
+				FROM CatalogImpl c
+				WHERE c.code IN (:codes)
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_ROOT_MAX_ORDERING">
+			<query>
+				SELECT MAX(c.ordering)
+				FROM AbstractCategoryImpl c
+				WHERE c.catalog.uidPk = ?1
+				AND c.parentInternal IS NULL
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_ROOT_MIN_ORDERING">
+			<query>
+				SELECT MIN(c.ordering)
+				FROM AbstractCategoryImpl c
+				WHERE c.catalog.uidPk = ?1
+				AND c.parentInternal IS NULL
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_CHILD_MAX_ORDERING">
+			<query>
+				SELECT MAX(c.ordering)
+				FROM AbstractCategoryImpl c
+				WHERE c.parentInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_CHILD_MIN_ORDERING">
+			<query>
+				SELECT MIN(c.ordering)
+				FROM AbstractCategoryImpl c
+				WHERE c.parentInternal.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="BrandImpl">
+		<named-query name="BRAND_FIND_BY_CODE">
+			<query>
+				SELECT b
+				FROM BrandImpl b
+				WHERE b.code = ?1
+			</query>
+		</named-query>
+		<named-query name="BRANDS_IN_USE_LIST">
+			<query>
+				SELECT DISTINCT b
+				FROM ProductImpl p INNER JOIN p.brand b
+			</query>
+		</named-query>
+		<named-query name="BRAND_IN_USE_UIDPK_LIST">
+			<query>
+				SELECT b.uidPk
+				FROM ProductImpl p INNER JOIN p.brand b
+			</query>
+		</named-query>
+		<named-query name="BRAND_SELECT_ALL">
+			<query>
+				SELECT b
+				FROM BrandImpl b
+			</query>
+		</named-query>
+		<named-query name="BRAND_SELECT_BY_GUID">
+			<query>
+				SELECT b
+				FROM BrandImpl b
+				WHERE b.code = ?1
+			</query>
+		</named-query>
+		<named-query name="BRAND_SELECT_BY_GUID_AND_CATALOG_GUID">
+			<query>
+				SELECT b
+				FROM BrandImpl b
+				WHERE b.code = ?1
+				AND b.catalog.code = ?2
+			</query>
+		</named-query>
+		<named-query name="BRAND_GUID_SELECT_BY_GUID">
+			<query>
+				SELECT b.code
+				FROM BrandImpl b
+				WHERE b.code = ?1
+			</query>
+		</named-query>
+		<named-query name="BRAND_SELECT_CATALOG_ALL">
+			<query>
+				SELECT b
+				FROM BrandImpl b
+				WHERE b.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="BRAND_SELECT_CATALOG_IN_LIST">
+			<query>
+				SELECT b
+				FROM BrandImpl b
+				WHERE b.catalog.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="BRAND_IN_USE_LIST">
+			<query>
+				SELECT p.brand.uidPk
+				FROM ProductImpl p
+				WHERE p.brand.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="BRAND_IN_USE">
+			<query>
+				SELECT p.brand.uidPk
+				FROM ProductImpl p
+				WHERE p.brand.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CatalogImpl">
+		<named-query name="CATALOG_IN_USE_BY_PRODUCT_TYPE">
+			<query>
+				SELECT pt.uidPk
+				FROM ProductTypeImpl pt LEFT JOIN pt.catalog c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_IN_USE_BY_CATEGORY_TYPE">
+			<query>
+				SELECT ct.uidPk
+				FROM CategoryTypeImpl ct LEFT JOIN ct.catalog c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_IN_USE_BY_BRAND">
+			<query>
+				SELECT b.uidPk
+				FROM BrandImpl b LEFT JOIN b.catalog c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_IN_USE_BY_CMUSER">
+			<query>
+				SELECT cm.uidPk
+				FROM CmUserImpl cm LEFT JOIN cm.catalogs c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_IN_USE_BY_SYNGROUP">
+			<query>
+				SELECT sg.uidPk
+				FROM SynonymGroupImpl sg LEFT JOIN sg.catalog c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATALOG_IN_USE_BY_ATTRIBUTE">
+			<query>
+				SELECT a.uidPk
+				FROM AttributeImpl a LEFT JOIN a.catalog c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_CATALOG_UIDS">
+			<query>
+				SELECT c.uidPk
+				FROM CatalogImpl c
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_CATALOGS">
+			<query>
+				SELECT c
+				FROM CatalogImpl c
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_MASTER_CATALOGS">
+			<query>
+				SELECT c
+				FROM CatalogImpl c
+				WHERE c.master = true order by c.name
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_MASTER_CATALOG_UIDS">
+			<query>
+				SELECT c.uidPk
+				FROM CatalogImpl c
+				WHERE c.master = true order by c.name
+			</query>
+		</named-query>
+		<named-query name="FIND_CATALOG_BY_UID">
+			<query>
+				SELECT c
+				FROM CatalogImpl c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_CATALOG_BY_NAME">
+			<query>
+				SELECT c
+				FROM CatalogImpl c
+				WHERE c.name = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_CATALOG_BY_CODE">
+			<query>
+				SELECT c
+				FROM CatalogImpl c
+				WHERE c.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_CATALOG_UID_BY_CODE">
+			<query>
+				SELECT c.uidPk
+				FROM CatalogImpl c
+				WHERE c.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_MASTER_CATALOGS_USING_LINKED_CATEGORIES">
+			<query>
+				SELECT DISTINCT c
+				FROM LinkedCategoryImpl lc
+				JOIN lc.masterCategory mc
+				JOIN mc.catalog c
+				WHERE lc.catalog.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_MASTER_CATALOGS_USING_VIRTUAL_CATEGORIES">
+			<query>
+				SELECT DISTINCT c
+				FROM ProductCategoryImpl vpc, ProductCategoryImpl mpc, CategoryImpl vc, CategoryImpl mc
+				JOIN mc.catalog c
+				WHERE vc.catalog.code = ?1
+				AND vpc.product = mpc.product
+				AND vpc.category.uidPk = vc.uidPk
+				AND mpc.category.uidPk = mc.uidPk
+				AND vc.virtual = true
+				AND mc.virtual = false
+			</query>
+		</named-query>
+		<named-query name="VIRTUAL_CATALOG_NAME_BY_GUID">
+			<query>
+				SELECT c.name
+				FROM CatalogImpl AS c
+				WHERE c.code = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CategoryDeletedImpl">
+		<named-query name="CATEGORY_UIDS_SELECT_BY_DELETED_DATE">
+			<query>select cd.categoryUid from CategoryDeletedImpl as cd
+				WHERE cd.deletedDate &gt;= ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CategoryImpl">
+		<named-query name="CATEGORY_SELECT_BY_GUID">
+			<query>
+				SELECT c
+				FROM CategoryImpl AS c
+				WHERE c.code = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_SELECT_BY_GUID_AND_CATALOG_GUID">
+			<query>
+				SELECT c
+				FROM CategoryImpl AS c
+				WHERE c.code = ?1
+				AND c.catalog.code = ?2
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UID_SELECT_BY_GUID">
+			<query>
+				SELECT c.uidPk
+				FROM CategoryImpl c
+				WHERE c.code = ?1
+				AND c.catalog.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_CODE_SELECT_BY_UID">
+			<query>
+				SELECT c.code
+				FROM CategoryImpl c
+				WHERE c.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_CODES_SELECT_BY_UIDS">
+			<query>
+				SELECT c.code
+				FROM CategoryImpl c
+				WHERE c.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_FIND_BY_GUID_CATALOG">
+			<query>
+				SELECT c
+				FROM CategoryImpl c
+				WHERE c.code = ?1
+				AND c.catalog.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_COUNT_BY_CODE">
+			<query>
+				SELECT count(c.uidPk)
+				FROM CategoryImpl c
+				WHERE c.code = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_LIST_AVAILABLE_ROOT">
+			<query>
+				SELECT c
+				FROM CategoryImpl c
+				WHERE c.parentInternal IS NULL
+				AND c.hidden = false
+				AND c.startDate &lt;= ?1
+				AND ( c.endDate IS NULL or c.endDate &gt;= ?2 )
+				AND c.catalog.uidPk = ?3
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UIDS_AVAILABLE">
+			<query>
+				SELECT c.uidPk
+				FROM CategoryImpl c
+				WHERE c.startDate &lt;= ?1
+				AND ( c.endDate IS null OR c.endDate &gt;= ?2 )
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_NAME_IN_DEFAULT_LOCALE_BY_CODE">
+			<query>
+				SELECT ldf.displayName
+				FROM CategoryImpl c, IN(c.localeDependantFieldsMap) ldf
+				WHERE c.code = ?1
+				AND ldf.locale = c.catalog.defaultLocaleInternal
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_EXISTS_FOR_COMPOUND_GUID">
+			<query>
+				SELECT count(c.uidPk) from CategoryImpl c
+				WHERE c.code = :categoryCode
+				AND c.catalog.code = :catalogCode
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CategoryTypeImpl">
+		<named-query name="CATEGORY_TYPE_SELECT_ALL">
+			<query>
+				SELECT ct from CategoryTypeImpl ct
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_SELECT_ALL_EAGER">
+			<query>
+				SELECT ct
+				FROM CategoryTypeImpl ct LEFT OUTER JOIN FETCH ct.categoryAttributeGroupAttributes
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_BY_CATALOG_EAGER">
+			<query>
+				SELECT ct
+				FROM CategoryTypeImpl ct LEFT OUTER JOIN FETCH ct.categoryAttributeGroupAttributes
+				WHERE ct.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_COUNT_BY_NAME">
+			<query>
+				SELECT count(ct.uidPk)
+				FROM CategoryTypeImpl ct
+				WHERE ct.name = ?1
+				AND ct.uidPk &lt;&gt; ?2
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_FIND_BY_NAME">
+			<query>
+				SELECT ct
+				FROM CategoryTypeImpl ct
+				WHERE ct.name = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_NAME_FIND_BY_GUID">
+			<query>
+				SELECT ct.name
+				FROM CategoryTypeImpl ct
+				WHERE ct.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_FIND_BY_GUID">
+			<query>
+				SELECT ct
+				FROM CategoryTypeImpl ct
+				WHERE ct.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_USED_UIDS">
+			<query>
+				SELECT DISTINCT ct.uidPk
+				FROM CategoryImpl ac LEFT OUTER JOIN ac.categoryType ct
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_LIST_CATEGORY_TYPE">
+			<query>
+				SELECT ac
+				FROM CategoryImpl ac LEFT OUTER JOIN ac.categoryType ct
+				LEFT OUTER JOIN FETCH ac.attributeValueMap
+				WHERE ct.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_SELECT_CATALOG_ALL">
+			<query>
+				SELECT ct
+				FROM CategoryTypeImpl ct
+				WHERE ct.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPES_IN_USE">
+			<query>
+				SELECT ac.categoryType.uidPk
+				FROM CategoryImpl ac
+				WHERE ac.categoryType.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_TYPE_DELETE_BY_CATALOG_UID">
+			<query>DELETE
+				FROM CategoryTypeImpl ct
+				WHERE ct.catalog.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="DigitalAssetAuditImpl">
+		<named-query name="DA_AUDIT_BY_DAID_ORDERSKUID">
+			<query>
+				SELECT daAudit
+				FROM DigitalAssetAuditImpl daAudit
+				WHERE daAudit.orderSku.uidPk = ?1
+				AND daAudit.digitalAsset.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="DIGITAL_ASSET_AUDIT_SELECT_ALL">
+			<query>
+				SELECT da
+				FROM DigitalAssetImpl da
+			</query>
+		</named-query>
+	</entity>
+	<entity class="DigitalAssetImpl">
+		<named-query name="DIGITAL_ASSET_SELECT_ALL">
+			<query>
+				SELECT da
+				FROM DigitalAsset da
+			</query>
+		</named-query>
+	</entity>
+	<entity class="GiftCertificateImpl">
+		<named-query name="GIFT_CERTIFICATE_SELECT_ALL">
+			<query>
+				SELECT g
+				FROM GiftCertificateImpl g
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_BY_UIDS">
+			<query>
+				SELECT g
+				FROM GiftCertificateImpl as g
+				WHERE g.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_UIDS_ALL">
+			<query>
+				SELECT g.uidPk
+				FROM GiftCertificateImpl as g
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT g.uidPk
+				FROM GiftCertificateImpl as g
+				WHERE g.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT g
+				FROM GiftCertificateImpl as g
+				WHERE g.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_FIND_BY_CODE">
+			<query>
+				SELECT g
+				FROM GiftCertificateImpl as g
+				WHERE g.giftCertificateCode = ?1
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_FIND_BY_CODE_AND_STORE">
+			<query>
+				SELECT g
+				FROM GiftCertificateImpl as g
+				WHERE g.giftCertificateCode = ?1 and g.store.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_FIND_BY_GUID">
+			<query>
+				SELECT g
+				FROM GiftCertificateImpl as g
+				WHERE g.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_DETAIL_REPORT">
+			<query>
+				<![CDATA[
+				SELECT gc
+				FROM GiftCertificateImpl as gc
+				WHERE gc.store.uidPk = ?1
+				AND (gc.creationDate >= ?2 OR ?2 IS NULL)
+				AND (gc.creationDate <= ?3 OR ?3 IS NULL)
+				AND gc.currencyCode IN (:list)
+				AND (gc.orderGuid IS NULL OR gc.orderGuid NOT IN (SELECT o.orderNumber
+					FROM OrderImpl o
+					WHERE o.status = 'FAILED'
+					AND o.orderNumber = gc.orderGuid))
+				ORDER BY gc.creationDate
+				]]>
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_SUMMARY_PURCHASED_REPORT">
+			<query>
+				<![CDATA[
+				SELECT s.name, gc.currencyCode, SUM(gc.purchaseAmount)
+				FROM StoreImpl as s, GiftCertificateImpl as gc
+				WHERE gc.store.uidPk = s.uidPk
+				AND s.uidPk IN (:list)
+				AND (gc.currencyCode = ?1 OR ?1 IS NULL)
+				AND (gc.creationDate >= ?2 OR ?2 IS NULL)
+				AND (gc.creationDate <= ?3 OR ?3 IS NULL)
+				AND (gc.orderGuid IS NULL OR gc.orderGuid NOT IN (SELECT o.orderNumber
+					FROM OrderImpl o
+					WHERE o.status = 'FAILED'
+					AND o.orderNumber = gc.orderGuid))
+				GROUP BY s.name, s.code ,gc.currencyCode
+				]]>
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_SUMMARY_SPEND_REPORT">
+			<query>
+				<![CDATA[
+				SELECT s.name, gc.currencyCode, SUM(gct.amount)
+				FROM StoreImpl as s, GiftCertificateImpl as gc, GiftCertificateTransactionImpl as gct
+				WHERE gc.store.uidPk = s.uidPk
+				AND s.uidPk IN (:list)
+				AND gct.giftCertificate.uidPk = gc.uidPk
+				AND (gc.currencyCode = ?1 OR ?1 IS NULL)
+				AND (gc.creationDate >= ?2 OR ?2 IS NULL)
+				AND (gc.creationDate <= ?3 OR ?3 IS NULL)
+				AND (gc.orderGuid IS NULL OR gc.orderGuid NOT IN (SELECT o.orderNumber
+					FROM OrderImpl o
+					WHERE o.status = 'FAILED'
+					AND o.orderNumber = gc.orderGuid))
+				GROUP BY s.name, s.code, gc.currencyCode
+				]]>
+			</query>
+		</named-query>
+	</entity>
+	<entity class="LinkedCategoryImpl">
+		<named-query name="LINKED_CATEGORY_SELECT_BY_MASTER_CATEGORY_UID">
+			<query>
+				SELECT lc
+				FROM LinkedCategoryImpl lc
+				WHERE lc.masterCategory.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_LIST_AVAILABLE_ROOT">
+			<query>
+				SELECT lc
+				FROM LinkedCategoryImpl lc
+				WHERE lc.parentInternal IS NULL
+				AND lc.masterCategory.hidden = false
+				AND lc.masterCategory.startDate &lt;= ?1
+				AND ( lc.masterCategory.endDate IS NULL OR lc.masterCategory.endDate &gt;= ?2 )
+				AND lc.catalog.uidPk = ?3
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_UIDS_AVAILABLE">
+			<query>
+				SELECT lc.uidPk
+				FROM LinkedCategoryImpl lc
+				WHERE lc.masterCategory.startDate &lt;= ?1
+				AND ( lc.masterCategory.endDate IS null OR lc.masterCategory.endDate &gt;= ?2 )
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_FIND_BY_GUID_CATALOG">
+			<query>
+				SELECT lc
+				FROM LinkedCategoryImpl lc
+				WHERE lc.masterCategory.code = ?1
+				AND lc.catalog.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_FIND_BY_GUID_CATALOG_GUID">
+			<query>
+				SELECT lc
+				FROM LinkedCategoryImpl lc
+				WHERE lc.masterCategory.code = ?1
+				AND lc.catalog.code = ?2
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_COUNT_BY_CODE">
+			<query>
+				SELECT count(lc)
+				FROM LinkedCategoryImpl lc
+				WHERE lc.masterCategory.code = ?1
+				AND lc.catalog.code = ?2
+			</query>
+		</named-query>
+		<named-query name="FIND_MASTER_CATALOG_FOR_LINKED_CATEGORY">
+			<query>
+				SELECT lc.masterCategory.catalog
+				FROM LinkedCategoryImpl lc
+				WHERE lc.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_CODE_SELECT_BY_UID">
+			<query>
+				SELECT lc.masterCategory.code
+				FROM LinkedCategoryImpl lc
+				WHERE lc.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="LINKED_CATEGORY_EXISTS_FOR_COMPOUND_GUID">
+			<query>
+				SELECT count(c.uidPk) from LinkedCategoryImpl c
+				WHERE c.masterCategory.code = :categoryCode
+				AND c.catalog.code = :catalogCode
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ProductAssociationImpl">
+		<named-query name="PRODUCTASSOCIATION_SELECT_BY_TARGETSKU_UIDS">
+			<query>
+				SELECT pa
+				FROM ProductAssociationImpl pa
+				WHERE pa.targetSku.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCTASSOCIATION_SELECT_BY_TARGETPRODUCT_UIDS">
+			<query>
+				SELECT pa
+				FROM ProductAssociationImpl pa
+				WHERE pa.targetProduct.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCTASSOCIATION_SELECT_BY_SOURCEPRODUCT_UIDS">
+			<query>
+				SELECT pa
+				FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCTASSOCIATION_DELETE_BY_UID">
+			<query>
+				DELETE FROM ProductAssociationImpl pa
+				WHERE pa.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTASSOCIATION_UIDS_BY_SOURCE_PRODUCT_CODE_AND_CATALOG">
+			<query>
+				SELECT pa.uidPk
+				FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.code = ?1
+				AND pa.catalog.code = ?2
+			</query>
+		</named-query>
+		<named-query name="DELETE_PRODUCT_ASSOCIATIONS_BY_UID">
+			<query>
+				DELETE FROM ProductAssociationImpl pa
+				WHERE pa.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="DELETE_CATALOG_PRODUCT_ASSOCIATIONS_BY_SOURCE_PRODUCT_CODE">
+			<query>
+				DELETE FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.code = ?1
+				AND pa.catalog.code = ?2
+			</query>
+		</named-query>
+		<named-query name="DELETE_PRODUCT_ASSOCIATIONS_BY_SOURCE_AND_TARGET_PRODUCT_CODE">
+			<query>
+				DELETE FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.code = ?1
+				AND pa.targetProduct.code = ?2
+				AND pa.catalog.code = ?3
+			</query>
+		</named-query>
+		<named-query name="DELETE_PRODUCT_ASSOCIATIONS_BY_SOURCE_AND_TARGET_PRODUCT_CODE_AND_ASSOC_TYPE">
+			<query>
+				DELETE FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.code = ?1
+				AND pa.targetProduct.code = ?2
+				AND pa.associationType = ?3
+				AND pa.catalog.code = ?4
+			</query>
+		</named-query>
+		<named-query name="DELETE_PRODUCT_ASSOCIATIONS_BY_SOURCE_AND_ASSOC_TYPE">
+			<query>
+				DELETE FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.code = ?1
+				AND pa.associationType = ?2
+				AND pa.catalog.code = ?3
+			</query>
+		</named-query>
+		<named-query name="PRODUCTASSOCIATION_IN_CATALOG">
+			<query>
+				SELECT COUNT(pa.uidPk)
+				FROM ProductAssociationImpl pa, IN(pa.sourceProduct.productCategories) spc, IN(pa.targetProduct.productCategories) tpc
+				WHERE pa.uidPk = ?1
+				AND spc.category.catalog = pa.catalog
+				AND tpc.category.catalog = pa.catalog
+			</query>
+		</named-query>
+		<named-query name="PRODUCTASSOCIATION_EXISTS_IN_CATALOG">
+			<query>
+				SELECT pa.uidPk
+				FROM ProductAssociationImpl pa
+				WHERE pa.sourceProduct.uidPk = ?1
+				AND pa.targetProduct.uidPk = ?2
+				AND pa.catalog.uidPk = ?3
+				AND pa.associationType = ?4
+			</query>
+		</named-query>
+		<named-query name="FILTER_EXISTING_PRODUCTASSOCIATIONS_IN_CATALOG">
+			<query>
+				SELECT DISTINCT pa.targetProduct.uidPk
+				FROM ProductAssociationImpl pa
+				WHERE pa.targetProduct.uidPk IN(:list)
+				AND pa.sourceProduct.uidPk = ?1
+				AND pa.catalog.uidPk = ?2
+				AND pa.associationType = ?3
+			</query>
+		</named-query>
+		<named-query name="DELETE_OBSOLETE_PRODUCTASSOCIATIONS">
+			<query>DELETE
+				FROM ProductAssociationImpl pa
+				WHERE pa.targetProduct.uidPk NOT IN(:list)
+				AND pa.sourceProduct.uidPk = ?1
+				AND pa.catalog.uidPk = ?2
+				AND pa.associationType = ?3
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ProductCategoryImpl">
+		<named-query name="MAX_FEATURED_ORDER_BY_CAT">
+			<query>
+				SELECT max(pc.featuredProductOrder)
+				FROM ProductCategoryImpl pc
+				WHERE pc.category.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_PRODUCTS_IN_CATEGORY">
+			<query>
+				SELECT count(pc.uidPk)
+				FROM ProductCategoryImpl pc
+				WHERE pc.category.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTCATEGORY_DELETE_BY_CATEGORY_UID">
+			<query>DELETE
+				FROM ProductCategoryImpl pc
+				WHERE pc.category.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="SELECT_CATEGORY_UID_BY_PRODUCT_UID">
+			<query>
+				SELECT DISTINCT pc.category.uidPk
+				FROM ProductCategoryImpl pc
+				WHERE pc.product.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_BY_PRODUCT_CATEGORY_UID">
+            		<query>
+				SELECT pc
+				FROM ProductCategoryImpl AS pc
+				WHERE pc.uidPk = ?1
+			</query>
+        	</named-query>
+        	<named-query name="FIND_BY_CATEGORY_UID_AND_PRODUCT_CODE">
+            		<query>
+				SELECT pc
+				FROM ProductCategoryImpl AS pc
+				WHERE pc.category.uidPk = ?1
+				AND pc.product.code = ?2
+			</query>
+        	</named-query>
+        	<named-query name="FIND_BY_CATEGORY_UID">
+            		<query>
+				SELECT pc
+				FROM ProductCategoryImpl AS pc
+				WHERE pc.category.uidPk = ?1
+			</query>
+        	</named-query>     
+	</entity>
+	<entity class="ProductDeletedImpl">
+		<named-query name="PRODUCT_UIDS_SELECT_BY_DELETED_DATE">
+			<query>
+				SELECT pd.productUid
+				FROM ProductDeletedImpl pd
+				WHERE pd.deletedDate &gt;= ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="com.elasticpath.domain.search.impl.ObjectDeletedImpl">
+		<named-query name="OBJECT_UIDS_SELECT_BY_DELETED_DATE">
+			<query>
+				SELECT od.objectUid
+				FROM ObjectDeletedImpl od
+				WHERE od.objectType = ?1
+				AND od.deletedDate &gt;= ?2
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ProductImpl">
+		<named-query name="PRODUCT_SELECT_BY_GUID">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_TOP_SELLERS">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				ORDER BY p.salesCount DESC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_ALL">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_WITH_CATEGORY">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				INNER JOIN FETCH p.productCategories
+				WHERE p.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_ALL_EAGER">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				LEFT OUTER JOIN FETCH p.catalogPrices
+				LEFT OUTER JOIN FETCH p.productSkusInternal
+				LEFT OUTER JOIN FETCH p.productCategories
+				LEFT OUTER JOIN FETCH p.localeDependantFieldsMap
+				LEFT OUTER JOIN FETCH p.attributeValueMap
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UIDS_ALL">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_BY_CATEGORY_UID">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk = ?1 ORDER BY p.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UID_SELECT_BY_CATEGORY_UID">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk = ?1 ORDER BY p.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_BY_BRAND_UID">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.brand.uidPk = ?1
+				ORDER BY p.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UID_SELECT_BY_BRAND_UID">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				WHERE p.brand.uidPk = ?1
+				ORDER BY p.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UIDS_AVAILABLE">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				WHERE p.startDate &lt;= ?1
+				AND ( p.endDate IS NULL OR p.endDate &gt;= ?2 )
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UIDS_AVAILABLE_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				WHERE p.lastModifiedDate &gt;= ?1
+				AND p.startDate &lt;= ?2
+				AND ( p.endDate IS NULL OR p.endDate &gt;= ?3 )
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				WHERE p.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UID_SELECT_BY_GUID">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				WHERE p.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_CODE_SELECT_BY_UID">
+			<query>
+				SELECT p.uidPk, p.code
+				FROM ProductImpl p
+				WHERE p.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UIDS_BY_SKUOPTION">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p, IN(p.productType.skuOptions) so
+				WHERE so.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UID_BY_CATEGORY">
+			<query>
+				SELECT DISTINCT p.uidPk
+				FROM ProductImpl p INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_GUID_SELECT_BY_GUID">
+			<query>
+				SELECT p.code
+				FROM ProductImpl p
+				WHERE p.code = ?1
+			</query>
+		</named-query>
+		<named-query name="SELECT_PRODUCT_CATEGORY_ASSOCIATION">
+			<query>
+				SELECT pc.uidPk
+				FROM ProductImpl p INNER JOIN p.productCategories pc
+				WHERE p.uidPk = ?1
+				AND pc.category.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_UID_SELECT_BY_PRODUCT_UID">
+			<query>
+				SELECT pc.category.uidPk
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE p.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="FEATURED_PRODUCT_SELECT_BY_CAT_UID">
+			<query>
+				SELECT p, pc.featuredProductOrder
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk = ?1
+				AND pc.featuredProductOrder IS NOT null
+				AND pc.featuredProductOrder &lt;&gt; 0
+				ORDER BY pc.featuredProductOrder, p.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="FEATURED_PRODUCT_UID_SELECT_BY_CAT_UID">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk = ?1
+				AND pc.featuredProductOrder IS NOT null and pc.featuredProductOrder &lt;&gt; 0
+				ORDER BY pc.featuredProductOrder, p.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UPDATE_MODIFIED_TIME_BY_PRODUCT_TYPE">
+			<query>
+				UPDATE ProductImpl p
+				SET p.lastModifiedDate = ?1
+				WHERE p.productType.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UPDATE_MODIFIED_TIME_BY_UID">
+			<query>
+				UPDATE ProductImpl p
+				SET p.lastModifiedDate = ?1
+				WHERE p.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UPDATE_MODIFIED_TIME_BY_BRAND">
+			<query>
+				UPDATE ProductImpl p
+				SET p.lastModifiedDate = ?1
+				WHERE p.brand.uidPk = ?2
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UPDATE_DEFAULT_SKU_NULL">
+			<query>
+				UPDATE ProductImpl p
+				SET p.defaultSku = null
+				WHERE p.defaultSku.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SELECT_SALES_COUNT_AND_CATEGORY_UIDS">
+			<query>
+				SELECT p.salesCount, p.uidPk
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk in (:list)
+				ORDER BY p.salesCount DESC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BY_UIDS">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BY_GUIDS">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.code in (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UID_FOR_SKU_CODE">
+			<query>
+				SELECT p.uidPk
+				FROM ProductSkuImpl ps
+				JOIN ps.productInternal p
+				WHERE ps.skuCodeInternal = :skuCode
+			</query>
+		</named-query>
+
+		<named-query name="BUNDLE_ENRICH_DTO_BY_GUIDS">
+			<query>
+				SELECT p.code, pldf.displayName, pt.withMultipleSkus, MIN(psku.skuCodeInternal)
+				FROM ProductBundleImpl p
+				LEFT JOIN p.productSkusInternal psku
+				INNER JOIN p.localeDependantFieldsMap as pldf
+				INNER JOIN p.productType as pt
+				WHERE pldf.locale = ?1
+				AND p.code in (:list)
+				GROUP BY p.code, pldf.displayName, pldf.locale, pt.withMultipleSkus
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_ENRICH_DTO_BY_GUIDS">
+			<query>
+				SELECT p.code, pldf.displayName, pt.withMultipleSkus, MIN(psku.skuCodeInternal)
+				FROM ProductImpl p
+				LEFT JOIN p.productSkusInternal psku
+				INNER JOIN p.localeDependantFieldsMap as pldf
+				INNER JOIN p.productType as pt
+				WHERE pldf.locale = ?1
+				AND p.code in (:list)
+				GROUP BY p.code, pldf.displayName, pldf.locale, pt.withMultipleSkus
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_ENRICH_DTO_BY_GUIDS">
+			<query>
+				SELECT p.code, pldf.displayName, pt.withMultipleSkus, psku.skuCodeInternal
+				FROM ProductSkuImpl AS psku
+				INNER JOIN psku.productInternal p
+				INNER JOIN p.localeDependantFieldsMap as pldf
+				INNER JOIN p.productType as pt
+				WHERE pldf.locale = ?1
+				AND psku.skuCodeInternal in (:list)
+			</query>
+		</named-query>
+
+		<named-query name="PRODUCT_SKU_OPTION_ENRICH_DTO_BY_GUIDS">
+			<query>
+				SELECT psku.skuCodeInternal, lpm.value, ovm.optionKey
+				FROM ProductSkuImpl AS psku
+				INNER JOIN psku.optionValueMap ovm
+				INNER JOIN ovm.skuOptionValue ov
+				INNER JOIN ov.localizedPropertiesMap lpm
+				WHERE psku.skuCodeInternal in (:list)
+				AND lpm.localizedPropertyKey = CONCAT('skuOptionValueDisplayName_',?1)
+				ORDER BY ovm.optionKey ASC
+			</query>
+		</named-query>
+
+		<named-query name="PRODUCT_UID_SELECT_BY_CATEGORY_UIDS">
+			<query>
+				SELECT DISTINCT p.uidPk
+				FROM ProductImpl p
+				INNER JOIN p.productCategories pc
+				WHERE pc.category.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UPDATE_MODIFIED_TIME_BY_UIDS">
+			<query>
+				UPDATE ProductImpl p
+				SET p.lastModifiedDate = ?1
+				WHERE p.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_UIDS_FIND_BY_STORE_UID">
+			<query>
+				SELECT p.uidPk
+				FROM ProductImpl p, IN(p.productCategories) pc, StoreImpl s
+				WHERE pc.category.catalog = s.catalog
+				AND s.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="UPDATE_PRODUCT_SALES_COUNT_BY">
+			<query>
+				UPDATE ProductImpl p
+				SET p.salesCount = ?1, p.lastModifiedDate = ?2
+				WHERE p.uidPk = ?3
+			</query>
+		</named-query>
+		<named-query name="SELECT_PRODUCT_SALES_COUNT">
+			<query>
+				SELECT p.salesCount
+				FROM ProductImpl p
+				WHERE p.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_DATA_SELECT_TOP_SELLERS">
+			<query>
+				SELECT p.salesCount, p.uidPk
+				FROM ProductImpl p ORDER BY p.salesCount DESC
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_NAME_IN_DEFAULT_LOCALE_BY_CODE">
+			<query>
+				SELECT ldf.displayName
+				FROM ProductImpl p, IN(p.localeDependantFieldsMap) ldf, IN(p.productCategories) pc
+				WHERE p.code = ?1
+				AND pc.category.catalog.master = true
+				AND ldf.locale = pc.category.catalog.defaultLocaleInternal
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ProductSkuImpl">
+		<named-query name="PRODUCTSKU_COUNT_BY_PRODUCT">
+			<query>
+				SELECT count(ps.uidPk)
+				FROM ProductSkuImpl ps
+				WHERE ps.productInternal.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_GUID_BY_PRODUCT">
+			<query>
+				SELECT ps.skuCodeInternal
+				FROM ProductSkuImpl ps
+				WHERE ps.productInternal.code like ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_SELECT_BY_GUID">
+			<query>
+				SELECT p
+				FROM ProductSkuImpl p
+				WHERE p.skuCodeInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_GUID_SELECT_BY_GUID">
+			<query>
+				SELECT p.skuCodeInternal
+				FROM ProductSkuImpl p
+				WHERE p.skuCodeInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_SELECT_BY_PRODUCT_UID">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				WHERE ps.productInternal.uidPk = ?1
+				ORDER BY ps.skuCodeInternal ASC, ps.uidPk ASC
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_SELECT_BY_SKU_CODE">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				WHERE ps.skuCodeInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_SELECT_BY_GUID">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				WHERE ps.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKUS_BY_SKU_CODES">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				WHERE ps.skuCodeInternal IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKUS_BY_SKU_UIDS">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				WHERE ps.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_COUNT_BY_NAME">
+			<query>
+				SELECT count(p.uidPk)
+				FROM ProductSkuImpl p
+				WHERE p.skuCodeInternal = ?1
+				AND p.uidPk &lt;&gt; ?2
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_COUNT_BY_PRODUCT_CODE">
+			<query>
+				SELECT COUNT(p.uidPk)
+				FROM ProductSkuImpl p
+				WHERE p.productInternal.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_UID_SELECT_BY_GUID">
+			<query>
+				SELECT p.uidPk
+				FROM ProductSkuImpl p
+				WHERE p.skuCodeInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_SELECT_BY_SKUCODE_LIKE_AND_CATEGORY_UIDS">
+			<query>
+				SELECT sku
+				FROM ProductSkuImpl sku
+				INNER JOIN sku.productInternal p
+				INNER JOIN p.productCategories pc
+				WHERE sku.skuCodeInternal LIKE ?1
+				AND pc.category.uidPk IN (:list)
+				ORDER BY sku.skuCodeInternal asc, sku.uidPk asc
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_SELECT">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				WHERE ps.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_EXISTS">
+			<query>
+				SELECT ps.skuCodeInternal
+				FROM ProductSkuImpl ps
+				WHERE ps.skuCodeInternal IN (:list)
+				AND ps.productInternal.uidPk &lt;&gt; ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_SKU_PRE_OR_BACK_ORDER_DETAILS">
+			<query>
+				SELECT NEW com.elasticpath.domain.catalog.impl.PreOrBackOrderDetails(sku.skuCodeInternal, sku.productInternal.preOrBackOrderLimitInternal, sku.preOrBackOrderedQuantity)
+				FROM ProductSkuImpl sku
+				WHERE sku.skuCodeInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_UIDS_SINCE_PRODUCT_LAST_MODIFIED">
+			<query>
+				SELECT ps.uidPk
+				FROM ProductSkuImpl ps
+				WHERE ps.productInternal.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_UIDS_ALL">
+			<query>
+				SELECT ps.uidPk
+				FROM ProductSkuImpl ps
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ProductTypeImpl">
+		<named-query name="PRODUCT_TYPE_SELECT_ALL">
+			<query>
+				SELECT pt
+				FROM ProductTypeImpl pt
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_SELECT_ALL_EAGER">
+			<query>
+				SELECT pt
+				FROM ProductTypeImpl pt
+				LEFT OUTER JOIN FETCH pt.productAttributeGroupAttributes
+				LEFT OUTER JOIN FETCH pt.skuAttributeGroupAttributes
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_BY_CATALOG_EAGER">
+			<query>
+				SELECT pt
+				FROM ProductTypeImpl pt
+				LEFT OUTER JOIN FETCH pt.productAttributeGroupAttributes
+				LEFT OUTER JOIN FETCH pt.skuAttributeGroupAttributes
+				WHERE pt.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_USED_UIDS">
+			<query>
+				SELECT DISTINCT pt.uidPk
+				FROM ProductImpl p
+				LEFT OUTER JOIN p.productType pt
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_COUNT_BY_NAME">
+			<query>
+				SELECT count(pt.uidPk)
+				FROM ProductTypeImpl pt
+				WHERE pt.name = ?1
+				AND pt.uidPk &lt;&gt; ?2
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_LIST_PRODUCT_TYPE">
+			<query>
+				SELECT p
+				FROM ProductImpl p
+				WHERE p.productType.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="TAX_CODES_WITH_PRODUCT_TYPE">
+			<query>
+				SELECT distinct pt.taxCode.code
+				FROM ProductTypeImpl as pt
+			</query>
+		</named-query>
+		<named-query name="TAX_CODES_WITH_PRODUCT">
+			<query>
+				SELECT DISTINCT p.taxCodePersistence.code
+				FROM ProductImpl AS p
+			</query>
+		</named-query>
+		<named-query name="PRODUCTSKU_LIST_PRODUCT_TYPE">
+			<query>
+				SELECT ps
+				FROM ProductSkuImpl ps
+				LEFT OUTER JOIN ps.productInternal p
+				WHERE p.productType.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_SELECT_CATALOG_ALL">
+			<query>
+				SELECT pt
+				FROM ProductTypeImpl pt
+				WHERE pt.catalog.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_FIND_BY_NAME">
+			<query>
+				SELECT pt
+				FROM ProductTypeImpl pt
+				WHERE pt.name = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_PRODUCT_TYPE_BY_GUID">
+			<query>
+				SELECT pt
+				FROM ProductTypeImpl pt
+				WHERE pt.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_IN_USE">
+			<query>
+				SELECT p.productType.uidPk
+				FROM ProductImpl p
+				WHERE p.productType.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_TYPE_FIND_BY_SKUCODE">
+			<query>
+				SELECT sku.productInternal.productType
+				FROM ProductSkuImpl AS sku
+				WHERE sku.skuCodeInternal = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TopSellerImpl">
+		<named-query name="TOP_SELLER_SELECT_BY_CATEGORY_UID">
+			<query>
+				SELECT tsc
+				FROM TopSellerImpl AS tsc
+				WHERE tsc.categoryUid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CatalogLocaleImpl">
+		<named-query name="FIND_ALL_CATALOG_LOCALES">
+			<query>
+				SELECT c
+				FROM CatalogLocaleImpl c
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ItemConfigurationMementoImpl">
+		<named-query name="FIND_ITEM_CONFIGURATION_BY_GUID">
+			<query>
+				SELECT icm
+				FROM ItemConfigurationMementoImpl icm
+				WHERE icm.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_ITEM_CONFIGURATION_UID_BY_GUID">
+			<query>
+				SELECT icm.uidPk
+				FROM ItemConfigurationMementoImpl icm
+				WHERE icm.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

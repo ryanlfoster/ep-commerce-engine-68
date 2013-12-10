@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<saved_conditions>
+<condition>
+    <guid>53CBBD97-FE31-5C56-204A-6830E1BA6BA0</guid>
+    <name>Out of range start date</name>
+    <description></description>
+    <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1608943860000L) }  } </condition_string>
+    <dictionary_guid>TIME</dictionary_guid>
+</condition>
+
+<condition>
+    <guid>6524FBBF-C321-174D-ABBA-B6E6A94B5835</guid>
+    <name>Only Mobee</name>
+    <description></description>
+    <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+    <dictionary_guid>STORES</dictionary_guid>
+</condition>
+</saved_conditions>

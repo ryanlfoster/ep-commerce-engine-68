@@ -1,0 +1,82 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2010
+*#
+## RMA.html.vm
+#emailInit()
+#set ($order = $orderReturn.getOrder())
+#set ($store = $order.getStore())
+#set ($customer = $order.getCustomer())
+#set ($lang = $order.getLocale())
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#emailMessage("RMA.title")</title>
+<style type="text/css">
+body {
+	font-size: 0.8em
+}
+</style>
+</head>
+<body>
+	<table width="600" border="0" align="center" cellpadding="0"
+        cellspacing="0" bgcolor="#FFFFFF">
+	<tr>
+		<td>#parse("includes/header.email.vm")</td>
+	</tr>
+	<tr>
+	<td>
+	<p>
+		<b>#emailMessage("RMA.date")</b>&nbsp;$dateTool.format('E, MMMM d yyyy',$orderReturn.getCreatedDate())<br/>
+		<b>#emailMessage("RMA.rmaNumber")</b>&nbsp;$orderReturn.getRmaCode()<br/>
+		<b>#emailMessage("RMA.name")</b>&nbsp;$customer.getFirstName()&nbsp;$customer.getLastName()<br/>
+	</p>
+	</td>
+	</tr>
+	<tr>
+	<td>
+    <table width="100%" border="0" align="center" cellpadding="10"
+			cellspacing="0" bgcolor="#FFFFFF">
+		<tr>
+			<td><b>#emailMessage("RMA.skuCode")</b></td>
+			<td><b>#emailMessage("RMA.productName")</b></td>
+			<td><b>#emailMessage("RMA.returnQty")</b></td>
+			<td><b>#emailMessage("RMA.reasonForExchange")</b></td>
+		</tr>
+    	#foreach ($orderReturnSku in $orderReturn.getOrderReturnSkus())
+    		<tr>
+    			<td>$orderReturnSku.getOrderSku().getSkuCode()</td>
+				<td>$orderReturnSku.getProductSku().getProduct().getDisplayName($lang)</td>
+    			<td>$orderReturnSku.getQuantity()</td>
+    			<td>#emailMessage($orderReturnSku.getReturnReason())</td>
+    		</tr>
+    	#end
+	</table>
+	</td>
+	</tr>
+	<tr>
+	<td>
+    <p>#emailMessage("RMA.return.title")</p>
+	<p>
+		#emailMessage("RMA.return.line1")<br/>
+		#emailMessage("RMA.return.line2")<br/>
+		#emailMessage("RMA.return.line3")<br/>
+		#emailMessage("RMA.return.line4")<br/>
+		#emailMessage("RMA.return.line5")<br/>
+	</p>
+    <p><u>#emailMessage("RMA.instructions.title")</u></p>
+	<p>#emailMessage("RMA.instructions.paragraph1")</p>
+	<p>#emailMessage("RMA.instructions.paragraph2")</p>
+    <p>#emailMessage("RMA.instructions.paragraph3")</p>
+	<p>#emailMessage("RMA.instructions.paragraph4")</p>    
+	<p><hr/>#emailMessage("RMA.forWarehouse.title")<hr/></p>
+    <p>#emailMessage("RMA.forWarehouse.receivedBy")</p>
+    <br/>
+    <br/>
+    <p>#emailMessage("RMA.forWarehouse.signed")</p>
+	</td>
+	</tr>
+	</table>
+</body>
+</html>

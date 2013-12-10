@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  
+In the search web.xml, we have a servlet context named "manager".  Its servlet class is our
+EpDispatcherServlet, which extends DispatcherServlet.  By default, DispatcherServlet looks for
+a Spring context file named <context-name>-servlet.xml, so in our case it looks for manager-servlet.xml.
+
+We also configure ContextLoaderListener and and define a context parameter for
+contextConfigLocation=/WEB-INF/elastic-path-servlet.xml to load the elastic-path-servlet.xml.
+
+At a point, we could get rid of this file, rename the context in the web.xml from "manager" to
+"elastic-path" and remove the ContextLoaderListener.
+-->
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+
+</beans>

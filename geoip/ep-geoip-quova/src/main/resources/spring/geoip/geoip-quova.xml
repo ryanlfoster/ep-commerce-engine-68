@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+
+	<bean id="quovaProvider" class="com.elasticpath.domain.geoip.provider.impl.QuovaGeoIpProviderImpl" lazy-init="true">
+		<property name="settingsReader" ref="settingsReader"/>
+		<property name="username" value="COMMERCE/SYSTEM/GEOIP/QUOVA/Username"/>
+		<property name="password" value="COMMERCE/SYSTEM/GEOIP/QUOVA/Password"/>
+		<property name="endpoint" value="COMMERCE/SYSTEM/GEOIP/QUOVA/onDemandEndpointUrl"/>
+		<property name="additionalIntegerRequestProperties">
+			<map>
+				<!-- Use string literals (rather than code constants) to work with different jax-ws versions -->
+				<entry key="com.sun.xml.ws.connect.timeout"><value>200</value></entry>
+				<entry key="com.sun.xml.ws.request.timeout"><value>500</value></entry>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<!-- selectable values provider -->
+	<bean id="timeZoneSelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableFloatTagValueProviderImpl">
+		<property name="resourceName" value="geoip/timezone_GMT.csv" />
+		<property name="delimiter" value=";" />
+		<property name="skipFirstLine" value="false" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	
+	<bean id="countryCodeSelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/iso_countries.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="ipRoutingTypeSelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/ip_routing_type.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="ipConnectionTypeSelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/ip_connection_type.csv" />
+		<property name="delimiter" value=";" />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="continentSelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/continent.csv" />
+		<property name="delimiter" value=";" />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="stateSelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/country_state_abbreviation.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="3" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="citySelectableValueProvider-quova" class="com.elasticpath.domain.geoip.provider.impl.QuovaSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/country_state_city.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="3" />
+		<property name="nameFieldIndex" value="3" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<shipping_service_levels>
+<shipping_service_level guid="service_level127672548310427">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>25.0</value>
+                <display_text>25.0</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SLRWORLD</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Global Airmail Parcel Post</value>
+    </localized_names>
+    <code>SLRWORLD_USPSGlobalAirmailParcelPost</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548292921">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>5.8</value>
+                <display_text>5.8</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SLRWORLD</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Ground</value>
+    </localized_names>
+    <code>SLRWORLD_USPSGround</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548299023">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>18.0</value>
+                <display_text>18.0</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SLRWORLD</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Next Day Air</value>
+    </localized_names>
+    <code>SLRWORLD_USPSNextDayAir</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548304425">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>26.99</value>
+                <display_text>26.99</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SLRWORLD</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Next Day Air Early AM</value>
+    </localized_names>
+    <code>SLRWORLD_USPSNextDayAirEarlyAM</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548183617">
+    <shipping_region>Great Britain (UK)</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>6.00</value>
+                <display_text>6.00</display_text>
+                <currency>GBP</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUPUK</storecode>
+    <carrier>Royal Mail</carrier>
+    <localized_names>
+        <value language="en">Royal Mail 1st Class</value>
+    </localized_names>
+    <code>SNAPITUPUK_RoyalMail1stClass</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548177615">
+    <shipping_region>Great Britain (UK)</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>4.00</value>
+                <display_text>4.00</display_text>
+                <currency>GBP</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUPUK</storecode>
+    <carrier>Royal Mail</carrier>
+    <localized_names>
+        <value language="en">Royal Mail 2nd Class</value>
+    </localized_names>
+    <code>SNAPITUPUK_RoyalMail2ndClass</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548190819">
+    <shipping_region>Great Britain (UK)</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>12.00</value>
+                <display_text>12.00</display_text>
+                <currency>GBP</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUPUK</storecode>
+    <carrier>Royal Mail</carrier>
+    <localized_names>
+        <value language="en">Special Delivery Next day</value>
+    </localized_names>
+    <code>SNAPITUPUK_SpecialDeliveryNextday</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level12767254809773">
+    <shipping_region>Canada</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>9.30</value>
+                <display_text>9.30</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>Canada Post</carrier>
+    <localized_names>
+        <value language="en">1 Business Day (Canada Post - Xpresspost)</value>
+        <value language="fr">1 Jour Ouvrable (Postes Canada - Xpresspost)</value>
+    </localized_names>
+    <code>SNAPITUP_1BusinessDayCanadaPostXpresspost</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level12767254808101">
+    <shipping_region>Canada</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>7.00</value>
+                <display_text>7.00</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>Canada Post</carrier>
+    <localized_names>
+        <value language="en">2 Business Days (Canada Post - Regular Parcel)</value>
+        <value language="fr">2 Jours Ouvrable (Postes Canada - Colis Standard)</value>
+    </localized_names>
+    <code>SNAPITUP_2BDayCanadaPostRegularParcel</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level12767254810345">
+    <shipping_region>Canada</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>16.00</value>
+                <display_text>16.00</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>Canada Post</carrier>
+    <localized_names>
+        <value language="en">Next Business Day (Canada Post - Priority Courier)</value>
+        <value language="fr">Jour Ouvrable Suivant : 12 h (Postes Canada - Messageries Prioritaires)</value>
+    </localized_names>
+    <code>SNAPITUP_NextBusinessDayCanadaPostPriorityCourier</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level12767254811037">
+    <shipping_region>Great Britain (UK)</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>4.00</value>
+                <display_text>4.00</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>Royal Mail</carrier>
+    <localized_names>
+        <value language="en">Royal Mail 2nd Class</value>
+        <value language="fr">2&amp;egrave;me Classe De Courrier Royal</value>
+    </localized_names>
+    <code>SNAPITUP_RoyalMail2ndClass</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level12767254811649">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>5.80</value>
+                <display_text>5.80</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Ground</value>
+        <value language="fr">USPS Sol</value>
+    </localized_names>
+    <code>SNAPITUP_USPSGround</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548123011">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>18.00</value>
+                <display_text>18.00</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Next Day Air</value>
+        <value language="fr">L'Air de lendemain d'USPS</value>
+    </localized_names>
+    <code>SNAPITUP_USPSNextDayAir</code>
+    <active>true</active>
+</shipping_service_level>
+
+<shipping_service_level guid="service_level127672548128613">
+    <shipping_region>USA</shipping_region>
+    <shipping_cost_calculation_method type="fixedPriceMethod">
+        <displayText>FixedPriceMethod_method_text</displayText>
+        <shipping_cost_calculation_params>
+            <shipping_cost_calculation_param>
+                <param_key>CalculationParameter_FixedPrice</param_key>
+                <value>26.99</value>
+                <display_text>26.99</display_text>
+                <currency>USD</currency>
+            </shipping_cost_calculation_param>
+        </shipping_cost_calculation_params>
+    </shipping_cost_calculation_method>
+    <storecode>SNAPITUP</storecode>
+    <carrier>USPS</carrier>
+    <localized_names>
+        <value language="en">USPS Next Day Air Early AM</value>
+        <value language="fr">L'Air de lendemain d'USPS EST T&amp;ocirc;t</value>
+    </localized_names>
+    <code>SNAPITUP_USPSNextDayAirEarlyAM</code>
+    <active>true</active>
+</shipping_service_level>
+</shipping_service_levels>

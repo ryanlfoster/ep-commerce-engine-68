@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.0.N20060628-1351 Build &lt;20060628-1537></property>
+    <property name="units">in</property>
+    <text-property name="title">Registration</text-property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="startDate" id="45">
+            <property name="valueType">static</property>
+            <property name="dataType">dateTime</property>
+            <text-property name="promptText">Start Date</text-property>
+            <property name="allowBlank">false</property>
+            <property name="allowNull">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Short Date</property>
+                <property name="pattern">Short Date</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="46">
+            <property name="valueType">static</property>
+            <property name="dataType">dateTime</property>
+            <text-property name="promptText">End Date</text-property>
+            <property name="allowBlank">false</property>
+            <property name="allowNull">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Short Date</property>
+                <property name="pattern">Short Date</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="EPScriptedDataSource" id="43"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="RegistrationDataSet" id="44">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">createDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">uidPk</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">firstName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">lastName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">email</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">anonymous</property>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">phoneNumber</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">yearMonthDay</property>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">createDate</property>
+                    <property name="displayName">Registration Date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">uidPk</property>
+                    <property name="displayName">Customer ID</property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstName</property>
+                    <property name="displayName">First Name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">lastName</property>
+                    <property name="displayName">Last Name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">email</property>
+                    <property name="displayName">Email Address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">anonymous</property>
+                    <property name="displayName">Anonymous Registration</property>
+                </structure>
+                <structure>
+                    <property name="columnName">phoneNumber</property>
+                    <property name="displayName">Phone Number</property>
+                </structure>
+                <structure>
+                    <property name="columnName">yearMonthDay</property>
+                    <property name="displayName">Group by year, month, day</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">EPScriptedDataSource</property>
+            <method name="open"><![CDATA[customerService = new Packages.com.elasticpath.cmweb.reportservice.impl.CustomerReportServiceImpl();
+
+var startDate;
+var endDate;
+
+if (params["startDate"].value == null) {
+	startDate = null;
+} else {
+	startDate = params["startDate"];
+}
+if (params["endDate"].value == null) {
+	endDate = null;
+} else {
+	endDate = params["endDate"];
+}
+
+/* FOR TESTING PURPOSES ONLY
+engine = new Packages.com.elasticpath.persistence.TestPersistenceEngine();
+customerService.setPersistenceEngine(engine);
+*/
+
+
+customers = customerService.registrationReport(startDate, endDate);
+
+totalRows = customers.size();
+
+currentRow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentRow >= totalRows) {
+    return false;
+}
+
+var customer = customers.get(currentRow);
+
+currentRow++;
+row["createDate"] = customer[0];
+row["uidPk"] = new Number(customer[1]);
+row["firstName"] = customer[2];
+row["lastName"] = customer[3];
+row["email"] = customer[4];
+row["anonymous"] = customer[5];
+row["phoneNumber"] = customer[6];
+
+var stringDate = new String(row["createDate"]);
+row["yearMonthDay"] = stringDate.substring(11, 15) + " " + stringDate.substring(4, 7) + " " +  
+	+ stringDate.substring(8, 10);
+
+return true;]]></method>
+            <method name="close"><![CDATA[customerService = null;
+customers = null;
+
+totalRows = null;
+currentRow = null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="ep-table-header" id="379">
+            <property name="backgroundColor">#CCCCCC</property>
+            <property name="backgroundImage">template-resources/images/bg-bar-tbl-header.gif</property>
+            <property name="backgroundRepeat">repeat-x</property>
+            <property name="fontWeight">normal</property>
+            <property name="color">black</property>
+            <property name="borderBottomColor">#ACA899</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#F7F8F9</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="paddingTop">3px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">3px</property>
+            <property name="paddingRight">2px</property>
+            <property name="textAlign">left</property>
+            <property name="whiteSpace">nowrap</property>
+        </style>
+        <style name="ep-table-group-header-1" id="380">
+            <property name="backgroundColor">#A4C2F5</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">white</property>
+            <property name="borderBottomColor">#E8E4DA</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderTopColor">#E8E4DA</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="paddingTop">2px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">2px</property>
+            <property name="paddingRight">2px</property>
+        </style>
+        <style name="ep-table-detail" id="381">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="borderBottomColor">#F0F0F0</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderRightColor">#F0F0F0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="paddingTop">2px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">2px</property>
+            <property name="paddingRight">2px</property>
+        </style>
+        <style name="ep-report-header-bg" id="382">
+            <property name="backgroundColor">#5987D6</property>
+            <property name="backgroundImage">template-resources/images/bg-bar-1.gif</property>
+            <property name="backgroundRepeat">repeat-x</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="ep-report-header" id="383">
+            <property name="fontSize">1em</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">white</property>
+            <property name="marginTop">2px</property>
+            <property name="marginLeft">6px</property>
+            <property name="marginBottom">2px</property>
+            <property name="marginRight">2px</property>
+            <property name="lineHeight">1.7em</property>
+        </style>
+        <style name="report" id="384">
+            <property name="fontFamily">arial</property>
+            <property name="fontSize">1em</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <grid id="4">
+            <property name="fontFamily">"Arial"</property>
+            <property name="width">100%</property>
+            <column id="5"/>
+            <row id="6">
+                <cell id="7">
+                    <property name="style">ep-report-header-bg</property>
+                    <text id="10">
+                        <property name="style">ep-report-header</property>
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="paddingLeft">5pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Registration Report (<VALUE-OF>params["startDate"]</VALUE-OF> - <VALUE-OF>params["endDate"]</VALUE-OF>)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="8">
+                <cell id="9">
+                    <table id="11">
+                        <property name="width">100%</property>
+                        <property name="dataSet">RegistrationDataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">createDate</property>
+                                <expression name="expression">dataSetRow["createDate"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                            <structure>
+                                <property name="name">uidPk</property>
+                                <expression name="expression">dataSetRow["uidPk"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">firstName</property>
+                                <expression name="expression">dataSetRow["firstName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">lastName</property>
+                                <expression name="expression">dataSetRow["lastName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">email</property>
+                                <expression name="expression">dataSetRow["email"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">anonymous</property>
+                                <expression name="expression">dataSetRow["anonymous"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">phoneNumber</property>
+                                <expression name="expression">dataSetRow["phoneNumber"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">yearMonthDay</property>
+                                <expression name="expression">dataSetRow["yearMonthDay"]</expression>
+                            </structure>
+                        </list-property>
+                        <column id="36"/>
+                        <column id="37"/>
+                        <column id="38"/>
+                        <column id="39"/>
+                        <column id="40"/>
+                        <column id="41"/>
+                        <column id="42"/>
+                        <header>
+                            <row id="12">
+                                <property name="style">ep-table-header</property>
+                                <cell id="13">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="47">
+                                        <text-property name="text">Registration Date</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="14">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="49">
+                                        <text-property name="text">Customer ID</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="15">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="51">
+                                        <text-property name="text">First Name</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="16">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="53">
+                                        <text-property name="text">Last Name</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="17">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="55">
+                                        <text-property name="text">Email Address</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="18">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="57">
+                                        <text-property name="text">Anonymous Registration</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="19">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="59">
+                                        <text-property name="text">Phone Number</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="78">
+                            <property name="groupName">GroupByYearMonthDay</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">asc</property>
+                            <expression name="keyExpr">row["yearMonthDay"]</expression>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <header>
+                                <row id="79">
+                                    <cell id="80">
+                                        <property name="colSpan">7</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <property name="paddingTop">3px</property>
+                                        <text-data id="95">
+                                            <expression name="valueExpr">row["yearMonthDay"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="87">
+                                    <cell id="88"/>
+                                    <cell id="89"/>
+                                    <cell id="90"/>
+                                    <cell id="91"/>
+                                    <cell id="92"/>
+                                    <cell id="93"/>
+                                    <cell id="94"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="20">
+                                <property name="style">ep-table-detail</property>
+                                <cell id="21">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="96">
+                                        <expression name="valueExpr">new String(row["createDate"]).substring(0, 10)</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="22">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="50">
+                                        <property name="resultSetColumn">uidPk</property>
+                                    </data>
+                                </cell>
+                                <cell id="23">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="52">
+                                        <property name="resultSetColumn">firstName</property>
+                                    </data>
+                                </cell>
+                                <cell id="24">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="54">
+                                        <property name="resultSetColumn">lastName</property>
+                                    </data>
+                                </cell>
+                                <cell id="25">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="56">
+                                        <property name="resultSetColumn">email</property>
+                                    </data>
+                                </cell>
+                                <cell id="26">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="58">
+                                        <property name="resultSetColumn">anonymous</property>
+                                    </data>
+                                </cell>
+                                <cell id="27">
+                                    <property name="style">ep-table-detail</property>
+                                    <data id="60">
+                                        <property name="resultSetColumn">phoneNumber</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="28">
+                                <cell id="29"/>
+                                <cell id="30"/>
+                                <cell id="31"/>
+                                <cell id="32"/>
+                                <cell id="33"/>
+                                <cell id="34"/>
+                                <cell id="35"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <list-property name="images">
+        <structure>
+            <property name="name">icon-list.gif</property>
+            <property name="data">
+                R0lGODlhEAAOAOYAAAAAAP///4am6nqPvH+Tvombwi9iyDFlzTly4j5240B240Z75Ep9406B5FaG5ViH
+                5WWV82KO5mqZ9XGd9WyU526X53ei9n2n+Hab6Hqf6YSr+X+h6Yuw+oSl6Za5/Iuq6oOXwI6gxZSlx5qq
+                yqCvzaa0z7G91JC1+5q9/Z/A/qLC/6u50rXB1rrF2NLX4LzS9qe728LW9qO0z7PD3Ku50LvI3b3I2tvn
+                +sDK2+Ps+8rS3+zy/K2/28nb96OyyKe2zNLh+LbB0cPO3/P3/TVJY5Oit5alup6uw5qpvtjc4fn7/f7+
+                /v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAEwALAAAAAAQAA4AAAebgEwf
+                gx8CGxgUEQ8NCwkITIIqKSgeJxwaFxYTEhAHkIQdGRURDgwKCKgGkD9Lra6tSkM7OUSQPks4ODZLLCYr
+                QyQjQbVMR6+wsjk3w5BISzYtLEsrJSQ5IiHMTEavsbM3QD00xEW8vsAjIkAFIDLkyN/hMS/ukOXU1tgF
+                MQQD9UxFlCRxoUNIjRk8YCj8V4SIw4cQH0KaSLHixEAAOw==
+            </property>
+        </structure>
+    </list-property>
+</report>

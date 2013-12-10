@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.sellingcontext.impl</package>
+	<entity class="SellingContextImpl">
+		<named-query name="FIND_ALL_SELLING_CONTEXTS">
+			<query>
+				SELECT sc
+				FROM SellingContextImpl sc
+			</query>
+		</named-query>
+		<named-query name="SELLING_CONTEXT_FIND_BY_GUID">
+			<query>
+				SELECT sc
+				FROM SellingContextImpl sc
+				WHERE sc.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="SELLING_CONTEXT_FIND_BY_NAMED_CONDITION_GUID">
+			<query>
+				SELECT DISTINCT sc
+				FROM SellingContextImpl AS sc, IN (sc.conditions) scc
+				WHERE scc.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

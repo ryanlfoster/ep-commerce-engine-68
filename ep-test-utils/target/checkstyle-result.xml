@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/concurrent/ConcurrencyTestUtils.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/concurrent/RepeatableTestRunner.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/concurrent/Repeats.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/Assert.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/AssertHashCodeEquals.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/MatcherFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/matchers/GetterSetterMatcherAction.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/mock/MockWrapper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/mock/MockWrapperFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/mock/MockWrapperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/mock/PropertyEnabledExpectations.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/main/java/com/elasticpath/test/util/ReflectionHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/test/java/com/elasticpath/test/util/AssertTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/test/java/com/elasticpath/test/util/matchers/GetterSetterMatcherActionTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/test/java/com/elasticpath/test/util/mock/MockWrapperFactoryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/ep-test-utils/src/test/java/com/elasticpath/test/util/mock/PropertyEnabledExpectationsTest.java">
+</file>
+</checkstyle>

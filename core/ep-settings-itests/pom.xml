@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>itests-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+		<relativePath>../../itests-parent</relativePath>
+	</parent>
+
+	<artifactId>ep-settings-itests</artifactId>
+	<packaging>jar</packaging>
+	<name>Settings JUnit Integrations Tests</name>
+	<description>Settings JUnit Integrations Tests</description>
+
+	<properties>
+		<java.jvm.opts>-XX:MaxPermSize=128m -Xmx512m</java.jvm.opts>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-test-application</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-settings</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

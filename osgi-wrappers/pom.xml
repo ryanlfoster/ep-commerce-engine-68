@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<groupId>com.elasticpath.osgi.wrappers</groupId>
+	<artifactId>osgi-wrappers</artifactId>
+	<packaging>pom</packaging>
+	<name>OSGI Wrappers</name>
+
+	<properties>
+		<!-- Must be relative to $basedir in each child module. -->
+		<dependency.directory>lib</dependency.directory>
+		<osgi-version-qualifier>${maven.build.timestamp}</osgi-version-qualifier>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-dependencies</id>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<phase>process-sources</phase>
+							<configuration>
+								<target>
+									<dependencyfilesets prefix="deps." />
+									<mkdir dir="${basedir}/${dependency.directory}" />
+									<copy todir="${basedir}/${dependency.directory}">
+										<fileset refid="deps.maven.project.dependencies" />
+										<compositemapper>
+											<regexpmapper from="^.*[\\/](.*)(\d{8}\.\d+-\d+)(.*)$$" to="\1SNAPSHOT\3" />
+											<flattenmapper />
+										</compositemapper>
+									</copy>
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<extensions>true</extensions>
+					<configuration>
+						<rebuildBundle>true</rebuildBundle>
+						<instructions>
+							<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+							<_nouses>true</_nouses>
+							<_snapshot>${osgi-version-qualifier}</_snapshot>
+							<_nodefaultversion>true</_nodefaultversion>
+							<Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
+							<Import-Package>!*</Import-Package>
+							<Embed-Directory>${dependency.directory}</Embed-Directory>
+							<Bundle-Localization>plugin</Bundle-Localization>
+						</instructions>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>lib</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>m2e-lifecycle-mapping</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<properties>
+				<osgi-version-qualifier>qualifier</osgi-version-qualifier>
+			</properties>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.felix</groupId>
+							<artifactId>maven-bundle-plugin</artifactId>
+							<configuration>
+								<!-- PDE doesn't honour custom manifest locations. -->
+								<manifestLocation>META-INF</manifestLocation>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.apache.maven.plugins</groupId>
+												<artifactId>maven-antrun-plugin</artifactId>
+												<versionRange>[1,)</versionRange>
+												<goals>
+													<goal>run</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+
+	<modules>
+		<module>com.elasticpath.cmclient.libs</module>
+		<module>com.elasticpath.cmclient.testlibs</module>
+	</modules>
+</project>

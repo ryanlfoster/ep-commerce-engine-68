@@ -1,0 +1,33 @@
+#emailInit()
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+	#set ($order = $shipment.getOrder())
+
+	#emailMessage("email.failedRelease.message")
+
+	#emailMessage("email.failedRelease.message2"):
+
+	#emailMessage("email.failedRelease.store"): $order.getStore().getName()
+	#emailMessage("email.failedRelease.orderNumber"): $!order.getOrderNumber()
+	#emailMessage("email.failedRelease.shipmentNumber"): $!shipment.getShipmentNumber()
+	#emailMessage("email.failedRelease.createdDate"): $!shipment.createdDate
+
+	#emailMessage("email.failedRelease.reason"):
+	$errorMessage
+
+	#emailMessage("email.failedRelease.failedPayments")
+
+	#foreach($orderPayment in $order.getOrderPayments())
+	#if ($orderPayment.getOrderShipment() && ($shipment.getUidPk() == $orderPayment.getOrderShipment().getUidPk()))
+	#emailMessage("email.failedRelease.paymentDate"): $!orderPayment.getCreatedDate()
+	#emailMessage("email.failedRelease.paymentMethod"): $!orderPayment.getPaymentMethod()
+	#emailMessage("email.failedRelease.paymentAmount"): ($!orderPayment.getCurrencyCode() $!orderPayment.getAmount())
+	#emailMessage("email.failedRelease.paymentStatus"): $!orderPayment.getStatus()
+
+	#end#end
+
+  </body>
+</html>

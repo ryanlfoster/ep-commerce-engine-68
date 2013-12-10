@@ -1,0 +1,85 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+#macro (displayEmailProduct $product)
+#set($product = $wishListItem.productSku.product)
+#set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+#set ($brandName = $product.getBrand().getDisplayName($locale, true))
+  #if ($ctxSeoEnabledHelper.getBoolean())
+    #if ($ctxEp.defaultLocale.equals($locale))
+      #set ($productSeoUrl = "$baseImgUrl/$ctxSeoUrlBuilder.productSeoUrl($product, $locale, $product.getDefaultCategory())")
+    #else
+      #set ($productSeoUrl = "$baseImgUrl/$locale.toLowerCase()/$ctxSeoUrlBuilder.productSeoUrl($product, $locale, $product.getDefaultCategory())")
+    #end
+  #else
+    #set ($productSeoUrl = "$baseImgUrl/product-view.ep?pID=${product.guid}")
+  #end
+  
+<tr>
+	<td>
+		#set($image = $product.getImage())
+		<a href="$productSeoUrl" style="border:1px solid #ddd; margin:0; padding:0;">#displayCatalogImage($image "120" "120" "0" "middle" "0" $productName "")</a>
+	</td>
+</tr>
+<tr>
+	<td>											    
+	    <div style="font-weight:bold; font-size:12px;">$!brandName</div>
+	    <a href="$productSeoUrl" style="color:#3667A2; font-size:11px; text-decoration:none; margin:0 0 4px 0;">$!productName</a>
+	</td>
+</tr>
+#end
+
+## orderConf.html.vm
+#emailInit()
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<div style="width:600px;margin-left:auto;margin-right:auto;background:#fff;color:#333;font-size:12px;line-height:150%;padding-bottom:20px;border:0;font-family:arial,helvetica,sans-serif;border:2px solid #ccc;">
+			<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">						
+				<tr>
+					<td>
+						#parse("includes/header.email.vm")
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" border="0" align="center" cellpadding="10" cellspacing="0" bgcolor="#FFFFFF">									
+							<tr>
+								<td width ="*" valign="top">									
+									<font face="arial,verdana" size="1" color="#666666" style="font-size:12px">
+									$dateTool.get('MMMM d, yyyy')<br>
+									<br>                             		
+									$wishListMessage.getMessage()<br>		
+									<br>
+									$store.getName() #emailMessage("email.wishList.conf") $wishListMessage.getSenderName()<br>
+									<a href="$store.getUrl()">$store.getUrl()</a>
+									</font>
+								</td>
+								<td width="130px">
+									<table cellspacing="10">
+										<colgroup width="130"></colgroup>
+										#foreach($wishListItem in $wishListItems)
+										<tr>
+											<td>
+												#set($product = $wishListItem.productSku.product)
+												#displayEmailProduct($product)												
+											</td>											
+										</tr>											
+										#end
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						#parse("includes/footer.email.vm")
+					</td>
+				</tr>
+			</table>									
+		</div>
+	</body>
+</html>

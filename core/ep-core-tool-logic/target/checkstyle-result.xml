@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/DataSourceFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/EmbeddedEpCore.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/LoggerFacade.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractBaseSettings.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractBulkSetSetting.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractEpCore.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractIndexBuildStatus.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractPingSearchServer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractRecompileRuleBase.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractRequestReindex.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractSetCmUserPassword.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractSetSetting.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/AbstractUnSetSetting.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/main/java/com/elasticpath/epcoretool/logic/dto/EpSetting.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/test/java/com/elasticpath/epcoretool/logic/AbstractBulkSetSettingTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool-logic/src/test/java/com/elasticpath/epcoretool/logic/TestLogger.java">
+</file>
+</checkstyle>

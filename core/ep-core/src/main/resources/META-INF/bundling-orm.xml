@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.catalog.impl</package>
+	<entity class="ProductBundleImpl">
+		<named-query name="PRODUCT_BUNDLE_BY_GUID">
+			<query>
+				SELECT p
+				FROM ProductBundleImpl AS p
+				WHERE p.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_ALL">
+			<query>
+				SELECT p
+				FROM ProductBundleImpl AS p
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_BY_GUIDS">
+			<query>
+				SELECT p
+				FROM ProductBundleImpl AS p
+				WHERE p.code in (:list)
+			</query>
+		</named-query>
+		<named-query name="FIND_BUNDLES_BY_PRODUCT_CODE">
+			<query>
+				SELECT pb
+				FROM ProductBundleImpl AS pb, IN(pb.constituentsInternal) bc
+				WHERE bc.productConstituent.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_BUNDLES_BY_PRODUCT_SKU_CODE">
+			<query>
+				SELECT pb
+				FROM ProductBundleImpl AS pb, IN(pb.constituentsInternal) bc
+				WHERE bc.skuConstituent.skuCodeInternal = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_BUNDLE_IDS_BY_CONSTITUENT_PRODUCT_CODE">
+			<query>
+				SELECT pb.uidPk, pb.code 
+				FROM ProductBundleImpl AS pb, IN(pb.constituentsInternal) bc
+				WHERE bc.productConstituent.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_BUNDLE_IDS_BY_CONSTITUENT_PRODUCT_SKUS">
+			<query>
+				SELECT pb.uidPk, pb.code
+				FROM ProductBundleImpl AS pb, IN(pb.constituentsInternal) bc
+				WHERE bc.skuConstituent.skuCodeInternal IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_BY_CONSTITUENT_GUID">
+			<query>
+				SELECT p
+				FROM ProductBundleImpl p
+				INNER JOIN p.constituentsInternal b
+				WHERE b.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_EXISTS">
+			<query>
+				SELECT COUNT(p.uidPk)
+				FROM ProductBundleImpl AS p
+				WHERE p.code = :code
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_UID_BY_SKUCODE">
+			<query>
+				SELECT pb.uidPk
+				FROM ProductBundleImpl AS pb, ProductSkuImpl AS sku
+				WHERE sku.skuCodeInternal = :skuCode
+				AND pb.uidPk = sku.productInternal.uidPk
+			</query>
+		</named-query>
+	</entity>
+	<entity class="com.elasticpath.domain.catalog.impl.BundleConstituentImpl">
+		<named-query name="PRODUCT_BUNDLE_CONSTITUENT_BY_BUNDLE_CODE">
+			<query>
+				SELECT bc
+				FROM ProductBundleImpl AS pb, IN(pb.constituentsInternal) bc
+				WHERE pb.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_CONSTITUENT_BY_BUNDLE_CODE_AND_CONSTITUENT_CODE">
+			<query>
+				SELECT bc
+				FROM ProductBundleImpl AS pb, IN(pb.constituentsInternal) bc
+				WHERE pb.code = ?1
+				AND bc.productConstituent.code = ?2
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_AS_CONSTITUENT">
+			<query>
+				SELECT p
+				FROM BundleConstituentImpl AS p
+				WHERE p.productConstituent.code = ?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_BUNDLE_UID_SELECT_BY_CONSTITUENT_UIDS">
+			<query>
+				SELECT DISTINCT p.uidPk
+				FROM ProductBundleImpl p
+				INNER JOIN p.constituentsInternal c
+				WHERE c.productConstituent.uidPk IN (:list)
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!--
+	Wrapper that displays the specified image
+
+	Input Parameters:
+	1. imagePath, type "Image".
+-->
+<content-wrapper> 
+
+	<template-name>apiImageTemplate.cwt</template-name>
+	<wrapper-id>ApiImageContentWrapper</wrapper-id>
+	<wrapper-name>Digital Commerce API: Image</wrapper-name>
+	
+	<user-input-settings>
+		<user-input-setting id="imagePath" localizable="true" name="Path to Image File" type="Image" required="true" pass-to-template="true"/>
+	</user-input-settings>
+</content-wrapper>

@@ -1,0 +1,1611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<import resource="classpath:spring/service/service.xml" />
+
+	<bean id="assetRepository" class="com.elasticpath.commons.util.impl.AssetRepositoryImpl">
+		<property name="settingsReader" ref="settingsService"/>
+		<property name="elasticPath" ref="elasticPath"/>
+	</bean>
+
+	<bean id="storeMessageSourceDelegate" class="com.elasticpath.commons.util.impl.StoreMessageSourceImpl" />
+
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+
+	<bean id="emailService" class="com.elasticpath.service.misc.impl.NoOpEmailService"/>
+
+	<bean id="defaultValidationHandler" class="com.elasticpath.importexport.common.marshalling.DefaultValidationEventHandler" />
+
+	<bean id="importProcessor" class="com.elasticpath.importexport.importer.importers.impl.ImportProcessorImpl">
+		<property name="importerFactory">
+			<ref bean="importerFactory" />
+		</property>
+		<property name="persistenceEngine">
+			<ref bean="persistenceEngine" />
+		</property>
+		<property name="elasticPath">
+			<ref bean="elasticPath" />
+		</property>
+		<property name="validationEventHandler">
+			<ref bean="defaultValidationHandler" />
+		</property>
+		<property name="savingManager">
+			<ref bean="savingManager" />
+		</property>
+	</bean>
+
+	<bean id="statusHolder" class="com.elasticpath.importexport.importer.importers.impl.ImportStatusHolder" scope="prototype" />
+
+	<bean id="abstractImporter" class="com.elasticpath.importexport.importer.importers.impl.AbstractImporterImpl"
+		scope="prototype" abstract="true">
+		<property name="statusHolder">
+			<ref bean="statusHolder" />
+		</property>
+		<property name="commitUnit" value="100" />
+	</bean>
+
+	<bean id="productImporter" class="com.elasticpath.importexport.importer.importers.impl.ProductImporterImpl"
+		parent="abstractImporter">
+		<property name="productAdapter">
+			<ref bean="productAdapter" />
+		</property>
+		<property name="productDao">
+			<ref bean="productDao" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaProduct.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="productBundleImporter" class="com.elasticpath.importexport.importer.importers.impl.ProductBundleImporterImpl"
+		parent="abstractImporter">
+		<property name="productBundleService" ref="productBundleService" />
+		<property name="productBundleAdapter" ref="productBundleAdapter" />
+		<property name="priceAdjustmentService" ref="priceAdjustmentService" />
+		<property name="schemaPath">
+			<value>schema/schemaProductBundle.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="productAssociationImporter" class="com.elasticpath.importexport.importer.importers.impl.ProductAssociationImporterImpl"
+		parent="abstractImporter">
+		<property name="productAssociationAdapter">
+			<ref bean="productAssociationAdapter" />
+		</property>
+		<property name="productAssociationService">
+			<ref bean="productAssociationService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaProductAssociation.xsd</value>
+		</property>
+		<property name="productAssociationLoadTuner">
+			<bean class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl">
+				<property name="fetchGroups">
+					<list>
+						<value>productAssociationMinimal</value>
+						<value>productHashMinimal</value>
+						<value>catalog</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="catalogImporter" class="com.elasticpath.importexport.importer.importers.impl.CatalogImporterImpl"
+		parent="abstractImporter">
+		<property name="catalogAdapter">
+			<ref bean="catalogAdapter" />
+		</property>
+		<property name="brandAdapter">
+			<ref bean="brandAdapter" />
+		</property>
+		<property name="attributeAdapter">
+			<ref bean="attributeAdapter" />
+		</property>
+		<property name="categoryTypeAdapter">
+			<ref bean="categoryTypeAdapter" />
+		</property>
+		<property name="productTypeAdapter">
+			<ref bean="productTypeAdapter" />
+		</property>
+		<property name="skuOptionAdapter">
+			<ref bean="catalogSkuOptionAdapter" />
+		</property>
+		<property name="catalogService">
+			<ref bean="catalogService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="cachingService">
+			<ref bean="cachingService" />
+		</property>
+		<property name="categoryTypeService">
+			<ref bean="categoryTypeService" />
+		</property>
+		<property name="attributeService">
+			<ref bean="attributeService" />
+		</property>
+		<property name="productTypeService">
+			<ref bean="productTypeService" />
+		</property>
+		<property name="skuOptionService">
+			<ref bean="skuOptionService" />
+		</property>
+		<property name="synonymGroupAdapter">
+			<ref bean="synonymGroupAdapter" />
+		</property>
+		<property name="synonymGroupService">
+			<ref bean="synonymGroupService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaCatalog.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="productCategoryImporter" class="com.elasticpath.importexport.importer.importers.impl.ProductCategoryImporterImpl"
+		parent="abstractImporter">
+		<property name="productService">
+			<ref bean="productService" />
+		</property>
+		<property name="productCategoryAdapter">
+			<ref bean="productCategoryAdapter" />
+		</property>
+		<property name="productLoadTuner">
+			<ref bean="productTunerForProductCategory" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaProductCategory.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="pricingImporter" class="com.elasticpath.importexport.importer.importers.impl.PricingImporterImpl"
+		parent="abstractImporter">
+		<property name="productService">
+			<ref bean="productService" />
+		</property>
+		<property name="productPricesAdapter">
+			<ref bean="productPricesAdapter" />
+		</property>
+		<property name="productLoadTuner">
+			<ref bean="productTunerForPricing" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaPricing.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="assetsImporter" class="com.elasticpath.importexport.importer.importers.impl.AssetsImporterImpl" parent="abstractEpService">
+		<property name="schemaPath">
+			<value>schema/schemaAssets.xsd</value>
+		</property>
+		<property name="assetFileManager">
+			<ref bean="importAssetFileManager" />
+		</property>
+		<property name="statusHolder">
+			<ref bean="statusHolder" />
+		</property>
+		<property name="applicationPropertiesHelper" ref="applicationPropertiesHelper" />
+	</bean>
+
+	<bean id="inventoryImporter" class="com.elasticpath.importexport.importer.importers.impl.InventoryImporterImpl"
+		parent="abstractImporter">
+		<property name="productSkuService">
+			<ref bean="productSkuService" />
+		</property>
+		<property name="warehouseService">
+			<ref bean="warehouseService" />
+		</property>
+		<property name="inventorySkuAdapter">
+			<ref bean="inventorySkuAdapter" />
+		</property>
+		<property name="orderAllocationProcessor">
+			<ref bean="orderAllocationProcessor" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaInventory.xsd</value>
+		</property>
+		<property name="productInventoryManagementService" ref="productInventoryManagementService" />
+	</bean>
+
+	<bean id="categoryImporter" class="com.elasticpath.importexport.importer.importers.impl.CategoryImporterImpl"
+		parent="abstractImporter">
+		<property name="categoryService">
+			<ref bean="categoryService" />
+		</property>
+		<property name="cachingService">
+			<ref bean="cachingService" />
+		</property>
+		<property name="categoryAdapter">
+			<ref bean="categoryAdapter" />
+		</property>
+		<property name="linkedCategoryAdapter">
+			<ref bean="linkedCategoryAdapter" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaCategory.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="updatableRuleService" class="com.elasticpath.importexport.importer.importers.impl.UpdatableRuleServiceImpl"
+		parent="ruleServiceLocal" />
+
+	<bean id="shoppingCartPromotionImporter" class="com.elasticpath.importexport.importer.importers.impl.ShoppingCartPromotionImporterImpl"
+		parent="abstractImporter">
+		<property name="promotionAdapter" ref="promotionAdapter" />
+		<property name="ruleService" ref="updatableRuleService" />
+        <property name="sellingContextService" ref="sellingContextService" />
+		<property name="schemaPath">
+			<value>schema/schemaPromotions.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="couponSetImporter" class="com.elasticpath.importexport.importer.importers.impl.CouponSetImporterImpl"
+		parent="abstractImporter">
+		<property name="couponSetAdapter">
+			<ref bean="couponSetAdapter" />
+		</property>
+		<property name="couponService">
+			<ref bean="couponService" />
+		</property>
+		<property name="couponConfigService">
+			<ref bean="couponConfigService" />
+		</property>
+		<property name="couponUsageService">
+			<ref bean="couponUsageService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaCartPromotionsCoupon.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="promotionConditionRuleImporter" class="com.elasticpath.importexport.importer.importers.impl.ConditionRuleImporterImpl"
+		parent="abstractImporter">
+		<property name="ruleAdapter">
+			<ref bean="ruleAdapter" />
+		</property>
+		<property name="ruleService">
+			<ref bean="ruleService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaRules.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="priceListDescriptorImporter" class="com.elasticpath.importexport.importer.importers.impl.PriceListDescriptorImporterImpl"
+		parent="abstractImporter">
+		<property name="priceListDescriptorService">
+			<ref bean="priceListDescriptorService" />
+		</property>
+		<property name="priceListDescriptorAdapter">
+			<ref bean="priceListDescriptorAdapter" />
+		</property>
+		<property name="baseAmountService">
+			<ref bean="baseAmountService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaPricing.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="settingDefinitionImporter" class="com.elasticpath.importexport.importer.importers.impl.SettingDefinitionImporterImpl"
+		parent="abstractImporter">
+		<property name="settingsService">
+			<ref bean="settingsService" />
+		</property>
+		<property name="settingDefinitionAdapter">
+			<ref bean="settingDefinitionAdapter" />
+		</property>
+		<property name="settingValueAdapter">
+			<ref bean="settingValueAdapter" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaConfigurationSetting.xsd</value>
+		</property>
+		<property name="settingValueSavingManager" ref="savingManager" />
+	</bean>
+
+	<bean id="baseAmountImporter" class="com.elasticpath.importexport.importer.importers.impl.BaseAmountImporterImpl"
+		parent="abstractImporter">
+		<property name="baseAmountService">
+			<ref bean="baseAmountService" />
+		</property>
+		<property name="baseAmountAdapter">
+			<ref bean="baseAmountAdapter" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaBaseAmounts.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="dynamicContentImporter" class="com.elasticpath.importexport.importer.importers.impl.DynamicContentImporterImpl"
+		parent="abstractImporter">
+		<property name="dynamicContentAdapter">
+			<ref bean="dynamicContentAdapter" />
+		</property>
+		<property name="parameterValueAdapter">
+			<ref bean="parameterValueAdapter" />
+		</property>
+		<property name="dynamicContentService">
+			<ref bean="dynamicContentService" />
+		</property>
+		<property name="parameterValueQueryService" ref="parameterValueQueryService" />
+		<property name="schemaPath">
+			<value>schema/schemaDynamicContent.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="priceListAssignmentImporter" class="com.elasticpath.importexport.importer.importers.impl.PriceListAssignmentImporter"
+		parent="abstractImporter">
+		<property name="priceListAssignmentAdapter">
+			<ref bean="priceListAssignmentAdapter" />
+		</property>
+		<property name="priceListAssignmentService">
+			<ref bean="priceListAssignmentService" />
+		</property>
+		<property name="sellingContextService">
+			<ref bean="sellingContextService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaPricing.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="dynamicContentDeliveryImporter" class="com.elasticpath.importexport.importer.importers.impl.DynamicContentDeliveryImporterImpl"
+		parent="abstractImporter">
+		<property name="dcdAdapter">
+			<ref bean="dcdAdapter" />
+		</property>
+		<property name="dynamicContentDeliveryService">
+			<ref bean="dynamicContentDeliveryService" />
+		</property>
+			<property name="sellingContextService">
+			<ref bean="sellingContextService" />
+		</property>
+		<property name="schemaPath">
+			<value>schema/schemaDynamicContentDelivery.xsd</value>
+		</property>
+	</bean>
+
+	<bean id="contentSpaceImporter" class="com.elasticpath.importexport.importer.importers.impl.ContentSpaceImporter" parent="abstractImporter">
+		<property name="domainAdapter" ref="contentSpaceAdapter" />
+		<property name="contentSpaceService" ref="contentspaceService" />
+        <property name="schemaPath" value="schema/schemaContentSpace.xsd" />
+	</bean>
+	
+	<bean id="shippingServiceLevelImporter" class="com.elasticpath.importexport.importer.importers.impl.ShippingServiceLevelImporterImpl" parent="abstractImporter">
+		<property name="domainAdapter" ref="shippingServiceLevelAdapter" />
+		<property name="shippingServiceLevelService" ref="shippingServiceLevelService" />
+        <property name="schemaPath" value="schema/schemaShippingServiceLevel.xsd" />
+	</bean>
+
+	<bean id="savedConditionImporter" class="com.elasticpath.importexport.importer.importers.impl.SavedConditionImporterImpl"  parent="abstractImporter">
+		<property name="domainAdapter" ref="savedConditionAdapter" />
+		<property name="tagConditionService" ref="tagConditionService" />
+        <property name="schemaPath" value="schema/schemaSavedCondition.xsd" />
+	</bean>	
+
+	<bean id="shippingRegionImporter" class="com.elasticpath.importexport.importer.importers.impl.ShippingRegionImporterImpl" parent="abstractImporter">
+		<property name="domainAdapter" ref="shippingRegionAdapter" />
+		<property name="shippingRegionService" ref="shippingRegionService" />
+        <property name="schemaPath" value="schema/schemaShippingRegion.xsd" />
+	</bean>
+
+	
+	<bean id="taxJurisdictionImporter" class="com.elasticpath.importexport.importer.importers.impl.TaxJurisdictionImporter"
+		parent="abstractImporter">
+		<property name="taxJurisdictionAdapter" ref="taxJurisdictionAdapter" />
+		<property name="taxJurisdictionService" ref="taxJurisdictionService" />
+		<property name="schemaPath" value="schema/schemaTaxJurisdiction.xsd" />
+	</bean>
+
+	<bean id="taxCodeImporter" class="com.elasticpath.importexport.importer.importers.impl.TaxCodeImporter" parent="abstractImporter">
+		<property name="taxCodeAdapter" ref="taxCodeAdapter" />
+		<property name="taxCodeService" ref="taxCodeService" />
+		<property name="schemaPath" value="schema/schemaTaxCode.xsd" />
+	</bean>
+
+	<bean id="paymentGatewayImporter" class="com.elasticpath.importexport.importer.importers.impl.PaymentGatewayImporter"
+		parent="abstractImporter">
+		<property name="paymentGatewayService" ref="paymentGatewayService" />
+		<property name="paymentGatewayAdapter" ref="paymentGatewayAdapter" />
+		<property name="schemaPath" value="schema/schemaPaymentGateway.xsd" />
+	</bean>
+
+	<bean id="warehouseImporter" class="com.elasticpath.importexport.importer.importers.impl.WarehouseImporter"
+		parent="abstractImporter">
+		<property name="warehouseService" ref="warehouseService" />
+		<property name="warehouseAdapter" ref="warehouseAdapter" />
+		<property name="schemaPath" value="schema/schemaWarehouse.xsd" />
+	</bean>
+
+	<bean id="storeImporter" class="com.elasticpath.importexport.importer.importers.impl.StoreImporter" parent="abstractImporter">
+		<property name="storeService" ref="storeService" />
+		<property name="storeAdapter" ref="storeAdapter" />
+		<property name="schemaPath" value="schema/schemaStore.xsd" />
+	</bean>
+
+    <bean id="cmImportJobImporter" class="com.elasticpath.importexport.importer.importers.impl.CmImportJobImporter" parent="abstractImporter">
+        <property name="cmImportJobService" ref="importService" />
+        <property name="cmImportJobAdapter" ref="cmImportJobAdapter" />
+        <property name="schemaPath" value="schema/schemaCmImportJobs.xsd" />
+    </bean>
+
+	<bean id="storeAssociationImporter" class="com.elasticpath.importexport.importer.importers.impl.StoreAssociationImporter" parent="abstractImporter">
+		<property name="storeService" ref="storeService" />
+		<property name="storeAssociationAdapter" ref="storeAssociationAdapter" />
+		<property name="schemaPath" value="schema/schemaStoreAssociation.xsd" />
+	</bean>
+
+	<bean id="customerProfileAttributeImporter" class="com.elasticpath.importexport.importer.importers.impl.CustomerProfileAttributeImporter"
+		parent="abstractImporter">
+		<property name="attributeAdapter" ref="attributeAdapter" />
+		<property name="attributeService" ref="attributeService" />
+		<property name="schemaPath" value="schema/schemaCustomerProfileAttribute.xsd" />
+	</bean>
+
+	<bean id="customerImporter" class="com.elasticpath.importexport.importer.importers.impl.CustomerImporter" parent="abstractImporter">
+		<property name="customerService" ref="customerService" />
+		<property name="customerAdapter" ref="customerAdapter">
+		
+		</property>
+		<property name="schemaPath" value="schema/schemaCustomer.xsd" />
+	</bean>
+
+	<bean id="cmUserImporter" class="com.elasticpath.importexport.importer.importers.impl.CmUserImporter" parent="abstractImporter">
+		<property name="cmUserService" ref="cmUserService" />
+		<property name="cmUserAdapter" ref="cmUserAdapter"/>
+		<property name="schemaPath" value="schema/schemaCmUser.xsd" />
+	</bean>
+
+	<bean id="userRoleImporter" class="com.elasticpath.importexport.importer.importers.impl.UserRoleImporter" parent="abstractImporter">
+		<property name="userRoleService" ref="userRoleService" />
+		<property name="userRoleAdapter" ref="userRoleAdapter"/>
+		<property name="schemaPath" value="schema/schemaUserRole.xsd" />
+	</bean>
+
+	<bean id="giftCertificateImporter" class="com.elasticpath.importexport.importer.importers.impl.GiftCertificateImporter" parent="abstractImporter">
+		<property name="giftCertificateAdapter" ref="giftCertificateAdapter"/>
+		<property name="giftCertificateTransactionAdapter" ref="giftCertificateTransactionAdapter"/>
+		<property name="giftCertificateService" ref="giftCertificateService" />
+		<property name="giftCertificateTransactionService" ref="giftCertificateTransactionService"/>
+		<property name="giftCertificateTransactionSavingManager" ref="savingManager"/>
+		<property name="schemaPath" value="schema/schemaGiftCertificate.xsd" />
+	</bean>
+
+	<bean id="cachingService" class="com.elasticpath.importexport.common.caching.impl.CachingServiceImpl">
+		<property name="catalogService">
+			<ref bean="catalogService" />
+		</property>
+		<property name="categoryService">
+			<ref bean="categoryService" />
+		</property>
+		<property name="productTypeDao">
+			<ref bean="productTypeDao" />
+		</property>
+		<property name="taxCodeService">
+			<ref bean="taxCodeService" />
+		</property>
+		<property name="brandService">
+			<ref bean="brandService" />
+		</property>
+		<property name="attributeService">
+			<ref bean="attributeService" />
+		</property>
+		<property name="skuOptionService">
+			<ref bean="skuOptionService" />
+		</property>
+		<property name="productDao">
+			<ref bean="productDao" />
+		</property>
+		<property name="productSkuService">
+			<ref bean="productSkuService" />
+		</property>
+		<property name="productBundleDao">
+			<ref bean="productBundleDao" />
+		</property>
+		<property name="warehouseService">
+			<ref bean="warehouseService" />
+		</property>
+		<property name="categoryTypeService">
+			<ref bean="categoryTypeService" />
+		</property>
+		<property name="storeService">
+			<ref bean="storeService" />
+		</property>
+	</bean>
+
+	<bean id="importerFactory" class="com.elasticpath.importexport.importer.importers.impl.ImporterFactoryImpl">
+		<property name="importerMap">
+			<map>
+				<entry key="PAYMENTGATEWAY">
+					<ref bean="paymentGatewayImporter" />
+				</entry>
+				<entry key="TAXJURISDICTION">
+					<ref bean="taxJurisdictionImporter" />
+				</entry>
+				<entry key="TAXCODE">
+					<ref bean="taxCodeImporter" />
+				</entry>
+				<entry key="WAREHOUSE">
+					<ref bean="warehouseImporter" />
+				</entry>
+				<entry key="STORE">
+					<ref bean="storeImporter" />
+				</entry>
+				<entry key="STORE_ASSOCIATION">
+					<ref bean="storeAssociationImporter" />
+				</entry>
+				<entry key="CUSTOMER">
+					<ref bean="customerImporter"/>
+				</entry>
+				<entry key="CUSTOMERPROFILE_ATTRIBUTE">
+					<ref bean="customerProfileAttributeImporter"/>
+				</entry>
+				<entry key="PRODUCT">
+					<ref bean="productImporter" />
+				</entry>
+				<entry key="PRODUCTBUNDLE">
+					<ref bean="productBundleImporter" />
+				</entry>
+				<entry key="CATALOG">
+					<ref bean="catalogImporter" />
+				</entry>
+				<entry key="CATEGORY">
+					<ref bean="categoryImporter" />
+				</entry>
+				<entry key="PRODUCTASSOCIATION">
+					<ref bean="productAssociationImporter" />
+				</entry>
+				<entry key="PRODUCTCATEGORYASSOCIATION">
+					<ref bean="productCategoryImporter" />
+				</entry>
+				<entry key="PRICING">
+					<ref bean="pricingImporter" />
+				</entry>
+				<entry key="INVENTORY">
+					<ref bean="inventoryImporter" />
+				</entry>
+				<entry key="ASSETS">
+					<ref bean="assetsImporter" />
+				</entry>
+				<entry key="PROMOTION">
+					<ref bean="shoppingCartPromotionImporter" />
+				</entry>
+				<entry key="CONDITIONRULE">
+					<ref bean="promotionConditionRuleImporter" />
+				</entry>
+				<entry key="PRICELISTDESCRIPTOR">
+					<ref bean="priceListDescriptorImporter" />
+				</entry>
+				<entry key="BASEAMOUNT">
+					<ref bean="baseAmountImporter" />
+				</entry>
+				<entry key="SYSTEMCONFIGURATION">
+					<ref bean="settingDefinitionImporter" />
+				</entry>
+				<entry key="COUPONSET">
+					<ref bean="couponSetImporter" />
+				</entry>
+				<entry key="DYNAMICCONTENTDELIVERY">
+					<ref bean="dynamicContentDeliveryImporter" />
+				</entry>
+				<entry key="DYNAMICCONTENT">
+					<ref bean="dynamicContentImporter" />
+				</entry>
+				<entry key="CONTENTSPACE">
+					<ref bean="contentSpaceImporter" />
+				</entry>
+				<entry key="PRICELISTASSIGNMENT">
+					<ref bean="priceListAssignmentImporter" />
+				</entry>
+				<entry key="CMUSER">
+					<ref bean="cmUserImporter" />
+				</entry>
+				<entry key="USER_ROLE">
+					<ref bean="userRoleImporter" />
+				</entry>
+				<entry key="GIFT_CERTIFICATE">
+					<ref bean="giftCertificateImporter" />
+				</entry>
+				<entry key="SHIPPING_SERVICE_LEVEL">
+					<ref bean="shippingServiceLevelImporter" />
+				</entry>
+				<entry key="SHIPPING_REGION">
+					<ref bean="shippingRegionImporter" />
+				</entry>
+                <entry key="SAVED_CONDITION">
+                    <ref bean="savedConditionImporter" />
+                </entry>
+                <entry key="CM_IMPORT_JOB">
+                    <ref bean="cmImportJobImporter" />
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="abstractEpService" class="com.elasticpath.service.impl.AbstractEpServiceImpl" scope="prototype">
+		<property name="elasticPath">
+			<ref bean="elasticPath" />
+		</property>
+	</bean>
+
+	<bean id="abstractExporter" class="com.elasticpath.importexport.exporter.exporters.impl.AbstractExporterImpl"
+		scope="prototype" parent="abstractEpService">
+		<property name="chunkSize" value="20" />
+	</bean>
+
+	<bean id="exportController" class="com.elasticpath.importexport.exporter.controller.impl.ExportControllerImpl"
+		parent="abstractEpService">
+		<property name="exporterFactory">
+			<ref bean="exporterFactory" />
+		</property>
+		<property name="transformersChainFactory">
+			<ref bean="transformerFactory" />
+		</property>
+		<property name="deliveryMethodFactory">
+			<ref bean="deliveryMethodFactory" />
+		</property>
+		<property name="packagerFactory">
+			<ref bean="packagerFactory" />
+		</property>
+		<property name="configurationLoader">
+			<ref bean="configurationLoader" />
+		</property>
+		<property name="messageResolver">
+			<ref bean="messageResolver" />
+		</property>
+	</bean>
+
+	<bean id="exporterFactory" class="com.elasticpath.importexport.exporter.exporters.impl.ExporterFactoryImpl">
+		<property name="exportJobMap">
+			<map>
+				<entry key="CUSTOMERPROFILE_ATTRIBUTE">
+					<list>
+						<ref bean="customerProfileAttributeExporter" />
+					</list>
+				</entry>
+				<entry key="WAREHOUSE">
+					<list>
+						<ref bean="warehouseExporter" />
+					</list>
+				</entry>
+				<entry key="PAYMENTGATEWAY">
+					<list>
+						<ref bean="paymentGatewayExporter" />
+					</list>
+				</entry>
+                <entry key="TAXCODE">
+                    <list>
+                        <ref bean="taxCodeExporter" />
+                    </list>
+                </entry>
+				<entry key="TAXJURISDICTION">
+					<list>
+						<ref bean="taxCodeExporter" />
+						<ref bean="taxJurisdictionExporter" />
+					</list>
+				</entry>
+				<entry key="CUSTOMER">
+					<list>
+						<ref bean="customerExporter"/>
+					</list>
+				</entry>
+				<entry key="STORE">
+					<list>
+						<ref bean="storeExporter" />
+					</list>
+				</entry>
+				<entry key="STORE_ASSOCIATION">
+					<list>
+						<ref bean="storeAssociationExporter" />
+					</list>
+				</entry>
+				<entry key="PRODUCT">
+					<list>
+						<ref bean="productExporter" />
+						<ref bean="productBundleExporter" />
+						<ref bean="productCategoryExporter" />
+						<ref bean="categoryExporter" />
+						<ref bean="catalogExporter" />
+					</list>
+				</entry>
+				<entry key="CATALOG">
+					<list>
+						<ref bean="catalogExporter" />
+					</list>
+				</entry>
+				<entry key="CATEGORY">
+					<list>
+						<ref bean="categoryExporter" />
+						<ref bean="catalogExporter" />
+					</list>
+				</entry>
+				<entry key="PRODUCTASSOCIATION">
+					<list>
+						<ref bean="productAssociationExporter" />
+					</list>
+				</entry>
+				<entry key="PRICING">
+					<list>
+						<ref bean="pricingExporter" />
+					</list>
+				</entry>
+				<entry key="INVENTORY">
+					<list>
+						<ref bean="inventoryExporter" />
+					</list>
+				</entry>
+				<entry key="ASSETS">
+					<list>
+						<ref bean="assetsExporter" />
+					</list>
+				</entry>
+				<entry key="PROMOTION">
+					<list>
+						<ref bean="shoppingCartPromotionExporter" />
+					</list>
+				</entry>
+				<entry key="CONDITIONRULE">
+					<list>
+						<ref bean="conditionRuleExporter" />
+					</list>
+				</entry>
+				<entry key="COUPONSET">
+					<list>
+						<ref bean="couponSetExporter" />
+					</list>
+				</entry>
+				<entry key="PRICELISTDESCRIPTOR">
+					<list>
+						<ref bean="priceListDescriptorExporter" />
+					</list>
+				</entry>
+				<entry key="PRICELISTASSIGNMENT">
+					<list>
+						<ref bean="priceListAssignmentExporter" />
+					</list>
+				</entry>
+
+				<entry key="BASEAMOUNT">
+					<list>
+						<ref bean="baseAmountExporter" />
+					</list>
+				</entry>
+				<entry key="SYSTEMCONFIGURATION">
+					<list>
+						<ref bean="settingDefinitionExporter" />
+					</list>
+				</entry>
+				<entry key="DYNAMICCONTENTDELIVERY">
+					<list>
+						<ref bean="dcdExporter" />
+					</list>
+				</entry>
+				<entry key="DYNAMICCONTENT">
+					<list>
+						<ref bean="dynamicContentExporter" />
+					</list>
+				</entry>
+				<entry key="CONTENTSPACE">
+					<list>
+						<ref bean="contentSpaceExporter" />
+					</list>
+				</entry>
+				<entry key="CMUSER">
+					<list>
+						<ref bean="cmUserExporter" />
+					</list>
+				</entry>
+				<entry key="USER_ROLE">
+					<list>
+						<ref bean="userRoleExporter" />
+					</list>
+				</entry>
+				<entry key="GIFT_CERTIFICATE">
+					<list>
+						<ref bean="giftCertificateExporter" />
+					</list>
+				</entry>
+				<entry key="SHIPPING_REGION">
+					<list>
+						<ref bean="shippingRegionExporter" />
+					</list>
+				</entry>
+				<entry key="SHIPPING_SERVICE_LEVEL">
+					<list>
+						<ref bean="shippingServiceLevelExporter" />
+					</list>
+				</entry>
+				<entry key="SAVED_CONDITION">
+					<list>
+						<ref bean="savedConditionExporter" />
+					</list>
+				</entry>
+				<entry key="CM_IMPORT_JOB">
+					<list>
+						<ref bean="cmImportJobExporter" />
+					</list>
+				</entry>
+			</map>
+		</property>
+		<property name="availableOptionalJobMap">
+			<map>
+				<entry key="PRODUCT">
+					<list>
+						<value>PRODUCTASSOCIATION</value>
+						<value>PRICING</value>
+						<value>INVENTORY</value>
+						<value>ASSETS</value>
+					</list>
+				</entry>
+				<entry key="CATALOG">
+					<list>
+						<value>ASSETS</value>
+					</list>
+				</entry>
+				<entry key="CATEGORY">
+					<list>
+						<value>ASSETS</value>
+					</list>
+				</entry>
+				<entry key="PROMOTION">
+					<list>
+						<value>CONDITIONRULE</value>
+						<value>COUPONSET</value>
+					</list>
+				</entry>
+				<entry key="PRICELISTDESCRIPTOR">
+					<list>
+						<value>BASEAMOUNT</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="productExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ProductExporterImpl"
+		parent="abstractExporter">
+		<property name="productService">
+			<ref bean="productService" />
+		</property>
+		<property name="productAssociationService">
+			<ref bean="productAssociationService" />
+		</property>
+		<property name="importExportSearcher">
+			<ref bean="importExportSearcher" />
+		</property>
+		<property name="productAdapter">
+			<ref bean="productAdapter" />
+		</property>
+		<property name="productLoadTuner">
+			<ref bean="PRODUCT_LOAD_TUNER_ALL" />
+		</property>
+		<property name="applicationPropertiesHelper" ref="applicationPropertiesHelper" />
+	</bean>
+
+	<bean id="priceListAssignmentExporter" class="com.elasticpath.importexport.exporter.exporters.impl.PriceListAssignmentExporter">
+        <property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="priceListAssignmentAdapter" ref="priceListAssignmentAdapter" />
+        <property name="priceListAssignmentService" ref="priceListAssignmentService" />
+	</bean>
+
+	<bean id="taxCodeExporter" class="com.elasticpath.importexport.exporter.exporters.impl.TaxCodeExporter">
+        <property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="taxCodeAdapter" ref="taxCodeAdapter" />
+		<property name="taxCodeService" ref="taxCodeService" />
+	</bean>
+
+	<bean id="taxJurisdictionExporter" class="com.elasticpath.importexport.exporter.exporters.impl.TaxJurisdictionExporter">
+        <property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="taxJurisdictionAdapter" ref="taxJurisdictionAdapter" />
+		<property name="taxJurisdictionService" ref="taxJurisdictionService" />
+	</bean>
+
+	<bean id="paymentGatewayExporter" class="com.elasticpath.importexport.exporter.exporters.impl.PaymentGatewayExporter">
+		<property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="paymentGatewayAdapter" ref="paymentGatewayAdapter" />
+		<property name="paymentGatewayService" ref="paymentGatewayService" />
+	</bean>
+
+	<bean id="warehouseExporter" class="com.elasticpath.importexport.exporter.exporters.impl.WarehouseExporter">
+		<property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="warehouseAdapter" ref="warehouseAdapter" />
+		<property name="warehouseService" ref="warehouseService" />
+	</bean>
+
+	<bean id="storeExporter" class="com.elasticpath.importexport.exporter.exporters.impl.StoreExporter">
+		<property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="storeAdapter" ref="storeAdapter" />
+		<property name="storeAssociationAdapter" ref="storeAssociationAdapter" />
+		<property name="storeService" ref="storeService" />
+		<property name="storeAssociationService" ref="storeAssociationService" />	
+	</bean>
+
+	<bean id="storeAssociationExporter" class="com.elasticpath.importexport.exporter.exporters.impl.StoreAssociationExporter">
+		<property name="storeService" ref="storeService" />
+		<property name="storeAssociationAdapter" ref="storeAssociationAdapter" />
+	</bean>
+
+	<bean id="customerExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CustomerExporter">
+		<property name="customerAdapter" ref="customerAdapter" />
+		<property name="customerService" ref="customerService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+
+	<bean id="customerProfileAttributeExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CustomerProfileAttributeExporter">
+		<property name="attributeAdapter" ref="attributeAdapter" />
+		<property name="attributeService" ref="attributeService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+
+	<bean id="savedConditionExporter" class="com.elasticpath.importexport.exporter.exporters.impl.SavedConditionExporterImpl">
+		<property name="adapter" ref="savedConditionAdapter" />
+		<property name="tagConditionService" ref="tagConditionService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+
+	<bean id="dcdExporter" class="com.elasticpath.importexport.exporter.exporters.impl.DynamicContentDeliveryExporter">
+		<property name="adapter" ref="dcdAdapter" />
+		<property name="dynamicContentDeliveryService" ref="dynamicContentDeliveryService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+	
+	<bean id="contentSpaceExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ContentSpaceExporterImpl">
+		<property name="domainAdapter" ref="contentSpaceAdapter" />
+		<property name="contentSpaceService" ref="contentspaceService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+
+	<bean  id="dynamicContentExporter"
+	       class="com.elasticpath.importexport.exporter.exporters.impl.DynamicContentExporterImpl"
+	       parent="abstractExporter">
+		<property name="dynamicContentAdapter" ref="dynamicContentAdapter" />
+		<property name="dynamicContentService" ref="dynamicContentService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+        <property name="parameterValueAdapter" ref="parameterValueAdapter" />
+	</bean>
+
+	<bean id="productBundleExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ProductBundleExporterImpl"
+		parent="abstractExporter">
+		<property name="productBundleService" ref="productBundleService" />
+		<property name="productBundleAdapter" ref="productBundleAdapter" />
+	</bean>
+
+	<bean id="categoryExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CategoryExporterImpl"
+		parent="abstractExporter">
+		<property name="categoryService">
+			<ref bean="categoryServiceUsingDefaultPlusAttributes" />
+		</property>
+		<property name="categoryAdapter">
+			<ref bean="categoryAdapter" />
+		</property>
+		<property name="categoryLoadTuner">
+			<ref bean="CATEGORY_LOAD_TUNER_ALL" />
+		</property>
+		<property name="importExportSearcher">
+			<ref bean="importExportSearcher" />
+		</property>
+		<property name="applicationPropertiesHelper" ref="applicationPropertiesHelper" />
+		<property name="dependentExporters">
+			<list>
+				<ref bean="categoryLinkedCategoryExporter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="categoryLinkedCategoryExporter" class="com.elasticpath.importexport.exporter.exporters.impl.LinkedCategoryDependentExporterImpl">
+		<property name="domainAdapter" ref="linkedCategoryAdapter" />
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<bean id="productAssociationTunerForImportExport" class="com.elasticpath.domain.catalog.impl.ProductAssociationLoadTunerImpl"
+		scope="singleton" parent="epDomain">
+		<property name="loadingCatalog" value="true" />
+		<property name="productLoadTuner" ref="productLoadTunerForAssociation" />
+	</bean>
+
+	<bean id="productAssociationExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ProductAssociationExporterImpl"
+		parent="abstractExporter">
+		<property name="productAssociationService">
+			<ref bean="productAssociationService" />
+		</property>
+		<property name="productAssociationAdapter">
+			<ref bean="productAssociationAdapter" />
+		</property>
+		<property name="productAssociationLoadTuner" ref="productAssociationTunerForImportExport" />
+	</bean>
+
+	<bean id="assetsExporter" class="com.elasticpath.importexport.exporter.exporters.impl.AssetExporterImpl" parent="abstractEpService">
+		<property name="assetFileManager">
+			<ref bean="exportAssetFileManager" />
+		</property>
+		<property name="applicationPropertiesHelper" ref="applicationPropertiesHelper" />
+	</bean>
+
+	<bean id="catalogExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CatalogExporterImpl"
+		parent="abstractExporter">
+		<property name="catalogService">
+			<ref bean="catalogService" />
+		</property>
+		<property name="catalogAdapter">
+			<ref bean="catalogAdapter" />
+		</property>
+		<property name="importExportSearcher">
+			<ref bean="importExportSearcher" />
+		</property>
+		<property name="dependentExporters">
+			<list>
+				<ref bean="catalogBrandExporter" />
+				<ref bean="catalogCategoryTypeExporter" />
+				<ref bean="catalogProductTypeExporter" />
+				<ref bean="catalogSkuOptionExporter" />
+				<ref bean="catalogAttributeExporter" />
+				<ref bean="catalogSynonymGroupExporter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="catalogBrandExporter" class="com.elasticpath.importexport.exporter.exporters.impl.BrandDependentExporterImpl">
+		<property name="domainAdapter" ref="brandAdapter" />
+		<property name="brandService" ref="brandService" />
+		<property name="applicationPropertiesHelper" ref="applicationPropertiesHelper" />
+	</bean>
+
+	<bean id="catalogCategoryTypeExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CategoryTypeDependentExporterImpl">
+		<property name="domainAdapter" ref="categoryTypeAdapter" />
+		<property name="categoryTypeService" ref="categoryTypeService" />
+	</bean>
+
+	<bean id="catalogProductTypeExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ProductTypeDependentExporterImpl">
+		<property name="domainAdapter" ref="productTypeAdapter" />
+		<property name="productTypeService" ref="productTypeService" />
+	</bean>
+
+	<bean id="catalogSkuOptionExporter" class="com.elasticpath.importexport.exporter.exporters.impl.SkuOptionDependentExporterImpl">
+		<property name="domainAdapter" ref="catalogSkuOptionAdapter" />
+		<property name="skuOptionService" ref="skuOptionService" />
+		<property name="applicationPropertiesHelper" ref="applicationPropertiesHelper" />
+	</bean>
+
+	<bean id="catalogAttributeExporter" class="com.elasticpath.importexport.exporter.exporters.impl.AttributeDependentExporterImpl">
+		<property name="domainAdapter" ref="attributeAdapter" />
+		<property name="attributeService" ref="attributeService" />
+		<property name="catalogService" ref="catalogService" />
+	</bean>
+
+	<bean id="catalogSynonymGroupExporter" class="com.elasticpath.importexport.exporter.exporters.impl.SynonymGroupDependentExporterImpl">
+		<property name="domainAdapter" ref="synonymGroupAdapter" />
+		<property name="synonymGroupService" ref="synonymGroupService" />
+	</bean>
+
+	<bean id="settingDefinitionExporter" class="com.elasticpath.importexport.exporter.exporters.impl.SettingDefinitionExporter"
+		parent="abstractExporter">
+		<property name="settingsService">
+			<ref bean="settingsService" />
+		</property>
+		<property name="settingDefinitionAdapter">
+			<ref bean="settingDefinitionAdapter" />
+		</property>
+		<property name="settingValueAdapter">
+			<ref bean="settingValueAdapter" />
+		</property>
+		<property name="importExportSearcher">
+			<ref bean="importExportSearcher" />
+		</property>
+	</bean>
+
+	<bean id="shoppingCartPromotionExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ShoppingCartPromotionExporterImpl">
+		<property name="ruleService">
+			<ref bean="ruleService" />
+		</property>
+		<property name="importExportSearcher">
+			<ref bean="importExportSearcher" />
+		</property>
+		<property name="promotionAdapter">
+			<ref bean="promotionAdapter" />
+		</property>
+	</bean>
+
+	<bean id="conditionRuleExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ConditionRuleExporterImpl">
+		<property name="ruleAdapter">
+			<ref bean="ruleAdapter" />
+		</property>
+		<property name="ruleService">
+			<ref bean="ruleService" />
+		</property>
+	</bean>
+
+	<bean id="couponSetExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CouponSetExporterImpl">
+		<property name="couponConfigService">
+			<ref bean="couponConfigService" />
+		</property>
+		<property name="couponService">
+			<ref bean="couponService" />
+		</property>
+		<property name="ruleService">
+			<ref bean="ruleService" />
+		</property>
+		<property name="couponUsageService">
+			<ref bean="couponUsageService" />
+		</property>
+		<property name="couponSetAdapter">
+			<ref bean="couponSetAdapter" />
+		</property>
+	</bean>
+
+	<bean id="priceListDescriptorExporter" class="com.elasticpath.importexport.exporter.exporters.impl.PriceListExporterImpl">
+		<property name="priceListDescriptorService">
+			<ref bean="priceListDescriptorService" />
+		</property>
+		<property name="priceListDescriptorAdapter">
+			<ref bean="priceListDescriptorAdapter" />
+		</property>
+		<property name="baseAmountService">
+			<ref bean="baseAmountService" />
+		</property>
+		<property name="importExportSearcher">
+			<ref bean="importExportSearcher" />
+		</property>
+	</bean>
+
+	<bean id="baseAmountExporter" class="com.elasticpath.importexport.exporter.exporters.impl.BaseAmountExporterImpl">
+		<property name="baseAmountAdapter">
+			<ref bean="baseAmountAdapter" />
+		</property>
+		<property name="baseAmountService">
+			<ref bean="baseAmountService" />
+		</property>
+	</bean>
+
+	<bean id="cmUserExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CmUserExporter" parent="abstractExporter">
+		<property name="cmUserService" ref="cmUserService" />
+		<property name="cmUserAdapter" ref="cmUserAdapter" />
+		<property name="importExportSearcher" ref="importExportSearcher" />        
+	</bean>
+
+	<bean id="userRoleExporter" class="com.elasticpath.importexport.exporter.exporters.impl.UserRoleExporter" parent="abstractExporter">
+        <property name="importExportSearcher" ref="importExportSearcher" />
+        <property name="userRoleAdapter" ref="userRoleAdapter" />
+		<property name="userRoleService" ref="userRoleService" />
+	</bean>
+
+	<bean id="giftCertificateExporter" class="com.elasticpath.importexport.exporter.exporters.impl.GiftCertificateExporter" parent="abstractExporter">
+        <property name="giftCertificateAdapter" ref="giftCertificateAdapter" />
+		<property name="giftCertificateService" ref="giftCertificateService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+		<property name="dependentExporters">
+			<list>
+				<ref bean="giftCertificateTransactionDependentExporter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="giftCertificateTransactionDependentExporter" class="com.elasticpath.importexport.exporter.exporters.impl.GiftCertificateTransactionDependentExporter">
+		<property name="giftCertificateTransactionService" ref="giftCertificateTransactionService" />
+		<property name="giftCertificateService" ref="giftCertificateService" />
+		<property name="domainAdapter" ref="giftCertificateTransactionAdapter" />
+	</bean>
+
+	<bean id="shippingServiceLevelExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ShippingServiceLevelExporterImpl">
+		<property name="domainAdapter" ref="shippingServiceLevelAdapter" />
+		<property name="shippingServiceLevelService" ref="shippingServiceLevelService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+	
+		<bean id="shippingRegionExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ShippingRegionExporterImpl">
+		<property name="domainAdapter" ref="shippingRegionAdapter" />
+		<property name="shippingRegionService" ref="shippingRegionService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+
+	<bean id="cmImportJobExporter" class="com.elasticpath.importexport.exporter.exporters.impl.CmImportJobExporter">
+		<property name="domainAdapter" ref="cmImportJobAdapter" />
+		<property name="importService" ref="importService" />
+        <property name="importExportSearcher" ref="importExportSearcher" />
+	</bean>
+	
+	<bean id="transformerFactory" class="com.elasticpath.importexport.common.transformers.impl.TransformersChainFactoryImpl" />
+
+	<bean id="vfsFileSystemManager" class="com.elasticpath.commons.util.impl.VfsFileSystemManagerImpl" />
+
+	<bean id="abstractAssetFileManager" class="com.elasticpath.importexport.common.util.assets.AbstractAssetFileManagerImpl">
+		<property name="vfsFileSystemManager">
+			<ref bean="vfsFileSystemManager" />
+		</property>
+	</bean>
+
+	<bean id="importAssetFileManager" class="com.elasticpath.importexport.common.util.assets.ImportAssetFileManagerImpl"
+		parent="abstractAssetFileManager" />
+
+	<bean id="exportAssetFileManager" class="com.elasticpath.importexport.common.util.assets.ExportAssetFileManagerImpl"
+		parent="abstractAssetFileManager" />
+
+	<bean id="fileDeliveryMethod" class="com.elasticpath.importexport.exporter.delivery.impl.FileDeliveryMethodImpl" />
+
+	<bean id="deliveryMethodFactory" class="com.elasticpath.importexport.exporter.delivery.impl.DeliveryMethodFactoryImpl">
+		<property name="deliveryMethods">
+			<map>
+				<entry key="FILE">
+					<ref bean="fileDeliveryMethod" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="zipPackager" class="com.elasticpath.importexport.exporter.packager.impl.ZipPackagerImpl" />
+
+	<bean id="nullPackager" class="com.elasticpath.importexport.exporter.packager.impl.NullPackagerImpl" />
+
+	<bean id="packagerFactory" class="com.elasticpath.importexport.exporter.packager.impl.PackagerFactoryImpl">
+		<property name="packagerMap">
+			<map>
+				<entry key="ZIP">
+					<ref bean="zipPackager" />
+				</entry>
+				<entry key="NONE">
+					<ref bean="nullPackager" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="abstractImportController" class="com.elasticpath.importexport.importer.controller.impl.ImportControllerImpl"
+		parent="abstractEpService" abstract="true">
+		<property name="unpackagerFactory">
+			<ref bean="unpackagerFactory" />
+		</property>
+		<property name="transformersChainFactory">
+			<ref bean="transformerFactory" />
+		</property>
+		<property name="retrievalMethodFactory">
+			<ref bean="retrievalMethodFactory" />
+		</property>
+		<property name="configurationLoader">
+			<ref bean="configurationLoader" />
+		</property>
+	</bean>
+
+	<bean id="importController" class="com.elasticpath.importexport.importer.controller.impl.ImportControllerImpl"
+		parent="abstractImportController">
+		<property name="importStages">
+			<list>
+				<bean class="com.elasticpath.importexport.importer.controller.impl.ChangeSetImportStageImpl">
+					<property name="id" value="stage1" />
+					<property name="baseAmountService" ref="baseAmountService" />
+					<property name="changeSetService" ref="changeSetService" />
+					<property name="cmUserGuid" value="400" />
+					<property name="timeService" ref="timeService" />
+					<property name="importerFactory" ref="importerFactory" />
+					<property name="persistenceEngine" ref="persistenceEngine" />
+					<property name="savingManager" ref="savingManager" />
+					<property name="validationEventHandler" ref="defaultValidationHandler" />
+					<property name="businessObjectDescriptorLocator" ref="businessObjectDescriptorLocator" />
+					<property name="metadataMap" ref="persistenceListenerMetadataMap" />
+					<property name="relatedObjectsResolvers">
+						<map key-type="java.lang.Class">
+							<entry key="com.elasticpath.importexport.common.dto.products.ProductDTO">
+								<bean class="com.elasticpath.importexport.importer.controller.impl.ProductRelatedObjectsResolverImpl">
+									<property name="changeSetPolicy" ref="changeSetPolicy" />
+									<property name="productDao" ref="productDao" />
+									<property name="businessObjectDescriptorLocator" ref="businessObjectDescriptorLocator" />
+								</bean>
+							</entry>
+						</map>
+					</property>
+				</bean>
+				<bean class="com.elasticpath.importexport.importer.controller.impl.ProcessImportStageImpl">
+					<property name="id" value="stage2" />
+					<property name="importProcessor" ref="importProcessor" />
+					<property name="metadataMap" ref="persistenceListenerMetadataMap" />
+				</bean>
+			</list>
+		</property>
+		<property name="metadataMap" ref="persistenceListenerMetadataMap" />
+	</bean>
+
+	<bean id="businessObjectDescriptorLocator" class="com.elasticpath.importexport.importer.changesetsupport.impl.BusinessObjectDescriptorLocatorImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="objectDescriptorInfoMap">
+			<map>
+				<entry key="com.elasticpath.importexport.common.dto.catalogs.CatalogDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.CatalogObjectDescriptorPopulator">
+						<property name="objectType" value="Catalog" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.importexport.common.dto.category.CategoryDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.CategoryObjectDescriptorPopulator">
+						<property name="objectType" value="Category" />
+						<property name="categoryGuidUtil" ref="categoryGuidUtil" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.importexport.common.dto.products.ProductDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getCode" />
+						<property name="objectType" value="Product" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.importexport.common.dto.products.ProductSkuDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getSkuCode" />
+						<property name="objectType" value="Product SKU" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.importexport.common.dto.products.bundles.ProductBundleDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getCode" />
+						<property name="objectType" value="Product Bundle" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.importexport.common.dto.promotion.cart.PromotionDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getCode" />
+						<property name="objectType" value="Promotion" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.common.dto.pricing.BaseAmountDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getGuid" />
+						<property name="objectType" value="Base Amount" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.common.dto.pricing.PriceListAssignmentsDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getGuid" />
+						<property name="objectType" value="Price List Assignment" />
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.common.dto.pricing.PriceListDescriptorDTO">
+					<bean class="com.elasticpath.importexport.importer.changesetsupport.impl.MethodObjectDescriptorPopulator">
+						<property name="objectIdGetter" value="getGuid" />
+						<property name="objectType" value="Price List Descriptor" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="fileRetrievalMethod" class="com.elasticpath.importexport.importer.retrieval.impl.FileRetrievalMethodImpl" />
+
+	<bean id="retrievalMethodFactory" class="com.elasticpath.importexport.importer.retrieval.impl.RetrievalMethodFactoryImpl">
+		<property name="retrievalMethods">
+			<map>
+				<entry key="FILE">
+					<ref bean="fileRetrievalMethod" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="zipUnpackager" class="com.elasticpath.importexport.importer.unpackager.impl.ZipUnpackagerImpl" />
+
+	<bean id="nullUnpackager" class="com.elasticpath.importexport.importer.unpackager.impl.NullUnpackagerImpl" />
+
+	<bean id="unpackagerFactory" class="com.elasticpath.importexport.importer.unpackager.impl.UnpackagerFactoryImpl">
+		<property name="packagerMap">
+			<map>
+				<entry key="ZIP">
+					<ref bean="zipUnpackager" />
+				</entry>
+				<entry key="NONE">
+					<ref bean="nullUnpackager" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="configurationLoader" class="com.elasticpath.importexport.common.configuration.ConfigurationLoader">
+		<property name="validationEventHandler">
+			<ref bean="defaultValidationHandler" />
+		</property>
+		<property name="schemaPathMap">
+			<map>
+				<entry key="ExportConfiguration">
+					<value>schema/schemaExportConfig.xsd</value>
+				</entry>
+				<entry key="SearchConfiguration">
+					<value>schema/schemaSearchConfig.xsd</value>
+				</entry>
+				<entry key="ImportConfiguration">
+					<value>schema/schemaImportConfig.xsd</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="manifestBuilder" class="com.elasticpath.importexport.common.manifest.impl.ManifestBuilderImpl" scope="prototype">
+		<property name="jobTypePriority">
+			<list>
+				<value>SYSTEMCONFIGURATION</value>
+				<value>TAXCODE</value>
+				<value>TAXJURISDICTION</value>
+				<value>WAREHOUSE</value>
+				<value>PAYMENTGATEWAY</value>
+				<value>CATALOG</value>
+				<value>CATEGORY</value>
+				<value>STORE</value>
+				<value>STORE_ASSOCIATION</value>		
+				<value>CUSTOMERPROFILE_ATTRIBUTE</value>
+				<value>CUSTOMER</value>
+				<value>GIFT_CERTIFICATE</value>
+				<value>PRODUCT</value>
+				<value>PRODUCTBUNDLE</value>
+				<value>PRODUCTCATEGORYASSOCIATION</value>
+				<value>PROMOTION</value>
+				<value>CONDITIONRULE</value>
+				<value>COUPONSET</value>
+				<value>PRICING</value>
+				<value>INVENTORY</value>
+				<value>PRODUCTASSOCIATION</value>
+				<value>CONTENTSPACE</value>
+				<value>DYNAMICCONTENT</value>
+				<value>SAVED_CONDITION</value>
+				<value>DYNAMICCONTENTDELIVERY</value>
+				<value>ASSETS</value>
+				<value>PRICELISTDESCRIPTOR</value>
+				<value>PRICELISTASSIGNMENT</value>
+				<value>BASEAMOUNT</value>
+				<value>USER_ROLE</value>
+				<value>CMUSER</value>
+				<value>SHIPPING_REGION</value>
+				<value>SHIPPING_SERVICE_LEVEL</value>
+				<value>CM_IMPORT_JOB</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ruleWrapper" class="com.elasticpath.importexport.importer.importers.impl.RuleWrapperImpl" scope="prototype" />
+
+	<bean id="productCategoryExporter" class="com.elasticpath.importexport.exporter.exporters.impl.ProductCategoryExporterImpl"
+		parent="abstractExporter">
+		<property name="productService">
+			<ref bean="productService" />
+		</property>
+		<property name="productCategoryAdapter">
+			<ref bean="productCategoryAdapter" />
+		</property>
+		<property name="productLoadTuner">
+			<ref bean="productTunerForProductCategory" />
+		</property>
+	</bean>
+
+	<bean id="pricingExporter" class="com.elasticpath.importexport.exporter.exporters.impl.PricingExporterImpl"
+		parent="abstractExporter">
+		<property name="productService">
+			<ref bean="productService" />
+		</property>
+		<property name="productPricesAdapter">
+			<ref bean="productPricesAdapter" />
+		</property>
+		<property name="productLoadTuner">
+			<ref bean="productTunerForPricing" />
+		</property>
+	</bean>
+
+	<bean id="inventoryExporter" class="com.elasticpath.importexport.exporter.exporters.impl.InventoryExporterImpl"
+		parent="abstractExporter">
+		<property name="productSkuService">
+			<ref bean="productSkuService" />
+		</property>
+		<property name="inventorySkuAdapter">
+			<ref bean="inventorySkuAdapter" />
+		</property>
+		<property name="productInventoryManagementService" ref="productInventoryManagementService" />
+	</bean>
+
+	<bean id="productTunerForProductCategory" class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl" scope="singleton"
+		parent="epDomain">
+		<property name="loadingSkus">
+			<value>false</value>
+		</property>
+		<property name="loadingProductType">
+			<value>false</value>
+		</property>
+		<property name="loadingAttributeValue">
+			<value>false</value>
+		</property>
+		<property name="loadingDefaultCategory">
+			<value>true</value>
+		</property>
+		<property name="loadingCategories">
+			<value>true</value>
+		</property>
+		<property name="loadingDefaultSku">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="productTunerForPricing" class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl" scope="singleton"
+		parent="epDomain">
+		<property name="loadingSkus">
+			<value>true</value>
+		</property>
+		<property name="loadingProductType">
+			<value>false</value>
+		</property>
+		<property name="loadingAttributeValue">
+			<value>false</value>
+		</property>
+		<property name="loadingDefaultCategory">
+			<value>false</value>
+		</property>
+		<property name="loadingCategories">
+			<value>false</value>
+		</property>
+		<property name="loadingDefaultSku">
+			<value>true</value>
+		</property>
+		<property name="productSkuLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue">
+					<value>false</value>
+				</property>
+				<property name="loadingOptionValue">
+					<value>false</value>
+				</property>
+				<property name="loadingProduct">
+					<value>false</value>
+				</property>
+				<property name="loadingDigitalAsset">
+					<value>false</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 
+		 The categoryServiceUsingDefaultPlusAttributes bean naming is a reflection of the distinction between the core definition 
+	     and the import export definition which includes attributes in the categoryLoadTunerDefault. 
+    -->
+	<bean id="categoryServiceUsingDefaultPlusAttributes" parent="txProxyTemplate">
+		<property name="target">
+			<bean parent="categoryServiceTargetTemplate">
+				<property name="categoryLoadTunerDefault">
+					<ref bean="CATEGORY_LOAD_TUNER_DEFAULT_PLUS_ATTRIBUTES" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="importExportSearcher" class="com.elasticpath.importexport.exporter.search.impl.ImportExportSearcherImpl">
+		<property name="epQLSearchEngine">
+			<ref bean="epQLSearchEngine" />
+		</property>
+	</bean>
+
+	<!-- Use the Spring PropertiesFactoryBean to get properties from a file on the classpath as a Properties object -->
+	<bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="classpath:importexporttool.config" />
+	</bean>
+
+	<bean id="applicationPropertiesHelper" class="com.elasticpath.importexport.util.impl.ApplicationPropertiesHelperImpl">
+		<property name="applicationProperties" ref="applicationProperties" />
+	</bean>
+
+	<!-- Initializer which will be called before the persistence engine bean is created. -->
+	<!-- this allows the datasource to be overridden -->
+	<bean id="applicationInitialization" class="com.elasticpath.importexport.client.ImportExportInitialization"
+		init-method="init">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="appProperties" ref="applicationProperties" />
+	</bean>
+
+	<bean id="searchHostLocator" class="com.elasticpath.service.search.impl.SettingsSearchHostLocatorImpl">
+		<property name="settingsReader" ref="settingsService" />
+		<!-- Setting for clustered search server deployments. -->
+		<!-- <property name="requiresMaster" value="true" /> -->
+	</bean>
+
+	<bean id="searchConfigFactory" class="com.elasticpath.service.search.impl.DefaultSearchConfigFactoryImpl">
+		<property name="searchHostLocator" ref="searchHostLocator" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+	</bean>
+
+	<bean id="savingManager" class="com.elasticpath.importexport.importer.importers.impl.PersistenceSessionSavingManagerImpl">
+		<property name="persistenceEngine" ref="persistenceEngine" />
+	</bean>
+
+</beans>

@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+	<import file="squish.xml" />
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Release-Deploy</id>
+		<parent>abstract</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<jobType>free</jobType>
+		<disabled>true</disabled>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SCM</name>
+				<value>${scmUrl}</value>
+				<description>Where should I checkout PD code base?</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>SCM_REVISION</name>
+				<value>${scmRevision}</value>
+				<description>Revision from Subversion to build from. If unsure, use HEAD.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>SNAPSHOT_REPOSITORY_ID</name>
+				<description>ID of Snapshot Repository to use</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_REPOSITORY_ID</name>
+				<description>ID of Release Repository to use</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value />
+				<description>EP_PLATFORM_SITE_URL must be the one passed by Main-Release!</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<value>${ep.platform.version}</value>
+				<description>The EP Version used by this build</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_REST_STUDIO_VERSION</name>
+				<value>${ep.rest.studio.version}</value>
+				<description>Version of ep-rest-studio to deploy.</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+					<![CDATA[${deploymentTargetsShell}]]>
+				</command>
+			</shell>
+		</tasks>
+
+		<invoke>
+			<jobs>${jenkinsJobPrefix}-Multi-Deploy</jobs>
+			<unstable>true</unstable>
+			<currentBuildParams>true</currentBuildParams>
+			<propertiesFileParams>deployment-targets.properties</propertiesFileParams>
+			<params>
+				SCM_URL=$EP_PLATFORM_SCM
+			</params>
+		</invoke>
+	</job>
+
+	<job>
+		<id>abstract-nightly-deploy</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<abstract>true</abstract>
+		<node>${nightlyNodeLabel}</node>
+		<jobType>free</jobType>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGET</name>
+				<description>Specify which server to deploy to.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_REPOSITORY_ID</name>
+				<value>${dummyRepoValue}</value>
+				<description>ID of Release Repository to use. Nightly builds use a dummy value since they don't have a release repo.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_REST_STUDIO_VERSION</name>
+				<value>${ep.rest.studio.version}</value>
+				<description>Version of ep-rest-studio to deploy.</description>
+			</parameter>	
+		</parameters>
+		<tasks>
+
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>scm:checkout -DcheckoutDirectory=${checkout_dir} -DconnectionUrl=${connection_url}</targets>				
+			</maven>
+			
+			<shell>
+				<command>
+				<![CDATA[
+					rm -rf ~/.m2/repository/com/elasticpath
+
+					ln -s $WORKSPACE/stores/cortex-dce-populate-database non-distributable/appserver-setup/src/it/cortex-dce-populate-database
+					# snapitup-data needs to be run before any other store, we use setupIncludes in maven-invoker-plugin to always run it first, hence setup-*.
+					ln -s $WORKSPACE/stores/snapitup-populate-database non-distributable/appserver-setup/src/it/setup-populate-database
+				]]>
+				</command>
+			</shell>
+		</tasks>
+
+		<process>
+		<![CDATA[
+			${configureScmProcessGroovy}
+
+			node.remove(node.concurrentBuild[0])
+			node.appendNode('concurrentBuild','true')
+		]]>
+		</process>
+		
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Deploy-Only</id>
+		<parent>abstract-nightly-deploy</parent>
+		<!-- It's useful to keep more than the default number of builds due to Multi-Deploy usually being run with close/more than the default number of builds to keep. -->
+		<numToKeep>60</numToKeep>
+		<appendTasks>true</appendTasks>
+		<parameters>
+			<parameter>
+					<type>string</type>
+					<name>EP_PLATFORM_VERSION</name>
+					<value />
+					<description>The EP Version used by this build</description>
+			</parameter>
+		</parameters>
+		<tasks>
+			<shell>
+				<command>
+				<![CDATA[
+					echo "$DEPLOYMENT_TARGET" >curserver.txt
+					echo "DEPLOYMENT_TARGET=`cat curserver.txt`" > email.properties
+				]]>
+				</command>
+			</shell>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e -B -U clean verify -Pnightly</targets>
+				<pom>non-distributable/autodeploy.util/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					settings.filename=$WORKSPACE/${settingsLocation}
+					env.SNAPSHOT_REPOSITORY_ID=$SNAPSHOT_REPOSITORY_ID
+					deployment.target.file=$WORKSPACE/curserver.txt
+				]]>
+				</properties>
+			</maven>
+		</tasks>
+
+		<publishers>
+		<!-- Only email listed recipients and the requester of the job. -->
+		<![CDATA[
+			<hudson.plugins.emailext.ExtendedEmailPublisher>
+				<recipientList>${nightlyMailTo}</recipientList>
+				<configuredTriggers>
+					<hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+						<email>
+							<recipientList />
+							<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+							<body>$PROJECT_DEFAULT_CONTENT</body>
+							<sendToDevelopers>false</sendToDevelopers>
+							<sendToRequester>true</sendToRequester>
+							<includeCulprits>false</includeCulprits>
+							<sendToRecipientList>true</sendToRecipientList>
+						</email>
+					</hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+					<hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+						<email>
+							<recipientList />
+							<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+							<body>$PROJECT_DEFAULT_CONTENT</body>
+							<sendToDevelopers>false</sendToDevelopers>
+							<sendToRequester>true</sendToRequester>
+							<includeCulprits>false</includeCulprits>
+							<sendToRecipientList>true</sendToRecipientList>
+						</email>
+					</hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+					<hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+						<email>
+							<recipientList />
+							<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+							<body>$PROJECT_DEFAULT_CONTENT</body>
+							<sendToDevelopers>false</sendToDevelopers>
+							<sendToRequester>true</sendToRequester>
+							<includeCulprits>false</includeCulprits>
+							<sendToRecipientList>true</sendToRecipientList>
+						</email>
+					</hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+					<hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+						<email>
+							<recipientList />
+							<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+							<body>$PROJECT_DEFAULT_CONTENT</body>
+							<sendToDevelopers>false</sendToDevelopers>
+							<sendToRequester>true</sendToRequester>
+							<includeCulprits>false</includeCulprits>
+							<sendToRecipientList>true</sendToRecipientList>
+						</email>
+					</hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+					<hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
+						<email>
+							<recipientList />
+							<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+							<body>$PROJECT_DEFAULT_CONTENT</body>
+							<sendToDevelopers>false</sendToDevelopers>
+							<sendToRequester>true</sendToRequester>
+							<includeCulprits>false</includeCulprits>
+							<sendToRecipientList>true</sendToRecipientList>
+						</email>
+					</hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
+				</configuredTriggers>
+				<contentType>default</contentType>
+				<defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+				<defaultContent>$DEFAULT_CONTENT</defaultContent>
+			</hudson.plugins.emailext.ExtendedEmailPublisher>
+		]]>
+		</publishers>
+	</job>
+
+	<job>
+		<id>${nextFitnesseBuild}</id>
+		<abstract>true</abstract>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Deploy</id>
+		<parent>abstract-nightly-deploy</parent>
+		<numToKeep>20</numToKeep>
+		<appendTasks>true</appendTasks>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGET</name>
+				<description>Override next rotation target with the given one (empty to continue rotation).</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value />
+				<description>The BuildRepo URL to upload test results to</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>ARTIFACT_REPOSITORY_ID</name>
+				<value />
+				<description>
+					Email needs to know the repository containing the build artifacts. For Nightly builds, this is the Snapshot repository ID. For Release builds, this is the Release Repository ID.
+				</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<value>${ep.rest.studio.version}</value>
+				<description>The EP Version used by this build</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+				<![CDATA[
+					${deploymentTargetsShell}
+					non-distributable/autodeploy.util/rotation.sh "${DEPLOYMENT_TARGET}" auto-rotation
+					echo "Deployment target to use: ... `cat curserver.txt`"
+					echo "Setting up paramaters for downstream builds"
+					echo "DEPLOYMENT_TARGET=`cat curserver.txt`" > email.properties
+				]]></command>
+			</shell>
+			<xml>
+				<content>
+				<![CDATA[
+					<EnvInjectBuilder>
+						<info>
+							<propertiesFilePath>email.properties</propertiesFilePath>
+						</info>
+					</EnvInjectBuilder>
+				]]>
+				</content>
+			</xml>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-e -B -U clean verify -Pnightly</targets>
+				<pom>non-distributable/autodeploy.util/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					settings.filename=$WORKSPACE/${settingsLocation}
+					env.SNAPSHOT_REPOSITORY_ID=$SNAPSHOT_REPOSITORY_ID
+					deployment.target.file=$WORKSPACE/curserver.txt
+				]]>
+				</properties>
+			</maven>
+		</tasks>
+
+		<publishers>
+			<!-- Configure parameterized builds (with SCM revision) to be kicked off on success. -->
+
+<![CDATA[
+<hudson.plugins.emailext.ExtendedEmailPublisher>
+	<recipientList>${mailTo}</recipientList>
+	<configuredTriggers>
+		<hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+			<email>
+				<recipientList></recipientList>
+				<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+				<body>$PROJECT_DEFAULT_CONTENT</body>
+				<sendToDevelopers>true</sendToDevelopers>
+				<sendToRequester>true</sendToRequester>
+				<includeCulprits>true</includeCulprits>
+				<sendToRecipientList>true</sendToRecipientList>
+			</email>
+		</hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+		<hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+			<email>
+				<recipientList></recipientList>
+				<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+				<body>$PROJECT_DEFAULT_CONTENT</body>
+				<sendToDevelopers>true</sendToDevelopers>
+				<sendToRequester>true</sendToRequester>
+				<includeCulprits>true</includeCulprits>
+				<sendToRecipientList>true</sendToRecipientList>
+			</email>
+		</hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+		<hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+			<email>
+				<recipientList></recipientList>
+				<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+				<body>$PROJECT_DEFAULT_CONTENT</body>
+				<sendToDevelopers>true</sendToDevelopers>
+				<sendToRequester>true</sendToRequester>
+				<includeCulprits>true</includeCulprits>
+				<sendToRecipientList>true</sendToRecipientList>
+			</email>
+		</hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+		<hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+			<email>
+				<recipientList></recipientList>
+				<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+				<body>$PROJECT_DEFAULT_CONTENT</body>
+				<sendToDevelopers>true</sendToDevelopers>
+				<sendToRequester>true</sendToRequester>
+				<includeCulprits>true</includeCulprits>
+				<sendToRecipientList>true</sendToRecipientList>
+			</email>
+		</hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+		<hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
+			<email>
+				<recipientList></recipientList>
+				<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+				<body>$PROJECT_DEFAULT_CONTENT</body>
+				<sendToDevelopers>true</sendToDevelopers>
+				<sendToRequester>true</sendToRequester>
+				<includeCulprits>true</includeCulprits>
+				<sendToRecipientList>true</sendToRecipientList>
+			</email>
+		</hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
+		<hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+			<email>
+				<recipientList></recipientList>
+				<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+				<body>$PROJECT_DEFAULT_CONTENT</body>
+				<sendToDevelopers>true</sendToDevelopers>
+				<sendToRequester>true</sendToRequester>
+				<includeCulprits>true</includeCulprits>
+				<sendToRecipientList>true</sendToRecipientList>
+			</email>
+		</hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+	</configuredTriggers>
+	<contentType>default</contentType>
+	<defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+	<defaultContent>$DEFAULT_CONTENT</defaultContent>
+</hudson.plugins.emailext.ExtendedEmailPublisher>
+]]>
+
+		</publishers>
+	
+		<invoke>
+			<jobs>
+				${jenkinsJobPrefix}-Nightly-Squish,${nextFitnesseBuild}
+			</jobs>
+			<stable>true</stable>
+			<currentBuildParams>true</currentBuildParams>
+			<params>
+				SCM_BASE_URL=https://svn.elasticpath.com/perfect_ep/products/cortex-dce/trunk
+				SCM_BASE_URL_FOR_CORTEX=https://svn.elasticpath.com/perfect_ep/products/cortex-dce/trunk
+				SCM_BASE_URL_FOR_AUTODEPLOY=https://svn.elasticpath.com/perfect_ep/pd/ep/trunk
+				SCM_REVISION=HEAD
+				ARTIFACT_REPOSITORY_ID=$SNAPSHOT_REPOSITORY_ID
+			</params>
+		</invoke>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Multi-Deploy</id>
+		<parent>abstract-scm</parent>
+		<jobType>free</jobType>
+		<scmType>none</scmType>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>SNAPSHOT_REPOSITORY_ID</name>
+				<description>ID of Snapshot Repository to use</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_REPOSITORY_ID</name>
+				<description>ID of Release Repository to use</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGETS</name>
+				<description>Comma separated list of deployment targets to perform a deploy</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<description>EP_PLATFORM_SITE_URL must be the one passed by Main-Release!</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<description>The EP Version used by this build</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_REST_STUDIO_VERSION</name>
+				<value>${ep.rest.studio.version}</value>
+				<description>Version of ep-rest-studio to deploy.</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+					rm -rf ~/.m2/repository/com/elasticpath
+				</command>
+			</shell>
+			<xml>
+				<content>
+				<![CDATA[
+					<hudson.plugins.groovy.SystemGroovy>
+						<scriptSource class="hudson.plugins.groovy.StringScriptSource">
+							<command>
+								import hudson.model.*
+								import hudson.maven.*
+								import hudson.tasks.*
+
+								def build = Thread.currentThread().executable
+								def targets = build.getEnvironment(TaskListener.NULL)['DEPLOYMENT_TARGETS'].split(',')
+								def currentBuildParameters = build.actions.collect { action ->
+									if (action.hasProperty('parameters')) {
+										return action?.parameters.collect {
+											new StringParameterValue(it.name, it.value)
+										}
+									}
+									return null
+								}.flatten().findAll().findAll { it.name != 'DEPLOYMENT_TARGETS' }
+
+								deployOnlyJob = Hudson.instance.getItem("""${jenkinsJobPrefix}-Nightly-Deploy""")
+								targets.each { target ->
+									println "Firing off Build-Only for DEPLOYMENT_TARGET = ${target}"
+									targetParam = new StringParameterValue('DEPLOYMENT_TARGET',target)
+									params = new ParametersAction([currentBuildParameters, targetParam].flatten())
+									deployOnlyJob.scheduleBuild(2, new Cause.UserCause(), params);
+								}
+							</command>
+						</scriptSource>
+					</hudson.plugins.groovy.SystemGroovy>
+				]]>
+				</content>
+			</xml>
+		</tasks>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Multi-Deploy</id>
+		<parent>${jenkinsJobPrefix}-Multi-Deploy</parent>
+		<appendTasks>true</appendTasks>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGETS</name>
+				<value>${nightlyDeployEnvs}</value>
+				<description>Required so we know where to deploy the nightly to</description>
+			</parameter>
+		</parameters>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Nightly-Email</id>
+		<parent>abstract-triggered</parent>
+		<scmType>${scmType}-wipe</scmType>
+		<jobType>free</jobType>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>DEPLOYMENT_TARGET</name>
+				<description>Deployment target to use</description>
+			</parameter>
+			<parameter>
+				<type>bool</type>
+				<name>NEXUS_DEPLOY</name>
+				<value>true</value>
+				<description>Whether nexus deployment was successful</description>
+			</parameter>
+			<parameter>
+				<type>bool</type>
+				<name>APPSERVER_DEPLOY</name>
+				<value>true</value>
+				<description>Whether deployment to the appserver was successful</description>
+			</parameter>
+			<parameter>
+				<type>bool</type>
+				<name>FITNESSE_RUN</name>
+				<value>true</value>
+				<description>Whether fitnesse was successful</description>
+			</parameter>
+			<parameter>
+				<type>bool</type>
+				<name>SQUISH_RUN</name>
+				<value>true</value>
+				<description>Whether squish was successful</description>
+			</parameter>
+			<parameter>
+				<type>bool</type>
+				<name>SELENIUM_RUN</name>
+				<value>true</value>
+				<description>Whether selenium was successful</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SITE_URL</name>
+				<value />
+				<description>The BuildRepo URL to upload test results to</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>ARTIFACT_REPOSITORY_ID</name>
+				<value />
+				<description>
+					Email needs to know the repository containing the build artifacts. For Nightly builds, this is the Snapshot repository ID. For Release builds, this is the Release Repository ID.
+				</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<value />
+				<description>The EP Version used by this build</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+					rm -rf ~/.m2/repository/com/elasticpath
+				</command>
+			</shell>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>
+				<![CDATA[
+					-e -B -U clean package -Dep.platform.site.url="$EP_PLATFORM_SITE_URL"
+					-DsvnUrl=$SCM_URL -Denv.SNAPSHOT_REPOSITORY_ID=$SNAPSHOT_REPOSITORY_ID
+					-Ddeployment.target=$DEPLOYMENT_TARGET -DSCM_REVISION=$SCM_REVISION
+					-DARTIFACT_REPOSITORY_ID=$ARTIFACT_REPOSITORY_ID -DbuildNumber=${mavenBuildNumber}
+					-DjobName=$JOB_NAME -Demail_distrib_list=${nightlyMailTo}
+					-DEP_PLATFORM_VERSION=$EP_PLATFORM_VERSION
+				]]>
+				</targets>
+				<pom>$WORKSPACE/non-distributable/build.util/email/pom.xml</pom>
+			</maven>
+		</tasks>
+	</job>
+</jobs>

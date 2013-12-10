@@ -1,0 +1,4 @@
+## Copyright (c) Elastic Path Software Inc., 2007
+## create.vm
+#set($pageName = "catalog/product/giftCertificate.vm")
+#productMainTemplate(true false "GC_Theme" false false)

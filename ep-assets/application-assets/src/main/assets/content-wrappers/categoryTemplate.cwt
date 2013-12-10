@@ -1,0 +1,44 @@
+## Copyright (c) Elastic Path Software Inc., 2009
+
+#**
+* To display a catalog image
+*#
+  
+<div class="clear10"></div>
+<div id="main-content">
+    <div class="category-header">
+        <div class="category-image">
+        
+        #set ($image = $catImage)
+        #set ($width = "286")
+		#set ($height = "184")
+		#set ($padding = "0")
+		#set ($align = "middle")
+		#set ($border = "0")
+		#set ($alt = "Category Image")
+		#set ($id = "")
+	        
+	        
+	  #set ($widthStr = "")
+	  #set ($heightStr = "")
+	  #if ($width != "")
+	    #set ($widthStr = "width=$!width")
+	  #end
+	  #if ($height != "")
+	    #set ($heightStr = "height=$!height")
+	  #end
+	  #set($imageUrl="renderImage.image?imageName=$image&amp;width=$!width&amp;height=$!height&amp;padding=$!padding")
+	  #if($!id != "")
+	    #set($idTag = "id='$!id'")
+	  #end
+	  
+	  <img src="$baseUrl/$imageUrl" $widthStr $heightStr align="$!align" border="$!border" alt="$catName" $!idTag/>
+        
+        </div>
+        <div class="category-description-box">
+            <div class="category-description">
+            <h1>$catName</h1>
+            <div class="text">#if ($catDesc) $catDesc #end</div>
+        </div>
+    </div>		  	         
+</div>

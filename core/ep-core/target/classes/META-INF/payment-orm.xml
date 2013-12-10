@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.payment.impl</package>
+	<entity class="PaymentGatewayImpl">
+		<named-query name="FIND_ALL_PAYMENT_GATEWAY_UIDS">
+			<query>
+				SELECT pg.uidPk
+				FROM PaymentGatewayImpl pg
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_PAYMENT_GATEWAYS">
+			<query>
+				SELECT pg
+				FROM PaymentGatewayImpl pg
+			</query>
+		</named-query>
+		<named-query name="FIND_PAYMENT_GATEWAY_NAME">
+			<query>
+				SELECT pg
+				FROM PaymentGatewayImpl pg
+				WHERE pg.name = ?1
+			</query>
+		</named-query>
+		<named-query name="PAYMENT_GATEWAYS_BY_UIDS">
+			<query>
+				SELECT pg
+				FROM PaymentGatewayImpl as pg
+				WHERE pg.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="PAYMENT_GATEWAYS_BY_NAMES">
+			<query>
+				SELECT pg
+				FROM PaymentGatewayImpl as pg
+				WHERE pg.name in (:list)
+			</query>
+		</named-query>
+	</entity>
+
+	<entity class="GiftCertificateTransactionImpl">
+		<named-query name="GIFT_CERTIFICATE_TRANSACTIONS">
+			<query>
+				SELECT g
+				FROM GiftCertificateTransactionImpl g
+				WHERE g.giftCertificate.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="GIFT_CERTIFICATE_TRANSACTIONS_BY_ORDER_AND_GIFT_CERTIFICATE">
+			<query>
+				SELECT DISTINCT gct
+				FROM GiftCertificateTransactionImpl gct, OrderImpl o
+				JOIN o.orderPayments op
+				WHERE gct.giftCertificate.uidPk=?1
+				AND gct.authorizationCode=op.authorizationCode
+				AND op.paymentMethod=?2
+				AND o.uidPk=?3
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

@@ -1,0 +1,5 @@
+"guid"|"customerGuid"|"firstName"|"lastName"|"phoneNumber"|"street1"|"street2"|"city"|"subCountry"|"country"|"zipOrPostalCode"
+"1001"|"101"|"CustomerFN"|"CustomerLN"|"1111111111"|"Customer Address line 1"|"Customer Address line 2"|"Customer sity"|"AL"|"US"|"777777"
+"1002"|"101"|"CustomerFN"|"CustomerLN"|"2222222222"|"Customer Address line 1"|"Customer Address line 2"|"Customer sity"|"AL"|"US"|"777777"
+"1002"|"101"|"CustomerFN2"|"CustomerLN"|"4444444444"|"Customer Address line 1"|"Customer Address line 2"|"Customer city"|"AL"|"US"|"777777"
+"1003"|"102"|"CustomerFN"|"CustomerLN"|"2222222222"|"Customer Address line 1"|"Customer Address line 2"|"Customer sity"|"AL"|"US"|"777777"

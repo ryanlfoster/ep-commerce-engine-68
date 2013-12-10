@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="cmUserSessionFilter"
+		class="com.elasticpath.cmweb.filters.CmUserSessionFilter">
+		<property name="cmUserService">
+			<ref bean="cmUserService" />
+		</property>
+		<property name="requestHelper">
+			<ref bean="requestHelper" />
+		</property>
+	</bean>
+
+	<bean id="cachingControlFilter"
+		class="com.elasticpath.commons.filter.impl.CachingControlFilter">
+		<property name="cachingControlEntries">
+			<list>
+				<bean
+					class="com.elasticpath.commons.filter.impl.CachingControlFilter$CachingControlEntry">
+					<property name="urlPattern">
+						<value>^.*((\.js)|(\.css)|(\.gif)|(\.jpeg))$</value>
+					</property>
+					<property name="maxAge">
+						<value>86400</value>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>

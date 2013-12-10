@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+
+<form-validation>
+    <formset>
+
+        <form name="customerAddressImpl">
+	        <field property="firstName" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="lastName" depends="securityCheck,required,maxlength">
+			<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="organization" depends="securityCheck,maxlength">
+				<arg0 key="globals.organization" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+
+			<field property="street1" depends="securityCheck,required,maxlength">
+			<arg0 key="globals.street1" />
+ 				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="street2" depends="securityCheck,maxlength">
+				<arg0 key="globals.street2" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="city"  depends="securityCheck,required,maxlength">
+				<arg0 key="globals.city" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="country" depends="securityCheck,required"><arg0 key="globals.country" /></field>
+			<field property="subCountry" depends="securityCheck,subCountryRequired">
+				<arg0 key="globals.subcountry" />
+				<var>
+                	<var-name>countryProperty</var-name>
+                    <var-value>country</var-value>
+                </var>
+			</field>
+
+			<field property="zipOrPostalCode" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.zippostalcode" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+
+			<field property="phoneNumber" depends="securityCheck,required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+		</form>
+
+        <form name="creditCardFormBeanImpl">
+			<field property="cardType" depends="securityCheck,required,maxlength">
+				<arg0 key="creditCard.cardType" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+
+	        <field property="cardHolderName" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,maxlength">
+				<arg0 key="creditCard.cardHolderName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="cardNumber" depends="securityCheck,required,creditCard,noLeadingTrailingWhiteSpaces,maxlength">
+			<arg0 key="creditCard.cardNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+
+	        <field property="expiryMonth" depends="expiredCreditCard,securityCheck,required,maxlength">
+				<arg0 key="creditCard.expiryMonth" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>2</var-value>
+                </var>
+				<var>
+                    <var-name>expiryYearProperty</var-name>
+                    <var-value>expiryYear</var-value>
+                </var>
+			</field>
+
+	        <field property="expiryYear" depends="securityCheck,required,maxlength">
+				<arg0 key="creditCard.expiryYear" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>4</var-value>
+                </var>
+			</field>
+		</form>
+
+
+		<form name="customerFormBeanImpl">
+			<field property="email" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="globals.emailAddress" />
+				 <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+			<field property="firstName" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="lastName" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="phoneNumber" depends="securityCheck,required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+			<field property="clearTextPassword" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,minlength,twofields">
+            	<msg name="twofields" key="errors.twofields" />
+                <arg0 key="globals.password" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <arg1 name="twofields" key="globals.confirmpassword" />
+                <var>
+                	<var-name>minlength</var-name>
+                    <var-value>8</var-value>
+                </var>
+                <var>
+                	<var-name>secondProperty</var-name>
+                    <var-value>confirmClearTextPassword</var-value>
+                </var>
+            </field>
+            <field property="confirmClearTextPassword" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,minlength">
+                <arg0 key="globals.confirmpassword" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>8</var-value>
+                </var>
+            </field>
+		</form>
+
+		<form name="cartFormBeanImpl">
+			<field property="quantity" indexedListProperty="cartItems" depends="securityCheck,required,epCartQuantity">
+				<arg0 key="shoppingCart.quantity" />
+			</field>
+		</form>
+
+		<form name="shoppingCartFormBeanImpl">
+			<field property="quantity" indexedListProperty="cartItems" depends="securityCheck,required,epCartQuantity">
+				<arg0 key="shoppingCart.quantity" />
+			</field>
+		</form>
+
+		<form name="signInFormBeanImpl">
+			<field property="j_username" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="globals.emailAddress" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+			<field property="j_password" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,minlength,maxlength">
+				<arg0 key="globals.password" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+				<var>
+                	<var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+
+		</form>
+
+		<form name="anonymousSignInFormBeanImpl">
+			<field property="email" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="globals.emailAddress" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+		</form>
+
+		<form name="forgottenPasswordFormBeanImpl">
+			<field property="email" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="globals.emailAddress" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+		</form>
+		
+		<form name="customerAddressFormBeanImpl">
+	        <field property="customerAddress.firstName" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.lastName" depends="securityCheck,required,maxlength">
+			<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.organization" depends="securityCheck,maxlength">
+			<arg0 key="globals.organization" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.street1" depends="securityCheck,required,maxlength">
+			<arg0 key="globals.street1" />
+ 				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.street2" depends="securityCheck,maxlength">
+				<arg0 key="globals.street2" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.city"  depends="securityCheck,required,maxlength">
+				<arg0 key="globals.city" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.country" depends="securityCheck,required"><arg0 key="globals.country" /></field>
+			<field property="customerAddress.subCountry" depends="securityCheck,subCountryRequired">
+				<arg0 key="globals.subcountry" />
+				<var>
+                	<var-name>countryProperty</var-name>
+                    <var-value>customerAddress.country</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.zipOrPostalCode" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.zippostalcode" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+
+			<field property="customerAddress.phoneNumber" depends="securityCheck,required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+		</form>
+		
+
+
+
+		<form name="checkoutAddressFormBeanImpl">
+	        <field property="newAddress.firstName" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.firstname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.lastName" depends="securityCheck,required,maxlength">
+			<arg0 key="globals.lastname" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.organization" depends="securityCheck,maxlength">
+			<arg0 key="globals.organization" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.street1" depends="securityCheck,required,maxlength">
+			<arg0 key="globals.street1" />
+ 				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.street2" depends="securityCheck,maxlength">
+				<arg0 key="globals.street2" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.city"  depends="securityCheck,required,maxlength">
+				<arg0 key="globals.city" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.country" depends="securityCheck,required"><arg0 key="globals.country" /></field>
+			<field property="newAddress.subCountry" depends="securityCheck,subCountryRequired">
+				<arg0 key="globals.subcountry" />
+				<var>
+                	<var-name>countryProperty</var-name>
+                    <var-value>newAddress.country</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.zipOrPostalCode" depends="securityCheck,required,maxlength">
+				<arg0 key="globals.zippostalcode" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+
+			<field property="newAddress.phoneNumber" depends="securityCheck,required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+
+		</form>
+
+
+		<form name="billingAndReviewFormBeanImpl">
+			<field property="orderPaymentFormBean.cardHolderName" depends="securityCheck,requiredWhen,noLeadingTrailingWhiteSpaces,maxlength">
+				<arg0 key="billingandreview.cardholdername" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>selectedPaymentOption == NewCreditCard</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="orderPaymentFormBean.unencryptedCardNumber" depends="securityCheck,requiredWhen,creditCard,noLeadingTrailingWhiteSpaces,maxlength">
+				<arg0 key="billingandreview.cardnumber" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>selectedPaymentOption == NewCreditCard</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+			<field property="orderPaymentFormBean.cvv2Code" depends="securityCheck,requiredWhen,noLeadingTrailingWhiteSpaces,maxlength,integer">
+				<arg0 key="billingandreview.securitycode" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>selectedPaymentOption == NewCreditCard</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                	<var-name>maxlength</var-name>
+                    <var-value>4</var-value>
+                </var>
+			</field>
+			
+			<field property="securityCode" indexedListProperty="existingCreditCards" depends="securityCheck,requiredExistingCardSecurityCode">
+				<arg0 key="billingandreview.securitycode" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+				<var>
+                	<var-name>minlength</var-name>
+                    <var-value>3</var-value>
+                </var>		
+			</field>
+			
+	        <field property="orderPaymentFormBean.expiryMonth" depends="securityCheck,expiredCreditCard,requiredWhen,maxlength">
+				<arg0 key="creditCard.expiryDate" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>selectedPaymentOption == NewCreditCard</var-value>
+                </var>
+				<var>
+                    <var-name>validateExpirationWhen</var-name>
+                    <var-value>selectedPaymentOption == NewCreditCard</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>2</var-value>
+                </var>
+				<var>
+                    <var-name>expiryYearProperty</var-name>
+                    <var-value>orderPaymentFormBean.expiryYear</var-value>
+                </var>                
+			</field>
+	        <field property="orderPaymentFormBean.expiryYear" depends="securityCheck,requiredWhen,maxlength">
+				<arg0 key="creditCard.expiryDate" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>selectedPaymentOption == NewCreditCard</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>4</var-value>
+                </var>
+			</field>			
+		</form>
+
+		<form name="orderPaymentImpl">
+			<field property="cardType" depends="securityCheck,requiredWhen,maxlength">
+				<arg0 key="creditCard.cardType" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>paymentMethod == CREDITCARD</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+			<field property="cardHolderName" depends="securityCheck,requiredWhen,noLeadingTrailingWhiteSpaces,maxlength">
+				<arg0 key="creditCard.cardHolderName" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>paymentMethod == CREDITCARD</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="unencryptedCardNumber" depends="securityCheck,requiredWhen,creditCard,noLeadingTrailingWhiteSpaces,maxlength">
+				<arg0 key="creditCard.cardNumber" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>paymentMethod == CREDITCARD</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+			</field>
+	        <field property="expiryMonth" depends="securityCheck,requiredWhen,maxlength">
+				<arg0 key="creditCard.expiryDate" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>paymentMethod == CREDITCARD</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>2</var-value>
+                </var>
+			</field>
+	        <field property="expiryYear" depends="securityCheck,requiredWhen,maxlength">
+				<arg0 key="creditCard.expiryDate" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>paymentMethod == CREDITCARD</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>4</var-value>
+                </var>
+			</field>
+			<field property="cvv2Code" depends="securityCheck,requiredWhen,noLeadingTrailingWhiteSpaces,maxlength,integer">
+				<arg0 key="creditCard.securityCode" />
+				<var>
+                    <var-name>requiredWhen</var-name>
+                    <var-value>paymentMethod == CREDITCARD</var-value>
+                </var>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>10</var-value>
+                </var>
+			</field>
+		</form>
+
+		<form name="editAccountFormBeanImpl">
+	        <field property="firstName" depends="securityCheck,required,maxlength">
+				<arg0 key="edit.firstName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="lastName" depends="securityCheck,required,maxlength">
+			<arg0 key="edit.lastName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+			<field property="email" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+				<arg0 key="edit.email" />
+				 <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+			
+			<field property="phoneNumber" depends="securityCheck,required,phoneNumber,maxlength">
+				<arg0 key="globals.phonenumber" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false" />
+
+				<var>
+                    <var-name>pattern</var-name>
+                    <var-value>^([0-9]|\s|-|\)|\(|\+)*$</var-value>
+				</var>
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+				<var>
+                    <var-name>minlength</var-name>
+                    <var-value>7</var-value>
+                </var>
+			</field>
+			
+			<field property="password" depends="securityCheck,noLeadingTrailingWhiteSpaces,minlength,twofields">
+            	<msg name="twofields" key="errors.twofields" />
+                <arg0 key="edit.password" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <arg1 name="twofields" key="edit.confirmPassword" />
+                <var>
+                	<var-name>minlength</var-name>
+                    <var-value>8</var-value>
+                </var>
+                <var>
+                	<var-name>secondProperty</var-name>
+                    <var-value>confirmPassword</var-value>
+                </var>
+            </field>
+            <field property="confirmPassword" depends="securityCheck,noLeadingTrailingWhiteSpaces,minlength">
+                <arg0 key="edit.confirmPassword" />
+                <arg1 name="minlength" key="${var:minlength}" resource="false" />
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>8</var-value>
+                </var>
+            </field>
+		</form>
+
+  		<form name="wishListMessageImpl">
+			<field property="recipientEmails" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,maxlength,epDelimitedEmails">
+				<arg0 key="wishList.recipientEmails" />
+				 <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				 <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>1000</var-value>
+                </var>
+			</field>
+	        <field property="senderName" depends="securityCheck,required,maxlength">
+				<arg0 key="wishList.senderName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+			</field>
+	        <field property="message" depends="securityCheck,required,maxlength">
+				<arg0 key="wishList.message" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+		</form>
+		
+		<form name="giftCertificateFormBeanImpl">
+			<field property="recipientEmail" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength">
+                <arg0 key="globals.giftCertificate.recipientEmail" />
+                <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+                <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+                <var>
+                	<var-name>secondProperty</var-name>
+                    <var-value>confirmEmail</var-value>
+                </var>
+            </field>
+			<field property="confirmEmail" depends="securityCheck,required,noLeadingTrailingWhiteSpaces,epEmail,maxlength,twofields">
+            	<msg name="twofields" key="errors.twoEmails" />
+                <arg0 key="giftCertificate.confirmEmail" />
+                <arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+                <arg1 name="twofields" key="globals.giftCertificate.recipientEmail" />
+                <var>
+                	<var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+                <var>
+                	<var-name>secondProperty</var-name>
+                    <var-value>recipientEmail</var-value>
+                </var>
+            </field>
+	        <field property="recipientName" depends="securityCheck,maxlength">
+				<arg0 key="globals.giftCertificate.recipientName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+	        <field property="senderName" depends="securityCheck,maxlength">
+				<arg0 key="globals.giftCertificate.senderName" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+	        <!-- <field property="giftCertificate.theme" depends="securityCheck,required">
+				<arg0 key="globals.giftCertificate.theme" />
+			</field> -->
+	        <!-- <field property="purchaseAmount" depends="securityCheck,required,integer,intRange">
+	        	<msg name="integer" key="errors.wholeNumber" />
+	        	<msg name="intRange" key="errors.amountRange" />
+				<arg0 key="globals.giftCertificate.purchaseAmount" />
+				<arg1 name="intRange" key="${var:min}" resource="false" />
+				<arg2 name="intRange" key="${var:max}" resource="false" />
+				<var>
+                    <var-name>min</var-name>
+                    <var-value>5</var-value>
+                </var>
+				<var>
+                    <var-name>max</var-name>
+                    <var-value>500</var-value>
+                </var>
+			</field>-->
+	        <field property="message" depends="securityCheck,maxlength">
+				<arg0 key="globals.giftCertificate.message" />
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+				<var>
+                    <var-name>maxlength</var-name>
+                    <var-value>255</var-value>
+                </var>
+			</field>
+		</form>
+		
+
+    </formset>
+</form-validation>

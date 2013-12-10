@@ -1,0 +1,23 @@
+#!/bin/bash
+orig_dir=$(pwd)
+cd ${0%/*}/..
+solr_root=$(pwd)
+
+. ${solr_root}/conf/scripts.conf
+
+log=${solr_root}/logs/snapcleaner.ep.log
+# run snapcleaner for an each index
+for index in ${indexlist}
+do
+# All parameters are listed in snapcleaner.ep script.
+# It is possible to clean snapshots by the following criteria, choose appropriate:
+# -D <days>   cleanup snapshots more than <days> days old
+# -N <num>    keep the most recent <num> number of snapshots and cleanup up the remaining ones that are not being pulled
+# -d specify directory holding index data
+	${solr_root}/bin/snapcleaner.ep -N 2 -d ${solr_root}/data/index-${index} 1>> ${log} 2>&1
+done
+# run snapcleaner for an each spell check index
+for spell in ${spelllist}
+do
+	${solr_root}/bin/snapcleaner.ep -N 2 -d ${solr_root}/data/spell-${spell} 1>> ${log} 2>&1
+done

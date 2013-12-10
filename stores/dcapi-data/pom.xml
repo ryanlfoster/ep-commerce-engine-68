@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>store-data-exporter-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+		<relativePath>../store-data-exporter-parent</relativePath>
+	</parent>
+
+	<artifactId>dcapi-data</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Digital Commerce API Data</name>
+	<description>ImportExport data for the DCAPI demo stores.</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!-- We do not package up the importexporttool.config since it is only used for exporting dcapi-data from an epdb configured database and not for importing/etc.. -->
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/importexporttool.config</exclude>
+						<exclude>**/log4j.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

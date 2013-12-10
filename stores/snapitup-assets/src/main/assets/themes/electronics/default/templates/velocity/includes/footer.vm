@@ -1,0 +1,23 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## footer.vm
+<div id="footer">
+	<div>
+		<div id="footer-nav">
+			<p><strong><a href="#">#springMessage("footer.aboutus")</a> &bull; <a href="#">#springMessage("footer.customerservice")</a> &bull; <a href="#">#springMessage("footer.privacy")</a> &bull; <a href="$baseUrl/sitemap.ep">#springMessage("footer.sitemap")</a> &bull; <a href="#">#springMessage("footer.contact")</a></strong></p>
+			#if ("$!localeUrlMap" == "")
+				#set ($localeUrlMap = $requestLocaleUrlTool.getLocaleLinksForCurrentStore($locale))
+			#end
+			<p class="lang">
+			#set($delimBetweenLang = "" )
+			#foreach ($localeKey in $localeUrlMap.keySet())
+				 $delimBetweenLang #if ($localeUrlMap.get($localeKey)) <a href="$baseUrl/$localeUrlMap.get($localeKey)">#springMessage("footer.language.$localeKey.toString()")</a> #else	<span class="on">#springMessage("footer.language.$localeKey.toString()")</span> #end
+				#set($delimBetweenLang = "|" )
+			#end
+			<img src="$baseUrl/template-resources/images/cnetchannel_logo_powered.gif" width="94" height="34" align="top" alt="Content powered by CNet Channel"/></p>
+		</div>
+		<div id="copyright"><a href="#springMessage("footer.link")"><img src="$baseUrl/template-resources/images/#springMessage("footer.logo.filename")" border="0" alt="#springMessage("footer.ep")"/></a></div>
+		<div class="clear40"></div>
+	</div>
+</div>

@@ -1,0 +1,43 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set ($groupId_path = $groupId.replace(".","/"))
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+	http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="${groupId_path}/db/${artifactId}/core-changelog-ext.xml">
+	
+	<!-- Important:
+	- Table names cannot exceed 30 characters (Oracle limitation)
+	- Column names cannot exceed 30 characters (Oracle limitation)
+	- Index names cannot exceed 18 characters (DB2 limitation)
+	
+	 Important:
+	- Using <preCondition> ? read: http://forum.liquibase.org/topic/unexpected-behaviour-of-preconditions-with-updatesql
+	- Using <preCondition> ? Consider adding onUpdateSql="TEST", but understand how it plays with updateSQL!
+	-->
+
+	<!-- ChangeSets before the "elasticpath-db-changelog.xml" will be run prior to any database changes. -->
+	<!-- This can be ideal for tasks such as disabling replication. -->	
+
+	<include file="liquibase/elasticpath-db-changelog.xml"/>
+	
+	<changeSet id="1" author="example@${groupId}">
+		<createTable tableName="TEXAMPLE">
+			<column name="uidpk" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="guid" type="varchar(64)"/>
+			<column name="firstname" type="varchar(255)"/>
+			<column name="lastname" type="varchar(255)"/>
+			<column name="username" type="varchar(255)">
+				<constraints unique="true" nullable="false"/>
+			</column>
+			<column name="testid" type="int" />
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

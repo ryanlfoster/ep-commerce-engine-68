@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sellingchannel/impl/TemplateModelFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sellingchannel/TemplateModelFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/AutocompletionRequest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/AutocompletionSearchResult.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/GuidedSkuSelectionBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/AggregatedPrice.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/AutocompletionRequestImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/AutocompletionSearchResultImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/GuidedSkuSelectionBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/JsonBundleItemBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/PriceTierBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/impl/ShippingServiceLevelBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/JsonBundleItemBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/PriceTierBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/ShippingServiceLevelBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/bean/ShoppingCartBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/interceptor/SessionTimeoutInterceptor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/AutocompletionSearchProductService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/GeographyController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/AutocompletionSearchProductServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/AutocompletionSearchResultBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/AutocompletionSearchResultConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/GeographyControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/JsonBundleFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/JsonBundleServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/PriceBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/PricedCalculatedBundleForJson.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/ShoppingCartAjaxControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/impl/SkuConfigurationServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/JsonBundleFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/JsonBundleService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/ShoppingCartAjaxController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/service/SkuConfigurationService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/ajax/validation/DwrValidationException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/config/impl/StoreSearchConfigFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/context/impl/EpContextConfigListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/BillingAndReviewFormBeanFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/EpController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AbstractCartControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AbstractEpControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AbstractEpFormController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AbstractViewOrderControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AddressFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AddToCartSimpleControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AddToWishListControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AdvancedSearchControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AnonymousSignInFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/AssetResourceControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/BillingAddressFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/BillingAndReviewFormBeanFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/BillingAndReviewFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/BrowsingControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/CacheInvalidationControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/CheckoutControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/CheckoutCreateAccountFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/CmclientSignInControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/CreditCardFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/DefaultProductConfigControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/DeliveryOptionsFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/EditAccountFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ForgottenPasswordFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ImageControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/InvalidAccessControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/JsonBundle.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/LocaleControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ManageAccountControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/MoveToCartControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/MoveToWishListControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/PayerAuthenticationReturnController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/PayPalExpressCheckoutController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/PayPalShortcutBeginControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/PayPalShortcutReturnControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ProductLookupControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ProductReviewControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/RemoveCartItemControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/RemoveWishListItemControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/SearchControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/SecureAssetControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ShippingAddressFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ShoppingCartControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ShoppingCartFormBeanFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ShoppingItemConfigControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ShoppingItemDtoMapperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ShoppingItemFormBeanContainerFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/SignInFormControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/SimplePageControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/SitemapControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ViewGiftCertificateControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ViewOrderControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ViewReceiptControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/ViewWishListController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/impl/WishListControllerImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/ProductConfigController.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/ShoppingCartFormBeanFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/ShoppingItemDtoMapper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/controller/ShoppingItemFormBeanContainerFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/EpSearchKeyWordNotGivenException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/EpSearchKeyWordTooLongException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/EpSfWebException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/exceptionhandler/EpSystemExceptionHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/CustomerSessionFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/EpFilterToBeanProxy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/LocaleFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/LogoutCustomerSessionHandler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/StoreUrlRewriteFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/TargetedSellingFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/filters/ThreadLocalHttpSessionFilter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/AdvancedSearchControllerFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/AnonymousSignInFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/BillingAndReviewFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/CartFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/CheckoutAddressFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/CheckoutCreditCardFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/CreditCardFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/CustomerAddressFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/CustomerFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/DeliveryOptionsFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/EditAccountFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/EpFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/ForgottenPasswordFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/GiftCertificateFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/AdvancedSearchControllerFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/AnonymousSignInFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/BillingAndReviewFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/CartFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/CheckoutAddressFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/CheckoutCreditCardFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/CreditCardFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/CustomerAddressFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/CustomerFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/DeliveryOptionsFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/EditAccountFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/EpFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/ForgottenPasswordFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/GiftCertificateFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/ManageAccountFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/NonPreDefinedAttributeRangeFieldFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/OrderPaymentFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/ShoppingCartFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/ShoppingItemFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/impl/SignInFormBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/ManageAccountFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/NonPreDefinedAttributeRangeFieldFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/OrderPaymentFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/ShoppingCartFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/ShoppingItemFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/ShoppingItemFormBeanContainer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/SignInFormBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/validator/impl/AdvancedSearchFormBeanValidator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/validator/impl/GiftCertificateFormBeanValidator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/validator/impl/ProductFormBeanValidator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/formbean/validator/ShoppingItemValidator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/handlers/CustomerSignInAuthenticationStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/CartSubtotalTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/CouponAutoApplier.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/CustomerProfileTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/GeoIpTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/InStoreSearchEngineQueryTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/ReferralSearchEngineQueryTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/ReferringUrlTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/SellingChannelTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/ShoppingCartRefresher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/StartShoppingTimeTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/SuccessfulCheckoutTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/TargetUrlTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/listeners/VisitedCategoryTagger.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/search/impl/AdvancedStoreSearchRequestFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/search/impl/CatalogViewResultBeanCreator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/search/impl/StoreSearchRequestFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/search/StoreSearchRequestFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/security/GuestAuthenticationProvider.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/security/GuestAuthenticationToken.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/EntityCache.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/CachingShippingServiceLevelServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/CachingStoreServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/EhCacheProductAssociationRetrieveStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/EhCacheProductRetrieveStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/EhCacheRuleEngineDataRetrievalStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/EhCacheSellingContextRetrievalStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/EhCacheStoreRetrieveStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/EntityCacheImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/impl/WebCustomerSessionServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/service/WebCustomerSessionService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/CustomerSessionLocaleResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/EpDispatcherServlet.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/facade/HttpServletFacadeFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/facade/HttpServletRequestFacade.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/facade/HttpServletRequestResponseFacade.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/facade/HttpServletResponseFacade.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/facade/impl/HttpServletFacadeFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/facade/impl/HttpServletRequestResponseFacadeImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/listeners/BrowsingBehaviorEventListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/listeners/CustomerLoginEventListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/listeners/HttpSessionEventListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/listeners/NewHttpSessionEventListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/servlet/listeners/ShoppingCartEventListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/SessionExpiredException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tags/impl/TagProcessorsHolderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tags/TagProcessorsHolder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tools/impl/LocaleLinksToolImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tools/impl/NonPurchasableProductsRequestHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tools/impl/RequestScopedLocaleToolImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tools/LocaleLinksTool.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/tools/RequestScopedLocaleTool.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/util/impl/EpSfFieldChecks.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/ComboBoxValueMapComparator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/MoneyFormatterProxy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/OptionSummaryPresenter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/ParameterMapper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/PerStoreSettingHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/RadioButtonValueMapComparator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/helpers/TopCategoriesHelper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/velocity/StoreVelocityConfigurer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/velocity/StoreVelocityViewImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/view/velocity/StoreVelocityViewResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/AdvancedSearchSummaryOptionsBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/CatalogViewResultBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/EpViewBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/impl/AdvancedSearchSummaryOptionsBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/impl/CatalogViewResultBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/impl/EpViewBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/impl/ProductViewBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/impl/SitemapResultBeanImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/ProductViewBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/main/java/com/elasticpath/sfweb/viewbean/SitemapResultBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sellingchannel/impl/TemplateModelFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/ajax/service/impl/AutocompletionSearchProductServiceImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/ajax/service/impl/AutocompletionSearchResultBuilderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/ajax/service/impl/SkuConfigurationServiceImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/beanframework/StorefrontSpringXmlVerificationTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/AbstractEpFormControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/AddToCartSimpleControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/AdvancedSearchControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/AssetResourceControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/BillingAddressFormControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/BillingAndReviewFormControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/BrowsingControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/CreditCardFormControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/DefaultProductConfigControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/JsonBundleFactoryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/JsonBundleTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/LocaleControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ManageAccountControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/MoveToCartControllerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ShippingAddressFormControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ShoppingCartFormBeanFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ShoppingItemConfigControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ShoppingItemDtoMapperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ShoppingItemFormBeanContainerFactoryImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/controller/impl/ViewOrderControllerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/filters/LocaleFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/filters/StoreAccessFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/filters/StoreSelectionFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/filters/StoreUrlRewriteFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/filters/TargetedSellingFilterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/formbean/impl/GiftCertificateFormBeanImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/formbean/validator/impl/AdvancedSearchFormBeanValidatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/formbean/validator/impl/GiftCertificateFormBeanValidatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/CartSubtotalTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/CouponAutoApplierTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/CustomerProfileTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/GeoIpTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/InStoreSearchEngineQueryTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/ReferralSearchEngineQueryTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/ShoppingStartTimeTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/SuccessfulCheckoutTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/TargetUrlTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/listeners/VisitedCategoryTaggerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/search/impl/AdvancedStoreSearchRequestFactoryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/search/impl/StoreSearchRequestFactoryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/security/impl/StoreAccessCheckerImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/service/impl/CachingShippingServiceLevelServiceImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/service/impl/EhCacheProductAssociationRetrieveStrategyImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/service/impl/EhCacheProductRetrieveStrategyImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/service/impl/EntityCacheImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/service/impl/WebCustomerSessionServiceImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/servlet/CustomerSessionLocaleResolverTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/tags/TagProcessorsHolderTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/test/BeanFactoryExpectationsFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/test/PrototypeBeanCustomStub.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/tools/impl/NonPurchasableProductsRequestHelperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/tools/impl/RequestScopedLocaleToolImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/helpers/MoneyFormatterProxyTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/helpers/OptionSummaryPresenterTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/helpers/ParameterMapperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/helpers/PerStoreSettingHelperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/helpers/SelectionControlValueMapComparatorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/helpers/TopCategoriesHelperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/view/velocity/StoreVelocityViewImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/storefront/ep-storefront/src/test/java/com/elasticpath/sfweb/viewbean/impl/CatalogViewResultBeanImplTest.java">
+</file>
+</checkstyle>

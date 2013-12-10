@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>stores-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>snapitup-assets</artifactId>
+	<packaging>pom</packaging>
+	<name>Snap It Up Assets</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>prepare-assets</artifactId>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-assets-dir</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<mkdir dir="${ep.local.asset.path}" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.elasticpath.tools</groupId>
+				<artifactId>ep-symlink-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-links-to-assets-dir</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>link</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>remove-links-from-assets-dir</id>
+						<phase>pre-clean</phase>
+						<goals>
+							<goal>unlink</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<links>
+						<link>
+							<dst>${ep.local.asset.path}/digitalassets</dst>
+							<src>${basedir}/src/main/assets/digitalassets</src>
+						</link>
+						<link>
+							<dst>${ep.local.asset.path}/dynamiccontent</dst>
+							<src>${basedir}/src/main/assets/dynamiccontent</src>
+						</link>
+						<link>
+							<dst>${ep.local.asset.path}/images</dst>
+							<src>${basedir}/src/main/assets/images</src>
+						</link>
+						<link>
+							<dst>${ep.local.asset.path}/storeassets</dst>
+							<src>${basedir}/src/main/assets/storeassets</src>
+						</link>
+						<link>
+							<dst>${ep.local.asset.path}/themes</dst>
+							<src>${basedir}/src/main/assets/themes</src>
+						</link>
+					</links>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

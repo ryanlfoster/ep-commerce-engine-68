@@ -1,0 +1,8 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## email.header.vm
+<a href="$storeUrl/index.ep"><img src="$storeUrl/template-resources/images/logo.gif" width="107" height="28" border="12" style="border-color:#FFFFFF" alt="#emailMessage("$store.getName()")"></a><br>	
+<div style="height:60px; background-image:url($storeUrl/template-resources/images/body-bg-email.gif); background-repeat:repeat-x; background-position: top" >
+&nbsp;
+</div>

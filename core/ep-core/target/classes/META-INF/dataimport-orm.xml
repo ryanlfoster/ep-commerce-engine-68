@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.dataimport.impl</package>
+	<entity class="ImportJobImpl">
+		<named-query name="IMPORT_JOB_SELECT_ALL">
+			<query>
+				SELECT i
+				FROM ImportJobImpl i
+			</query>
+		</named-query>
+		<named-query name="IMPORT_JOB_FIND_BY_NAME">
+			<query>
+				SELECT j
+				FROM ImportJobImpl j
+				WHERE j.name = ?1
+			</query>
+		</named-query>
+		<named-query name="JOB_COUNT">
+			<query>
+				SELECT COUNT(j)
+				FROM ImportJobImpl j
+			</query>
+		</named-query>
+		<named-query name="IMPORT_JOB_FIND_BY_GUIDS">
+			<query>
+				SELECT j
+				FROM ImportJobImpl j
+				WHERE j.guid in (:list)
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ImportJobStatusImpl">
+		<named-query name="FIND_BY_PROCESS_ID">
+			<query>
+				SELECT st
+				FROM ImportJobStatusImpl st
+				WHERE st.processId = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_BY_JOB_GUID">
+			<query>
+				SELECT st
+				FROM ImportJobStatusImpl st
+				WHERE st.importJob.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="COUNT_BY_JOB_STATE">
+			<query>
+				SELECT COUNT(st)
+				FROM ImportJobStatusImpl st
+				WHERE st.state = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_BY_JOB_STATE">
+			<query>
+				SELECT st
+				FROM ImportJobStatusImpl st
+				WHERE st.state = ?1
+			</query>
+		</named-query>
+		<named-query name="IMPORT_JOB_COUNT_BY_ID">
+			<query>
+				SELECT COUNT(st)
+				FROM ImportJobStatusImpl st
+				WHERE st.processId = ?1
+			</query>
+		</named-query>
+		<named-query name="DELETE_IMPORT_JOB_STATUS_BY_JOB_GUID">
+			<query>
+				DELETE FROM ImportJobStatusImpl st
+				WHERE st.importJob.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ImportNotificationImpl">
+		<named-query name="FIND_BY_ACTION_AND_STATE">
+			<query>
+				SELECT n
+				FROM ImportNotificationImpl n
+				WHERE n.action = ?1
+				AND n.state = ?2
+				ORDER BY n.dateCreated
+			</query>
+		</named-query>
+		<named-query name="FIND_BY_JOB_ID_USER_GUID_AND_ACTION">
+			<query>
+				SELECT n
+				FROM ImportNotificationImpl n
+				WHERE n.importJob.guid = ?1
+				AND n.initiator.guid = ?2
+				AND n.action = ?3
+				ORDER BY n.dateCreated
+			</query>
+		</named-query>
+		<named-query name="FIND_BY_PROCESS_ID_AND_ACTION">
+			<query>
+				SELECT n
+				FROM ImportNotificationImpl n
+				WHERE n.requestId = ?1
+				AND n.action = ?2
+				ORDER BY n.dateCreated
+			</query>
+		</named-query>
+		<named-query name="DELETE_IMPORT_NOTIFICATIONS_BY_JOB_GUID">
+			<query>
+				DELETE FROM ImportNotificationImpl n
+				WHERE n.importJob.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+
+</entity-mappings>
+

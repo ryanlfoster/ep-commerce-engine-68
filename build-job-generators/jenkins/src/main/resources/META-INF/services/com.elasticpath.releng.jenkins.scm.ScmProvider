@@ -1,0 +1,2 @@
+com.elasticpath.releng.builds.SvnWorkspaceWipeSourceReleaseScmProvider
+com.elasticpath.releng.builds.GitCustomRemoteWorkspaceWipeSourceReleaseScmProvider

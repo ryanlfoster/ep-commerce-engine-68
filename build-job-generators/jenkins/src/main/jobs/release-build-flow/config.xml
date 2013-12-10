@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.cloudbees.plugins.flow.BuildFlow plugin="build-flow-plugin@0.9">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>EP_CE_SCM_URL</name>
+          <description></description>
+          <defaultValue>git@github.elasticpath.net:Hive/commerce-engine.git</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>EP_CMC_SCM_URL</name>
+          <description></description>
+          <defaultValue>git@github.elasticpath.net:Hive/commerce-manager-client.git</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SCM_REVISION</name>
+          <description></description>
+          <defaultValue>6.8.x</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>JOB_PREFIX</name>
+          <description>What name prefixes job names.  May be the same as $SCM_REVISION.</description>
+          <defaultValue>6.8.x</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>EP_SRC_RELEASE_PKG_VERSION</name>
+          <description>Version in the final source release package.  Future improvement - get this value from com.elasticpath.Commerce-Engine &lt;version&gt; in non-distributable/source-release/pom.xml</description>
+          <defaultValue>6.8.0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>EMAIL_LIST</name>
+          <description></description>
+          <defaultValue>rel-eng@elasticpath.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>RELEASE_VERSION</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DEVELOPMENT_VERSION</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>slave</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders/>
+  <publishers/>
+  <buildWrappers/>
+  <icon/>
+  <dsl>// Params supplied to ALL jobs
+baseParams = [
+    &quot;SCM_REVISION&quot; : params[&quot;SCM_REVISION&quot;],
+    &quot;RELEASE_VERSION&quot; : params[&quot;RELEASE_VERSION&quot;],
+    &quot;DEVELOPMENT_VERSION&quot; : params[&quot;DEVELOPMENT_VERSION&quot;],
+    &quot;EMAIL_LIST&quot; : params[&quot;EMAIL_LIST&quot;],
+]
+
+// Params supplied to some jobs
+ID = params[&quot;JOB_PREFIX&quot;]
+EP_CE_SCM_URL = params[&quot;EP_CE_SCM_URL&quot;]
+EP_CMC_SCM_URL = params[&quot;EP_CMC_SCM_URL&quot;]
+EP_SRC_RELEASE_PKG_VERSION = params[&quot;EP_SRC_RELEASE_PKG_VERSION&quot;]
+
+
+
+// Launch CE Main-Release job
+ceMainReleaseParams = baseParams + [
+    &quot;SCM_URL&quot; : EP_CE_SCM_URL, 
+]
+ceMainRelease = build( ceMainReleaseParams, ID + &quot;-Main-Release&quot; )
+
+// Params defined in Main-Release job
+EP_CE_SNAPSHOT_REPOSITORY_ID = ceMainRelease.build.environment.EP_CE_SNAPSHOT_REPOSITORY_ID
+EP_CE_RELEASE_REPOSITORY_ID = ceMainRelease.build.environment.EP_CE_RELEASE_REPOSITORY_ID
+EP_PLATFORM_SITE_URL = ceMainRelease.build.environment.EP_PLATFORM_SITE_URL
+EP_CE_SCM_RELEASE_TAG = ceMainRelease.build.environment.EP_CE_SCM_RELEASE_TAG
+
+
+
+// CM Client params
+cmclientReleaseParams = baseParams + [
+    &quot;SCM_URL&quot; : EP_CMC_SCM_URL,
+    &quot;RELEASE_REPOSITORY_ID&quot; : EP_CE_RELEASE_REPOSITORY_ID,
+    &quot;SNAPSHOT_REPOSITORY_ID&quot; : EP_CE_SNAPSHOT_REPOSITORY_ID,
+    &quot;EP_PLATFORM_SITE_URL&quot; : EP_PLATFORM_SITE_URL,
+]
+cmclientRelease = build( cmclientReleaseParams, ID + &quot;-CMClient-Release&quot; )
+
+// Params defined in CM Client job
+EP_CMC_SCM_RELEASE_TAG = cmclientRelease.build.environment.EP_CMC_SCM_RELEASE_TAG
+
+
+
+// downstream params
+downstreamParams = baseParams + [
+    &quot;SCM_URL&quot; : EP_CE_SCM_URL, 
+    &quot;SCM_REVISION&quot; : EP_CE_SCM_RELEASE_TAG,
+    &quot;RELEASE_REPOSITORY_ID&quot; : EP_CE_RELEASE_REPOSITORY_ID,
+    &quot;SNAPSHOT_REPOSITORY_ID&quot; : EP_CE_SNAPSHOT_REPOSITORY_ID,
+    &quot;EP_PLATFORM_SITE_URL&quot; : EP_PLATFORM_SITE_URL,
+    &quot;EP_PLATFORM_VERSION&quot; : baseParams.RELEASE_VERSION,
+    &quot;EP_CE_SCM_RELEASE_TAG&quot; : EP_CE_SCM_RELEASE_TAG,
+    &quot;EP_CE_SCM_URL&quot; : EP_CE_SCM_URL,
+]
+
+ignore(UNSTABLE) {
+    downstream = parallel ([
+        deploy: { 
+            archetypes = build(downstreamParams, ID + &quot;-Nightly-Release-Archetypes&quot;)    
+            deploymentPackage = build(downstreamParams, ID + &quot;-Deployment-Package&quot;)
+        },    
+        fitTestsAuditing: { build(downstreamParams, ID + &quot;-FIT-Tests-Auditing&quot;) },
+        fitTestsCore: { build(downstreamParams, ID + &quot;-FIT-Tests-Core&quot;) },
+        fitTestsImportExport: { build(downstreamParams, ID + &quot;-FIT-Tests-ImportExport&quot;) },
+        fitTestsQL: { build(downstreamParams, ID + &quot;-FIT-Tests-QL&quot;)},
+        fitTestsSF: { build(downstreamParams, ID + &quot;-FIT-Tests-SF&quot;) },
+        fitSearch: { build(downstreamParams, ID + &quot;-FIT-Tests-Search&quot;) },
+        fitSync: { build(downstreamParams, ID + &quot;-FIT-Tests-Sync&quot;) },
+        integrationTestsCMServer: { build(downstreamParams, ID + &quot;-Integration-Tests-CMServer&quot;)},
+        integrationTestsCore: { build(downstreamParams, ID + &quot;-Integration-Tests-Core&quot;)},
+        integrationTestsSF: { build(downstreamParams, ID + &quot;-Integration-Tests-SF&quot;)},  
+        javadoc: { build(downstreamParams, ID + &quot;-Javadoc&quot;) },
+        analysis: { build(downstreamParams, ID + &quot;-Analysis&quot; ) },
+    ])
+}
+
+// Launch Source-Release jobs
+sourceReleaseParams = baseParams + [
+    &quot;SCM_URL&quot; : EP_CE_SCM_URL,
+    &quot;RELEASE_REPOSITORY_ID&quot; : EP_CE_RELEASE_REPOSITORY_ID,
+    &quot;EP_PLATFORM_SCM&quot; : EP_CE_SCM_URL,
+    &quot;EP_PLATFORM_SCM_VERSION&quot; : EP_CE_SCM_RELEASE_TAG,
+    &quot;EP_PLATFORM_CMCLIENT_SCM&quot; : EP_CMC_SCM_URL,
+    &quot;EP_PLATFORM_CMCLIENT_SCM_VERSION&quot; : EP_CMC_SCM_RELEASE_TAG,
+    &quot;EP_PLATFORM_VERSION&quot; : EP_SRC_RELEASE_PKG_VERSION,
+]
+ignore(FAILURE) {
+    sourceRelease =  build( sourceReleaseParams, ID + &quot;-Source-Release&quot; )
+    sourceReleaseSmokeTest = build( sourceReleaseParams, ID + &quot;-Source-Release-Smoke-Test&quot;)
+}
+
+// Launch Licensing-Report
+licensingReportParams = baseParams + [
+    &quot;SCM_URL&quot; : EP_CE_SCM_URL,
+    &quot;RELEASE_REPOSITORY_ID&quot; : EP_CE_RELEASE_REPOSITORY_ID,
+    &quot;SCM_REVISION&quot; : EP_CE_SCM_RELEASE_TAG,
+]
+licensingReport = build( licensingReportParams, ID + &quot;-Licensing-Report&quot; )</dsl>
+</com.cloudbees.plugins.flow.BuildFlow>

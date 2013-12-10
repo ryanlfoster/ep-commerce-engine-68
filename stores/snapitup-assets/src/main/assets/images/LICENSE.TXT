@@ -1,0 +1,14 @@
+
+Images from the US FWS National Digital Library (public domain):
+================================================================
+
+berries.jpg:     credit: anonymous/USFWS
+hummingbird.jpg: credit: Steve Maslowski/USFWS
+
+What is the FWS National Digital Library?
+
+The U.S. Fish and Wildlife Service's National Digital Library is a searchable collection of selected images, historical artifacts, audio clips, publications, and video and that are in the public domain. You are free to use them as you wish - no permission is necessary. We do ask that you please give credit to the photographer or creator and the U.S. Fish and Wildlife Service, in a format similar to the example below.
+
+    Credit: John Doe/USFWS
+
+

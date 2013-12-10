@@ -1,0 +1,7 @@
+product_name,product startDate,product_defaultCategory,product_guid
+row1col1,Fri Apr 21 17:13:10 PDT 2006,row1col3,row1col4
+row2col1,Fri Apr 21 17:13:10 PDT 2006,row1col3,row1col4
+row3col1,Fri Apr 21 17:13:10 PDT 2006,row1col3,row1col4
+row4col1,Fri Apr 21 17:13:10 PDT 2006,row1col3,row1col4
+row5col1,Fri Apr 21 17:13:10 PDT 2006,row1col3,row1col4
+"row,6col1","Fri Apr 21 17:13:10 PDT 2006",row1col3,row1col4

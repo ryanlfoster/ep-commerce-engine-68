@@ -1,0 +1,15 @@
+IP Routing Type,Description
+fixed,Fixed - user location is likely to be at or near the IP location
+anonymizer,Anonymizer - user IP is potentially hiding. It is possible the user could be in any location
+aol,Aol - user is part of the AOL network.
+aolpop,Aolpop - user is part of the AOL network.
+aoldialup,Aoldialup - user is part of the AOL network.
+aolproxy,Aolproxy - user is part of the AOL network.
+pop,Pop - user is dialing into a regional ISP and is likely to be near the IP location
+superpop,Superpop - user is dialing into a multi-state ISP and is not likely to be near.
+satellite,Satellite - user connecting to the Internet through a consumer satellite.
+cache proxy,Cache proxy - user is proxied through either an Internet accelerator.
+international proxy,International proxy - a proxy that routes traffic from multiple countries.
+regional proxy,Regional proxy - a proxy that routes traffic from multiple states.
+mobile gateway,Mobile gateway - a gateway to connect mobile devices to the public Internet.
+none,None - routing type is not known or is not identifiable as one of the types listed above.

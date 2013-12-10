@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.cmuser.impl</package>
+	<entity class="CmUserImpl">
+		<named-query name="CMUSER_SELECT_ALL">
+			<query>
+				SELECT c
+				FROM CmUserImpl c
+			</query>
+		</named-query>
+		<named-query name="CMUSER_FIND_BY_EMAIL">
+			<query>
+				SELECT c
+				FROM CmUserImpl c
+				WHERE LOWER(c.email) = LOWER(?1)
+			</query>
+		</named-query>
+		<named-query name="CMUSER_FIND_BY_USERNAME">
+			<query>
+				SELECT c
+				FROM CmUserImpl c
+				WHERE LOWER(c.userName) = LOWER(?1)
+			</query>
+		</named-query>
+		<named-query name="CMUSER_COUNT">
+			<query>
+				SELECT COUNT(c)
+				FROM CmUserImpl c
+			</query>
+		</named-query>
+		<named-query name="CMUSER_FIND_BY_USERROLE_ID">
+			<query>
+				SELECT c
+				FROM CmUserImpl c, IN(c.userRoles) role
+				WHERE role.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CMUSER_COUNT_BY_USERNAME">
+			<query>
+				SELECT COUNT(c)
+				FROM CmUserImpl c
+				WHERE LOWER(c.userName) = LOWER(?1)
+			</query>
+		</named-query>
+		<named-query name="CMUSER_COUNT_BY_EMAIL">
+			<query>
+				SELECT COUNT(c)
+				FROM CmUserImpl c
+				WHERE LOWER(c.email) = LOWER(?1)
+			</query>
+		</named-query>
+		<named-query name="CMUSER_FIND_BY_GUID">
+			<query>
+				SELECT c
+				FROM CmUserImpl c
+				WHERE c.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="CMUSER_FIND_ALL_UIDS">
+			<query>
+				SELECT c.uidPk
+				FROM CmUserImpl c
+			</query>
+		</named-query>
+		<named-query name="CMUSER_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT c.uidPk
+				FROM CmUserImpl as c
+				WHERE c.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="CMUSER_BY_UIDS">
+			<query>
+				SELECT c
+				FROM CmUserImpl c
+				WHERE c.uidPk in (:list)
+			</query>
+		</named-query>
+	</entity>
+	<entity class="UserRoleImpl">
+		<named-query name="USERROLE_FIND_BY_NAME">
+			<query>
+				SELECT u
+				FROM UserRoleImpl AS u
+				WHERE u.name = ?1
+			</query>
+		</named-query>
+		<named-query name="USERROLE_FIND_BY_GUID">
+			<query>
+				SELECT u
+				FROM UserRoleImpl AS u
+				WHERE u.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="USERROLE_SELECT_ALL">
+			<query>
+				SELECT u
+				FROM UserRoleImpl AS u
+			</query>
+		</named-query>
+		<named-query name="USERROLE_UID_IN_USE">
+			<query>
+				SELECT DISTINCT ur.uidPk
+				FROM CmUserImpl AS cu
+				INNER JOIN cu.userRoles AS ur
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

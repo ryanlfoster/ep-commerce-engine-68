@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="promotionConfigureService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.impl.PromotionConfigureServiceImpl">
+				<property name="productService">
+					<ref bean="productService" />
+				</property>
+				<property name="productSkuService">
+					<ref bean="productSkuService" />
+				</property>
+				<property name="brandService">
+					<ref bean="brandService" />
+				</property>
+				<property name="categoryService">
+					<ref bean="categoryService" />
+				</property>
+				<property name="shippingServiceLevelService">
+					<ref bean="shippingServiceLevelService" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="additionalAuthorizationService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.impl.AdditionalAuthorizationServiceImpl">
+				<property name="paymentService">
+					<ref bean="paymentService" />
+				</property>
+				<property name="elasticPath">
+					<ref bean="elasticPath" />
+				</property>
+				<property name="storeService" ref="storeService"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="shipmentService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.impl.ShipmentServiceImpl">
+				<property name="elasticPath">
+					<ref bean="elasticPath" />
+				</property>
+				<property name="allocationService">
+					<ref bean="allocationService" />
+				</property>
+				<property name="eventOriginatorHelper">
+					<ref bean="eventOriginatorHelper" />
+				</property>
+				<property name="priceLookupFacade">
+					<ref bean="priceLookupFacade" />
+				</property>
+				<property name="productInventoryManagementService">
+					<ref bean="productInventoryManagementService" />
+				</property>
+				<property name="storeService" ref="storeService"/>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

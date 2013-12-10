@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="quartz-setup.xml"/>
+
+	<bean id="customerIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="customer"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="customerBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="customerIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the customer search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the customer search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="productIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="product"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="productBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="productIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the product search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the product search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="categoryIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="category"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="categoryBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="categoryIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the category search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the category search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="promotionIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="promotion"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="promotionBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="promotionIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the promotion search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the promotion search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="catalogPromoMonitorJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="catalogPromoMonitor"/>
+		<property name="targetMethod" value="checkCatalogPromotionChanges"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="catalogPromoMonitorTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="catalogPromoMonitorJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to check for catalog promotion modifications -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will check for catalog promotion modifications every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="rulebaseCompileJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="epRuleEngine"/>
+		<property name="targetMethod" value="recompileRuleBase"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="compileRuleBaseTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="rulebaseCompileJob" />
+		<!-- Start delay in milliseconds: server will wait for this long before starting to recompile the promotion rules -->
+		<property name="startDelay" value="300000" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will recompile the promotion rules every 'x' milliseconds -->
+		<property name="repeatInterval" value="300000" />
+	</bean>
+
+	<bean id="cmUserIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="cmuser"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="cmUserBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="cmUserIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the customer search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the customer search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="shippingServiceLevelIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="shippingservicelevel"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="shippingServiceLevelBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="shippingServiceLevelIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the customer search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the customer search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+	<bean id="skuIndexBuildJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="buildIndexJobRunner"/>
+		<property name="arguments" value="sku"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="skuBuildIndexTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="skuIndexBuildJob"/>
+		<!-- Start delay in milliseconds: server will wait for this long before starting to update the customer search index -->
+		<property name="startDelay" value="${ep.index.build.delay}" />
+		<!-- Repeat interval in milliseconds: after the initial delay and first run, the server will update the customer search index every 'x' milliseconds -->
+		<property name="repeatInterval" value="${ep.index.build.interval}" />
+	</bean>
+
+
+	<bean id="optimizeSearchIndicesJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexBuildService"/>
+		<property name="targetMethod" value="optimizeIndicesJobRunner"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="optimizeSearchIndicesTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="optimizeSearchIndicesJob"/>
+		<!-- Start delay in milliseconds: the first index optimization check will be done 2 minutes after the application starts up -->
+		<property name="startDelay" value="120000" />
+		<!-- Repeat interval in milliseconds: the check for whether indices should be optimized is set to be done every 5 minutes -->
+		<property name="repeatInterval" value="300000" />
+	</bean>
+
+</beans>

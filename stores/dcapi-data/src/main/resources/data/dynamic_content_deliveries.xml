@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dynamic_content_deliveries>
+<dynamic_content_delivery>
+    <name>Super Awesome API Dynamic Content Delivery of Images</name>
+    <guid>00010AAA-6F2C-83B0-AAAA-B4A03D10BBBB</guid>
+    <priority>4</priority>
+    <dynamiccontent_guid>CBA761A41-EDFF-9F4F-4AAB-AA92306C69BB</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>A6314754-967C-DC54-A3DC-FF362E334333</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>AAB8AB57-C1BE-73AA-542B-FFB2A4A1CFFF</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>CCECA239-AAAA-EB31-43B8-3549CC7E6FAA</guid>
+                <name>4244159602673005</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee April 2012 GalaxyQ Ad</name>
+    <guid>074F9EEA-837B-67F4-A44C-F47FCBA529B2</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>C910DCBC-46A9-5DAC-EDF8-87B3C488404D</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>30E2EC19-D202-4DBD-9602-658D3F13D7F7</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>411774A0-686F-FF4F-C0A1-716450811903</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>1F0A996B-3E2B-7265-CE47-A1D53F3A5D93</guid>
+                <name>4244273097443551</name>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1333324200000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>8845CA19-22FB-FC41-7A28-6C4259F94B26</guid>
+                <name>4244288777264016</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee AngryBird Ad</name>
+    <guid>2ACFE6B7-ABBC-3CEE-C3FA-D706BC85A27E</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>A3AD8F1A-6DAF-FC6E-B6CF-BA48C811995C</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>AA0A277C-6FC4-927E-F7A6-1B3931FE0F16</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>DD73532D-6515-0024-EC00-F870D5B359F1</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>16C102DE-D2D5-750A-E827-560000407655</guid>
+                <name>4243873893481215</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Weekly Movie Promo</name>
+    <guid>4D347E5E-1591-152D-78C2-BC088A7EFF71</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>DD748AE2-7B57-71CD-EA8F-43E23E49D6C5</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>DB72D53C-80B6-0678-D44F-471BC387BAA3</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>19DFF806-CB48-8DA0-8667-BAC7644CDA1B</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <saved_condition_guids>
+            <saved_condition_guid>6524FBBF-C321-174D-ABBA-B6E6A94B5835</saved_condition_guid>
+        </saved_condition_guids>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee AngryBird Lower Prio Ad</name>
+    <guid>60BA1F65-DA44-776A-3698-9D5C560C1E5A</guid>
+    <priority>3</priority>
+    <dynamiccontent_guid>A3AD8F1A-6DAF-FC6E-B6CF-BA48C811995C</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>ABFCE4D5-E1AB-7CD7-FAD6-4DFFDF2AD90C</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>D2B4251A-F189-54DA-F135-2DBE631CF7EC</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>8D414725-6B47-B68A-7D54-35A7E0D005F5</guid>
+                <name>4325851025172832</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee GalaxyQ Ad</name>
+    <guid>7E238A16-7BBE-E42C-F0AC-FD6B3C408273</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>C910DCBC-46A9-5DAC-EDF8-87B3C488404D</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>53FCA53F-2189-7AB3-CD38-B6F9ECF5121B</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>A6F5B299-AA12-574B-CA73-81BC31105925</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <saved_condition_guids>
+            <saved_condition_guid>6524FBBF-C321-174D-ABBA-B6E6A94B5835</saved_condition_guid>
+        </saved_condition_guids>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee ImageNonClickable Ad</name>
+    <guid>8EFC7EEC-082C-BDB9-3EA3-AA0B274EDC85</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>7D43F241-D9DD-1C06-7E9C-1D2DA6F7180D</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>F6C14754-967C-DC1F-A3DC-AF362E334F87</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>5398B3D6-3606-FD94-B59F-22E5A3EFB15F</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>BC16A582-64B9-CC5A-57A3-A8E07EB08F87</guid>
+                <name>4243958276784494</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Global GalaxyQ Ad</name>
+    <guid>A49DFB9F-4E16-57CC-D784-771917D5DFC0</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>C910DCBC-46A9-5DAC-EDF8-87B3C488404D</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>674796D7-F851-CD99-6850-FBF932A61A75</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>9187099B-824C-484D-0450-B50535128CA2</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>DA49DCED-1D2E-463D-44B0-3ABDDCAA260A</guid>
+                <name>all stores</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'searchbee' }  { SELLING_CHANNEL.equalTo 'Kobee' }  { SELLING_CHANNEL.equalTo 'MOBEE' }  { SELLING_CHANNEL.equalTo 'toastie' }  { SELLING_CHANNEL.equalTo 'Dobee' }  { SELLING_CHANNEL.equalTo 'tobee123' }  { SELLING_CHANNEL.equalTo 'rockjam' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee GalaxyQ Higher Prio Ad</name>
+    <guid>AAD5F407-D521-9194-10CC-26D686DD39C7</guid>
+    <priority>2</priority>
+    <dynamiccontent_guid>C910DCBC-46A9-5DAC-EDF8-87B3C488404D</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>ABFCE4D5-E1AB-7CD7-FAD6-4DFFDF2AD90C</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>B0B49F88-5090-430F-FC03-42D52763549F</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>F51DBFA1-6A42-EBB1-3A0C-A90C3E48222E</guid>
+                <name>4325801209899207</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Video Games Promo For Other Store</name>
+    <guid>ABC10AAC-DA73-83B0-DA7E-B4A03D10E111</guid>
+    <priority>3</priority>
+    <dynamiccontent_guid>1A43F241-D9BA-46DA-7E9C-147869DAEDAE</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>AA0A277C-12A3-927E-F7A6-7265415DA913</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>DBB8AB57-DA73-738B-542B-B4A03D10E111</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>ABEDA239-DA73-EB31-4CB8-B4A03D10E111</guid>
+                <name>4244159609876441</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Video Games Promo 1A</name>
+    <guid>B5A10AAC-6F2C-83B0-DA7E-B4A03D10E666</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>1A43F241-D9BA-A7A5-7E9C-1D2DA6F718DA</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>AA0A277C-12A3-927E-F7A6-7265415DA913</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>DBB8AB57-C1BE-738B-542B-B4A03D10E666</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>B7EDA239-8755-EB31-4CB8-B4A03D10E666</guid>
+                <name>4244159609843305</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee Christmas 2020 GalaxyQ Ad</name>
+    <guid>B5A10AAC-6F2C-83B0-EAB3-B4A03D10ED20</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>C910DCBC-46A9-5DAC-EDF8-87B3C488404D</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>B7DEBE42-12A3-C2D3-068F-7265415DA913</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>DBB8AB57-C1BE-738B-542B-E9B2A4A1CFAE</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>B7EDA239-8755-EB31-4CB8-3549AC7E6F22</guid>
+                <name>4244159602673005</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+        <saved_condition_guids>
+            <saved_condition_guid>53CBBD97-FE31-5C56-204A-6830E1BA6BA0</saved_condition_guid>
+        </saved_condition_guids>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Movies Promo Campaign</name>
+    <guid>C927CDD7-8940-96C4-55BD-7F1FA81DFD98</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>F9761A41-ED5D-9F4F-440B-F792306C69C1</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>B7DEBE42-12A3-C2D3-068F-7265415DA913</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>F231E712-61F9-BBEC-7FA6-07251CF11956</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>348C16AF-5BEF-5851-44A4-A19CBCC390DF</guid>
+                <name>4398895003987825</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  { SELLING_CHANNEL.equalTo 'searchbee' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+
+<dynamic_content_delivery>
+    <name>Mobee HTML Ad</name>
+    <guid>DE64DE82-AEC8-5BF4-C9D7-73BE39D3BE9D</guid>
+    <priority>5</priority>
+    <dynamiccontent_guid>49F367A1-56B9-2DE5-BB74-D89CE29DDBA6</dynamiccontent_guid>
+    <contentspaces>
+        <contentspace_guid>13F89EA9-A417-1743-A3B3-519D13E19FC4</contentspace_guid>
+    </contentspaces>
+    <selling_context>
+        <guid>EFD3BC67-5B7D-2112-F4D0-605D9B6E4D0C</guid>
+        <name>SELLING_CONTEXT_NAME_null</name>
+        <description>SELLING_CONTEXT_DESCR_null</description>
+        <priority>0</priority>
+        <conditions>
+            <condition>
+                <guid>883E984C-BB47-3D2A-B1EF-493EE66358DA</guid>
+                <name>4398895003987625</name>
+                <condition_string> { OR { SELLING_CHANNEL.equalTo 'MOBEE' }  } </condition_string>
+                <dictionary_guid>STORES</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</dynamic_content_delivery>
+</dynamic_content_deliveries>

@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- BEGIN: JMX Statistics for Pipeline Performance -->
+	<bean id="threadpoolMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="beans">
+			<map>
+				<entry key="com.elasticpath.search:bean=EntityLoader" value="#{ entityLoaderTaskExecutor.threadPoolExecutor }" />
+				<entry key="com.elasticpath.search:bean=EntityLoaderQueue"
+					value="#{ entityLoaderTaskExecutor.threadPoolExecutor.queue }" />
+
+				<entry key="com.elasticpath.search:bean=DocumentCreator"
+					value="#{ documentCreatorTaskExecutor.threadPoolExecutor }" />
+				<entry key="com.elasticpath.search:bean=DocumentCreatorQueue"
+					value="#{ documentCreatorTaskExecutor.threadPoolExecutor.queue }" />
+
+			</map>
+		</property>
+		<property name="assembler">
+			<bean
+				class="org.springframework.jmx.export.assembler.MethodNameBasedMBeanInfoAssembler">
+				<property name="managedMethods">
+					<value>size,remainingCapacity,getActiveCount,getCompletedTaskCount,getCorePoolSize,getPoolSize,getLargestPoolSize,getMaximumPoolSize,setCorePoolSize,setMaximumPoolSize
+					</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<alias name="com.elasticpath.search.IndexingStats" alias="indexingStats" />
+
+	<bean id="com.elasticpath.search.IndexingStats"
+		class="com.elasticpath.search.index.pipeline.stats.impl.IndexingStatsImpl"
+		lazy-init="false">
+	</bean>
+
+	<!-- END: JMX Statistics for Pipeline Performance -->
+
+	<!-- BEGIN: Thread Pool Configuration -->
+	<!-- This pool is shared among all pipelines for loading entities from the 
+		database. Assume that each thread uses at least one database connection, 
+		so if set too high it can run the database connection pool dry. (5-10 is 
+		default pool-size) -->
+
+	<bean id="entityLoaderTaskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="daemon" value="true" />
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="keepAliveSeconds" value="600" />
+		<property name="queueCapacity" value="200000" />
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy" />
+		</property>
+	</bean>
+
+	<!-- This pool is shared among all pipelines for the DocumentCreatingStage. 
+		This stage is also entitled to use the database (16-25 is default pool-size) -->
+	<bean id="documentCreatorTaskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="daemon" value="true" />
+		<property name="corePoolSize" value="25" />
+		<property name="maxPoolSize" value="25" />
+		<property name="keepAliveSeconds" value="600" />
+		<property name="queueCapacity" value="200000" />
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy" />
+		</property>
+	</bean>
+
+	<!-- END: Thread Pool Configuration -->
+
+	<!-- Grouping Related: Grouping is entity-type agnostic. -->
+	<bean id="indexGroupingTask"
+		class="com.elasticpath.search.index.grouper.impl.UidGroupingTaskImpl"
+		scope="prototype">
+	</bean>
+
+	<bean id="indexGroupingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="indexGroupingTask" />
+		</property>
+	</bean>
+
+	<bean id="batchingGroupingStage"
+		class="com.elasticpath.search.index.pipeline.impl.UidGroupingStage"
+		scope="prototype">
+		<property name="indexGroupingTaskFactory" ref="indexGroupingTaskFactory" />
+		<property name="taskExecutor">
+			<bean class="org.springframework.core.task.SyncTaskExecutor" />
+		</property>
+	</bean>
+
+
+	<!-- Pipeline Monitors -->
+
+	<task:scheduler id="pipelineMonitorScheduler" pool-size="7" />
+
+	<task:scheduled-tasks scheduler="pipelineMonitorScheduler">
+		<task:scheduled ref="productIndexingPipeline" method="periodicMonitor"
+			fixed-delay="2500" />
+		<task:scheduled ref="skuIndexingPipeline" method="periodicMonitor"
+			fixed-delay="2500" />
+		<task:scheduled ref="cmUserIndexingPipeline" method="periodicMonitor"
+			fixed-delay="2500" />
+		<task:scheduled ref="categoryIndexingPipeline" method="periodicMonitor"
+			fixed-delay="2500" />
+		<task:scheduled ref="customerIndexingPipeline" method="periodicMonitor"
+			fixed-delay="2500" />
+		<task:scheduled ref="ruleIndexingPipeline" method="periodicMonitor"
+			fixed-delay="2500" />
+		<task:scheduled ref="shippingServiceLevelIndexingPipeline"
+			method="periodicMonitor" fixed-delay="2500" />
+	</task:scheduled-tasks>
+
+	<!-- Product Indexing Pipeline -->
+
+	<bean id="productIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">PRODUCT</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="productLoadingStage"/>
+				<ref bean="productDocumentCreatorStage"/>
+				<ref bean="productDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="productDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">PRODUCT</value>
+		</property>
+	</bean>
+
+	<!-- Loading Related : Product solrDocumentPublisher -->
+
+	<bean id="productLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchProductLoader" />
+		</property>
+	</bean>
+
+	<bean id="productLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="productLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchProductLoader"
+		class="com.elasticpath.search.index.loader.impl.BatchProductLoader"
+		scope="prototype">
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="storeService" ref="storeService" />
+		<property name="productLoadTuner" ref="PRODUCT_FG_LOAD_TUNER_INDEX" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : Product -->
+
+	<bean id="productDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="productSolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="productDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory" ref="productDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="productSolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.ProductSolrInputDocumentCreator"
+		scope="prototype">
+		<property name="categoryService" ref="categoryService" />
+		<property name="brandService" ref="brandService" />
+		<property name="storeService" ref="storeService" />
+		<property name="productLoadTuner" ref="PRODUCT_FG_LOAD_TUNER_INDEX" />
+		<property name="promotedPriceLookupService" ref="promotedPriceLookupService" />
+		<property name="priceListAssignmentService" ref="priceListAssignmentService" />
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="analyzer" ref="analyzer" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Publishing Related : Product -->
+
+	<!-- Document Publishing Related : Product (END) -->
+
+	<!-- CmUser Indexing Pipeline -->
+
+	<bean id="cmUserIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">CMUSER</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="cmUserLoadingStage"/>
+				<ref bean="cmUserDocumentCreatorStage"/>
+				<ref bean="cmUserDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="cmUserDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">CMUSER</value>
+		</property>
+	</bean>
+
+	<!-- Loading Related : CmUser solrDocumentPublisher -->
+
+	<bean id="cmUserLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchCmUserLoader" />
+		</property>
+	</bean>
+
+	<bean id="cmUserLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="cmUserLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchCmUserLoader"
+		class="com.elasticpath.search.index.loader.impl.BatchCmUserLoader"
+		scope="prototype">
+		<property name="cmUserService" ref="cmUserService" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : CmUser -->
+
+	<bean id="cmUserDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="cmUserSolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="cmUserDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory" ref="cmUserDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="cmUserSolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.CmUserSolrInputDocumentCreator"
+		scope="prototype">
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="analyzer" ref="analyzer" />
+	</bean>
+
+	<!-- Sku Indexing Pipeline -->
+
+	<bean id="skuIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">SKU</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="skuLoadingStage"/>
+				<ref bean="skuDocumentCreatorStage"/>
+				<ref bean="skuDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="skuDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">SKU</value>
+		</property>
+	</bean>
+
+	<!-- Loading Related : Sku solrDocumentPublisher -->
+
+	<bean id="skuLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchProductSkuLoader" />
+		</property>
+	</bean>
+
+	<bean id="skuLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="skuLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchProductSkuLoader"
+		class="com.elasticpath.search.index.loader.impl.BatchProductSkuLoader"
+		scope="prototype">
+		<property name="skuService" ref="productSkuService" />
+		<property name="productSkuLoadTuner" ref="SKU_PRODUCT_FG_LOAD_TUNER_INDEX" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : Sku -->
+
+	<bean id="skuDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="skuSolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="skuDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory" ref="skuDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="skuSolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.SkuSolrInputDocumentCreator"
+		scope="prototype">
+		<property name="storeService" ref="storeService" />
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="productSkuLoadTuner" ref="SKU_PRODUCT_FG_LOAD_TUNER_INDEX" />
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="analyzer" ref="analyzer" />
+	</bean>
+
+	<!-- Category Indexing Pipeline -->
+
+	<bean id="categoryIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">CATEGORY</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="categoryLoadingStage"/>
+				<ref bean="categoryDocumentCreatorStage"/>
+				<ref bean="categoryDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="categoryDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">CATEGORY</value>
+		</property>
+	</bean>
+
+	<!-- Loading Related : Category solrDocumentPublisher -->
+
+	<bean id="categoryLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchCategoryLoader" />
+		</property>
+	</bean>
+
+	<bean id="categoryLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="categoryLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchCategoryLoader"
+		class="com.elasticpath.search.index.loader.impl.BatchCategoryLoader"
+		scope="prototype">
+		<property name="categoryService" ref="categoryService" />
+		<property name="categoryFetchGroupLoadTuner" ref="CATEGORY_FG_LOAD_TUNER_INDEX" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : Category -->
+
+	<bean id="categoryDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="categorySolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="categoryDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory" ref="categoryDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="categorySolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.CategorySolrInputDocumentCreator"
+		scope="prototype">
+		<property name="categoryService" ref="categoryService" />
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="analyzer" ref="analyzer" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+
+	<!-- Customer Indexing Pipeline -->
+
+	<bean id="customerIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">CUSTOMER</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="customerFilteringStage"/>
+				<ref bean="customerLoadingStage"/>
+				<ref bean="customerDocumentCreatorStage"/>
+				<ref bean="customerDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="customerDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">CUSTOMER</value>
+		</property>
+	</bean>
+
+	<!-- Filtering Related : customerFilter -->
+
+	<bean id="customerFilterTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="customerFilter" />
+		</property>
+	</bean>
+
+	<bean id="customerFilteringStage"
+		class="com.elasticpath.search.index.pipeline.impl.UidFilteringStage">
+		<property name="indexFilteringTaskFactory" ref="customerFilterTaskFactory" />
+		<property name="taskExecutor">
+			<bean class="org.springframework.core.task.SyncTaskExecutor" />
+		</property>
+	</bean>
+
+	<bean id="customerFilter"
+		class="com.elasticpath.search.index.filter.impl.CustomerFilter"
+		scope="prototype">
+		<property name="customerService" ref="customerService" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Loading Related : Customer solrDocumentPublisher -->
+
+	<bean id="customerLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchCustomerLoader" />
+		</property>
+	</bean>
+
+	<bean id="customerLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="customerLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchCustomerLoader"
+		class="com.elasticpath.search.index.loader.impl.BatchCustomerLoader"
+		scope="prototype">
+		<property name="customerService" ref="customerService" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : Customer -->
+
+	<bean id="customerDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="customerSolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="customerDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory" ref="customerDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="customerSolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.CustomerSolrInputDocumentCreator"
+		scope="prototype">
+		<property name="analyzer" ref="analyzer" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Publishing Related : Customer -->
+
+	<!-- Rule Indexing Pipeline -->
+
+	<bean id="ruleIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">PROMOTION</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="ruleLoadingStage"/>
+				<ref bean="ruleDocumentCreatorStage"/>
+				<ref bean="ruleDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="ruleDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">PROMOTION</value>
+		</property>
+	</bean>
+
+	<!-- Loading Related : Rule solrDocumentPublisher -->
+
+	<bean id="ruleLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchRuleLoader" />
+		</property>
+	</bean>
+
+	<bean id="ruleLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="ruleLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchRuleLoader"
+		class="com.elasticpath.search.index.loader.impl.BatchRuleLoader"
+		scope="prototype">
+		<property name="ruleService" ref="ruleService" />
+		<property name="ruleLoadTuner" ref="PROMOTION_FG_LOAD_TUNER_INDEX" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : Rule -->
+
+	<bean id="ruleDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="ruleSolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="ruleDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory" ref="ruleDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="ruleSolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.RuleSolrInputDocumentCreator"
+		scope="prototype">
+		<property name="analyzer" ref="analyzer" />
+		<property name="conditionDSLBuilder" ref="tagConditionDSLBuilder" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Publishing Related : Rule -->
+
+	<!-- ShippingServiceLevel Indexing Pipeline -->
+
+	<bean id="shippingServiceLevelIndexingPipeline" init-method="initialize"
+		destroy-method="destroy"
+		class="com.elasticpath.search.index.pipeline.impl.IndexingPipelineImpl">
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">SHIPPING_SERVICE_LEVEL</value>
+		</property>
+		<property name="stages">
+			<util:list>
+				<ref bean="batchingGroupingStage"/>
+				<ref bean="shippingServiceLevelLoadingStage"/>
+				<ref bean="shippingServiceLevelDocumentCreatorStage"/>
+				<ref bean="shippingServiceLevelDocumentPublishingStage"/>
+			</util:list>
+		</property>
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="timeService" ref="timeService" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+	</bean>
+
+	<bean id="shippingServiceLevelDocumentPublishingStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentPublishingStage">
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexType">
+			<value type="com.elasticpath.service.search.IndexType">SHIPPING_SERVICE_LEVEL</value>
+		</property>
+	</bean>
+
+	<!-- Loading Related : ShippingServiceLevel solrDocumentPublisher -->
+
+	<bean id="shippingServiceLevelLoadingTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="batchShippingServiceLevelLoader" />
+		</property>
+	</bean>
+
+	<bean id="shippingServiceLevelLoadingStage"
+		class="com.elasticpath.search.index.pipeline.impl.EntityLoadingStage">
+		<property name="loaderFactory" ref="shippingServiceLevelLoadingTaskFactory" />
+		<property name="taskExecutor" ref="entityLoaderTaskExecutor" />
+	</bean>
+
+	<bean id="batchShippingServiceLevelLoader"
+		class="com.elasticpath.search.index.loader.impl.ShippingServiceLevelLoader"
+		scope="prototype">
+		<property name="shippingServiceLevelService" ref="shippingServiceLevelService" />
+		<property name="pipelinePerformance">
+			<!-- pass in a black hole PipelinePerformance for integration tests.. -->
+			<bean
+				class="com.elasticpath.search.index.pipeline.stats.impl.PipelinePerformanceImpl" />
+		</property>
+	</bean>
+
+	<!-- Document Creation Related : ShippingServiceLevel -->
+
+	<bean id="shippingServiceLevelDocumentCreatorTaskFactory"
+		class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName">
+			<idref local="shippingServiceLevelSolrInputDocumentCreator" />
+		</property>
+	</bean>
+
+	<bean id="shippingServiceLevelDocumentCreatorStage"
+		class="com.elasticpath.search.index.pipeline.impl.DocumentCreatingStage"
+		scope="prototype">
+		<property name="documentCreatorFactory"
+			ref="shippingServiceLevelDocumentCreatorTaskFactory" />
+		<property name="taskExecutor" ref="documentCreatorTaskExecutor" />
+	</bean>
+
+	<bean id="shippingServiceLevelSolrInputDocumentCreator"
+		class="com.elasticpath.search.index.solr.document.impl.ShippingServiceLevelSolrInputDocumentCreator"
+		scope="prototype">
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="analyzer" ref="analyzer" />
+	</bean>
+
+</beans>

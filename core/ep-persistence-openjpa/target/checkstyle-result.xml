@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/ChangeType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/AbstractPersistenceEngineEntityListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/ConfigurableLocalContainerEntityManagerFactoryBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/JpaPersistenceEngineImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/JpaQueryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/JpaSessionFactoryImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/JpaSessionImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/JpaTransactionImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/ListeningPersistenceSessionImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/MergingPersistenceUnitPostProcessor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/OverrideAllowingPersistenceUnitManager.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/QueryParameterEscaperImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/impl/RemoveTrailingBackslashPersistenceUnitPostProcessor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/JpaPersistenceEngine.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/JpaPersistenceEngineInternal.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/JpaPersistenceSession.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/PersistenceEngineEntityListener.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/PersistenceInterceptor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/QueryParameterEscaper.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/support/impl/OpenJPAInitializer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/support/JpqlQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/main/java/com/elasticpath/persistence/openjpa/support/JpqlQueryBuilderWhereGroup.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/test/java/com/elasticpath/persistence/openjpa/impl/JpaPersistenceEngineImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/test/java/com/elasticpath/persistence/openjpa/impl/MergingPersistenceUnitPostProcessorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/test/java/com/elasticpath/persistence/openjpa/impl/QueryParameterEscaperTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/test/java/com/elasticpath/persistence/openjpa/impl/RemoveTrailingBackslashPersistenceUnitPostProcessorTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-openjpa/src/test/java/com/elasticpath/persistence/openjpa/support/JpqlQueryBuilderTest.java">
+</file>
+</checkstyle>

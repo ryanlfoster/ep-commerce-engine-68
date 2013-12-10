@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="forgottenPasswordFormBean" class="com.elasticpath.sfweb.formbean.impl.ForgottenPasswordFormBeanImpl" scope="prototype">
+	</bean>
+		
+	<bean id="signInFormBean" class="com.elasticpath.sfweb.formbean.impl.SignInFormBeanImpl" scope="prototype">
+	</bean>
+	
+	<bean id="anonymousSignInFormBean" class="com.elasticpath.sfweb.formbean.impl.AnonymousSignInFormBeanImpl" scope="prototype">
+	</bean>
+	
+	<bean id="creditCardFormBean" class="com.elasticpath.sfweb.formbean.impl.CreditCardFormBeanImpl" scope="prototype">
+	</bean>
+	
+	<bean id="checkoutAddressFormBean" class="com.elasticpath.sfweb.formbean.impl.CheckoutAddressFormBeanImpl" scope="prototype">
+	</bean>
+	
+	<bean id="billingAndReviewFormBean" class="com.elasticpath.sfweb.formbean.impl.BillingAndReviewFormBeanImpl" scope="prototype">
+		<property name="orderPaymentFormBean" ref="orderPaymentFormBean" />
+	</bean>
+	
+	<bean id="customerAddressFormBean" class="com.elasticpath.sfweb.formbean.impl.CustomerAddressFormBeanImpl" scope="prototype">
+	</bean>
+	
+	<bean id="editAccountFormBean" class="com.elasticpath.sfweb.formbean.impl.EditAccountFormBeanImpl" scope="prototype">
+	</bean>
+	 
+	<bean id="giftCertificateFormBean" class="com.elasticpath.sfweb.formbean.impl.GiftCertificateFormBeanImpl" scope="prototype">
+	</bean>
+ 	
+	<bean id="orderPaymentFormBean" class="com.elasticpath.sfweb.formbean.impl.OrderPaymentFormBeanImpl" scope="prototype">
+	</bean>
+
+	<bean id="customerFormBean" class="com.elasticpath.sfweb.formbean.impl.CustomerFormBeanImpl" scope="prototype">
+	</bean>
+	
+	<bean id="cartFormBean" class="com.elasticpath.sfweb.formbean.impl.CartFormBeanImpl" scope="prototype" />
+	
+	<bean id="shoppingItemFormBean" class="com.elasticpath.sfweb.formbean.impl.ShoppingItemFormBeanImpl" scope="prototype" />
+	
+	<bean id="shoppingCartFormBean" class="com.elasticpath.sfweb.formbean.impl.ShoppingCartFormBeanImpl" scope="prototype" />
+	
+	<bean id="orderItemFormBean" class="com.elasticpath.sellingchannel.presentation.impl.OrderItemPresentationBeanImpl" scope="prototype" />
+	
+	<bean id="manageAccountFormBean" class="com.elasticpath.sfweb.formbean.impl.ManageAccountFormBeanImpl" scope="prototype" />
+	
+	<bean id="advancedSearchControllerFormBean" class="com.elasticpath.sfweb.formbean.impl.AdvancedSearchControllerFormBeanImpl" scope="prototype" />
+
+	<!-- AJAX Beans -->
+	
+	<bean id="skuSelectionBean" class="com.elasticpath.sfweb.ajax.bean.impl.GuidedSkuSelectionBeanImpl" scope="prototype" />
+	
+	<bean id="jsonBundle" class="com.elasticpath.sfweb.ajax.bean.impl.JsonBundleItemBeanImpl" scope="prototype"/>
+	
+	
+</beans>

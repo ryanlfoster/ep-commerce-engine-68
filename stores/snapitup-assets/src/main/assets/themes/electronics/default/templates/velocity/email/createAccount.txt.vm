@@ -1,0 +1,24 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## createAccount.txt.vm
+#emailInit()
+$dateTool.get('MMMM d, yyyy')#**#
+    
+#emailMessage("email.globals.dear") $!customer.firstName $!customer.lastName,#**#
+
+#emailMessage("email.createAccount.message1")#**#
+$store.getUrl()#**#
+    
+#emailMessage("email.createAccount.message2")#**#
+$store.getUrl()/manage-account.ep#**#
+        
+#emailMessage("email.createAccount.message3")#**#
+#emailMessage("email.createAccount.customerno"): $!customer.uidPk#**#
+#emailMessage("email.createAccount.created"): $!customer.creationDate#**#
+#emailMessage("email.emailAddress"): $!customer.email#**#
+    
+-------------------------------------#**#
+$store.getName()
+$store.getUrl()
+-------------------------------------#**#

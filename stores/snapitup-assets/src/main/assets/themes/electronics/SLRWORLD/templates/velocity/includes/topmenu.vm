@@ -1,0 +1,102 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## topmenu.vm
+#**
+* Recursively display a category tree and mark "on" for the curren category path.
+*#
+<div id="top-menu">
+	<div id="tabs10">
+		<ul>
+			#foreach($category in $ctxTopCategoriesHelper.resolveTopCategories())
+				#if($category.isAvailable())
+					#set ($categoryID = $category.getUidPk())
+					#set ($categoryDisplayName = $category.getDisplayName($locale))
+					
+					#parseCategorySeoUrl($category 1)
+					
+					## loop ten times to check the parent code since velocity doesn't have while loop
+					#set ($times=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+					#if ($currentCategory)
+						#set ($categoryCursor = $currentCategory)
+					#else
+						#set ($categoryCursor = false)
+					#end
+					
+					#set ($matchCode = false)
+					#foreach ($curTime in $times)
+						#if ($matchCode == false && $categoryCursor && $categoryCursor.getCode() == $category.getCode())
+							#set ($matchCode = true)
+						#end
+						#if ($categoryCursor.getParent())
+							#set ($categoryCursor = $categoryCursor.getParent())
+						#end
+					#end
+					#if ($matchCode)
+					<li id="current"><a href="$categorySeoUrl"><span>$categoryDisplayName</span></a></li>
+					#else
+					<li><a href="$categorySeoUrl"><span>$categoryDisplayName</span></a></li>						
+					#end
+					
+				#end
+			#end
+		</ul>
+	</div>
+</div>
+
+<div id="search">
+		<form action="$baseUrl/search.ep" method="get" name="searchForm" class="search-form">
+			#if ($currentCatalogViewResult.getCategory())
+				#set ($currentCategory = $currentCatalogViewResult.getCategory())
+			#else
+				#set ($currentCategory = false)
+			#end
+			<input id="suggestKeywords" class="search-box" type="text" maxlength="255" name="keyWords" value="" />
+			
+			<select id="suggestCategoryId" name="categoryId">
+				<option value="" label="Entire Store">#springMessage("topmenu.entireStore")</option>
+			#if (!$currentCategory)
+				#foreach ($category in $ctxTopCategoriesHelper.resolveTopCategories())
+					#if ($category.isAvailable())
+						#set ($categoryID = $category.getUidPk())
+						#set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+						<option value="$categoryID" label="$escapeTool.html($categoryDisplayName)"
+							>$escapeTool.html($categoryDisplayName)</option>
+					#end
+				#end
+			#else
+				#set ($parents = $currentCategory.getPathAsList())
+				#set ($children = $currentCategory.getChildren())
+				#foreach ($category in $parents)
+					#if ($category.isAvailable())
+						#set ($categoryID = $category.getUidPk())
+						#set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+						<option value="$categoryID"
+							label="$escapeTool.html($categoryDisplayName)"
+							#if ($categoryID == $currentCategory.getUidPk())
+								selected="selected"
+							#end
+							>$escapeTool.html($categoryDisplayName)</option>
+					#end
+				#end
+				#foreach ($category in $children)
+					#if ($category.isAvailable())
+						#set ($categoryID = $category.getUidPk())
+						#set ($categoryDisplayName = $category.getLocaleDependantFields($locale).getDisplayName())
+						<option value="$categoryID"
+							label="$escapeTool.html($categoryDisplayName)"
+							>$escapeTool.html($categoryDisplayName)</option>
+					#end
+				#end
+			#end
+			</select>
+			<input type="submit" class="button" name="submit" value="#springMessage("header.search")" />
+		</form>
+	</div>
+
+
+  ## product search autocompletion
+  #set($extraParams = '{keyWords : function() { return jq("#suggestKeywords").val() }, categoryId: function() { return jq("#suggestCategoryId").val() } }')
+  #searchProductSuggestJsScript('suggestKeywords' 50 50 3 350 290 $extraParams)
+
+	

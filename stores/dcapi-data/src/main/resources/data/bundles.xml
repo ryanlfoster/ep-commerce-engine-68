@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bundles>
+<bundle code="bundle_terminator">
+    <constituents>
+        <constituent>
+            <guid>5D007A6F-242F-9ABA-19A2-EF6ED4259664</guid>
+            <code type="product">movie_111222</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>A026132B-5D83-5E09-E7B9-1A48A54FE36C</guid>
+            <code type="product">movie_1234567</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>CBE6236A-B47E-169A-0DD2-D812C351B19B</guid>
+            <code type="product">movie_2345678</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_4567890">
+    <constituents>
+        <constituent>
+            <guid>4B6F62B4-34B3-8781-57D2-A8C64B89E614</guid>
+            <code type="product">mb_3456789</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>335590E9-A9BD-6BBE-C9C7-0B35B09FBF8D</guid>
+            <code type="product">tt0970179</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="tb_9878943">
+    <constituents>
+        <constituent>
+            <guid>DF28CAF7-E16B-2845-897C-E8DEE4D1A66D</guid>
+            <code type="sku">72542_1</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>242E7FB5-222B-C4B6-36DF-B118EFD3AF81</guid>
+            <code type="sku">TV_76567_sku1</code>
+            <quantity>2</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="bundle_nopriceitem">
+    <constituents>
+        <constituent>
+            <guid>CB306416-4997-67F5-C51C-B3B06A0D1C24</guid>
+            <code type="product">galaxys2</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>F20CAB43-D976-D950-6AF9-45068A1528B5</guid>
+            <code type="product">htcevo</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="GI29939">
+    <constituents>
+        <constituent>
+            <guid>2BAAAE10-0244-6AC0-E9F0-27DFA4942FDC</guid>
+            <code type="product">GI18293</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>1F92992F-C201-20E5-8B2A-C9724906F4FB</guid>
+            <code type="product">GI29389</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_8909032">
+    <constituents>
+        <constituent>
+            <guid>3BFFB2E9-E370-15A9-42ED-84FCEEAB500C</guid>
+            <code type="product">tt0068646</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>8CBBBA05-1438-8F84-6B30-F51EDED44969</guid>
+            <code type="product">tt1568346</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>C3A9396B-270C-7E75-6011-272E6867178E</guid>
+            <code type="sku">tt258022dh_HDB</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_7890123">
+    <constituents>
+        <constituent>
+            <guid>5B7060B1-9C39-DCB5-CC10-437F7D7938BB</guid>
+            <code type="product">mb_3456789</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>7B07F470-59BD-C864-7101-BDB91C24CA15</guid>
+            <code type="product">tt0068646</code>
+            <quantity>2</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_8901234">
+    <constituents>
+        <constituent>
+            <guid>C60F5358-ADDC-195C-9FC4-79B1A5872C82</guid>
+            <code type="product">mb_5678901</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>193A1489-2736-EB12-F96E-5DFEDCF88B79</guid>
+            <code type="product">mb_7890123</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_2345678">
+    <constituents/>
+</bundle>
+
+<bundle code="tb_dyn12345">
+    <constituents>
+        <constituent>
+            <guid>8A9A4AFE-57AF-4E20-3D87-98E659F600A7</guid>
+            <code type="product">tt0970179</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>C6C0B01E-5624-1C4C-9FB4-C84DFA4A5CA8</guid>
+            <code type="product">tt5656565</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>6B554C97-5710-D993-619C-4484171D0F87</guid>
+            <code type="product">tt0926084</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+    <selectionrule>
+        <selectionparameter>1</selectionparameter>
+    </selectionrule>
+</bundle>
+
+<bundle code="mb_6789012">
+    <constituents>
+        <constituent>
+            <guid>7ED53146-D690-ADCD-4F02-21A098ED37EF</guid>
+            <code type="product">tt5656565</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>3C1C0DDD-AA42-C352-ED3C-278C80BD471B</guid>
+                    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+                    <adjustment_amount>0.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>CE8B0D32-1D78-C931-98D4-E00A8089E1B1</guid>
+            <code type="product">tt0926084</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>86C9698B-659D-5D88-5F92-BA9ECAC138EC</guid>
+                    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+                    <adjustment_amount>-10.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>2718155D-826F-8E06-E57C-A705ACF8A4A6</guid>
+            <code type="sku">72542_1</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="tbcp_0123456">
+    <constituents>
+        <constituent>
+            <guid>C53D5385-F07A-D4CA-9BF3-73C8ECC8BF2C</guid>
+            <code type="product">tt5656565</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>DA8EB7C1-A63C-5535-4A66-78BE7DE47E73</guid>
+            <code type="sku">tt966001av_sd_buy</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_4324324">
+    <constituents>
+        <constituent>
+            <guid>14638951-98CA-5EBB-2FE7-29353BBAE890</guid>
+            <code type="product">mb_8974323</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>20FC0A70-943B-C476-7E7B-B6EAD9921FF3</guid>
+            <code type="product">tb_9878943</code>
+            <quantity>2</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_8974323">
+    <constituents>
+        <constituent>
+            <guid>16F15AF8-CCC3-13F4-7601-29317594C34E</guid>
+            <code type="sku">tt966001av_hd_rent</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>7475F724-F865-DC84-DF60-7820E740BBC9</guid>
+            <code type="sku">tt966001av_sd_rent</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>3BA8FEA6-2D1A-E1F2-07CC-80A336B2FD5C</guid>
+            <code type="sku">tt777789bttf_hd_rent</code>
+            <quantity>2</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>DEBE91F1-84F0-9E62-4F5A-B6B5AFF395C2</guid>
+            <code type="sku">tt0970179_sku</code>
+            <quantity>1</quantity>
+            <ordering>3</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="tbcp_1234567">
+    <constituents>
+        <constituent>
+            <guid>C52A9E7A-730E-407D-5A33-7ACC582A2EFB</guid>
+            <code type="product">tbcp_0123456</code>
+            <quantity>2</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>DD3C95CF-0B24-442E-5F95-B007FFEDB400</guid>
+            <code type="sku">72542_1</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="GM38829">
+    <constituents>
+        <constituent>
+            <guid>33DCDBE4-FCBB-3BFC-819F-D4EA1E0D3380</guid>
+            <code type="product">GI18293</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>B38EA694-4306-C81D-1749-1C6C6B5804EF</guid>
+            <code type="product">GA19920</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="tbcp_3456789">
+    <constituents>
+        <constituent>
+            <guid>576B44E0-F9A7-EAB1-9CFB-01795E1DD777</guid>
+            <code type="product">tbcp_2345678</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>A860A495-8581-2576-5666-342C09AF1D9E</guid>
+            <code type="product">tbcp_4325453</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="tbcp_4325453">
+    <constituents>
+        <constituent>
+            <guid>76A2CDC6-A2FF-BBD4-2DDE-2CC7ED750DF7</guid>
+            <code type="product">TV_76567</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>65B3956B-7FFB-604C-8946-0E3BC0BFC69C</guid>
+            <code type="product">TV_78432</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="tbcp_2345678">
+    <constituents>
+        <constituent>
+            <guid>29F4BF63-D781-0523-0F53-3BB905D8351D</guid>
+            <code type="product">TV_72542</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>E548259F-8FB6-F8F1-2E6A-30B64FB4EF0A</guid>
+            <code type="product">TV_87465</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_2893033">
+    <constituents>
+        <constituent>
+            <guid>EF437B85-B4CD-0D5C-C503-5B252EBFA168</guid>
+            <code type="product">mb_6789012</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>6EB1108E-1775-5C4E-C237-B167B664523D</guid>
+            <code type="product">mb_8909032</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="bundle_disney">
+    <constituents>
+        <constituent>
+            <guid>045BA850-E849-3647-5E06-2BA1F7548E95</guid>
+            <code type="product">movie_333444</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>EB1618F9-8CC4-175F-3F86-EFB19BC47607</guid>
+            <code type="product">movie_444555</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>30178A62-7EF2-7842-2E08-C884A45398FB</guid>
+            <code type="sku">movie_222333_regular</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>3337DC9E-C3D4-E1B5-9DF3-0F23E31540EA</guid>
+            <code type="sku">movie_555666_regular</code>
+            <quantity>1</quantity>
+            <ordering>3</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_1234567">
+    <constituents>
+        <constituent>
+            <guid>D7F67C1A-C71C-D434-FF36-16A835F6F74D</guid>
+            <code type="product">tt0034583</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>42B5B11B-C430-80F0-76C8-4C4740A6B75D</guid>
+            <code type="product">tt0068646</code>
+            <quantity>2</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>4987E047-5B95-5A8A-0F66-0D73175A4D0C</guid>
+            <code type="product">tt0050083</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_3456789">
+    <constituents>
+        <constituent>
+            <guid>E60FD301-2F96-1385-7DD9-F5DC55635E18</guid>
+            <code type="product">mb_1234567</code>
+            <quantity>1</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>0A9C904D-93CE-75DA-2DFF-372BA00FB17B</guid>
+                    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+                    <adjustment_amount>10.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>C3644F5F-BD7B-1E88-C635-7F80081AD91A</guid>
+            <code type="product">tt5656565</code>
+            <quantity>2</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_5678901">
+    <constituents>
+        <constituent>
+            <guid>147B2794-7AF5-9E0D-4481-08AFDD4C4AFA</guid>
+            <code type="product">tt0970179</code>
+            <quantity>3</quantity>
+            <ordering>0</ordering>
+            <price_adjustments>
+                <adjustment>
+                    <guid>889FC877-1406-84B8-53AF-44B7CA6EAF64</guid>
+                    <price_list_guid>1A971BA1-D81F-A164-0FF0-53817D83B107</price_list_guid>
+                    <adjustment_amount>5.00</adjustment_amount>
+                </adjustment>
+            </price_adjustments>
+        </constituent>
+        <constituent>
+            <guid>9BE355B7-70B5-EBEB-4181-8CC32AD6D077</guid>
+            <code type="product">mb_4567890</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>4DB6E0ED-5B07-699C-304A-FC6BC1D870FC</guid>
+            <code type="product">mb_1234567</code>
+            <quantity>1</quantity>
+            <ordering>2</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+
+<bundle code="mb_9012345">
+    <constituents>
+        <constituent>
+            <guid>8DDB4762-158D-62C3-466C-1CAC06161D6A</guid>
+            <code type="product">mb_8901234</code>
+            <quantity>2</quantity>
+            <ordering>0</ordering>
+            <price_adjustments/>
+        </constituent>
+        <constituent>
+            <guid>52000D6D-63A3-8F36-3F74-2C31DF6E7D4E</guid>
+            <code type="product">galaxyq</code>
+            <quantity>1</quantity>
+            <ordering>1</ordering>
+            <price_adjustments/>
+        </constituent>
+    </constituents>
+</bundle>
+</bundles>

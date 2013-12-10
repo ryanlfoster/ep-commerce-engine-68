@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.search.query.impl</package>
+	<entity class="SearchTermsActivityImpl">
+		<named-query name="SEARCH_TERMS_DELETE_OLD_ACTIVITY">
+			<query>
+			<![CDATA[
+				DELETE FROM SearchTermsActivityImpl AS activity
+				WHERE activity.lastAccessDate < ?1
+			]]>
+			</query>
+		</named-query>
+		
+		<!-- 
+		The following queries are written in native SQL because of the limitations in JPQL.
+			* There is no INSERT command in JPQL. To emulate the insert command with the APIs, we would need to 
+			  fetch all the data from the database to the application server, which is not efficient.
+			* There is a bug in OpenJPA that causes issues with UPDATE queries on MySQL. See OpenJPA-459.
+		 -->
+		<named-native-query name="SEARCH_TERMS_AGGREGATE_EXISTING">
+			<query>
+			<![CDATA[
+				UPDATE TSEARCHTERMSACTIVITYSUMMARY SET
+				LAST_ACCESS_DATE = (SELECT MAX(LAST_ACCESSED) FROM TSEARCHTERMSACTIVITY WHERE SEARCH_TERM_UID = TSEARCHTERMSACTIVITYSUMMARY.SEARCH_TERM_UID AND LAST_ACCESSED < ?1),
+				SEARCH_COUNT = SEARCH_COUNT + (SELECT COUNT(*) FROM TSEARCHTERMSACTIVITY WHERE SEARCH_TERM_UID = TSEARCHTERMSACTIVITYSUMMARY.SEARCH_TERM_UID AND LAST_ACCESSED < ?1)
+				WHERE SEARCH_TERM_UID IN (
+					SELECT SEARCH_TERM_UID
+					FROM TSEARCHTERMSACTIVITY
+				)
+			]]>
+			</query>
+		</named-native-query>
+		<named-native-query name="SEARCH_TERMS_AGGREGATE_NEW">
+			<query>
+			<![CDATA[
+				INSERT INTO TSEARCHTERMSACTIVITYSUMMARY
+				SELECT s.SEARCH_TERM_UID, MAX(s.LAST_ACCESSED), COUNT(*)
+				FROM TSEARCHTERMSACTIVITY s
+				WHERE s.LAST_ACCESSED < ?1 AND s.SEARCH_TERM_UID NOT IN (
+					SELECT SEARCH_TERM_UID
+					FROM TSEARCHTERMSACTIVITYSUMMARY
+				)
+				GROUP BY s.SEARCH_TERM_UID
+			]]>
+			</query>
+		</named-native-query>
+	</entity>
+</entity-mappings>
+

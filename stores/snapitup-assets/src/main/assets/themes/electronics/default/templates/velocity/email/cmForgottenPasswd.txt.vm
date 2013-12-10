@@ -1,0 +1,9 @@
+Dear $!cmUser.firstName $!cmUser.lastName
+
+The new sign-in information that you requested is below:
+
+Username: $!cmUser.userName
+Password: $newPassword
+
+Best regards,
+Your Elastic Path Team

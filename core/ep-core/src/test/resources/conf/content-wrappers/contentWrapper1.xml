@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<content-wrappe>
+	<template-name>cs1.cwt</template-name>
+	<wrapper-id>1000</wrapper-id>
+    <wrapper-name>Human readable content wrapper name for UI</wrapper-name>
+	<template-parameters>
+		<template-parameter localizable="true">productPrice</template-parameter>
+		<template-parameter localizable="true">productCode</template-parameter>
+		<template-parameter localizable="true">productName</template-parameter>
+	</template-parameters>
+</content-wrapper>

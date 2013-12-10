@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>store-data-importer-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+		<relativePath>../store-data-importer-parent</relativePath>
+	</parent>
+
+	<artifactId>dcapi-populate-database</artifactId>
+	<packaging>pom</packaging>
+
+	<name>DCAPI Database Populator</name>
+
+	<description>This project is used to populate your current *-dev-db, or
+		any db which honours the epdb.* properties with the data from
+		dcapi-data. Run with -Dimport to activate.</description>
+
+	<properties>
+		<!-- Proxy the datapopdb to epdb; you can see this done differently in the dcapi-h2-database. -->
+		<datapopdb.url>${epdb.url}</datapopdb.url>
+		<datapopdb.schemaname>${epdb.schemaname}</datapopdb.schemaname>
+		<datapopdb.username>${epdb.username}</datapopdb.username>
+		<datapopdb.password>${epdb.password}</datapopdb.password>
+		<datapopdb.jdbc.driver>${epdb.jdbc.driver}</datapopdb.jdbc.driver>
+		<datapopdb.maven.groupId>${epdb.maven.groupId}</datapopdb.maven.groupId>
+		<datapopdb.maven.artifactId>${epdb.maven.artifactId}</datapopdb.maven.artifactId>
+		<datapopdb.maven.version>${epdb.maven.version}</datapopdb.maven.version>
+		<data.artifactId>dcapi-data</data.artifactId>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.stores</groupId>
+			<artifactId>dcapi-data</artifactId>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>update-settings</id>
+			<dependencies>
+				<dependency>
+					<groupId>${epdb.maven.groupId}</groupId>
+					<artifactId>${epdb.maven.artifactId}</artifactId>
+					<version>${epdb.maven.version}</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.elasticpath.tools</groupId>
+						<artifactId>ep-core-tool</artifactId>
+						<!-- update-settings inherited from store-data-importer-parent -->
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>create-artifact</id>
+			<activation>
+				<property>
+					<name>import</name>
+				</property>
+			</activation>
+
+			<dependencies>
+				<dependency>
+					<groupId>${epdb.maven.groupId}</groupId>
+					<artifactId>${epdb.maven.artifactId}</artifactId>
+					<version>${epdb.maven.version}</version>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<!-- copy resources inherited from store-data-importer-parent -->
+					</plugin>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<!-- unpack data.artifactId inherited from store-data-importer-parent -->
+					</plugin>
+					<plugin>
+						<groupId>org.liquibase</groupId>
+						<artifactId>liquibase-maven-plugin</artifactId>
+						<!-- liquibase:update inherited from store-data-importer-parent -->
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<!-- perform import inherited from store-data-importer-parent -->
+					</plugin>
+					<plugin>
+						<groupId>com.elasticpath.tools</groupId>
+						<artifactId>ep-core-tool</artifactId>
+						<!-- update-settings inherited from store-data-importer-parent -->
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

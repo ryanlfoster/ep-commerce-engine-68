@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<warehouses>
+<warehouse code="UKWarehouse">
+    <name>UK Warehouse</name>
+    <pick_delay>120</pick_delay>
+    <street1>Unit 540, Springfield Industrial Estate</street1>
+    <city>Warrington</city>
+    <sub_country></sub_country>
+    <zip_postal_code>WA12 7J3</zip_postal_code>
+    <country>GB</country>
+</warehouse>
+
+<warehouse code="USWarehouse1">
+    <name>Warehouse_US</name>
+    <pick_delay>120</pick_delay>
+    <street1>110 Commercial Ave</street1>
+    <city>Las Vegas</city>
+    <sub_country>AL</sub_country>
+    <zip_postal_code>112211</zip_postal_code>
+    <country>US</country>
+</warehouse>
+</warehouses>

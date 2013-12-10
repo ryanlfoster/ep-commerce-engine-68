@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.elasticpath.stores</groupId>
+		<artifactId>stores-parent</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>store-data-exporter-parent</artifactId>
+	<name>Store Data Exporter Parent</name>
+
+	<packaging>pom</packaging>
+
+	<description>Parent project for exporting store data via importexport.</description>
+	<inceptionYear>2011</inceptionYear>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath.db</groupId>
+			<artifactId>core-schema</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-importexport</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<skipDeploy>true</skipDeploy>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<activation>
+				<property>
+					<name>export</name>
+				</property>
+			</activation>
+
+			<dependencies>
+				<dependency>
+					<groupId>${epdb.maven.groupId}</groupId>
+					<artifactId>${epdb.maven.artifactId}</artifactId>
+					<version>${epdb.maven.version}</version>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>resources</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Run Export -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>perform-export</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>java</executable>
+									<arguments>
+										<argument>-Xms256m</argument>
+										<argument>-Xmx1024m</argument>
+										<argument>-XX:MaxPermSize=256m</argument>
+										<argument>-agentlib:jdwp=transport=dt_socket,address=${ep.debug.port},server=y,suspend=n</argument>
+										<argument>-Xint</argument>
+										<argument>-classpath</argument>
+										<classpath />
+										<argument>com.elasticpath.importexport.client.Index</argument>
+										<argument>-e</argument>
+										<argument>${project.build.outputDirectory}/cfg/searchconfiguration.xml</argument>
+										<argument>-c</argument>
+										<argument>${project.build.outputDirectory}/cfg/exportconfiguration.xml</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

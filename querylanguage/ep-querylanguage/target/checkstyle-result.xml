@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/catalog/CatalogConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/catalog/GiftCertificateConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/category/CategoryConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/cmimportjob/CmImportJobConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/cmuser/CmUserConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/cmuser/UserRoleConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/customer/CustomerConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/customer/CustomerProfileAttributeConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/pricelist/PriceListAssignmentConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/pricelist/PriceListConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/product/AttributeFieldResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/product/PriceFieldResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/product/ProductConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/product/ProductStateQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/promotion/ContentSpaceConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/promotion/DynamicContentConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/promotion/DynamicContentDeliveryConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/promotion/PromotionConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/promotion/SavedConditionConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/setting/MetadataFieldResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/setting/SettingConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/setting/SettingResult.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/setting/SettingSearchResultConverter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/setting/SQLSettingSubQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/setting/SQLSettingValueResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/shipping/ShippingRegionConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/shipping/ShippingServiceLevelConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/shipping/WarehouseConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/store/PaymentGatewayConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/store/StoreConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/tax/TaxCodeConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/custom/tax/TaxJurisdictionConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/AbstractEpQLCustomConfiguration.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQLField.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQLFieldDescriptor.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQLFieldType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQLOperator.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQLParseException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQLTerm.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQueryAssembler.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EpQueryParser.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/EPQueryType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/FetchType.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/fieldresolver/EpQLFieldResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/fieldresolver/impl/LocalizedFieldResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/fieldresolver/impl/NonLocalizedFieldResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/gen/FastCharStream.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/NativeResolvedTerm.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/JPQLBooleanClause.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/JPQLBooleanQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/JPQLQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/LuceneBooleanClause.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/LuceneQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/NativeBooleanClause.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/NativeQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/SQLBooleanClause.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/SQLBooleanQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/query/SQLQuery.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/CompleteQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/JPQLQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/JPQLSubQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/LuceneQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/LuceneRangeSubQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/LuceneSubQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/SQLQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/impl/SQLSubQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/querybuilder/SubQueryBuilder.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/SearchExecutionException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/ShieldUtility.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/TargetLanguage.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/valueresolver/EpQLValueResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/valueresolver/impl/EnumValueResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/valueresolver/impl/JPQLValueResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/valueresolver/impl/LuceneValueResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/ql/parser/valueresolver/impl/SQLValueResolver.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/EpQLSearchEngine.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/EpQLSearchEngineImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/EpQlSearchResult.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/IndexSearcher.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/JPQLIndexSearcherImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/SearchResultConverter.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/SolrIndexSearcherImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/SolrIndexSearchResult.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/main/java/com/elasticpath/search/searchengine/SQLIndexSearcherImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/asserts/ParseAssert.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/custom/pricelist/PriceListAssignmentQueryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/custom/promotion/DynamicContentDeliveryQueryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/custom/promotion/DynamicContentQueryTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpCmImportJobQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpCmUserQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpContentSpaceQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpCustomerProfileAttributeQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpCustomerQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpGiftCertificateQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpPaymentGatewayQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpShippingRegionQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpShippingServiceLevelQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpStoreQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpTaxCodeQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpTaxJurisdictionQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpUserRoleQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/EpWarehouseQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/querybuilder/RangeQueryAssemblerTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/SaveConditionQueryParserTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/ql/parser/valueresolver/impl/AbstractEpQLTermResolverTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/querylanguage/ep-querylanguage/src/test/java/com/elasticpath/search/searchengine/SolrIndexSearcherImplTest.java">
+</file>
+</checkstyle>

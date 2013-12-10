@@ -1,0 +1,44 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## index.vm
+<?xml version="1.0" encoding="utf-8"?>
+#templateInit()
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	#parse("includes/head.vm")
+	</head>
+	<body>
+		<div id="wrapper">
+			#parse("includes/header.vm")
+			#parse("includes/topmenu.vm")
+			<div class="fp-promo-box"><img src="$baseUrl/template-resources/images/fp-promo-box.gif" alt=""/></div>
+			<div class="fp-feature-1"><a href="$baseUrl/slr-camera/nikon-n-90s-slr-camera-35mm-body-only-black/prod10040233.html"><img src="$baseUrl/template-resources/images/fp-feature-box-1.jpg" border="0" alt=""/></a></div>
+			<div class="fp-feature-2"><a href="$baseUrl/digital-slrs/canon-eos-digital-rebel-xt-digital-camera-slr-8-0-mpix-canon-ef-s-18-55mm-lens-optical-zoom-3-x-supported-memory-cf-microdrive-silver/prod10030708.html"><img src="$baseUrl/template-resources/images/fp-feature-box-2.jpg" border="0" alt=""/></a></div>
+			<div class="clear20"></div>
+			<div id="fp-category-grid">
+				<ul>
+					<li class="fp-category-img"><img src="$baseUrl/template-resources/images/fp-cat-ico-digital-cameras.jpg" alt="Digital SLR" border="0" /></li>
+					<li class="fp-category-name"><h2>DIGITAL SLRs</h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/digital-slrs/c90000017-p1.html">#springMessage("index.c90000017")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/digital-style-slrs/c90000018-p1.html">#springMessage("index.c90000018")</a></li>
+					</ul>
+				<ul>
+					<li class="fp-category-img"><img src="$baseUrl/template-resources/images/fp-cat-ico-film-cameras.jpg" alt="Film SLR" border="0" /></li>
+					<li class="fp-category-name"><h2>FILM SLRs</h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/slr-camera/c90000011-p1.html">#springMessage("index.c90000011")</a></li>
+				</ul>
+				<ul>
+					<li class="fp-category-img"><a href="$baseUrl/accessories/c90000006-p1.html"><img src="$baseUrl/template-resources/images/fp-cat-ico-accessories.jpg" alt="Accessories" border="0" /></a></li>
+					<li class="fp-category-name"><h2><a href="$baseUrl/accessories/c90000006-p1.html">#springMessage("index.c90000006")</a></h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/carrying-cases/c90000028-p1.html">#springMessage("index.c90000028")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/flash-memory/c90000029-p1.html">#springMessage("index.c90000029")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/power-devices-batteries/c90000030-p1.html">#springMessage("index.c90000030")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/accessories/c90000006-p1.html">#springMessage("index.more") #springMessage("index.c90000006")...</a></li>
+				</ul>
+			</div>
+			<div class="clear20"></div>
+		</div>
+		#parse("includes/footer.vm")
+	</body>
+</html>

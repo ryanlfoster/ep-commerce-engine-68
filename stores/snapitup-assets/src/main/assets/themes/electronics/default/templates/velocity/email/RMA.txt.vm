@@ -1,0 +1,39 @@
+﻿#emailInit()
+#set ($order = $orderReturn.getOrder())
+#set ($customer = $order.getCustomer())
+#set ($lang = $order.getLocale())
+
+#emailMessage("RMA.date") $dateTool.format('E, MMMM d yyyy',$orderReturn.getCreatedDate())
+#emailMessage("RMA.rmaNumber") $orderReturn.getRmaCode()
+#emailMessage("RMA.name") $customer.getFirstName()&nbsp;$customer.getLastName()
+
+#emailMessage("RMA.skuCode")	#emailMessage("RMA.productName")	#emailMessage("RMA.returnQty")	#emailMessage("RMA.reasonForExchange")
+#foreach ($orderReturnSku in $orderReturn.getOrderReturnSkus())
+	$orderReturnSku.getOrderSku().getSkuCode()	$orderReturnSku.getProductSku().getProduct().getDisplayName($lang)	$orderReturnSku.getQuantity()	#emailMessage($orderReturnSku.getReturnReason())
+#end
+
+#emailMessage("RMA.return.title")
+
+#emailMessage("RMA.return.line1")
+#emailMessage("RMA.return.line2")
+#emailMessage("RMA.return.line3")
+#emailMessage("RMA.return.line4")
+#emailMessage("RMA.return.line5")
+
+#emailMessage("RMA.instructions.title")
+
+#emailMessage("RMA.instructions.paragraph1")
+
+#emailMessage("RMA.instructions.paragraph2")
+
+#emailMessage("RMA.instructions.paragraph3")
+
+#emailMessage("RMA.instructions.paragraph4")
+
+	
+#emailMessage("RMA.forWarehouse.title")
+
+#emailMessage("RMA.forWarehouse.receivedBy")
+
+	
+#emailMessage("RMA.forWarehouse.signed")

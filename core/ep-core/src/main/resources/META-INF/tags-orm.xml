@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.tags.domain.impl</package>
+	<entity class="TagDictionaryImpl">
+		<named-query name="TAG_DICTIONARY_BY_GUID">
+			<query>
+				SELECT t
+				FROM TagDictionaryImpl AS t
+				WHERE t.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="TAG_DICTIONARY_ALL">
+			<query>
+				SELECT t
+				FROM TagDictionaryImpl AS t
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TagGroupImpl">
+		<named-query name="TAG_GROUP_BY_GUID">
+			<query>
+				SELECT t
+				FROM TagGroupImpl AS t
+				WHERE t.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="TAG_GROUP_ALL">
+			<query>
+				SELECT t
+				FROM TagGroupImpl AS t
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TagDefinitionImpl">
+		<named-query name="TAG_DEFINITION_BY_GUID">
+			<query>
+				SELECT t
+				FROM TagDefinitionImpl AS t
+				WHERE t.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="TAG_DEFINITION_BY_NAME">
+			<query>
+				SELECT t
+				FROM TagDefinitionImpl AS t
+				WHERE t.name = ?1
+			</query>
+		</named-query>
+		<named-query name="TAG_DEFINITIONS_BY_GROUP_UIDPK">
+			<query>
+				SELECT t
+				FROM TagDefinitionImpl AS t
+				WHERE t.group.uidPk = ?1
+				ORDER BY t.name ASC
+			</query>
+		</named-query>
+		<named-query name="TAG_DEFINITION_ALL">
+			<query>
+				SELECT t
+				FROM TagDefinitionImpl AS t
+			</query>
+		</named-query>
+		<named-query name="TAG_DEFINITION_ALL_BY_TAG_DICTIONARY_GUID">
+			<query>
+				SELECT t
+				FROM TagDefinitionImpl AS t
+				WHERE t.tagDictionaryGuid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="ConditionalExpressionImpl">
+		<named-query name="CONDITION_BY_GUID">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+				WHERE c.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="CONDITION_BY_NAME">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+				WHERE c.name = ?1
+				AND c.named = true
+			</query>
+		</named-query>
+		<named-query name="CONDITION_ALL">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+			</query>
+		</named-query>
+		<named-query name="CONDITION_ALL_BY_TAG_DICTIONARY">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+				WHERE c.tagDictionaryGuid = ?1
+			</query>
+		</named-query>
+		<named-query name="CONDITION_ALL_NAMED">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+				WHERE c.named = true
+			</query>
+		</named-query>
+		<named-query name="CONDITION_ALL_NAMED_BY_TAG_DICTIONARY">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+				WHERE c.tagDictionaryGuid = ?1
+				AND c.named = true
+			</query>
+		</named-query>
+		<named-query name="CONDITION_NAMED_BY_NAME_DICT_TAG">
+			<query>
+				SELECT c
+				FROM ConditionalExpressionImpl AS c
+				WHERE (?1 IS NULL OR c.name LIKE ?1)
+				AND (?2 IS NULL OR c.tagDictionaryGuid = ?2)
+				AND (?3 IS NULL OR c.conditionString LIKE ?3)
+				AND c.named = true
+				ORDER BY c.name
+			</query>
+		</named-query>
+		<named-query name="CONDITION_NAMED_BY_NAME_DICT_TAG_SELLINGCONTEXT">
+			<query>
+				SELECT DISTINCT c
+				FROM ConditionalExpressionImpl AS c, SellingContextImpl AS sc, IN (sc.conditions) scc
+				WHERE (?1 IS NULL OR c.name LIKE ?1)
+				AND (?2 IS NULL OR c.tagDictionaryGuid = ?2)
+				AND (?3 IS NULL OR c.conditionString LIKE ?3 )
+				AND (?4 IS NULL
+					OR (c.guid = scc.guid AND sc.guid = ?4))
+				AND c.named = true
+				ORDER BY c.name
+			</query>
+		</named-query>
+		<named-query name="CONDITIONAL_EXPRESSION_NAME_BY_GUID">
+			<query>
+				SELECT c.name
+				FROM ConditionalExpressionImpl AS c
+				WHERE c.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TagOperatorImpl">
+		<named-query name="TAG_OPERATOR_BY_GUID">
+			<query>
+				SELECT t
+				FROM TagOperatorImpl AS t
+				WHERE t.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="TAG_OPERATOR_ALL">
+			<query>
+				SELECT t
+				FROM TagOperatorImpl AS t
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TagValueTypeImpl">
+		<named-query name="TAG_VALUE_TYPE_BY_GUID">
+			<query>
+				SELECT t
+				FROM TagValueTypeImpl AS t
+				WHERE t.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="TAG_VALUE_TYPE_ALL">
+			<query>
+				SELECT t
+				FROM TagValueTypeImpl AS t
+			</query>
+		</named-query>
+	</entity>
+
+</entity-mappings>
+

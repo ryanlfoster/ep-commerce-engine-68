@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<promotions>
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>Free Camera Case (US Store)</name>
+    <displayName/>
+    <code>4D07A338-3CB5-5379-3A4A-E59E2B8B6B16</code>
+    <description>Get a free camera case when purchasing any Digital SLR Camera</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartNFreeSkusAction">
+            <parameters>
+                <parameter>
+                    <key>skuCode</key>
+                    <value>5665</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Free Camera Case (US Store)</guid>
+        <name>Free Camera Case (US Store)</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Free Camera Case (US Store)_TIME</guid>
+                <name>Free Camera Case (US Store)_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUPUK</store_code>
+    <name>Free Camera Case (UK Store)</name>
+    <displayName/>
+    <code>D9B7CB6E-4AEF-382B-F14D-84CC7B07B00B</code>
+    <description>Get a free camera case when purchasing any Digital SLR Camera</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartNFreeSkusAction">
+            <parameters>
+                <parameter>
+                    <key>skuCode</key>
+                    <value>5665</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Free Camera Case (UK Store)</guid>
+        <name>Free Camera Case (UK Store)</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Free Camera Case (UK Store)_TIME</guid>
+                <name>Free Camera Case (UK Store)_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SLRWORLD</store_code>
+    <name>Free Standard Rate Shipping (SLR Store)</name>
+    <displayName/>
+    <code>A7DA0FD6-6E71-9B85-EE1E-EA8BCAF7A556</code>
+    <description>Free Standard Shipping on orders over $50</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="shippingPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>shippingServiceLevelCode</key>
+                    <value>SLRWORLD_USPSGround</value>
+                </parameter>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>100.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Free Standard Rate Shipping (SLR Store)</guid>
+        <name>Free Standard Rate Shipping (SLR Store)</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Free Standard Rate Shipping (SLR Store)_TIME</guid>
+                <name>Free Standard Rate Shipping (SLR Store)_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>Free Standard Rate Shipping (US Store)</name>
+    <displayName/>
+    <code>A2386DD3-E146-32EB-8754-0AF2D52ABEF6</code>
+    <description>Free Standard Shipping on orders over $50</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="shippingPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>shippingServiceLevelCode</key>
+                    <value>SNAPITUP_USPSGround</value>
+                </parameter>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>100.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Free Standard Rate Shipping (US Store)</guid>
+        <name>Free Standard Rate Shipping (US Store)</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Free Standard Rate Shipping (US Store)_TIME</guid>
+                <name>Free Standard Rate Shipping (US Store)_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUPUK</store_code>
+    <name>Free Standard Rate Shipping (UK Store)</name>
+    <displayName/>
+    <code>FCE9284E-9845-BA2C-61DB-E052532D8134</code>
+    <description>Free Standard Shipping on orders over &amp;pound;50</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="shippingPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>shippingServiceLevelCode</key>
+                    <value>SNAPITUPUK_RoyalMail2ndClass</value>
+                </parameter>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>100.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Free Standard Rate Shipping (UK Store)</guid>
+        <name>Free Standard Rate Shipping (UK Store)</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Free Standard Rate Shipping (UK Store)_TIME</guid>
+                <name>Free Standard Rate Shipping (UK Store)_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Catalog">
+    <catalog_code>SNAPITUPUS</catalog_code>
+    <name>50% off all Single Use Camera's</name>
+    <displayName/>
+    <code>0774BF5E-B309-B50A-22AC-47576CC76992</code>
+    <description>50% off all Single Use Camera's</description>
+    <availability>
+        <enabled>true</enabled>
+        <enabledate>2008-01-01T00:00:00-08:00</enabledate>
+    </availability>
+    <actions>
+        <action type="catalogCurrencyPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>currency</key>
+                    <value>USD</value>
+                </parameter>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>50.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUPUK</store_code>
+    <name>20% off all digital camera with coupon</name>
+    <displayName>
+        <value language="en">25 % off digital camera</value>
+    </displayName>
+    <code>CAMERA2</code>
+    <description>20% off all DigiCameras (single use per customer only)(coupon code = CAMERA2-1, CAMERA2-2, CAMERA2-3,  CAMERA2-4, CAMERA2-4, CAMERA2-5) IN SNAPITUPUK store</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartCategoryPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>categoryCode</key>
+                    <value>90000003|SNAPITUPUK</value>
+                </parameter>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>20.0</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>20% off all digital camera with coupon</guid>
+        <name>20% off all digital camera with coupon</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>20% off all digital camera with coupon_TIME</guid>
+                <name>20% off all digital camera with coupon_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1262337131000L)} {SHOPPING_START_TIME.lessThan (1580548331000L)}}</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>25% off all Binoculars with use of Coupon</name>
+    <displayName>
+        <value language="en">25% off Binoculars</value>
+        <value language="fr">25% de réduction des jumelles</value>
+    </displayName>
+    <code>25%_Off_Binoculars</code>
+    <description>25% off all Binoculars (coupon is user specific to email addresses) Bino001 - alana.abercombie@elasticpath.com and annabelle.alvirez@elasticpath.com; Bino002 - darcy.aubel@elasticpath.com,  tester@ep.com</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartCategoryPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>25.0</value>
+                </parameter>
+                <parameter>
+                    <key>categoryCode</key>
+                    <value>90000014|SNAPITUPUS</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>25% off all Binoculars with use of Coupon</guid>
+        <name>25% off all Binoculars with use of Coupon</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>25% off all Binoculars with use of Coupon_TIME</guid>
+                <name>25% off all Binoculars with use of Coupon_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1262337131000L)} {SHOPPING_START_TIME.lessThan (1577869931000L)}}</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>Get 4MB Flash Memory Free</name>
+    <displayName>
+        <value language="en">Free Flash Memory Card</value>
+        <value language="fr">Mémoire Instantanée gratuite</value>
+    </displayName>
+    <code>FlashMemoryFree</code>
+    <description></description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartNFreeSkusAction">
+            <parameters>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+                <parameter>
+                    <key>skuCode</key>
+                    <value>CF-4</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Get 4MB Flash Memory Free</guid>
+        <name>Get 4MB Flash Memory Free</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Get 4MB Flash Memory Free_TIME</guid>
+                <name>Get 4MB Flash Memory Free_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199174400000L)} {SHOPPING_START_TIME.lessThan (1325404800000L)}}</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>Buy Nikon D70 Get 4MB Flash Memory Free</name>
+    <displayName/>
+    <code>BUY1GET1_FlashFree</code>
+    <description>Get Eligible for the Free Flash Memory promotion after purchasing a Nikon D70 digital camera</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="couponAssignmentAction">
+            <parameters>
+                <parameter>
+                    <key>couponPrefix</key>
+                    <value>FlashMemoryFree</value>
+                </parameter>
+                <parameter>
+                    <key>ruleCode</key>
+                    <value>FlashMemoryFree</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Buy Nikon D70 Get 4MB Flash Memory Free</guid>
+        <name>Buy Nikon D70 Get 4MB Flash Memory Free</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Buy Nikon D70 Get 4MB Flash Memory Free_TIME</guid>
+                <name>Buy Nikon D70 Get 4MB Flash Memory Free_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} {SHOPPING_START_TIME.lessThan (1577869931000L)}}</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SLRWORLD</store_code>
+    <name>Free Camera Case (SLRWorld)</name>
+    <displayName/>
+    <code>37FD706A-AC0F-B3B2-3EC8-E28BB7E33F81</code>
+    <description>Get a free camera case when purchasing any Digital SLR Camera</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartNFreeSkusAction">
+            <parameters>
+                <parameter>
+                    <key>skuCode</key>
+                    <value>5665</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>Free Camera Case (SLRWorld)</guid>
+        <name>Free Camera Case (SLRWorld)</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>Free Camera Case (SLRWorld)_TIME</guid>
+                <name>Free Camera Case (SLRWorld)_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUPUK</store_code>
+    <name>$10 off memory card with all digital camera's</name>
+    <displayName>
+        <value language="en">$10 off a memory card when purchase a digital camera</value>
+    </displayName>
+    <code>27843E77-9002-90D0-582D-46C9248FE6F3</code>
+    <description>$10 off selected memory cards (1st time customers only) (coupon code = MEMORY)</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartCategoryAmountDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>categoryCode</key>
+                    <value>90000029|SNAPITUPUK</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+                <parameter>
+                    <key>discountAmount</key>
+                    <value>10.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>$10 off memory card with all digital camera's</guid>
+        <name>$10 off memory card with all digital camera's</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>$10 off memory card with all digital camera's_TIME</guid>
+                <name>$10 off memory card with all digital camera's_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1199178731000L)} }</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>10% off all digital cameras with coupon</name>
+    <displayName>
+        <value language="en">10% off digital camera</value>
+        <value language="fr">10% sur les appareils photo numériques</value>
+    </displayName>
+    <code>CAMERA1</code>
+    <description>10% off all Digital Cameras (single use per customer only)(coupon code = CAMERA1-1, CAMERA1-2, CAMERA1-3,  CAMERA1-4, CAMERA1-4, CAMERA1-5) IN SNAPITUP store</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartCategoryPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>categoryCode</key>
+                    <value>90000003|SNAPITUPUS</value>
+                </parameter>
+                <parameter>
+                    <key>numItems</key>
+                    <value>1</value>
+                </parameter>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>10.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>10% off all digital cameras with coupon</guid>
+        <name>10% off all digital cameras with coupon</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>10% off all digital cameras with coupon_TIME</guid>
+                <name>10% off all digital cameras with coupon_TIME</name>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1262337131000L)} {SHOPPING_START_TIME.lessThan (1580548331000L)}}</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+
+<promotion type="Cart">
+    <store_code>SNAPITUP</store_code>
+    <name>10% off coupon</name>
+    <displayName>
+        <value language="en">10% off any purchase over $50 </value>
+        <value language="fr">10% de rabais avec achat de $50 et plus</value>
+    </displayName>
+    <code>7021E9A6-3FB1-E481-3979-F74D2AA03F54</code>
+    <description>10% off any purchase over $50 until Dec 31st 2012 (coupon code = SPECIAL-OFFER)</description>
+    <availability>
+        <enabled>true</enabled>
+    </availability>
+    <actions>
+        <action type="cartSubtotalPercentDiscountAction">
+            <parameters>
+                <parameter>
+                    <key>discountPercent</key>
+                    <value>10.0</value>
+                </parameter>
+            </parameters>
+            <exceptions/>
+        </action>
+    </actions>
+    <selling_context>
+        <guid>10% off coupon</guid>
+        <name>10% off coupon</name>
+        <description>Selling Context</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>10% off coupon_TIME</guid>
+                <name>10% off coupon_TIME</name>
+                <condition_string> { AND { SHOPPING_START_TIME.greaterThan (1199178731000L) }  { SHOPPING_START_TIME.lessThan (1325404800000L) }  } </condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</promotion>
+</promotions>

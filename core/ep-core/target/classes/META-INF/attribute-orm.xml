@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.attribute.impl</package>
+	<entity class="AttributeImpl">
+		<named-query name="ATTRIBUTE_SELECT_ALL">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_FIND_BY_KEY">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.key = ?1
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_FIND_BY_NAME_USAGE">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.name = ?1
+				AND a.attributeUsageIdInternal = ?2
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_FIND_BY_USAGE">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.attributeUsageIdInternal = ?1
+				ORDER BY a.required DESC, a.uidPk
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_FIND_BY_EXCLUDE_USAGE">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.attributeUsageIdInternal &lt;&gt; ?1
+				ORDER BY a.required
+				DESC, a.uidPk
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_IN_USE_PRODUCT_TYPE">
+			<query>
+				SELECT DISTINCT a.attribute.uidPk
+				FROM ProductTypeImpl p
+				INNER JOIN p.productAttributeGroupAttributes a
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_IN_USE_CATEGORY_TYPE">
+			<query>
+				SELECT DISTINCT a.attribute.uidPk
+				FROM CategoryTypeImpl c
+				INNER JOIN c.categoryAttributeGroupAttributes a
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_IN_USE_PRODUCT_TYPE_SKU">
+			<query>
+				SELECT DISTINCT a.attribute.uidPk
+				FROM ProductTypeImpl p
+				INNER JOIN p.skuAttributeGroupAttributes a
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_IN_USE_CUSTOMER_PROFILE_TYPE">
+			<query>
+				SELECT DISTINCT att.uidPk
+				FROM CustomerProfileValueImpl cp
+				INNER JOIN cp.attribute att
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_SELECT_CATALOG_OR_GLOBAL_ALL">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.catalog.uidPk = ?1
+				OR a.global = TRUE
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_SELECT_CATALOG_OR_GLOBAL_BY_USAGE">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.catalog.uidPk = ?1
+				OR (a.global = TRUE AND a.attributeUsageIdInternal IN (:list))
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_FIND_BY_CATALOG_USAGE">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE (a.catalog.uidPk = ?1 OR a.global = TRUE)
+				AND a.attributeUsageIdInternal = ?2
+				ORDER BY a.required DESC, a.uidPk
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_SELECT_GLOBAL_ALL">
+			<query>
+				SELECT a
+				FROM AttributeImpl a
+				WHERE a.global = TRUE
+			</query>
+		</named-query>
+		<named-query name="ATTRIBUTE_NAME_BY_KEY">
+			<query>
+				SELECT a.name
+				FROM AttributeImpl a
+				WHERE a.key = ?1
+			</query>
+		</named-query>
+		<named-query name="SKU_ATTRIBUTE_IN_USE">
+			<query>
+				SELECT sav.uidPk
+				FROM SkuAttributeValueImpl sav
+				LEFT OUTER JOIN sav.attribute sa
+				WHERE sa.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="CATEGORY_ATTRIBUTE_IN_USE">
+			<query>
+				SELECT cav.uidPk
+				FROM CategoryAttributeValueImpl cav
+				LEFT OUTER JOIN cav.attribute ca
+				WHERE ca.uidPk=?1
+			</query>
+		</named-query>
+		<named-query name="PRODUCT_ATTRIBUTE_IN_USE">
+			<query>
+				SELECT pav.uidPk
+				FROM ProductAttributeValueImpl pav
+				LEFT OUTER JOIN pav.attribute pa
+				WHERE pa.uidPk=?1
+			</query>
+		</named-query>
+		<named-query name="CUSTOMER_ATTRIBUTE_IN_USE">
+			<query>
+				SELECT cav.uidPk
+				FROM CustomerProfileValueImpl cav
+				LEFT OUTER JOIN cav.attribute ca
+				WHERE ca.uidPk=?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

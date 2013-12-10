@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath</groupId>
+		<artifactId>core</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>ep-core</artifactId>
+	<packaging>bundle</packaging>
+	<name>eCommerce Core</name>
+	<description>Core eCommerce services and data structures.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-base</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-cache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-settings</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-persistence-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-persistence-openjpa</artifactId>
+		</dependency>
+		<dependency>
+	      		<groupId>com.elasticpath</groupId>
+			<artifactId>ep-payment-gateway-connectivity-api</artifactId>
+	    	</dependency>
+
+		 <dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-test-payment-gateway</artifactId>
+		</dependency>
+
+      		<dependency>
+        		<groupId>net.sf.dozer</groupId>
+        		<artifactId>dozer</artifactId>
+   	 	</dependency>
+    		<dependency>
+      			<groupId>org.apache.xmlbeans</groupId>
+      			<artifactId>xmlbeans</artifactId>
+    		</dependency>
+
+		<dependency>
+    			<groupId>org.unitils</groupId>
+    			<artifactId>unitils-core</artifactId>
+    			<version>3.3</version>
+    			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-openjpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>geronimo-stax-api_1.0_spec</artifactId>
+					<groupId>org.apache.geronimo.specs</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_3.0_spec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-remoting</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springmodules</groupId>
+			<artifactId>spring-modules-jakarta-commons</artifactId>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-beanutils-core</artifactId>
+					<groupId>commons-beanutils</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springmodules</groupId>
+			<artifactId>spring-modules-validation</artifactId>
+		</dependency>
+		<dependency>
+			<!-- Some classes in spring-modules-validation depend on spring-webmvc. We need this here for Weblogic deployments, which seem to scan all the classes and resolve them. -->
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.media</groupId>
+			<artifactId>jai-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>velocity-tools</groupId>
+			<artifactId>velocity-tools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google</groupId>
+			<artifactId>google-checkout</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.elasticpath</groupId>
+			<artifactId>ep-test-utils</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.media</groupId>
+			<artifactId>jai-codec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>geronimo-stax-api_1.0_spec</artifactId>
+					<groupId>org.apache.geronimo.specs</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<!-- org.apache.solr:solr-core depends on woodstox:wstx-asl which has no pom.xml, so we exclude it and depend on this instead -->
+			<groupId>org.codehaus.woodstox</groupId>
+			<artifactId>wstx-asl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-testlib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-vfs</groupId>
+			<artifactId>commons-vfs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>stax-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-legacy</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+		</dependency>
+		<!-- quartz needs httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.gemini</groupId>
+			<artifactId>org.eclipse.gemini.blueprint.core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.aopalliance</groupId>
+					<artifactId>com.springsource.org.aopalliance</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.osgi</groupId>
+					<artifactId>org.eclipse.osgi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.osgi</groupId>
+					<artifactId>org.eclipse.osgi.services</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>org.springframework.context.support</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-integration</artifactId>
+			<version>${hamcrest.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>2.0</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.23</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- solrj uses slf4j, these help communicate with log4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.bval</groupId>
+			<artifactId>bval-jsr303</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.bval</groupId>
+			<artifactId>bval-extras</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>maven-replacer-plugin</artifactId>
+			</plugin>
+
+			<!--
+			 - Workaround for a shortcoming in the Groovy compiler.
+			 - The Groovy stub generator sets the modified date of all generated files to the
+			 - 1st of January 1970 in order to prevent the Java compiler from overwriting the
+			 - groovy .class files with new ones based on the stub.
+			 - However, adding @SuppressWarnings annotations to all generated code in the
+			 - maven-replacer-plugin above overrides that and sets the modified date to the
+			 - current time.
+			 - Here we put the modified time back to 1970 to make the Groovy compiler happy
+			 - again.
+			 -
+			 - See http://jira.codehaus.org/browse/MGROOVY-187 for the original Groovy defect.
+			 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>touch-modified-groovy-stubs</id>
+						<phase>process-sources</phase>
+						<configuration>
+							<target>
+								<touch datetime="1970-01-01T00:00:00 GMT" pattern="yyyy-MM-dd'T'HH:mm:ss z">
+									<fileset dir="target/generated-sources/groovy-stubs" />
+								</touch>
+							</target>
+						</configuration>
+						<goals><goal>run</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<runOrder>alphabetical</runOrder>
+					<argLine>${java.jvm.opts}</argLine>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>determine-buildnumber</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+						<configuration>
+							<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>META-INF</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>META-INF</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.gmaven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generateStubs</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Eclipse-BuddyPolicy>registered</Eclipse-BuddyPolicy>
+						<Bundle-Name>%pluginName</Bundle-Name>
+						<Bundle-Vendor>%pluginProvider</Bundle-Vendor>
+						<Bundle-SymbolicName>com.elasticpath.core</Bundle-SymbolicName>
+						<Require-Bundle>com.elasticpath.cmclient.libs;visibility:=reexport</Require-Bundle>
+						<Eclipse-RegisterBuddy>com.elasticpath.cmclient.libs</Eclipse-RegisterBuddy>
+						<_exportcontents>
+							com.elasticpath.commons.security.impl;x-internal:=true,
+							com.elasticpath.commons.util.config.impl;x-internal:=true,
+							com.elasticpath.commons.util.extenum.impl;x-internal:=true,
+							com.elasticpath.commons.util.impl;x-internal:=true,
+							com.elasticpath.commons.util.security.impl;x-internal:=true,
+							com.elasticpath.commons.validator.impl;x-internal:=true,
+							com.elasticpath.cmweb.dto.catalog.impl;x-internal:=true,
+							com.elasticpath.cmweb.service.catalog.impl;x-internal:=true,
+							com.elasticpath.domain.advancedsearch.impl;x-internal:=true,
+							com.elasticpath.domain.attribute.impl;x-internal:=true,
+							com.elasticpath.domain.catalog.impl;x-internal:=true,
+							com.elasticpath.domain.catalogview.browsing.impl;x-internal:=true,
+							com.elasticpath.domain.catalogview.impl;x-internal:=true,
+							com.elasticpath.domain.catalogview.search.impl;x-internal:=true,
+							com.elasticpath.domain.catalogview.sitemap.impl;x-internal:=true,
+							com.elasticpath.domain.changeset.impl;x-internal:=true,
+							com.elasticpath.domain.cmuser.impl;x-internal:=true,
+							com.elasticpath.domain.contentspace.impl;x-internal:=true,
+							com.elasticpath.domain.customer.impl;x-internal:=true,
+							com.elasticpath.domain.dataimport.impl;x-internal:=true,
+							com.elasticpath.domain.event.impl;x-internal:=true,
+							com.elasticpath.domain.impl;x-internal:=true,
+							com.elasticpath.domain.misc.impl;x-internal:=true,
+							com.elasticpath.domain.order.impl;x-internal:=true,
+							com.elasticpath.domain.payment.impl;x-internal:=true,
+							com.elasticpath.domain.pricing.csvimport.impl;x-internal:=true,
+							com.elasticpath.domain.rules.impl;x-internal:=true,
+							com.elasticpath.domain.search.impl;x-internal:=true,
+							com.elasticpath.domain.search.query.impl;x-internal:=true,
+							com.elasticpath.domain.shipping.impl;x-internal:=true,
+							com.elasticpath.domain.shoppingcart.impl;x-internal:=true,
+							com.elasticpath.domain.shopper.impl;x-internal:=true,
+							com.elasticpath.domain.skuconfiguration.impl;x-internal:=true,
+							com.elasticpath.domain.store.impl;x-internal:=true,
+							com.elasticpath.domain.tax.impl;x-internal:=true,
+							com.elasticpath.domain.subscriptions.impl;x-internal:=true,
+							com.elasticpath.persistence.impl;x-internal:=true,
+							com.elasticpath.persistence.support.impl;x-internal:=true,
+							com.elasticpath.service.asset.impl;x-internal:=true,
+							com.elasticpath.service.attribute.impl;x-internal:=true,
+							com.elasticpath.service.auth.impl;x-internal:=true,
+							com.elasticpath.service.catalog.impl;x-internal:=true,
+							com.elasticpath.service.catalogview.impl;x-internal:=true,
+							com.elasticpath.service.changeset.impl;x-internal:=true,
+							com.elasticpath.service.cmuser.impl;x-internal:=true,
+							com.elasticpath.service.command.impl;x-internal:=true,
+							com.elasticpath.service.customer.impl;x-internal:=true,
+							com.elasticpath.service.dataimport.impl;x-internal:=true,
+							com.elasticpath.service.impl;x-internal:=true,
+							com.elasticpath.service.misc.impl;x-internal:=true,
+							com.elasticpath.service.order.impl;x-internal:=true,
+							com.elasticpath.service.payment.impl;x-internal:=true,
+							com.elasticpath.service.query.impl;x-internal:=true,
+							com.elasticpath.service.remote.impl;x-internal:=true,
+							com.elasticpath.service.rules.impl;x-internal:=true,
+							com.elasticpath.service.search.impl;x-internal:=true,
+							com.elasticpath.service.search.query.impl;x-internal:=true,
+							com.elasticpath.service.shipping.impl;x-internal:=true,
+							com.elasticpath.service.shopper.impl;x-internal:=true,
+							com.elasticpath.service.shoppingcart.impl;x-internal:=true,
+							com.elasticpath.service.store.impl;x-internal:=true,
+							com.elasticpath.service.targetedselling.impl;x-internal:=true,
+							com.elasticpath.service.tax.impl;x-internal:=true,
+							com.elasticpath.common.pricing.service.impl;x-internal:=true,
+							com.elasticpath.domain.targetedselling.impl;x-internal:=true,
+							com.elasticpath.domain.sellingcontext.impl;x-internal:=true,
+							com.elasticpath.service.sellingcontext.impl;x-internal:=true,
+							com.elasticpath.tags.domain.impl;x-internal:=true,
+							com.elasticpath.validation.domain.impl;x-internal:=true,
+							com.elasticpath.validation.service.impl;x-internal:=true,
+							com.elasticpath.service.pricing.impl;x-internal:=true,
+							!*.impl,
+							*</_exportcontents>
+						<_nouses>true</_nouses>
+						<_snapshot>${osgi-version-qualifier}</_snapshot>
+						<_nodefaultversion>true</_nodefaultversion>
+						<Bundle-Localization>plugin</Bundle-Localization>
+						<Bundle-RequiredExecutionEnvironment>J2SE-1.5</Bundle-RequiredExecutionEnvironment>
+						<Import-Package>!*</Import-Package>
+						<Implementation-Build>${buildNumber}</Implementation-Build>
+						<Implementation-Version>${project.version} (r ${buildNumber} )</Implementation-Version>
+
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<java.jvm.opts>-XX:MaxPermSize=128m</java.jvm.opts>
+		<corbertura.instrument.excludes>com/elasticpath/commons/constants/*.class,
+			com/elasticpath/commons/util/impl/MailerImpl.class,
+			com/elasticpath/service/misc/Criteria.class</corbertura.instrument.excludes>
+		<osgi-version-qualifier>${maven.build.timestamp}</osgi-version-qualifier>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>m2e-lifecycle-mapping</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<properties>
+				<osgi-version-qualifier>qualifier</osgi-version-qualifier>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<!-- This tells m2e-wtp to copy groovy classes to webapp when publishing due to us using an explicit maven execution instead of the groovy m2e plugin. -->
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/main/groovy</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.felix</groupId>
+							<artifactId>maven-bundle-plugin</artifactId>
+							<configuration>
+								<!-- PDE doesn't honour custom manifest locations. -->
+								<manifestLocation>META-INF</manifestLocation>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.codehaus.gmaven</groupId>
+												<artifactId>gmaven-plugin</artifactId>
+												<versionRange>[1.4,)</versionRange>
+												<goals>
+													<goal>compile</goal>
+													<goal>generateStubs</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+</project>

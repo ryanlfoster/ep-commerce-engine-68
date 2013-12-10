@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<store_associations>
+<store_association store_code="Kobee">
+    <associated_store_codes>
+        <associated_store_code>MOBEE</associated_store_code>
+    </associated_store_codes>
+</store_association>
+
+<store_association store_code="searchbee">
+    <associated_store_codes/>
+</store_association>
+
+<store_association store_code="MOBEE">
+    <associated_store_codes>
+        <associated_store_code>Kobee</associated_store_code>
+        <associated_store_code>sobee</associated_store_code>
+        <associated_store_code>toastie</associated_store_code>
+        <associated_store_code>Dobee</associated_store_code>
+        <associated_store_code>tobee123</associated_store_code>
+    </associated_store_codes>
+</store_association>
+
+<store_association store_code="sobee">
+    <associated_store_codes>
+        <associated_store_code>MOBEE</associated_store_code>
+    </associated_store_codes>
+</store_association>
+
+<store_association store_code="toastie">
+    <associated_store_codes>
+        <associated_store_code>MOBEE</associated_store_code>
+    </associated_store_codes>
+</store_association>
+
+<store_association store_code="Dobee">
+    <associated_store_codes>
+        <associated_store_code>MOBEE</associated_store_code>
+    </associated_store_codes>
+</store_association>
+
+<store_association store_code="tobee123">
+    <associated_store_codes>
+        <associated_store_code>MOBEE</associated_store_code>
+    </associated_store_codes>
+</store_association>
+
+<store_association store_code="rockjam">
+    <associated_store_codes/>
+</store_association>
+</store_associations>

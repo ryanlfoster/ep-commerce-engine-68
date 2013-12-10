@@ -1,0 +1,34 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## header.vm
+
+#set ($itemNum = $sesShoppingCart.getNumItems())
+<div id="header">
+	<div id="logo"><a href="$baseUrl/index.ep" id="headerIndexLink"><img src="$baseUrl/template-resources/images/logo.gif" width="107" height="28" border="0" alt="#springMessage("header.electronics")" /></a></div>
+	<div id="account">
+		<div>
+			<a href="$baseUrl/view-cart.ep">
+				<span>
+					<img src="$baseUrl/template-resources/images/ico-cart.gif" alt="#springMessage("topmenu.cart")" width="16" height="16" border="0" class="cart-icon" />
+					#if($itemNum)$itemNum #else 0 #end #springMessage("topmenu.mycart")
+				</span>
+			</a> | 			
+			#if($CS.shopper.customer.isRegistered())
+				#set ($messageArgs = [ "#limitDisplayLength($!CS.shopper.customer.firstName)" ] )
+				<a href="$baseUrl/manage-account.ep">#springArgMessage("header.saccount" $messageArgs)</a>
+			#else
+				<a href="$baseUrl/manage-account.ep">#springMessage("header.myaccount")</a>
+			#end
+			| <a href="$baseUrl/view-wishlist.ep">#springMessage("header.wishlist")</a>
+			#if($CS.isSignedIn())
+				| <a href="$baseUrl/sign-out.ep">#springMessage("header.signout")</a>
+			#end
+		</div>
+		<div id="notme">
+			#if($CS.shopper.customer.isRegistered() && !$CS.isSignedIn())
+				(#springMessage("header.ifYourNot")&nbsp;#limitDisplayLength($!CS.shopper.customer.firstName)&nbsp;#limitDisplayLength($!CS.shopper.customer.lastName),&nbsp;<a href="$baseUrl/sign-out-customer-session.ep">#springMessage("header.clickHere")</a>	)
+			#end
+		</div>
+	</div>
+</div>

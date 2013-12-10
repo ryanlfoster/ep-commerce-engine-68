@@ -1,0 +1,162 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## sitemap.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#macro (listCategoryChildren $tempCat)
+    #set($subCategories = $tempCat.availableChildren)
+    #foreach($subCategory in $subCategories)
+      #if($subCategory.isAvailable())
+        #set($pathList = $subCategory.pathAsList)
+        #set($numberOfPathItems = $pathList.size() - 2)
+      <li class="sitemap-item-name">#if ($ctxSeoEnabledHelper.getBoolean())<a href="${baseUrl}/$ctxSeoUrlBuilder.sitemapSeoUrl($subCategory, null, $locale, 1)">#else<a href="${baseUrl}/sitemap.ep?cID=${subCategory.code}">#end #foreach($pathItemIndex in [0 .. $numberOfPathItems])$pathList.get($pathItemIndex).getDisplayName($locale) :: #end$subCategory.getDisplayName($locale)</a></li>
+        #listCategoryChildren($subCategory)
+      #end
+    #end
+#end
+
+#**
+* Display the pagination URL
+*#
+#macro (getPaginationURL $pageNumber $action)
+#if($ctxSeoEnabledHelper.getBoolean())${baseUrl}/$sitemapResultBean.getSeoUrl($locale, $pageNumber)#elseif($sitemapResultBean.currentSitemapResult.category)${baseUrl}/sitemap.ep?cID=${sitemapResultBean.currentSitemapResult.category.code}&amp;pn=${pageNumber}#elseif($sitemapResultBean.currentSitemapResult.brand)${baseUrl}/sitemap.ep?filters=brand-${sitemapResultBean.currentSitemapResult.brand.uidPk}&amp;pn=${pageNumber}#end
+#end
+
+#**
+* Display the paginations.
+*#
+#macro (displayPagination $action)
+	#set($paginationRange = 6)
+	#if($sitemapResultBean.totalPageNumber > 1)
+		<div class="pagination">
+			#if($sitemapResultBean.currentPageNumber >= $paginationRange)
+				#set($displayStartLimit = 1)
+				#set($paginationRange = $paginationRange - 1)
+			#end
+			#if($sitemapResultBean.currentPageNumber < $mathTool.sub($sitemapResultBean.totalPageNumber, $paginationRange) + 1)
+				#set($displayEndLimit = 1)
+				#set($paginationRange = $paginationRange - 1)
+			#end
+			#if ($sitemapResultBean.currentPageNumber > 1)
+				#set ($prePageNumber = $sitemapResultBean.currentPageNumber - 1)
+				<a href="#getPaginationURL($prePageNumber $action)"><img src="$baseUrl/template-resources/images/nav/btn_prev_arrow.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.previous")"/></a>
+				#if($displayStartLimit && $displayStartLimit == 1)<a href="#getPaginationURL(1 $action)">1</a><span class="continuum">...</span>
+				#end
+			#else
+				<img src="$baseUrl/template-resources/images/nav/btn_prev_arrow_off.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.previous")"/>
+			#end
+			#set ($paginationRangeNumber = $mathTool.ceil($mathTool.div($sitemapResultBean.currentPageNumber, $paginationRange)))
+			#set ($paginationRangeEnd = $mathTool.mul($paginationRangeNumber, $paginationRange))
+			#if ($paginationRangeEnd < $paginationRange)
+				#set ($paginationRangeEnd = $paginationRange)
+			#end
+			#set ($paginationRangeStart = $paginationRangeEnd - $paginationRange + 1)
+			#if ($sitemapResultBean.totalPageNumber < $paginationRangeEnd)
+				#set ($paginationRangeEnd = $sitemapResultBean.totalPageNumber)
+			#end
+			#foreach($p in [$paginationRangeStart..$paginationRangeEnd])
+				#if($p == $sitemapResultBean.currentPageNumber)
+					<span class="current">$p</span>
+				#else
+					<a href="#getPaginationURL($p $action)">$p</a>
+				#end
+			#end
+			#if ($sitemapResultBean.currentPageNumber < $sitemapResultBean.totalPageNumber && $sitemapResultBean.currentPageNumber != -1)
+				#set ($nextPageNumber = $sitemapResultBean.currentPageNumber + 1)
+				#if($displayEndLimit && $displayEndLimit == 1)<span class="continuum">...</span><a href="#getPaginationURL($sitemapResultBean.totalPageNumber $action)">$sitemapResultBean.totalPageNumber</a>#end
+				<a href="#getPaginationURL($nextPageNumber $action)"><img src="$baseUrl/template-resources/images/nav/btn_next_arrow.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.next")"/></a>
+			#else
+				<img src="$baseUrl/template-resources/images/nav/btn_next_arrow_off.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.next")"/>
+			#end
+		</div>
+	#end
+#end
+
+#templateInit()
+#set ($localeUrlMap = $localeUrlTool.getLocaleLinksForSitemap($sesShoppingCart.getStore().getSupportedLocales(), $locale, $sitemapResultBean.currentSitemapResult.category, $sitemapResultBean.currentPageNumber, $sitemapResultBean.currentSitemapResult.brand, $ctxEp.isSeoEnabled()))
+#set ($action = "sitemap.ep")
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #parse("includes/head.vm")
+</head>
+<body>
+<div id="wrapper">
+#parse("includes/header.vm")
+#parse("includes/topmenu.vm")
+  <div id="breadcrumb">
+    #parse("includes/breadcrumbs.vm")
+  </div>
+  <div class="clear10"></div>
+## Product listing for a brand or category
+#if($sitemapResultBean.currentSitemapResult.products)
+  #if($sitemapResultBean.currentSitemapResult.category)
+  $sitemapResultBean.currentSitemapResult.category.getDisplayName($locale)
+  #else
+  $sitemapResultBean.currentSitemapResult.brand.getDisplayName($locale, true)
+  #end
+  #displayPagination($action)
+  <div class="clear10"></div>
+  #if($sitemapResultBean.currentSitemapResult.products.size() > 0)
+  <ul class="sitemap-products">
+  ##Only products for current page is in the bean
+  #foreach($product in $sitemapResultBean.getProducts())
+    #if($product.isDisplayable())
+		#parseProductSeoUrl($product $sitemapResultBean.category)
+    <li class="sitemap-item-name"><a href="$productSeoUrl">$escapeTool.html($product.getDisplayName($locale))</a></li>
+    #end
+  #end
+  </ul>
+  #else
+  #springMessage("sitemap.noProductsToDisplay")
+  #end
+  <div class="clear10"></div>
+  #displayPagination($action)
+## Listing of brands and categories
+#else
+  ## Brand listing
+  #set($brands = $sitemapResultBean.currentSitemapResult.brandListing)
+  #if($brands && !$brands.isEmpty())
+  <div class="site-map-brand-title">#springMessage("sitemap.brandSiteMap")</div>
+    #set($numberOfBrandColumns = 4)
+    #set($numberOfBrands = $brands.size())
+    #if($numberOfBrandColumns > $numberOfBrands)
+      #set($numberOfBrandColumns = $numberOfBrands)
+    #end
+    #set($startBrand = 0)
+    #set($brandsPerColumn = $numberOfBrands/$numberOfBrandColumns)
+    #foreach($brandColumnIndex in [1 .. $numberOfBrandColumns])
+		#if ($startBrand < $numberOfBrands)
+  <div class="site-map-category">
+    <ul class="sitemap">
+      #set($endBrand = $startBrand+$brandsPerColumn)
+      #if($endBrand >= $numberOfBrands)
+        #set($endBrand = $numberOfBrands - 1)
+      #end
+      #foreach($brandIndex in [$startBrand .. $endBrand])
+        #set($brand = $brands.get($brandIndex))
+      <li class="sitemap-item-name">#if ($ctxSeoEnabledHelper.getBoolean())<a href="${baseUrl}/$ctxSeoUrlBuilder.sitemapSeoUrl(null, $brand, $locale, 1)">#else<a href="${baseUrl}/sitemap.ep?filters=brand-${brand.uidPk}">#end$brand.getDisplayName($locale, true)</a></li>
+      #end
+      #set($startBrand = $startBrand+$brandsPerColumn+1)
+    </ul>
+  </div>
+      #end
+    #end
+  <div class="clear20"></div>
+  #end
+  ## Category listing
+  #set($categories = $sitemapResultBean.currentSitemapResult.categoryListing)
+  <div class="site-map-category-title">#springMessage("sitemap.categorySiteMap")</div>
+  #foreach($category in $categories)
+  <div class="site-map-category">#if ($ctxSeoEnabledHelper.getBoolean())<a href="${baseUrl}/$ctxSeoUrlBuilder.sitemapSeoUrl($category, null, $locale, 1)">#else<a href="${baseUrl}/sitemap.ep?cID=${category.code}">#end$category.getDisplayName($locale)</a>
+    <ul class="sitemap">
+    #listCategoryChildren($category)
+    </ul>
+  </div>
+  #end
+#end
+  <div class="clear20"></div>
+</div>
+#parse("includes/footer.vm")
+</body>
+</html>
+

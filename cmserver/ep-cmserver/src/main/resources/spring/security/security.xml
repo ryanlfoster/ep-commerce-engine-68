@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+             xmlns:beans="http://www.springframework.org/schema/beans" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/security
+             http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+  <http access-decision-manager-ref="accessDecisionManager" realm="Commerce Manager">
+
+    <intercept-url pattern="/assetImageController.remote*" access="ROLE_ANONYMOUS" requires-channel="${ep.cm.secure.channel}" />
+    <intercept-url pattern="/*remote" access="ROLE_SUPERUSER,ROLE_CMUSER" requires-channel="${ep.cm.secure.channel}" />
+    <intercept-url pattern="/*" requires-channel="${ep.cm.secure.channel}" />
+
+    <port-mappings>
+      <port-mapping http="${ep.cm.port.http}" https="${ep.cm.port.https}" />
+    </port-mappings>
+		
+    <http-basic />
+		
+    <access-denied-handler ref="accessDeniedHandler"/>
+
+  </http>
+  	
+  <authentication-manager alias="authenticationManager">
+    <authentication-provider user-service-ref="cmUserAuthenticationDao">
+      <password-encoder ref="cmPasswordEncoder"/>
+    </authentication-provider>
+  </authentication-manager>
+
+  <beans:bean id="cmUserAuthenticationDao" class="com.elasticpath.persistence.impl.CmUserAuthenticationDaoImpl">
+    <beans:property name="persistenceEngine" ref="persistenceEngine"/>
+  </beans:bean>
+
+  <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+    <beans:property name="allowIfAllAbstainDecisions" value="false" />
+    <beans:property name="decisionVoters">
+      <beans:list>
+       	<beans:ref bean="roleVoter"/>
+      </beans:list>
+     </beans:property>
+  </beans:bean>	
+
+  <beans:bean id="roleVoter" class="com.elasticpath.cmweb.util.impl.EpRoleVoter">
+    <beans:property name="rolePrefix" value="ROLE_" />   		
+  </beans:bean>
+
+  <beans:bean id="remoteAuthenticationManager" class="com.elasticpath.cmweb.security.impl.CmRemoteAuthenticationManagerImpl">
+    <beans:property name="authenticationManager" ref="authenticationManager"/>
+    <beans:property name="settingsReader" ref="settingsService"/>
+  </beans:bean>
+	
+  <beans:bean id="accessDeniedHandler" class="com.elasticpath.cmweb.security.impl.CmAccessDeniedHandlerImpl"/>
+	
+  <beans:bean id="cmSpringSecurityListener" class="com.elasticpath.cmweb.security.impl.CmSpringSecurityListener">
+    <beans:property name="cmUserService" ref="cmUserService"/>
+  </beans:bean>
+
+</beans:beans>

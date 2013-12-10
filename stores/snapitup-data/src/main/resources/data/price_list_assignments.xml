@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<price_list_assignments>
+<price_list_assignment>
+    <guid>1BE1BDE0-EDCC-3AF1-290D-CB219F2A856B</guid>
+    <name>Default Pricing for SLR World Catalog in USD</name>
+    <description>Base price list assignment for SLR World Catalog.</description>
+    <priority>10</priority>
+    <catalog_guid>SLRWORLDCATALOG</catalog_guid>
+    <price_list_guid>SNAPITUP_USD</price_list_guid>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>4C640BA5-A95A-B02D-503C-23239EBB381D</guid>
+    <name>Senior Shopper</name>
+    <description>Shoppers who are seniors will receive cheaper pricing on selected Telescope products.</description>
+    <priority>8</priority>
+    <catalog_guid>SNAPITUPUS</catalog_guid>
+    <price_list_guid>SeniorPL</price_list_guid>
+    <selling_context>
+        <guid>2054C56D-250F-E515-CA69-AC097DA371D5</guid>
+        <name>Senior Shopper</name>
+        <description>PLA SellingContext for Senior Shopper</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>25E48ED8-7541-D072-EFF9-B4AF76C45511</guid>
+                <name>name_TIME</name>
+                <description>desc_TIME</description>
+                <condition_string>{AND {SHOPPING_START_TIME.greaterThan (1230796800000L)} {SHOPPING_START_TIME.lessThan (1669967999000L)}}</condition_string>
+                <dictionary_guid>TIME</dictionary_guid>
+            </condition>
+            <condition>
+                <guid>394CEAE8-F46A-2633-4208-9F38600176FD</guid>
+                <name>name_PLA_SHOPPER</name>
+                <description>desc_PLA_SHOPPER</description>
+                <condition_string>{ AND { AND { CUSTOMER_AGE_YEARS.greaterThanOrEqualTo (65i) } } }</condition_string>
+                <dictionary_guid>PLA_SHOPPER</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>74C2ADE8-D4BC-F9EF-1A73-CCC89761C16D</guid>
+    <name>Default Pricing for Snap It Up US Catalog in USD</name>
+    <description>Base price list assignment for Snap It Up US Virtual Catalog.</description>
+    <priority>10</priority>
+    <catalog_guid>SNAPITUPUS</catalog_guid>
+    <price_list_guid>SNAPITUP_USD</price_list_guid>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>7A01E3BB-35ED-99CD-9DA0-92DD21558BB7</guid>
+    <name>Default Pricing for Snap It Up UK Catalog in GBP</name>
+    <description>Base price list for assignment for Snap It Up UK Virtual Catalog.</description>
+    <priority>10</priority>
+    <catalog_guid>SNAPITUPUK</catalog_guid>
+    <price_list_guid>SNAPITUP_GBP</price_list_guid>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>8D36A434-91AF-EBB9-A4D0-D167CD45755A</guid>
+    <name>Default Pricing for Snap it Up Catalog in GBP</name>
+    <description>Snap It Up Master Catalog will use the SnapItUp GBP price list when no other price list exists in the stack.</description>
+    <priority>10</priority>
+    <catalog_guid>SNAPITUP</catalog_guid>
+    <price_list_guid>SNAPITUP_GBP</price_list_guid>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>ACDDA23A-55EC-1835-F6E6-80A464C4EB48</guid>
+    <name>Google Referral</name>
+    <description>Shoppers referred by Google will receive cheaper pricing on selected Flash Memory products.</description>
+    <priority>8</priority>
+    <catalog_guid>SNAPITUPUS</catalog_guid>
+    <price_list_guid>GooglePL</price_list_guid>
+    <selling_context>
+        <guid>F4B97AA2-4930-0D9C-BFA1-8FA95CC5FF53</guid>
+        <name>Google Referral</name>
+        <description>PLA SellingContext for Google Referral</description>
+        <priority>1</priority>
+        <conditions>
+            <condition>
+                <guid>D6B97C7D-8DEA-962C-716C-DD28D6A642B2</guid>
+                <name>name_PLA_SHOPPER</name>
+                <description>desc_PLA_SHOPPER</description>
+                <condition_string>{ AND { AND  { REFERRING_URL.includesIgnoreCase 'google' } } }</condition_string>
+                <dictionary_guid>PLA_SHOPPER</dictionary_guid>
+            </condition>
+        </conditions>
+    </selling_context>
+</price_list_assignment>
+
+<price_list_assignment>
+    <guid>FC2F312F-BDE4-4BB6-A62A-3C83177865A7</guid>
+    <name>Default Pricing for Snap It Up Catalog in USD</name>
+    <description>Snap It Up Master Catalog will use the SnapItUp USD price list when currency is USD unless higher priority price lists exist in the stack.</description>
+    <priority>10</priority>
+    <catalog_guid>SNAPITUP</catalog_guid>
+    <price_list_guid>SNAPITUP_USD</price_list_guid>
+</price_list_assignment>
+</price_list_assignments>

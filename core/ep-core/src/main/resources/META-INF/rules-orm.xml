@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.rules.impl</package>
+	<entity class="EpRuleBaseImpl">
+		<named-query name="EP_RULE_BASE_FIND_CHANGED_CATALOGCODE_SCENARIO">
+			<query>
+				SELECT rb
+				FROM EpRuleBaseImpl rb
+				WHERE rb.catalog.code = ?1
+				AND rb.store IS NULL
+				AND rb.scenarioId = ?2
+				AND rb.lastModifiedDate &gt; ?3
+			</query>
+		</named-query>
+		<named-query name="EP_RULE_BASE_FIND_CHANGED_STORECODE_SCENARIO">
+			<query>
+				SELECT rb
+				FROM EpRuleBaseImpl rb
+				WHERE rb.store.code = ?1
+				AND rb.catalog IS NULL
+				AND rb.scenarioId = ?2
+				AND rb.lastModifiedDate &gt; ?3
+			</query>
+		</named-query>
+		<named-query name="EP_RULE_BASE_FIND_BY_STORE_SCENARIO">
+			<query>
+				SELECT rb
+				FROM EpRuleBaseImpl rb
+				WHERE rb.store.uidPk = ?1
+				AND rb.scenarioId = ?2
+			</query>
+		</named-query>
+		<named-query name="EP_RULE_BASE_FIND_BY_CATALOG_SCENARIO">
+			<query>
+				SELECT rb
+				FROM EpRuleBaseImpl rb
+				WHERE rb.catalog.uidPk = ?1
+				AND rb.scenarioId = ?2
+			</query>
+		</named-query>
+		<named-query name="EP_RULE_BASE_FIND_BY_STORE_CATALOG_SCENARIO">
+			<query>
+				SELECT rb
+				FROM EpRuleBaseImpl rb
+				WHERE rb.store.uidPk = ?1
+				AND rb.catalog.uidPk = ?2
+				AND rb.scenarioId = ?3
+			</query>
+		</named-query>
+	</entity>
+	<entity class="PromotionRuleImpl">
+		<named-query name="RULE_FIND_BY_UIDS">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r
+				WHERE r.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="RULE_FIND_BY_NOT_UIDS_IN_STORE">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r
+				WHERE r.uidPk not in (:list)
+				AND r.store.uidPk in (:store_uids)
+			</query>
+		</named-query>
+		<named-query name="RULE_FIND_IN_STORE_LIST">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r
+				WHERE r.store.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="RULE_SELECT_ACTIVE_COUNT_NUM">
+			<query>
+				SELECT count(r)
+				FROM PromotionRuleImpl r
+				WHERE (r.startDate is null or r.startDate &lt;= ?1 )
+				AND ( r.endDate is null or r.endDate &gt;=?2 )
+			</query>
+		</named-query>
+		<named-query name="RULE_FIND_BY_NAME">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r
+				WHERE r.name = ?1
+			</query>
+		</named-query>
+		<named-query name="RULE_UIDS_ALL">
+			<query>
+				SELECT r.uidPk
+				FROM PromotionRuleImpl as r
+			</query>
+		</named-query>
+		<named-query name="RULE_UIDS_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT r.uidPk
+				FROM PromotionRuleImpl as r
+				WHERE r.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="RULE_UIDS_SCOPE_CHANGED">
+			<query>
+				SELECT r.uidPk
+				FROM PromotionRuleImpl r
+				WHERE ((r.startDate &lt;= ?1
+				AND r.startDate &gt;= ?2) OR (r.endDate &lt;= ?1
+				AND r.endDate &gt;= ?2))
+				AND r.ruleSet.scenario = ?3
+			</query>
+		</named-query>
+		<named-query name="RULE_FIND_BY_CODE">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r
+				WHERE r.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_LUP_BY_RULECODE">
+			<query>
+				SELECT r.currentLupNumber
+				FROM PromotionRuleImpl r
+				WHERE r.code = ?1
+			</query>
+		</named-query>
+		<named-query name="RULEID_AND_SELLINGCONTEXT_FIND_BY_SCENARIO">
+			<query>
+				SELECT rule.uidPk, rule.sellingContext
+				FROM PromotionRuleImpl rule
+				WHERE rule.ruleSet.scenario = ?1
+			</query>
+		</named-query>
+		<named-query name="RULE_FIND_BY_COUPON_CODE">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r, CouponImpl c
+				WHERE r.code = c.couponConfig.ruleCode
+				AND c.couponCode = ?1
+			</query>
+		</named-query>
+		<named-query name="RULE_CODE_BY_UID">
+			<query>
+				SELECT r.code
+				FROM PromotionRuleImpl r
+				WHERE r.uidPk = ?1
+			</query>
+		</named-query>
+		<named-query name="RULES_BY_SCENARIO_AND_STORE">
+			<query>
+				SELECT r
+				FROM PromotionRuleImpl r
+				WHERE r.ruleSet.scenario = ?1
+				AND r.store.code= ?2
+			</query>
+		</named-query>
+		<named-query name="RULES_MAPPED_BY_COUPON_CODE">
+			<query>
+				SELECT c.couponCode, r
+				FROM PromotionRuleImpl r, CouponImpl c
+				WHERE r.code = c.couponConfig.ruleCode
+				AND c.couponCode IN (:list)
+			</query>
+		</named-query>
+		<named-query name="PROMOTION_NAME_BY_GUID">
+			<query>
+				SELECT r.name
+				FROM PromotionRuleImpl r
+				WHERE r.code = ?1
+			</query>
+		</named-query>
+		<named-query name="FIND_ALL_COUPON_ASSIGNMENT_PROMOS_FOR_A_UIDPK_LIST">
+			<query>
+				SELECT r.uidPk
+				FROM PromotionRuleImpl r
+				WHERE r.code IN (SELECT p.value
+					FROM PromotionRuleImpl r, in(r.ruleElements) e, in(e.parameters) p
+					WHERE p.key = ?1
+					AND r.uidPk IN (:list))
+			</query>
+		</named-query>
+	</entity>
+	<entity class="RuleParameterImpl">
+		<named-query name="RULE_PARAMETER_VALUE_BY_KEY">
+			<query>
+				SELECT rp.value
+				FROM RuleParameterImpl as rp
+				WHERE rp.key = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="RuleSetImpl">
+		<named-query name="RULESET_SELECT_ALL">
+			<query>
+				SELECT rs
+				FROM RuleSetImpl rs
+			</query>
+		</named-query>
+		<named-query name="RULE_SET_SELECT_BY_MODIFIED_DATE">
+			<query>
+				SELECT rs
+				FROM RuleSetImpl rs
+				WHERE rs.lastModifiedDate &gt;= ?1
+			</query>
+		</named-query>
+		<named-query name="RULESET_FIND_BY_SCENARIO">
+			<query>
+				SELECT rs
+				FROM RuleSetImpl rs
+				WHERE rs.scenario = ?1
+			</query>
+		</named-query>
+		<named-query name="RULESET_FIND_BY_NAME">
+			<query>
+				SELECT rs
+				FROM RuleSetImpl rs
+				WHERE rs.name = ?1
+			</query>
+		</named-query>
+		<named-query name="RULE_SET_UPDATE_LAST_MODIFIED_DATE">
+			<query>
+				UPDATE RuleSetImpl rs
+				SET rs.lastModifiedDate = ?2
+				WHERE rs.uidPk = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CouponImpl">
+		<named-query name="COUPON_FIND_BY_COUPON_CODE">
+			<query>
+				SELECT c
+				FROM CouponImpl c
+				WHERE c.couponCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_FIND_BY_RULE_CODE">
+			<query>
+				SELECT c
+				FROM CouponImpl c
+				WHERE c.couponConfig.ruleCode =?1
+			</query>
+		</named-query>
+
+		<named-query name="COUPON_FIND_UNUSED_COUPON_FOR_RULE_CODE_AND_EMAIL">
+			<query>
+				SELECT c
+				FROM CouponImpl c JOIN c.couponConfig cc
+				WHERE cc.ruleCode = ?1
+				AND cc.usageType = 'limitPerSpecifiedUser'
+				AND NOT EXISTS (SELECT cu.useCount
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.uidPk = c.uidPk
+				AND cu.customerEmailAddress = ?2)
+				AND c.suspended = false
+			</query>
+		</named-query>
+		<named-query name="COUPON_FIND_BY_RULE_CODE_FROM_COUPON_CODES">
+			<query>
+				SELECT c
+				FROM CouponImpl c
+				WHERE c.couponConfig.ruleCode = ?1
+				AND c.couponCode IN (:list)
+			</query>
+		</named-query>
+		<named-query name="COUPON_FIND_BY_RULE_UID_FROM_COUPON_CODES">
+			<query>
+				SELECT c
+				FROM CouponImpl c, PromotionRuleImpl pr
+				WHERE c.couponConfig.ruleCode = pr.code
+				AND pr.uidPk = ?1
+				AND c.couponCode IN (:list)
+			</query>
+		</named-query>
+		<named-query name="COUPON_DELETE_BY_COUPON_CONFIG_GUID">
+			<query>
+				DELETE FROM CouponImpl c
+				WHERE c.couponConfig.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_CODES_FIND_FROM_LIST">
+			<query>
+				SELECT c.couponCode
+				FROM CouponImpl c
+				WHERE c.couponCode IN (:list)
+			</query>
+		</named-query>
+		<named-query name="COUPON_CODES_NOT_RULE_CODE_FIND_FROM_LIST">
+			<query>
+				<![CDATA[
+				SELECT c.couponCode
+				FROM CouponImpl c
+				WHERE c.couponCode IN (:list)
+				AND c.couponConfig.ruleCode <> ?1
+				]]>
+			</query>
+		</named-query>
+		<named-query name="COUPON_CODES_BY_COUPON_CODE_NOT_RULE_CODE">
+			<query>
+				<![CDATA[
+				SELECT c.couponCode
+				FROM CouponImpl c
+				WHERE c.couponCode = ?1
+				AND c.couponConfig.ruleCode <> ?2
+				]]>
+			</query>
+		</named-query>
+		<named-query name="COUPON_CODES_BY_RULE_CODE">
+			<query>
+				SELECT c.couponCode
+				FROM CouponImpl c
+				WHERE c.couponConfig.ruleCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPONS_FIND_BY_UIDS">
+			<query>
+				SELECT c
+				FROM CouponImpl c
+				WHERE c.uidPk IN (:list)
+			</query>
+		</named-query>
+		<named-query name="COUPON_MAP_BY_CODE">
+			<query>
+				SELECT c.couponCode, c
+				FROM CouponImpl c
+				WHERE c.couponCode IN (:list)
+			</query>
+		</named-query>
+		<named-query name="COUPON_LIKE_CODE_PREFIX_DESC">
+			<query>
+				SELECT c
+				FROM CouponImpl c
+				WHERE c.couponCode LIKE ?1 ORDER BY c.couponCode DESC
+			</query>
+		</named-query>
+
+	</entity>
+	<entity class="CouponUsageImpl">
+		<named-query name="COUPON_USAGE_FIND_BY_COUPON_CODE">
+			<query>
+				SELECT cu
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_USECOUNT_FIND_BY_COUPON_CODE_AND_EMAIL_ADDRESS">
+			<query>
+				SELECT sum(cu.useCount)
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponCode = ?1
+				AND cu.customerEmailAddress = ?2
+			</query>
+		</named-query>
+		<named-query name="COUPON_USAGE_FIND_BY_RULE_CODE">
+			<query>
+				SELECT cu
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponConfig.ruleCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_USAGE_FIND_BY_COUPON_CODE_AND_EMAIL_ADDRESS">
+			<query>
+				SELECT cu
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponCode = ?1
+				AND cu.customerEmailAddress = ?2
+			</query>
+		</named-query>
+		<named-query name="COUPON_USAGE_FIND_BY_RULE_CODE_AND_EMAIL_ADDRESS">
+			<query>
+				SELECT cu
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponConfig.ruleCode = ?1
+				AND cu.customerEmailAddress = ?2
+			</query>
+		</named-query>
+		<named-query name="COUPON_USAGE_FIND_BY_EMAIL_ELIGIBLE_IN_STORE">
+			<query>
+				<![CDATA[
+				SELECT cu
+				FROM CouponUsageImpl cu, PromotionRuleImpl pr
+				INNER JOIN cu.coupon c
+				WHERE cu.customerEmailAddress = ?1
+				AND (cu.limitedDurationEndDate IS NULL OR cu.limitedDurationEndDate >= ?2 )
+				AND (cu.coupon.couponConfig.usageLimit = 0 OR cu.coupon.couponConfig.usageLimit > cu.useCount )
+				AND pr.code = c.couponConfig.ruleCode
+				AND pr.store.uidPk = ?3
+				AND cu.suspendedInternal = false
+				AND cu.coupon.suspended = false
+				]]>
+			</query>
+		</named-query>
+		<named-query name="COUPON_USAGE_FIND_FOR_COUPON_EMAIL_RULE_CODE">
+			<query>
+				<![CDATA[
+				SELECT cu
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponCode = ?1
+				AND cu.customerEmailAddress = ?2
+				AND cu.coupon.couponConfig.ruleCode = ?3
+				]]>
+			</query>
+		</named-query>
+		<named-query name="RULES_USAGE_ALL">
+			<query>
+				<![CDATA[
+				SELECT o.currency, s.code, ar.ruleUid, ar.ruleName, ar.ruleName, r.startDate, r.endDate, rs.scenario, sum(o.total), count(o.orderNumber), count(o.orderNumber)
+				FROM OrderImpl o, StoreImpl s, PromotionRuleImpl r, RuleSetImpl rs
+				INNER JOIN o.appliedRules ar
+				WHERE s.code = o.storeCode
+				AND o.status <> 'FAILED'
+				AND s.uidPk IN (:list)
+				AND r.uidPk = ar.ruleUid
+				AND (o.currency = ?1 OR ?1 IS NULL)
+				AND (o.createdDate >= ?2 OR ?2 IS NULL)
+				AND (o.createdDate <= ?3 OR ?3 IS NULL)
+				AND (rs.scenario = r.ruleSet.scenario AND (r.ruleSet.scenario = ?4 OR ?4 = 0))
+				GROUP BY o.currency, s.code, ar.ruleUid, ar.ruleName, r.startDate, r.endDate, rs.scenario
+				]]>
+			</query>
+		</named-query>
+		<named-query name="RULES_USAGE_COUPONS_ONLY">
+			<query>
+				<![CDATA[
+				SELECT o.currency, s.code, ar.ruleUid, ar.ruleName, ar.ruleName, r.startDate, r.endDate, rs.scenario, sum(o.total), count(o.orderNumber), count(o.orderNumber)
+				FROM OrderImpl o, StoreImpl s, PromotionRuleImpl r, RuleSetImpl rs
+				INNER JOIN o.appliedRules ar
+				INNER JOIN ar.appliedCoupons ac
+				WHERE s.code = o.storeCode
+				AND o.status <> 'FAILED'
+				AND s.uidPk IN (:list)
+				AND r.uidPk = ar.ruleUid
+				AND (o.currency = ?1 OR ?1 IS NULL)
+				AND (o.createdDate >= ?2 OR ?2 IS NULL)
+				AND (o.createdDate<= ?3 OR ?3 IS NULL)
+				AND (rs.scenario = r.ruleSet.scenario
+				AND (r.ruleSet.scenario = ?4 OR ?4 = 0))
+				GROUP BY o.currency, s.code, ar.ruleUid, ar.ruleName, r.startDate, r.endDate, rs.scenario
+				]]>
+			</query>
+		</named-query>
+		<named-query name="RULES_USAGE_TOTAL_ORDERS">
+			<query>
+				<![CDATA[
+				SELECT o.currency, s.code, count(o.orderNumber)
+				FROM OrderImpl o, StoreImpl s
+				WHERE s.code = o.storeCode
+				AND o.status <> 'FAILED'
+				AND s.uidPk IN (:list)
+				AND (o.currency = ?1 OR ?1 IS NULL)
+				AND (o.createdDate >= ?2 OR ?2 IS NULL)
+				AND (o.createdDate<= ?3 OR ?3 IS NULL)
+				GROUP BY o.currency, s.code
+				]]>
+			</query>
+		</named-query>
+
+		<named-query name="COUPON_USAGE_DELETE_BY_COUPON_CONFIG_GUID">
+			<query>
+				DELETE
+				FROM CouponUsageImpl cu
+				WHERE cu.coupon.couponConfig.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_USAGE_FIND_BY_UIDS">
+			<query>
+				SELECT cu
+				FROM CouponUsageImpl cu
+				WHERE cu.uidPk IN (:list)
+			</query>
+		</named-query>
+
+		<named-query name="PROMOTION_DETAILS">
+			<query>
+				<![CDATA[
+				SELECT o.orderNumber, o.createdDate, o.customer.userId, ac.couponCode, o.currency, o.total
+				FROM OrderImpl o, StoreImpl s, PromotionRuleImpl r, RuleSetImpl rs
+				INNER JOIN o.appliedRules ar
+				LEFT OUTER JOIN ar.appliedCoupons ac
+				WHERE s.code = o.storeCode
+				AND o.status <> 'FAILED'
+				AND r.uidPk = ar.ruleUid
+				AND s.uidPk = ?1
+				AND (o.currency = ?2 OR ?2 IS NULL)
+				AND (o.createdDate >= ?3 OR ?3 IS NULL)
+				AND o.createdDate<= ?4
+				AND (rs.scenario = r.ruleSet.scenario
+				AND (r.ruleSet.scenario = 1))
+				AND r.code = ?5
+				AND (ac.couponCode = ?6 OR ?6 IS NULL)
+				]]>
+			</query>
+		</named-query>
+	</entity>
+	<entity class="CouponConfigImpl">
+		<named-query name="COUPON_CONFIG_BY_RULE_CODE">
+			<query>
+				SELECT cc
+				FROM CouponConfigImpl cc
+				WHERE cc.ruleCode = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_CONFIG_BY_CODE">
+			<query>
+				SELECT cc
+				FROM CouponConfigImpl cc
+				WHERE cc.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="COUPON_CONFIG_GUID_BY_RULE_CODE">
+			<query>
+				SELECT cc.guid
+				FROM CouponConfigImpl cc
+				WHERE cc.ruleCode = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

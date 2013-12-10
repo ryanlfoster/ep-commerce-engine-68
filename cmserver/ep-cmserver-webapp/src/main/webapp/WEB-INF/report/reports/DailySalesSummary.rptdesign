@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.0.N20060628-1351 Build &lt;20060628-1537></property>
+    <property name="units">in</property>
+    <text-property name="title">Daily Sales</text-property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="startDate" id="13">
+            <property name="valueType">static</property>
+            <property name="dataType">dateTime</property>
+            <text-property name="promptText">Start Date</text-property>
+            <property name="allowBlank">false</property>
+            <property name="allowNull">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Medium Date</property>
+                <property name="pattern">Medium Date</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="14">
+            <property name="valueType">static</property>
+            <property name="dataType">dateTime</property>
+            <text-property name="promptText">End Date</text-property>
+            <property name="allowBlank">false</property>
+            <property name="allowNull">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Medium Date</property>
+                <property name="pattern">Medium Date</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="cancelled" id="15">
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <text-property name="promptText">Include cancelled</text-property>
+            <property name="allowNull">true</property>
+            <property name="controlType">check-box</property>
+            <property name="defaultValue">true</property>
+            <structure name="format"/>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="EPScriptedDataSource" id="11"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="DailySalesSummaryDataSet" id="12">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">orderCount</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">createDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">totalTax</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">totalDiscount</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">currency</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">productCount</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">yearMonthCurrency</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">orderCount</property>
+                    <property name="displayName"># of Orders</property>
+                </structure>
+                <structure>
+                    <property name="columnName">createDate</property>
+                    <property name="displayName">Date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">totalTax</property>
+                    <property name="displayName">Tax</property>
+                </structure>
+                <structure>
+                    <property name="columnName">totalDiscount</property>
+                    <property name="displayName">Discount</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="displayName">Sales Total</property>
+                </structure>
+                <structure>
+                    <property name="columnName">currency</property>
+                    <property name="displayName">Currency</property>
+                </structure>
+                <structure>
+                    <property name="columnName">productCount</property>
+                    <property name="displayName"># of Units Sold</property>
+                </structure>
+                <structure>
+                    <property name="columnName">yearMonthCurrency</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">EPScriptedDataSource</property>
+            <method name="open"><![CDATA[orderService = new Packages.com.elasticpath.cmweb.reportservice.impl.OrderReportServiceImpl();
+
+/* FOR TESTING PURPOSES ONLY
+ep = new Packages.com.elasticpath.persistence.TestElasticPath();
+engine = new Packages.com.elasticpath.persistence.TestPersistenceEngine();
+orderService.setPersistenceEngine(engine);
+*/
+
+var startDate;
+var endDate;
+
+if (params["startDate"].value == null) {
+	startDate = null;
+} else {
+	startDate = params["startDate"];
+}
+if (params["endDate"].value == null) {
+	endDate = null;
+} else {
+	endDate = params["endDate"];
+}
+
+orders = orderService.orderSummaryReport(startDate, endDate, params["cancelled"]);
+totalRows = orders.size();
+
+currentRow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentRow >= totalRows) {
+    return false;
+}
+
+var order = orders.get(currentRow);
+
+currentRow++;
+row["orderCount"] = order[0];
+row["createDate"] = order[1];
+row["totalTax"] = order[2];
+row["totalDiscount"] = order[3];
+row["total"] = order[4];
+row["currency"] = order[5];
+row["productCount"] = order[6];
+
+var stringDate = new String(row["createDate"]);
+row["yearMonthCurrency"] = stringDate.substring(4, 7) + " " + stringDate.substring(11, 15) 
+	+ " (in " + row["currency"] + ")";
+
+return true;]]></method>
+            <method name="close"><![CDATA[orderService = null;
+orders = null;
+
+totalRows = null;
+currentRow = null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="ep-table-header" id="172">
+            <property name="backgroundColor">#CCCCCC</property>
+            <property name="backgroundImage">template-resources/images/bg-bar-tbl-header.gif</property>
+            <property name="backgroundRepeat">repeat-x</property>
+            <property name="fontWeight">normal</property>
+            <property name="color">black</property>
+            <property name="borderBottomColor">#ACA899</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#F7F8F9</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="paddingTop">3px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">3px</property>
+            <property name="paddingRight">2px</property>
+            <property name="textAlign">left</property>
+            <property name="whiteSpace">nowrap</property>
+        </style>
+        <style name="ep-table-group-header-1" id="173">
+            <property name="backgroundColor">#A4C2F5</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">white</property>
+            <property name="borderBottomColor">#E8E4DA</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderTopColor">#E8E4DA</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="paddingTop">2px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">2px</property>
+            <property name="paddingRight">2px</property>
+        </style>
+        <style name="ep-table-detail" id="174">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="borderBottomColor">#F0F0F0</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderRightColor">#F0F0F0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="paddingTop">2px</property>
+            <property name="paddingLeft">4px</property>
+            <property name="paddingBottom">2px</property>
+            <property name="paddingRight">2px</property>
+        </style>
+        <style name="ep-report-header-bg" id="175">
+            <property name="backgroundColor">#5987D6</property>
+            <property name="backgroundImage">template-resources/images/bg-bar-1.gif</property>
+            <property name="backgroundRepeat">repeat-x</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="ep-report-header" id="176">
+            <property name="fontSize">1em</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">white</property>
+            <property name="marginTop">2px</property>
+            <property name="marginLeft">6px</property>
+            <property name="marginBottom">2px</property>
+            <property name="marginRight">2px</property>
+            <property name="lineHeight">1.7em</property>
+        </style>
+        <style name="report" id="177">
+            <property name="fontFamily">arial</property>
+            <property name="fontSize">1em</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <grid id="4">
+            <property name="width">100%</property>
+            <column id="5"/>
+            <row id="6">
+                <cell id="7">
+                    <property name="style">ep-report-header-bg</property>
+                    <text id="65">
+                        <property name="style">ep-report-header</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Daily Sales Summary (<VALUE-OF>params["startDate"]</VALUE-OF> - <VALUE-OF>params["endDate"]</VALUE-OF>)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="8">
+                <cell id="9">
+                    <table id="16">
+                        <property name="width">100%</property>
+                        <property name="dataSet">DailySalesSummaryDataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">createDate</property>
+                                <expression name="expression">dataSetRow["createDate"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">orderCount</property>
+                                <expression name="expression">dataSetRow["orderCount"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">productCount</property>
+                                <expression name="expression">dataSetRow["productCount"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">totalDiscount</property>
+                                <expression name="expression">dataSetRow["totalDiscount"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">totalTax</property>
+                                <expression name="expression">dataSetRow["totalTax"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">total</property>
+                                <expression name="expression">dataSetRow["total"]</expression>
+                                <property name="dataType">any</property>
+                            </structure>
+                            <structure>
+                                <property name="name">yearMonth</property>
+                                <expression name="expression">dataSetRow["yearMonthCurrency"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">currency</property>
+                                <expression name="expression">dataSetRow["currency"]</expression>
+                            </structure>
+                        </list-property>
+                        <column id="44"/>
+                        <column id="45"/>
+                        <column id="46"/>
+                        <column id="47"/>
+                        <column id="48"/>
+                        <column id="49"/>
+                        <column id="50"/>
+                        <column id="51"/>
+                        <header>
+                            <row id="17">
+                                <property name="style">ep-table-header</property>
+                                <cell id="18">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="52">
+                                        <text-property name="text">Date</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="19">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="54">
+                                        <text-property name="text"># of Orders</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="20">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="56">
+                                        <text-property name="text"># of Units Sold</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="21">
+                                    <property name="style">ep-table-header</property>
+                                    <text id="67">
+                                        <property name="contentType">plain</property>
+                                        <text-property name="content"><![CDATA[Avg Products per Order]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="22">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="58">
+                                        <text-property name="text">Discount</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="23">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="60">
+                                        <text-property name="text">Tax</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="24">
+                                    <property name="style">ep-table-header</property>
+                                    <text id="69">
+                                        <property name="contentType">plain</property>
+                                        <text-property name="content"><![CDATA[Avg Sales per Order]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="25">
+                                    <property name="style">ep-table-header</property>
+                                    <label id="62">
+                                        <text-property name="text">Sales Total</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="115">
+                            <property name="groupName">GroupByYearMonth</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">desc</property>
+                            <expression name="keyExpr">row["yearMonth"]</expression>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <header>
+                                <row id="116">
+                                    <property name="style">ep-table-group-header-1</property>
+                                    <cell id="117">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <data id="134">
+                                            <property name="resultSetColumn">yearMonth</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="118">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="135">
+                                            <expression name="valueExpr">Total.sum(row["orderCount"]).toFixed(0)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="119">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="136">
+                                            <expression name="valueExpr">Total.sum(row["productCount"]).toFixed(0)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="120">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="141">
+                                            <expression name="valueExpr">(Total.sum(row["productCount"]) / Total.sum(row["orderCount"])).toFixed(2)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="121">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="139">
+                                            <expression name="valueExpr">Total.sum(row["totalDiscount"]).toFixed(2)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="122">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="138">
+                                            <expression name="valueExpr">Total.sum(row["totalTax"]).toFixed(2)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="123">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="140">
+                                            <expression name="valueExpr">(Total.sum(row["total"]) / Total.sum(row["orderCount"])).toFixed(2)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="124">
+                                        <property name="style">ep-table-group-header-1</property>
+                                        <text-data id="137">
+                                            <expression name="valueExpr">Total.sum(row["total"]).toFixed(2)</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="125">
+                                    <cell id="126"/>
+                                    <cell id="127"/>
+                                    <cell id="128"/>
+                                    <cell id="129"/>
+                                    <cell id="130"/>
+                                    <cell id="131"/>
+                                    <cell id="132"/>
+                                    <cell id="133"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="26">
+                                <property name="style">ep-table-detail</property>
+                                <cell id="27">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="109">
+                                        <expression name="valueExpr">new String(row["createDate"]).substring(0, 10)</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="28">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="110">
+                                        <expression name="valueExpr">row["orderCount"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="29">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="111">
+                                        <expression name="valueExpr">row["productCount"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="30">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="66">
+                                        <expression name="valueExpr">(row["productCount"] / row["orderCount"]).toFixed(2)</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="31">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="112">
+                                        <expression name="valueExpr">row["totalDiscount"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="32">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="113">
+                                        <expression name="valueExpr">row["totalTax"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="33">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="68">
+                                        <expression name="valueExpr">(row["total"] / row["orderCount"]).toFixed(2)</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="34">
+                                    <property name="style">ep-table-detail</property>
+                                    <text-data id="114">
+                                        <expression name="valueExpr">row["total"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="35">
+                                <cell id="36"/>
+                                <cell id="37"/>
+                                <cell id="38"/>
+                                <cell id="39"/>
+                                <cell id="40"/>
+                                <cell id="41"/>
+                                <cell id="42"/>
+                                <cell id="43"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

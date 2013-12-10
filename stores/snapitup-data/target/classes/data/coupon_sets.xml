@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<coupon_sets>
+<coupon_set>
+    <coupon_config>
+        <rule_code>27843E77-9002-90D0-582D-46C9248FE6F3</rule_code>
+        <coupon_config_code>56918A70-0445-C8CF-65F8-BF629D442568</coupon_config_code>
+        <coupon_usage_type>limitPerCoupon</coupon_usage_type>
+        <usage_limit>2147483647</usage_limit>
+        <duration_days>0</duration_days>
+        <limited_duration>false</limited_duration>
+        <multi_use_per_order>false</multi_use_per_order>
+    </coupon_config>
+    <coupons>
+        <coupon_code>MEMORY</coupon_code>
+    </coupons>
+    <coupon_usages/>
+</coupon_set>
+
+<coupon_set>
+    <coupon_config>
+        <rule_code>CAMERA1</rule_code>
+        <coupon_config_code>0CD50F76-3EDB-EC9D-EF13-FC26FBB1BB1A</coupon_config_code>
+        <coupon_usage_type>limitPerAnyUser</coupon_usage_type>
+        <usage_limit>5</usage_limit>
+        <duration_days>0</duration_days>
+        <limited_duration>false</limited_duration>
+        <multi_use_per_order>false</multi_use_per_order>
+    </coupon_config>
+    <coupons>
+        <coupon_code>CAMERA1-1</coupon_code>
+        <coupon_code>CAMERA1-2</coupon_code>
+        <coupon_code>CAMERA1-3</coupon_code>
+        <coupon_code>CAMERA1-4</coupon_code>
+        <coupon_code>CAMERA1-5</coupon_code>
+    </coupons>
+    <coupon_usages/>
+</coupon_set>
+
+<coupon_set>
+    <coupon_config>
+        <rule_code>CAMERA2</rule_code>
+        <coupon_config_code>56918A70-0445-C8CF-65F8-BF629D442567</coupon_config_code>
+        <coupon_usage_type>limitPerCoupon</coupon_usage_type>
+        <usage_limit>6</usage_limit>
+        <duration_days>0</duration_days>
+        <limited_duration>false</limited_duration>
+        <multi_use_per_order>false</multi_use_per_order>
+    </coupon_config>
+    <coupons>
+        <coupon_code>CAMERA2-1</coupon_code>
+        <coupon_code>CAMERA2-2</coupon_code>
+        <coupon_code>CAMERA2-3</coupon_code>
+    </coupons>
+    <coupon_usages/>
+</coupon_set>
+
+<coupon_set>
+    <coupon_config>
+        <rule_code>7021E9A6-3FB1-E481-3979-F74D2AA03F54</rule_code>
+        <coupon_config_code>56918A70-0445-C8CF-65F8-BF629D442569</coupon_config_code>
+        <coupon_usage_type>limitPerCoupon</coupon_usage_type>
+        <usage_limit>2147483647</usage_limit>
+        <duration_days>0</duration_days>
+        <limited_duration>false</limited_duration>
+        <multi_use_per_order>false</multi_use_per_order>
+    </coupon_config>
+    <coupons>
+        <coupon_code>SPECIAL-OFFER</coupon_code>
+    </coupons>
+    <coupon_usages/>
+</coupon_set>
+
+<coupon_set>
+    <coupon_config>
+        <rule_code>25%_Off_Binoculars</rule_code>
+        <coupon_config_code>8B857F27-9E8B-9787-A833-72206FBDA417</coupon_config_code>
+        <coupon_usage_type>limitPerSpecifiedUser</coupon_usage_type>
+        <usage_limit>1</usage_limit>
+        <duration_days>0</duration_days>
+        <limited_duration>false</limited_duration>
+        <multi_use_per_order>false</multi_use_per_order>
+    </coupon_config>
+    <coupons>
+        <coupon_code>Bino001</coupon_code>
+        <coupon_code>Bino002</coupon_code>
+    </coupons>
+    <coupon_usages>
+        <coupon_usage>
+            <coupon_code>Bino001</coupon_code>
+            <active_in_cart>true</active_in_cart>
+            <email>alana.abercombie@elasticpath.com</email>
+        </coupon_usage>
+        <coupon_usage>
+            <coupon_code>Bino001</coupon_code>
+            <active_in_cart>true</active_in_cart>
+            <email>annabelle.alvirez@elasticpath.com</email>
+        </coupon_usage>
+        <coupon_usage>
+            <coupon_code>Bino002</coupon_code>
+            <active_in_cart>true</active_in_cart>
+            <email>darcy.aubel@elasticpath.com</email>
+        </coupon_usage>
+        <coupon_usage>
+            <coupon_code>Bino002</coupon_code>
+            <active_in_cart>true</active_in_cart>
+            <email>tester@ep.com</email>
+        </coupon_usage>
+    </coupon_usages>
+</coupon_set>
+
+<coupon_set>
+    <coupon_config>
+        <rule_code>FlashMemoryFree</rule_code>
+        <coupon_config_code>CB24A3DC-926C-35AF-3A16-D58851D81727</coupon_config_code>
+        <coupon_usage_type>limitPerSpecifiedUser</coupon_usage_type>
+        <usage_limit>20</usage_limit>
+        <duration_days>30</duration_days>
+        <limited_duration>true</limited_duration>
+        <multi_use_per_order>true</multi_use_per_order>
+    </coupon_config>
+    <coupons>
+        <coupon_code>FlashFree</coupon_code>
+        <coupon_code>FlashMemoryFree0000000001</coupon_code>
+    </coupons>
+    <coupon_usages>
+        <coupon_usage>
+            <coupon_code>FlashMemoryFree0000000001</coupon_code>
+            <active_in_cart>true</active_in_cart>
+            <email>lorrie.bhaskar@elasticpath.com</email>
+        </coupon_usage>
+    </coupon_usages>
+</coupon_set>
+</coupon_sets>

@@ -1,0 +1,90 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## edit.vm
+#set($pageName = "account/edit.vm")
+#templateInit()
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #parse("includes/topmenu.vm")
+      <div class="top-menu-bar"></div>
+      <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; <a href="$baseUrl/manage-account.ep">#springMessage("globals.bc.account")</a> &raquo; #springMessage("globals.bc.editAccount") </div>
+      <div class="clear10"></div>
+      <!-- Start main area -->
+      <div id="account-personal-info">
+        <form action="$baseUrl/edit-account.ep" method="post" name="EditAccountFormBean">
+          <fieldset>
+            <legend>#springMessage("edit.editMyInfo")</legend>
+            <table border="0" cellspacing="0" cellpadding="3">
+              <colgroup>
+                <col width="150">
+                <col width="*">
+              </colgroup>
+              <tr>
+                <td align="right">#springMessage("edit.firstName")</td>
+                <td>
+                  #springFormInput("editAccountFormBean.firstName" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right">#springMessage("edit.lastName")</td>
+                <td>
+                  #springFormInput("editAccountFormBean.lastName" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right">#springMessage("edit.email")</td>
+                <td>
+                  #springFormInput("editAccountFormBean.email" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right">#springMessage("edit.phone")</td>
+                <td>
+                  #springFormInput("editAccountFormBean.phoneNumber" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <br />
+                  <strong>#springMessage("edit.changePassword")</strong>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">#springMessage("edit.password")</td>
+                <td>
+                  #springFormPasswordInput("editAccountFormBean.password" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+              <tr>
+                <td align="right">#springMessage("edit.confirmPassword")</td>
+                <td>
+                  #springFormPasswordInput("editAccountFormBean.confirmPassword" "maxlength='100'")
+                  #springShowErrors("<br>" "req")
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+          <div class="fieldset-footer">
+            <input value='#springMessage("edit.update")' class="button1" type="submit" />
+            <input type="button" class="button-normal" value="#springMessage("msg.return")" onClick="history.back()" />
+          </div>
+        </form>
+      </div>
+      <div class="clear20"></div>
+    </div>
+    #parse("includes/footer.vm")
+  </body>
+</html>

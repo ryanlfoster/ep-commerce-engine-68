@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-6.4.0.xml">
+
+	<!-- Reminder:
+		- Table names cannot exceed 30 characters (Oracle limitation)
+		- Column names cannot exceed 30 characters (Oracle limitation)
+		- Index names cannot exceed 18 characters (DB2 limitation)
+		
+		 Important:
+		- Using <preCondition> ? read: http://forum.liquibase.org/topic/unexpected-behaviour-of-preconditions-with-updatesql
+		- Using <preCondition> ? Consider adding onUpdateSql="TEST", but understand how it plays with updateSQL!
+	-->
+
+	<changeSet id="6.4.0" author="elasticpath">
+		<comment>[BN-64] Persist payment method on Order</comment>
+		<addColumn tableName="TCARTORDER">
+			<column name="PAYMENTMETHOD_GUID" defaultValue="NULL" type="java.sql.Types.VARCHAR(64)" />
+		</addColumn>
+
+		<comment>[BN-77] Add shipment discount to order return</comment>
+		<addColumn tableName="TORDERRETURN">
+			<column name="SHIPMENT_DISCOUNT" type="DECIMAL(19,2)" />
+		</addColumn>
+
+		<comment>[BN-99] Add abandoned cart and cartOrder cleanup Quartz job</comment>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="104" />
+			<column name="PATH" value="COMMERCE/STORE/ABANDONEDCARTCLEANUP/maxHistory" />
+			<column name="VALUE_TYPE" value="Integer" />
+			<column name="MAX_OVERRIDE_VALUES" value="-1" />
+			<column name="DEFAULT_VALUE" value="60" />
+			<column name="DESCRIPTION" value="This setting controls the number of days of cart history to keep before a Quartz job clears it." />
+		</insert>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="105" />
+			<column name="PATH" value="COMMERCE/SYSTEM/ABANDONEDCARTCLEANUP/batchSize" />
+			<column name="VALUE_TYPE" value="Integer" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="1000" />
+			<column name="DESCRIPTION" value="The maximum number of carts to cleanup in one transaction." />
+		</insert>
+		<addColumn tableName="TSHOPPINGCART">
+			<column name="LAST_MODIFIED_DATE" defaultValueDate="CURRENT_TIMESTAMP" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+
+		<comment>[BN-191] Add failed order cleanup Quartz job</comment>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="106" />
+			<column name="PATH" value="COMMERCE/SYSTEM/FAILEDORDERCLEANUP/maxHistory" />
+			<column name="VALUE_TYPE" value="Integer" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="60" />
+			<column name="DESCRIPTION" value="This setting controls the number of days orders with state failed will be kept before a Quartz job removes them from the system." />
+		</insert>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="107" />
+			<column name="PATH" value="COMMERCE/SYSTEM/FAILEDORDERCLEANUP/batchSize" />
+			<column name="VALUE_TYPE" value="Integer" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="1000" />
+			<column name="DESCRIPTION" value="This setting controls the maximum number of failed orders to clean up in one transaction." />
+		</insert>
+
+		<comment>[BN-207] Obtain a cart order from an order</comment>
+		<addColumn tableName="TORDER">
+			<column name="CART_ORDER_GUID" defaultValue="NULL" type="java.sql.Types.VARCHAR(64)" />
+		</addColumn>
+
+		<comment>[BN-228] Add identifier for configured products</comment>
+		<createTable tableName="TITEMCONFIGURATION">
+			<column name="UIDPK" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="GUID" type="VARCHAR(64)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="TITEMCONFIGURATION_GUID_UNIQUE" />
+			</column>
+			<column name="ITEM_REPRESENTATION" type="CLOB" />
+		</createTable>
+		
+		<comment>[BN-289] Add setting for the base directory of payment gateway certificates.</comment>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="108" />
+			<column name="PATH" value="COMMERCE/SYSTEM/PAYMENTGATEWAY/certificatesDirectory" />
+			<column name="VALUE_TYPE" value="String" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="./" />
+			<column name="DESCRIPTION"
+				value="This setting defines the base directory where the payment gateway certificates can be found. The certificate path of the payment gateway will be appended to this prefix. It should end with a file separator, e.g a /. If it is a relative path, it will be relative to the current working directory of the application server. Therefore, using an absolute path is recommended." />
+		</insert>
+		
+		<comment>[BN-231] Move separator in the settings: urlrewrite separator and filtered navigation in token separator.</comment>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="109" />
+			<column name="PATH" value="COMMERCE/SYSTEM/URLREWRITE/fieldSeparator" />
+			<column name="VALUE_TYPE" value="String" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="-" />
+			<column name="DESCRIPTION"
+				value="This setting defines the field separator that is used in the urlrewrite to tokenize the file name part of the SEO urls. If you change this value, you must set the same value into the XML defined by property: COMMERCE/SYSTEM/urlRewriteConfig" />
+		</insert>
+		<insert tableName="TSETTINGMETADATA">
+			<column name="UIDPK" valueNumeric="1100" />
+			<column name="SETTING_DEFINITION_UID" valueNumeric="109" />
+			<column name="METADATA_KEY" value="environmentSpecific" />
+			<column name="VALUE" value="false" />
+		</insert>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueNumeric="110" />
+			<column name="PATH" value="COMMERCE/SYSTEM/FILTEREDNAVIGATION/separatorInToken" />
+			<column name="VALUE_TYPE" value="String" />
+			<column name="MAX_OVERRIDE_VALUES" value="1" />
+			<column name="DEFAULT_VALUE" value="_" />
+			<column name="DESCRIPTION" value="This setting defines the field separator that is used in the filtered navigation." />
+		</insert>
+		<insert tableName="TSETTINGMETADATA">
+			<column name="UIDPK" valueNumeric="1101" />
+			<column name="SETTING_DEFINITION_UID" valueNumeric="109" />
+			<column name="METADATA_KEY" value="environmentSpecific" />
+			<column name="VALUE" value="false" />
+		</insert>
+		<insert tableName="TSETTINGMETADATA">
+			<column name="UIDPK" valueNumeric="1102" />
+			<column name="SETTING_DEFINITION_UID" valueNumeric="110" />
+			<column name="METADATA_KEY" value="sfRefreshStrategy" />
+			<column name="VALUE" value="interval:timeout=COMMERCE/Cache/Cache_2" />
+		</insert>
+		
+		<comment>
+			[BN-231] Update the comment in urlrewrite.xml file. 
+			This was added separately due the fact that the value is XML and we can't define the XML as a CDATA section in a column element value attribute.
+		</comment>
+		<sql splitStatements="false"><![CDATA[
+				UPDATE TSETTINGDEFINITION SET DEFAULT_VALUE='<?xml version="1.0" encoding="utf-8"?> <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.5//EN" "http://tuckey.org/res/dtds/urlrewrite2.5.dtd"> <!--      Configuration file for UrlRewriteFilter   http://tuckey.org/urlrewrite/         Basic SEO Configuration   ========================   UrlRewriteResolverImpl takes an init-param of ''fieldSeparator'', this param overrides the    default string used to tokenize the file name part of the SEO urls, this allows product    codes with dashes ''-'' (tokenizing default) in them to be used without changing their    codes.   If you set this param you must also set the same string in the setting property: COMMERCE/SYSTEM/URLREWRITE/fieldSeparator, so the urls that are generated can be parsed here.    --> <urlrewrite>   <!-- This section handles displaying SEO catalog pages in the locale        specified in the url.           This matches any SEO url and passes the request to UrlRewriteLocaleResolverImpl to     determine whether the url should be redirected. This class will redirect a URL     that contains the default locale OR a non-supported locale to the default locale URL:     i.e. /storefront/gr/prod1234.html will redirect to /storefront/prod1234.html          It will also set a request attribute indicating the locale which is used by other     code in the storefront.         -->   <rule enabled="true">     <name>Redirect default locale</name>     <note>Permanently redirect to default locale (if language not defined in storefront)</note>     <from>^/(.*)/(c|prod|sitemap)([^/]*.html[^/]*)$</from>     <run class="com.elasticpath.sfweb.util.impl.UrlRewriteLocaleResolverImpl" method="doGet"/>   </rule>      <!-- This section interprets all requests for *.html pages and decodes        the url to determine the product, catalog or sitemap to display.        The UrlRewriteResolverImpl handles this decoding.       -->   <rule enabled="true">     <!-- Category url parsing. -->     <from>^.*/c[^/]*\.html[^/]*$</from>     <run       class="com.elasticpath.sfweb.util.impl.UrlRewriteResolverImpl"       method="resolve">       <!--init-param>         <param-name>fieldSeparator</param-name>         <param-value>,</param-value>         </init-param-->     </run>     <to>/browse.ep</to>   </rule>   <rule enabled="true">     <!-- Product url parsing. -->     <from>^.*/prod[^/]*\.html[^/]*$</from>     <run       class="com.elasticpath.sfweb.util.impl.UrlRewriteResolverImpl"       method="resolve">       <!--init-param>         <param-name>fieldSeparator</param-name>         <param-value>,</param-value>         </init-param-->     </run>     <to>/product-view.ep</to>   </rule>   <rule enabled="true">     <!-- Sitemap url parsing. -->     <from>^.*/sitemap[^/]*\.html[^/]*$</from>     <run       class="com.elasticpath.sfweb.util.impl.UrlRewriteResolverImpl"       method="resolve">       <!--init-param>         <param-name>fieldSeparator</param-name>         <param-value>,</param-value>         </init-param-->     </run>     <to>/sitemap.ep</to>   </rule>    <outbound-rule>     <note>       The outbound-rule specifies that when response.encodeURL is       called (if you are using JSTL c:url) the url /rewrite-status       will be rewritten to /test/status/. The above rule and this       outbound-rule means that end users should never see the url       /rewrite-status only /test/status/ both in thier location       bar and in hyperlinks in your pages.     </note>     <from>/rewrite-status</from>     <to>%{context-path}/test/status</to>   </outbound-rule>  </urlrewrite>'  WHERE PATH='COMMERCE/SYSTEM/urlRewriteConfig']]></sql>
+		
+		<comment>[BN-243] Remove LegacyInventoryStrategy.</comment>
+		<update tableName="TSETTINGDEFINITION">
+			<column name="DESCRIPTION"
+				value="Determines the strategy or approach the system uses for inventory behavior. The only valid value is ''allocatedjournaling'' (no quotes). Warning: changing this value on a production system can have serious consequences. Please refer to Elastic Path documentation for guidance." />
+			<where>UIDPK = '103'</where>
+		</update>
+		
+		<comment>[JP-1241] Remove null constraint on credentials column.</comment>
+		<dropNotNullConstraint tableName="TOAUTHACCESSTOKEN" columnName="CREDENTIALS" columnDataType="VARCHAR(255)"/>
+		
+		<comment>[BN-315] Use default for context of searchHost setting rather than null.</comment>
+		<update tableName="TSETTINGVALUE">
+			<column name="CONTEXT" value="default"/>
+			<where>SETTING_DEFINITION_UID = (SELECT UIDPK FROM TSETTINGDEFINITION WHERE PATH = 'COMMERCE/SYSTEM/SEARCH/searchHost') AND CONTEXT IS NULL</where>
+		</update>
+	</changeSet>
+	
+</databaseChangeLog>

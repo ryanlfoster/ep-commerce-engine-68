@@ -1,0 +1,159 @@
+#**
+* Display the Sorter Options.
+*#
+#macro (displaySorterOption $value $name)
+	$currentCatalogViewRequest.getSortTypeOrderString()
+	$currentCatalogViewSorterId
+	$value
+	#if ($currentCatalogViewSorterId == $value)
+		#set ($selected = "SELECTED")
+	#else
+		#set ($selected = "")
+	#end
+	<option value="$value" $selected>#springMessage("$name")</option>
+#end
+
+#**
+* Display the pagination URL
+*#
+#macro (getPaginationURL $pageNumber $action)
+    #if($action == "search.ep" || $action == "advanced-search.ep" || !$ctxSeoEnabledHelper.getBoolean())
+		#set($paginationUrl = "$baseUrl/$action?$currentCatalogViewQueryString&pn=$pageNumber")
+    #else
+		#set($paginationUrl = "$baseUrl/$currentCatalogViewRequest.getSeoUrl($pageNumber)")
+	#end
+	$escapeTool.html($paginationUrl)	
+#end
+
+#**
+* Display the paginations.
+*#
+#macro (displayPagination $action)
+	#set($paginationRange = 6)
+	<div class="pagination">
+		#if ($advancedsearch)
+			<a href="#" onclick="jq('#finder').show()">#springMessage("advancedSearch.refinesearch")</a>&nbsp;
+		#end
+		#if($totalPageNumber > 1)
+			<a href="#getPaginationURL(0 $action)">#springMessage("productgrid.viewall")</a> ($currentCatalogViewResultSize)&nbsp;|&nbsp;#springMessage("productgrid.page")&nbsp;
+			#if($currentPageNumber >= $paginationRange)
+				#set($displayStartLimit = 1)
+				#set($paginationRange = $paginationRange - 1)
+			#end
+			#if($currentPageNumber < $mathTool.sub($totalPageNumber, $paginationRange) + 1)
+				#set($displayEndLimit = 1)
+				#set($paginationRange = $paginationRange - 1)
+			#end
+			#if ($currentPageNumber > 1)
+				#set ($prePageNumber = $currentPageNumber - 1)
+				<a href="#getPaginationURL($prePageNumber $action)"><img src="$baseUrl/template-resources/images/nav/btn_prev_arrow.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.previous")"/></a>
+				#if($displayStartLimit && $displayStartLimit == 1)<a href="#getPaginationURL(1 $action)">1</a><span class="continuum">...</span>
+				#end
+			#else
+				<img src="$baseUrl/template-resources/images/nav/btn_prev_arrow_off.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.previous")"/>
+			#end
+			#set ($paginationRangeNumber = $mathTool.ceil($mathTool.div($currentPageNumber, $paginationRange)))
+			#set ($paginationRangeEnd = $mathTool.mul($paginationRangeNumber, $paginationRange))
+			#if ($paginationRangeEnd < $paginationRange)
+				#set ($paginationRangeEnd = $paginationRange)
+			#end
+			#set ($paginationRangeStart = $paginationRangeEnd - $paginationRange + 1)
+			#if ($totalPageNumber < $paginationRangeEnd)
+				#set ($paginationRangeEnd = $totalPageNumber)
+			#end
+			#foreach($p in [$paginationRangeStart..$paginationRangeEnd])
+				#if($p == $currentPageNumber)
+					<span class="current">$p</span>
+				#else
+					<a href="#getPaginationURL($p $action)">$p</a>
+				#end
+			#end
+			#if ($currentPageNumber < $totalPageNumber && $currentPageNumber != -1)
+				#set ($nextPageNumber = $currentPageNumber + 1)
+				#if($displayEndLimit && $displayEndLimit == 1)<span class="continuum">...</span><a href="#getPaginationURL($totalPageNumber $action)">$totalPageNumber</a>#end
+				<a href="#getPaginationURL($nextPageNumber $action)"><img src="$baseUrl/template-resources/images/nav/btn_next_arrow.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.next")"/></a>
+			#else
+				<img src="$baseUrl/template-resources/images/nav/btn_next_arrow_off.gif" width="9" height="9" border="0" alt="#springMessage("productgrid.next")"/>
+			#end
+		#end
+	</div>
+#end
+
+#**
+* Display the Sort Options.
+*#
+#macro (displaySort $action)
+	<div class="sort">
+		<form method="get" action="$baseUrl/$action" name="sorterForm">
+			#if($action == "browse.ep")
+				<input type="hidden" name="cID" value="$currentCategory.getUidPk()"/>
+			#else
+				<input type="hidden" name="categoryId" value="$currentCatalogViewRequest.getCategoryUid()"/>
+				##Advanced search request might not have keywords, so don't display it if null.
+				#if ($currentCatalogViewRequest.getKeyWords())
+					<input type="hidden" name="keyWords" value="$currentCatalogViewRequest.getKeyWords()"/>					
+				#end
+			#end
+			<input type="hidden" name="filters" value="$escapeTool.html($currentCatalogViewRequest.getFilterIds())"/>
+			<label>#springMessage("productgrid.sortby")</label>
+			<select name="sorter" onchange="this.form.submit()">
+				#if($action == "search.ep")
+					#displaySorterOption("relevance-desc" "productgrid.sortrelevance")
+				#end
+				#displaySorterOption("featuredProducts-desc" "productgrid.sortfeaturedproducts")
+				#displaySorterOption("productName-asc" "productgrid.sortproductname")
+				#displaySorterOption("price-asc" "productgrid.sortpricelh")
+				#displaySorterOption("price-desc" "productgrid.sortpricehl")
+				#displaySorterOption("topSeller-desc" "productgrid.sorttopsellers")
+			</select>
+		</form>
+	</div>
+#end
+
+## Setup the PowerReviews JavaScript
+<script type = "text/javascript" src="$baseUrl/template-resources/power-reviews/pwr/engine/js/full.js"></script>
+<script type = "text/javascript">
+  pr_zip_location='$baseUrl/template-resources/power-reviews';
+  pr_style_sheet='$baseUrl/template-resources/stylesheet/powerreviews/category-page.css';
+</script>
+
+#if ($ctxSeoEnabledHelper.getBoolean() && $action == "browse.ep")
+	#set ($seoUrl = $currentCatalogViewRequest.getSeoUrl($currentPageNumber))
+#end
+#set($productList = $catalogViewResultBean.getProducts())
+#if($productList.size() > 0)
+
+	<div class="cat-nav">
+	<div id="side-menu">&nbsp;</div>
+		#displaySort($action)
+		#displayPagination($action)
+		<div class="clear0"></div>
+	</div>
+    <div class="clear10"></div>
+    <div id="main-content">
+	<div class="clear10"></div>
+	#set ($colCount = 0)
+	#set ($totCount = 0)
+	<div id="product-grid-1">
+		#foreach ($product in $productList)
+			#set ($totCount = $totCount + 1)
+			#set ($productPrice = false)
+			#set ($productPrice = $catalogViewResultBean.getPrice($product.code))
+			#set ($productCharacteristics = $catalogViewResultBean.getProductCharacteristics($product.code))
+    		#displayProductWithPrice($product $catalog $warehouse $productPrice "" true $productCharacteristics)
+			#if($mathTool.mod($totCount, 4) == 0)
+				<div class="clear10"></div>
+			#end
+		#end
+		<div class="clear20"></div>
+		<!-- end product row -->
+	</div>
+	<!-- end product grid -->
+	<div class="cat-nav">
+		#displaySort($action)
+		#displayPagination($action)
+		<div class="clear0"></div>
+	</div>
+	</div>
+#end
+<!-- end main content -->

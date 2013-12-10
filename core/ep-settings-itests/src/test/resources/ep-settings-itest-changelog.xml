@@ -1,0 +1,21 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="insert-setting-definitions-for-itests" author="ep-settings-itests">
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" value="2000" />
+			<column name="PATH" value="COMMERCE/ITEST/SETTINGS/sampleSetting" />
+			<column name="DEFAULT_VALUE" value="Expected value" />
+			<column name="VALUE_TYPE" value="String" />
+			<column name="DESCRIPTION" value="Sample Setting value for use within Settings integration tests" />
+			<column name="MAX_OVERRIDE_VALUES" value="-1" />
+		</insert>
+		<rollback>
+			delete from TSETTINGDEFINITION where UIDPK = 2000
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>

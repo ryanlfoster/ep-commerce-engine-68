@@ -1,0 +1,14 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2005
+*#
+<!-- logo.vm -->
+<div>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td >#springMessage($msgSource "globals.cm.logo")</td>
+    </tr>
+  </table>
+</div>
+<!-- end header table --> 
+<div class="header"><img src="template-resources/images/spacer.gif" width="1" height="1" border="0" /></div>
+   

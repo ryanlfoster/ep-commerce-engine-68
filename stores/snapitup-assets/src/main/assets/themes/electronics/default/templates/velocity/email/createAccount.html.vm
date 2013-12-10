@@ -1,0 +1,53 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## orderConf.html.vm
+#emailInit()
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div style="width:600px;margin-left:auto;margin-right:auto;background:#fff;color:#333;font-size:11pt;line-height:150%;padding-bottom:20px;border:0;font-family:arial,helvetica,sans-serif;border:2px solid #ccc;">
+			<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+				<tr>
+					<td>
+						#parse("includes/header.email.vm")
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" border="0" align="center" cellpadding="10" cellspacing="0" bgcolor="#FFFFFF">
+							<tr>
+								<td style="line-height:150%;">
+									#set ($customer = $order.getCustomer())
+
+									<p>$dateTool.get('MMMM d, yyyy')</p>
+									<p>#emailMessage("email.globals.dear") $!customer.firstName $!customer.lastName,<br>
+									#emailMessage("email.createAccount.message1")<br>
+									<a href="$store.getUrl()">$store.getUrl()</a></p>
+
+									<p>#emailMessage("email.createAccount.message2")<br>
+									<a href="$store.getUrl()/manage-account.ep">$store.getUrl()/manage-account.ep</a></p>
+
+									<h3 style="color:#80A71F; border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:10px 0;">#emailMessage("email.createAccount.message3")</h3>
+
+									<p>#emailMessage("email.createAccount.customerno"): $!customer.uidPk<br>
+									#emailMessage("email.createAccount.created"): $!customer.creationDate<br>
+									#emailMessage("email.emailAddress"): $!customer.email</p>
+									<p>$store.getName()<br>
+									<a href="$store.getUrl()">$store.getUrl()</a></p>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						#parse("includes/footer.email.vm")
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

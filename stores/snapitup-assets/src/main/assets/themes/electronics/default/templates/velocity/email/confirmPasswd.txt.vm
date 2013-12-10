@@ -1,0 +1,15 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## confirmPasswd.txt.vm
+#emailInit()
+$dateTool.get('MMMM d, yyyy')#**#
+    
+#emailMessage("email.globals.dear") $!customer.firstName $!customer.lastName,#**#
+    
+#emailMessage("email.confirmPasswd.message1")#**#
+
+--------------------------------------#**#
+$store.getName()#**#
+$store.getUrl()#**#
+--------------------------------------#**#

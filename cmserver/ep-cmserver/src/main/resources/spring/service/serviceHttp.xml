@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="httpAuthenticationProvider" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="remoteAuthenticationManager"/>
+		</property>
+		<property name="serviceInterface">
+			<value>org.springframework.security.authentication.rcp.RemoteAuthenticationManager</value>
+		</property>
+	</bean>
+	
+	<bean id="httpResourceRetrievalService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="resourceRetrievalService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.remote.ResourceRetrievalService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpEmailService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="serverEmailService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.misc.EmailService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpOrderReturnEmailService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="orderReturnEmailService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.misc.OrderReturnEmailService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpNotificationService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="notificationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.notification.NotificationService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpImportService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="importService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.dataimport.ImportService</value>
+		</property>
+	</bean>
+
+	<bean id="httpProductService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductService</value>
+		</property>
+	</bean>
+
+	<bean id="httpProductBundleService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productBundleService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductBundleService</value>
+		</property>
+	</bean>
+
+	<bean id="httpProductModelService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service" ref="productModelService"/>
+		<property name="serviceInterface" value="com.elasticpath.cmweb.service.catalog.ProductModelService" />
+	</bean>
+	<bean id="httpDigitalAssetAuditService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="digitalAssetAuditService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.asset.DigitalAssetAuditService</value>
+		</property>
+	</bean>
+	<bean id="httpAttributeService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="attributeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.attribute.AttributeService</value>
+		</property>
+	</bean>
+	<bean id="httpBrandService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="brandService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.BrandService</value>
+		</property>
+	</bean>
+	<bean id="httpCatalogService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="catalogService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.CatalogService</value>
+		</property>
+	</bean>
+	<bean id="httpCategoryService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="categoryService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.CategoryService</value>
+		</property>
+	</bean>
+	<bean id="httpCategoryTypeService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="categoryTypeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.CategoryTypeService</value>
+		</property>
+	</bean>
+	<bean id="httpGiftCertificateService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="giftCertificateService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.GiftCertificateService</value>
+		</property>
+	</bean>
+	<bean id="httpProductInventoryManagementService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productInventoryManagementService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductInventoryManagementService</value>
+		</property>
+	</bean>
+	<bean id="httpProductAssociationService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productAssociationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductAssociationService</value>
+		</property>
+	</bean>
+	<bean id="httpProductRecommendationService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productRecommendationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductRecommendationService</value>
+		</property>
+	</bean>
+	<bean id="httpProductSkuService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productSkuService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductSkuService</value>
+		</property>
+	</bean>
+	<bean id="httpProductTypeService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productTypeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.ProductTypeService</value>
+		</property>
+	</bean>
+	<bean id="httpSkuOptionService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="skuOptionService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.SkuOptionService</value>
+		</property>
+	</bean>
+	<bean id="httpCouponService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="couponService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.CouponService</value>
+		</property>
+	</bean>
+	<bean id="httpTopSellerService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="topSellerService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.TopSellerService</value>
+		</property>
+	</bean>
+
+	<bean id="httpCustomerGroupService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="customerGroupService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.customer.CustomerGroupService</value>
+		</property>
+	</bean>
+	<bean id="httpCustomerService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="customerService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.customer.CustomerService</value>
+		</property>
+	</bean>
+	<bean id="httpCustomerSessionService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="customerSessionService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.customer.CustomerSessionService</value>
+		</property>
+	</bean>
+	<bean id="httpOrderService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="orderService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.order.OrderService</value>
+		</property>
+	</bean>
+	<bean id="httpOrderLockService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="orderLockService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.order.OrderLockService</value>
+		</property>
+	</bean>
+	<bean id="httpReturnAndExchangeService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="returnAndExchangeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.order.ReturnAndExchangeService</value>
+		</property>
+	</bean>
+	<bean id="httpPaymentGatewayService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="paymentGatewayService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.payment.PaymentGatewayService</value>
+		</property>
+	</bean>
+	<bean id="httpRuleElementService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="ruleElementService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.RuleElementService</value>
+		</property>
+	</bean>
+	<bean id="httpRuleParameterService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="ruleParameterService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.RuleParameterService</value>
+		</property>
+	</bean>
+	<bean id="httpRuleService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="ruleService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.RuleService</value>
+		</property>
+	</bean>
+	<bean id="httpReportingRuleService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="reportingRuleService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.ReportingRuleService</value>
+		</property>
+	</bean>
+	<bean id="httpRuleSetService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="ruleSetService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.RuleSetService</value>
+		</property>
+	</bean>
+	<bean id="httpCouponConfigService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="couponConfigService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.CouponConfigService</value>
+		</property>
+	</bean>
+	<bean id="httpCouponUsageService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="couponUsageService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.rules.CouponUsageService</value>
+		</property>
+	</bean>
+	<bean id="httpShippingRegionService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="shippingRegionService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.shipping.ShippingRegionService</value>
+		</property>
+	</bean>
+	<bean id="httpShippingServiceLevelService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="shippingServiceLevelService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.shipping.ShippingServiceLevelService</value>
+		</property>
+	</bean>
+	<bean id="httpShoppingCartService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="shoppingCartService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.shoppingcart.ShoppingCartService</value>
+		</property>
+	</bean>
+	<bean id="httpStoreService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="storeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.store.StoreService</value>
+		</property>
+	</bean>
+	<bean id="httpWarehouseService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="warehouseService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.store.WarehouseService</value>
+		</property>
+	</bean>
+	<bean id="httpTaxCalculationService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="taxCalculationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.tax.TaxCalculationService</value>
+		</property>
+	</bean>
+	<bean id="httpTaxCodeService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="taxCodeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.tax.TaxCodeService</value>
+		</property>
+	</bean>
+	<bean id="httpTaxJurisdictionService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="taxJurisdictionService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.tax.TaxJurisdictionService</value>
+		</property>
+	</bean>
+	<bean id="httpCmUserService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="cmUserService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.cmuser.CmUserService</value>
+		</property>
+	</bean>
+	<bean id="httpUserRoleService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="userRoleService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.cmuser.UserRoleService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpReportService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="reportService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.reporting.ReportService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpSynonymService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service" ref="synonymGroupService"/>
+		<property name="serviceInterface" value="com.elasticpath.service.search.SynonymGroupService"/>
+	</bean>
+	
+	<bean id="httpPropertyService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="propertyService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.misc.PropertyService</value>
+		</property>
+	</bean>
+	
+
+	<bean id="httpPaymentService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="paymentService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.payment.PaymentService</value>
+		</property>
+	</bean>
+
+	<bean id="httpAllocationService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="allocationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.order.AllocationService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpSettingsService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+	  <property name="service" ref="settingsService"/>
+	  <property name="serviceInterface" value="com.elasticpath.settings.SettingsService"/>
+	</bean>
+
+	<bean id="httpAdvancedSearchQueryDao" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="advancedSearchQueryDao"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.persistence.dao.AdvancedSearchQueryDao</value>
+		</property>
+	</bean>
+	
+	<bean id="httpIndexSearchService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="indexSearchService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.search.index.IndexSearchService</value>
+		</property>
+	</bean>
+
+	<bean id="httpTimeService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="timeService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.misc.TimeService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpCmPasswordPolicy" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="cmPasswordPolicy"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.commons.security.CmPasswordPolicy</value>
+		</property>
+	</bean>
+	
+	<bean id="httpMaximumAgePasswordPolicy" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="maximumAgePasswordPolicy"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.commons.security.PasswordPolicy</value>
+		</property>
+	</bean>
+	
+	<bean id="httpRetryAttemptPasswordPolicy" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="retryAttemptPasswordPolicy"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.commons.security.PasswordPolicy</value>
+		</property>
+	</bean>
+	
+	<bean id="httpAccountPasswordPolicy" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="accountPasswordPolicy"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.commons.security.PasswordPolicy</value>
+		</property>
+	</bean>
+	<bean id="httpCommandService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="commandService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.command.CommandService</value>
+		</property>
+	</bean>
+
+	<bean id="httpIndexBuildStatusService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="indexBuildStatusService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.search.IndexBuildStatusService</value>
+		</property>
+	</bean>
+
+	<bean id="httpIndexNotificationService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="indexNotificationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.search.IndexNotificationService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpPriceLookupFacade" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceLookupFacade"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.common.pricing.service.PriceLookupFacade</value>
+		</property>
+	</bean>
+
+	<bean id="httpPriceListService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceListService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.common.pricing.service.PriceListService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpPriceListLookupService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceListLookupService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.common.pricing.service.PriceListLookupService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpPriceListHelperService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceListHelperService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.common.pricing.service.PriceListHelperService</value>
+		</property>
+	</bean>
+
+	<bean id="httpPriceListAssignmentHelperService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceListAssignmentHelperService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.common.pricing.service.PriceListAssignmentHelperService</value>
+		</property>
+	</bean>
+
+	<bean id="httpPriceListAssignmentService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceListAssignmentService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.pricing.PriceListAssignmentService</value>
+		</property>
+	</bean>
+
+		<bean id="httpPriceListDescriptorService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="priceListDescriptorService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.pricing.PriceListDescriptorService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpChangeSetManagementService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="changeSetManagementService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.changeset.ChangeSetManagementService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpChangeSetService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="changeSetService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.changeset.ChangeSetService</value>
+		</property>
+	</bean>
+
+	<bean id="httpDynamicContentService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="dynamicContentService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.contentspace.DynamicContentService</value>
+		</property>
+	</bean>
+
+	<bean id="httpContentspaceService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="contentspaceService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.contentspace.ContentSpaceService</value>
+		</property>
+	</bean>
+
+	<bean id="httpDynamicContentDeliveryService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="dynamicContentDeliveryService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.targetedselling.DynamicContentDeliveryService</value>
+		</property>
+	</bean>
+
+	<bean id="httpSellingContextService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="sellingContextService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.sellingcontext.SellingContextService</value>
+		</property>
+	</bean>
+
+	<bean id="httpTagDictionaryService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagDictionaryService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.TagDictionaryService</value>
+		</property>
+	</bean>
+
+	<bean id="httpTagDefinitionService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagDefinitionService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.TagDefinitionService</value>
+		</property>
+	</bean>
+
+	<bean id="httpTagConditionService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagConditionService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.TagConditionService</value>
+		</property>
+	</bean>
+	
+	<bean id="httpTagConditionDSLBuilder" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagConditionDSLBuilder"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.ConditionDSLBuilder</value>
+		</property>
+	</bean>
+	
+	<bean id="httpTagConditionBuilder" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagConditionBuilder"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.ConditionBuilder</value>
+		</property>
+	</bean>
+	
+	<bean id="httpTagOperatorService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagOperatorService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.TagOperatorService</value>
+		</property>
+	</bean>
+
+	<bean id="httpSelectableTagValuesService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="selectableTagValuesService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.SelectableTagValueFacade</value>
+		</property>
+	</bean>
+
+	<bean id="httpTagGroupService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="tagGroupService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.tags.service.TagGroupService</value>
+		</property>
+	</bean>
+
+	<bean id="httpCouponDtoMediator" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service" ref="couponDtoMediator"/>
+		<property name="serviceInterface" value="com.elasticpath.common.dto.CouponDtoMediator"/>
+	</bean>
+	
+	<bean id="httpCouponUsageDtoMediator" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service" ref="couponUsageDtoMediator"/>
+		<property name="serviceInterface" value="com.elasticpath.common.dto.CouponUsageDtoMediator"/>
+	</bean>
+	
+	<bean id="httpBundleValidator" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="bundleValidator"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.catalog.BundleValidator</value>
+		</property>
+	</bean>
+	<bean id="httpShopperService" class="com.elasticpath.web.service.audit.impl.AuditHttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="shopperService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.service.shopper.ShopperService</value>
+		</property>
+	</bean>
+	
+ 	<bean id="httpProductTypeDao" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="productTypeDao"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.elasticpath.persistence.dao.ProductTypeDao</value>
+		</property>
+	</bean>
+	
+  <bean id="httpPaymentGatewayFactory" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+    <property name="service">
+      <ref bean="paymentGatewayFactory"/>
+    </property>
+    <property name="serviceInterface">
+      <value>com.elasticpath.domain.payment.PaymentGatewayFactory</value>
+    </property>
+  </bean>
+
+ 	<bean id="httpEpQLSearchEngine" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="epQLSearchEngine"/>
+		<property name="serviceInterface" value="com.elasticpath.search.searchengine.EpQLSearchEngine"/>
+	</bean>
+  
+</beans>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dynamic_contents>
+<dynamiccontent guid="Seasonal Sale Nikon N 90s (SLRWORLD)">
+    <name>Seasonal Sale Nikon N 90s (SLRWORLD)</name>
+    <description>Seasonal Sale Nikon N 90s Banner</description>
+    <contentwrapperid>imageClickableWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="408BA51D-11BF-2FC8-1C70-D73036AEED44">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/fp-feature-box-1.jpg</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="C097742B-E35B-3D67-4ACA-731F89413981">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">Seasonal Sale Nikon N 90s</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="C7C16FA3-4181-14C0-AC0E-53020C59CFAC">
+            <parametername>onClick</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">slr-camera/nikon-n-90s-slr-camera-35mm-body-only-black/prod10040233.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="20% Off Flash Memory &amp; Batteries Banner">
+    <name>20% Off Flash Memory &amp; Batteries Banner</name>
+    <description>20% Off Flash Memory &amp; Batteries Banner</description>
+    <contentwrapperid>HTMLWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="222BF347-F750-6926-D701-3500150CD4CF">
+            <parametername>HTML</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">&lt;img border='0' src='/storefront/content/dcassets/images/bg_offer_c-fr.gif' alt='20% Rabais' usemap='#twoside'/&gt;                     &lt;map name='twoside' id='twoside'&gt;&lt;area shape='rect' coords='4,28,115,107' href='/storefront/fr/accessoires/memoire-instantanee/c90000006-c90000029-p1.html' title='20% de Rabais' alt='20% de Rabais'/&gt;&lt;area shape='rect' coords='120,28,244,107' href='/storefront/fr/accessoires/dispositifs-et-batteries-de-puissance/c90000006-c90000030-p1.html' title='20% Rabais' alt='20% Rabais'/&gt;&lt;/map&gt;</value>
+                <value language="en">&lt;img border='0' src='/storefront/content/dcassets/images/bg_offer_c.gif' alt='20% Off Flash Memory &amp; Batteries' usemap='#twoside'/&gt;&lt;map name='twoside' id='twoside'&gt;&lt;area shape='rect' coords='4,28,115,107' href='/storefront/flash-memory/c90000029-p1.html' title='20% Off Flash Memory' alt='20% Off Flash Memory'/&gt;&lt;area shape='rect' coords='120,28,244,107' href='/storefront/power-devices-batteries/c90000030-p1.html' title='20% Off Batteries' alt='20% Off Batteries'/&gt;&lt;/map&gt;</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Kodak DCS Pro SLR">
+    <name>Kodak DCS Pro SLR</name>
+    <description>Kodak DCS Pro SLR</description>
+    <contentwrapperid>productWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="4A25CFBE-354F-E081-3CC6-A0961D597000">
+            <parametername>productCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">10030004</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Kodak EasyShare V705">
+    <name>Kodak EasyShare V705</name>
+    <description>Kodak EasyShare V705</description>
+    <contentwrapperid>productWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="687A101C-3200-9B23-DA10-B1347808E279">
+            <parametername>productCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">10030788</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="3 rotating slides UK (camera, binocular &amp; camera bags)">
+    <name>3 rotating slides UK (camera, binocular &amp; camera bags)</name>
+    <description>3 rotating slides (camera, binocular &amp; camera bags)</description>
+    <contentwrapperid>flashWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="F56E7D32-B6AA-79A0-DFCC-A90EB93C8D7A">
+            <parametername>flashPath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">flash/banner-uk.swf</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="9944D00B-BC12-9992-B113-FEBE6938C06C">
+            <parametername>url1</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">digital-cameras/digital-slrs/nikon-d70s-digital-camera-slr-6-1-mpix-nikon-af-s-dx-18-70mm-lens-optical-zoom-3-8-x-supported-memory-cf-microdrive/prod10030223.html</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="37FC79B0-C786-80E0-9F97-EED02378BAED">
+            <parametername>url2</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">optics/binoculars/pentax-ucf-x-binoculars-8-x-25/prod10010226.html</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="1FF228E1-154C-C00A-51C1-FB54771A1962">
+            <parametername>url3</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">Tamrac/accessories/carrying-cases/c90000006-c90000028-bF00032-p1.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Gift Certificates Banner">
+    <name>Gift Certificates Banner</name>
+    <description>Gift Certificate Banner</description>
+    <contentwrapperid>HTMLWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="8808521E-CFE7-0E79-AC4E-D91F7F7E8863">
+            <parametername>HTML</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">&lt;style type='text/css'&gt;                     .offerAleft{float: left; width: 100px; height: 100px; padding: 11px 0 0 11px;}                     .offerAleft p{line-height: 1px; padding: 0; margin: 0;}                     .offerAright{float: left; width: 124px; height: 101px; padding: 10px 0 0 15px;}                     .offerAright p{line-height: 1px; padding: 0; margin: 0;}                     .offerAright ul.gift_ul{list-style: none; margin: 12px 0 0 0; padding: 0; width: 119px;}                     .offerAright ul.gift_ul li{margin: 0; padding: 0; padding: 5px 0 4px 19px; background: url('/storefront/content/dcassets/images/bg_ul_li.gif') 9px 11px no-repeat; width: 100px;}                     .offerAright ul.gift_ul li a {color: #0082B8; text-decoration: underline;}                     .offerAright ul.gift_ul li a:hover {text-decoration: none;}                     &lt;/style&gt;                                           &lt;div style='width: 250px; height: 111px; background: url(/storefront/content/dcassets/images/bg_offer_a.gif) 0 0 no-repeat;'&gt;&lt;div class='offerAleft'&gt;&lt;p&gt;&lt;img src='/storefront/content/dcassets/images/gift_cards.gif' alt=''/&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class='offerAright'&gt;&lt;p&gt;&lt;img src='/storefront/content/dcassets/images/gift_certificate-fr.gif' alt=''/&gt;&lt;/p&gt;&lt;ul class='gift_ul'&gt;&lt;li&gt;&lt;a href='gift-certificates/c80000050-p1.html'&gt;Achetez des certificats cadeaux&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='sign-in.ep'&gt;V&amp;eacute;rifier l'&amp;eacute;quilibre&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</value>
+                <value language="en">&lt;style type='text/css'&gt;                     .offerAleft{float: left; width: 100px; height: 100px; padding: 11px 0 0 11px;}                     .offerAleft p{line-height: 1px; padding: 0; margin: 0;}                     .offerAright{float: left; width: 124px; height: 101px; padding: 10px 0 0 15px;}                     .offerAright p{line-height: 1px; padding: 0; margin: 0;}                     .offerAright ul.gift_ul{list-style: none; margin: 12px 0 0 0; padding: 0; width: 119px;}                     .offerAright ul.gift_ul li{margin: 0; padding: 0; padding: 5px 0 4px 19px; background: url('/storefront/content/dcassets/images/bg_ul_li.gif') 9px 11px no-repeat; width: 100px;}                     .offerAright ul.gift_ul li a {color: #0082B8; text-decoration: underline;}                     .offerAright ul.gift_ul li a:hover {text-decoration: none;}                     &lt;/style&gt;                                            &lt;div style='width: 250px; height: 111px; background: url(/storefront/content/dcassets/images/bg_offer_a.gif) 0 0 no-repeat;'&gt;&lt;div class='offerAleft'&gt;&lt;p&gt;&lt;img src='/storefront/content/dcassets/images/gift_cards.gif' alt=''/&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class='offerAright'&gt;&lt;p&gt;&lt;img src='/storefront/content/dcassets/images/gift_certificate.gif' alt=''/&gt;&lt;/p&gt;&lt;ul class='gift_ul'&gt;&lt;li&gt;&lt;a href='gift-certificates/c80000050-p1.html'&gt;Buy gift cards&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='sign-in.ep'&gt;Check balance&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Meade LXD75 Series AR-5 EC Refractor Telescope">
+    <name>Meade LXD75 Series AR-5 EC Refractor Telescope</name>
+    <description>Meade LXD75 Series AR-5 EC Refractor Telescope</description>
+    <contentwrapperid>productWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="05BE9AA9-3F63-AA05-E5C6-8170A20920F9">
+            <parametername>productCode</parametername>
+            <localizable>false</localizable>
+            <values>
+                <value language="null-value">10050021</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="3 rotating slides US (camera, binocular &amp; camera bags)">
+    <name>3 rotating slides US (camera, binocular &amp; camera bags)</name>
+    <description>3 rotating slides (camera, binocular &amp; camera bags)</description>
+    <contentwrapperid>flashWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="9B1440B3-C6B6-2910-C1E5-5243F865A015">
+            <parametername>flashPath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">flash/banner-fr.swf</value>
+                <value language="en">flash/banner-us.swf</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="EA370569-8EFA-90FE-02DF-CD3EB1D8BAD3">
+            <parametername>url1</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">fr/digital-cameras/digital-slrs/nikon-d70s-digital-camera-slr-6-1-mpix-nikon-af-s-dx-18-70mm-lens-optical-zoom-3-8-x-supported-memory-cf-microdrive/prod10030223.html</value>
+                <value language="en">digital-cameras/digital-slrs/nikon-d70s-digital-camera-slr-6-1-mpix-nikon-af-s-dx-18-70mm-lens-optical-zoom-3-8-x-supported-memory-cf-microdrive/prod10030223.html</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="DB906152-218E-2A73-E98E-1D71FE91A95F">
+            <parametername>url2</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">fr/optique/jumelles/pentax-ucf-x-binoculars-8-x-25/prod10010226.html</value>
+                <value language="en">optics/binoculars/pentax-ucf-x-binoculars-8-x-25/prod10010226.html</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="37969869-3928-A034-1757-04F53ABE401C">
+            <parametername>url3</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">fr/Tamrac/accessoires/cas-portants/c90000006-c90000028-bF00032-p1.html</value>
+                <value language="en">Tamrac/accessories/carrying-cases/c90000006-c90000028-bF00032-p1.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Free shipping Banner (UK)">
+    <name>Free shipping Banner (UK)</name>
+    <description>Free Shipping Banner (UK)</description>
+    <contentwrapperid>imageWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="06F648BD-B958-36DB-3A88-C9167096468D">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/fp-promo-box2-uk.gif</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="834FC8B6-AE61-695D-FA9B-B168253CA0FD">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">Spend 50 pounds and qualify for free shipping</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Get one in every color (UK)">
+    <name>Get one in every color (UK)</name>
+    <description>Canon PowerShot banner</description>
+    <contentwrapperid>imageClickableWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="A8AEB6C3-78A2-B3D7-A358-0E5589FFCBC7">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/color-banner-uk.jpg</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="3C26349A-7FCD-285B-2605-9BB5C8CF7444">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">Get one in every color</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="B570D379-16DC-C25E-5C71-AC47D07E4E43">
+            <parametername>onClick</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">digital-cameras/canon-powershot-sd30-digital-elph-digital-camera-5-0-mpix-optical-zoom-2-4-x-supported-memory-mmc-sd/prod0350B001.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Buy any SLR camera get a free camera bag">
+    <name>Buy any SLR camera get a free camera bag</name>
+    <description>Buy any SLR camera, get a free camera bag</description>
+    <contentwrapperid>imageWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="22E8867A-8853-FE3A-4A2B-EB2EFDC87B77">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">images/gift_bag-fr.gif</value>
+                <value language="en">images/gift_bag.gif</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="04989220-540C-A949-4D74-0247AC6E1B7F">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">Achetez un appareil photo numerique SLR</value>
+                <value language="en">Buy any SLR camera get a free camera bag</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Canon EOS Digital Rebel XT (US)">
+    <name>Canon EOS Digital Rebel XT (US)</name>
+    <description>Canon EOS Digital Rebel XT banner</description>
+    <contentwrapperid>imageClickableWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="A74A1236-DE5F-9F13-08CC-AF7576A7A32C">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">images/canon-banner-fr.png</value>
+                <value language="en">images/canon-banner-en.png</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="FD8776E8-60B2-AF39-6F24-5FCC78109DC6">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">Canon EOS Digital Rebel XT</value>
+                <value language="en">Canon EOS Digital Rebel XT</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="0A36EC85-24E7-D5CE-5050-F1E47A7E8D58">
+            <parametername>onClick</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">fr/appareils-photos-numeriques/slrs-de-digital/canon-eos-digital-rebel-xt-appareil-photo-numerique-slr-8-0-mpix-objectif-canon-ef-s-18-55-mm-zoom-optique-3-x-memoire-prise-en-charge-cf-microdrive-argente-e-/prod10030708.html</value>
+                <value language="en">digital-cameras/digital-slrs/canon-eos-digital-rebel-xt-digital-camera-slr-8-0-mpix-canon-ef-s-18-55mm-lens-optical-zoom-3-x-supported-memory-cf-microdrive-silver/prod10030708.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Canon EOS Digital Rebel XT (UK)">
+    <name>Canon EOS Digital Rebel XT (UK)</name>
+    <description>Canon EOS Digital Rebel XT banner</description>
+    <contentwrapperid>imageClickableWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="E83F93B8-4A0B-6039-DF5C-6FF0FDE1958C">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/canon-banner-uk.jpg</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="D369A465-F76A-F447-6322-FB6D2EDA4121">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">Canon EOS Digital Rebel XT</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="6B05FF13-DE01-1DEB-B922-A3B37C4ED97B">
+            <parametername>onClick</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">digital-cameras/digital-slrs/canon-eos-digital-rebel-xt-digital-camera-slr-8-0-mpix-canon-ef-s-18-55mm-lens-optical-zoom-3-x-supported-memory-cf-microdrive-silver/prod10030708.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Canon EOS Digital Rebel XT (SLRWorld)">
+    <name>Canon EOS Digital Rebel XT (SLRWorld)</name>
+    <description>Canon EOS Digital Rebel XT banner for SRLWorld</description>
+    <contentwrapperid>imageClickableWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="B50CA521-1D21-BEE7-C59F-89F54C29FFDA">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">images/canon-banner-en.png</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="72D8F5EC-DBDE-A99D-1605-BBAEDCBCB150">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">Canon EOS Digital Rebel XT</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="3BCA13CE-C230-C2B5-2E65-53BC6DB568B8">
+            <parametername>onClick</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="en">digital-slrs/canon-eos-digital-rebel-xt-digital-camera-slr-8-0-mpix-canon-ef-s-18-55mm-lens-optical-zoom-3-x-supported-memory-cf-microdrive-silver/prod10030708.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Get one in every color (US)">
+    <name>Get one in every color (US)</name>
+    <description>Canon PowerShot banner</description>
+    <contentwrapperid>imageClickableWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="65ABE8C1-727B-A390-9076-9BEFE4D5981C">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">images/color-banner-fr.png</value>
+                <value language="en">images/color-banner-en.png</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="70B1A333-36DC-73F4-00F9-E1EAD2EB0CF6">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">Obtenez en un de chaque</value>
+                <value language="en">Get one in every color</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="6B42BED2-BA0C-4C32-4518-7B8CB9FFAF75">
+            <parametername>onClick</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">fr/appareils-photos-numeriques/canon-powershot-sd30-digital-elph-appareil-photo-numerique-5-0-mpix-zoom-optique-2-4-x-memoire-prise-en-charge-mmc-sd/prod0350B001.html</value>
+                <value language="en">digital-cameras/canon-powershot-sd30-digital-elph-digital-camera-5-0-mpix-optical-zoom-2-4-x-supported-memory-mmc-sd/prod0350B001.html</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+
+<dynamiccontent guid="Free shipping Banner (US)">
+    <name>Free shipping Banner (US)</name>
+    <description>Free Shipping Banner (US)</description>
+    <contentwrapperid>imageWrapper</contentwrapperid>
+    <parametervalues>
+        <parametervalue guid="3CB93024-2DFA-C6CC-5468-CD323BD1749B">
+            <parametername>imagePath</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">images/fp-promo-box2-fr.gif</value>
+                <value language="en">images/fp-promo-box2.gif</value>
+            </values>
+        </parametervalue>
+        <parametervalue guid="D9F086A7-1F1C-158E-BCB7-D899CC573532">
+            <parametername>altText</parametername>
+            <localizable>true</localizable>
+            <values>
+                <value language="fr">Livraison gratuite avec achat de $50 et plus</value>
+                <value language="en">Spend $50 and qualify for free shipping</value>
+            </values>
+        </parametervalue>
+    </parametervalues>
+</dynamiccontent>
+</dynamic_contents>

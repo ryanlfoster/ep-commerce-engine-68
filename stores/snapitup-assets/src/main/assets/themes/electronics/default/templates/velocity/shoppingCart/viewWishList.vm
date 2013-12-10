@@ -1,0 +1,209 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## viewWishList.vm
+
+#**
+* Display a Wish List Item
+*#
+
+#set($pageName = "shoppingCart/viewWishList.vm")
+#set($_content = "viewWishList")
+#set($_breadcrumbs = "viewWishListBreadcrumbs")
+#masterTemplate()
+
+#macro(viewWishListBreadcrumbs)
+    <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; #springMessage("wishList.breadcrumb")</div>
+#end
+
+#macro(viewWishList)
+            <div id="body"> 
+                <div class="clear20"></div>
+                #if ($request.getParameter("sendEmailConf") && $request.getParameter("sendEmailConf") == 1)
+                    <div id="info">
+                        <div class="info-message-item">#springMessage("wishList.confirmation")</div>
+                    </div>
+                    #end    
+                #if ($request.getParameter("sendEmailConf") && $request.getParameter("sendEmailConf") == 0)
+                    <div class="alert">
+                        #springMessageText($errorKey "The request can not be fulfilled successfully. Please contact the store administrator.")
+                    </div>
+                #end
+                #if ($wishListItems.size() == 0)
+                    <div>
+                        <h4>#springMessage("wishList.empty")</h4>
+                    </div>
+                #else
+                    #set ($wishListItemIndex = 0)
+                    <div id="cart">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td colspan="5">#springMessage("wishList.totalItems"): $wishListItems.size()</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                #foreach($wishListItem in $wishListItems)
+                                  #set ($productSku = $wishListItem.productSku)
+                                  #set ($product = $productSku.product)
+                                  #set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+                                  #set ($listPrice = "")
+                                  #set ($listPrice = $wishListItem.getPrice().getListPrice())
+                                  #set ($onSale = $wishListItem.getPrice().isLowestLessThanList())
+                                  #set ($qty = $wishListItem.getQuantity())
+                                  #parseProductSeoUrl($product $product.getDefaultCategory())
+                                  
+                                  #if($productSku.getImage())
+                                  		    #set ($image = $!productSku.getImage())
+		                                  #else
+		                                      #set ($image = "")
+		                                  #end
+                                  
+                                  <tr class="line">
+                                    <td class="action">
+                                      <a href="remove-wishlist-item.ep?itemUid=$wishListItem.getUidPk()">#springMessage("globals.cart.remove")</a>
+                                    </td>
+                                    <td class="img">#displayCatalogImage($image "50" "50" "0" "middle" "0" $productName "")</td>
+                                    <td class="desc"><a href="$productSeoUrl">$productName</a><br />
+                                      #foreach ($skuOptionValue in $productSku.getOptionValues())
+                                        $skuOptionValue.getLocalizedProperties().getValue("skuOptionValueDisplayName", $locale)     <br />
+                                      #end
+                                      <div class="sku">$productSku.skuCode</div>
+                                    </td>
+                                    <td class="unit-price">
+										#displaySinglePriceOrPriceSchedules($wishListItem.getPrice() false true $sectionName)
+                                    </td>
+                                    <td>
+                                      #set ($minQty = $product.getMinOrderQty())
+                                      #set ($inventory = $availabilityMap.get($wishListItem.uidPk))
+                                      #set ($messageCode = $inventory.messageCode)
+                                      #set($addToCartClass = "add-to-cart-small")
+                                      #set($addToCartDisabled = "")
+                                
+                                      #if($messageCode == "IN_STOCK")
+                                        #if ($inventory && $inventory.getAvailableQuantityInStock() > 0) ## always available or no limit on pre or back order
+                                          <div class="instock" id="inventoryText">#springMessage("productTemplate.inStock"), $inventory.getAvailableQuantityInStock()&nbsp;#springMessage("productTemplate.itemsAvailable")</div>
+                                        #else
+                                          <div class="instock" id="inventoryText">#springMessage("productTemplate.inStock")</div>
+                                        #end
+                                      #elseif($messageCode == "OUT_OF_STOCK")
+                                        <div class="outstock" id="inventoryText">#springMessage("productTemplate.outOfStock")</div>
+                                        #set($addToCartClass = "add-to-cart-small off")
+                                        #set($addToCartDisabled = "disabled='disabled'")
+                                      #elseif($messageCode == "OUT_OF_STOCK_WITH_RESTOCK_DATE")
+                                        <div class="outstock" id="inventoryText">#springMessage("productTemplate.outOfStock")</div>
+										#if ($inventory.stockDate)
+                                        <div class="restockdate" id="restockDate">(#springMessage("productTemplate.availableOnlyInStockRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$inventory.getStockDate()))</div>
+                                        #end
+										#set($addToCartClass = "add-to-cart-small off")
+                                        #set($addToCartDisabled = "disabled='disabled'")
+                                      #elseif($messageCode == "AVAILABLE_FOR_PREORDER")
+                                        <div class="instock" id="inventoryText">#springMessage("productTemplate.availableForPreOrder")</div>
+                                        #if ($product.getExpectedReleaseDate())
+                                        <div class="restockdate" id="restockDate2">(#springMessage("productTemplate.preOrderRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$product.getExpectedReleaseDate()))</div>
+                                        #end
+                                      #elseif($messageCode == "AVAILABLE_FOR_BACKORDER")
+                                        <div class="instock" id="inventoryText">#springMessage("productTemplate.availableForBackOrder")</div>
+                                          #if($inventory.getStockDate())
+                                            <div class="restockdate" id="restockDate3">(#springMessage("productTemplate.backOrderRestockDate"):&nbsp;$dateTool.format('E, MMMM d',$inventory.getStockDate()))</div>
+                                          #else
+                                            <div class="sku" id="inventoryText">(#springMessage("productTemplate.willShipWhenAvailable"))</div>
+                                          #end
+									  #end
+									  
+									  #if($product.isNotSoldSeparately())
+										<div class="not-sold-separately">#springMessage("productTemplate.nss")</div>
+										#set($addToCartClass = "add-to-cart-small off")
+                                        #set($addToCartDisabled = "disabled='disabled'")
+									  #end
+                                
+                                      #if($minQty > 1)
+                                        <div class="minqty">#springMessage("productTemplate.minOrderQty") $minQty</div>
+                                      #end
+                                        <div class="clear10"></div>
+                                    
+                                        #set ($productHref = "$baseUrl/move-to-cart.ep?skuCode=$productSku.skuCode&amp;itemUid=$wishListItem.getUidPk()&amp;qty=$qty")
+                                        #set ($accessories = $product.getAssociationsByType(4, $sesShoppingCart.getCartProducts()))
+                                        #set ($warranties = $product.getAssociationsByType(3))
+                                        #if($accessories && $accessories.size() > 0 || $warranties && $warranties.size() > 0)
+                                            #set ($productHref = $productSeoUrl)
+                                        #end
+                                        
+                                        #if($listPrice == "")
+											#set($addToCartClass = "add-to-cart-small off")
+											#set($addToCartDisabled = "disabled='disabled'")
+										#end
+										<input class="$!addToCartClass" name="add-to-cart" $!addToCartDisabled value="#springMessage("productTemplate.addToCart")" type="button" onclick="location.href='$productHref'"/>
+                                    
+                                      </td>
+                                    </tr>
+                                    #set($wishListItemIndex = $wishListItemIndex + 1)
+                                #end
+                            </tbody>
+                        </table>    
+                    </div>
+                    <div class="clear20"></div>                         
+                    <div class="fieldset-footer">               
+                        <input  value="#springMessage("wishList.tellPeople")" class="button-normal" type="button" onclick="location.href='$baseUrl/send-wishlist.ep'"/>
+                    </div>
+                    <div class="clear20"></div>                                         
+                #end 
+            </div>
+#end
+
+#**
+* Display recurring and one time price.
+*#
+#macro (displaySinglePriceOrPriceSchedules $price $showStartingFrom $showSave $sectionName)
+	  #set ($schedule = "")  ##reset variable singleSchedule
+	  #set ($priceSchedules = $price.getPricingScheme().getSchedules())
+	  #if (!$priceSchedules.empty)  ##if we have recurringSchedule - display them first
+	  <div id="recurringPrices">
+	  #foreach($schedule in $priceSchedules)
+          <div class="schedule-price$!sectionName">#displaySinglePrice($price.getPricingScheme().getSimplePriceForSchedule($schedule) false true $schedule $sectionName)</div>
+      #end
+    	</div>
+	  #else 
+		#if (!$command.getCartItems().get(0).isCalculatedBundle())
+		  #displaySinglePrice($price $showStartingFrom $showSave $schedule $sectionName) ##not tested for calclatedBundles yet?!?! 
+		#end
+	  #end
+#end
+
+#**
+* Display Single price per original functionality.
+*#
+#macro (displaySinglePrice $price $hasAdjustments $showSave $schedule $sectionName)
+  ## If the given price is empty then Velocity will not overwrite the variables below.
+  ## So they may still have price info from the previous item in the wishlist.
+  ## Therefor, initialize them to empty to be safe.
+  #set ($listPrice = "")
+  #set ($lowestPrice = "")  
+  #set ($onSale = "")
+  #set ($listPrice = $price.getListPrice())
+  #set ($lowestPrice = $price.getLowestPrice())  
+  #set ($onSale = $price.isLowestLessThanList())
+  
+  #if($hasAdjustments)
+	<div class="starting-from" id="starting-from">#springMessage("productgrid.starting")</div>
+  #end
+  #set ($hasSchedules = false)
+  #set ($hasSchedules = ($price.getPricingScheme().getSchedules().size() > 1))
+  #if ($onSale && $showSave)
+      #set ($dollarSavings = $price.getDollarSavings())
+      <div class="sale-price$!sectionName" id="lowestPrice">#displayPriceForCartLocale($lowestPrice)</div>
+      #displayPriceScheduleFrequencyWithClass($schedule "sale-price$!sectionName")
+      #if ($schedule.getType().toString() == "PURCHASE_TIME" && $hasSchedules )
+        <span class="sale-price">
+         	&nbsp;#springMessage("productTemplate.recurringPrice.NOW")
+        </span>
+      #end
+	  #displayWasSave($schedule $listPrice $dollarSavings $sectionName)
+   #else
+      <div class="reg-price$!sectionName" id="lowestPrice">#displayPriceForCartLocale($lowestPrice)</div>
+	  #displayPriceScheduleFrequencyWithClass($schedule "reg-price$!sectionName")
+	  #if ($schedule.getType().toString() == "PURCHASE_TIME" && $hasSchedules)
+        <span class="reg-price">
+            &nbsp;#springMessage("productTemplate.recurringPrice.NOW")
+        </span>
+      #end
+   #end
+#end

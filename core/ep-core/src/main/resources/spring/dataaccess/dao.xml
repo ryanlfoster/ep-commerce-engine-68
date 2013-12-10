@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		">
+
+	<bean id="productTypeDao" class="com.elasticpath.persistence.dao.impl.ProductTypeDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="fetchPlanHelper" ref="fetchPlanHelper"/>
+		<property name="productTypeLoadTunerAll" ref="PRODUCT_TYPE_LOAD_TUNER_ALL"/>
+		<property name="productTypeLoadTunerAttributes" ref="PRODUCT_TYPE_LOAD_TUNER_ATTRIBUTES"/>
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<bean id="productDaoImpl" class="com.elasticpath.persistence.dao.impl.ProductDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+		<property name="productLoadTunerAll" ref="PRODUCT_LOAD_TUNER_ALL"/>
+		<property name="productLoadTunerMinimal" ref="PRODUCT_LOAD_TUNER_MINIMAL"/>
+		<property name="productLoadTunerForUpdate" ref="PRODUCT_LOAD_TUNER_FOR_UPDATE"/>
+		<property name="fetchPlanHelper" ref="fetchPlanHelper"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<bean id="productDao" parent="txProxyTemplate">
+		<property name="target" ref="productDaoImpl"/>
+	</bean>
+
+	<bean id="indexBuildStatusDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.persistence.dao.impl.IndexBuildStatusDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="advancedSearchQueryDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.persistence.dao.impl.AdvancedSearchQueryDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="beanFactory" ref="coreBeanFactory"/>
+				<property name="fetchPlanHelper" ref="fetchPlanHelper"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="propertiesDao"
+			class="com.elasticpath.persistence.impl.PropertiesDaoImpl">
+		<property name="resourceLoader">
+			<bean class="org.springframework.core.io.support.PathMatchingResourcePatternResolver"/>
+		</property>
+		<property name="propertiesLocation" value="classpath*:resources"/>
+	</bean>
+
+	<bean id="skuConfigurationDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.persistence.impl.SkuConfigurationDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="settingsDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.settings.dao.impl.SettingsDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="priceListDescriptorDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.pricing.dao.impl.PriceListDescriptorDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="baseAmountDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.pricing.dao.impl.BaseAmountDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="priceAdjustmentDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.pricing.dao.impl.PriceAdjustmentDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="abstractQueryComposer" abstract="true">
+		<property name="analyzer" ref="queryAnalyzer"/>
+		<property name="indexUtility" ref="indexUtility"/>
+	</bean>
+
+	<bean id="filterFactory" class="com.elasticpath.service.catalogview.impl.FilterFactoryImpl">
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="fncLoader" ref="filteredNavigationConfigurationLoader"/>
+	</bean>
+
+	<bean id="advancedSearchFilterFactory" class="com.elasticpath.service.catalogview.impl.FilterFactoryImpl">
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="fncLoader" ref="advancedSearchConfigurationLoader"/>
+	</bean>
+
+	<bean id="solrIndexSearcher" class="com.elasticpath.service.search.solr.SolrIndexSearcherImpl">
+		<property name="solrProvider" ref="solrManager"/>
+		<property name="queryComposerFactory" ref="queryComposerFactory"/>
+		<property name="solrQueryFactory" ref="solrQueryFactory"/>
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="filterFactory" ref="filterFactory"/>
+		<property name="solrFacetAdapter" ref="solrFacetAdapter"/>
+		<property name="indexUtility" ref="indexUtility"/>
+		<property name="retrieveCatalogFromCache" value="true"/>
+	</bean>
+
+	<bean id="luceneRawQueryComposer" class="com.elasticpath.service.search.solr.query.LuceneRawQueryComposerImpl" parent="abstractQueryComposer">
+		<property name="luceneAnalyzer">
+			<bean id="synonymAnalyzer" class="org.apache.lucene.analysis.snowball.SnowballAnalyzer">
+				<constructor-arg value="English"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="productQueryComposer" class="com.elasticpath.service.search.solr.query.ProductQueryComposerImpl" parent="abstractQueryComposer">
+		<property name="categoryService" ref="categoryService"/>
+		<property name="catalogService" ref="catalogService"/>
+		<property name="solrQueryFactory" ref="solrQueryFactory"/>
+		<property name="analyzer" ref="queryAnalyzer"/>
+	</bean>
+	<bean id="productAutocompleteQueryComposer"
+			class="com.elasticpath.service.search.solr.query.ProductAutocompleteQueryComposerImpl" parent="productQueryComposer">
+	</bean>
+
+	<bean id="categoryQueryComposer" class="com.elasticpath.service.search.solr.query.CategoryQueryComposerImpl" parent="abstractQueryComposer"/>
+	<bean id="customerQueryComposer" class="com.elasticpath.service.search.solr.query.CustomerQueryComposerImpl" parent="abstractQueryComposer"/>
+	<bean id="promotionQueryComposer" class="com.elasticpath.service.search.solr.query.PromotionQueryComposerImpl" parent="abstractQueryComposer"/>
+	<bean id="userQueryComposer" class="com.elasticpath.service.search.solr.query.UserQueryComposerImpl" parent="abstractQueryComposer"/>
+	<bean id="shippingServiceLevelQueryComposer" class="com.elasticpath.service.search.solr.query.ShippingServiceLevelQueryComposerImpl" parent="abstractQueryComposer"/>
+	<bean id="filteredQueryComposer" class="com.elasticpath.service.search.solr.query.FilteredQueryComposerImpl" parent="abstractQueryComposer">
+		<property name="queryComposerFactory" ref="queryComposerFactory"/>
+	</bean>
+	<bean id="skuQueryComposer" class="com.elasticpath.service.search.solr.query.SkuQueryComposerImpl" parent="abstractQueryComposer">
+		<property name="solrQueryFactory" ref="solrQueryFactory"/>
+	</bean>
+
+	<bean id="spellIndexSearcher" class="com.elasticpath.service.search.solr.SolrSpellIndexSearcherImpl">
+		<property name="solrProvider" ref="solrManager"/>
+		<property name="solrQueryFactory" ref="solrQueryFactory"/>
+	</bean>
+
+	<bean id="queryAnalyzer" class="com.elasticpath.service.search.solr.QueryAnalyzerImpl"/>
+
+	<bean id="solrQueryFactory" class="com.elasticpath.service.search.solr.SolrQueryFactoryImpl">
+		<property name="indexUtility" ref="indexUtility"/>
+		<property name="solrFacetAdapter" ref="solrFacetAdapter"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="searchConfigFactory" ref="searchConfigFactory"/>
+		<property name="settingsReader" ref="settingsService"/>
+		<property name="analyzer" ref="queryAnalyzer"/>
+	</bean>
+
+	<bean id="solrFacetAdapter" class="com.elasticpath.service.search.solr.SolrFacetAdapter">
+		<property name="settingsReader" ref="settingsReader"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="analyzer" ref="queryAnalyzer"/>
+		<property name="indexUtility" ref="indexUtility"/>
+		<property name="fncLoader" ref="filteredNavigationConfigurationLoader"/>
+	</bean>
+
+	<bean id="csvFileReader"
+			class="com.elasticpath.persistence.impl.CsvFileReaderImpl" scope="prototype">
+		<property name="settingsReader" ref="settingsService"/>
+	</bean>
+
+	<bean id="baseAmountDtoCsvLineReader" class="com.elasticpath.csvimport.impl.DtoCsvLineReaderImpl"
+			scope="prototype">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="mapper" ref="baseAmountMapper"/>
+	</bean>
+
+	<bean id="baseAmountDtoCsvLineReaderWithHeaderExtension" class="com.elasticpath.csvimport.impl.DtoCsvLineReaderWithHeaderExtensionImpl"
+			scope="prototype">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="mapper" ref="baseAmountMapper"/>
+		<property name="mapperForHeader" ref="mapperForHeader"/>
+	</bean>
+
+	<bean id="baseAmountMapper" class="com.elasticpath.domain.pricing.csvimport.impl.CsvImportFieldBaseAmountDtoMapperImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="mapperForHeader" class="com.elasticpath.csvimport.impl.CsvImportFieldObjectMapperImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="dtoImportDataType" ref="importDataTypeHeaderForBaseAmount"/>
+	</bean>
+
+	<bean id="importDataTypeHeaderForBaseAmount" class="com.elasticpath.domain.pricing.csvimport.impl.ImportDataTypeHeaderForBaseAmountImpl"
+			init-method="init"/>
+
+	<bean id="couponCsvLineReader" class="com.elasticpath.csvimport.impl.DtoCsvLineReaderWithHeaderExtensionImpl"
+			scope="prototype">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="mapper" ref="couponMapper"/>
+		<property name="mapperForHeader" ref="mapperForHeaderForCoupon"/>
+	</bean>
+
+	<bean id="couponUsageCsvLineReader" parent="couponCsvLineReader" scope="prototype">
+		<property name="mapper" ref="couponEmailMapper"/>
+		<property name="mapperForHeader" ref="mapperForHeaderForCouponEmail"/>
+	</bean>
+
+	<bean id="mapperForHeaderForCoupon" class="com.elasticpath.csvimport.impl.CsvImportFieldObjectMapperImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="dtoImportDataType" ref="importDataTypeHeaderForCoupon"/>
+	</bean>
+
+	<bean id="mapperForHeaderForCouponEmail" class="com.elasticpath.csvimport.impl.CsvImportFieldObjectMapperImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="dtoImportDataType" ref="importDataTypeHeaderForCouponAndEmail"/>
+	</bean>
+
+	<bean id="importDataTypeHeaderForCoupon" class="com.elasticpath.domain.rules.csvimport.impl.ImportDataTypeCouponCodeImpl"
+			init-method="init"/>
+
+	<bean id="importDataTypeHeaderForCouponAndEmail" class="com.elasticpath.domain.rules.csvimport.impl.ImportDataTypeCouponCodeEmailImpl"
+			init-method="init"/>
+
+	<bean id="couponMapper" class="com.elasticpath.csvimport.impl.CsvImportFieldObjectMapperImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="dtoImportDataType" ref="importDataTypeHeaderForCoupon"/>
+	</bean>
+
+	<bean id="couponEmailMapper" class="com.elasticpath.csvimport.impl.CsvImportFieldObjectMapperImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="dtoImportDataType" ref="importDataTypeHeaderForCouponAndEmail"/>
+	</bean>
+
+	<bean id="printWriter"
+			class="com.elasticpath.persistence.impl.PrintWriterImpl" scope="prototype">
+	</bean>
+
+	<bean id="distinctAttributeValueCriterion"
+			class="com.elasticpath.persistence.support.impl.DistinctAttributeValueCriterionImpl">
+	</bean>
+
+	<bean id="solrIndexConstantFactory" class="com.elasticpath.service.search.impl.SolrIndexConstantFactoryImpl">
+		<property name="indexTypesMap">
+			<map>
+				<entry key="product" value="product"/>
+				<entry key="customer" value="customer"/>
+				<entry key="category" value="category"/>
+				<entry key="order" value="order"/>
+				<entry key="orderreturn" value="orderreturn"/>
+				<entry key="promotion" value="promotion"/>
+				<entry key="cmuser" value="cmuser"/>
+				<entry key="shippingservicelevel" value="shippingservicelevel"/>
+				<entry key="sku" value="sku"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- By default we cannot update a Solr Index, so we pass in a read-only publisher
+	which will throw exceptions if we try.  Search provides a different implementation. -->
+	<bean id="solrDocumentPublisher"
+			class="com.elasticpath.service.search.solr.ReadOnlySolrDocumentPublisher"
+			scope="prototype"/>
+
+	<bean id="solrDocumentPublisherFactory"
+			class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+		<property name="serviceLocatorInterface"
+				value="com.elasticpath.service.search.solr.SolrDocumentPublisherFactory"/>
+	</bean>
+
+	<bean id="solrManager" class="com.elasticpath.service.search.solr.DefaultSolrManager" scope="singleton">
+		<property name="searchConfigFactory" ref="searchConfigFactory"/>
+		<property name="solrIndexConstantFactory" ref="solrIndexConstantFactory"/>
+		<property name="solrDocumentPublisherFactory" ref="solrDocumentPublisherFactory"/>
+	</bean>
+
+	<bean id="queryComposerFactory" class="com.elasticpath.service.search.solr.QueryComposerFactoryImpl">
+		<property name="queryComposerMappings">
+			<map key-type="java.lang.Class">
+				<entry key="com.elasticpath.service.search.query.ProductSearchCriteria" value-ref="productQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.CategorySearchCriteria" value-ref="categoryQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.CustomerSearchCriteria" value-ref="customerQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.PromotionSearchCriteria" value-ref="promotionQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.FilteredSearchCriteria" value-ref="filteredQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.UserSearchCriteria" value-ref="userQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.ShippingServiceLevelSearchCriteria" value-ref="shippingServiceLevelQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.LuceneRawSearchCriteria" value-ref="luceneRawQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.ProductAutocompleteSearchCriteria" value-ref="productAutocompleteQueryComposer"/>
+				<entry key="com.elasticpath.service.search.query.SkuSearchCriteria" value-ref="skuQueryComposer"/>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="changeSetDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.changeset.dao.impl.ChangeSetDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="changeSetUserFinder" ref="changeSetCmUserFinder"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="changeSetCmUserFinder" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.changeset.dao.impl.ChangeSetCmUserFinderImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="businessObjectGroupDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.objectgroup.dao.impl.BusinessObjectGroupDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="elasticPath" ref="elasticPath"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="changeSetMemberDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.changeset.dao.impl.ChangeSetMemberDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="businessObjectGroupDao" ref="businessObjectGroupDao"/>
+				<property name="changeSetHelper" ref="changeSetHelper"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagDefinitionDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.dao.impl.TagDefinitionDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagDictionaryDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.dao.impl.TagDictionaryDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagGroupDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.dao.impl.TagGroupDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagConditionDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.dao.impl.ConditionalExpressionDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagOperatorDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.dao.impl.TagOperatorDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagValueTypeDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.dao.impl.TagValueTypeDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- bundling start -->
+
+	<bean id="productBundleDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.persistence.dao.impl.ProductBundleDaoImpl" parent="productDaoImpl">
+			</bean>
+		</property>
+	</bean>
+
+	<!-- bundling end -->
+
+	<bean id="shoppingItemDao" class="com.elasticpath.persistence.dao.impl.ShoppingItemDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+		<property name="fetchPlanHelper" ref="fetchPlanHelper"/>
+		<property name="shoppingItemLoadTunerDefault" ref="SHOPPING_ITEM_LOAD_TUNER_DEFAULT"/>
+	</bean>
+
+	<bean id="importJobStatusDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.dataimport.dao.impl.ImportJobStatusDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="importNotificationDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.dataimport.dao.impl.ImportNotificationDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="priceListAssignmentDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.pricing.dao.impl.PriceListAssignmentDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="inventoryDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.inventory.dao.impl.InventoryDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="beanFactory" ref="coreBeanFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="inventoryJournalDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.inventory.dao.impl.InventoryJournalDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="inventoryJournalLockDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.inventory.dao.impl.InventoryJournalLockDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="couponDao" class="com.elasticpath.service.rules.dao.impl.CouponDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+	</bean>
+
+	<bean id="couponUsageDao" class="com.elasticpath.service.rules.dao.impl.CouponUsageDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+	</bean>
+
+	<bean id="couponConfigDao" class="com.elasticpath.service.rules.dao.impl.CouponConfigDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="wishListDao" class="com.elasticpath.service.shoppingcart.dao.impl.WishListDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+		<property name="fetchPlanHelper" ref="fetchPlanHelper"/>
+		<property name="productSkuLoadTuner" ref="PRODUCT_SKU_LOAD_TUNER_ALL"/>
+		<property name="productLoadTuner" ref="PRODUCT_LOAD_TUNER_ALL"/>
+		<property name="categoryLoadTuner" ref="CATEGORY_LOAD_TUNER_MASTER_AND_PARENT"/>
+		<property name="shoppingItemLoadTuner" ref="SHOPPING_ITEM_LOAD_TUNER_DEFAULT"/>
+	</bean>
+
+	<bean id="shopperDao" class="com.elasticpath.service.shopper.dao.impl.ShopperDaoImpl">
+		<property name="persistenceEngine" ref="persistenceEngine"/>
+	</bean>
+
+	<bean id="cartOrderDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.cartorder.dao.impl.CartOrderDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="customerAddressDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.customer.dao.impl.CustomerAddressDaoImpl">
+				<property name="beanFactory" ref="coreBeanFactory"/>
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="searchTermsMementoDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.persistence.dao.impl.SearchTermsMementoDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="searchTermsActivityDao" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.persistence.dao.impl.SearchTermsActivityDaoImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="paymentTokenDao" parent="txProxyTemplate">
+    	<property name="target">
+      		<bean class="com.elasticpath.persistence.dao.impl.PaymentTokenDaoImpl">
+        		<property name="persistenceEngine" ref="persistenceEngine"/>
+      		</bean>
+    	</property>
+  	</bean>
+</beans>

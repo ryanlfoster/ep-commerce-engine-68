@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-6.5.1.xml">
+
+	<!-- Reminder:
+		- Table names cannot exceed 30 characters (Oracle limitation)
+		- Column names cannot exceed 30 characters (Oracle limitation)
+		- Index names cannot exceed 18 characters (DB2 limitation)
+		
+		 Important:
+		- Using <preCondition> ? read: http://forum.liquibase.org/topic/unexpected-behaviour-of-preconditions-with-updatesql
+		- Using <preCondition> ? Consider adding onUpdateSql="TEST", but understand how it plays with updateSQL!
+	-->
+	
+	<!--***************************************************
+		There are no database changes for this release.
+	*******************************************************-->
+
+</databaseChangeLog>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:annotation-config/>
+
+	<import resource="classpath:integration-core-context.xml" />
+	<import resource="classpath:integration-real-email.xml" />
+	<import resource="classpath:ep-test-application.xml" />
+	<import resource="classpath:core-itest-tools.xml" />
+
+	<bean id="productRecommendationService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.catalog.impl.ProductRecommendationServiceImpl">
+				<property name="productService" ref="productService" />
+				<property name="productAssociationService" ref="productAssociationService" />
+				<property name="settingsReader" ref="settingsService" />
+				<property name="storeService" ref="storeService" />
+				<property name="persistenceEngine" ref="persistenceEngine" />
+				<property name="elasticPath" ref="elasticPath" />
+				<property name="timeService" ref="timeService" />
+			</bean>
+		</property>
+	</bean>
+
+    <bean id="solrIndexConstantFactory" class="com.elasticpath.service.search.impl.SolrIndexConstantFactoryImpl">
+		<property name="indexTypesMap">
+			<map>
+				<entry key="product" value="product" />
+				<entry key="customer" value="customer" />
+				<entry key="category" value="category" />
+				<!-- We don't like order indexes in the tests... not sure why. -->
+<!-- 				<entry key="order" value="order" /> -->
+<!-- 				<entry key="orderreturn" value="orderreturn" /> -->
+				<entry key="promotion" value="promotion" />
+				<entry key="cmuser" value="cmuser" />
+				<entry key="shippingservicelevel" value="shippingservicelevel" />
+				<entry key="sku" value="sku" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- for concurrency test purpose -->
+	<bean id="syncedInventoryJournalRollupService1" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.test.integration.inventory.SyncedInventoryJournalRollupServiceImpl1">
+				<property name="elasticPath" ref="elasticPath" />
+				<property name="inventoryJournalDao" ref="inventoryJournalDao" />
+				<property name="inventoryJournalLockDao" ref="inventoryJournalLockDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="syncedInventoryJournalRollupService2" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.test.integration.inventory.SyncedInventoryJournalRollupServiceImpl2">
+				<property name="elasticPath" ref="elasticPath" />
+				<property name="inventoryJournalDao" ref="inventoryJournalDao" />
+				<property name="inventoryJournalLockDao" ref="inventoryJournalLockDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="persistenceEngineTestEntityListenerConfigurer" class="com.elasticpath.test.integration.customer.impl.JpaPersistenceEngineTestEntityListenerConfigurerImpl"/>
+
+	<bean id="cyberSourceSubscriberFactory" class="com.elasticpath.paymentgateways.cybersource.impl.CyberSourceSubscriberFactoryImpl"/>
+
+</beans>

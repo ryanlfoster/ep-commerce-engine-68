@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<import resource="classpath:spring/service/service.xml" />
+	<import resource="indexing-pipeline.xml" />
+	<import resource="classpath:spring/service/ehcache-jmx.xml"/>
+
+	<bean id="applicationName" class="java.lang.String">
+		<constructor-arg><value>Search</value></constructor-arg>
+	</bean>
+
+
+
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+
+	<!-- Email Service is not used, but requires a definition by beans in service.xml -->
+	<bean id="emailService"
+		class="com.elasticpath.service.misc.EmailHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="" />
+		<property name="serviceInterface" value="com.elasticpath.service.misc.EmailService" />
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="catalogPromoMonitor" class="com.elasticpath.search.CatalogPromotionMonitor">
+		<property name="propertiesDao" ref="propertiesDao" />
+		<property name="ruleService" ref="ruleService" />
+		<property name="indexNotificationService" ref="indexNotificationService" />
+		<property name="catalogPromoQueryComposerHelper" ref="catalogPromoQueryComposerHelper" />
+		<property name="maxClauseCount" value="1024" />
+	</bean>
+
+	<bean id="epRuleEngine"
+		class="com.elasticpath.service.rules.impl.DBCompilingRuleEngineImpl">
+		<property name="ruleSetService" ref="ruleSetService" />
+		<property name="propertiesDao" ref="propertiesDao" />
+		<property name="storeService" ref="storeService" />
+		<property name="ruleService" ref="ruleService" />
+		<property name="timeService" ref="timeService" />
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="promotionRuleDelegate" ref="promotionRuleDelegate" />
+		<property name="ruleEngineConfigProps">
+			<props>
+				<prop key="drools.dialect.java.compiler.lnglevel">1.5</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="searchHostLocator"
+		class="com.elasticpath.service.search.impl.SettingsSearchHostLocatorImpl">
+		<property name="settingsReader" ref="settingsService" />
+		<!-- Setting for clustered search server deployments. -->
+		<!-- <property name="requiresMaster" value="true" /> -->
+	</bean>
+
+	<bean id="searchConfigFactory"
+		class="com.elasticpath.service.search.impl.DefaultSearchConfigFactoryImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="searchHostLocator" ref="searchHostLocator" />
+	</bean>
+
+	<!-- IndexBuilders -->
+	<bean id="abstractIndexBuilder" abstract="true" class="com.elasticpath.search.index.solr.builders.impl.AbstractIndexBuilder">
+		<property name="indexNotificationProcessor" ref="indexNotificationProcessor" />
+	</bean>
+
+	<bean id="productIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.ProductIndexBuilder">
+		<property name="solrManager" ref="solrManager" />
+		<property name="productService" ref="productService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="ruleEngine" ref="epRuleEngine" />
+		<property name="promotedPriceLookupService" ref="promotedPriceLookupService" />
+		<property name="spellCheckingIndexRebuildInterval" value="1800" />
+		<property name="priceListAssignmentService" ref="priceListAssignmentService" />
+		<property name="productIndexingPipeline" ref="productIndexingPipeline" />
+	</bean>
+
+	<bean id="categoryIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.CategoryIndexBuilder">
+		<property name="categoryService" ref="categoryService" />
+		<property name="categoryIndexingPipeline" ref="categoryIndexingPipeline" />
+	</bean>
+
+	<bean id="customerIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.CustomerIndexBuilder">
+		<property name="customerService" ref="customerService" />
+		<property name="customerIndexingPipeline" ref="customerIndexingPipeline" />
+	</bean>
+
+	<bean id="promotionIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.PromotionIndexBuilder">
+		<property name="ruleService" ref="ruleService" />
+		<property name="ruleIndexingPipeline" ref="ruleIndexingPipeline" />
+	</bean>
+
+	<bean id="cmUserIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.CmUserIndexBuilder">
+		<property name="cmUserService" ref="cmUserService" />
+		<property name="cmUserIndexingPipeline" ref="cmUserIndexingPipeline" />
+	</bean>
+
+	<bean id="shippingServiceLevelIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.ShippingServiceLevelIndexBuilder">
+		<property name="shippingServiceLevelService" ref="shippingServiceLevelService" />
+		<property name="shippingServiceLevelIndexingPipeline" ref="shippingServiceLevelIndexingPipeline" />
+	</bean>
+
+	<bean id="skuIndexBuilder" parent="abstractIndexBuilder"
+		class="com.elasticpath.search.index.solr.builders.impl.SkuIndexBuilder">
+		<property name="skuService" ref="productSkuService" />
+		<property name="skuIndexingPipeline" ref="skuIndexingPipeline" />
+	</bean>
+
+	<util:map id="indexBuilderMap" map-class="java.util.HashMap">
+		<entry key="product">
+			<ref bean="productIndexBuilder" />
+		</entry>
+		<entry key="category">
+			<ref bean="categoryIndexBuilder" />
+		</entry>
+		<entry key="customer">
+			<ref bean="customerIndexBuilder" />
+		</entry>
+		<entry key="promotion">
+			<ref bean="promotionIndexBuilder" />
+		</entry>
+		<entry key="cmuser">
+			<ref bean="cmUserIndexBuilder" />
+		</entry>
+		<entry key="shippingservicelevel">
+			<ref bean="shippingServiceLevelIndexBuilder" />
+		</entry>
+		<entry key="sku">
+			<ref bean="skuIndexBuilder" />
+		</entry>
+	</util:map>
+
+	<util:set id="optimizedIndexesListExclusions" set-class="java.util.HashSet">
+		<value>productassociation</value>
+	</util:set>
+
+	<bean id="indexBuildPolicyContext"
+		class="com.elasticpath.search.index.solr.service.IndexBuildPolicyContext"
+		scope="prototype" />
+
+	<bean id="indexBuildPolicyContextFactory"
+		class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+		<property name="serviceLocatorInterface"
+			value="com.elasticpath.search.index.solr.service.IndexBuildPolicyContextFactory" />
+	</bean>
+
+	<!-- There are two production capable SolrDocumentPublishers. The SimpleDocumentPublisher
+		implements the in-thread publishing policy with configurable publish/commit
+		frequency. -->
+
+	<!-- <bean id="simpleSolrDocumentPublisher" -->
+	<!-- class="com.elasticpath.search.index.solr.service.impl.SimpleSolrDocumentPublisher" -->
+	<!-- scope="prototype"> -->
+	<!-- <property name="indexBuildPolicy" ref="indexBuildPolicy" /> -->
+	<!-- <property name="indexBuildPolicyContextFactory" ref="indexBuildPolicyContextFactory"
+		/> -->
+	<!-- <property name="solrManager" ref="solrManager" /> -->
+	<!-- <property name="persistenceEngine" ref="persistenceEngine"/> -->
+	<!-- </bean> -->
+
+	<!-- The QueueingSolrDocumentPublisher does publishing in a separate thread. Initially
+	it was designed to take care of the commit frequency itself, but periodic commits while
+	rebuilding the search index causes things to disappear from the storefront until they're
+	readded. -->
+
+	<bean id="solrDocumentPublisher"
+		class="com.elasticpath.search.index.solr.service.impl.QueueingSolrDocumentPublisher"
+		scope="prototype" init-method="initialize">
+		<property name="documentPublisherTask">
+			<bean
+				class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+				<property name="daemon" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="indexBuilderFactory"
+		class="com.elasticpath.search.index.solr.builders.impl.IndexBuilderFactoryImpl">
+		<property name="indexBuilderMap" ref="indexBuilderMap" />
+	</bean>
+
+	<bean id="indexBuildService"
+		class="com.elasticpath.search.index.solr.service.impl.IndexBuildServiceImpl">
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="persistenceEngine" ref="persistenceEngine" />
+		<property name="timeService" ref="timeService" />
+		<property name="solrManager" ref="solrManager" />
+		<property name="indexSearchService" ref="indexSearchService" />
+		<property name="indexBuilderFactory" ref="indexBuilderFactory" />
+		<property name="indexBuildStatusDao" ref="indexBuildStatusDao" />
+		<property name="indexBuildPolicy" ref="indexBuildPolicy" />
+		<property name="indexingStatistics" ref="indexingStats" />
+		<property name="indexBuildStatusFactory">
+			<bean
+				class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+				<property name="targetBeanName">
+					<idref bean="indexBuildStatus" />
+				</property>
+			</bean>
+		</property>
+		<property name="optimizedIndexesListExclusions" ref="optimizedIndexesListExclusions" />
+		<property name="indexBuildPolicyContextFactory" ref="indexBuildPolicyContextFactory" />
+	</bean>
+
+	<bean id="indexBuildPolicy"
+		class="com.elasticpath.search.index.solr.service.impl.IndexBuildPolicyImpl">
+		<property name="timeService" ref="timeService" />
+		<property name="settingsReader" ref="settingsService" />
+		<property name="maxOperationsBeforeCommit" value="2147483647" />
+		<property name="maxDocsBeforeAdd" value="256" />
+	</bean>
+
+	<bean id="storeMessageSourceDelegate"
+		class="com.elasticpath.commons.util.impl.StoreMessageSourceImpl" />
+
+	<bean id="cartDirector"
+		class="com.elasticpath.sellingchannel.director.impl.CartDirectorImpl">
+		<property name="shoppingCartService" ref="shoppingCartService" />
+		<property name="priceLookupFacade" ref="priceLookupFacade" />
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler" />
+		<property name="shoppingItemDtoFactory" ref="shoppingItemDtoFactory" />
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="productSkuService" ref="productSkuService" />
+		<property name="storeProductLoadTuner" ref="productLoadTunerForSFAddToCart" />
+		<!-- Wish list isn't needed; don't wire wishListService or timeService -->
+	</bean>
+</beans>

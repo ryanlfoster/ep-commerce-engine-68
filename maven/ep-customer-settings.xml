@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
+                      http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+	<!-- IMPORTANT: See near the bottom of this file on how and where to edit it (if needed)! -->
+
+	<pluginGroups>
+		<pluginGroup>com.elasticpath.tools</pluginGroup>
+	</pluginGroups>
+
+	<!-- You will want to add <server/> stanzas here. -->
+	<!-- See http://maven.apache.org/settings.html#Servers -->
+	<!-- See http://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords -->
+
+	<mirrors>
+		<mirror>
+			<!-- You will need to change the URL here to your corporate Maven repository which mirrors the internet. -->
+			<id>internet-mirror</id>
+			<url>http://your.internal.maven.repo.localdomain/nexus/content/groups/mirror</url>
+			<mirrorOf>external:*</mirrorOf>
+		</mirror>
+	</mirrors>
+
+	<profiles>
+		<profile>
+			<id>internet-repos</id>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<url>http://repo1.maven.org/maven2</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>maven2-repository.java.net</id>
+					<url>https://maven.java.net/content/repositories/releases/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>public-jboss</id>
+					<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>sonatype</id>
+					<url>https://repository.sonatype.org/content/groups/forge</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>evgeny-goldin</id>
+					<url>http://evgenyg.artifactoryonline.com/evgenyg/repo/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>wakaleo</id>
+					<url>http://www.wakaleo.com/maven/repos</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>springsource-bundles</id>
+					<url>http://repository.springsource.com/maven/bundles/external</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>springsource-zodiac-milestone</id>
+					<url>http://zodiac.springsource.com/maven/bundles/milestone</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>springsource-milestone</id>
+					<url>http://maven.springframework.org/milestone/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>central</id>
+					<url>http://repo1.maven.org/maven2</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>maven2-repository.java.net</id>
+					<url>https://maven.java.net/content/repositories/releases/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>public-jboss</id>
+					<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>sonatype</id>
+					<url>https://repository.sonatype.org/content/groups/forge</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>evgeny-goldin</id>
+					<url>http://evgenyg.artifactoryonline.com/evgenyg/repo/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>wakaleo</id>
+					<url>http://www.wakaleo.com/maven/repos</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>springsource-bundles</id>
+					<url>http://repository.springsource.com/maven/bundles/external</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>springsource-zodiac-milestone</id>
+					<url>http://zodiac.springsource.com/maven/bundles/milestone</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>springsource-milestone</id>
+					<url>http://maven.springframework.org/milestone/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+
+		<profile>
+			<!-- Inside EP we have "ep-internal-developer" where we define our values for these properties. Unfortunately we can't share these values with you. -->
+			<!-- If you're in a similar situation, we recommend using this ep-external-developer profile. -->
+
+			<id>ep-external-developer</id>
+			<properties>
+				<!-- tycho.target-platform -->
+
+				<!-- Thse are the URLs where "mvn deploy" should deploy your copy of these artifacts. -->
+				<ep.platform.release.repository.url>http://maven.elasticpath.com/nexus/content/repositories/pd-releases
+				</ep.platform.release.repository.url>
+				<ep.platform.snapshot.repository.url>http://maven.elasticpath.com/nexus/content/repositories/pd-snapshots-group
+				</ep.platform.snapshot.repository.url>
+
+			</properties>
+
+			<repositories>
+				<!-- This is the recommended way of pointing central to our local repository. -->
+				<repository>
+					<id>central</id>
+					<url>http://repo1.maven.org/?bogus-url-overridden-by-mirrorOf-above</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+
+			<pluginRepositories>
+				<!-- This is the recommended way of pointing central to our local repository. -->
+				<pluginRepository>
+					<id>central</id>
+					<url>http://repo1.maven.org/?bogus-url-overridden-by-mirrorOf-above</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+
+		<!-- Example of overriding some database values for MySQL -->
+		<!-- Note how we keep it in a profile with the same name and only override the properties needed. -->
+
+		<!-- <profile> -->
+		<!-- <id>mysql-dev-db</id> -->
+		<!-- <properties> -->
+		<!-- <epdb.schemaname>COMMERCEDB</epdb.schemaname> -->
+		<!-- <epdb.username>root</epdb.username> -->
+		<!-- <epdb.password>password</epdb.password> -->
+		<!-- </properties> -->
+		<!-- </profile> -->
+
+	</profiles>
+
+	<activeProfiles>
+		<activeProfile>internet-repos</activeProfile>
+		<activeProfile>ep-defaults</activeProfile>
+		<activeProfile>ep-developer</activeProfile>
+		<activeProfile>ep-external-developer</activeProfile>
+
+		<!-- Uncomment one appserver profile -->
+		<activeProfile>tomcat-developer</activeProfile>
+		<!-- <activeProfile>jboss-developer</activeProfile> -->
+		<!-- <activeProfile>weblogic-developer</activeProfile> -->
+		<!-- <activeProfile>websphere-developer</activeProfile> -->
+
+		<!-- Uncomment one DB profile (see grandparent POM for a full list) -->
+		<activeProfile>mysql-dev-db</activeProfile>
+		<!-- <activeProfile>oracle-dev-db</activeProfile> -->
+		<!-- <activeProfile>mssql-dev-db</activeProfile> -->
+
+		<!-- You can uncomment with-osgi-wrappers if you usually build CMClient, but it will slightly slow down the main reactor build. -->
+		<!-- <activeProfile>with-osgi-wrappers</activeProfile> -->
+
+		<!-- The wtp-developer profile is used to override port numbers in order to set up for deployment in wtp. You'll still have to run: -->
+		<!-- $ mvn clean package -Pupdate-settings -fstores/snapitup-populate-database/pom.xml -->
+		<!-- to get these port numbers into your database. -->
+		<!-- The wtp-developer profile only works with tomcat, and the associated tomcat-developer profile. -->
+		<!-- <activeProfile>wtp-developer</activeProfile> -->
+	</activeProfiles>
+</settings>

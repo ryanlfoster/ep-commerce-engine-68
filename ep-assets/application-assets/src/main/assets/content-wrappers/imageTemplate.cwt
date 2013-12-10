@@ -1,0 +1,3 @@
+<!-- Simple image with alt text and no on click action -->
+<img alt="$altText" border="0" src="$baseDcAssetUrl/$imagePath"/>
+<!-- /Simple image with alt text and no on click action -->

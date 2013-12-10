@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-master.xml">
+
+	<!--do not reference me directly -->
+
+	<include file="liquibase/ep-pre-6.4.xml" />
+	<include file="liquibase/core-changelog-6.4.0.xml" />
+	<include file="liquibase/core-changelog-6.5.0.xml" />
+	<include file="liquibase/core-changelog-6.5.1.xml" />
+	<include file="liquibase/core-changelog-6.6.0.xml" />
+	<include file="liquibase/core-changelog-6.7.0.xml" />
+	<include file="liquibase/core-changelog-6.8.0.xml" />
+
+</databaseChangeLog>

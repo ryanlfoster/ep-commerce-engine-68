@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+	<import file="main.xml" />
+
+	<!-- Maven Release Job: This is manually triggered to do release:prepare / release:perform. It also disables -Main-Build while it's running -->
+	<job>
+		<id>${jenkinsJobPrefix}-Main-Release</id>
+		<parent>abstract-scm</parent>
+		<jobType>free</jobType>
+		<scmType>${scmType}-release</scmType>
+		<tasks>
+			<xml>
+				<content>
+				<![CDATA[
+					<hudson.plugins.groovy.SystemGroovy>
+						<scriptSource class="hudson.plugins.groovy.StringScriptSource">
+							<command>
+								import hudson.model.*
+
+								def mainBuildJob = Hudson.instance.getItem("""${jenkinsJobPrefix}-Main-Build""")
+								println "Disabling ${mainBuildJob.name} so our SCM changes do not trigger it to run."
+								mainBuildJob.disabled = true
+								mainBuildJob.save()
+							</command>
+						</scriptSource>
+					</hudson.plugins.groovy.SystemGroovy>
+				]]>
+				</content>
+			</xml>
+			<shell>
+				<command>
+				<![CDATA[
+					mkdir -p target/nexus-work
+					echo "<project><modelVersion>4.0.0</modelVersion><groupId>dummy</groupId><artifactId>dummy</artifactId><version>1.0-SNAPSHOT</version></project>" > target/nexus-work/pom.xml
+				]]>
+				</command>
+			</shell>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<jvmOptions>${mavenOpts.common}</jvmOptions>
+				<pom>target/nexus-work/pom.xml</pom>
+				<targets>-U -e com.elasticpath.tools:ep-nexus-client-plugin:create-hosted-repository</targets>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoId=${examplesSnapshotRepoId}
+				]]>
+				</properties>
+			</maven>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<jvmOptions>${mavenOpts.common}</jvmOptions>
+				<pom>target/nexus-work/pom.xml</pom>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:create-hosted-repository</targets>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoId=${nexusJobReleaseRepoId}
+					repoPolicy=RELEASE
+				]]>
+				</properties>
+			</maven>
+
+			<!-- ReservedCodeCacheSize is needed to avoid "java.lang.VirtualMachineError: out of space in CodeCache for adapters" -->
+			<!-- Profiles are activated below which are only activated so they are versioned and released. Some artifacts have a "release" profile which stops them from actually running. -->
+			<!-- ep.platform.site.url is set below to work around MSITE-604 and MSITE-501 -->
+			<!-- release:prepare -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<jvmOptions>-XX:MaxPermSize=512m -Xmx1536m -XX:ReservedCodeCacheSize=96m</jvmOptions>
+				<targets><![CDATA[ -U -B -e -P ,${maven.release.profiles} -DskipAllTests -DscmType=${scmType} -Dresume=false release:prepare ]]></targets>
+				<properties>
+				<![CDATA[
+					
+					username=$USERNAME
+					password=$PASSWORD
+					releaseVersion=$RELEASE_VERSION
+					developmentVersion=$DEVELOPMENT_VERSION
+					tagNameFormat=release-$RELEASE_VERSION-${mavenBuildNumber}
+					autoVersionSubmodules=true
+					arguments=-e -DskipAllTests -DscmType=${scmType} -Denv.RELEASE_REPOSITORY_ID=${nexusJobReleaseRepoId} \
+						-Denv.SNAPSHOT_REPOSITORY_ID=${examplesSnapshotRepoId} \
+						-Dinvoker.settingsFile='$WORKSPACE/${settingsLocation}'
+				]]>
+				</properties>
+			</maven>
+
+			<!-- release:perform (but don't run tests again) -->
+			<!-- ep.platform.site.url prefix must be the same as the one in cmclient-release! -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<jvmOptions>-XX:MaxPermSize=512m -Xmx1536m -XX:ReservedCodeCacheSize=96m</jvmOptions>
+				<targets><![CDATA[-U -B -e -P ,${maven.release.profiles} -DskipAllTests -DscmType=${scmType} release:perform ]]></targets>
+				<properties>
+				<![CDATA[
+					username=$USERNAME
+					password=$PASSWORD
+					arguments=-e -DskipAllTests -DscmType=${scmType} -Denv.RELEASE_REPOSITORY_ID=${nexusJobReleaseRepoId} \
+						-Denv.SNAPSHOT_REPOSITORY_ID=${examplesSnapshotRepoId} \
+						-Dep.platform.site.url=${maven.site.baseUrl}/${nexusJobReleaseRepoId} \
+						-Dinvoker.settingsFile='$WORKSPACE/${settingsLocation}'
+				]]>
+				</properties>
+			</maven>
+			
+
+			<shell>
+				<command>
+				<![CDATA[
+					mkdir -p target/nexus-work
+					echo "<project><modelVersion>4.0.0</modelVersion><groupId>dummy</groupId><artifactId>dummy</artifactId><version>1.0-SNAPSHOT</version></project>" > target/nexus-work/pom.xml
+				]]>
+				</command>
+			</shell>
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<jvmOptions>${mavenOpts.common}</jvmOptions>
+				<targets>-e com.elasticpath.tools:ep-nexus-client-plugin:add-repository-to-group</targets>
+				<pom>target/nexus-work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+					nexusBaseUrl=${maven.repo.baseUrl}
+					repoGroupId=${nexusJobReleaseRepoGroup}
+					repoId=${nexusJobReleaseRepoId}
+				]]>
+				</properties>
+			</maven>
+
+			<xml>
+				<content>
+				<![CDATA[
+					<hudson.plugins.groovy.SystemGroovy>
+						<scriptSource class="hudson.plugins.groovy.StringScriptSource">
+							<command>
+								import hudson.model.*
+
+								def mainBuildJob = Hudson.instance.getItem("""${jenkinsJobPrefix}-Main-Build""")
+								println "Enabling ${mainBuildJob.name} now that we have made our SCM changes."
+								mainBuildJob.disabled = false
+								mainBuildJob.save()
+							</command>
+						</scriptSource>
+					</hudson.plugins.groovy.SystemGroovy>
+				]]>
+				</content>
+			</xml>
+
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>org.apache.maven.plugins:maven-dependency-plugin:2.6:get -N</targets>
+				<properties>
+				<![CDATA[
+					version=$RELEASE_VERSION
+					groupId=%%%project.groupId%%%
+					artifactId=%%%project.artifactId%%%
+					packaging=%%%project.packaging%%%
+					dest=release.pom
+					transitive=false
+				]]>
+				</properties>
+			</maven>
+
+			<groovy>
+				<groovyName>groovy-2.0.6</groovyName>
+				<command>
+				<![CDATA[
+					def pom = new XmlSlurper().parse(new File('release.pom'))
+					def conn = pom.scm.connection.text().find(~/scm:.*?:(.*?)$/) { match, url ->
+						return url
+					}
+					assert conn, 'Pom missing /project/scm/connection, cannot trigger jobs'
+					def tag = pom.scm?.tag.text() ?: 'HEAD'
+
+					def env = new File('release-environment.properties').newWriter()
+					env << "EP_CE_SCM_URL=${conn}\n"
+
+					/* If conn contains tag, use passed in SCM_REVISION. */
+					/* Override SCM_REVISION only if conn does not contain tag. */
+					if (! conn.contains(tag)) {
+						env << "EP_CE_SCM_RELEASE_TAG=${tag}\n"
+					}
+					env.close()
+				]]>
+				</command>
+			</groovy>
+			<xml>
+				<content>
+				<![CDATA[
+					<EnvInjectBuilder>
+						<info>
+							<propertiesFilePath>release-environment.properties</propertiesFilePath>
+							<propertiesContent>EP_CE_RELEASE_REPOSITORY_ID=${RELEASE_PREFIX}-ep-platform-release-$BUILD_NUMBER-$GIT_COMMIT
+EP_CE_SNAPSHOT_REPOSITORY_ID=${RELEASE_PREFIX}-ep-platform-examples-$BUILD_NUMBER-$GIT_COMMIT 
+EP_PLATFORM_SITE_URL=dav:https://buildrepo.elasticpath.net/epweb/pd/site/${RELEASE_PREFIX}-ep-platform-release-$BUILD_NUMBER-$GIT_COMMIT
+							</propertiesContent>
+						</info>
+					</EnvInjectBuilder>
+				]]>
+				</content>
+			</xml>
+		</tasks>
+
+		<!-- Do a fresh checkout for releases -->
+		<useUpdate>false</useUpdate>
+		<doRevert>false</doRevert>
+
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_VERSION</name>
+				<description>The version used for release (eg: 6.4.0.20120729).</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>DEVELOPMENT_VERSION</name>
+				<value>${ep.platform.version}</value>
+				<description>The version used for the next development iteration.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>USERNAME</name>
+				<description>SCM username to use (must have permission to tag + branch).</description>
+			</parameter>
+			<parameter>
+				<type>password</type>
+				<name>PASSWORD</name>
+				<description>SCM password to use.</description>
+			</parameter>
+			<parameters>
+				<type>string</type>
+				<name>SCM_REVISION</name>
+				<value>${scmRevision}</value>
+				<description>
+					A revision to release. This should always point to the tip of a particular branch/tag, not a revision which has others
+					after it.
+				</description>
+			</parameters>
+		</parameters>
+
+		<process>	  	
+			<![CDATA[	  	
+			  ${configureScmProcessGroovy}
+			  def wipeOutWorkspace = node.depthFirst().find { it instanceof Node && it.name() == 'wipeOutWorkspace' }	  	
+			  wipeOutWorkspace.setValue('true')
+			]]>              
+		</process>
+		<invoke>
+			<jobs>${jenkinsJobPrefix}-Main-Build</jobs>
+			<currentBuildParams>true</currentBuildParams>
+		</invoke>
+
+	</job>
+</jobs>

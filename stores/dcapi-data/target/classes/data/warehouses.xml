@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<warehouses>
+<warehouse code="MOBEE_Warehouse">
+    <name>MOBEE Warehouse</name>
+    <pick_delay>0</pick_delay>
+    <street1>8th Floor, 1045 Howe St.</street1>
+    <street2></street2>
+    <city>Vancouver</city>
+    <sub_country>BC</sub_country>
+    <zip_postal_code>V6Z 2A9</zip_postal_code>
+    <country>CA</country>
+</warehouse>
+
+<warehouse code="search_warehouse">
+    <name>SEARCH Warehouse</name>
+    <pick_delay>0</pick_delay>
+    <street1>6656 Still Creek Drive</street1>
+    <street2></street2>
+    <city>Burnaby</city>
+    <sub_country>BC</sub_country>
+    <zip_postal_code>V5J 0D3</zip_postal_code>
+    <country>CA</country>
+</warehouse>
+</warehouses>

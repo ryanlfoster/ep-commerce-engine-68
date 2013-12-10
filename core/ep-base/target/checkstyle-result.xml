@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-base/src/main/java/com/elasticpath/base/exception/EpServiceException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-base/src/main/java/com/elasticpath/base/exception/EpSystemException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-base/src/main/java/com/elasticpath/base/GloballyIdentifiable.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-base/src/main/java/com/elasticpath/base/Initializable.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-base/src/main/java/com/elasticpath/commons/util/extenum/AbstractExtensibleEnum.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-base/src/main/java/com/elasticpath/commons/util/extenum/ExtensibleEnum.java">
+</file>
+</checkstyle>

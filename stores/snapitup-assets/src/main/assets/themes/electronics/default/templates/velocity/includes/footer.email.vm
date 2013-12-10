@@ -1,0 +1,10 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## footer.email.vm
+<div style="margin-top:20px; border-top: 1px solid #999; background-image:url($storeUrl/template-resources/images/bg-breadcrumbs.gif); background-repeat:repeat-x top left; height:23px">
+&nbsp;
+</div>
+<div>
+<a href="$storeUrl" target="_blank"><img src="$storeUrl/template-resources/images/ft-ep-logo.gif" alt="$store.getName()" width="160" height="48" border="12" style="border-color:#FFFFFF"></a>
+</div>

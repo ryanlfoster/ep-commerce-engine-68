@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/AbstractEpCoreMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/BulkSetSettingMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/IndexBuildStatusMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/PingSearchServerMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/RecompileRuleBaseMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/RequestReindexMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/SetCmUserPasswordMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/SetSettingMojo.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-core-tool/src/main/java/com/elasticpath/epcoretool/mojo/UnSetSettingMojo.java">
+</file>
+</checkstyle>

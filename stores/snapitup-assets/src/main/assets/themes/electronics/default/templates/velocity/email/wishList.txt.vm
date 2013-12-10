@@ -1,0 +1,26 @@
+#*
+* Copyright (c) Elastic Path Software Inc., 2006
+*#
+## wishList.txt.vm
+#emailInit()
+$dateTool.get('MMMM d, yyyy')#**#
+    
+$wishListMessage.getMessage()#**#
+
+-----------------------------------------------------------------------------#**#   
+#foreach($wishListItem in $wishListItems)
+#set($product = $wishListItem.productSku.product)
+#set ($productName = $product.getLocaleDependantFields($locale).getDisplayName())
+#parseProductSeoUrl($product $product.getDefaultCategory())
+$productName#**#
+$productSeoUrl#**#
+-----------------------------------------------------------------------------#**#
+#end
+
+$store.getName() #emailMessage("email.wishList.conf") $wishListMessage.getSenderName()#**#
+
+-------------------------------------#**#
+$store.getName()
+$store.getUrl()
+-------------------------------------#**#
+

@@ -1,0 +1,27 @@
+#emailInit()
+
+$dateTool.get('MMMM d, yyyy')
+                  #emailMessage("email.giftCert.email.message1") $!purchaseAmount #emailMessage("email.giftCert.email.message2")  #emailMessage("email.giftCert.email.snapItUp")
+                  #emailMessage("email.giftCert.email.message3") #emailMessage("email.giftCert.email.message4")
+                  #emailMessage("email.giftCert.email.message5")
+                  #emailMessage("email.giftCert.email.redeemAt") #emailMessage("email.giftCert.email.storeUrl")
+                  
+#emailMessage("email.giftCert.email.giftCertificate")#**#
+------------------------------------------------------#**#
+                  #emailMessage("email.giftCert.email.giftCertificateCode") $!giftCertCode
+                  #emailMessage("email.giftCert.email.amount") $!purchaseAmount
+                  #emailMessage("email.giftCert.email.to") #if($recipientName)$!recipientName #end $!recipientEmail
+                  #emailMessage("email.giftCert.email.from") #if($senderName)$!senderName #end $!senderEmail
+                  #if($message)#emailMessage("email.giftCert.email.message")$!message #end
+------------------------------------------------------#**# 
+                 
+                  #emailMessage("email.giftCert.email.message6")#**#
+                  
+                  1. #emailMessage("email.giftCert.email.message7") #emailMessage("email.giftCert.email.storeUrl")
+                  2. #emailMessage("email.giftCert.email.message8")
+                  3. #emailMessage("email.giftCert.email.message9")
+                  #emailMessage("email.giftCert.email.message10")
+                  #emailMessage("email.giftCert.email.message11")
+                  #emailMessage("email.giftCert.email.message12") #emailMessage("email.giftCert.email.phone")
+                  #emailMessage("email.giftCert.email.message13")
+                  #emailMessage("email.giftCert.email.message14")

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="initializableBeanPostProcessor" class="com.elasticpath.domain.impl.InitializableBeanPostProcessorImpl"/>
+
+	<bean id="productBundle" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductBundleImpl"/>
+	<bean id="bundleConstituent" scope="prototype" class="com.elasticpath.domain.catalog.impl.BundleConstituentImpl"/>
+	<bean id="bundleSelectionRule" scope="prototype" class="com.elasticpath.domain.catalog.impl.SelectionRuleImpl"/>
+	<bean id="tagCondition" scope="prototype" class="com.elasticpath.tags.domain.impl.ConditionalExpressionImpl"/>
+	<bean id="tagDefinition" scope="prototype" class="com.elasticpath.tags.domain.impl.TagDefinitionImpl"/>
+	<bean id="tagDictionary" scope="prototype" class="com.elasticpath.tags.domain.impl.TagDictionaryImpl"/>
+	<bean id="logicalOperator" scope="prototype" class="com.elasticpath.tags.domain.LogicalOperator"/>
+	<bean id="condition" scope="prototype" class="com.elasticpath.tags.domain.Condition"/>
+	<bean id="conditionalExpression" scope="prototype" class="com.elasticpath.tags.domain.impl.ConditionalExpressionImpl"/>
+	<bean id="tagSet" scope="prototype" class="com.elasticpath.tags.TagSet"/>
+	<bean id="tagOperator" scope="prototype" class="com.elasticpath.tags.domain.impl.TagOperatorImpl"/>
+	<bean id="tagValueType" scope="prototype" class="com.elasticpath.tags.domain.impl.TagValueTypeImpl"/>
+	<bean id="tagAllowedValue" scope="prototype" class="com.elasticpath.tags.domain.impl.TagAllowedValueImpl"/>
+	<bean id="tagGroup" scope="prototype" class="com.elasticpath.tags.domain.impl.TagGroupImpl"/>
+	<bean id="sellingContext" scope="prototype" class="com.elasticpath.domain.sellingcontext.impl.SellingContextImpl"/>
+	<bean id="dynamicContent" scope="prototype" class="com.elasticpath.domain.contentspace.impl.DynamicContentImpl"/>
+	<bean id="dynamicContentDelivery" scope="prototype" class="com.elasticpath.domain.targetedselling.impl.DynamicContentDeliveryImpl"/>
+	<bean id="contentspace" scope="prototype" class="com.elasticpath.domain.contentspace.impl.ContentSpaceImpl"/>
+	<bean id="dynamicContentParameterValue" scope="prototype" class="com.elasticpath.domain.contentspace.impl.ParameterValueImpl"/>
+	<bean id="dynamicContentTemplateParameter" scope="prototype" class="com.elasticpath.domain.contentspace.impl.TemplateParameterImpl"/>
+	<bean id="dynamicContentUserInputParameter"
+			scope="prototype" class="com.elasticpath.domain.contentspace.impl.UserInputParameterImpl"/>
+	<bean id="dynamicContentParameterLocaleDependantValue"
+			scope="prototype" class="com.elasticpath.domain.contentspace.impl.ParameterLocaleDependantValueImpl"/>
+	<bean id="giftCertificate" scope="prototype" class="com.elasticpath.domain.catalog.impl.GiftCertificateImpl"/>
+	<bean id="giftCertificateTransaction" scope="prototype" class="com.elasticpath.domain.payment.impl.GiftCertificateTransactionImpl"/>
+	<bean id="topSeller" scope="prototype" class="com.elasticpath.domain.catalog.impl.TopSellerImpl"/>
+	<bean id="topSellerProduct" scope="prototype" class="com.elasticpath.domain.catalog.impl.TopSellerProductImpl"/>
+	<bean id="customer" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerImpl"/>
+	<bean id="customerAuthentication" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerAuthenticationImpl"/>
+	<bean id="customerDeleted" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerDeletedImpl"/>
+	<bean id="customerSession" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerSessionImpl"/>
+	<bean id="customerSessionMemento" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerSessionMementoImpl"/>
+	<bean id="customerGroup" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerGroupImpl"/>
+	<bean id="customerAddress" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerAddressImpl"/>
+	<bean id="customerCreditCard" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerCreditCardImpl"/>
+	<bean id="abstractCategory" scope="prototype" class="com.elasticpath.domain.catalog.impl.AbstractCategoryImpl"/>
+	<bean id="category" scope="prototype" class="com.elasticpath.domain.catalog.impl.CategoryImpl"/>
+	<bean id="linkedCategory" scope="prototype" class="com.elasticpath.domain.catalog.impl.LinkedCategoryImpl"/>
+	<bean id="categoryDeleted" scope="prototype" class="com.elasticpath.domain.catalog.impl.CategoryDeletedImpl"/>
+	<bean id="product" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductImpl"/>
+	<bean id="productDeleted" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductDeletedImpl"/>
+	<bean id="productSku" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductSkuImpl"/>
+	<bean id="productType" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductTypeImpl"/>
+	<bean id="attributeGroupAttribute" scope="prototype" class="com.elasticpath.domain.attribute.impl.AttributeGroupAttributeImpl"/>
+	<bean id="attributeGroup" scope="prototype" class="com.elasticpath.domain.attribute.impl.AttributeGroupImpl"/>
+	<bean id="attribute" scope="prototype" class="com.elasticpath.domain.attribute.impl.AttributeImpl"/>
+	<bean id="Price" scope="prototype" class="com.elasticpath.domain.catalog.impl.PriceImpl"/>
+	<bean id="priceListAssignment" scope="prototype" class="com.elasticpath.domain.pricing.impl.PriceListAssignmentImpl"/>
+	<bean id="priceListStack" scope="prototype" class="com.elasticpath.domain.pricing.impl.PriceListStackImpl"/>
+	<bean id="priceListDescriptor" scope="prototype" class="com.elasticpath.domain.pricing.impl.PriceListDescriptorImpl"/>
+	<bean id="baseAmountFilter" scope="prototype" class="com.elasticpath.common.pricing.service.impl.BaseAmountFilterImpl"/>
+	<bean id="baseAmountFilterExt" scope="prototype" class="com.elasticpath.common.pricing.service.impl.BaseAmountFilterExtImpl"/>
+	<bean id="priceAdjustment" scope="prototype" class="com.elasticpath.domain.pricing.impl.PriceAdjustmentImpl"/>
+	<bean id="moneyFormatter" scope="prototype" class="com.elasticpath.domain.misc.impl.StandardMoneyFormatter"/>
+	<bean id="taxCalculationResult" scope="prototype" class="com.elasticpath.service.tax.impl.TaxCalculationResultImpl"/>
+	<bean id="attributeValue" scope="prototype" class="com.elasticpath.domain.attribute.impl.TransientAttributeValueImpl"/>
+	<bean id="customerProfile" scope="prototype" class="com.elasticpath.domain.customer.impl.CustomerProfileImpl"/>
+	<bean id="ruleSet" scope="prototype" class="com.elasticpath.domain.rules.impl.RuleSetImpl"/>
+	<bean id="shoppingCart" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ShoppingCartImpl"/>
+	<bean id="shoppingCartMemento" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ShoppingCartMementoImpl"/>
+	<bean id="shoppingItem" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ShoppingItemImpl"/>
+	<bean id="wishListMessage" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.WishListMessageImpl"/>
+	<bean id="orderPayment" scope="prototype" class="com.elasticpath.domain.order.impl.OrderPaymentImpl"/>
+	<bean id="abstractOrderShipment" scope="prototype" class="com.elasticpath.domain.order.impl.AbstractOrderShipmentImpl"/>
+	<bean id="physicalOrderShipment" scope="prototype" class="com.elasticpath.domain.order.impl.PhysicalOrderShipmentImpl"/>
+	<bean id="electronicOrderShipment" scope="prototype" class="com.elasticpath.domain.order.impl.ElectronicOrderShipmentImpl"/>
+	<bean id="orderSku" scope="prototype" class="com.elasticpath.domain.order.impl.OrderSkuImpl"/>
+	<bean id="order" scope="prototype" class="com.elasticpath.domain.order.impl.OrderImpl"/>
+	<bean id="orderLock" scope="prototype" class="com.elasticpath.domain.order.impl.OrderLockImpl"/>
+	<bean id="orderAddress" scope="prototype" class="com.elasticpath.domain.order.impl.OrderAddressImpl"/>
+	<bean id="orderTaxValue" scope="prototype" class="com.elasticpath.domain.order.impl.OrderTaxValueImpl"/>
+	<bean id="orderEvent" scope="prototype" class="com.elasticpath.domain.order.impl.OrderEventImpl"/>
+	<bean id="orderReturn" scope="prototype" class="com.elasticpath.domain.order.impl.OrderReturnImpl"/>
+	<bean id="orderReturnSku" scope="prototype" class="com.elasticpath.domain.order.impl.OrderReturnSkuImpl"/>
+	<bean id="inventory" scope="prototype" class="com.elasticpath.inventory.domain.impl.InventoryImpl"/>
+	<bean id="inventoryDto" scope="prototype" class="com.elasticpath.inventory.impl.InventoryDtoImpl"/>
+	<bean id="inventoryAudit" scope="prototype" class="com.elasticpath.domain.catalog.impl.InventoryAuditImpl"/>
+	<bean id="inventoryExecutionResult" scope="prototype" class="com.elasticpath.inventory.impl.InventoryExecutionResultImpl"/>
+	<bean id="inventoryJournal" scope="prototype" class="com.elasticpath.inventory.domain.impl.InventoryJournalImpl"/>
+	<bean id="inventoryJournalLock" scope="prototype" class="com.elasticpath.inventory.domain.impl.InventoryJournalLockImpl"/>
+	<bean id="skuOption" scope="prototype" class="com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl"/>
+	<bean id="skuOptionValue" scope="prototype" class="com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl"/>
+	<bean id="jpaAdaptorSkuOptionValue"
+			scope="prototype" class="com.elasticpath.domain.skuconfiguration.impl.JpaAdaptorOfSkuOptionValueImpl"/>
+	<bean id="ruleParameter" scope="prototype" class="com.elasticpath.domain.rules.impl.RuleParameterImpl"/>
+	<bean id="promotionRule" scope="prototype" class="com.elasticpath.domain.rules.impl.PromotionRuleImpl"/>
+	<bean id="scenarios" scope="prototype" class="com.elasticpath.domain.rules.impl.RuleScenariosImpl"/>
+	<bean id="productCategoryCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.ProductCategoryConditionImpl"/>
+	<bean id="productCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.ProductConditionImpl"/>
+	<bean id="brandCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.BrandConditionImpl"/>
+	<bean id="cartCurrencyCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.CartCurrencyConditionImpl"/>
+	<bean id="limitedUsagePromotionCondition"
+			scope="prototype" class="com.elasticpath.domain.rules.impl.LimitedUsagePromotionConditionImpl"/>
+	<bean id="limitedUseCouponCodeCondition"
+			scope="prototype" class="com.elasticpath.domain.rules.impl.LimitedUseCouponCodeConditionImpl"/>
+	<bean id="coupon" scope="prototype" class="com.elasticpath.domain.rules.impl.CouponImpl"/>
+	<bean id="couponUsage" scope="prototype" class="com.elasticpath.domain.rules.impl.CouponUsageImpl"/>
+	<bean id="couponConfig" scope="prototype" class="com.elasticpath.domain.rules.impl.CouponConfigImpl"/>
+	<bean id="couponAssignmentAction" scope="prototype" class="com.elasticpath.domain.rules.impl.CouponAssignmentActionImpl"/>
+
+	<bean id="cartContainsItemsOfCategoryCondition"
+			scope="prototype" class="com.elasticpath.domain.rules.impl.CartContainsItemsOfCategoryConditionImpl"/>
+	<bean id="cartSubtotalCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.CartSubtotalConditionImpl"/>
+	<bean id="productInCartCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.ProductInCartConditionImpl"/>
+	<bean id="skuInCartCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.SkuInCartConditionImpl"/>
+	<bean id="anySkuInCartCondition" scope="prototype" class="com.elasticpath.domain.rules.impl.AnySkuInCartConditionImpl"/>
+	<bean id="totallingApplier" scope="prototype" class="com.elasticpath.domain.discounts.impl.LimitedTotallingApplierImpl"/>
+	<bean id="shoppingCartDiscountItemContainer"
+			scope="prototype" class="com.elasticpath.domain.discounts.impl.ShoppingCartDiscountItemContainerImpl"/>
+	<bean id="skuException" scope="prototype" class="com.elasticpath.domain.rules.impl.SkuExceptionImpl"/>
+	<bean id="productException" scope="prototype" class="com.elasticpath.domain.rules.impl.ProductExceptionImpl"/>
+	<bean id="categoryException" scope="prototype" class="com.elasticpath.domain.rules.impl.CategoryExceptionImpl"/>
+	<bean id="categoryType" scope="prototype" class="com.elasticpath.domain.catalog.impl.CategoryTypeImpl"/>
+	<bean id="localizedProperties" scope="prototype" class="com.elasticpath.domain.misc.impl.LocalizedPropertiesImpl"/>
+	<bean id="brand" scope="prototype" class="com.elasticpath.domain.catalog.impl.BrandImpl"/>
+
+	<bean id="shippingRegion" scope="prototype" class="com.elasticpath.domain.shipping.impl.ShippingRegionImpl"/>
+	<bean id="shippingServiceLevel" scope="prototype" class="com.elasticpath.domain.shipping.impl.ShippingServiceLevelImpl"/>
+	<bean id="fixedPriceMethod" scope="prototype" class="com.elasticpath.domain.shipping.impl.FixedPriceMethodImpl"/>
+	<bean id="orderTotalPercentageMethod" scope="prototype" class="com.elasticpath.domain.shipping.impl.OrderTotalPercentageMethodImpl"/>
+	<bean id="fixedBaseAndOrderTotalPercentageMethod"
+			scope="prototype" class="com.elasticpath.domain.shipping.impl.FixedBaseAndOrderTotalPercentageMethodImpl"/>
+	<bean id="costPerUnitWeightMethod" scope="prototype" class="com.elasticpath.domain.shipping.impl.CostPerUnitWeightMethodImpl"/>
+	<bean id="fixedBaseAndCostPerUnitWeightMethod"
+			scope="prototype" class="com.elasticpath.domain.shipping.impl.FixedBaseAndCostPerUnitWeightMethodImpl"/>
+	<bean id="shippingCostCalculationParameter"
+			scope="prototype" class="com.elasticpath.domain.shipping.impl.ShippingCostCalculationParameterImpl"/>
+	<bean id="region" scope="prototype" class="com.elasticpath.domain.shipping.impl.RegionImpl"/>
+	<bean id="searchRequest" scope="prototype" class="com.elasticpath.domain.catalogview.search.impl.SearchRequestImpl"/>
+	<bean id="searchResult" scope="prototype" class="com.elasticpath.domain.catalogview.search.impl.SearchResultImpl"/>
+	<bean id="browsingRequest" scope="prototype" class="com.elasticpath.domain.catalogview.browsing.impl.BrowsingRequestImpl"/>
+	<bean id="browsingResult" scope="prototype" class="com.elasticpath.domain.catalogview.browsing.impl.BrowsingResultImpl"/>
+	<bean id="sitemapRequest" scope="prototype" class="com.elasticpath.domain.catalogview.sitemap.impl.SitemapRequestImpl"/>
+	<bean id="sitemapResult" scope="prototype" class="com.elasticpath.domain.catalogview.sitemap.impl.SitemapResultImpl"/>
+	<bean id="catalogViewResultHistory" scope="prototype" class="com.elasticpath.domain.catalogview.impl.CatalogViewResultHistoryImpl"/>
+	<bean id="categoryFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.CategoryFilterImpl"/>
+	<bean id="attributeFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.AttributeValueFilterImpl"/>
+	<bean id="attributeRangeFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.AttributeRangeFilterImpl"/>
+	<bean id="priceFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.PriceFilterImpl"/>
+	<bean id="brandFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.BrandFilterImpl"/>
+	<bean id="featuredProductFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.FeaturedProductFilterImpl"/>
+	<bean id="displayableFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.DisplayableFilterImpl"/>
+	<bean id="advancedSearchFilteredNavSeparatorFilter"
+			scope="prototype" class="com.elasticpath.domain.catalogview.impl.AdvancedSearchFilteredNavSeparatorFilterImpl"/>
+	<bean id="filterOption" scope="prototype" class="com.elasticpath.domain.catalogview.impl.FilterOptionImpl"/>
+	<bean id="productAssociation" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductAssociationImpl"/>
+	<bean id="productTypeLoadTuner" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"/>
+	<bean id="productSkuLoadTuner" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"/>
+	<bean id="productLoadTuner" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductLoadTunerImpl"/>
+	<bean id="categoryLoadTuner" scope="prototype" class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl"/>
+	<bean id="categoryTypeLoadTuner" scope="prototype" class="com.elasticpath.domain.catalog.impl.CategoryTypeLoadTunerImpl"/>
+	<bean id="taxCategory" scope="prototype" class="com.elasticpath.domain.tax.impl.TaxCategoryImpl"/>
+	<bean id="taxCode" scope="prototype" class="com.elasticpath.domain.tax.impl.TaxCodeImpl"/>
+	<bean id="taxJurisdiction" scope="prototype" class="com.elasticpath.domain.tax.impl.TaxJurisdictionImpl"/>
+	<bean id="taxRegion" scope="prototype" class="com.elasticpath.domain.tax.impl.TaxRegionImpl"/>
+	<bean id="cmUser" scope="prototype" class="com.elasticpath.domain.cmuser.impl.CmUserImpl"/>
+	<bean id="userPasswordHistoryItem" scope="prototype" class="com.elasticpath.domain.cmuser.impl.UserPasswordHistoryItemImpl"/>
+	<bean id="cmUserSession" scope="prototype" class="com.elasticpath.domain.cmuser.impl.CmUserSessionImpl"/>
+	<bean id="importJob" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportJobImpl"/>
+	<bean id="importDataTypeBaseAmount"
+			scope="prototype" class="com.elasticpath.domain.pricing.csvimport.impl.ImportDataTypeBaseAmountImpl"/>
+	<bean id="importDataTypeProduct" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeProductImpl"/>
+	<bean id="importDataTypeCategory" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeCategoryImpl"/>
+	<bean id="importDataTypeProductSku" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeProductSkuImpl"/>
+	<bean id="importDataTypeInventory" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeInventoryImpl"/>
+	<bean id="importDataTypeProductCategoryAssociation"
+			scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeProductCategoryAssociationImpl"/>
+	<bean id="importDataTypeProductAssociation"
+			scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeProductAssociationImpl"/>
+	<bean id="importDataTypeCustomer" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeCustomerImpl"/>
+	<bean id="importDataTypeCustomerAddress"
+			scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportDataTypeCustomerAddressImpl"/>
+	<bean id="importBadRow" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportBadRowImpl"/>
+	<bean id="importFault" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportFaultImpl"/>
+	<bean id="userRole" scope="prototype" class="com.elasticpath.domain.cmuser.impl.UserRoleImpl"/>
+	<bean id="userPermission" scope="prototype" class="com.elasticpath.domain.cmuser.impl.UserPermissionImpl"/>
+	<bean id="randomGuid" scope="prototype" class="com.elasticpath.domain.misc.impl.RandomGuidImpl"/>
+	<bean id="displayNameComparator" scope="prototype" class="com.elasticpath.domain.misc.impl.DisplayNameComparatorImpl"/>
+	<bean id="topSellerComparator" scope="prototype" class="com.elasticpath.domain.misc.impl.TopSellerComparatorImpl"/>
+	<bean id="filterBucketComparator" scope="prototype" class="com.elasticpath.domain.misc.impl.FilterBucketComparatorImpl"/>
+	<bean id="filterOptionComparetoComparator"
+			scope="prototype" class="com.elasticpath.domain.catalogview.impl.FilterOptionCompareToComparatorImpl"/>
+	<bean id="regionCodeComparator" scope="prototype" class="com.elasticpath.domain.misc.impl.RegionCodeComparatorImpl"/>
+	<bean id="imageRenderResponse" scope="prototype" class="com.elasticpath.domain.misc.impl.ImageRenderResponseImpl"/>
+	<bean id="imageRenderRequest" scope="prototype" class="com.elasticpath.domain.misc.impl.ImageRenderRequestImpl"/>
+	<bean id="digitalAsset" scope="prototype" class="com.elasticpath.domain.catalog.impl.DigitalAssetImpl"/>
+	<bean id="digitalAssetAudit" scope="prototype" class="com.elasticpath.domain.catalog.impl.DigitalAssetAuditImpl"/>
+	<bean id="viewHistory" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ViewHistoryImpl"/>
+	<bean id="appliedRule" scope="prototype" class="com.elasticpath.domain.rules.impl.AppliedRuleImpl"/>
+	<bean id="appliedCoupon" scope="prototype" class="com.elasticpath.domain.rules.impl.AppliedCouponImpl"/>
+	<bean id="productSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.ProductSearchCriteria"/>
+	<bean id="categorySearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.CategorySearchCriteria"/>
+	<bean id="customerSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.CustomerSearchCriteria"/>
+	<bean id="orderSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.OrderSearchCriteria"/>
+	<bean id="orderReturnSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.OrderReturnSearchCriteria"/>
+	<bean id="promotionSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.PromotionSearchCriteria"/>
+	<bean id="userSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.UserSearchCriteria"/>
+	<bean id="keywordSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.KeywordSearchCriteria"/>
+	<bean id="filteredSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.FilteredSearchCriteria"/>
+	<bean id="luceneRawSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.LuceneRawSearchCriteria"/>
+	<bean id="productAutocompleteSearchCriteria"
+			scope="prototype" class="com.elasticpath.service.search.query.ProductAutocompleteSearchCriteria"/>
+	<bean id="customerProfileValue" scope="prototype" class="com.elasticpath.domain.attribute.impl.CustomerProfileValueImpl"/>
+
+	<bean id="PriceTier" scope="prototype" class="com.elasticpath.domain.catalog.impl.PriceTierImpl"/>
+	<bean id="taxValue" scope="prototype" class="com.elasticpath.domain.tax.impl.TaxValueImpl"/>
+	<bean id="productTypeProductAttribute"
+			scope="prototype" class="com.elasticpath.domain.attribute.impl.ProductTypeProductAttributeImpl"/>
+	<bean id="productTypeSkuAttribute" scope="prototype" class="com.elasticpath.domain.attribute.impl.ProductTypeSkuAttributeImpl"/>
+	<bean id="categoryTypeAttribute" scope="prototype" class="com.elasticpath.domain.attribute.impl.CategoryTypeAttributeImpl"/>
+	<bean id="sfSearchLog" scope="prototype" class="com.elasticpath.domain.search.impl.SfSearchLogImpl"/>
+
+	<bean id="warehouse" scope="prototype" class="com.elasticpath.domain.store.impl.WarehouseImpl"/>
+	<bean id="warehouseAddress" scope="prototype" class="com.elasticpath.domain.store.impl.WarehouseAddressImpl"/>
+	<bean id="store" scope="prototype" class="com.elasticpath.domain.store.impl.StoreImpl"/>
+	<bean id="creditCardType" scope="prototype" class="com.elasticpath.domain.store.impl.CreditCardTypeImpl"/>
+	<bean id="abstractPaymentGateway" scope="prototype" class="com.elasticpath.domain.payment.impl.PaymentGatewayImpl"/>
+	<bean id="paymentGatewayProperty" scope="prototype" class="com.elasticpath.domain.payment.impl.PaymentGatewayPropertyImpl"/>
+
+	<bean id="catalog" scope="prototype" class="com.elasticpath.domain.catalog.impl.CatalogImpl"/>
+	<bean id="catalogLocale" scope="prototype" class="com.elasticpath.domain.catalog.impl.CatalogLocaleImpl"/>
+	<bean id="searchConfig" scope="prototype" class="com.elasticpath.domain.misc.impl.SearchConfigImpl"/>
+	<bean id="emailProperties" scope="prototype" class="com.elasticpath.domain.misc.impl.EmailPropertiesImpl"/>
+	<bean id="checkoutResults" scope="prototype" class="com.elasticpath.domain.misc.impl.CheckoutResultsImpl"/>
+	<bean id="eventOriginator" scope="prototype" class="com.elasticpath.domain.event.impl.EventOriginatorImpl"/>
+	<bean id="payerAuthenticationEnrollmentResult"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.PayerAuthenticationEnrollmentResultImpl"/>
+	<bean id="payerAuthValidationValue" scope="prototype" class="com.elasticpath.domain.misc.impl.PayerAuthValidationValueImpl"/>
+	<bean id="synonymGroup" scope="prototype" class="com.elasticpath.domain.search.impl.SynonymGroupImpl"/>
+	<bean id="synonym" scope="prototype" class="com.elasticpath.domain.search.impl.SynonymImpl"/>
+	<bean id="paymentResult" scope="prototype" class="com.elasticpath.service.payment.impl.PaymentResultImpl"/>
+	<bean id="paymentHandlerCreditCard" scope="prototype" class="com.elasticpath.domain.payment.impl.CreditCardPaymentHandler"/>
+	<bean id="paymentHandlerToken" scope="prototype" class="com.elasticpath.domain.payment.impl.TokenPaymentHandler"/>
+	<bean id="paymentHandlerGoogleCheckout" scope="prototype" class="com.elasticpath.domain.payment.impl.GooglePaymentHandler"/>
+	<bean id="paymentHandlerPayPal" scope="prototype" class="com.elasticpath.domain.payment.impl.PayPalExpressPaymentHandler"/>
+	<bean id="paymentHandlerReturnAndExchange" scope="prototype" class="com.elasticpath.domain.payment.impl.ExchangePaymentHandler"/>
+	<bean id="paymentHandlerGiftCertificate" scope="prototype" class="com.elasticpath.domain.payment.impl.GiftCertificatePaymentHandler"/>
+	<bean id="orderingComparator" scope="prototype" class="com.elasticpath.domain.misc.impl.OrderingComparatorImpl"/>
+	<bean id="currencyCodeComparator" scope="prototype" class="com.elasticpath.domain.misc.impl.CurrencyCodeComparatorImpl"/>
+	<bean id="couponUsageByCouponCodeComparator"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.CouponUsageByCouponCodeComparatorImpl"/>
+	<bean id="fetchGroupLoadTuner" scope="prototype" class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl"/>
+	<bean id="emailPropertyHelperCmUser" scope="prototype" class="com.elasticpath.domain.misc.impl.CmUserEmailPropertyHelperImpl"/>
+	<bean id="emailPropertyHelperCustomer" scope="prototype" class="com.elasticpath.domain.misc.impl.CustomerEmailPropertyHelperImpl"/>
+	<bean id="emailPropertyHelperGiftCertificate"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.GiftCertificateEmailPropertyHelperImpl">
+		<property name="moneyFormatter" ref="moneyFormatter"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+	<bean id="emailPropertyHelperImport" scope="prototype" class="com.elasticpath.domain.misc.impl.ImportEmailPropertyHelperImpl"/>
+	<bean id="indexNotification" scope="prototype" class="com.elasticpath.domain.search.impl.IndexNotificationImpl"/>
+	<bean id="indexBuildStatus" scope="prototype" class="com.elasticpath.domain.search.impl.IndexBuildStatusImpl"/>
+	<bean id="allocationResult" scope="prototype" class="com.elasticpath.domain.order.impl.AllocationResultImpl"/>
+	<bean id="mailerBean" scope="prototype" class="com.elasticpath.commons.util.impl.MailMessageImpl"/>
+	<bean id="abstractRuleElement" scope="prototype" class="com.elasticpath.domain.rules.impl.AbstractRuleElementImpl"/>
+	<bean id="epRuleBase" scope="prototype" class="com.elasticpath.domain.rules.impl.EpRuleBaseImpl"/>
+	<bean id="settingDefinition" scope="prototype" class="com.elasticpath.settings.domain.impl.SettingDefinitionImpl"/>
+	<bean id="settingMetadata" scope="prototype" class="com.elasticpath.settings.domain.impl.SettingMetadataImpl"/>
+	<bean id="advancedSearchQuery" scope="prototype" class="com.elasticpath.domain.advancedsearch.impl.AdvancedSearchQueryImpl"/>
+	<bean id="filteredNavigationConfiguration"
+			scope="prototype" class="com.elasticpath.service.catalogview.filterednavigation.impl.FilteredNavigationConfigurationImpl"/>
+	<bean id="fileSystemManager" scope="prototype" class="com.elasticpath.commons.util.impl.VfsFileSystemManagerImpl"/>
+	<bean id="updateStoreCommand" scope="prototype" class="com.elasticpath.service.command.impl.UpdateStoreCommandImpl"/>
+	<bean id="updateStoreCommandResult" scope="prototype" class="com.elasticpath.service.command.impl.UpdateStoreCommandResultImpl"/>
+	<bean id="viewHistoryProduct" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ViewHistoryProductImpl"/>
+	<bean id="connectionInfo" scope="prototype" class="com.elasticpath.domain.impl.FileSystemConnectionInfoImpl"/>
+	<bean id="contentWrapper" scope="prototype" class="com.elasticpath.domain.contentspace.impl.ContentWrapperImpl"/>
+	<bean id="brandLocalizedPropertyValue" scope="prototype" class="com.elasticpath.domain.misc.impl.BrandLocalizedPropertyValueImpl"/>
+	<bean id="shippingServiceLevelLocalizedPropertyValue"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.ShippingServiceLevelLocalizedPropertyValueImpl"/>
+	<bean id="skuOptionLocalizedPropertyValue"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.SkuOptionLocalizedPropertyValueImpl"/>
+	<bean id="skuOptionValueLocalizedPropertyValue"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.SkuOptionValueLocalizedPropertyValueImpl"/>
+	<bean id="taxCategoryLocalizedPropertyValue"
+			scope="prototype" class="com.elasticpath.domain.misc.impl.TaxCategoryLocalizedPropertyValueImpl"/>
+	<bean id="csvReadResult" scope="prototype" class="com.elasticpath.csvimport.impl.CsvReadResultImpl"/>
+	<bean id="csvReaderConfiguration" scope="prototype" class="com.elasticpath.csvimport.impl.CsvReaderConfigurationImpl"/>
+	<bean id="shippingServiceLevelSearchCriteria"
+			scope="prototype" class="com.elasticpath.service.search.query.ShippingServiceLevelSearchCriteria"/>
+	<bean id="importValidRow" scope="prototype" class="com.elasticpath.csvimport.impl.ImportValidRowImpl"/>
+	<bean id="changeSet" scope="prototype" class="com.elasticpath.domain.changeset.impl.ChangeSetImpl"/>
+	<bean id="businessObjectGroupMember" scope="prototype" class="com.elasticpath.domain.objectgroup.impl.BusinessObjectGroupMemberImpl"/>
+	<bean id="businessObjectDescriptor" scope="prototype" class="com.elasticpath.domain.objectgroup.impl.BusinessObjectDescriptorImpl"/>
+	<bean id="changeSetObjectStatus" scope="prototype" class="com.elasticpath.domain.changeset.impl.ChangeSetObjectStatusImpl"/>
+	<bean id="businessObjectMetadata" scope="prototype" class="com.elasticpath.domain.objectgroup.impl.BusinessObjectMetadataImpl"/>
+	<bean id="changeSetMember" scope="prototype" class="com.elasticpath.domain.changeset.impl.ChangeSetMemberImpl"/>
+	<bean id="changeSetLoadTuner" scope="prototype" class="com.elasticpath.service.changeset.impl.ChangeSetLoadTunerImpl"/>
+	<bean id="changeTransaction" scope="prototype" class="com.elasticpath.domain.audit.impl.ChangeTransactionImpl"/>
+	<bean id="singleChangeOperation" scope="prototype" class="com.elasticpath.domain.audit.impl.SingleChangeOperationImpl"/>
+	<bean id="bulkChangeOperation" scope="prototype" class="com.elasticpath.domain.audit.impl.BulkChangeOperationImpl"/>
+	<bean id="dataChanged" scope="prototype" class="com.elasticpath.domain.audit.impl.DataChangedImpl"/>
+	<bean id="changeTransactionMetadata" scope="prototype" class="com.elasticpath.domain.audit.impl.ChangeTransactionMetadataImpl"/>
+	<bean id="paginationConfig" scope="prototype" class="com.elasticpath.commons.pagination.impl.PaginationConfigImpl"/>
+	<bean id="importNotification" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportNotificationImpl"/>
+	<bean id="importJobStatus" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportJobStatusImpl"/>
+	<bean id="importJobRequest" scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportJobRequestImpl"/>
+	<bean id="importNotificationMetadata"
+			scope="prototype" class="com.elasticpath.domain.dataimport.impl.ImportNotificationMetadataImpl"/>
+	<bean id="inventoryDetails" scope="prototype" class="com.elasticpath.common.dto.InventoryDetails"/>
+	<bean id="ruleLocalizedPropertyValue" scope="prototype" class="com.elasticpath.domain.rules.impl.RuleLocalizedPropertyValueImpl"/>
+	<bean id="importDataTypeCouponCode"
+			scope="prototype" class="com.elasticpath.domain.rules.csvimport.impl.ImportDataTypeCouponCodeImpl"/>
+	<bean id="importDataTypeCouponCodeAndEmail"
+			scope="prototype" class="com.elasticpath.domain.rules.csvimport.impl.ImportDataTypeCouponCodeEmailImpl"/>
+	<bean id="skuSearchCriteria" scope="prototype" class="com.elasticpath.service.search.query.SkuSearchCriteria"/>
+	<bean id="wishList" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.WishListImpl"/>
+	<bean id="shopper" scope="prototype" class="com.elasticpath.domain.shopper.impl.ShopperImpl"/>
+	<bean id="shopperMemento" scope="prototype" class="com.elasticpath.domain.shopper.impl.ShopperMementoImpl"/>
+	<bean id="skuOptionValueFilter" scope="prototype" class="com.elasticpath.domain.catalogview.impl.SkuOptionValueFilterImpl"/>
+	<bean id="advancedSearchRequest" scope="prototype" class="com.elasticpath.domain.catalogview.search.impl.AdvancedSearchRequestImpl"/>
+	<bean id="productConstituent" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductConstituentImpl"/>
+	<bean id="productSkuConstituent" scope="prototype" class="com.elasticpath.domain.catalog.impl.ProductSkuConstituentImpl"/>
+	<bean id="paymentSchedule" scope="prototype" class="com.elasticpath.domain.subscriptions.impl.PaymentScheduleImpl"/>
+	<bean id="priceSchedule" scope="prototype" class="com.elasticpath.domain.catalog.impl.PriceScheduleImpl"/>
+	<bean id="pricingScheme" scope="prototype" class="com.elasticpath.domain.catalog.impl.PricingSchemeImpl"/>
+	<bean id="shoppingItemRecurringPrice"
+			scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ShoppingItemRecurringPriceImpl"/>
+	<bean id="shoppingItemSimplePrice" scope="prototype" class="com.elasticpath.domain.shoppingcart.impl.ShoppingItemSimplePrice"/>
+	<bean id="serviceOrderShipment" scope="prototype" class="com.elasticpath.domain.order.impl.ServiceOrderShipmentImpl"/>
+	<bean id="oAuth2AccessTokenMemento" scope="prototype" class="com.elasticpath.domain.auth.impl.OAuth2AccessTokenMementoImpl"/>
+	<bean id="cartOrder" scope="prototype" class="com.elasticpath.domain.cartorder.impl.CartOrderImpl"/>
+	<bean id="itemConfigurationMemento" scope="prototype" class="com.elasticpath.domain.catalog.impl.ItemConfigurationMementoImpl"/>
+	<bean id="searchTermsMemento" scope="prototype" class="com.elasticpath.domain.search.query.impl.SearchTermsMementoImpl"/>
+	<bean id="searchTerms" scope="prototype" class="com.elasticpath.domain.search.query.impl.SearchTermsImpl"/>
+	<bean id="searchTermsActivity" scope="prototype" class="com.elasticpath.domain.search.query.impl.SearchTermsActivityImpl"/>
+	<bean id="imageMap" scope="prototype" class="com.elasticpath.domain.asset.impl.ImageMapImpl"/>
+	<bean id="imageMapWithAbsolutePath" scope="prototype" class="com.elasticpath.domain.asset.impl.ImageMapWithAbsolutePathImpl"/>
+</beans>

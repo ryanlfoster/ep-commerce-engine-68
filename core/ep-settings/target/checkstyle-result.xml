@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/beanframework/SettingFactoryBean.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/dao/impl/SettingsDaoImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/dao/SettingsDao.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/domain/impl/SettingDefinitionImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/domain/impl/SettingMetadataImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/domain/impl/SettingValueImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/domain/SettingDefinition.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/domain/SettingMetadata.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/domain/SettingValue.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/impl/CachedSettingsReaderImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/impl/SettingsServiceImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/impl/SettingValueFactoryWithDefinitionImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/refreshstrategy/impl/ApplicationLifetimeRefreshStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/refreshstrategy/impl/ImmediateRefreshStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/refreshstrategy/impl/IntervalRefreshStrategyImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/refreshstrategy/SettingRefreshStrategy.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/SettingMaxOverrideException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/SettingsReader.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/SettingsService.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/main/java/com/elasticpath/settings/SettingValueFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/beanframework/SettingFactoryBeanTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/dao/impl/SettingsDaoImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/domain/impl/SettingDefinitionImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/domain/impl/SettingMetadataImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/domain/impl/SettingValueImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/impl/CachedSettingsReaderImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-settings/src/test/java/com/elasticpath/settings/impl/SettingsServiceImplTest.java">
+</file>
+</checkstyle>

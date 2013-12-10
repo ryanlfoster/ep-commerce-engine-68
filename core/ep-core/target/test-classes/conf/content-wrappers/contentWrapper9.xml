@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<content-wrapper> 
+	<template-name>simpleHtml.cwt</template-name>
+	<wrapper-id>20090318</wrapper-id>
+	<wrapper-name>Simple html</wrapper-name>
+
+	<template-parameters>
+		<template-parameter name="html" type="HTML" localizable="true"/>
+	</template-parameters>
+	
+</content-wrapper>

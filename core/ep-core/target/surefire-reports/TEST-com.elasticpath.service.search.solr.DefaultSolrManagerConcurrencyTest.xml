@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="13.797" errors="0" skipped="0" tests="202" name="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest">
+  <properties>
+    <property name="sun.lang.ClassLoader.allowArraySyntax" value="true"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="23.25-b01"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/ugomech/Documents/Commerce-Engine/platform"/>
+    <property name="java.runtime.version" value="1.7.0_25-b15"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/zm/k8wntmfj49d_1l4657_c6s25yk93kq/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/ugomech/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.8.4"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/ugomech"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="ugomech"/>
+    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_25"/>
+    <property name="java.ext.dirs" value="/Users/ugomech/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/JObjC.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.072" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[0]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[1]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[2]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[3]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[4]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[5]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[6]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[7]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[8]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[9]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[10]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[11]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[12]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[13]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[14]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[15]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[16]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[17]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[18]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[19]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[20]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[21]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[22]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[23]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[24]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[25]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[26]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[27]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[28]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[29]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[30]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[31]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[32]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[33]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[34]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[35]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[36]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[37]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[38]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[39]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[40]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[41]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[42]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[43]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[44]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[45]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[46]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[47]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[48]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[49]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[50]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[51]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[52]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[53]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[54]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[55]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[56]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[57]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[58]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[59]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[60]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[61]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[62]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[63]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[64]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[65]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[66]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[67]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[68]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[69]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[70]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[71]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[72]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[73]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[74]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[75]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[76]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[77]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[78]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[79]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[80]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[81]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[82]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[83]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[84]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[85]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[86]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[87]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[88]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[89]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[90]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[91]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[92]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[93]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[94]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[95]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[96]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[97]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[98]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[99]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getPublisherAndServer[100]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[0]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[1]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[2]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[3]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[4]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[5]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[6]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[7]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[8]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[9]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[10]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[11]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[12]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[13]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[14]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[15]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[16]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[17]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[18]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[19]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[20]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[21]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[22]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[23]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[24]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[25]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[26]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[27]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[28]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[29]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[30]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[31]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[32]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[33]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[34]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[35]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[36]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[37]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[38]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[39]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[40]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[41]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[42]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[43]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[44]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[45]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[46]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[47]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[48]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[49]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[50]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[51]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[52]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[53]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[54]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[55]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[56]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[57]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[58]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[59]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[60]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[61]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[62]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[63]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[64]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[65]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[66]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[67]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[68]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[69]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[70]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[71]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[72]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[73]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[74]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[75]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[76]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[77]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[78]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[79]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[80]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[81]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[82]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[83]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[84]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[85]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[86]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[87]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[88]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[89]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[90]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[91]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[92]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[93]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[94]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[95]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[96]"/>
+  <testcase time="0.067" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[97]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[98]"/>
+  <testcase time="0.068" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[99]"/>
+  <testcase time="0.069" classname="com.elasticpath.service.search.solr.DefaultSolrManagerConcurrencyTest" name="getServer[100]"/>
+</testsuite>

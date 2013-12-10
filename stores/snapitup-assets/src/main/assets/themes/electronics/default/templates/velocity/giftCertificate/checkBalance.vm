@@ -1,0 +1,36 @@
+## Copyright (c) Elastic Path Software Inc., 2007
+## checkBalance.vm
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#set($pageName = "giftCertificate/checkBalance.vm")
+#templateInit()
+#set ($action = "search-gift-certificate.ep")
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    #parse("includes/head.vm")
+  </head>
+  <body>
+    <div id="wrapper">
+      #parse("includes/header.vm")
+      #parse("includes/topmenu.vm")
+      <div id="breadcrumb">
+        #parse("includes/breadcrumbs.vm")
+      </div>
+      <div class="clear20"></div>
+        <div id="search-gift-certificate">
+          <form action="$baseUrl/search-gift-certificate.ep" method="post" name="searchForm">
+            <!--fieldset-->
+              <strong>#springMessage("giftCertificate.checkGiftCertBalanceMessage")</strong>
+              <p>#springMessage("giftCertificate.viewGiftCertificateMessage")</p>
+              <b><label for="giftCertificate">#springMessage("giftCertificate.giftCertificateNumber")</label></b>
+		  		<input maxlength="28" class="textbox" type="text" name="giftCertificateCode" value="" />
+              <input type="submit" class="button" name="submit" value="#springMessage("giftCertificate.checkBalance")" />
+            <!--/fieldset-->
+          </form>
+        </div>
+        <div class="clear20"></div>
+  #parse("includes/footer.vm")
+  </body>
+</html>
+

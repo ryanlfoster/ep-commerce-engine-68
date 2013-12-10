@@ -1,0 +1,11 @@
+Dear $cmUser.firstName $cmUser.lastName,
+
+The import job "$importRunningJob.importJob.name" you started at $importRunningJob.startTime has completed:
+
+Import Job: $importRunningJob.importJob.name
+Start Time: $importRunningJob.startTime
+End Time: $importRunningJob.endTime
+Total Rows: $importRunningJob.totalRows
+Successfully Imported Rows: $importRunningJob.succeededRows
+Failed Imported Rows: $importRunningJob.failedRows
+Left Rows: $importRunningJob.leftRows

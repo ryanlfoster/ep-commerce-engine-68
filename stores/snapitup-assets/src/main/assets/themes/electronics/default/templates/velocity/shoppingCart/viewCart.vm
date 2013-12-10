@@ -1,0 +1,388 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## viewCart.vm
+
+#set($pageName = "shoppingCart/viewCart.vm")
+#set($_scripts = "javaScript")
+#set($_content = "shoppingCartBody")
+#set($_breadcrumbs = "cartBreadCrumbs")
+#masterTemplate()
+
+#macro(shoppingCartBody)
+      #if ($invalidItemsWereRemoved)
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("warning.cart.items.removed")</div>
+          <div class="error-message-item">#springMessage("globals.cart.items.removed")</div>
+        </div>
+      #end
+      #if ($mergedCart)
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("warning.merged.cart")</div>
+          <div class="error-message-item">#springMessage("globals.cart.merged.cart")</div>
+        </div>
+      #end
+	  #if ($NoTierOneFromWL)
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("warning.noTierOneFromWL")</div>
+          <div class="error-message-item">#springMessage("globals.cart.noTierOneFromWL")</div>
+        </div>
+      #end
+
+      #if (!$command.isCodeValid())
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("error.general")</div>
+          <div class="error-message-item">  #springMessage("viewCart.invalidCode")</div>
+        </div>
+        ## Reset codeValid to true, since the code has been cleared
+        $command.setCodeValid(true)
+      #end
+
+	  #set($errorMessageKey = $request.getAttribute("error.message"))
+	  #if ($errorMessageKey && !$errorMessageKey.equals(""))
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("error.general")</div>
+          <div class="error-message-item">#springMessage($errorMessageKey)</div>
+        </div>
+      #end
+
+      #if ($request.getSession().getAttribute("gcZeroBalance"))
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("error.general")</div>
+          <div class="error-message-item">  #springMessage("viewCart.giftCertificateZeroBalance")</div>
+        </div>
+        ## Reset gcZeroBalance to true, since the code has been cleared
+        $!request.getSession().setAttribute("gcZeroBalance", false)
+      #end
+
+      #if ($request.getSession().getAttribute("gcCurrencyMismatch"))
+        <div id="alert" class="alert">
+          <div class="error-message-title">#springMessage("error.general")</div>
+          <div class="error-message-item">  #springMessage("viewCart.giftCertificateCurrencyMismatch")</div>
+        </div>
+        ## Reset gcCurrencyMismatch to true, since the code has been cleared
+        $!request.getSession().setAttribute("gcCurrencyMismatch", false)
+      #end
+
+      <!-- START main area -->
+      <div class="clear10"></div>
+      <form action="view-cart.ep" method="post" name="shoppingCart">
+        <input type="hidden" name="cartAction" value="cartCheckout"/>
+        <input type="hidden" name="promoCodeToDelete" value=""/>
+        <div id="cart">
+          #set ($cartEmpty = ($command.getCartItems().size() == 0))
+          #if ($cartEmpty)
+            <div id="body">
+              <h4>#springMessage("viewCart.empty")</h4>
+            </div>
+          #else
+            <table>
+              <thead>
+                <tr>
+                  <td class="action">&nbsp;</td>
+                  <td class="img">&nbsp;</td>
+                  <td class="desc">#springMessage("viewCart.description")</td>
+                  <td class="unit-price">#springMessage("viewCart.each")</td>
+                  <td class="frequency">#springMessage("viewCart.frequency")</td>
+                  <td class="qty">#springMessage("viewCart.qty")</td>
+                  <td class="total-price">#springMessage("viewCart.total")</td>
+                </tr>
+              </thead>
+              <tbody>
+                #displayShoppingItems($command false $availabilityMap)
+              </tbody>
+            </table>
+          #end
+        </div>
+
+        #if (!$cartEmpty)
+          <div class="promo-box">
+            <label for="promo-code">
+            #if ($giftCertificateEnabledHelper.getBoolean() && $gcPaymentEnabled)
+                #springMessage("viewCart.code")
+            #else
+                #springMessage("viewCart.promocode")
+            #end:</label>
+            <input name="code" maxlength="25" style="width:100px; margin-right:20px;" id="code"/>
+            <script type='text/javascript'>
+              jq("#code").bind("keypress", function(event) {
+                var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
+                  if (keycode == 13) { // catch enter key
+                    applyCode();	//apply promo
+                    return false;
+                  } else  {
+                    return true;
+                  }
+            });
+            </script>
+            <a href="#" onclick="applyCode();">
+              <img src="$baseUrl/template-resources/images/ico-refresh.gif" alt="re-calculate" width="16" height="16" style="vertical-align:middle;" />#springMessage("viewCart.applyCode")
+            </a>
+          <div class="clear20"></div>
+          <div>
+            #foreach($promotionCode in $command.getAppliedPromotionCodes())
+              <span class="promo-box-promo-name">$escapeTool.html($promotionCodeNames.get($promotionCode))</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="promo-box-promo-code-label">#springMessage("viewCart.promocodeLabel"):</span>
+              <span class="promo-box-promo-code">$escapeTool.html($promotionCode)</span>
+              ## TODO: Display Promotion Action Type (SKU, Shopping Cart, Shipping) here
+              ## TODO: Display discount amount here
+              <a href="#" onclick="removePromoCode('$promotionCode');">
+                <img src="$baseUrl/template-resources/images/ico-filter-close.gif" alt="delete" style="vertical-align:middle;" />
+              </a>
+              <br>
+            #end
+          </div>
+
+          <div>
+            #foreach($promotionCode in $command.getNotAppliedPromotionCodes())
+              <span class="promo-box-promo-name-greyed">$escapeTool.html($promotionCodeNames.get($promotionCode))</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="promo-box-promo-code-label-greyed">#springMessage("viewCart.promocodeLabel"):</span>
+              <span class="promo-box-promo-code-greyed">$escapeTool.html($promotionCode)</span>
+              <a href="#" onclick="removePromoCode('$promotionCode');">
+                <img src="$baseUrl/template-resources/images/ico-filter-close.gif" alt="delete" style="vertical-align:middle;" />
+              </a>
+              <br>
+            #end
+          </div>
+
+          </div>
+
+          <div class="clear20"></div>
+
+          #set ($hasDeliveryOptions = 0)
+          #if ($command.shippingServiceLevelList && $command.shippingServiceLevelList.size() > 0)
+            #set ($hasDeliveryOptions = 1)
+          #end
+          #set($style = "")
+          #if($hasDeliveryOptions == 0)
+            #set($style = "style='display:none'")
+          #end
+          <div id="shipping-rates" $!style>#displayShippingOptions($command.estimateAddress $command.shippingServiceLevelList)</div>
+          #set($style = "")
+          #if(!$command.requiresShipping() || $hasDeliveryOptions==1)
+            #set($style = "style='display:none'")
+          #end
+          <div id="calculate-shipping" $!style>
+              <fieldset>
+                <legend>#springMessage("viewCart.estimateShippingAndTaxes")</legend>
+                <table id="shippingEstimatorTable">
+                  <tr>
+                    <td align="right" width="110">#springMessage("viewCart.country")</td>
+                    <td>
+                      #set ($shippingAddressCountryCode = "")
+                      #if ($!command.shippingAddress)
+                        #set ($shippingAddressCountryCode = $!command.shippingAddress.country)
+                      #end
+                      ##Display the list of countries that can be shipped to, in alphabetical order. Select the shipping address country by default.
+                      <select id="country" name="country" onchange="onShippingCountryChange(this.value)">
+                        <option value="">#springMessage("viewCart.selectCountry")</option>
+                        #foreach ($countryName in $shippingCountryNameMap.keySet())
+                            #set ($countryCode = $shippingCountryNameMap.get($countryName))
+                          <option value="$countryCode" #if($!shippingAddressCountryCode==$!countryCode)selected="selected"#end>$escapeTool.html($countryName)</option>
+                        #end
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">#springMessage("viewCart.subCountry")</td>
+                      <td>
+                        ## Create a div for subCountries select for each country and hide them by default
+                        <span id="shippingAddress.subCountry_" #if($!shippingAddressCountryCode != "")style="display:none"#end>
+                        <select id="subCountry_" name="subCountry_">
+                          <option value="">#springMessage("viewCart.selectSubCountry")</option>
+                        </select>
+                      </span>
+                      #foreach ($countryName in $shippingCountryNameMap.keySet())
+                        #set ($countryCode = $shippingCountryNameMap.get($countryName))
+                        #set ($subCountryMap = $shippingCountrySubCountryMap.get($countryCode))
+                        <select id="subCountry_$countryCode" name="subCountry_$countryCode" #if(!$shippingAddressCountryCode || $!shippingAddressCountryCode!=$countryCode)style="display:none"#end>
+                                <option value="">#springMessage("viewCart.selectSubCountry")</option>
+                                #foreach ($subCountryName in $subCountryMap.keySet())
+                                    #set ($subCountryCode = $subCountryMap.get($subCountryName))
+                                    <option value="$subCountryCode" #if($command.shippingAddress && $command.shippingAddress.subCountry == $subCountryCode)selected="selected"#end>
+                                            $escapeTool.html($subCountryName)
+                                    </option>
+                                #end
+                        </select>
+                      #end
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">#springMessage("globals.zippostalcode")</td>
+                    <td>
+                      <input type="text" name="zipOrPostalCode" id="zipOrPostalCode" maxlength="10" size="6" value="$!command.shippingAddress.zipOrPostalCode"/>
+                      <a href="javascript:void(0)" onclick="estimateShippingAndTaxes();return false;">
+                        <img src="$baseUrl/template-resources/images/ico-refresh.gif" alt="Estimate" width="16" height="16" style="vertical-align:middle;" />#springMessage("viewCart.estimate")
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
+            <div class="clear20"></div>
+          </div>
+
+          <div id="cart-summary">
+          <fieldset>
+            <legend>#springMessage("viewCart.summary")</legend>
+                 <fieldset>
+            	    <legend class="dueNow">#springMessage("viewCart.dueNow")</legend>
+            <table id="cart-summary-table" width="100%" border="0" cellpadding="2" cellspacing="0">
+              ##discount for exclusive tax calculation method
+              <tr class="sub-total" id="sub-total">
+                <td class="title"><strong>#springMessage("globals.ordersummary.subtotal"):</strong></td>
+                <td class="value" id="subTotalValue">#displayPriceForCartLocale($command.getSubtotalMoney())</td>
+              </tr>
+              <tr class="promotion" id="promotion-exclusive" #if($command.hasSubtotalDiscount()&&!$command.isInclusiveTaxCalculationInUse()) #else style="display:none"#end>
+                <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+                <td id="exclusive-discount-value" class="value"> #displayPriceForCartLocale($command.getSubtotalDiscountMoney())</td>
+              </tr>
+              <tr class="shipping" id="shipping" #if(!$command.estimateMode)style="display:none"#end>
+                <td class="title">#springMessage("globals.ordersummary.shipping"):</td>
+                <td class="value" id="cartShippingCostValue">#displayPriceForCartLocale($command.getShippingCost())</td>
+              </tr>
+              <tr class="delimiter" id="delimiter"><td></td><td></td></tr>
+              <tr class="sub-total" id="total-before-tax">
+                <td class="title"><strong>#springMessage("globals.ordersummary.totalBeforeTax"):</strong></td>
+                <td class="value" id="totalBeforeTaxValue">#displayPriceForCartLocale($command.getBeforeTaxTotal())</td>
+              </tr>
+
+              <tr id="tax-na" class="tax" #if(! $command.taxCalculationResult || $command.taxCalculationResult.taxCategoriesSet.size() > 0)style="display:none"#end>
+                <td class="title">#springMessage("globals.ordersummary.tax"): </td>
+                <td class="value">N/A</td>
+              </tr>
+
+              #if ($command.taxCalculationResult && $command.taxCalculationResult.taxCategoriesSet.size() > 0)
+                #set ($count = 1)
+                #foreach ($taxCategory in $command.taxCalculationResult.taxCategoriesSet)
+                  <tr id="tax$count" class="tax" >
+                    <td id="title">$!taxCategory.getDisplayName($locale):</td>
+                    <td id="value">#displayPriceForCartLocale($command.taxCalculationResult.getTaxValue($taxCategory))</td>
+                  </tr>
+                  #set ($count = $count + 1)
+                #end
+              #end
+              ##discount for inclusive tax calculation method
+              <tr class="promotion" id="promotion-inclusive" #if($command.hasSubtotalDiscount() && $command.isInclusiveTaxCalculationInUse()) #else style="display:none"#end>
+                <td class="title">#springMessage("globals.ordersummary.orderdiscount"):</td>
+                <td id="inclusive-discount-value" class="value"> #displayPriceForCartLocale($command.getSubtotalDiscountMoney())</td>
+              </tr>
+              #if(!$command.getAppliedGiftCertificates().isEmpty())
+                <tr class="gift-certificate" id="gift-certificate">
+                    <td class="title">#springMessage("globals.giftCertificate.giftCertificates"):</td>
+                    <td id="gift-certificate-value" class="value"> #displayPriceForCartLocale($command.getGiftCertificateDiscountMoney()) </td>
+                </tr>
+              #end
+              <tr class="delimiter" id="delimiter"><td></td><td></td></tr>
+              <tr class="total">
+                        <td class="title">#springMessage("globals.ordersummary.totalNow"):</td>
+                <td class="value" id="cartTotalValue">#displayPriceForCartLocale($command.getTotalMoney())</td>
+              </tr>
+            </table>
+          </fieldset>
+                #displayFrequencySummary ($!command.getFrequencyMap() "viewCart.recurringPricesTitle")
+          </fieldset>
+            <div class="fieldset-footer">
+              <input name="cartCheckout" value="#springMessage("viewCart.checkout")" type="submit" class="checkout-button"  style="vertical-align: top"/>
+                #if ($payPalEnabled)
+                    <input type="image" id="paypal-shortcut-button" name="payPalShortcut" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckoutsm.gif"/>
+                #end
+            </div>
+            <div style="position:relative;">
+              <div onmouseover="javascript:ShowContent('continueShopping')" onmouseout="HideContent('continueShopping'); return true;" style=" border:1px solid #ddd; background-color:#f7f8f9; padding:10px 20px;">
+                <a href="javascript:ShowContent('continueShopping')">#springMessage("viewCart.continueShopping")</a>
+              </div>
+
+
+
+                <div onmouseover="ShowContent('continueShopping'); return true;" onmouseout="HideContent('continueShopping'); return true;" id="continueShopping" style="display:none;
+      position:absolute;
+      left:10px;
+      top:30px;
+      border:1px solid #ccc;
+      background-color:#f7f8f9;
+      padding:10px;
+      z-index:60601;">
+
+                #if ($command.viewHistory.getLastViewedHistoryProduct())
+                    #set ($lastViewedHistoryProduct = $!command.viewHistory.getLastViewedHistoryProduct())
+                    #set ($lastViewProductName = $!lastViewedHistoryProduct.getLdf($locale).getDisplayName())
+                    #set ($lastViewBrandName =  $!lastViewedHistoryProduct.getBrand().getDisplayName($locale, true))
+                    #if($lastViewedHistoryProduct)
+                        <div><a href="$!lastViewedHistoryProduct.getSeoUrl($locale)"><strong>#springMessage("viewCart.backTo")</strong> $lastViewProductName</a></div>
+                    #end
+                #end
+                <div style="margin-top:10px;"><a href="index.ep"><strong>#springMessage("viewCart.backToHome")</strong></a></div>
+              </div>
+            </div>
+          </div>
+        #end
+
+
+        ##Display Cart Cross Sells
+        #if ($cartCrossSells && $cartCrossSells.size() > 0)
+          <div id="cart-recommendations">
+            <fieldset>
+              <legend>#springMessage("viewCart.youMayAlsoLike")</legend>
+              <div id="product-grid-4">
+                #foreach ($crossSell in $cartCrossSells)
+                  <ul class="product">
+                    #set ($crossSellProduct = $crossSell.getTargetProduct())
+					#set ($crossSellPrice = $cartCrossSellPrices.get($crossSellProduct.getCode()))
+					#set ($crossSellCharacteristics = $cartCrossSellCharacteristics.get($crossSellProduct.getCode()))
+					#displayProductWithPrice($crossSellProduct $catalog $warehouse $crossSellPrice "" false $crossSellCharacteristics)
+                    #set ($productSku = $crossSellProduct.getDefaultSku())
+                    <input name="add-to-cart" value="#springMessage("productTemplate.addToCart")" type="button" class="add-to-cart-small" onclick="location.href='$baseUrl/add-to-cart-simple.ep?skuCode=$productSku.skuCode&qty=$crossSell.getDefaultQuantity()'"/>
+                  </ul>
+                #end
+                <div class="clear10"></div>
+              </div>
+            </fieldset>
+          </div>
+        #end
+        </form>
+      <div class="clear40"></div>
+        #end
+
+#macro(cartBreadCrumbs)
+    <div id="breadcrumb"><strong><a href="$baseUrl/index.ep">#springMessage("globals.bc.home")</a></strong> &raquo; #springMessage("viewCart.breadcrumb")</div>
+#end
+
+#macro(javaScript)
+      <script type='text/javascript'>
+    #if ($command.shippingAddress)
+        var curSelectedShippingCountry="$!command.shippingAddress.country";
+    #else
+        var curSelectedShippingCountry="";
+    #end
+    #if($command.selectedShippingServiceLevel && $!command.selectedShippingServiceLevel.uidPk)
+    var selectedShippingServiceLevelId=$!command.selectedShippingServiceLevel.uidPk;
+    #else
+      var selectedShippingServiceLevelId=0;
+    #end
+      var localeStr = "$!command.getLocale().toString()";
+    var specifyShippingStr = '#springMessage("viewCart.specifyShippingDestination")';
+    var noDeliveryOptionStr = '#springMessage("viewCart.noDeliberyOptions")';
+  </script>
+  <script type='text/javascript' src='$storefrontContextUrl/template-resources/js/viewCart.js'></script>
+  <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/sesShoppingCart.js'></script>
+  <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/shoppingCartAjaxController.js'></script>
+  <script type='text/javascript' src='$storefrontContextUrl/dwr/interface/moneyFormatter.js'></script>
+  
+  <script type="text/javascript" language="JavaScript">
+    var timer;
+
+    function HideContent(d) {
+      if(d.length < 1) { return false; }
+      timer = setTimeout("doHide('"+d+"')", 1000);
+    }
+
+    function doHide(d) {
+      document.getElementById(d).style.display = "none";
+    }
+
+    function ShowContent(d) {
+      if(d.length < 1) { return false; }
+      document.getElementById(d).style.display = "block";
+      clearTimeout(timer);
+    }
+  </script>
+#end
+

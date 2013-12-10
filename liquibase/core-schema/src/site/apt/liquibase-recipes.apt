@@ -1,0 +1,127 @@
+
+Setup
+
+  The Elastic Path Grandparent POM defines a number of development database profiles, it's assumed you've picked up and set it up in your settings.xml, otherwise you'll need to specify it on the command line (for example: -P h2-dev-db)
+
+* End Developer Normal usage
+
+*--+--+--
+|  mvn liquibase:update | This updates your configured database, making schema adjustments needed. |
+*--+--+--
+
+
+* Schema Changing Developer Usage
+
+*--+--+--
+| mvn liquibase:updateSQL | Show the SQL that shall be run on your database. |
+*--+--+--
+| mvn liquibase:clearCheckSums | If Liquibase complains when you're working on a changeset. |
+*--+--+--
+| mvn liquibase:updateTestingRollback | Does :update, :rollback and :update again as a simple test |
+*--+--+--
+
+
+* Advanced Normal Usage
+
+*--+--+--
+| mvn liquibase:status | list the changesets that would be applied by liquibase:update |
+*--+--+--
+| mvn liquibase:updateSQL | write the SQL that needs to be run to update the database the way liquibase:update would |
+*--+--+--
+| mvn liquibase:dbDoc | Output Javadoc-style information about the changes made to the schema. |
+*--+--+--
+
+
+* Initial Schema Setup in Production
+
+  The simplest way: on a server which has access to your production database, ensure the proper settings are set in settings.xml and run liquibase:update as a user
+with proper access.
+
+  Alternatively, create an empty development database (of the same flavour) and run:
+
+*--+--+--
+|  mvn liquibase:updateSQL | Write the SQL that needs to be run to create a database from scratch. |
+*--+--+--
+
+
+  Taking the output .sql file and running it in production.
+
+* Updating Schema Between Versions
+
+  The simplest way: Update the version of the schema project you depend on, ensure the proper settings are set in settings.xml and run liquibase:update as a user
+with proper access in production.
+
+Alternatively, migrate in a copy of your production database into development (as created by Liquibase) and run:
+
+*--+--+--
+|  mvn liquibase:updateSQL | Write the SQL that needs to be run to make changes to your database. |
+*--+--+--
+
+
+  Then take the output .sql and run it on production.
+
+* Introducing Liquibase on Customer Sites that aren't yet using Liquibase
+
+  You will need to upgrade to 6.3.0 manually without Liquibase.  Once on 6.3.0, you can use the above mechanisms, as our Liquibase will detect 6.3.0 and
+not make changes.
+
+* Introducing Liquibase into an Customer Site Already Using Liquibase
+
+[[1]] add a logicalPathName to your existing liquibase script.  Make no other changes, use changeLogSyncSQL / clearCheckSums to mark it as run on dev/production
+[[2]] You will need to upgrade to 6.3.0 manually.  You can include the db changes needed in the existing Liquibase infrastructure.
+[[3]] Use the Archetype to generate a core-schema-extension. 
+[[4]] In order, add your existing changelogs, the ep master, then pointers to any other changes.
+[[5]] use normally.  Empty databases should get your existing liquibase infrastructure.
+
+* Tagging and Rolling Back
+
+  Many schema changes support "rolling back".  To automatically take advantage of this:
+
+*--+--+--
+| mvn liquibase:tag -Dtag=todaysTagName | Tag the current set of changes in the database. |
+*--+--+--
+|     mvn liquibase:update | Apply the new changes to your database. |
+*--+--+--
+|     mvn liquibase:rollback -Dtag=todaysTagName | Roll back to the tagged version of the database schema. |
+*--+--+--
+
+
+  Alternatively, you can roll back a fixed # of changesets:
+
+*--+--+--
+|     mvn liquibase:rollback -DrollbackCount=3 | Roll back the last 3 changes. |
+*--+--+--
+
+
+* Taking Control
+
+  To tell Liquibase to assume that the output of liquibase:status has already been run:
+
+*--+--+--
+|  mvn liquibase:changelogSync | Force the changelog table to the current state (not actually applying changes). |
+*--+--+--
+
+
+  Alternatively,
+  
+*--+--+--
+|    mvn liquibase:checklogSyncSQL | Generate SQL which would tell Liquibase that all updates have been run. |
+*--+--+--
+
+* Troubleshooting
+
+  To force it to release locks (if you abort an update, for example), you can use:
+
+*--+--+--
+|   mvn liquibase:listLocks | See which locks are currently being held. |
+*--+--+--
+|   mvn liquibase:releaseLocks  | Remove all locks from the current database. |
+*--+--+--
+
+
+  To tell Liquibase to accept that some checksums have changed:
+
+*--+--+--
+|   mvn liquibase:clearCheckSums | This clears all existing checksums, they will be recomputed the next update. |
+*--+--+--
+

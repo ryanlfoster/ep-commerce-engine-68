@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.063" errors="0" skipped="0" tests="40" name="com.elasticpath.ql.parser.EpQueryParserTest">
+  <properties>
+    <property name="sun.lang.ClassLoader.allowArraySyntax" value="true"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="23.25-b01"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/ugomech/Documents/Commerce-Engine/platform"/>
+    <property name="java.runtime.version" value="1.7.0_25-b15"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/zm/k8wntmfj49d_1l4657_c6s25yk93kq/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/ugomech/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.8.4"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/ugomech"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="ugomech"/>
+    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_25"/>
+    <property name="java.ext.dirs" value="/Users/ugomech/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/lib/JObjC.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.018" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testAttributes"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse002"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse004"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse005"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse006"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse007"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse008"/>
+  <testcase time="0.012" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse009"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse010"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse011"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse012"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse013"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse014"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse015"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse016"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse017"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse018"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse019"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse020"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testInvalidParse021"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse001"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse002"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse003"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse004"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse005"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse006"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse007"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse008"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse009"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse010"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse011"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse014"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse016"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse017"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse018"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse019"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse020"/>
+  <testcase time="0.001" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse021"/>
+  <testcase time="0.002" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse022"/>
+  <testcase time="0" classname="com.elasticpath.ql.parser.EpQueryParserTest" name="testSuccessfulParse023"/>
+</testsuite>

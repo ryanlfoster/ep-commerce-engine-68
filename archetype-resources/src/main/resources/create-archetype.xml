@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project name="create-archetype" default="create">
+
+	<!-- Override if necessary with properties before this script is called. -->
+	<property name="archetype.work.dir" value="${project.build.directory}/archetype-temp"/>
+	<property name="archetype.dir" value="${project.build.directory}/generated-sources/archetype"/>
+
+	<property name="archetype.resources.dir" value="${archetype.dir}/src/main/resources" />
+
+	<!-- Allows global property filtering when copying. -->
+	<echoproperties destfile="${archetype.work.dir}/filters.properties"/>
+	<filter filtersfile="${archetype.work.dir}/filters.properties"/>
+
+	<target name="create">
+		<copy todir="${archetype.resources.dir}/archetype-resources" filtering="false" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="src/main/**" />
+				<include name="src/tomcat/**" />
+			</fileset>
+		</copy>
+		<!-- copy additional files from src/archetype/resources -->
+		<copy todir="${archetype.dir}" filtering="true" overwrite="true">
+			<fileset dir="${basedir}/src/archetype/resources/">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+		<copy file="${archetype.work.dir}/archetype.pom.xml" tofile="${archetype.dir}/pom.xml" filtering="true"/>
+		<copy file="src/archetype/archetype-metadata.xml" todir="${archetype.resources.dir}/META-INF/maven" filtering="true"/>
+
+		<!-- Run an xslt on the pom.xml for the future-webapp to make it look like an archetype should-->
+		<xslt style="${archetype.work.dir}/fix-pom.xslt"
+			in="${basedir}/pom.xml"
+			out="${archetype.resources.dir}/archetype-resources/pom.xml"
+			force="true" />
+	</target>
+</project>

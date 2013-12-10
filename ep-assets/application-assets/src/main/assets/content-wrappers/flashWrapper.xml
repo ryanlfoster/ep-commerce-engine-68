@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!--
+
+	Flash wrapper displays a flash object for which is supplies three URL
+	parameters as FlashVars.
+
+	Input Parameters:
+	1. flashPath - the path to flash file
+	2. url1 - the URL for link 1
+	3. url2 - the URL for link 2
+	4. url3 - the URL for link 3
+
+-->
+
+<content-wrapper> 
+	<template-name>flashTemplate.cwt</template-name>
+	<wrapper-id>flashWrapper</wrapper-id>
+	<wrapper-name>Flash</wrapper-name>	
+	<user-input-settings>
+		<user-input-setting id="flashPath" localizable="true" name="Path to Flash File" type="File" description="Flash Path" required="true" pass-to-template="true" />
+		<user-input-setting id="url1" localizable="true" name="URL for Link 1" type="StringShort" description="Linked Url 1" required="true" pass-to-template="true" />
+		<user-input-setting id="url2" localizable="true" name="URL for Link 2" type="StringShort" description="Linked Url 2" required="true" pass-to-template="true" />
+		<user-input-setting id="url3" localizable="true" name="URL for Link 3" type="StringShort" description="Linked Url 3" required="true" pass-to-template="true" />
+	</user-input-settings>	
+</content-wrapper>

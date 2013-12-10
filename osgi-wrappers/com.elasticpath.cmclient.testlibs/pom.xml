@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elasticpath.osgi.wrappers</groupId>
+		<artifactId>osgi-wrappers</artifactId>
+		<version>6.8.0.2013101613-RELEASE</version>
+	</parent>
+
+	<artifactId>com.elasticpath.cmclient.testlibs</artifactId>
+	<packaging>bundle</packaging>
+	<name>CMClient OSGi Wrappers for Tests</name>
+	<description>A bucket of JAR files wrapped with an OSGi manifest for use when writing tests against CMClient.</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Name>%pluginName</Bundle-Name>
+						<Bundle-Vendor>%pluginProvider</Bundle-Vendor>
+						<Embed-Dependency>*</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<_exportcontents>*</_exportcontents>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-legacy</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

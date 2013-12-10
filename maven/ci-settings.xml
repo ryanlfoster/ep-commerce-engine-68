@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
+                      http://maven.apache.org/xsd/settings-1.1.0.xsd">
+	<mirrors>
+		<mirror>
+			<id>elasticpath-psi</id>
+			<url>http://maven.elasticpath.com/nexus/content/groups/6.8.x-ep-platform-build-server-repo</url>
+			<mirrorOf>external:*,!build-server-snapshots,!ep-platform-snapshots-group</mirrorOf>
+		</mirror>
+	</mirrors>
+	
+	<pluginGroups>
+		<pluginGroup>com.elasticpath.tools</pluginGroup>
+	</pluginGroups>
+	
+	<activeProfiles>
+		<activeProfile>ep-defaults</activeProfile>
+		<activeProfile>ep-nightly</activeProfile>
+		<activeProfile>build-server-repositories</activeProfile>
+		<activeProfile>build-server-properties</activeProfile>
+
+		<activeProfile>licensing</activeProfile>
+
+		<!-- Uncomment one appserver profile to be used as default for CI build -->
+		<!-- <activeProfile>tomcat-developer</activeProfile> -->
+		<!-- <activeProfile>jboss-developer</activeProfile> -->
+		<!-- <activeProfile>weblogic-developer</activeProfile> -->
+		<!-- <activeProfile>websphere-developer</activeProfile> -->
+
+		<!-- Uncomment one DB profile to be used for deployments (see grandparent POM for a full list) -->
+		<!-- <activeProfile>mysql-dev-db</activeProfile> -->
+		<!-- <activeProfile>oracle-dev-db</activeProfile> -->
+		<!-- <activeProfile>mssql-dev-db</activeProfile> -->
+	</activeProfiles>
+
+	<profiles>
+		<profile>
+			<id>ep-platform-snapshots-group</id>
+			<activation>
+				<property>
+					<name>env.EP_PLATFORM_SNAPSHOTS</name>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>ep-platform-snapshots-group</id>
+					<url>http://maven.elasticpath.com/nexus/content/repositories/${env.EP_PLATFORM_SNAPSHOTS}</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>ep-platform-snapshots-group</id>
+					<url>http://maven.elasticpath.com/nexus/content/repositories/${env.EP_PLATFORM_SNAPSHOTS}</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+
+		<profile>
+			<id>build-server-repositories</id>
+			<repositories>
+				<repository>
+					<!-- This is the recommended way of pointing central to our local repository. -->
+					<id>central</id>
+					<url>http://repo1.maven.org/?bogus-url-overridden-by-mirrorOf-above</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>build-server-snapshots</id>
+					<url>http://maven.elasticpath.com/nexus/content/repositories/${env.SNAPSHOT_REPOSITORY_ID}</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+
+			</repositories>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>central</id>
+					<!-- This is the recommended way of pointing central to our local repository. -->
+					<url>http://repo1.maven.org/?bogus-url-overridden-by-mirrorOf-above</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+
+				<pluginRepository>
+					<id>build-server-snapshots</id>
+					<url>http://maven.elasticpath.com/nexus/content/repositories/${env.SNAPSHOT_REPOSITORY_ID}</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+
+			<properties>
+				<ep.platform.release.repository.url>http://maven.elasticpath.com/nexus/content/repositories/${env.RELEASE_REPOSITORY_ID}</ep.platform.release.repository.url>
+				<ep.platform.snapshot.repository.url>http://maven.elasticpath.com/nexus/content/repositories/${env.SNAPSHOT_REPOSITORY_ID}</ep.platform.snapshot.repository.url>
+				<ep.public.releases.repository.url>http://maven.elasticpath.com/nexus/content/repositories/ep-public-releases</ep.public.releases.repository.url>
+				<ep.public.snapshots.repository.url>http://maven.elasticpath.com/nexus/content/repositories/ep-public-snapshots</ep.public.snapshots.repository.url>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>build-server-properties</id>
+			<properties>
+				<tycho.target-platform>cmclient-e36-internal</tycho.target-platform>
+			</properties>
+		</profile>
+
+		<!-- Profile to use for enabling/disabling licensing checks -->
+		<profile>
+			<id>licensing</id>
+			<properties>
+				<licensing.skip>false</licensing.skip>
+			</properties>
+		</profile>
+		
+		<!-- Profile for telling nightlys to log to /var/log/ep -->
+		<profile>
+			<id>nightly</id>
+			<properties>
+				<ep.log.dir>/var/log/ep</ep.log.dir>
+			</properties>
+		</profile>
+
+		<!-- Profile to use for deploying to DEV environment -->
+		<!-- 
+		<profile>
+			<id>deploy-dev</id>
+			<properties>
+				<epdb.host>0.0.0.0</epdb.host>
+				<epdb.databasename>xe</epdb.databasename>
+				<epdb.reset_user>system</epdb.reset_user>
+				<epdb.reset_password>password</epdb.reset_password>
+				<epdb.username>ep_dev</epdb.username>
+				<epdb.password>password</epdb.password>
+				<ep.asset.vfs.rootpath>/home/someuser/ep/assets</ep.asset.vfs.rootpath>
+				<ep.local.asset.path>/home/someuser/ep/assets</ep.local.asset.path>
+			</properties>
+		</profile> 
+		-->
+	</profiles>
+
+	<!-- These passwords require the ~/.m2/settings-security.xml file on Build Slaves -->
+	<!-- Follow the guide here: http://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords to set your passwords in here encrypted. -->
+	<servers>
+		<server>
+			<id>ep-platform-site</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>ep-platform-snapshots</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>ep-platform-releases</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>ep-public-snapshots</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>ep-public-releases</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>restricted-3rdparty</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>hosted-3rdparty</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>ep-extension-snapshots</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>ep-extension-releases</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+		<server>
+			<id>nexus</id>
+			<username>nexus-repo-manager</username>
+			<password>{nqinr2upAjcHpDLZVzUKnDV/vFkIr49LeSrLzqDmrNs=}</password>
+		</server>
+		<server>
+			<id>svn.elasticpath.com</id>
+			<username>buildadmin</username>
+			<password>{mzESptUffuUHs2U28qTcYqpAI7oIn4/Fd/dYHqCb558=}</password>
+		</server>
+		<!-- Needed by cortex-ce itests during EP nightly deployment process -->
+		<server>
+			<id>cortex-dce-site</id>
+			<username>maven-deployer</username>
+			<password>{1Nte6eUXvf8H/nxSUvXr76rsa4h+AaQE5S5IsN977q0=}</password>
+		</server>
+	</servers>
+</settings>

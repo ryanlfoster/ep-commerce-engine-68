@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<categories>
+<category mastercatalog="MobileCatalog">
+    <parentcategory></parentcategory>
+    <code>Games</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Games</value>
+    </name>
+    <type>Games</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-12T15:00:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catImage">
+            <value>sony.png</value>
+        </attribute>
+        <attribute key="catName">
+            <value language="en">All &lt;b&gt;&lt;i&gt;Games&lt;/i&gt;&lt;/b&gt;</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>This category contains listing of all Games titles available in this store.</value>
+        </attribute>
+        <attribute key="catRating">
+            <value>8.25</value>
+        </attribute>
+        <attribute key="catTheme">
+            <value>NikonCapture.exe</value>
+        </attribute>
+        <attribute key="catSubCategories">
+            <value language="en">Mobile Games</value>
+            <value language="en">Video Games</value>
+            <value language="en">憤怒的小鳥</value>
+            <value language="en">怒っている鳥</value>
+            <value language="en">नाराज पक्षियों</value>
+            <value language="en">پرندگان عصبانی</value>		
+        </attribute>
+        <attribute key="catReleaseDate">
+            <value>Sun Apr 22 00:00:00 2012</value>
+        </attribute>
+        <attribute key="catTotalItems">
+            <value>5</value>
+        </attribute>
+        <attribute key="catLastModified">
+            <value>Mon Apr 30 12:23:31 2012</value>
+        </attribute>
+        <attribute key="catReleased">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory>Games</parentcategory>
+    <code>MobileGames</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Mobile Games</value>
+    </name>
+    <type>MobileGames</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-12T15:01:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catName">
+            <value language="en">Mobile Games</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>This category contains listings of all mobile game titles available in this store.</value>
+        </attribute>
+        <attribute key="catRating">
+            <value>4.65</value>
+        </attribute>
+        <attribute key="catSubCategories">
+            <value language="en">Android</value>
+            <value language="en">iPhone</value>
+        </attribute>
+        <attribute key="catReleaseDate">
+            <value>Thu May 31 00:00:00 2012</value>
+        </attribute>
+        <attribute key="catTotalItems">
+            <value>4</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="search_catalog">
+    <parentcategory></parentcategory>
+    <code>Music</code>
+    <name>
+        <value language="en_CA">Music</value>
+    </name>
+    <type>DVD</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-25T13:33:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</category>
+
+<category mastercatalog="search_catalog">
+    <parentcategory>Music</parentcategory>
+    <code>PopSongs</code>
+    <name>
+        <value language="en_CA">Pop Songs</value>
+    </name>
+    <type>DVD</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-25T13:34:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory></parentcategory>
+    <code>TV</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">TV Series</value>
+    </name>
+    <type>TV</type>
+    <order>5</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-01-04T13:46:00-08:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>5</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="search_catalog">
+    <parentcategory></parentcategory>
+    <code>Movies_DVD</code>
+    <name>
+        <value language="en_CA">Movies</value>
+    </name>
+    <type>DVD</type>
+    <order>6</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-03-23T16:12:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory></parentcategory>
+    <code>Movies</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Movies</value>
+    </name>
+    <type>Movies</type>
+    <order>3</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2011-11-07T09:37:00-08:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catName">
+            <value language="en">Movies</value>
+            <value>Cinéma</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>This category contains listings of all movie titles available in this store.</value>
+        </attribute>
+        <attribute key="catRating">
+            <value>9.50</value>
+        </attribute>
+        <attribute key="catSubCategories">
+            <value>en haute définition</value>
+            <value>définition standard</value>
+            <value>Blu-ray</value>
+            <value>3D</value>
+            <value language="en">Blu ray</value>
+            <value language="en">High Definition</value>
+            <value language="en">Standard Definition</value>
+            <value language="en">3D</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>4</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="Toastie">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory></parentcategory>
+    <code>Accessories</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Accessories</value>
+    </name>
+    <type>Accessories</type>
+    <order>7</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2011-07-20T11:43:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory>MobileGames</parentcategory>
+    <code>AndroidGames</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Android Games</value>
+    </name>
+    <type>MobileGames</type>
+    <order>1</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-12T15:01:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catName">
+            <value language="en">Android</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>This category contains listings of all Android game titles available in this store.</value>
+        </attribute>
+        <attribute key="catRating">
+            <value>9.90</value>
+        </attribute>
+        <attribute key="catReleaseDate">
+            <value>Mon Apr 30 11:52:23 2012</value>
+        </attribute>
+        <attribute key="catTotalItems">
+            <value>100</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>1</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory>MobileGames</parentcategory>
+    <code>IPhoneGames</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">IPhone Games</value>
+    </name>
+    <type>MobileGames</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-12T15:02:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catName">
+            <value language="en">iPhone</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>This category contains listings of all iPhone game titles available in this store.</value>
+        </attribute>
+        <attribute key="catRating">
+            <value>5.00</value>
+        </attribute>
+        <attribute key="catSubCategories">
+            <value language="en">none</value>
+        </attribute>
+        <attribute key="catTotalItems">
+            <value>0</value>
+        </attribute>
+        <attribute key="catReleased">
+            <value>false</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory>Games</parentcategory>
+    <code>VideoGames</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Video Games</value>
+    </name>
+    <type>VideoGames</type>
+    <order>2</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2012-04-12T15:01:00-07:00</enabledate>
+    </availability>
+    <attributes>
+        <attribute key="catName">
+            <value language="en">Console Games 2012</value>
+        </attribute>
+        <attribute key="catRating">
+            <value>9.90</value>
+        </attribute>
+        <attribute key="catDescription">
+            <value>This category contains listings of all console game titles available in this store.</value>
+        </attribute>
+        <attribute key="catSubCategories">
+            <value language="en">DS</value>
+            <value language="en">PSP</value>
+            <value language="en">PS3</value>
+            <value language="en">Wii</value>
+            <value language="en">XBox 360</value>
+        </attribute>
+        <attribute key="catTotalItems">
+            <value>6405</value>
+        </attribute>
+    </attributes>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+
+<category mastercatalog="MobileCatalog">
+    <parentcategory></parentcategory>
+    <code>Smartphones</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Smart-phonés</value>
+    </name>
+    <type>Phones</type>
+    <order>8</order>
+    <availability>
+        <storevisible>true</storevisible>
+        <enabledate>2011-10-12T11:37:00-07:00</enabledate>
+    </availability>
+    <attributes/>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+    <linkedcategories>
+        <linkedcategory virtualcatalog="Toastie">
+            <order>2</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+        <linkedcategory virtualcatalog="Mobile">
+            <order>3</order>
+            <excluded>false</excluded>
+        </linkedcategory>
+    </linkedcategories>
+</category>
+</categories>

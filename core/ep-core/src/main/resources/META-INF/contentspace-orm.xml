@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.contentspace.impl</package>
+	<entity class="ContentSpaceImpl">
+		<named-query name="QUERY_DYNAMIC_CONTENT_DELIVERIES_BY_CONTENT_SPACE">
+			<query>
+				SELECT distinct dcd
+				FROM DynamicContentDeliveryImpl dcd,
+				IN(dcd.contentspaces) sc
+				WHERE sc.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="DynamicContentImpl">
+		<named-query name="DYNAMIC_CONTENT_FIND_BY_GUID">
+			<query>
+				SELECT dc
+				FROM DynamicContentImpl dc
+				WHERE dc.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_FIND_BY_NAME">
+			<query>
+				SELECT dc
+				FROM DynamicContentImpl dc
+				WHERE dc.name = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_FIND_BY_NAME_LIKE">
+			<query>
+				SELECT dc
+				FROM DynamicContentImpl dc
+				WHERE dc.name LIKE ?1
+			</query>
+		</named-query>
+
+		<named-query name="DYNAMIC_CONTENT_FIND_BY_NAME_LIKE_ASSIGNED">
+			<query>
+				SELECT distinct dc
+				FROM DynamicContentImpl dc, DynamicContentDeliveryImpl dcd
+				WHERE dc.name LIKE ?1
+				AND dcd.dynamicContent.uidPk = dc.uidPk
+			</query>
+		</named-query>
+
+		<named-query name="DYNAMIC_CONTENT_FIND_BY_NAME_LIKE_NOTASSIGNED">
+			<query>
+				SELECT dc
+				FROM DynamicContentImpl dc
+				WHERE dc.name LIKE ?1
+				AND dc.uidPk NOT IN (:list)
+			</query>
+		</named-query>
+
+		<named-query name="DYNAMIC_CONTENT_SELECT_ALL">
+			<query>
+				SELECT dc
+				FROM DynamicContentImpl dc
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_SELECT_BY_WRAPPER_ID">
+			<query>
+				SELECT dc
+				FROM DynamicContentImpl dc
+				WHERE dc.contentWrapperId = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_NAME_BY_GUID">
+			<query>
+				SELECT dc.name
+				FROM DynamicContentImpl dc
+				WHERE dc.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="DYNAMIC_CONTENT_DELIVERY_NAME_BY_GUID">
+			<query>
+				SELECT dcd.name
+				FROM DynamicContentDeliveryImpl dcd
+				WHERE dcd.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

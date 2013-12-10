@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+
+	<import resource="classpath*:spring/prototypes/prototypes.xml"/>
+
+	<import resource="classpath*:spring/models/domainModel.xml" />
+
+	<import resource="classpath*:spring/dataaccess/dao.xml" />
+
+	<import resource="classpath*:spring/service/service.xml" />
+
+	<import resource="classpath*:spring/dataaccess/openjpa/openjpa.xml" />
+
+	<import resource="classpath*:spring/commons/util-config.xml" />
+	<import resource="classpath:spring/commons/validators.xml" />
+
+	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesMode" value="2" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:module.properties</value>
+				<value>classpath:test_application.config</value>
+			</list>
+		</property>
+	</bean>
+	<!--
+		Override the elasticpath bean to bootstrap the webInfPath.
+		This would normally happen on application container startup.
+		See EpContextConfigListener.
+	-->
+	<bean id="elasticPath"
+			class="com.elasticpath.domain.impl.ElasticPathImpl"
+			factory-method="getInstance">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="messageSource" ref="coreMessageSource" />
+		<property name="webInfPath" value="${runtime.assets.dir}"/>
+	</bean>
+
+	<bean id="storeSeoUrlBuilderFactory" class="com.elasticpath.domain.catalogview.impl.StoreSeoUrlBuilderFactoryImpl" scope="singleton">
+		<property name="storeConfig" ref="threadLocalStorage" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+	</bean>
+
+	<bean id="shoppingItemDtoFactory" class="com.elasticpath.common.dto.sellingchannel.impl.ShoppingItemDtoFactoryImpl" />
+
+	<bean id="fakeEmailService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.test.util.FakeEmailServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="cmUserServiceWithFakeEmail" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.cmuser.impl.CmUserServiceImpl">
+				<property name="persistenceEngine">
+					<ref bean="persistenceEngine" />
+				</property>
+				<property name="elasticPath">
+					<ref bean="elasticPath" />
+				</property>
+				<property name="emailService">
+					<ref bean="fakeEmailService" />
+				</property>
+				<property name="fetchPlanHelper">
+					<ref bean="fetchPlanHelper" />
+				</property>
+				<property name="timeService">
+					<ref bean="timeService" />
+				</property>
+				<property name="settingsService">
+					<ref bean="settingsService" />
+				</property>
+				<property name="indexNotificationService">
+					<ref bean="indexNotificationService" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="productLoadTunerForBrowsingAndSearch" class="com.elasticpath.domain.catalog.impl.StoreProductLoadTunerImpl" scope="prototype" parent="epDomain">
+		<property name="loadingDefaultCategory">
+			<value>true</value>
+		</property>
+		<property name="loadingSkus">
+			<value>true</value>
+		</property>
+		<property name="loadingProductType">
+			<value>true</value>
+		</property>
+		<property name="loadingAttributeValue">
+			<value>true</value>
+		</property>
+		<property name="loadingCategories">
+			<!-- Categories must be loaded so that prices can be used outside of the service layer (when the persistence session is no longer available). -->
+			<value>true</value>
+		</property>
+		<property name="loadingProductAssociations">
+			<value>false</value>
+		</property>
+		<property name="loadingDefaultSku">
+			<value>true</value>
+		</property>
+		<property name="productSkuLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue">
+					<value>false</value>
+				</property>
+				<property name="loadingOptionValue">
+					<value>false</value>
+				</property>
+				<property name="loadingProduct">
+					<value>false</value>
+				</property>
+				<property name="loadingDigitalAsset">
+					<value>false</value>
+				</property>
+			</bean>
+		</property>
+
+		<property name="categoryLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingParent">
+					<value>true</value>
+				</property>
+				<property name="loadingMaster">
+					<value>true</value>
+				</property>
+				<property name="loadingChildren">
+					<value>true</value>
+				</property>
+				<!-- the recursion depth for loading children categories if loadingChildren is true, currently only support 1 (default in EP), -1 -->
+				<property name="childCategoryLevel">
+					<value>1</value>
+				</property>
+				<property name="loadingCategoryType">
+					<value>true</value>
+				</property>
+				<property name="loadingAttributeValue">
+					<value>false</value>
+				</property>
+				<property name="loadingLocaleDependantFields" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="productLoadTunerForProductPage" class="com.elasticpath.domain.catalog.impl.StoreProductLoadTunerImpl" scope="singleton" parent="epDomain">
+		<property name="loadingSkus">
+			<value>true</value>
+		</property>
+		<property name="loadingProductType">
+			<value>true</value>
+		</property>
+		<property name="loadingAttributeValue">
+			<value>true</value>
+		</property>
+		<property name="loadingCategories">
+			<value>true</value>
+		</property>
+		<property name="loadingDefaultSku">
+			<value>true</value>
+		</property>
+		<property name="loadingProductAssociations">
+			<value>true</value>
+		</property>
+		<property name="productSkuLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue">
+					<value>true</value>
+				</property>
+				<property name="loadingOptionValue">
+					<value>true</value>
+				</property>
+				<property name="loadingProduct">
+					<value>true</value>
+				</property>
+				<property name="loadingDigitalAsset">
+					<value>false</value>
+				</property>
+			</bean>
+		</property>
+		<property name="productTypeLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingAttributes">
+					<value>false</value>
+				</property>
+				<property name="loadingSkuOptions">
+					<value>true</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="customerOrderingService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.impl.CustomerOrderingServiceImpl">
+				<property name="checkoutService">
+					<ref bean="checkoutService" />
+				</property>
+				<property name="customerService">
+					<ref bean="customerService" />
+				</property>
+				<property name="shoppingCartService">
+					<ref bean="shoppingCartService" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="customerAuthenticationService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.impl.CustomerAuthenticationServiceImpl">
+				<property name="elasticPath">
+					<ref bean="elasticPath" />
+				</property>
+				<property name="customerSessionService">
+					<ref bean="customerSessionService" />
+				</property>
+				<property name="utility">
+					<ref bean="utility" />
+				</property>
+				<property name="shoppingCartService">
+					<ref bean="shoppingCartService" />
+				</property>
+				<property name="customerService">
+					<ref bean="customerService" />
+				</property>
+				<property name="shopperService">
+					<ref bean="shopperService" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="orderConfigurationService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.impl.OrderConfigurationServiceImpl">
+				<property name="elasticPath">
+					<ref bean="elasticPath" />
+				</property>
+				<property name="customerAuthenticationService">
+					<ref bean="customerAuthenticationService" />
+				</property>
+				<property name="customerOrderingService">
+					<ref bean="customerOrderingService" />
+				</property>
+				<property name="orderService">
+					<ref bean="orderService" />
+				</property>
+				<property name="shopperService">
+					<ref bean="shopperService" />
+				</property>
+				<property name="cartDirector" ref="cartDirector" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="messageSourceCache" class="com.elasticpath.commons.util.impl.MessageSourceCacheImpl" init-method="init" depends-on="applicationInitialization">
+		<property name="assetRepository" ref="assetRepository" />
+		<property name="defaultLanguage" value="en" />
+	</bean>
+
+	<!-- message source to be used by velocity templates -->
+	<bean id="storeMessageSource" class="com.elasticpath.commons.util.impl.StoreThemeMessageSource">
+		<property name="storeConfig" ref="threadLocalStorage" />
+		<property name="storeMessageSource" ref="storeMessageSourceDelegate" />
+	</bean>
+
+	<bean id="storeMessageSourceDelegate" class="com.elasticpath.commons.util.impl.StoreMessageSourceImpl">
+		<property name="messageSourceCache">
+			<ref bean="messageSourceCache" />
+		</property>
+		<property name="globalMessageSource">
+			<ref bean="globalMessageSource" />
+		</property>
+		<property name="assetRepository" ref="assetRepository" />
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="globalMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>org.springframework.security/messages</value>
+			</list>
+		</property>
+		<!-- Set cacheSeconds to -1 in Production Environment -->
+		<property name="cacheSeconds">
+			<value>200</value>
+		</property>
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+	</bean>
+
+	<bean id="threadLocalStorage" class="com.elasticpath.service.catalogview.impl.ThreadLocalStorageImpl">
+		<property name="storeService">
+			<ref bean="storeService" />
+		</property>
+		<property name="settingsService" ref="settingsService" />
+		<property name="cacheTimeoutMillis" value="30000" />
+	</bean>
+
+	<!-- By default set the email service to be the dummy one. This bean could be overwritten in a subsequent xml context file. -->
+	<bean id="emailService" class="com.elasticpath.test.util.FakeEmailServiceImpl" />
+	<bean id="emailNotificationHelper" class="com.elasticpath.service.notification.helper.EmailNotificationHelperImpl">
+		<property name="orderService">
+			<ref bean="orderService" />
+		</property>
+		<property name="beanFactory">
+			<ref bean="coreBeanFactory" />
+		</property>
+	</bean>
+
+	<bean id="notificationService" class="com.elasticpath.service.notification.impl.NotificationServiceImpl" />
+
+	<bean id="storeResourceManager" class="com.elasticpath.commons.util.impl.StoreResourceManagerImpl" factory-method="getInstance">
+		<property name="storeConfig" ref="threadLocalStorage" />
+		<property name="assetRepository" ref="assetRepository" />
+	</bean>
+
+	<bean id="abstractImportJobRunner" class="com.elasticpath.service.dataimport.impl.AbstractImportJobRunnerImpl" scope="prototype">
+		<property name="persistenceEngine">
+			<ref bean="persistenceEngine" />
+		</property>
+		<property name="elasticPath">
+			<ref bean="elasticPath" />
+		</property>
+		<property name="utility">
+			<ref bean="utility" />
+		</property>
+		<property name="importService">
+			<ref bean="importService" />
+		</property>
+		<property name="importJobStatusHandler">
+			<ref bean="importJobStatusHandler" />
+		</property>
+		<property name="changeSetService">
+			<ref bean="changeSetService" />
+		</property>
+		<property name="persistenceListenerMetadataMap" ref="persistenceListenerMetadataMap" />
+	</bean>
+
+	<bean id="importService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.dataimport.impl.ImportServiceImpl">
+				<property name="persistenceEngine">
+					<ref bean="persistenceEngine" />
+				</property>
+				<property name="assetRepository" ref="assetRepository" />
+				<property name="catalogService" ref="catalogService" />
+				<property name="warehouseService" ref="warehouseService" />
+				<property name="storeService" ref="storeService" />
+				<property name="importNotificationDao" ref="importNotificationDao" />
+				<property name="importJobStatusHandler" ref="importJobStatusHandler" />
+				<property name="timeService" ref="timeService" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="importJobStatusHandler" class="com.elasticpath.service.dataimport.impl.ImportJobStatusHandlerImpl">
+		<property name="importNotificationDao" ref="importNotificationDao" />
+		<property name="importJobStatusDao" ref="importJobStatusDao" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importJobRunnerCategory" class="com.elasticpath.service.dataimport.impl.ImportJobRunnerCategoryImpl" scope="prototype" parent="abstractImportJobRunner"
+		init-method="init">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importJobRunnerCustomer" class="com.elasticpath.service.dataimport.impl.ImportJobRunnerCustomerImpl" scope="prototype" parent="abstractImportJobRunner"
+		init-method="init">
+		<property name="customerService">
+			<ref bean="customerService" />
+		</property>
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importJobRunnerBaseAmount" class="com.elasticpath.csvimport.impl.ImportDtoJobRunnerCsvWithHeaderExtensionImpl" scope="prototype">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="importService" ref="importService" />
+		<property name="insertUpdateDtoImporter" ref="baseAmountDtoInsertUpdateImporterForFit" />
+		<property name="dtoCsvLineReader" ref="baseAmountDtoCsvLineReaderWithHeaderExtension" />
+		<property name="importJobStatusHandler" ref="importJobStatusHandler" />
+		<property name="baseAmountService" ref="baseAmountService" />
+		<property name="priceListDescriptorService" ref="priceListDescriptorService" />
+		<property name="changeSetService" ref="changeSetService" />
+		<property name="persistenceListenerMetadataMap" ref="persistenceListenerMetadataMap" />
+	</bean>
+
+	<bean id="baseAmountDtoImporter" class="com.elasticpath.domain.pricing.csvimport.impl.BaseAmountDtoInsertUpdateImporterImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="assembler" ref="baseAmountDtoAssembler" />
+		<property name="baseAmountService" ref="baseAmountService" />
+		<property name="changeSetService" ref="changeSetService" />
+		<property name="persistenceListenerMetadataMap" ref="persistenceListenerMetadataMap" />
+		<property name="priceListDescriptorService" ref="priceListDescriptorService" />
+	</bean>
+
+	<bean id="baseAmountDtoInsertUpdateImporterForFit" class="com.elasticpath.domain.pricing.csvimport.impl.BaseAmountDtoInsertUpdateImporterWithHeaderExtensionImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="assembler" ref="baseAmountDtoAssemblerForCsvImport" />
+		<property name="baseAmountService" ref="baseAmountService" />
+		<property name="changeSetService" ref="changeSetService" />
+		<property name="persistenceListenerMetadataMap" ref="persistenceListenerMetadataMap" />
+		<property name="priceListDescriptorService" ref="priceListDescriptorService" />
+	</bean>
+
+	<bean id="importJobRunnerProduct" class="com.elasticpath.service.dataimport.impl.ImportJobRunnerProductImpl" scope="prototype" parent="abstractImportJobRunner"
+		init-method="init">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importJobRunnerProductAssociation" class="com.elasticpath.service.dataimport.impl.ImportJobRunnerProductAssociationImpl" scope="prototype"
+		parent="abstractImportJobRunner" init-method="init">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importJobRunnerInventory" class="com.elasticpath.service.dataimport.impl.ImportJobRunnerInventoryImpl" scope="prototype" parent="abstractImportJobRunner"
+		init-method="init">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importJobRunnerProductSku" class="com.elasticpath.service.dataimport.impl.ImportJobRunnerProductSkuImpl" scope="prototype"
+		parent="abstractImportJobRunner" init-method="init">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="importGuidHelper" class="com.elasticpath.service.dataimport.impl.ImportGuidHelperImpl" scope="prototype">
+		<property name="persistenceEngine">
+			<ref bean="persistenceEngine" />
+		</property>
+		<property name="elasticPath">
+			<ref bean="elasticPath" />
+		</property>
+		<property name="categoryService" ref="categoryService" />
+		<!--property name="fetchSize" value="20"/ -->
+	</bean>
+
+	<bean id="epRuleEngine" class="com.elasticpath.service.rules.impl.DBCompilingRuleEngineImpl">
+		<property name="ruleSetService" ref="ruleSetService" />
+		<property name="propertiesDao" ref="propertiesDao" />
+		<property name="storeService" ref="storeService" />
+		<property name="ruleService" ref="ruleService" />
+		<property name="dataStrategy" ref="dbRuleEngineDataStrategy" />
+		<property name="timeService" ref="timeService" />
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="promotionRuleDelegate" ref="promotionRuleDelegate" />
+	</bean>
+
+	<bean id="ruleParameter" class="com.elasticpath.domain.rules.impl.RuleParameterImpl" scope="prototype" />
+
+	<bean id="categoryException" class="com.elasticpath.domain.rules.impl.CategoryExceptionImpl" scope="prototype" />
+
+	<bean id="productException" class="com.elasticpath.domain.rules.impl.ProductExceptionImpl" scope="prototype" />
+
+	<bean id="skuException" class="com.elasticpath.domain.rules.impl.SkuExceptionImpl" scope="prototype" />
+
+	<bean id="searchHostLocator" class="com.elasticpath.test.util.search.SearchServerLauncherHostLocator"/>
+
+	<bean id="searchConfigFactory" class="com.elasticpath.service.search.impl.DefaultSearchConfigFactoryImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="searchHostLocator" ref="searchHostLocator" />
+	</bean>
+
+	<bean id="intervalRefreshStrategy" class="com.elasticpath.settings.refreshstrategy.impl.IntervalRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService" />
+		<property name="timeoutParamKey">
+			<value>timeout</value>
+		</property>
+	</bean>
+
+	<bean id="immediateRefreshStrategy" class="com.elasticpath.settings.refreshstrategy.impl.ImmediateRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="applicationLifetimeRefreshStrategy" class="com.elasticpath.settings.refreshstrategy.impl.ApplicationLifetimeRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="cachedSettingsReader" class="com.elasticpath.settings.impl.CachedSettingsReaderImpl">
+		<property name="settingsService" ref="settingsService" />
+		<property name="refreshStrategies">
+			<map>
+				<entry key="interval" value-ref="intervalRefreshStrategy" />
+				<entry key="immediate" value-ref="immediateRefreshStrategy" />
+				<entry key="application" value-ref="applicationLifetimeRefreshStrategy" />
+			</map>
+		</property>
+		<property name="refreshStrategyKey">
+			<value>sfRefreshStrategy</value>
+		</property>
+		<property name="defaultRefreshStrategy" ref="immediateRefreshStrategy" />
+	</bean>
+
+	<bean id="contentWrapperLoader" class="com.elasticpath.domain.contentspace.impl.TestContentSpaceMediator$CustomContentWrapperLoaderImpl" />
+
+	<bean id="contentWrapperRepository" class="com.elasticpath.domain.contentspace.impl.TestContentSpaceMediator$CustomContentWrapperRepository">
+		<property name="contentWrapperLoader">
+			<ref bean="contentWrapperLoader" />
+		</property>
+	</bean>
+
+	<bean id="conditionEvaluationService" class="com.elasticpath.tags.service.impl.GroovyConditionEvaluatorServiceImpl" init-method="initialize">
+		<!-- Conditions are cached for 30 seconds to prevent multiple compilation. -->
+		<property name="conditionCacheTimeout" value="30000" />
+	</bean>
+
+	<bean id="tagConditionDSLBuilder" class="com.elasticpath.tags.service.impl.GroovyConditionDSLBuilderImpl">
+		<property name="tagDefinitionService">
+			<ref bean="tagDefinitionService" />
+		</property>
+		<property name="validationFacade">
+			<ref bean="conditionValidationFacade" />
+		</property>
+	</bean>
+
+	<alias name="sellingContextService" alias="sellingContextRetrievalStrategy" />
+
+	<bean id="dynamicContentRuntimeService" class="com.elasticpath.service.contentspace.impl.DynamicContentRuntimeServiceImpl">
+		<property name="dynamicContentDeliveryService">
+			<ref bean="dynamicContentDeliveryService" />
+		</property>
+		<property name="sellingContextRetrievalStrategy">
+			<ref bean="sellingContextRetrievalStrategy" />
+		</property>
+		<property name="actionResolutionAlgorithm">
+			<ref bean="actionResolutionAlgorithm" />
+		</property>
+		<property name="conditionEvaluatorService">
+			<ref bean="conditionEvaluationService" />
+		</property>
+		<property name="contentSpaceDeliveryCacheTimeout" value="0" />
+	</bean>
+
+	<bean id="dynamicContentDeliveryService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.targetedselling.impl.DynamicContentDeliveryServiceImpl">
+				<property name="elasticPath" ref="elasticPath" />
+				<property name="persistenceEngine">
+					<ref bean="persistenceEngine" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagDefinitionService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.service.impl.TagDefinitionServiceImpl">
+				<property name="tagDefinitionDao" ref="tagDefinitionDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="tagOperatorService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.service.impl.TagOperatorServiceImpl">
+				<property name="tagOperatorDao" ref="tagOperatorDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="selectableTagValueServiceLocator" class="com.elasticpath.tags.service.impl.SelectableTagValueServiceLocatorImpl">
+		<property name="valueProviders">
+			<map>
+				<entry>
+					<key>
+						<value>gender</value>
+					</key>
+					<bean class="com.elasticpath.tags.service.impl.InternalSelectableStringTagValueProviderImpl"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="selectableTagValuesService" class="com.elasticpath.tags.service.impl.SelectableTagValueFacadeImpl">
+		<property name="selectableTagValueServiceLocator">
+			<ref bean="selectableTagValueServiceLocator" />
+		</property>
+	</bean>
+
+	<bean id="tagValueTypeService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.tags.service.impl.TagValueTypeServiceImpl">
+				<property name="tagValueTypeDao" ref="tagValueTypeDao" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="dynamicContentService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.contentspace.impl.DynamicContentServiceImpl">
+				<property name="elasticPath" ref="elasticPath" />
+				<property name="persistenceEngine">
+					<ref bean="persistenceEngine" />
+				</property>
+				<property name="contentWrapperRepository">
+					<ref bean="contentWrapperRepository" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="sellingContextService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.sellingcontext.impl.SellingContextServiceImpl">
+				<property name="elasticPath" ref="elasticPath" />
+				<property name="persistenceEngine">
+					<ref bean="persistenceEngine" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- initializes the velocity renderer with the properties so that they could be used in the following instances of the renderer. -->
+	<bean id="velocityRenderer" class="com.elasticpath.service.contentspace.impl.VelocityRendererImpl">
+		<property name="velocityProperties">
+			<map>
+				<entry key="resource.loader">
+					<value>string</value>
+				</entry>
+				<entry key="string.resource.loader.class">
+					<value>org.apache.velocity.runtime.resource.loader.StringResourceLoader</value>
+				</entry>
+				<entry key="string.resource.loader.repository.class">
+					<value>com.elasticpath.domain.contentspace.impl.TestContentSpaceMediator$CustomStringResourceRepositoryImpl</value>
+				</entry>
+				<entry key="runtime.log.logsystem.class" value="org.apache.velocity.runtime.log.Log4JLogChute" />
+				<entry key="runtime.log.logsystem.log4j.logger" value="velocitydebug" />
+				<entry key="template.encoding">
+					<value>UTF-8</value>
+				</entry>
+				<entry key="input.encoding">
+					<value>UTF-8</value>
+				</entry>
+				<entry key="output.encoding">
+					<value>UTF-8</value>
+				</entry>
+			</map>
+		</property>
+        <property name="settingsReader" ref="settingsService"/>
+	</bean>
+
+	<bean id="importJobProcessor" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.dataimport.impl.ImportJobProcessorImpl">
+				<property name="importService" ref="importService" />
+				<property name="importJobStatusHandler" ref="importJobStatusHandler" />
+				<property name="importNotificationDao" ref="importNotificationDao" />
+				<property name="importJobStatusDao" ref="importJobStatusDao" />
+				<property name="assetRepository" ref="assetRepository" />
+				<property name="emailService" ref="fakeEmailService" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="importJobCleanupProcessor" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.dataimport.impl.ImportJobCleanupProcessorImpl">
+				<property name="importNotificationDao" ref="importNotificationDao" />
+				<property name="importJobStatusDao" ref="importJobStatusDao" />
+				<property name="staleImportNotificationProcessor" ref="staleImportJobProcessor" />
+				<property name="settingsReader" ref="settingsService" />
+				<property name="timeService" ref="timeService" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="staleImportJobProcessor" class="com.elasticpath.service.dataimport.impl.ResetStatusStaleImportNotificationProcessorImpl">
+		<property name="importNotificationDao" ref="importNotificationDao" />
+	</bean>
+
+	<bean id="sessionCleanupJob" class="com.elasticpath.domain.customer.impl.SessionCleanupJob">
+		<property name="timeService" ref="timeService" />
+		<property name="settingsReader" ref="settingsService" />
+		<property name="customerSessionCleanupService" ref="customerSessionCleanupService" />
+		<property name="shopperCleanupService" ref="shopperCleanupService" />
+		<property name="wishlistService" ref="wishListService" />
+		<property name="shoppingCartService" ref="shoppingCartService" />
+	</bean>
+
+	<!-- Defined only on ServiceSf.xml.vm - productViewService should be replaced with StoreProductService -->
+	<bean id="productViewService" class="com.elasticpath.service.catalogview.impl.ProductViewServiceImpl">
+		<property name="elasticPath">
+			<ref bean="elasticPath" />
+		</property>
+		<property name="productService">
+			<ref bean="productService" />
+		</property>
+		<property name="categoryService">
+			<ref bean="categoryService" />
+		</property>
+		<property name="storeConfig">
+			<ref bean="threadLocalStorage" />
+		</property>
+		<property name="storeProductService" ref="storeProductService" />
+	</bean>
+
+	<bean id="importJobRunnerCouponCode" class="com.elasticpath.csvimport.impl.ImportCouponUsageDtoRunnerCsvImpl" scope="prototype">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="importService" ref="importService" />
+		<property name="insertUpdateDtoImporter" ref="couponUsageModelDtoInsertUpdateImporter" />
+		<property name="dtoCsvLineReader" ref="couponCsvLineReader" />
+		<property name="importJobStatusHandler" ref="importJobStatusHandler" />
+		<property name="changeSetService" ref="changeSetService" />
+		<property name="couponConfigService" ref="couponConfigService" />
+		<property name="persistenceListenerMetadataMap" ref="persistenceListenerMetadataMap" />
+	</bean>
+
+	<bean id="importJobRunnerCouponCodeEmail" parent="importJobRunnerCouponCode" scope="prototype">
+		<property name="dtoCsvLineReader" ref="couponUsageCsvLineReader" />
+	</bean>
+
+	<bean id="couponUsageModelDtoInsertUpdateImporter" class="com.elasticpath.domain.rules.csvimport.impl.CouponUsageModelDtoInsertUpdateImporterImpl">
+		<property name="beanFactory" ref="coreBeanFactory" />
+		<property name="couponService" ref="couponService" />
+		<property name="couponUsageService" ref="couponUsageService" />
+	</bean>
+
+	<bean id="solrIndexSearcher" class="com.elasticpath.service.search.solr.SolrIndexSearcherImpl">
+		<property name="solrProvider" ref="solrManager" />
+		<property name="queryComposerFactory" ref="queryComposerFactory" />
+		<property name="solrQueryFactory" ref="solrQueryFactory" />
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="filterFactory" ref="filterFactory" />
+		<property name="solrFacetAdapter" ref="solrFacetAdapter" />
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="retrieveCatalogFromCache" value="false" />
+	</bean>
+
+	<bean id="cartDirector" class="com.elasticpath.sellingchannel.director.impl.CartDirectorImpl">
+		<property name="shoppingCartService" ref="shoppingCartService" />
+		<property name="priceLookupFacade" ref="priceLookupFacade" />
+		<property name="shoppingItemAssembler" ref="shoppingItemAssembler" />
+		<property name="shoppingItemDtoFactory" ref="shoppingItemDtoFactory" />
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="productSkuService" ref="productSkuService" />
+		<property name="storeProductLoadTuner" ref="productLoadTunerForSFAddToCart" />
+		<property name="wishListService" ref="wishListService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="wishListService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.shoppingcart.impl.WishListServiceImpl">
+				<property name="priceLookupFacade" ref="priceLookupFacade" />
+				<property name="wishListDao" ref="wishListDao" />
+				<property name="beanFactory" ref="coreBeanFactory" />
+				<property name="storeService" ref="storeService" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="paymentScheduleHelper" class="com.elasticpath.service.pricing.impl.PaymentScheduleHelperImpl">
+		<property name="skuOptionService" ref="skuOptionService" />
+		<property name="beanFactory" ref="coreBeanFactory" />
+	</bean>
+
+</beans>

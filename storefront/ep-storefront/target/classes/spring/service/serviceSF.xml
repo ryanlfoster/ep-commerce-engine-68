@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<import resource="classpath:spring/service/service.xml"/>
+	<import resource="classpath:spring/service/ehcache-jmx.xml"/>
+	<import resource="classpath:spring/web/service-common-web.xml" />
+	
+	<bean id="applicationName" class="java.lang.String">
+		<constructor-arg><value>Storefront</value></constructor-arg>
+	</bean>
+	
+	<!-- Create an alias which replaces the definition of settingsReader with the cached version -->
+	<!-- Because this is the last alias for settingsReader that is read it will override the alias in service.xml -->
+	<alias name="cachedSettingsReader" alias="settingsReader"/>
+	<alias name="cachingProductRetrieveStrategy" alias="productRetrieveStrategy"/>
+	<alias name="cachingRuleEngineDataStrategy" alias="ruleEngineDataStrategy"/>
+	<alias name="cachingSellingContextDataStrategy" alias="sellingContextRetrievalStrategy"/>
+	<alias name="cachingProductAssociationRetrieveStrategy" alias="productAssociationRetrieveStrategy"/>
+
+	<bean id="servicePreInterceptors" class="java.util.ArrayList" />
+
+	<!-- Override elasticPathService bean from core to include a storefrontContextUrl -->
+	<bean id="elasticPathService" class="com.elasticpath.service.impl.ElasticPathServiceImpl">
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="assetRepository" ref="assetRepository"/>
+		<property name="storefrontContextUrl" value="${ep.storefront.contextUrl}"/>
+	</bean>
+
+	<bean id="autoCompleteSearchPriceEnabledHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/AUTOCOMPLETESEARCH/enablePrice"/>
+	</bean>
+
+	<bean id="autoCompleteSearchThumbnailEnabledHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/AUTOCOMPLETESEARCH/enableThumbnail"/>
+	</bean>
+
+	<bean id="autoCompleteSearchNumberOfResultsHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/AUTOCOMPLETESEARCH/numberOfResults"/>
+	</bean>
+
+	<bean id="autoCompleteSearchEnabledHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/AUTOCOMPLETESEARCH/enable"/>
+	</bean>
+
+	<bean id="autoCompleteSearchProductNameMaxLengthHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/AUTOCOMPLETESEARCH/productNameMaxLength"/>
+	</bean>
+
+	<bean id="autoCompleteSearchProductDescriptionMaxLengthHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/AUTOCOMPLETESEARCH/productDescriptionMaxLength"/>
+	</bean>
+
+	<bean id="seoEnabledHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/seoEnabled"/>
+	</bean>
+
+	<bean id="powerReviewsEnabledHelper" class="com.elasticpath.sfweb.view.helpers.PerStoreSettingHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="path" value="COMMERCE/STORE/POWERREVIEWS/powerreviewsEnabled"/>
+	</bean>
+
+	<bean id="topCategoriesHelper" class="com.elasticpath.sfweb.view.helpers.TopCategoriesHelper">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="cacheTimeoutMillis" value="30000"/>
+	</bean>
+
+
+	<bean id="threadLocalStorage" class="com.elasticpath.service.catalogview.impl.ThreadLocalStorageImpl">
+		<property name="storeService" ref="storeService"/>
+		<property name="settingsService" ref="cachedSettingsReader"/>
+		<property name="cacheTimeoutMillis" value="30000"/>
+	</bean>
+
+    <bean id="storeResolver" class="com.elasticpath.sfweb.util.impl.CachingStoreResolverImpl">
+		<property name="delegate">
+			<bean class="com.elasticpath.sfweb.util.impl.StoreResolverImpl">
+				<property name="storeService" ref="storeService"/>
+				<property name="savingStoreCodeInSessionEnabled" value="true"/>
+			</bean>
+		</property>
+		<property name="cacheTimeoutMillis" value="60000"/>
+	</bean>
+
+	<bean id="storeSelectionFilter" class="com.elasticpath.sfweb.filters.StoreSelectionFilter">
+		<property name="storeResolver" ref="storeResolver"/>
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="selectionCandidates">
+			<list>
+				<value>StoreCodeParam=storeCode</value>
+				<value>StoreCodeSession=storeCode</value>
+				<value>DomainHeader=Host</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="accessChecker" class="com.elasticpath.sfweb.security.impl.StoreAccessCheckerImpl">
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+	</bean>
+
+	<bean id="storeAccessFilter" class="com.elasticpath.sfweb.filters.StoreAccessFilter">
+		<property name="accessChecker" ref="accessChecker"/>
+		<property name="storeNotAccessibleView" value="/maintenance.ep"/>
+		<property name="storefrontContextUrl" value="${ep.storefront.contextUrl}"/>
+	</bean>
+
+	<bean id="storeSeoUrlBuilderFactory" class="com.elasticpath.domain.catalogview.impl.StoreSeoUrlBuilderFactoryImpl" scope="singleton">
+	    <property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="seoUrlBuilderProxy" class="com.elasticpath.domain.catalogview.impl.SeoUrlBuilderProxy">
+		<property name="storeSeoUrlBuilderFactory" ref="storeSeoUrlBuilderFactory"/>
+	</bean>
+
+	<bean id="skuConfigurationServiceTemplate" abstract="true"
+		class="com.elasticpath.sfweb.ajax.service.impl.SkuConfigurationServiceImpl">
+			<property name="elasticPath" ref="elasticPath" />
+			<property name="multiSkuProductConfigurationService" ref="multiSkuProductConfigurationService" />
+        	<property name="productLoadTuner" ref="productLoadTunerForSFAddToCart" />
+        	<property name="storeConfig" ref="threadLocalStorage" />
+        	<property name="epRuleEngine" ref="epRuleEngine" />
+        	<property name="priceLookupFacade" ref="priceLookupFacade"/>
+        	<property name="requestHelper" ref="requestHelper"/>
+		<property name="storeProductService" ref="storeProductService"/>
+		<property name="productInventoryShoppingService" ref="productInventoryShoppingService"/>
+		<property name="messageSource" ref="messageSource"/>
+		<property name="priceBuilder" ref="priceBuilder" />
+		<property name="moneyFormatter" ref="moneyFormatter" />
+	</bean>
+
+	<bean id="skuConfigurationService" parent="skuConfigurationServiceTemplate" />
+
+	<bean id="webCustomerSessionService" class="com.elasticpath.sfweb.service.impl.WebCustomerSessionServiceImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="customerSessionService" ref="customerSessionService"/>
+		<property name="shoppingCartService" ref="shoppingCartService"/>
+		<property name="storeProductService" ref="storeProductService"/>
+		<property name="newHttpSessionEventListeners">
+			<list>
+				<ref bean="startShoppingTimeTagger"/>
+				<ref bean="customerProfileTagger"/>
+				<ref bean="targetUrlTagger"/>
+				<ref bean="referringUrlTagger"/>
+				<ref bean="referralSearchEngineQueryTagger"/>
+				<ref bean="sellingChannelTagger"/>
+				<ref bean="geoIpTagger"/>
+				<ref bean="shoppingCartRefresher"/>
+				<ref bean="couponAutoApplier"/>
+			</list>
+		</property>
+		<property name="customerLoginEventListeners">
+			<list>
+				<ref bean="customerProfileTagger"/>
+				<ref bean="sellingChannelTagger"/>
+				<ref bean="shoppingCartRefresher"/>
+				<ref bean="couponAutoApplier"/>
+			</list>
+		</property>
+        <property name="anonymousCustomerLoginEventListeners">
+			<list>
+				<ref bean="couponAutoApplier"/>
+			</list>
+		</property>
+		<property name="timeService" ref="timeService"/>
+		<property name="priceListLookupService" ref="priceListLookupService"/>
+		<property name="shopperService" ref="shopperService"/>
+	</bean>
+
+	<bean id="shoppingCartRefresher" class="com.elasticpath.sfweb.listeners.ShoppingCartRefresher">
+		<property name="cartDirector" ref="cartDirector"/>
+	</bean>
+
+	<bean id="couponAutoApplier" class="com.elasticpath.sfweb.listeners.CouponAutoApplier">
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="couponUsageService" ref="couponUsageService"/>
+		<property name="couponService" ref="couponService" />
+	</bean>
+
+	<util:list id="checkoutEventHandlers">
+		<ref bean="couponAutoApplier" />
+	</util:list>
+
+	<bean id="ipAddressResolver" class="com.elasticpath.sfweb.util.impl.IpAddressResolverImpl">
+		<property name="forwardedHeaderName" value="X-Forwarded-For"/>
+	</bean>
+
+	<bean id="startShoppingTimeTagger" class="com.elasticpath.sfweb.listeners.StartShoppingTimeTagger"/>
+	<bean id="customerProfileTagger" class="com.elasticpath.sfweb.listeners.CustomerProfileTagger" >
+		<property name="orderService" ref="orderService"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+	<bean id="targetUrlTagger" class="com.elasticpath.sfweb.listeners.TargetUrlTagger"/>
+	<bean id="referringUrlTagger" class="com.elasticpath.sfweb.listeners.ReferringUrlTagger"/>
+	<bean id="referralSearchEngineQueryTagger" class="com.elasticpath.sfweb.listeners.ReferralSearchEngineQueryTagger"/>
+	<bean id="sellingChannelTagger" class="com.elasticpath.sfweb.listeners.SellingChannelTagger"/>
+
+	<bean id="geoIpTagger" class="com.elasticpath.sfweb.listeners.GeoIpTagger">
+		<property name="geoProviderService" ref="geoProviderService"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+	</bean>
+
+	<bean id="productViewService" class="com.elasticpath.service.catalogview.impl.ProductViewServiceImpl">
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="productService" ref="productService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="storeProductService" ref="storeProductService"/>
+		<property name="storeConfig" ref="threadLocalStorage"/>
+	</bean>
+
+	<bean id="abstractSearchService" abstract="true"
+		class="com.elasticpath.service.catalogview.impl.AbstractSearchServiceImpl">
+		<property name="sfSearchLogService" ref="sfSearchLogService" />
+		<property name="timeService" ref="timeService" />
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="topSellerService" ref="topSellerService" />
+		<property name="indexSearchService" ref="indexSearchService" />
+		<property name="indexUtility" ref="indexUtility" />
+		<property name="seoUrlBuilder" ref="seoUrlBuilderProxy" />
+		<property name="settingsService" ref="cachedSettingsReader" />
+		<property name="storeProductService" ref="storeProductService" />
+		<property name="storeConfig" ref="threadLocalStorage" />
+		<property name="searchCriteriaFactory" ref="searchCriteriaFactory" />
+		<property name="paginationService" ref="paginationService" />
+	</bean>
+
+	<bean id="searchService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.catalogview.impl.SearchServiceImpl" parent="abstractSearchService">
+				<property name="searchConfigFactory" ref="searchConfigFactory"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="advancedSearchService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.catalogview.impl.AdvancedSearchServiceImpl" parent="abstractSearchService" />
+		</property>
+	</bean>
+
+	<bean id="searchCriteriaFactory" class="com.elasticpath.service.catalogview.impl.SearchCriteriaFactoryImpl">
+		<property name="synonymGroupService" ref="synonymGroupService"/>
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="catalogService" ref="catalogService"/>
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<bean id="sfSearchLogService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.catalogview.impl.SfSearchLogServiceImpl">
+				<property name="elasticPath" ref="elasticPath"/>
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="browsingService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.catalogview.impl.BrowsingServiceImpl">
+				<property name="elasticPath" ref="elasticPath"/>
+				<property name="categoryService" ref="categoryService"/>
+				<property name="topSellerService" ref="topSellerService"/>
+				<property name="indexSearchService" ref="indexSearchService"/>
+				<property name="indexUtility" ref="indexUtility"/>
+				<property name="seoUrlBuilder" ref="seoUrlBuilderProxy"/>
+				<property name="storeProductService" ref="storeProductService"/>
+	        	<property name="storeConfig" ref="threadLocalStorage" />
+				<property name="settingsService" ref="cachedSettingsReader" />
+				<property name="paginationService" ref="paginationService" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="sitemapService"  parent="txProxyTemplate">
+    	<property name="target">
+    		<bean class="com.elasticpath.service.catalogview.impl.SitemapServiceImpl">
+    		<property name="elasticPath" ref="elasticPath" />
+    		<property name="categoryService" ref="categoryService" />
+    		<property name="brandService" ref="brandService" />
+    		<property name="storeProductService" ref="storeProductService" />
+           	<property name="storeConfig" ref="threadLocalStorage" />
+    		<property name="indexSearchService" ref="indexSearchService"/>
+    		</bean>
+    	</property>
+	</bean>
+
+
+	<!-- !!!! DOCserviceSF -->
+	<!-- Modifying this tuner will significantly impact Storefront performance -->
+	<bean id="productLoadTunerForBrowsingAndSearchTemplate" abstract="true"
+		  class="com.elasticpath.domain.catalog.impl.StoreProductLoadTunerImpl"
+		  parent="epDomain">
+		<property name="loadingDefaultCategory" value="true"/>
+		<property name="loadingSkus" value="true"/>
+		<property name="loadingProductType" value="true"/>
+		<property name="loadingAttributeValue" value="${ep.product.attribute.filter.enable}"/>
+		<!-- Categories must be loaded so that prices can
+			 be used outside of the service layer (when the
+			 persitence session is no longer available.
+		-->
+		<property name="loadingCategories" value="true"/>
+		<property name="loadingProductAssociations" value="false"/>
+		<property name="loadingDefaultSku" value="true"/>
+		<property name="productSkuLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingAttributeValue" value="false"/>
+				<property name="loadingOptionValue" value="false"/>
+				<property name="loadingProduct" value="false"/>
+				<property name="loadingDigitalAsset" value="false"/>
+			</bean>
+		</property>
+
+		<property name="categoryLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.CategoryLoadTunerImpl" scope="prototype" parent="epDomain">
+				<property name="loadingParent" value="true"/>
+				<property name="loadingMaster" value="true"/>
+				<property name="loadingChildren" value="true"/>
+				<!-- the recursion depth for loading children categories if loadingChildren is true, currently only support 1 (default in EP), -1 -->
+				<property name="childCategoryLevel" value="1"/>
+				<property name="loadingCategoryType" value="true"/>
+				<property name="loadingAttributeValue" value="false"/>
+				<property name="loadingLocaleDependantFields" value="true"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="productLoadTunerForBrowsingAndSearch" parent="productLoadTunerForBrowsingAndSearchTemplate"
+		  scope="prototype"/>
+	<!-- !!!! DOCserviceSF -->
+
+	<bean id="imageService" class="com.elasticpath.service.misc.impl.ImageServiceImpl" scope="singleton" parent="epDomain">
+		<property name="elasticPath" ref="elasticPath"/>
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="assetRepository" ref="assetRepository"/>
+	</bean>
+
+	<bean id="generalJpaLoaderService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.service.misc.impl.GeneralJpaLoaderServiceImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="elasticPath" ref="elasticPath"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="emailService" class="com.elasticpath.service.misc.EmailHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="emailService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.misc.EmailService"/>
+		<property name="settingsReader" ref="settingsService"/>
+	</bean>
+
+	<bean id="notificationService" class="com.elasticpath.service.misc.EmailHttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="notificationService.remote"/>
+		<property name="serviceInterface" value="com.elasticpath.service.notification.NotificationService"/>
+		<property name="settingsReader" ref="settingsService"/>
+	</bean>
+
+  <bean id="wishListEmailService"  class="com.elasticpath.service.shoppingcart.impl.WishListEmailServiceImpl">
+    <property name="emailService" ref="emailService" />
+    <property name="wishListEmailPropertyHelper" ref="wishListEmailPropertyHelper"/>
+  </bean>
+
+  <bean id="wishListEmailPropertyHelper" class="com.elasticpath.domain.misc.impl.WishListEmailPropertyHelperImpl">
+  </bean>
+
+	<bean id="categoryServiceTarget" parent="categoryServiceTargetTemplate">
+		<property name="categoryLoadTunerDefault" ref="CATEGORY_LOAD_TUNER_DEFAULT_PLUS_ATTRIBUTES"/>
+	</bean>
+
+	<bean id="localeUrlTool" class="com.elasticpath.sfweb.tools.impl.LocaleLinksToolImpl">
+		<property name="seoBuilderVar" ref="seoUrlBuilderProxy"/>
+		<property name="localeControllerUrl" value="${ep.localeUrlTool.localeControllerUrl}"/>
+	</bean>
+
+	<bean id="seoUrlValidator" class="com.elasticpath.sfweb.util.impl.SeoUrlValidatorImpl">
+		<property name="urlUtility" ref="urlUtility"/>
+		<property name="seoUrlBuilder" ref="seoUrlBuilderProxy"/>
+		<property name="requestHelper" ref="requestHelper"/>
+		<property name="enabled" value="true"/>
+		<property name="categoryUrlPattern" value="^(.*)/c[^/]*\.html[^/]*$"/>
+		<property name="sitemapUrlPattern" value="^(.*)/sitemap[^/]*\.html[^/]*$"/>
+	</bean>
+
+	<bean id="searchHostLocator" class="com.elasticpath.service.search.impl.SettingsSearchHostLocatorImpl">
+		<property name="settingsReader" ref="cachedSettingsReader" />
+	</bean>
+
+	<bean id="searchConfigFactory" class="com.elasticpath.sfweb.config.impl.StoreSearchConfigFactoryImpl">
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+		<property name="storeConfig" ref="threadLocalStorage"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="searchHostLocator" ref="searchHostLocator" />
+	</bean>
+
+	<bean id="intervalRefreshStrategy" class="com.elasticpath.settings.refreshstrategy.impl.IntervalRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService"/>
+		<property name="timeoutParamKey" value="timeout"/>
+	</bean>
+
+	<bean id="immediateRefreshStrategy" class="com.elasticpath.settings.refreshstrategy.impl.ImmediateRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="sessionRefreshStrategy" class="com.elasticpath.commons.httpsession.settings.impl.HttpSessionRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService" />
+		<property name="httpSessionHandle" ref="httpSessionHandle" />
+	</bean>
+
+	<bean id="applicationLifetimeRefreshStrategy" class="com.elasticpath.settings.refreshstrategy.impl.ApplicationLifetimeRefreshStrategyImpl">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="cachedSettingsReader" class="com.elasticpath.settings.impl.CachedSettingsReaderImpl" >
+		<property name="settingsService" ref="settingsService" />
+		<property name="refreshStrategies">
+			<map>
+				<entry key="interval" value-ref="intervalRefreshStrategy"/>
+				<entry key="immediate" value-ref="immediateRefreshStrategy"/>
+				<entry key="session" value-ref="sessionRefreshStrategy"/>
+				<entry key="application" value-ref="applicationLifetimeRefreshStrategy"/>
+			</map>
+		</property>
+		<property name="refreshStrategyKey" value="sfRefreshStrategy"/>
+		<property name="defaultRefreshStrategy" ref="immediateRefreshStrategy"/>
+	</bean>
+
+	<bean id="triggeredCacheInvalidationStrategy" class="com.elasticpath.commons.util.impl.TriggeredCacheInvalidationStrategyImpl">
+		<property name="invalidatableCaches">
+			<bean class="java.util.HashSet">
+				<constructor-arg>
+					<set>
+						<ref bean="messageSourceCache"/>
+						<ref bean="velocityConfigurer"/>
+						<ref bean="contentWrapperRepository"/>
+						<ref bean="storeResourceManager"/>
+						<ref bean="viewResolver"/>
+					</set>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="cookieHandler" class="com.elasticpath.sfweb.util.impl.DefaultCookieHandlerImpl">
+		<property name="cookieGenerators">
+			<list>
+				<bean class="org.springframework.web.util.CookieGenerator">
+					<property name="cookieName" value="customerSessionGuid"/>
+					<!-- this setting should probably match the store front context specified in module.properties -->
+					<property name="cookiePath" value="${ep.storefront.contextUrl}"/>
+					<!-- set the cookie max age to 10 years (60 * 60 * 24 * 365 * 10) -->
+					<property name="cookieMaxAge" value="315360000"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="templateModelFactory" class="com.elasticpath.sellingchannel.impl.TemplateModelFactoryImpl">
+	 	<property name="beanFactory" ref="coreBeanFactory" />
+	 	<property name="priceLookupFacade" ref="priceLookupFacade" />
+	 	<property name="productViewService" ref="productViewService" />
+	 	<property name="shoppingCartService" ref="shoppingCartService" />
+	 	<property name="storeProductLoadTuner" ref="productLoadTunerForProductPage" />
+		<property name="cartFormBeanFactory" ref="cartFormBeanFactory" />
+		<property name="productCharacteristicsService" ref="productCharacteristicsService"/>
+        <property name="moneyFormatter" ref="moneyFormatter"/>
+	</bean>
+
+	<!-- !!!! DOCcartFormBeanFactoryServiceSFXML -->
+	<bean id="cartFormBeanFactory" 
+		class="com.elasticpath.sfweb.controller.impl.ShoppingItemFormBeanContainerFactoryImpl" >
+        <property name="productSkuService" ref="productSkuService" />
+        <property name="productViewService" ref="productViewService" />
+		<property name="storeProductService" ref="storeProductService" />
+        <property name="priceLookupFacade" ref="priceLookupFacade" />
+        <property name="jsonBundleFactory" ref="jsonBundleFactory"/>
+        <property name="jsonBundleService" ref="jsonBundleService"/>
+		<property name="storeProductLoadTuner" ref="productLoadTunerForProductPage" />
+	 	<property name="beanFactory" ref="coreBeanFactory" />
+	 	<property name="shoppingItemAssembler" ref="shoppingItemAssembler" />
+	 	<property name="cartDirector" ref="cartDirector" />
+	 	<property name="requestHelper" ref="requestHelper"/>
+	</bean>
+	<!-- !!!! DOCcartFormBeanFactoryServiceSFXML -->
+
+	<bean id="shoppingItemDtoMapper" class="com.elasticpath.sfweb.controller.impl.ShoppingItemDtoMapperImpl" />
+
+	<bean id="shoppingCartFormBeanFactory" class="com.elasticpath.sfweb.controller.impl.ShoppingCartFormBeanFactoryImpl"
+			parent="cartFormBeanFactory">
+		<property name="couponUsageService" ref="couponUsageService"/>
+	</bean>
+
+	<bean id="billingAndReviewFormBeanFactory" class="com.elasticpath.sfweb.controller.impl.BillingAndReviewFormBeanFactoryImpl"
+			parent="cartFormBeanFactory">
+		<property name="checkoutService" ref="checkoutService"/>
+	</bean>
+
+	<bean id="paginationService" class="com.elasticpath.service.catalogview.impl.PaginationServiceImpl">
+		<property name="settingsReader" ref="cachedSettingsReader"/>
+	</bean>
+
+	<!-- Initialize OWASP ESAPI with the path to the ESAPI resources -->
+	<bean class="com.elasticpath.commons.beanframework.config.SystemPropertyInitializingBean">
+		<property name="systemProperties">
+			<map>
+				<entry key="org.owasp.esapi.resources" value-ref="securityPath"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Resolve the security path within the resource loader's classpath -->
+	<bean id="securityPath" class="com.elasticpath.commons.beanframework.config.ResourcePathFactoryBean">
+		<property name="path" value="WEB-INF/security"/>
+	</bean>
+
+
+	<!-- bean id="productLoadTunerForAutocompletion"
+				class="com.elasticpath.domain.catalog.impl.StoreProductLoadTunerImpl"
+				scope="prototype" parent="epDomain">
+				<property name="loadingDefaultCategory">
+					<value>true</value>
+				</property>
+				<property name="loadingSkus">
+					<value>false</value>
+				</property>
+				<property name="loadingProductType">
+					<value>false</value>
+				</property>
+				<property name="loadingAttributeValue">
+					<value>false</value>
+				</property>
+				<property name="loadingCategories">
+					<value>false</value>
+				</property>
+				<property name="loadingProductAssociations">
+					<value>false</value>
+				</property>
+				<property name="loadingDefaultSku">
+					<value>false</value>
+				</property>
+				<property name="productTypeLoadTuner">
+					<bean
+						class="com.elasticpath.domain.catalog.impl.ProductTypeLoadTunerImpl"
+						scope="prototype" parent="epDomain">
+						<property name="loadingSkuOptions">
+							<value>false</value>
+						</property>
+					</bean>
+				</property>
+				<property name="productSkuLoadTuner">
+					<bean
+						class="com.elasticpath.domain.catalog.impl.ProductSkuLoadTunerImpl"
+						scope="prototype" parent="epDomain">
+						<property name="loadingAttributeValue">
+							<value>false</value>
+						</property>
+						<property name="loadingOptionValue">
+							<value>false</value>
+						</property>
+						<property name="loadingProduct">
+							<value>false</value>
+						</property>
+						<property name="loadingDigitalAsset">
+							<value>false</value>
+						</property>
+					</bean>
+				</property>
+	</bean -->
+
+	<bean id="autocompletionSearchProductServiceTemplate" abstract="true" class="com.elasticpath.sfweb.ajax.service.impl.AutocompletionSearchProductServiceImpl" >
+		<property name="autocompletionEnabledHelper" ref="autoCompleteSearchEnabledHelper" />
+		<property name="autocompletionProductNameMaxLengthHelper" ref="autoCompleteSearchProductNameMaxLengthHelper" />
+		<property name="autocompletionProductDescriptionMaxLengthHelper" ref="autoCompleteSearchProductDescriptionMaxLengthHelper" />
+		<property name="priceEnabledHelper" ref="autoCompleteSearchPriceEnabledHelper" />
+		<property name="thumbnailEnabledHelper" ref="autoCompleteSearchThumbnailEnabledHelper" />
+		<property name="numberOfResultsHelper" ref="autoCompleteSearchNumberOfResultsHelper" />
+		<property name="seoEnabledHelper" ref="seoEnabledHelper" />
+
+		<property name="solrIndexSearcher" ref="solrIndexSearcher"/>
+		<property name="productService" ref="productService" />
+		<property name="priceBuilder" ref="priceBuilder" />
+		<property name="priceLookupFacade" ref="priceLookupFacade"/>
+  		<property name="requestHelper" ref="requestHelper"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="autocompletionProductLoadTuner" ref="productLoadTunerForBrowsingAndSearch"/>
+		<property name="storeSeoUrlBuilderFactory" ref="storeSeoUrlBuilderFactory"/>
+		<property name="storefrontContextUrl" value="${ep.storefront.contextUrl}" />
+		<property name="messageSource" ref="messageSource"/>
+		<property name="moneyFormatter" ref="moneyFormatter"/>
+	</bean>
+
+	<bean id="autocompletionSearchProductService" parent="autocompletionSearchProductServiceTemplate"/>
+
+	<bean id="priceBuilderTemplate" abstract="true" class="com.elasticpath.sfweb.ajax.service.impl.PriceBuilder">
+		<property name="moneyFormatter" ref="moneyFormatter"/>
+	</bean>
+
+	<bean id="priceBuilder" parent="priceBuilderTemplate" />
+
+	<bean id="priceFinderForCart" class="com.elasticpath.sfweb.util.impl.PriceFinderForCartImpl">
+		<property name="priceLookupFacade" ref="priceLookupFacade"/>
+	</bean>
+
+	<bean id="catalogViewResultBeanCreator" class="com.elasticpath.sfweb.search.impl.CatalogViewResultBeanCreator">
+		<property name="paginationService" ref="paginationService"/>
+		<property name="priceFinderForCart" ref="priceFinderForCart"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="productCharacteristicsService" ref="productCharacteristicsService"/>
+	</bean>
+
+	<bean id="storeSearchRequestFactoryTemplate" abstract="true" class="com.elasticpath.sfweb.search.impl.StoreSearchRequestFactoryImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+	</bean>
+
+	<bean id="storeSearchRequestFactory" parent="storeSearchRequestFactoryTemplate"/>
+
+	<bean id="advancedStoreSearchRequestFactory" class="com.elasticpath.sfweb.search.impl.AdvancedStoreSearchRequestFactoryImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="filterFactory" ref="advancedSearchFilterFactory"/>
+		<property name="parameterMapper" ref="parameterMapper"/>
+	</bean>
+
+	<bean id="parameterMapper" class="com.elasticpath.sfweb.view.helpers.ParameterMapper">
+		<property name="filterFactory" ref="advancedSearchFilterFactory" />
+	</bean>
+
+	<bean id="httpServletFacadeFactory" class="com.elasticpath.sfweb.servlet.facade.impl.HttpServletFacadeFactoryImpl">
+		<constructor-arg ref="requestHelper" />
+		<constructor-arg ref="ipAddressResolver" />
+		<constructor-arg ref="cookieHandler"/>
+    </bean>
+
+	<bean id="jsonBundleFactoryTemplate" abstract="true" class="com.elasticpath.sfweb.ajax.service.impl.JsonBundleFactoryImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="priceBuilder" ref="priceBuilder"/>
+	</bean>
+
+	<bean id="jsonBundleFactory" parent="jsonBundleFactoryTemplate" />
+
+	<bean id="jsonBundleServiceTemplate" abstract="true" class="com.elasticpath.sfweb.ajax.service.impl.JsonBundleServiceImpl">
+		<property name="elasticPath" ref="elasticPath" />
+		<property name="priceLookupFacade" ref="priceLookupFacade" />
+		<property name="requestHelper" ref="requestHelper" />
+		<property name="productSkuService" ref="productSkuService" />
+		<property name="messageSource" ref="messageSource"/>
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="priceBuilder" ref="priceBuilder"/>
+		<property name="cacheInvalidationStrategy" >
+			<bean class="com.elasticpath.commons.util.impl.TriggeredCacheInvalidationStrategyImpl">
+				<property name="invalidatableCaches">
+					<bean class="java.util.HashSet">
+						<constructor-arg>
+							<set>
+								<ref bean="cachingProductRetrieveStrategy"/>
+							</set>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="jsonBundleService" parent="jsonBundleServiceTemplate"/>
+	<bean id="storeService" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="com.elasticpath.sfweb.service.impl.CachingStoreServiceImpl">
+				<property name="persistenceEngine" ref="persistenceEngine"/>
+				<property name="elasticPath" ref="elasticPath"/>
+				<property name="fetchPlanHelper" ref="fetchPlanHelper"/>
+				<property name="indexNotificationService" ref="indexNotificationService"/>
+				<property name="storeCache" ref="cachingStoreRetrieveStrategy"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="shippingServiceLevelServiceTarget" parent="shippingServiceLevelServiceTargetTemplate"
+		  class="com.elasticpath.sfweb.service.impl.CachingShippingServiceLevelServiceImpl">
+		<property name="entityCache" ref="shippingServiceLevelEntityCache"/>
+	 </bean>
+
+ <bean id="requestScopedLocaleToolTemplate" abstract="true" class="com.elasticpath.sfweb.tools.impl.RequestScopedLocaleToolImpl">
+	<property name="storeConfig" ref="threadLocalStorage"/>
+	<property name="localeLinksTool" ref="localeUrlTool"/>
+ </bean>
+
+ <bean id="requestScopedLocaleTool" parent="requestScopedLocaleToolTemplate"/>
+
+</beans>

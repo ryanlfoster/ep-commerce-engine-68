@@ -1,0 +1,334 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## billingAndReview.vm
+#set($pageName = "checkout/billingAndReview.vm")
+#set($_scripts = "javaScript")
+#set($_content = "checkoutBody")
+#set($_breadcrumbs = "checkoutBreadcrumbBilling")
+#masterTemplate()
+
+#macro(javaScript)
+    <script language="javascript">
+    
+    //These functions are called when the user selects a payment option
+    function onPayPalSelect() {
+        hideNewCreditCardForm();
+        showPayPalContinueButton();
+        deselectExistingCards();
+    }
+    function onNewCreditCardSelect() {
+        showNewCreditCardForm();
+        showCheckoutButton();
+        deselectExistingCards();
+    }
+    function onExistingCreditCardSelect() {
+        hideNewCreditCardForm();
+        showCheckoutButton();
+        document.getElementById("NewCreditCard").checked="";
+        document.getElementById("PayPalExpress").checked="";
+    }
+    
+    
+    //Helper functions for setting state when a new payment option is selected
+    function hideNewCreditCardForm() {
+        document.getElementById("credit-card-info").style.display="none";
+    }
+    function showNewCreditCardForm() {
+        document.getElementById("credit-card-info").style.display="block";
+    }
+    function showPayPalContinueButton() {
+        document.getElementById("checkoutButton").style.display="none";
+        document.getElementById("continueButton").style.display="block";
+    }
+    function showCheckoutButton() {
+        document.getElementById("checkoutButton").style.display="block";
+        document.getElementById("continueButton").style.display="none";
+    }
+    function deselectExistingCards() {
+        var elements = document.getElementsByName("selectedExistingCreditCardUid");
+        for(var i = 0; i < elements.length; i++) {
+            elements[i].checked="";
+        }
+    }
+    </script>
+#end
+
+#macro(checkoutBody)
+  <div id="body">
+	#displayGlobalErrors("billingAndReviewFormBean")
+	<div class="clear20"></div>
+ 	#set($hasBillingAddress = true)
+	#if (!$!paypalExpressCheckoutSession.token && !$!billingAndReviewFormBean.getBillingAddress())
+		#set($hasBillingAddress = false)
+	#end
+	#set($customer = $sesShoppingCart.getCustomerSession().getCustomer())
+	#set($hasExistingCards = false)
+	#if ($customer.creditCards && $customer.creditCards.size() > 0)
+		#set($hasExistingCards = true)
+	#end
+
+    #set ($shippingAddress = $billingAndReviewFormBean.getShippingAddress())
+	#if($shippingAddress)
+        <div id="checkout-review-shipping">
+            <fieldset>
+                <legend>#springMessage("billingandreview.shipto")</legend>
+                <div>
+                    #displayAddress($shippingAddress)
+                </div>
+                <div><strong>#springMessage("billingandreview.shippingMethod")</strong></div>
+                #set ($shippingServiceLevel = $sesShoppingCart.getSelectedShippingServiceLevel())
+                #if ($shippingServiceLevel)
+                    <div>$shippingServiceLevel.getCarrier() - $shippingServiceLevel.getDisplayName($sesShoppingCart.getLocale(), true)</div>
+                #end
+            </fieldset>
+            <div class="fieldset-footer">
+                <form action=#if($!paypalExpressCheckoutSession.token)"$baseUrl/paypal-shortcut-begin.ep"#else"$baseUrl/shipping-address.ep"#end method="get" name="shippingAddressForm">
+                    <input id="changeShipping" type="submit" class="button-normal" value='#springMessage("globals.change")' />
+                    #if($!paypalExpressCheckoutSession.token)<input name="continue" type="hidden" value="true" />#end
+                </form>
+            </div>
+            
+        </div>
+	#else
+        <fieldset>
+            <legend>#springMessage("billingandreview.shipto")</legend>
+             #springMessage("billingandreview.shippingAddressNotRequired")
+        </fieldset>
+	#end
+	
+	#set($isPayPal = $!paypalExpressCheckoutSession.token && $shippingAddress)
+	#if($isPayPal)
+        <div id="checkout-review-billing">
+            <fieldset>
+                <legend>#springMessage("billingandreview.billto")</legend>
+                <div style="line-height: 2em;">
+                    Via PayPal &nbsp;<img style="vertical-align: middle;" src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif"/><br/>
+                    Account: $!paypalExpressCheckoutSession.emailId
+                </div>
+            </fieldset>     
+        </div>
+	#else
+        <div id="checkout-review-billing">
+            <fieldset>
+                <legend>#springMessage("billingandreview.billto")</legend>
+                <div>
+                    #set ($billingAddress = $billingAndReviewFormBean.getBillingAddress())
+                    #displayAddress($billingAddress)
+                </div>
+            </fieldset>
+            <div class="fieldset-footer">
+                <form action="$baseUrl/billing-address.ep" method="get" name="billingAddressForm">
+                    <input id="changeBilling" type="submit" class="button-normal" value='#springMessage("globals.change")' />
+                    #if(!$hasBillingAddress)
+                    <legend><span class="error-message-line">#springMessage("errors.noBillingAddress")</span></legend>
+                    #end
+                </form>
+            </div>      
+        </div>
+	#end
+	
+    <div class="clear20"></div>
+    <div id="cart">
+      <table>
+        <thead>
+          <tr>
+            <td class="action">&nbsp;</td>
+            <td class="img">&nbsp;</td>
+            <td class="desc">#springMessage("globals.description")</td>
+            <td class="unit-price">#springMessage("globals.unitPrice")</td>
+            <td class="qty">#springMessage("globals.qty")</td>
+            <td class="total-price">#springMessage("globals.total")</td>
+          </tr>
+        </thead>
+        <tbody>
+            #displayCartItems($sesShoppingCart true)
+        </tbody>
+      </table>
+    </div>
+    <div class="clear10"></div>
+    <form action="billing-and-review.ep" method="post" name="billingAndReviewFormBean">
+	    #if($sesShoppingCart.getTotal().floatValue() > 0)
+            <div id="checkout-review-payment">
+                <fieldset>
+                <legend>#springMessage("billingandreview.paymenttitle")</legend>
+                  
+                #if ($!paypalExpressCheckoutSession.token)
+                    <div style="line-height: 2em;">
+                        Via PayPal &nbsp;<img style="vertical-align: middle;" src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif"/><br/>
+                        Account: $!paypalExpressCheckoutSession.emailId
+                        #if($hasBillingAddress)
+                            <input type="hidden" name="selectedPaymentOption" id="PayPalExpress" value="PayPalExpress">
+                        #end
+                    </div>
+                #else
+                    <table border="0" cellpadding="3" cellspacing="0">
+                        ## Display PayPal
+                        <tr>
+                            #if($billingAndReviewFormBean.isPayPalEnabled())
+                                <td><input type="radio" onclick="onPayPalSelect();" name="selectedPaymentOption" id="PayPalExpress" value="PayPalExpress" #if($billingAndReviewFormBean.selectedPaymentOption=="PayPalExpress") checked="checked" #end/></td>
+                            #else
+                                <td><input type="radio" name="selectedPaymentOption" id="PayPalExpress" value="PayPalExpress" disabled="disabled"/></td>
+                            #end
+                            <td><label for="PayPalExpress">PayPal</label></td>
+                            <td><img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif"/></td>
+                        </tr>
+                         
+                        <tr>
+                            <td colspan="3">
+                                #if(!$billingAndReviewFormBean.isPayPalEnabled())
+                                    <span style="color: red;">
+                                        #springMessage("billingandreview.payPalDisabled")
+                                    </span>
+                                #end
+                                <div class="clear10"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <hr/>
+                            </td>
+                        </tr>
+                        
+                        ## Display existing credit cards
+                        #if ($hasExistingCards)
+                            <tr>
+                              <td></td> 
+                              <td colspan="2"><label for="existingCreditCard">#springMessage("billingandreview.payWithExistingCard")</label></td>
+                              <td></td>
+                            </tr>
+                            
+                            #set($index = 0)
+                            #foreach($creditCard in $customer.creditCards)
+                                <tr>
+                                    ##Determine if the card should be selected
+                                    #set($selected = false)
+                                    #if($billingAndReviewFormBean.selectedPaymentOption!="PayPalExpress" && $billingAndReviewFormBean.selectedPaymentOption != "NewCreditCard" && $billingAndReviewFormBean.selectedExistingCreditCardUid > 0 && $billingAndReviewFormBean.selectedExistingCreditCardUid == $creditCard.uidPk && $hasBillingAddress)
+                                        #set($selected = true)
+                                    #elseif ($billingAndReviewFormBean.selectedPaymentOption!="PayPalExpress" && $billingAndReviewFormBean.selectedPaymentOption != "NewCreditCard" && $billingAndReviewFormBean.selectedExistingCreditCardUid == 0 && $creditCard.isDefaultCard() && $hasBillingAddress ) 
+                                        #set($selected = true)
+                                    #end
+                                    
+                                    <td valign="top"><input type="radio" onclick="onExistingCreditCardSelect();" id="existingCreditCard" name="selectedExistingCreditCardUid" #if ($selected) checked="checked" #end value="$creditCard.uidPk" #if(!$hasBillingAddress) disabled="disabed" #end/></td>
+                                    <td colspan="2">
+                                        <table width="100%">
+                                            <tr>
+                                                <td class="action">${creditCard.cardType}: &nbsp $creditCard.maskedCardNumber #springMessage("billingandreview.exp") ${creditCard.expiryMonth}/${creditCard.expiryYear} <a href="$baseUrl/edit-credit-card.ep?creditCardID=$creditCard.uidPk&isCheckout=true">#springMessage("globals.cart.edit")</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    #springMessage("billingandreview.securitycode")* 
+                                                    #springFormInput("billingAndReviewFormBean.existingCreditCards[${index}].securityCode" "maxlength='4' size='3'")
+                                                    #springShowErrors("<br>" "req")
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                #set($index = $index + 1)               
+                            #end   
+                               
+                            <tr><td colspan="3"><hr/></td></tr>             
+                    
+                            <tr>
+                                <td colspan="3"><div class="clear10"></div></td>
+                            </tr>
+                            
+                        #end
+                        
+                        <tr>
+                            <td><input type="radio" onclick="onNewCreditCardSelect();" id="NewCreditCard" name="selectedPaymentOption" #if($billingAndReviewFormBean.selectedPaymentOption=="NewCreditCard" && $hasBillingAddress)checked="checked" #end value="NewCreditCard" #if(!$hasBillingAddress) disabled="disabed" #end/></td>
+                            <td><label for="NewCreditCard"> #if($hasExistingCards) #springMessage("billingandreview.newCreditCard") #else #springMessage("billingandreview.creditCard") #end</label></td>
+                            <td><img src="$baseUrl/template-resources/images/credit-cards.gif" width="208" height="23"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div class="clear10"></div></td>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <td colspan="2">
+							     ## new credit card 
+                                  <table id="credit-card-info" #if($billingAndReviewFormBean.selectedPaymentOption!="NewCreditCard") style="display:none" #end >
+                                    <tr>
+                                      <td align="right">#springMessage("billingandreview.paymentmethod")*</td>
+                                      <td>
+                                      #springFormSingleSelect("billingAndReviewFormBean.orderPaymentFormBean.cardType" $billingAndReviewFormBean.getCardTypeMap() "")
+                                      #springShowErrors("<br>" "req")
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right">#springMessage("billingandreview.cardholdername")*</td>
+                                      <td>
+                                      #springFormInput("billingAndReviewFormBean.orderPaymentFormBean.cardHolderName" "maxlength='100'")
+                                      #springShowErrors("<br>" "req")
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right">#springMessage("billingandreview.cardnumber")*</td>
+                                      <td>
+                                      #springFormInput("billingAndReviewFormBean.orderPaymentFormBean.unencryptedCardNumber" "maxlength='16'")
+                                      #springShowErrors("<br>" "req")
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right">#springMessage("billingandreview.securitycode")*</td>
+                                      <td>
+                                      #springFormInput("billingAndReviewFormBean.orderPaymentFormBean.cvv2Code" "maxlength='4' size='3'" )
+                                      #springShowErrors("<br>" "req")
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right">#springMessage("billingandreview.expirationdate")*</td>
+                                      <td>
+                                      #springFormSingleSelect("billingAndReviewFormBean.orderPaymentFormBean.expiryMonth" $billingAndReviewFormBean.getMonthMap() "")
+                                      #springShowErrors("<br>" "req")
+                                      /
+                                      #springFormSingleSelect("billingAndReviewFormBean.orderPaymentFormBean.expiryYear" $billingAndReviewFormBean.getYearMap() "")
+                                      #springShowErrors("<br>" "req")
+                                      </td>
+                                    </tr>
+                                    #if (!$customer.isAnonymous() && $saveCustomerCreditCards)
+                                        <tr>
+                                          <td align="right">#springMessage("billingandreview.saveCreditCardForFutureUse") </td>
+                                          <td>
+                                            #springFormCheckboxes("billingAndReviewFormBean.saveCreditCardForFutureUse" $ctxEp.getBoolMap() "" "")  
+                                          </td>
+                                        </tr>
+                                    #end
+                                  </table>
+                            </td>
+                        </tr>
+                    </table>
+                #end
+                </fieldset>
+            </div>
+		#else
+			<input type="hidden" name="selectedPaymentOption" value="GiftCertificate" />
+		#end
+		
+        <div id="checkout-review-totals">
+            #displayOrderSummary($sesShoppingCart)
+            <div class="fieldset-footer">
+                <input type="submit" class="checkout-button" id="checkoutButton" value="#springMessage('billingandreview.submitOrder')" #if($billingAndReviewFormBean.selectedPaymentOption=="PayPalExpress" && !$!paypalExpressCheckoutSession.token) style="display:none" #end/>
+                <input type="submit" class="checkout-button" id="continueButton" value="#springMessage('billingandreview.continueCheckout')" #if(($billingAndReviewFormBean.selectedPaymentOption!="PayPalExpress" && !$!paypalExpressCheckoutSession.token) || ($billingAndReviewFormBean.selectedPaymentOption=="PayPalExpress" && $!paypalExpressCheckoutSession.token)) style="display:none" #end/>
+            </div>
+        </div>
+        <div class="clear10"></div>
+    </form>
+  </div>
+#end
+
+#**
+* Display an address
+*#
+#macro (displayAddress $address)
+	#if($!address)
+	  $!address.firstName $!address.lastName<br />
+      $!address.street1<br />
+      #if($address.street2 && $address.street2.length() > 0)
+        $!address.street2 <br />
+      #end
+      $!address.city, #if($address.subCountry && $address.subCountry.length() > 0)$!address.subCountry, #end $!address.zipOrPostalCode</br>
+      $!ctxCountries.getCountries($!sesShoppingCart.locale).get($!address.country)<br />
+      $!address.phoneNumber<br />
+   #end
+#end
+

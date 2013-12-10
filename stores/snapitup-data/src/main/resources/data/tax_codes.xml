@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tax_codes>
+<code code="GOODS" guid="502"/>
+
+<code code="NONE" guid="501"/>
+
+<code code="SHIPPING" guid="500"/>
+</tax_codes>

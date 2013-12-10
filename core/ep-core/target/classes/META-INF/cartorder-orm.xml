@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+    <package>com.elasticpath.domain.cartorder.impl</package>
+    <entity class="CartOrderImpl">
+        <named-query name="CART_ORDER_BY_GUID">
+			<query>
+				SELECT co
+				FROM CartOrderImpl AS co
+				WHERE co.guid = ?1
+			</query>
+        </named-query>
+        <named-query name="CART_ORDER_BY_SHOPPING_CART_GUID">
+			<query>
+				SELECT co
+				FROM CartOrderImpl AS co
+				WHERE co.shoppingCartGuidInternal = ?1
+			</query>
+        </named-query>
+        <named-query name="DELETE_CART_ORDER_BY_SHOPPING_CART_GUID">
+			<query>
+				DELETE FROM CartOrderImpl co
+				WHERE co.shoppingCartGuidInternal = ?1
+			</query>
+        </named-query>
+         <named-query name="DELETE_CART_ORDERS_BY_SHOPPING_CART_GUIDS">
+			<query>
+				DELETE FROM CartOrderImpl co
+				WHERE co.shoppingCartGuidInternal IN (:list)
+			</query>
+        </named-query>
+        <named-query name="DELETE_ALL_CART_ORDERS_BY_SHOPPER_UID">
+            <query>DELETE FROM CartOrderImpl co WHERE co.shoppingCartGuidInternal IN (SELECT sc.guid FROM ShoppingCartMementoImpl sc WHERE sc.shopperUid in (:list))</query>
+        </named-query>
+        <named-query name="STORE_CODE_BY_CART_ORDER_GUID">
+			<query>
+				SELECT cart.storeCode
+				FROM CartOrderImpl AS co, ShoppingCartMementoImpl AS cart
+				WHERE co.guid = ?1
+                    AND co.shoppingCartGuidInternal = cart.guid
+            </query>
+        </named-query>
+        <named-query name="CART_ORDER_LAST_MODIFIED_DATE">
+			<query>
+				SELECT cart.lastModifiedDate
+				FROM CartOrderImpl AS co, ShoppingCartMementoImpl AS cart
+				WHERE co.guid = ?1
+                    AND co.shoppingCartGuidInternal = cart.guid
+            </query>
+        </named-query>
+        <named-query name="CART_ORDER_GUIDS_BY_CUSTOMER_GUID">
+			<query>
+				SELECT co.guid
+				FROM CartOrderImpl AS co, ShoppingCartMementoImpl AS cart, ShopperMementoImpl AS shopper
+				WHERE co.shoppingCartGuidInternal = cart.guid
+            		AND shopper.uidPk = cart.shopperUid 
+            		AND cart.storeCode = ?1
+            		AND shopper.customer.guid = ?2
+            </query>
+        </named-query>
+    </entity>
+</entity-mappings>

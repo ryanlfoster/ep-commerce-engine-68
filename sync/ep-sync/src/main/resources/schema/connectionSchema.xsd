@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="connectionconfiguration" type="connectionConfiguration"/>
+
+  <xs:complexType name="connectionConfiguration">
+    <xs:sequence>
+      <xs:element name="url" type="xs:string"/>
+      <xs:element name="login" type="xs:string"/>
+      <xs:element name="pwd" type="xs:string"/>
+      <xs:element name="driver" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+  </xs:complexType>
+
+</xs:schema>

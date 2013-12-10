@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		">
+	<bean name="businessObjectResolver" parent="abstractBusinessObjectResolver"/>
+	<bean id="abstractBusinessObjectResolver" abstract="true" class="com.elasticpath.service.changeset.impl.BusinessObjectResolverImpl">
+		<property name="beanFactory" ref="coreBeanFactory"/>
+		<property name="objectTypes">
+			<map key-type="java.lang.Class">
+				<entry key="com.elasticpath.domain.skuconfiguration.SkuOption" value="Sku Option"/>
+				<entry key="com.elasticpath.domain.skuconfiguration.SkuOptionValue" value="Sku Option Value"/>
+				<entry key="com.elasticpath.domain.catalog.ProductBundle" value="Product Bundle"/>
+				<entry key="com.elasticpath.domain.catalog.Product" value="Product"/>
+				<entry key="com.elasticpath.domain.catalog.ProductSku" value="Product SKU"/>
+				<entry key="com.elasticpath.domain.rules.Rule" value="Promotion"/>
+				<entry key="com.elasticpath.domain.catalog.Category" value="Category"/>
+				<entry key="com.elasticpath.domain.catalog.CategoryType" value="CategoryType"/>
+				<entry key="com.elasticpath.domain.catalog.Catalog" value="Catalog"/>
+				<entry key="com.elasticpath.domain.catalog.Brand" value="Brand"/>
+				<entry key="com.elasticpath.domain.catalog.ProductType" value="ProductType"/>
+				<entry key="com.elasticpath.domain.pricing.BaseAmount" value="Base Amount"/>
+				<entry key="com.elasticpath.domain.pricing.PriceListDescriptor" value="Price List Descriptor"/>
+				<entry key="com.elasticpath.domain.pricing.PriceListAssignment" value="Price List Assignment"/>
+				<entry key="com.elasticpath.domain.targetedselling.DynamicContentDelivery" value="Dynamic Content Delivery"/>
+				<entry key="com.elasticpath.domain.contentspace.DynamicContent" value="Dynamic Content"/>
+				<entry key="com.elasticpath.tags.domain.ConditionalExpression" value="Saved Condition"/>
+				<entry key="com.elasticpath.domain.attribute.Attribute" value="Attribute"/>
+
+			</map>
+		</property>
+		<property name="secondaryObjectTypes">
+			<map key-type="java.lang.Class">
+				<entry key="com.elasticpath.common.dto.pricing.BaseAmountDTO" value="Base Amount"/>
+				<entry key="com.elasticpath.common.dto.pricing.PriceListDescriptorDTO" value="Price List Descriptor"/>
+			</map>
+		</property>
+
+		<property name="objectGuidResolvers">
+			<map>
+				<entry key="com.elasticpath.domain.skuconfiguration.SkuOptionValue">
+					<bean class="com.elasticpath.service.changeset.impl.SkuOptionValueGuidResolver">
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.Category">
+					<bean class="com.elasticpath.service.changeset.impl.CategoryGuidResolver">
+						<property name="categoryGuidUtil" ref="categoryGuidUtil"/>
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.Catalog">
+					<bean class="com.elasticpath.service.changeset.impl.CatalogGuidResolver"/>
+				</entry>
+				<entry key="com.elasticpath.common.dto.pricing.BaseAmountDTO">
+					<bean class="com.elasticpath.service.changeset.impl.BaseAmountDTOGuidResolver">
+						<property name="beanFactory" ref="coreBeanFactory"/>
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.common.dto.pricing.PriceListDescriptorDTO">
+					<bean class="com.elasticpath.service.changeset.impl.PriceListDescriptorDTOGuidResolver">
+						<property name="beanFactory" ref="coreBeanFactory"/>
+					</bean>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.ProductSku">
+					<bean class="com.elasticpath.service.changeset.impl.ProductSkuGuidResolver"/>
+				</entry>
+			</map>
+		</property>
+		<property name="defaultObjectGuidResolver" ref="defaultObjectGuidResolver"/>
+	</bean>
+
+	<bean id="defaultObjectGuidResolver" class="com.elasticpath.service.changeset.impl.DefaultObjectGuidResolver"/>
+</beans>

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.cloudbees.plugins.flow.BuildFlow plugin="build-flow-plugin@0.9">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>SCM_URL</name>
+          <description>Path to pull source code from.</description>
+          <defaultValue>git@github.elasticpath.net:Hive/commerce-engine.git</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SCM_REVISION</name>
+          <description>Which revision to build.</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>origin</name>
+        <refspec>+refs/heads/*:refs/remotes/origin/*</refspec>
+        <url>$SCM_URL</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>$SCM_REVISION</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <localBranch>last-build</localBranch>
+    <disableSubmodules>false</disableSubmodules>
+    <recursiveSubmodules>false</recursiveSubmodules>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>true</clean>
+    <wipeOutWorkspace>true</wipeOutWorkspace>
+    <pruneBranches>true</pruneBranches>
+    <remotePoll>false</remotePoll>
+    <ignoreNotifyCommit>false</ignoreNotifyCommit>
+    <useShallowClone>false</useShallowClone>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <submoduleCfg class="list"/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
+    <skipTag>false</skipTag>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec># Poll source control every 10 minutes
+*/10 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders/>
+  <publishers/>
+  <buildWrappers/>
+  <icon/>
+  <dsl>//start flow pipeline
+buildStart = build( &quot;6.8.x-Main-Build&quot; )
+
+//define parameters
+def ciParams = [
+	&quot;SCM_URL&quot;: buildStart.build.environment.SCM_URL ,
+	&quot;SCM_REVISION&quot;: buildStart.build.environment.GIT_COMMIT,
+	&quot;SNAPSHOT_REPOSITORY_ID&quot;:&quot;6.8.x-ep-platform-snapshot-&quot; + buildStart.build.environment.BUILD_NUMBER + &quot;-&quot; + buildStart.build.environment.GIT_COMMIT, 
+	&quot;EP_PLATFORM_SITE_URL&quot;: &quot;dav:https://buildrepo.elasticpath.net/epweb/pd/site/CI&quot;
+]
+//run downstream
+downstream = parallel (
+    analysis: { build(ciParams,&quot;6.8.x-Analysis&quot; ) },
+    deploy: { 
+        archetypes = build(ciParams,&quot;6.8.x-Archetypes&quot;)
+        deploymentPackage = build(ciParams,&quot;6.8.x-Deployment-Package&quot;)
+    },
+    javadoc: { build(ciParams,&quot;6.8.x-Javadoc&quot;) },
+    fitTestsAuditing: { build(ciParams,&quot;6.8.x-FIT-Tests-Auditing&quot;) },
+    fitTestsCore: { build(ciParams,&quot;6.8.x-FIT-Tests-Core&quot;) },
+    fitTestsImportExport: { build(ciParams,&quot;6.8.x-FIT-Tests-ImportExport&quot;) },
+    fitTestsQL: { build(ciParams,&quot;6.8.x-FIT-Tests-QL&quot;)},
+    fitTestsSF: { build(ciParams,&quot;6.8.x-FIT-Tests-SF&quot;) },
+    fitSearch: { build(ciParams,&quot;6.8.x-FIT-Tests-Search&quot;) },
+    fitSync: { build(ciParams,&quot;6.8.x-FIT-Tests-Sync&quot;) },
+    integrationTestsCMServer: { build(ciParams,&quot;6.8.x-Integration-Tests-CMServer&quot;)},
+    integrationTestsCore: { build(ciParams,&quot;6.8.x-Integration-Tests-Core&quot;)},
+    integrationTestsSF: { build(ciParams,&quot;6.8.x-Integration-Tests-SF&quot;)}
+)
+</dsl>
+</com.cloudbees.plugins.flow.BuildFlow>

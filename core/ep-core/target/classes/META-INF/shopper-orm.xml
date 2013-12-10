@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+    <package>com.elasticpath.domain.shopper.impl</package>
+ 	<entity class="ShopperMementoImpl">
+        <named-query name="DELETE_NON_DEPENDANT_SHOPPER_BY_UID_LIST">
+            <query>
+				DELETE FROM ShopperMementoImpl sc
+				WHERE sc.uidPk IN (:list)
+                    AND NOT EXISTS (SELECT scart FROM ShoppingCartMementoImpl scart where scart.shopperUid = sc.uidPk)
+                    AND NOT EXISTS (SELECT wl FROM WishListImpl wl where wl.shopperUid = sc.uidPk)
+            </query>
+        </named-query>
+          <named-query name="DELETE_SHOPPER_BY_UID_LIST">
+            <query>
+				DELETE FROM ShopperMementoImpl sc
+				WHERE sc.uidPk IN (?1)
+            </query>
+        </named-query>
+        <named-query name="FIND_SHOPPER_BY_CUSTOMER_GUID_AND_STORECODE">
+            <query>
+            	SELECT s 
+            	FROM ShopperMementoImpl s 
+            	WHERE s.customer.guid = ?1 AND s.storeCode = ?2
+            	ORDER BY s.uidPk
+            </query>
+        </named-query>
+         <named-query name="FIND_SHOPPER_BY_CUSTOMER_GUID">
+            <query>
+                SELECT s.uidPk
+                FROM ShopperMementoImpl s 
+                WHERE s.customer.guid = ?1
+            </query>
+        </named-query>
+        <named-query name="FIND_SHOPPER_UIDS_BY_CUSTOMER_UIDS">
+            <query>
+                SELECT s.uidPk
+                FROM ShopperMementoImpl s 
+                WHERE s.customer.uidPk IN (:list)
+            </query>
+        </named-query>
+        <named-query name="GET_SHOPPERS_ORPHANED_BY_CUSTOMER_SESSION">
+            <query>
+            	SELECT s 
+            	FROM ShopperMementoImpl s 
+            	WHERE s.uidPk NOT IN (
+            		SELECT cs.shopperUid FROM com.elasticpath.domain.customer.impl.CustomerSessionMementoImpl cs
+            	)
+            </query>
+        </named-query>
+        <named-query name="REMOVE_SHOPPERS_IF_ORPHANED">
+            <query>
+				DELETE FROM ShopperMementoImpl s
+				WHERE s.uidPk = ?1
+				AND s.uidPk NOT IN (
+					SELECT cs.shopperUid FROM com.elasticpath.domain.customer.impl.CustomerSessionMementoImpl cs
+				)
+            </query>
+        </named-query>
+    </entity>
+</entity-mappings>
+

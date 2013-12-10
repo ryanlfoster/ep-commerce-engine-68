@@ -1,0 +1,81 @@
+## Copyright (c) Elastic Path Software Inc., 2006
+## index.vm
+<?xml version="1.0" encoding="utf-8"?>
+#set($pageName = "index.vm")
+#templateInit()
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	#parse("includes/head.vm")
+	</head>
+	<body>
+		<div id="wrapper">
+			#parse("includes/header.vm")
+			#parse("includes/topmenu.vm")
+			## Note below the double quotes are important - causes contents to be evaluated
+			#contentspace('top_banner', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>top_banner</font></div>")
+			 #contentspace('HomepageHero', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>HomepageHero</font></div>")      
+			 <div class="offers">
+				<div class="offerA">
+				   #contentspace('HomepageOfferTopLeft', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>HomepageOfferTopLeft</font></div>") 
+				</div>
+				<div class="offerB">
+				   #contentspace('HomepageOfferTopMiddle', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>HomepageOfferTopMiddle</font></div>")  
+				</div>
+				<div class="offerC">
+				   #contentspace('HomepageOfferTopRight', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>HomepageOfferTopRight</font></div>")  
+			  </div>
+			</div>
+			<div class="fp-feature-1">
+				#contentspace('HomepageOfferBottomLeft', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>HomepageOfferBottomLeft</font></div>")
+			</div>
+			<div class="fp-feature-2">
+				#contentspace('HomepageOfferBottomRight', "<div class='content-space-default'>No default content has been specified for this content Space <font style='color: #f00;'>HomepageOfferBottomRight</font></div>")
+			</div>
+			<div class="clear20"></div>
+			<div id="fp-category-grid">
+				<ul>
+ 					<li class="fp-category-img"><a href="$baseUrl/digital-cameras/c90000003-p1.html"><img src="$baseUrl/template-resources/images/fp-cat-ico-digital-cameras.jpg" alt="Digital Cameras" border="0" /></a></li>
+ 					<li class="fp-category-name"><h2><a href="$baseUrl/digital-cameras/c90000003-p1.html">#springMessage("index.c90000003")</a></h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/digital-slrs/c90000017-p1.html">#springMessage("index.c90000017")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/digital-style-slrs/c90000018-p1.html">#springMessage("index.c90000018")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/digital-with-printer-dock/c90000019-p1.html">#springMessage("index.c90000019")</a></li>
+ 				</ul>
+ 				<ul>
+ 					<li class="fp-category-img"><a href="$baseUrl/film-cameras/c90000004-p1.html"><img src="$baseUrl/template-resources/images/fp-cat-ico-film-cameras.jpg" alt="Film Cameras" border="0" /></a></li>
+ 					<li class="fp-category-name"><h2><a href="$baseUrl/film-cameras/c90000004-p1.html">#springMessage("index.c90000004")</a></h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/point-shoot-camera/c90000009-p1.html">#springMessage("index.c90000009")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/single-use-camera/c90000010-p1.html">#springMessage("index.c90000010")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/slr-camera/c90000011-p1.html">#springMessage("index.c90000011")</a></li>
+ 					<li class="fp-category-name"><a href="$baseUrl/film-cameras/c90000004-p1.html">#springMessage("index.more") #springMessage("index.c90000004")...</a></li>
+ 				</ul>
+ 				<ul>
+ 					<li class="fp-category-img"><a href="$baseUrl/camcorders/c90000002-p1.html"><img src="$baseUrl/template-resources/images/fp-cat-ico-camcorders.jpg" alt="Camcorders" border="0" /></a></li>
+ 					<li class="fp-category-name"><h2><a href="$baseUrl/camcorders/c90000002-p1.html">#springMessage("index.c90000002")</a></h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/mini-dv/c90000021-p1.html">#springMessage("index.c90000021")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/digital8/c90000022-p1.html">#springMessage("index.c90000022")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/3-dvd/c90000026-p1.html">#springMessage("index.c90000026")</a></li>
+ 					<li class="fp-category-name"><a href="$baseUrl/camcorders/c90000002-p1.html">#springMessage("index.more") #springMessage("index.c90000002")...</a></li>
+ 				</ul>
+ 				<ul>
+ 					<li class="fp-category-img"><a href="$baseUrl/optics/c90000005-p1.html"><img src="$baseUrl/template-resources/images/fp-cat-ico-optics.jpg" alt="Optics" border="0" /></a></li>
+ 					<li class="fp-category-name"><h2><a href="$baseUrl/optics/c90000005-p1.html">#springMessage("index.c90000005")</a></h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/binoculars/c90000014-p1.html">#springMessage("index.c90000014")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/telescopes/c90000015-p1.html">#springMessage("index.c90000015")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/tripods/c90000016-p1.html">#springMessage("index.c90000016")</a></li>
+ 				</ul>
+ 				<ul>
+ 					<li class="fp-category-img"><a href="$baseUrl/accessories/c90000006-p1.html"><img src="$baseUrl/template-resources/images/fp-cat-ico-accessories.jpg" alt="Accessories" border="0" /></a></li>
+ 					<li class="fp-category-name"><h2><a href="$baseUrl/accessories/c90000006-p1.html">#springMessage("index.c90000006")</a></h2></li>
+					<li class="fp-category-name"><a href="$baseUrl/carrying-cases/c90000028-p1.html">#springMessage("index.c90000028")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/flash-memory/c90000029-p1.html">#springMessage("index.c90000029")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/power-devices-batteries/c90000030-p1.html">#springMessage("index.c90000030")</a></li>
+					<li class="fp-category-name"><a href="$baseUrl/accessories/c90000006-p1.html">#springMessage("index.more") #springMessage("index.c90000006")...</a></li>
+ 				</ul>
+ 			</div>
+ 			<div class="clear20"></div>
+		</div>
+		#parse("includes/footer.vm")
+	</body>
+</html>

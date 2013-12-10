@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+
+	<!-- !!!! DOCsync-merge-configurationXML -->
+	<bean id="mergeBoundarySpecification" parent="abstractMergeBoundarySpecification"/>
+	<bean id="abstractMergeBoundarySpecification" abstract="true" class="com.elasticpath.tools.sync.merge.configuration.impl.MergeBoundarySpecificationImpl">
+		<property name="mergeBoundaryMap">
+			<map>
+				<entry key="com.elasticpath.domain.contentspace.impl.DynamicContentImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.pricing.impl.PriceListAssignmentImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.pricing.impl.PriceListDescriptorImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.targetedselling.impl.DynamicContentDeliveryImpl">
+					<set>
+						<value>com.elasticpath.domain.contentspace.impl.ContentSpaceImpl</value>
+						<value>com.elasticpath.domain.contentspace.impl.DynamicContentImpl</value>
+					</set>
+				</entry>
+				
+				<entry key="com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl">
+					<set> 
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+					</set>
+				</entry>
+
+				<entry key="com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl">
+					<set> 
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</value>
+					</set>
+				</entry>
+				
+				<entry key="com.elasticpath.domain.pricing.impl.PriceListDescriptorImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.pricing.impl.BaseAmountImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.LinkedCategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.BrandImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductTypeImpl</value>
+						<value>com.elasticpath.domain.tax.impl.TaxCodeImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductBundleImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.LinkedCategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.BrandImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductBundleImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductTypeImpl</value>
+						<value>com.elasticpath.domain.tax.impl.TaxCodeImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductSkuImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl</value>
+					</set>
+				</entry>
+				<!-- !!!! DOCsync-merge-configurationXML -->
+				<entry key="com.elasticpath.domain.rules.impl.PromotionRuleImpl">
+					<set>
+						<value>com.elasticpath.domain.rules.impl.RuleSetImpl</value>
+						<value>com.elasticpath.domain.store.impl.StoreImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CategoryImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.LinkedCategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CategoryTypeImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.LinkedCategoryImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.LinkedCategoryImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CategoryTypeImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CatalogImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.tags.domain.impl.ConditionalExpressionImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.rules.impl.CouponConfigImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.rules.impl.CouponImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.rules.impl.CouponUsageImpl">
+					<set/>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductAssociationImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.ProductImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductSkuImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductCategoryImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.ProductImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.ProductBundleImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CategoryImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CategoryTypeImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.attribute.impl.AttributeImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductTypeImpl">
+					<set>
+					    <value>com.elasticpath.domain.tax.impl.TaxCodeImpl</value>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+						<value>com.elasticpath.domain.attribute.impl.AttributeImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl</value>
+						<value>com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl</value>
+					</set>
+				</entry>
+				<entry key="com.elasticpath.domain.catalog.impl.BrandImpl">
+					<set>
+						<value>com.elasticpath.domain.catalog.impl.CatalogImpl</value>
+					</set>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="dynamicContentLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.DynamicContentLocatorImpl">
+		<property name="dynamicContentService" ref="dynamicContentService" />
+	</bean>
+	<bean id="productCategoryLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductCategoryLocator">
+ 		<property name="productCategoryService" ref="productCategoryService"/>
+	</bean>
+	<bean id="priceListAssignmentLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.PriceListAssignmentLocatorImpl">
+    	<property name="priceListAssignmentService" ref="priceListAssignmentService" />
+	</bean>
+
+	<bean id="dynamicContentDeliveryLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.DynamicContentDeliveryLocatorImpl">
+    	<property name="dynamicContentDeliveryService" ref="dynamicContentDeliveryService" />
+	</bean>
+
+	<bean id="contentSpaceLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ContentSpaceLocatorImpl">
+    	<property name="contentSpaceService" ref="contentspaceService" />
+	</bean>
+	
+	<!-- !!!! DOCsync-merge-configurationXML3 -->
+	<bean id="priceListDescriptorLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.PriceListDescriptorLocatorImpl">
+		<property name="priceListDescriptorService" ref="priceListDescriptorService" />
+	</bean>
+	<!-- !!!! DOCsync-merge-configurationXML3 -->
+	
+	<bean id="baseAmountLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.BaseAmountLocatorImpl">
+		<property name="baseAmountService" ref="baseAmountService"/>
+	</bean>
+
+	<bean id="productBundleLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductBundleLocatorImpl">
+        <property name="productBundleService" ref="productBundleService" />
+        <property name="productBundleSortLoadTuner">
+	        <bean id="productBundleSortFetchGroup" class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl">
+		  		<property name="fetchGroups">
+		   			<list>
+		   				<value>bundleConstituentsInfiniteDepth</value>
+		   			</list>
+		      	</property>
+	      	</bean>
+      	</property>
+   	</bean>
+    
+    <bean id="brandLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.BrandLocatorImpl">
+        <property name="brandService" ref="brandService"/>
+    </bean>
+    
+    <bean id="productTypeLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductTypeLocatorImpl">
+    	<property name="productTypeService" ref="productTypeService"/>
+    </bean>
+    
+    <bean id="categoryLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.CategoryLocatorImpl">
+    	<property name="categoryService" ref="categoryService"/>
+		<property name="categorySortLoadTuner">
+            <bean class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl">
+                <property name="fetchGroups">
+                    <list>
+                        <value>infiniteParentCategoryDepth</value>
+                        <value>categoryHashMinimal</value>
+                    </list>
+                </property>
+            </bean>
+        </property>       
+    </bean>  
+              
+    <bean id="productLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductLocatorImpl">
+		<property name="productService" ref="productService"/>
+    </bean>
+    
+    <bean id="catalogLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.CatalogLocatorImpl">
+		<property name="catalogService" ref="catalogService"/>
+    </bean>
+    
+    <bean id="taxCodeLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.TaxCodeLocatorImpl">
+		<property name="taxCodeService" ref="taxCodeService"/>
+    </bean>
+    
+    <bean id="attributeLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.AttributeLocatorImpl">
+		<property name="attributeService" ref="attributeService"/>
+    </bean>
+    
+    <bean id="skuOptionLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.SkuOptionLocatorImpl">
+		<property name="skuOptionService" ref="skuOptionService"/>
+    </bean>
+    
+    <bean id="skuOptionValueLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.SkuOptionValueLocatorImpl">
+		<property name="skuOptionService" ref="skuOptionService"/>
+    </bean>
+    
+    <bean id="storeLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.StoreLocatorImpl">
+		<property name="storeService" ref="storeService"/>
+    </bean>
+    
+    <bean id="ruleSetLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.RuleSetLocatorImpl">
+		<property name="ruleSetService" ref="ruleSetService"/>
+    </bean>
+    
+    <bean id="ruleLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.RuleLocatorImpl">
+		<property name="ruleService" ref="ruleService"/>
+    </bean>
+    
+    <bean id="categoryTypeLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.CategoryTypeLocatorImpl">
+		<property name="categoryTypeService" ref="categoryTypeService"/>
+    </bean>
+
+    <bean id="productSkuLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductSkuLocatorImpl">
+		<property name="productSkuService" ref="productSkuService"/>
+    </bean>
+
+    <bean id="conditionalExpressionLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ConditionalExpressionLocatorImpl">
+		<property name="tagConditionService" ref="tagConditionService"/>
+    </bean>
+    
+    <bean id="sellingContextLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.SellingContextLocatorImpl">
+		<property name="sellingContextService" ref="sellingContextService" />
+	</bean>
+    
+    <bean id="productAssociationLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.ProductAssociationLocatorImpl">
+		<property name="productAssociationService" ref="productAssociationService"/>
+		<property name="productAssociationLoadTuner">
+			<bean class="com.elasticpath.domain.catalog.impl.ProductAssociationLoadTunerImpl">
+				<property name="loadingCatalog" value="true"/>
+			</bean>
+		</property>
+    </bean>
+
+    <bean id="couponConfigLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.CouponConfigLocatorImpl">
+		<property name="couponConfigService" ref="couponConfigService"/>
+    </bean>
+
+    <bean id="couponLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.CouponLocatorImpl">
+		<property name="couponService" ref="couponService"/>
+    </bean>
+    
+    <bean id="couponUsageLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.CouponUsageLocatorImpl">
+		<property name="couponUsageService" ref="couponUsageService"/>
+    </bean>
+        
+      <bean id="simpleLRUCache" class="org.apache.lucene.util.cache.SimpleLRUCache">
+       <constructor-arg type="int"><value>2048</value></constructor-arg>
+       </bean>
+       
+    <!-- !!!! DOCsync-merge-configurationXML2 -->
+	<bean id="entityLocator" parent="abstractEntityLocator"/>
+    <bean id="abstractEntityLocator" abstract="true" class="com.elasticpath.tools.sync.merge.configuration.impl.EntityLocatorDelegateImpl">
+    	<property name="guidLocator" ref="guidLocator"/>
+        <property name="refCache" ref="simpleLRUCache" />
+    	<property name="entityLocators">
+			<list>
+				<!-- Add new object locator here -->
+				<ref bean="baseAmountLocator" />
+				<ref bean="dynamicContentLocator"/>
+				<ref bean="productAssociationLocator" />
+				<ref bean="contentSpaceLocator"/>	
+				<ref bean="dynamicContentDeliveryLocator"/>
+				<ref bean="priceListAssignmentLocator" />
+				<ref bean="priceListDescriptorLocator" />
+				<ref bean="productBundleLocator" />
+				<ref bean="brandLocator" />
+				<ref bean="productTypeLocator" />
+				<ref bean="categoryLocator" />
+				<ref bean="productLocator" />
+				<ref bean="catalogLocator" />
+				<ref bean="categoryTypeLocator" />
+				<ref bean="taxCodeLocator" />
+				<ref bean="attributeLocator" />
+				<ref bean="skuOptionLocator" />
+				<ref bean="skuOptionValueLocator" />
+				<ref bean="storeLocator" />
+				<ref bean="ruleSetLocator" />
+				<ref bean="ruleLocator" />
+				<ref bean="productSkuLocator" />
+				<ref bean="conditionalExpressionLocator" />
+				<ref bean="sellingContextLocator" />
+				<ref bean="couponConfigLocator" />
+				<ref bean="couponLocator" />
+				<ref bean="couponUsageLocator" />
+				<ref bean="productCategoryLocator"/>				
+			</list>
+		</property>
+		<property name="emptyFetchGroupLoadTuner">
+			<bean class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl"/>
+		</property>
+    </bean>
+	<!-- !!!! DOCsync-merge-configurationXML2 -->
+
+	<!-- !!!! DOCsync-merge-configurationXML1 -->
+	<bean id="guidLocator" class="com.elasticpath.tools.sync.merge.configuration.impl.GuidLocatorImpl">
+		<property name="guidMethodNames">
+			<map>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductTypeImpl"><value>getName</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.BrandImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.LinkedCategoryImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductAssociationImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CategoryImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductBundleImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.BundleConstituentImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.pricing.impl.PriceAdjustmentImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.tax.impl.TaxCodeImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CatalogImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductSkuImpl"><value>getSkuCode</value></entry>
+				<entry key="com.elasticpath.domain.attribute.impl.AttributeImpl"><value>getKey</value></entry>
+				<entry key="com.elasticpath.domain.skuconfiguration.impl.SkuOptionImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.skuconfiguration.impl.SkuOptionValueImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.skuconfiguration.impl.JpaAdaptorOfSkuOptionValueImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.store.impl.StoreImpl"><value>getCode</value></entry>
+				<entry key="com.elasticpath.domain.rules.impl.RuleSetImpl"><value>getName</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.CategoryTypeImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductTypeImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.catalog.impl.BrandImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.attribute.impl.AttributeImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.pricing.impl.BaseAmountImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.pricing.impl.PriceListDescriptorImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.pricing.impl.PriceListAssignmentImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.tags.domain.impl.ConditionalExpressionImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.contentspace.impl.ParameterValueImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.contentspace.impl.ParameterLocaleDependantValueImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.targetedselling.impl.DynamicContentDeliveryImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.contentspace.impl.DynamicContentImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.contentspace.impl.ContentSpaceImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.sellingcontext.impl.SellingContextImpl"><value>getGuid</value></entry>
+				<entry key="com.elasticpath.domain.rules.impl.CouponConfigImpl"><value>getRuleCode</value></entry>
+				<entry key="com.elasticpath.domain.rules.impl.CouponImpl"><value>getGuid</value></entry>				
+				<entry key="com.elasticpath.domain.rules.impl.CouponUsageImpl"><value>getGuid</value></entry>				
+			</map>
+		</property>
+	</bean>
+	<!-- !!!! DOCsync-merge-configurationXML1 -->
+
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+        
+    <!-- Required for embedded ActiveMQ: 
+         import resource="activemq-broker.xml"
+    -->       
+    <import resource="activemq-broker.xml"/>
+    
+	<bean id="messagingGateway" 
+		  class="com.elasticpath.eisupport.client.impl.JMSClientImpl">
+		<property name="jmsTemplate" ref="jmsTemplateWithJencksPool" />
+	</bean>
+        
+    <!-- spring connection factory without pool    
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestinationName" value="ordersNew" />							
+	</bean>
+	-->
+	
+	<!-- connection factory with jencks pool -->
+	<bean id="jmsResourceAdapter" class="org.apache.activemq.ra.ActiveMQResourceAdapter">
+		<property name="serverUrl" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="jmsTransactionManager" class="org.jencks.factory.TransactionManagerFactoryBean" />
+
+	<bean id="connectionManager" class="org.jencks.factory.ConnectionManagerFactoryBean">
+		<property name="transactionManager" ref="jmsTransactionManager" />
+		<property name="poolMaxSize" value="20" />
+	</bean>
+
+	<bean id="jmsManagedConnectionFactory" class="org.apache.activemq.ra.ActiveMQManagedConnectionFactory">
+		<property name="resourceAdapter" ref="jmsResourceAdapter" />
+	</bean>
+
+	<bean id="jencksConnectionFactory" class="org.jencks.factory.ConnectionFactoryFactoryBean">
+		<property name="managedConnectionFactory" ref="jmsManagedConnectionFactory" />
+		<property name="connectionManager" ref="connectionManager" />
+	</bean>
+	
+	<bean id="jmsTemplateWithJencksPool" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jencksConnectionFactory" />
+		<property name="defaultDestinationName" value="ordersNew" />
+	</bean>
+
+    
+</beans>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+	<package>com.elasticpath.domain.tax.impl</package>
+	<entity class="TaxCodeImpl">
+		<named-query name="TAXCODE_SELECT_ALL">
+			<query>
+				SELECT tc
+				FROM TaxCodeImpl as tc
+			</query>
+		</named-query>
+		<named-query name="TAXCODE_FIND_BY_CODE">
+			<query>
+				SELECT tc
+				FROM TaxCodeImpl as tc
+				WHERE tc.code = ?1
+			</query>
+		</named-query>
+		<named-query name="TAXCODE_FIND_BY_GUID">
+			<query>
+				SELECT tc
+				FROM TaxCodeImpl as tc
+				WHERE tc.guid = ?1
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TaxJurisdictionImpl">
+		<named-query name="TAXJURISDICTION_FIND_BY_GUID">
+			<query>
+				SELECT tj
+				FROM TaxJurisdictionImpl as tj
+				WHERE tj.guid = ?1
+			</query>
+		</named-query>
+		<named-query name="TAXJURISDICTION_SELECT_ALL">
+			<query>
+				SELECT tj
+				FROM TaxJurisdictionImpl as tj
+			</query>
+		</named-query>
+		<named-query name="TAXJURISDICTION_SELECT_BY_COUNTRY_CODE">
+			<query>
+				SELECT tj
+				FROM TaxJurisdictionImpl as tj
+				WHERE tj.regionCode = ?1
+			</query>
+		</named-query>
+		<named-query name="SELECT_COUNTRIES_IN_USE">
+			<query>
+				SELECT tj.regionCode
+				FROM TaxJurisdictionImpl as tj
+			</query>
+		</named-query>
+		<named-query name="TAX_JURISDICTION_BY_UIDS">
+			<query>
+				SELECT tj
+				FROM TaxJurisdictionImpl as tj
+				WHERE tj.uidPk in (:list)
+			</query>
+		</named-query>
+		<named-query name="TAX_JURISDICTION_BY_GUIDS">
+			<query>
+				SELECT tj
+				FROM TaxJurisdictionImpl as tj
+				WHERE tj.guid in (:list)
+			</query>
+		</named-query>
+		<named-query name="TAX_JURISDICTIONS_FROM_STORE_BY_COUNTRY_CODE">
+			<query>
+				SELECT DISTINCT tj
+				FROM StoreImpl s JOIN s.taxJurisdictions tj
+				WHERE s.code = ?1
+				AND tj.regionCode = ?2
+			</query>
+		</named-query>
+	</entity>
+	<entity class="TaxValueImpl">
+		<named-query name="TAX_CODES_WITH_VALUE">
+			<query>
+				SELECT distinct tv.taxCode.code
+				FROM TaxValueImpl as tv
+			</query>
+		</named-query>
+	</entity>
+</entity-mappings>
+

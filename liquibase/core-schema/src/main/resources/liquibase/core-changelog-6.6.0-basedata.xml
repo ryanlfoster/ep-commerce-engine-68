@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:ep="http://www.elasticpath.com/liquibase/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+	logicalFilePath="com/elasticpath/core/db/core-changelog-6.6.0-basedata.xml">
+	
+	<!-- This file contains a liquibase change log of any data inserts/changes required for 6.6.0 -->
+	
+	<!-- Add the setting definition for list pagination but only if it doesn't already exist (may have been added manually). -->
+	<changeSet id="listPagination" author="elasticpath">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(*) FROM TSETTINGDEFINITION WHERE PATH='COMMERCE/STORE/DCAPI/listPagination'</sqlCheck>
+		</preConditions>
+	
+		<comment>Add a setting definition for list pagination</comment>
+		<insert tableName="TSETTINGDEFINITION">
+			<column name="UIDPK" valueComputed="112"/>
+			<column name="PATH" value="COMMERCE/STORE/DCAPI/listPagination"/>
+			<column name="DEFAULT_VALUE" value="20"/>
+			<column name="VALUE_TYPE" value="Integer"/>
+			<column name="DESCRIPTION" value="The maximum number of links to display per list for paginated objects." />
+			<column name="MAX_OVERRIDE_VALUES" value="-1"/>		
+		</insert>
+	</changeSet>
+	
+	<changeSet id="6.6.0-basedata" author="elasticpath">
+		<comment>[KK-240] Refactoring to scrub dcapi instances</comment>
+		<!--
+		Disclaimer for the following comment section: This comment section has some unexpected behaviour, 
+		although it will be applied over existing data, it will miss being applied against the h2 database creation used in itests, 
+		since liquibase changesets are applied BEFORE data population. Therefore no changes will applied in this case. 
+		But because the original import data was also modified, it has the same effect as applying this comment section. 
+		 -->
+		<update tableName="TCSCONTENTSPACE">
+			<column name="TARGET_ID" value="Super Awesome API Banner" />
+			<where>TARGET_ID = 'Super Awesome DCAPI Banner'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENT">
+			<column name="CONTENT_WRAPPER_ID" value="ApiImageContentWrapper" />
+			<where>CONTENT_WRAPPER_ID = 'DcapiImageContentWrapper'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENT">
+			<column name="CONTENT_WRAPPER_ID" value="ApiProductContentWrapper" />
+			<where>CONTENT_WRAPPER_ID = 'DcapiProductContentWrapper'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENT">
+			<column name="CONTENT_WRAPPER_ID" value="ApiCategoryContentWrapper" />
+			<where>CONTENT_WRAPPER_ID = 'DcapiCategoryContentWrapper'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENT">
+			<column name="NAME" value="Super Amazing API Image Content" />
+			<where>NAME = 'Super Amazing DCAPI Image Content (Go Canucks)'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENT">
+			<column name="DESCRIPTION" value="Image Non-clickable Ad (unsupported API wrapper)" />
+			<where>DESCRIPTION = 'Image Non-clickable Ad (unsupported DCAPI wrapper)'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENT">
+			<column name="DESCRIPTION" value="HTML Ad (unsupported API wrapper)" />
+			<where>DESCRIPTION = 'HTML Ad (unsupported DCAPI wrapper)'</where>
+		</update>
+		<update tableName="TCSDYNAMICCONTENTDELIVERY">
+			<column name="NAME" value="Super Awesome API Dynamic Content Delivery of Images" />
+			<where>NAME = 'Super Awesome DCAPI Dynamic Content Delivery of Images'</where>
+		</update>
+		<update tableName="TSETTINGDEFINITION">
+			<column name="DESCRIPTION" value="The maximum number of list elements per page that the API resource will return for paginated objects." />
+			<where>PATH = 'COMMERCE/STORE/DCAPI/listPagination'</where>
+		</update>
+		<update tableName="TSETTINGDEFINITION">
+			<column name="PATH" value="COMMERCE/STORE/listPagination" />
+			<where>PATH = 'COMMERCE/STORE/DCAPI/listPagination'</where>
+		</update>
+		<!-- Disclaimer note ends here.  -->
+		
+		<comment>[KK-240.2] Refactoring to scrub dcapi instances</comment>
+		<update tableName="TSETTINGMETADATA">
+			<column name="METADATA_KEY" value="apiRefreshStrategy" />
+			<where>METADATA_KEY = 'dcapiRefreshStrategy'</where>
+		</update>
+	</changeSet>
+</databaseChangeLog>

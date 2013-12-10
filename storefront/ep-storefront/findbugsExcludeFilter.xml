@@ -1,0 +1,13 @@
+<FindBugsFilter>
+   <Match>
+      <BugCode name="MS" />
+   </Match>
+
+   <Match>
+      <BugCode name="EI" />
+   </Match>
+
+   <Match>
+      <BugCode name="EI2" />
+   </Match>
+</FindBugsFilter>

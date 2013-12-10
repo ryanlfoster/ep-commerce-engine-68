@@ -1,0 +1,4970 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<products>
+<product>
+    <code>tt0114369</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">se7en</value>
+    </name>
+    <type>Movies_MultiSku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-20T13:45:23-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.70</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Dec 20 00:00:00 1995</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>00AD89FE-A8F3-4BF9-84EB-07CB19ED51E4.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>127</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="51538620-E181-0D09-FDEA-18EC35843CCE">
+            <code>tt0114369_sdr</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="E2409E29-AF5A-36FA-5AD5-F649722FD595">
+            <code>tt0114369_sdb</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-04T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="596F6790-F907-D51C-BDA6-C22DD252332E">
+            <code>tt0114369_hdb</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-11T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0373883</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Halloween</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-12T13:15:03-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>6.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00003">
+            <value language="en">maggie</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>109</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="0CAAC1FC-ED39-8031-16C8-E8319D1D6A7B">
+            <code>tt0373883</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>handsfree_shippable</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Samsung Headset</value>
+    </name>
+    <type>Headset</type>
+    <taxcode>GOODS</taxcode>
+    <brand>BlueAnt</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-01T17:43:55-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="19A27922-AE64-3DD9-CA03-848BC2198C3E">
+            <code>handsfree_shippable_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt777789bttf</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Back To The Future</value>
+    </name>
+    <type>Movies_MultiSku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-16T10:16:45-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.54</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Chinese</value>
+            <value>Korean</value>
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Fri Dec 16 10:28:01 2011</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>150</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="2D916A82-0D33-3D98-0579-72F852ACD5FA">
+            <code>tt777789bttf_hd_buy</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-16T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="BA38A9CC-F5CA-853E-CF69-812B2E83EFA1">
+            <code>tt777789bttf_hd_rent</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-16T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>GI29939</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Super Game Pack</value>
+    </name>
+    <type>GamesPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:37:48-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="BE2FFEA0-4A1C-D3A0-5F91-DBBB1491BB4E">
+            <code>GI29939_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>GM10293</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Tetris Heaven</value>
+    </name>
+    <type>Games</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:30:54-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="04BFD144-8225-043C-188D-0CEDCCDF4BD0">
+            <code>GM10293_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>GI18293</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Wing Warrior</value>
+    </name>
+    <type>Games</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:29:59-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="4D101C89-6C65-B4D0-6768-5F63FFDFD31A">
+            <code>GI18293_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt1568346</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">The Girl with the Dragon Tattoo</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>true</notsoldseperately>
+        <enabledate>2011-11-25T17:19:55-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2015-05-25T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>4.10</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Nov 25 00:00:00 2015</value>
+        </attribute>
+        <attribute key="A00001">
+            <value language="en">Remake Of Swedish Film</value>
+            <value language="en">Based On Novel</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>171</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="F2068398-517C-4A82-88D2-D8A3E0744141">
+            <code>tt1568346_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0926084</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Harry Potter and the Deathly Hallows Part 1</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-11-25T17:28:08-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_BACK_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>7.60</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Nov 10 00:00:00 2010</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>hummingbird.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>146</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="BEA7EEF7-C825-C00C-5981-DFEF6BD61A41">
+            <code>tt0926084_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0984938</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Harry Potter and the Deathly Hallows Part 2</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-12T13:12:32-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.10</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>130</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="33A1DAE7-484F-CFFF-AD19-897A6A88FD2B">
+            <code>tt0984938</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_3456789</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Just Released Movies</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T13:47:49-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Japanese</value>
+            <value>Korean</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Mon Dec 26 00:00:00 2011</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>150</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="7B5D9CDB-6650-BF60-6BD3-5F22C0329961">
+            <code>mb_3456789_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_2345678</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Empty Bundle</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T12:10:13-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>4.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Mon Jan 09 00:00:00 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>50</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="77A94130-EA3E-4F94-4FA7-429565C75247">
+            <code>mb_2345678_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>tb_dyn12345</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Dynamic Bundle</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>FOX</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-01T11:58:44-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="7C2FDCBB-BF6E-AB29-F8F7-3699E17D3FAB">
+            <code>tb_dyn12345sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_7890123</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Old Movies</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T14:02:23-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>6.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Japanese</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 14:04:03 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>50</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="3DAB36A4-9B7A-3DCC-EE09-EC76360D236C">
+            <code>mb_7890123_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_8901234</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Super Bundle</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T14:29:17-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>10.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 14:32:26 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>150</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="F3A3FD59-3213-EA62-82C7-AC0859774730">
+            <code>mb_8901234_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>GI29389</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Little Adventure</value>
+    </name>
+    <type>Games</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:27:10-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="1A37AF01-98C6-3250-D2DE-189B26C00AFA">
+            <code>GI29389</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0034583</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Casablanca</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-11-09T15:53:28-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.10</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Fri Nov 25 17:05:31 2011</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>174</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="E7BB99A8-AF40-6923-0A3E-D776B96752C2">
+            <code>tt0034583_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_4567890</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Today's Movie Deal</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>true</notsoldseperately>
+        <enabledate>2012-01-04T13:47:49-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>6.80</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>French</value>
+            <value>German</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 13:05:02 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>420</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="7E830DE3-37E0-815A-B3FD-337FB3771A6F">
+            <code>mb_4567890_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>tb_9878943</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">TV SciFi Pack - Low Pixel Combo</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>BBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-06T17:36:53-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="07788986-07C1-B374-D1AB-9654A745C017">
+            <code>tb_9878943_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>mb_8909032</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Good Movies</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>true</notsoldseperately>
+        <enabledate>2012-01-06T13:54:36-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2015-05-25T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>3.33</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Thu Jan 05 00:00:00 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>219</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="6D76E2AC-6FA0-5556-9D93-4AA878DD87FA">
+            <code>mb_8909032_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_3456789</code>
+    <name>
+        <value language="en_CA">The Hunger Games</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Paramount</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:27:42-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>150</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>Set in a future where the Capitol selects a boy and girl from the twelve districts to fight to the death on live television, Katniss Everdeen volunteers to take her younger sister's place for the latest match.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>French</value>
+            <value>Japanese</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="E4843869-A57C-198D-369F-3B393A591414">
+            <code>movie_3456789_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_111222</code>
+    <name>
+        <value language="en_CA">Terminator 2</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Warner_Bros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T16:53:41-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>150</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>The cyborg who once tried to kill Sarah Connor must now protect her teenage son, John Connor, from an even more powerful and advanced Terminator.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>Russian</value>
+            <value>Korean</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="EA8E00E9-CC5F-37EE-DBDD-32314FE779E9">
+            <code>movie_111222_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_5678901</code>
+    <name>
+        <value language="en_CA">Contagion</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Paramount</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:31:37-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>110</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>A thriller centered on the threat posed by a deadly disease and an international team of doctors contracted by the CDC to deal with the outbreak.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>French</value>
+            <value>German</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="70768922-7786-E21D-A8C7-259ACD7D699E">
+            <code>movie_5678901_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_333444</code>
+    <name>
+        <value language="en_CA">Lion King</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney_Studios</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:11:05-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>100</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>Tricked into thinking he killed his father, a guilt ridden lion cub flees into exile and abandons his identity as the future King.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="5F0C82BB-FF56-4ED4-96E5-BC53066A3D77">
+            <code>movie_333444_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>tbcp_3456789</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Series Mega Bundle</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-25T11:24:09-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="0D5CB452-7F50-5443-8EF1-23602561114A">
+            <code>tbcp_3456789_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt888456tw</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Twilight</value>
+    </name>
+    <type>Movies_MultiSku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-15T18:41:57-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>2.50</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>Japanese</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Thu Dec 15 18:43:03 2011</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>0019713D-5E45-4F4D-B7B1-28092F9D1213.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>180</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="C7EEF8BF-2CE2-9102-D235-13D706035FD2">
+            <code>tt888456tw</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-15T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>007FACCA-A2ED-4668-9D87-FB29D69BF11B.jpg</value>
+                </attribute>
+            </attributes>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt64464fn</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Finding Nemo</value>
+    </name>
+    <type>Movies_MultiSku_VidQuality</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney</brand>
+    <image>genericImage.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-05T15:50:33-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.60</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Mon Dec 05 15:51:07 2011</value>
+        </attribute>
+        <attribute key="A00001">
+            <value language="en">nemo</value>
+            <value language="en">crownfish</value>
+            <value language="en">animation</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>genericPoster.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>120</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="D51C9D5B-EDB7-A0E3-682E-DF35488D99F9">
+            <code>tt64464fn_hd</code>
+            <skuoptions>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image>SpecificImage_HD.jpg</image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>Thumbnail_HD.jpg</value>
+                </attribute>
+                <attribute key="A00014">
+                    <value>High</value>
+                </attribute>
+                <attribute key="A00017">
+                    <value>Thu Aug 30 10:14:35 2012</value>
+                </attribute>
+            </attributes>
+        </sku>
+        <sku guid="97D54EB9-664D-DA2C-9924-CDAB27B435F5">
+            <code>tt64464fn_sd</code>
+            <skuoptions>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image>genericImage.jpg</image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt1483735</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">The Portuguese Bun</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-12T13:33:28-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>5.50</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>127</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="B627591F-D72D-374F-DEE5-6F1CCA39F7EC">
+            <code>tt1483735</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>GA29391</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Angry Birds Seasons - Valentines</value>
+    </name>
+    <type>Games</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>false</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:34:43-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="40B8A7E3-BD92-D927-B07E-0F8EBCBA8F0C">
+            <code>GA29391_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>TV_72542</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Superheroes</value>
+    </name>
+    <type>TV</type>
+    <taxcode>GOODS</taxcode>
+    <brand>FOX</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T13:48:57-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="BE40FF41-0876-F451-BE8E-4E1DB8811C26">
+            <code>72542_2</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>720pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-04T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="FB2D8719-73BE-8B50-2EAA-628BCC17D9CE">
+            <code>72542_1</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>400pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-04T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>TV_78432</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">The Office</value>
+    </name>
+    <type>TV</type>
+    <taxcode>GOODS</taxcode>
+    <brand>CBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-25T11:22:03-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="2C67793C-2BE8-1050-B72B-D17A08087BB6">
+            <code>TV_78432_720p</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>720pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-25T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>00A7F3FD-9C88-4698-93DA-C3D692077CAE.jpg</value>
+                </attribute>
+            </attributes>
+        </sku>
+        <sku guid="1625E747-C883-89F1-8727-7CD08583F81B">
+            <code>TV_78432_400p</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>400pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-25T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>9D8A787D-43AC-40A3-A45D-896034B2E38E.jpg</value>
+                </attribute>
+            </attributes>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0068646</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">The Godfather</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-11-09T15:54:37-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.22</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Italian</value>
+            <value>française</value>
+        </attribute>
+        <attribute key="A00013">
+            <value language="en">&lt;form    onsubmit=&quot;if (typeof ClickTaleTag==&amp;#39;function&amp;#39;) {ClickTaleTag(&amp;#39;search performed&amp;#39;);}(new Image()).src='/rg/SEARCH-BOX-C/HEADER/images/b.gif?link=/find';&quot;    action=&quot;/find&quot;    method=&quot;get&quot; id=&quot;navbar-form&quot; &gt;&#xD;
+&#xD;
+            &lt;div id=&quot;nb_search&quot;&gt;&#xD;
+&#xD;
+				&lt;a href=&quot;/search/&quot;&gt;&lt;strong&gt;Search&lt;/strong&gt;&lt;/a&gt;&#xD;
+&#xD;
+                &lt;select id=&quot;quicksearch&quot; name=&quot;s&quot; onchange=&quot;jumpMenu(this); suggestionsearch_dropdown_choice(this);&quot;&gt;&#xD;
+&#xD;
+    &lt;option  &#xD;
+     value=&quot;all&quot;&gt;All&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;tt&quot;&gt;Titles&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;ep&quot;&gt;TV Episodes&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;nm&quot;&gt;Names&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;co&quot;&gt;Companies&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;kw&quot;&gt;Keywords&lt;/option&gt;&#xD;
+&#xD;
+    &lt;option  &#xD;
+     value=&quot;ch&quot;&gt;Characters&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;vi&quot;&gt;Videos&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;qu&quot;&gt;Quotes&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;bi&quot;&gt;Bios&lt;/option&gt;&#xD;
+    &lt;option  &#xD;
+     value=&quot;pl&quot;&gt;Plots&lt;/option&gt;&#xD;
+&#xD;
+				&lt;/select&gt;&#xD;
+&#xD;
+				&lt;input id=&quot;navbar-query&quot; name=&quot;q&quot; type=&quot;text&quot; value=&quot;&quot; autocomplete=&quot;off&quot; /&gt;&amp;nbsp;&lt;button id=&quot;navbar-submit-button&quot; class=&quot;nb_primary&quot; type=&quot;submit&quot;&gt;Go&lt;/button&gt;&lt;noscript&gt;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;/search/&quot;&gt;More&lt;/a&gt;&lt;/noscript&gt;&#xD;
+&lt;div id=&quot;navbar-suggestionsearch&quot;&gt;&lt;/div&gt;&#xD;
+			&lt;/div&gt;&#xD;
+		&lt;/form&gt;</value>
+        </attribute>
+        <attribute key="A00003">
+            <value language="en">&lt;strong&gt;Assertions:&lt;/strong&gt;</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 25 00:00:00 2006</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>192</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="064090E8-3F17-744F-B8EA-BE013BD87D10">
+            <code>tt0068646_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0050083</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">12 Angry Men</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-11-09T15:56:20-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.10</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Anglais</value>
+            <value>Français</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Sun Sep 04 00:00:00 2011</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>161</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="14EFADA5-8693-ABCD-808C-9FA53677E1CC">
+            <code>tt0050083_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>tbcp_1234567</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Best Series 2011</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>CBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-09T14:07:54-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="552E4B66-A779-97CE-0AD5-48F8DAA84E04">
+            <code>tbcp_1234567_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>TV_87465</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Stargate Atlantis</value>
+    </name>
+    <type>TV</type>
+    <taxcode>GOODS</taxcode>
+    <brand>BBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-25T11:20:27-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="479D4F3A-AEC7-B4FE-902F-7EE6FCC15D18">
+            <code>TV_87465_720p</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>720pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-25T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="DD7C72F9-2005-EA97-E342-D09E63E869B5">
+            <code>TV_87465_400p</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>400pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-25T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>tbcp_4325453</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">New TV Series</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>BBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-25T11:24:09-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="1D777071-33CE-F19B-6A26-886A059A9C97">
+            <code>tbcp_4325453</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt999123t</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Tangled</value>
+    </name>
+    <type>Movies_MultiSku_VidQuality</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-08T17:56:39-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Thu Dec 08 00:00:00 2011</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>0160E2D3-8CBC-48CE-A5B0-BEB81B77555A.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>90</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="D4DCF9B7-4454-F44D-A366-F87EF80EC838">
+            <code>tt999123t_HD</code>
+            <skuoptions>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-08T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="A00014">
+                    <value>704x480</value>
+                </attribute>
+                <attribute key="A00017">
+                    <value>Mon Jan 02 19:50:00 2012</value>
+                </attribute>
+            </attributes>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>GM38829</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Fun Games Pack</value>
+    </name>
+    <type>GamesPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:32:45-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="8B1FBDDF-DEB0-4E77-D69A-C1E685D9FF2E">
+            <code>GM38829_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>tbcp_2345678</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Old TV Series</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>FOX</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-25T11:20:27-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="4E94EC4A-6C8A-DD15-F902-D514F7860C45">
+            <code>tbcp_2345678_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt8789434</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Hugo Special Features</value>
+    </name>
+    <type>Movies_MultiSku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>true</notsoldseperately>
+        <enabledate>2012-01-11T15:50:03-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>4.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 11 00:00:00 2012</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>00AD89FE-A8F3-4BF9-84EB-07CB19ED51E4.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>30</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="9D595C9B-869F-D6DF-CF5B-EA9FBD6CF5A0">
+            <code>tt8789434_HD_Buy</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-11T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>IMG_TUT_STU_POR.jpg</value>
+                </attribute>
+            </attributes>
+        </sku>
+        <sku guid="65BA94F6-1F75-2C70-6275-C2AD0840D4DF">
+            <code>tt8789434_HD_Rent</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-11T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="50302818-4DD4-DF6E-99AF-E7C1C1DB40E6">
+            <code>tt8789434_SD_Rent</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-11T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="B574586E-94C9-2AB3-9F13-C860B6432134">
+            <code>tt8789434_SD_Buy</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-11T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_555666</code>
+    <name>
+        <value language="en_CA">Toy Story</value>
+    </name>
+    <type>Movies_DVD_Multisku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney_Studios</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:17:19-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>130</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>A cowboy toy is profoundly threatened and jealous when a fancy spaceman toy supplants him as top toy in a boy's room.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>Japanese</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="A4805AEE-37CD-EB27-DB6E-0BBDCAECBCDD">
+            <code>movie_555666_regular</code>
+            <skuoptions>
+                <skuoption code="dvdformat">
+                    <skuoptionvalue>regular</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-03-23T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="833FBC5F-9B09-4C1D-697D-1F4008F62D2A">
+            <code>movie_555666_bluray</code>
+            <skuoptions>
+                <skuoption code="dvdformat">
+                    <skuoptionvalue>bluray</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-03-23T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0162661</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Sleepy Hallow</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-12T13:17:02-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>7.50</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>Portuguese</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>105</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="816F461E-C806-6C3C-9536-FED7EDF0BBBC">
+            <code>tt0162661</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_4567890</code>
+    <name>
+        <value language="en_CA">The Vow</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Paramount</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:29:44-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>120</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>A car accident puts Paige (McAdams) in a coma, and when she wakes up with severe memory loss, her husband Leo (Tatum) works to win her heart again.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="2C9C2F97-00FD-5F01-D1CD-0EEBD7C501CB">
+            <code>movie_4567890_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_1234567</code>
+    <name>
+        <value language="en_CA">Terminator 1</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Warner_Bros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T16:24:50-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>120</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>A human-looking, apparently unstoppable cyborg is sent from the future to kill Sarah Connor; Kyle Reese is sent to stop it.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>Japanese</value>
+            <value>French</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="2A352B05-9CE0-B076-B80B-62A6BC8A3BBE">
+            <code>movie_1234567_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>bundle_disney</code>
+    <name>
+        <value language="en_CA">Disney Bundle</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney_Studios</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:23:46-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>350</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="2226945A-400A-673D-83B5-1A8990B3EDCA">
+            <code>bundle_disney_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_222333</code>
+    <name>
+        <value language="en_CA">Beauty and the Beast</value>
+    </name>
+    <type>Movies_DVD_Multisku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney_Studios</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:06:13-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>150</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>Belle, whose father is imprisoned by the Beast, offers herself instead and discovers her captor to be an enchanted prince.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>Chinese</value>
+            <value>Korean</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="7FC7C8D3-F186-BD82-49FC-8B8A7AE9BF53">
+            <code>movie_222333_regular</code>
+            <skuoptions>
+                <skuoption code="dvdformat">
+                    <skuoptionvalue>regular</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-03-23T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="8D34ABBC-7245-3B98-9939-2600A68ECF5F">
+            <code>movie_222333_bluray</code>
+            <skuoptions>
+                <skuoption code="dvdformat">
+                    <skuoptionvalue>bluray</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-03-23T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>ps94949</code>
+    <name>
+        <value language="en_CA">The Alphabets Song</value>
+    </name>
+    <type>Music</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney_Studios</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-25T13:43:27-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="BFA58812-12F8-D8CB-C423-71CE0FB98913">
+            <code>ps94949_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>bundle_terminator</code>
+    <name>
+        <value language="en_CA">Terminator Bundle</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Paramount</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:01:15-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="081FDF8E-C716-91BE-1DAF-F6DDDD9F0A19">
+            <code>bundle_terminator_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>mb_8974323</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Rent Movies Bundle</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-09-18T15:06:14-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>3.90</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Feb 01 00:00:00 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>333</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="1E937B80-3241-D452-C7AE-1CDC4383AAA5">
+            <code>mb_8974323_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>TV_76567</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Sanctuary</value>
+    </name>
+    <type>TV</type>
+    <taxcode>GOODS</taxcode>
+    <brand>CBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-06T17:33:49-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="56AB4147-1377-2BCA-4D88-316FEF1CB987">
+            <code>TV_76567_sku2</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>720pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-06T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="BECE5C89-4D3F-BE19-ACB9-6D184AB03159">
+            <code>TV_76567_sku1</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>400pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-01-06T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_1234567</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Movie Classics Bundle</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-30T11:40:31-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>Japanese</value>
+            <value>Spanish</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Fri Dec 30 11:43:43 2011</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>hummingbird.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>300</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="5A0750BC-B883-66DC-E9B6-7883CC7911DB">
+            <code>mb_1234567_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>TV_76522</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Finding Santa Clause</value>
+    </name>
+    <type>TV</type>
+    <taxcode>NONE</taxcode>
+    <brand>BBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-12T13:44:57-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="3E5B698C-7FA7-3BF1-8A0B-E53150EEE816">
+            <code>TV_76567_720p</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>720pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-03-12T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="FEE7D647-7586-1B17-1CD3-51ECFFB39BDD">
+            <code>TV_76567_400p</code>
+            <skuoptions>
+                <skuoption code="résolution">
+                    <skuoptionvalue>400pixels</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-03-12T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>mb_6789012</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">New Movies</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T13:53:37-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_BACK_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>6.33</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 13:56:00 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>111</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="5815699E-B331-E634-EA5F-2D88C90C51DE">
+            <code>mb_6789012_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>tbcp_0123456</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">House</value>
+    </name>
+    <type>TVPack</type>
+    <taxcode>NONE</taxcode>
+    <brand>CBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-09T11:13:32-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="18A35EDE-6CC4-4F8E-8F40-32090E3FE8EA">
+            <code>tbcp_0123456_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt5656565</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">The Social Network</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>true</notsoldseperately>
+        <enabledate>2012-01-04T13:47:49-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>5.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Hindi</value>
+            <value>Russian</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 13:49:12 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>120</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="0E065FDE-9602-48B9-8995-76399CE9AC9D">
+            <code>tt5656565_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_5678901</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Top Level Bundle</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T13:47:49-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.90</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Spanish</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 13:14:41 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>500</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="8993B5E7-40CE-F098-33DE-589DC67AAE09">
+            <code>mb_5678901_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt258022dh</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Die Hard</value>
+    </name>
+    <type>Movies_MultiSku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-06T10:16:01-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.81</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Fri Jul 15 00:00:00 1988</value>
+        </attribute>
+        <attribute key="A00001">
+            <value language="en">An exciting holiday movie</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>samsung.png</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>100</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="85D9B081-11DB-9D6A-9CB0-F3452A50CCD7">
+            <code>tt258022dh_HDR</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-06T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="A00012">
+                    <value>3</value>
+                </attribute>
+                <attribute key="A00015">
+                    <value>widescreen</value>
+                </attribute>
+                <attribute key="A00014">
+                    <value>720x576</value>
+                </attribute>
+                <attribute key="A00017">
+                    <value>Tue Nov 15 19:46:00 2011</value>
+                </attribute>
+                <attribute key="A00016">
+                    <value>Fri Jul 15 00:00:00 1988</value>
+                </attribute>
+            </attributes>
+        </sku>
+        <sku guid="E45BB47E-B7F2-8476-1D3A-7352E1D79649">
+            <code>tt258022dh_HDB</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-06T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>tamrac.png</value>
+                </attribute>
+                <attribute key="A00015">
+                    <value>widescreen</value>
+                </attribute>
+                <attribute key="A00014">
+                    <value>704x480</value>
+                </attribute>
+                <attribute key="A00017">
+                    <value>Sun Dec 11 19:15:00 2011</value>
+                </attribute>
+                <attribute key="A00016">
+                    <value>Fri Jul 15 00:00:00 1988</value>
+                </attribute>
+            </attributes>
+        </sku>
+        <sku guid="A1A08C60-0EB2-BD6C-A296-F16F6C01469E">
+            <code>tt258022dh_SD_B</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-06T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="A00015">
+                    <value>fullscreen</value>
+                </attribute>
+                <attribute key="A00014">
+                    <value>704x576</value>
+                </attribute>
+                <attribute key="A00017">
+                    <value>Tue Dec 20 19:47:00 2011</value>
+                </attribute>
+                <attribute key="A00016">
+                    <value>Wed Jun 15 00:00:00 1988</value>
+                </attribute>
+            </attributes>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>mb_2893033</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Movie Deal</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-06T13:56:31-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2015-05-25T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>3.35</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Fri Jan 06 00:00:00 2012</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>nikon.png</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>34</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="6BDE0971-C6B8-8CEA-09D4-5A48DF8B6FCC">
+            <code>mb_2893033</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>GA19920</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Angry Birds</value>
+    </name>
+    <type>Games</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image>angrybird.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-04-18T14:12:08-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="487F9BF1-40E6-AEA7-4FA3-620317373B57">
+            <code>GA19920_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>mb_4324324</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">RentMovieLowTVCombo</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>BBC</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-09-18T15:06:14-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>4.40</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Feb 01 16:29:43 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>321</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="F46CDD92-4C44-109B-08E6-D4C17C4B31EC">
+            <code>mb_4324324_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_2345678</code>
+    <name>
+        <value language="en_CA">Terminator 3</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Warner_Bros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T16:57:10-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>135</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>John Connor is now in his 20's, and a female terminator, called T-X or Terminatrix, is after him. Another T-101 is sent back through time to protect John once again on the verge of the rise of the machines.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>Spanish</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="E0F16E00-B190-7B2F-896E-E0E37720F9B4">
+            <code>movie_2345678_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>movie_444555</code>
+    <name>
+        <value language="en_CA">Anastasia</value>
+    </name>
+    <type>Movies_DVD</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Disney_Studios</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-23T17:15:33-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="B00001">
+            <value>100</value>
+        </attribute>
+        <attribute key="B00002">
+            <value>The only surviving child of the Russian Royal Family hooks up with two con men while the undead Rasputin seeks her death.</value>
+        </attribute>
+        <attribute key="B00003">
+            <value>English</value>
+            <value>Russian</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="63E96E35-1A03-5BC0-8ED9-7C9CD2CDDECE">
+            <code>movie_444555_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="en_CA"></value>
+        </url>
+        <title>
+            <value language="en_CA"></value>
+        </title>
+        <keywords>
+            <value language="en_CA"></value>
+        </keywords>
+        <description>
+            <value language="en_CA"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>handsfree_efah1234</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Acon Bluetooth headset</value>
+    </name>
+    <type>Headset</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Jawbone</brand>
+    <image>simpletech.png</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-07-20T11:45:00-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="EAF8C586-4D92-42BE-B721-E7975485B721">
+            <code>EAF8C586-4D92-42BE-B721-E7975485B721</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt966001av</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Avatar</value>
+    </name>
+    <type>Movies_MultiSku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>WarnerBros</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-05T15:41:22-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>9.20</value>
+        </attribute>
+        <attribute key="A00011">
+            <value>Return to Pandora</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>English</value>
+            <value>French</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>120</value>
+        </attribute>
+        <attribute key="A00006">
+            <value>true</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="4ACE79A6-D8EB-7081-07E9-62CCBDDD74DC">
+            <code>tt966001av_sd_rent</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes>
+                <attribute key="A00012">
+                    <value>2</value>
+                </attribute>
+                <attribute key="A00014">
+                    <value>720x480</value>
+                </attribute>
+                <attribute key="A00016">
+                    <value>Mon Mar 08 00:00:00 2010</value>
+                </attribute>
+                <attribute key="A00018">
+                    <value>false</value>
+                </attribute>
+            </attributes>
+        </sku>
+        <sku guid="78329CB4-6188-1809-D028-EAD72368F8F1">
+            <code>tt966001av_sd_buy</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>SD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="48501B89-17FD-60E8-530D-9B10F3D6CFE9">
+            <code>tt966001av_hd_buy</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="7175904C-6ED4-BEE1-CCD3-171065BCA1BD">
+            <code>tt966001av_hd_rent</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2011-12-05T00:00:00-08:00</enabledate>
+            </availability>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+            <image></image>
+            <attributes/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="calculated" bundle="true">
+    <code>bundle_nopriceitem</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">SmartPhones Bundle</value>
+    </name>
+    <type>Phones</type>
+    <taxcode>NONE</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-02T10:19:09-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="E7ED5571-44DB-A6D3-D74C-9D3DE4D4796F">
+            <code>bundle_nopriceitem_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>hidden_prod</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Motorola Wireless Headset</value>
+    </name>
+    <type>Headset</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Motorola</brand>
+    <image></image>
+    <availability>
+        <storevisible>false</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-15T16:53:00-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="DB9411AE-B65A-5D86-0286-8862BF3B7451">
+            <code>hidden_prod_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product pricingMechanism="assigned" bundle="true">
+    <code>mb_9012345</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Extreme Movie Bundle</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>NONE</taxcode>
+    <brand>Disney</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-01-04T14:35:02-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>5.00</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Chinese</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Wed Jan 04 14:36:30 2012</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>140</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="FBA32098-1094-E4DC-F74C-B73E85C0A9A1">
+            <code>mb_9012345_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0.00</weight>
+                <width units="CM">0.00</width>
+                <length units="CM">0.00</length>
+                <height units="CM">0.00</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>FoCUs</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Samsung Focus</value>
+    </name>
+    <type>Phones</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Samsung</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-02-29T15:10:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="01459956-390F-3F13-B684-E842ED3036DA">
+            <code>FocUSsku</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>handsfree_urik1121</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">T3 Bluetooth Headset</value>
+    </name>
+    <type>Headset</type>
+    <taxcode>GOODS</taxcode>
+    <brand>BlueAnt</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-07-20T13:56:00-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="EAF8C586-4D92-42BE-B721-E7975485B931">
+            <code>EAF8C586-4D92-42BE-B721-E7975485B931</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>htcevo</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">HTC Evo 4G</value>
+    </name>
+    <type>Phones</type>
+    <taxcode>GOODS</taxcode>
+    <brand>BlueAnt</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-03-02T10:16:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="63835BC4-411A-EC41-8A35-F501A81F1DC7">
+            <code>htcevo_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>galaxyq</code>
+    <name>
+        <value language="fr_CA">Samsung Galaxy Q</value>
+        <value language="en">Samsung Galaxy Q</value>
+    </name>
+    <type>Phones</type>
+    <taxcode>NONE</taxcode>
+    <brand>Samsung</brand>
+    <image>hummingbird.jpg</image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-10-13T10:54:00-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="product_image">
+            <value>samsung.png</value>
+        </attribute>
+        <attribute key="fullsize_image">
+            <value language="fr_CA">konicaminolta.png</value>
+            <value language="en">IMG_TUT_STU_POR.jpg</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="3268D8EE-CC34-1CE6-919E-65C5839BA421">
+            <code>t384lkef</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>handsfree_sony9191</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Sony Bluetooth Headset</value>
+    </name>
+    <type>Headset</type>
+    <taxcode>GOODS</taxcode>
+    <brand>SonyEricsson</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-30T11:33:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="AEFEC2F9-D0B5-7D37-86DC-85854BFFD2A7">
+            <code>sony_bt_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>galaxys2</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Samsung Galaxy S2</value>
+    </name>
+    <type>Phones</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Samsung</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-12-02T14:04:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="product_image">
+            <value>007D3664-7120-4FB3-B847-2188B2D1C296.jpg</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="2839191C-066F-B716-B05E-43E6AD6CEFE7">
+            <code>galaxys2_sku</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>tt0970179</code>
+    <name>
+        <value language="fr_CA">les aventures de Hugo</value>
+        <value language="en">Hugo</value>
+    </name>
+    <type>Movies</type>
+    <taxcode>GOODS</taxcode>
+    <brand>None</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-11-25T16:59:39-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_FOR_PRE_ORDER</availabilityrule>
+        <orderlimit>0</orderlimit>
+        <expectedreleasedate>2012-04-04T00:00:00-07:00</expectedreleasedate>
+    </availability>
+    <attributes>
+        <attribute key="A00009">
+            <value>8.12</value>
+        </attribute>
+        <attribute key="A00010">
+            <value>LivelyNight.exe</value>
+        </attribute>
+        <attribute key="A00013">
+            <value>35 mm, 1.85 : 1</value>
+        </attribute>
+        <attribute key="A00004">
+            <value>Anglais</value>
+            <value>Français</value>
+            <value>Italien</value>
+            <value>Allemand</value>
+        </attribute>
+        <attribute key="A00003">
+            <value language="en">The &quot;Invention of Hugo Cabret&quot; concerns a 12-year-old orphan who lives in the walls of a Paris train station in 1930 and a mystery involving the boy, his late father and a robot. &quot;</value>
+            <value>L'invention de &quot;Hugo Cabret&quot; concerne un orphelin de 12 ans qui vit dans les murs d'une gare de Paris en 1930 et un mystère impliquant le garçon, son père décédé et un robot.</value>
+        </attribute>
+        <attribute key="A00002">
+            <value>Sun Nov 13 00:00:00 2011</value>
+        </attribute>
+        <attribute key="A00001">
+            <value language="en">Robot</value>
+            <value language="en">Orphan</value>
+            <value language="en">1030s</value>
+            <value language="en">Train Station</value>
+            <value language="en">Mystery</value>
+            <value language="en">إنسان آلي</value>
+            <value>robot</value>
+            <value>orphelins</value>
+            <value>1030S</value>
+            <value>gare</value>
+            <value>mystère</value>
+            <value>إنسان آلي</value>
+        </attribute>
+        <attribute key="A00008">
+            <value>Hugo Poster.jpg</value>
+        </attribute>
+        <attribute key="A00007">
+            <value>127</value>
+        </attribute>
+        <attribute key="A00006">
+            <value>true</value>
+        </attribute>
+        <attribute key="A00005">
+            <value>Fri Nov 25 17:02:41 2011</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="945DFB30-1B63-4199-7F6E-7B7FA8B0277F">
+            <code>tt0970179_sku</code>
+            <shippable enabled="false"/>
+            <digitalasset enabled="true"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>xperiapro</code>
+    <name>
+        <value language="fr_CA">Le Xperia Pro de Sony Ericssone</value>
+        <value language="en">Sony Ericsson Xperia Pro</value>
+    </name>
+    <type>Phones</type>
+    <taxcode>NONE</taxcode>
+    <brand>SonyEricsson</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2011-10-12T11:41:00-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes>
+        <attribute key="fullsize_image">
+            <value language="en">simpletech.png</value>
+        </attribute>
+    </attributes>
+    <skus>
+        <sku guid="AFD65FDC-BAFA-FBC2-E803-2D8D206F7798">
+            <code>mk34abef</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+
+<product>
+    <code>portable_tv</code>
+    <name>
+        <value language="fr_CA"></value>
+        <value language="en">Portable TV</value>
+    </name>
+    <type>Accessories_Multisku</type>
+    <taxcode>GOODS</taxcode>
+    <brand>Samsung</brand>
+    <image></image>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2012-05-25T17:53:24-07:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>ALWAYS_AVAILABLE</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="9C928C20-AC07-0A84-4246-79AF5E22320A">
+            <code>portable_tv_hdrent_sku</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Rent</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-05-25T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+            <image></image>
+            <attributes/>
+        </sku>
+        <sku guid="81BEA8FC-96F5-204B-79E0-2BE798D56CED">
+            <code>portable_tv_hdbuy_sku</code>
+            <skuoptions>
+                <skuoption code="PurchaseType">
+                    <skuoptionvalue>Buy</skuoptionvalue>
+                </skuoption>
+                <skuoption code="VideoQuality">
+                    <skuoptionvalue>HD</skuoptionvalue>
+                </skuoption>
+            </skuoptions>
+            <availability>
+                <enabledate>2012-05-25T00:00:00-07:00</enabledate>
+            </availability>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+            <image></image>
+            <attributes>
+                <attribute key="Thumbnail_option">
+                    <value>samsung.png</value>
+                </attribute>
+            </attributes>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </url>
+        <title>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </title>
+        <keywords>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </keywords>
+        <description>
+            <value language="fr_CA"></value>
+            <value language="en"></value>
+        </description>
+    </seo>
+</product>
+<product>
+    <code>NoStockPhysicalItem</code>
+    <name>
+        <value language="fr_CA"/>
+        <value language="en">Physical Item With No Stock</value>
+    </name>
+    <type>Headset</type>
+    <taxcode>NONE</taxcode>
+    <brand>BlueAnt</brand>
+    <availability>
+        <storevisible>true</storevisible>
+        <notsoldseperately>false</notsoldseperately>
+        <enabledate>2000-01-07T11:33:00-08:00</enabledate>
+        <minorderqty>1</minorderqty>
+        <availabilityrule>AVAILABLE_WHEN_IN_STOCK</availabilityrule>
+        <orderlimit>0</orderlimit>
+    </availability>
+    <attributes/>
+    <skus>
+        <sku guid="3575D29A-CE8F-C388-472E-7F823B310C1D">
+            <code>phyItemNoStockSku</code>
+            <shippable enabled="true">
+                <weight units="KG">0</weight>
+                <width units="CM">0</width>
+                <length units="CM">0</length>
+                <height units="CM">0</height>
+            </shippable>
+            <digitalasset enabled="false"/>
+        </sku>
+    </skus>
+    <seo>
+        <url>
+            <value language="fr_CA"/>
+            <value language="en"/>
+        </url>
+        <title>
+            <value language="fr_CA"/>
+            <value language="en"/>
+        </title>
+        <keywords>
+            <value language="fr_CA"/>
+            <value language="en"/>
+        </keywords>
+        <description>
+            <value language="fr_CA"/>
+            <value language="en"/>
+        </description>
+    </seo>
+</product>
+</products>

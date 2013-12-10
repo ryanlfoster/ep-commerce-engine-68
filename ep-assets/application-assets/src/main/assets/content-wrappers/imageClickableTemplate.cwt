@@ -1,0 +1,3 @@
+<!-- Simple image with alt text and on click action -->
+<a href="$onClick"><img alt="$altText" border="0" src="$baseDcAssetUrl/$imagePath"/></a>
+<!-- /Simple image with alt text and on click action -->

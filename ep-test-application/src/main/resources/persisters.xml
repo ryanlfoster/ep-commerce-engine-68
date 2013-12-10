@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="productSkuBuilder" class="com.elasticpath.domain.builder.ProductSkuBuilder"/>
+
+    <bean id="catalogTestPersister" class="com.elasticpath.test.persister.CatalogTestPersister"/>
+
+    <bean id="taxTestPersister" class="com.elasticpath.test.persister.TaxTestPersister"/>
+
+	<bean id="checkoutTestCartBuilder" class="com.elasticpath.domain.builder.checkout.CheckoutTestCartBuilder" />
+
+	<bean id="orderPaymentFactory" class="com.elasticpath.domain.factory.OrderPaymentFactory" />
+
+	<bean id="customerBuilder" class="com.elasticpath.domain.builder.CustomerBuilder" />
+	
+	<bean id="paymentGatewayBuilder" class="com.elasticpath.domain.builder.payment.gateway.PaymentGatewayBuilder" />
+	
+	<bean id="orderBuilder" class="com.elasticpath.domain.builder.OrderBuilder" />
+</beans>

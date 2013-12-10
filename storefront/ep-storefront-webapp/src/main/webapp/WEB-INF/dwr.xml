@@ -1,0 +1,196 @@
+<!-- !!!! DOCstorefrontwebappdwrxml -->
+
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr//dwr20.dtd">
+
+<dwr>
+  <!-- Extending DWR -->
+  <init>
+  	<creator id="null" class="org.directwebremoting.create.NewCreator"/>
+    <converter id="epBean" class="com.elasticpath.web.ajax.dwrconverter.EpBeanConverter"/>
+    <converter id="moneyFormatterConverter" class="com.elasticpath.web.ajax.dwrconverter.MoneyFormatterConverter"/>
+  </init>
+
+  <allow>
+    <!--create creator="spring" javascript="customerService" scope="application"-->
+    <!-- scope value defaults to "page". Use of "session" requires cookies.  -->
+    <!-- possible scope values: "application", "session", "request" and "page". -->
+
+    <create creator="spring" javascript="geographyController">
+      <param name="beanName" value="geographyController" />
+      <include method="getSubCountries" />
+    </create>
+
+
+    <create creator="spring" javascript="skuConfigurationService">
+      <param name="beanName" value="skuConfigurationService"/>
+      <include method="getAvailableOptionValues"/>
+      <include method="getSkuWithMatchingOptionValues"/>
+      <include method="getSkuWithMatchingOptionValuesAndQuantity"/>
+      <include method="getSkuConfigurationBean"/>
+    </create>
+
+  	<create creator="new" javascript="sesShoppingCart" scope="session">
+  	  <param name="class" value="com.elasticpath.domain.shoppingcart.ShoppingCart"/>
+      <include method="getShippingServiceLevelList" />
+      <include method="setSelectedShippingServiceLevelUid" />
+      <include method="getTotalMoney"/>
+      <include method="getTaxMap"/>
+      <include method="getTaxCalculationResult"/>
+	  <include method="getBeforeTaxTotal"/>
+	  <include method="getBeforeTaxSubTotal"/>
+    </create>
+
+	<create creator="spring" javascript="shoppingCartAjaxController">
+  	  <param name="beanName" value="shoppingCartAjaxController"/>
+      <include method="estimateShippingAndTaxes" />
+      <include method="calculateForSelectedShippingServiceLevel" />
+      <include method="changeEstimationAddress"/>
+      <include method="getEstimateAddressStr"/>
+      <include method="getCartItemPrices"/>
+      <include method="getCartItemPricesFormattedForLocale"/>
+      <include method="getCart" />
+      <include method="getLocale" />
+    </create>
+    
+    <create creator="spring" javascript="autocompletionProduct">
+    	<param name="beanName" value="autocompletionSearchProductService" />
+    	<include method="findProducts" />
+    </create>
+
+	<create creator="spring" javascript="jsonBundleService">
+      <param name="beanName" value="jsonBundleService"/>
+      <include method="updateJsonBundle"/>
+    </create>
+    
+    <create creator="spring" javascript="moneyFormatter">
+      <param name="beanName" value="moneyFormatter"/>
+      <include method="format"/>
+    </create>
+
+    <!--CONVERTER MAPPINGS-->
+	<convert converter="epBean" match="com.elasticpath.domain.shipping.ShippingServiceLevel">
+  		<param name="include" value="uidPk, shippingCost, regularShippingCost, localizedProperties, carrier"/>
+  	</convert>
+
+  	<convert converter="epBean" match="com.elasticpath.domain.shoppingcart.ShoppingCart">
+  		<param name="include" value="locale, subTotal, total, subtotalMoney, beforeTaxSubTotal, totalMoney, beforeTaxTotal, subtotalDiscountMoney,
+  										shippingServiceLevelList, selectedShippingServiceLevel, shippingCost, beforeTaxShippingCost,
+  										localizedTaxMap, inclusiveTaxCalculationInUse, shippingAddress, billingAddress, giftCertificateDiscountMoney"/>
+  	</convert>
+
+	<convert converter="epBean" match="com.elasticpath.domain.shoppingCart.CartItem">
+  		<param name="include" value="amountMoney"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.customer.Address">
+  		<param name="include" value="uidPk, firstName, lastName, street1, street2, city, subCountry, country, zipOrPostalCode,  phoneNumber, faxNumber, zipOrPostalCode, commercialAddress"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.skuconfiguration.SkuOption">
+  		<param name="include" value="optionKey, optionValues, optionValueMap, defaultOptionValue, ordering, localizedProperties"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.skuconfiguration.SkuOptionValue">
+  		<param name="include" value="optionValueKey, code, image, ordering, localizedPropertiesMap"/>
+  	</convert>
+
+  	<convert converter="epBean" match="com.elasticpath.domain.misc.LocalizedPropertyValue">
+  		<param name="include" value="uidPk, value, localizedPropertyKey"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.catalog.Product">
+  		<param name="include" value="uidPk, guid"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.catalog.ProductSku">
+  		<param name="include" value="uidPk, skuCode, guid, product, image, optionValues, optionValueMap"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.catalog.InventoryDto">
+  		<param name="include" value="quantityOnHand, reservedQuantity, restockDate, availableQuantityInStock"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.domain.misc.LocalizedProperties">
+  		<param name="include" value="localizedPropertiesMap"/>
+  	</convert>
+
+    <convert converter="epBean" match="com.elasticpath.sfweb.ajax.bean.GuidedSkuSelectionBean">
+  		<param name="include" value="purchasable, productSku, inventory, availabilityCode, imageUrl, listPrice, lowestPrice, dollarSavings, lowestLessThanList, priceTierContents, infiniteQuantity, skuAvailable, priceTiers, minOrderQty"/>
+  	</convert>
+
+    <convert converter="moneyFormatterConverter" match="com.elasticpath.domain.misc.Money">
+  		<param name="include" value="currency, amount"/>
+  	</convert>
+
+	<convert converter="moneyFormatterConverter" match="java.util.Locale">
+  		<param name="include" value="language, country"/>
+  	</convert>
+  	
+  	<convert converter="bean" match="java.util.Currency">
+  		<param name="include" value="currencyCode, symbol"/>
+  	</convert>
+
+	<convert converter="bean" match="com.elasticpath.service.tax.TaxCalculationResult">
+		<param name="include" value="taxValue"/>
+	</convert>
+
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.AutocompletionRequest">
+		<param name="include" value="searchText"/>
+	</convert>
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.impl.AutocompletionRequestImpl">
+		<param name="include" value="searchText"/>
+	</convert>
+
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.impl.AutocompletionSearchResultImpl">
+		<param name="include" value="guid, name, image, url, description, price"/>
+	</convert>
+
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.AutocompletionSearchResult">
+		<param name="include" value="guid, name, image, url, description, price"/>
+	</convert>
+
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.impl.JsonBundleItemBeanImpl">
+		<param name="include" value="path, productCode, skuCode, quantity, price, selected, selectionRule, calculatedBundle, calculatedBundleItem, constituents, priceTiers, priceAdjustment, recurringPrice, paymentSchedule, recurringPriceTiers, aggregatedPrices"/>
+	</convert>
+
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.impl.PriceTierBeanImpl">
+		<param name="include" value="minQty, price"/>
+	</convert>
+	
+	<convert converter="bean" match="com.elasticpath.sfweb.ajax.bean.impl.AggregatedPrice">
+		<param name="include" value="minQty, priceString"/>
+	</convert>
+	
+  </allow>
+
+  <signatures>
+    	<![CDATA[
+    		import java.util.List;
+    		import javax.servlet.http.HttpServletRequest;
+    		import com.elasticpath.sfweb.ajax.service.impl.SkuConfigurationServiceImpl;
+    		import com.elasticpath.sfweb.ajax.service.impl.ShoppingCartAjaxControllerImpl;
+    		import com.elasticpath.sfweb.ajax.service.impl.AutocompletionSearchProductServiceImpl;
+    		import com.elasticpath.sfweb.ajax.service.impl.JsonBundleServiceImpl;
+    		import com.elasticpath.sfweb.ajax.bean.impl.JsonBundleItemBeanImpl;
+    		import com.elasticpath.sfweb.ajax.bean.impl.PriceTierBeanImpl;
+    		import com.elasticpath.sfweb.ajax.bean.impl.AggregatedPrice;
+    		
+    		SkuConfigurationServiceImpl.getAvailableOptionValues(long productUid, List<String> selectedOptionValueCodes);
+    		SkuConfigurationServiceImpl.getSkuWithMatchingOptionValues(final long productUid, final List<String> optionValues, final String currencyCode, final HttpServletRequest request);
+    		SkuConfigurationServiceImpl.getSkuWithMatchingOptionValuesAndQuantity(final long productUid, final List<String> optionValues, final String currencyCode, final int quantity, final HttpServletRequest request);
+    		ShoppingCartAjaxControllerImpl.estimateShippingAndTaxes(final String countryCode, final String subCountryCode, final String zipOrPostalCode, final List<String> cartItemQtyList, final HttpServletRequest request);
+    		
+    		JsonBundleServiceImpl.updateJsonBundle(final JsonBundleItemBeanImpl bundle, final HttpServletRequest request);
+    		JsonBundleItemBeanImpl.setPriceTiers(List<PriceTierBeanImpl> priceTiers);
+    		JsonBundleItemBeanImpl.setRecurringPriceTiers(List<PriceTierBeanImpl> recurringPriceTiers);
+			JsonBundleItemBeanImpl.setConstituents(List<JsonBundleItemBeanImpl> constituents);
+			JsonBundleItemBeanImpl.setPriceAdjustment(BigDecimal adjustmentAmount);
+			JsonBundleItemBeanImpl.setAggregatedPrices(List<AggregatedPrice> aggregatedPrices2);
+    	]]>
+  </signatures>
+
+</dwr>
+
+<!-- !!!! DOCstorefrontwebappdwrxml -->

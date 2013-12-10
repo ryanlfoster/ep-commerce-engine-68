@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<bean id="abstractDomainAdapter" 
+		class="com.elasticpath.importexport.common.adapters.AbstractDomainAdapterImpl"
+		scope="prototype">
+			<property name="elasticPath">
+				<ref bean="elasticPath" />
+			</property>
+			<property name="cachingService">
+				<ref bean="cachingService"/>
+			</property>
+	</bean>
+
+	<bean id="productAvailabilityAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.ProductAvailabilityAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="attributeValuesAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.AttributeValuesAdapter"
+		parent="abstractDomainAdapter">
+		<property name="validatorUtils" ref="validatorUtils"/>
+	</bean>
+
+    <bean id="digitalAssetItemAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.DigitalAssetItemAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="seoAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.SeoAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="shippableItemAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.ShippableItemAdapter"
+		parent="abstractDomainAdapter">
+		<property name="settingsReader" ref="settingsService" />
+	</bean>
+
+	<bean id="productSkuAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.ProductSkuAdapter"
+		parent="abstractDomainAdapter">
+			<property name="shippableItemAdapter">
+				<ref bean="shippableItemAdapter" />
+			</property>
+			<property name="digitalAssetItemAdapter">
+				<ref bean="digitalAssetItemAdapter" />
+			</property>
+			<property name="productSkuOptionAdapter">
+				<ref bean="productSkuOptionAdapter" />
+			</property>
+			<property name="attributeGroupAdapter">
+				<ref bean="attributeGroupAdapter"/>
+			</property>
+	</bean>
+
+	<bean id="productAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.ProductAdapter"
+		parent="abstractDomainAdapter">
+			<property name="seoAdapter">
+				<ref bean="seoAdapter"/>
+			</property>
+			<property name="productAvailabilityAdapter">
+				<ref bean="productAvailabilityAdapter"/>
+			</property>
+			<property name="attributeGroupAdapter">
+				<ref bean="attributeGroupAdapter"/>
+			</property>
+			<property name="productSkuAdapter">
+				<ref bean="productSkuAdapter"/>
+			</property>
+			<property name="productSkuService">
+				<ref bean="productSkuService"/>
+			</property>			
+			<property name="timeService" ref="timeService"/>
+	</bean>
+	
+	<bean id="productBundleAdapter" class="com.elasticpath.importexport.common.adapters.products.ProductBundleAdapter" parent="abstractDomainAdapter">
+		<property name="bundleConstituentFactory" ref="bundleConstituentFactory"/>
+		<property name="bundleValidator" ref="bundleValidator"/>
+		<property name="bundleConstituentCodeTypeResolver">
+			<map>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductConstituentImpl" value="product"/>
+				<entry key="com.elasticpath.domain.catalog.impl.ProductSkuConstituentImpl" value="sku"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="settingDefinitionAdapter" 
+		class="com.elasticpath.importexport.common.adapters.settings.SettingDefinitionAdapter"
+		parent="abstractDomainAdapter"/>
+	
+	<bean id="settingValueAdapter" 
+		class="com.elasticpath.importexport.common.adapters.settings.SettingValueAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="productAssociationAdapter" 
+		class="com.elasticpath.importexport.common.adapters.associations.ProductAssociationAdapter"
+		parent="abstractDomainAdapter">
+		<property name="catalogLoadTuner">
+			<bean class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl">
+				<property name="fetchGroups">
+					<list>
+						<value>catalog</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="productLoadTuner">
+			<bean class="com.elasticpath.persistence.support.impl.FetchGroupLoadTunerImpl">
+				<property name="fetchGroups">
+					<list>
+						<value>productHashMinimal</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="catalogAdapter" 
+		class="com.elasticpath.importexport.common.adapters.catalogs.CatalogAdapter"
+		parent="abstractDomainAdapter"/>
+	
+	<bean id="brandAdapter" 
+		class="com.elasticpath.importexport.common.adapters.catalogs.BrandAdapter"
+		parent="abstractDomainAdapter"/>
+		
+	<bean id="attributeAdapter" 
+		class="com.elasticpath.importexport.common.adapters.catalogs.AttributeAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="inventorySkuAdapter" 
+		class="com.elasticpath.importexport.common.adapters.inventory.InventorySkuAdapter" 
+		parent="abstractDomainAdapter">
+		<constructor-arg ref="productInventoryManagementService"/>
+	</bean>
+
+	<bean id="attributeGroupAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.AttributeGroupAdapter"
+		parent="abstractDomainAdapter">
+			<property name="attributeValuesAdapter" ref="attributeValuesAdapter"/>
+	</bean>
+
+	<bean id="productSkuOptionAdapter" 
+		class="com.elasticpath.importexport.common.adapters.products.data.ProductSkuOptionAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="productPricesAdapter"	class="com.elasticpath.importexport.common.adapters.pricing.ProductPricesAdapter" parent="abstractDomainAdapter" />
+
+	<bean id="catalogSkuOptionValueAdapter" class="com.elasticpath.importexport.common.adapters.catalogs.SkuOptionValueAdapter"
+		parent="abstractDomainAdapter" />
+
+	<bean id="catalogSkuOptionAdapter" class="com.elasticpath.importexport.common.adapters.catalogs.SkuOptionAdapter"
+		parent="abstractDomainAdapter">
+		<property name="skuOptionValueAdapter">
+			<ref bean="catalogSkuOptionValueAdapter" />
+		</property>
+		<property name="skuOptionService">
+			<ref bean="skuOptionService" />
+		</property>
+	</bean>
+	
+	<bean id="attributeGroupHelper" class="com.elasticpath.importexport.common.adapters.catalogs.helper.impl.AttributeGroupHelperImpl">
+		<property name="cachingService">
+			<ref bean="cachingService"/>
+		</property>
+	</bean>
+
+	<bean id="categoryTypeAdapter" class="com.elasticpath.importexport.common.adapters.catalogs.CategoryTypeAdapter" parent="abstractDomainAdapter">
+		<property name="attributeGroupHelper">
+			<ref bean="attributeGroupHelper"/>
+		</property>
+	</bean>
+	
+	<bean id="productTypeAdapter" class="com.elasticpath.importexport.common.adapters.catalogs.ProductTypeAdapter" parent="abstractDomainAdapter">
+		<property name="attributeGroupHelper">
+			<ref bean="attributeGroupHelper"/>
+		</property>
+	</bean>
+	
+	<bean id="synonymGroupAdapter" 
+		class="com.elasticpath.importexport.common.adapters.catalogs.SynonymGroupAdapter"
+		parent="abstractDomainAdapter"/>
+		
+	<bean id="productCategoryAdapter" 
+		class="com.elasticpath.importexport.common.adapters.productcategories.ProductCategoryAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="abstractElementAdapter" 
+		class="com.elasticpath.importexport.common.adapters.promotion.AbstractElementAdapter"
+		parent="abstractDomainAdapter"
+		scope="prototype" />
+
+	<bean id="promotionAdapter" class="com.elasticpath.importexport.common.adapters.promotion.PromotionAdapter" parent="abstractDomainAdapter">
+		<property name="actionAdapter">
+			<ref bean="actionAdapter"/>
+		</property>
+		<property name="ruleSetService">
+			<ref bean="ruleSetService"/>
+		</property>
+		<property name="sellingContextAdapter">
+			<ref bean="sellingContextAdapter"/>
+		</property>
+	</bean>
+
+	<bean id="ruleAdapter" class="com.elasticpath.importexport.common.adapters.promotion.RuleAdapter" parent="abstractDomainAdapter">
+		<property name="conditionAdapter">
+			<ref bean="conditionAdapter"/>
+		</property>
+	</bean>
+
+	<bean id="conditionAdapter" class="com.elasticpath.importexport.common.adapters.promotion.ConditionAdapter" parent="abstractElementAdapter" />
+
+	<bean id="actionAdapter" class="com.elasticpath.importexport.common.adapters.promotion.ActionAdapter" parent="abstractElementAdapter" />
+
+	<bean id="categoryAdapter" class="com.elasticpath.importexport.common.adapters.category.CategoryAdapter"
+		parent="abstractDomainAdapter">
+		<property name="attributeGroupAdapter">
+			<ref bean="attributeGroupAdapter"/>
+		</property>
+		<property name="seoAdapter">
+			<ref bean="seoAdapter"/>
+		</property>
+	</bean>
+
+	<bean id="linkedCategoryAdapter" class="com.elasticpath.importexport.common.adapters.category.LinkedCategoryAdapter"
+		parent="abstractDomainAdapter"/>
+
+	<bean id="priceListDescriptorAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="priceListDescriptorDtoAssembler" />
+	</bean>
+
+	<bean id="baseAmountAdapter" class="com.elasticpath.importexport.common.adapters.pricelist.BaseAmountAdapter" parent="abstractDomainAdapter">
+		<property name="baseAmountDtoAssembler">
+			<ref bean="baseAmountDtoAssembler"/>
+		</property>
+		<property name="priceListDescriptorService">
+			<ref bean="priceListDescriptorService"/>
+		</property>
+		<property name="errorMap" >
+			<map>
+				<entry key="validator.baseAmount.invalidQuantity" value="IE-10801" />
+				<entry key="validator.baseAmount.invalidListPrice" value="IE-10802" />
+				<entry key="validator.baseAmount.invalidSalePrice" value="IE-10803" />
+				<entry key="validator.baseAmount.salePriceIsMoreThenListPrice" value="IE-10804" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="dynamicContentAdapter" class="com.elasticpath.importexport.common.adapters.dynamiccontent.DynamicContentAdapter"
+		parent="abstractDomainAdapter">
+		<property name="parameterValueAdapter">
+			<ref bean="parameterValueAdapter" />
+		</property>
+	</bean>
+	
+	<bean id="savedConditionAssembler" class="com.elasticpath.importexport.common.adapters.tag.SavedConditionAssembler">
+		<property name="beanFactory" ref="elasticPath" />
+		<property name="tagDictionaryService" ref="tagDictionaryService" />
+		<property name ="conditionalExpressionAdapter" ref="conditionalExpressionAdapter" />
+	</bean>
+	
+	<bean id="savedConditionAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="savedConditionAssembler" />
+	</bean>
+	
+	<bean id="dcdAssembler" class="com.elasticpath.importexport.common.adapters.targetedselling.DynamicContentDeliveryAssembler">
+		<property name="beanFactory" ref="elasticPath" />
+		<property name="contentSpaceService" ref="contentspaceService" />
+		<property name="dynamicContentService" ref="dynamicContentService" />
+		<property name="sellingContextAdapter" ref="sellingContextAdapter" />
+		<property name="tagDictionaryService" ref="tagDictionaryService" />
+		<property name="tagConditionService" ref="tagConditionService" />
+	</bean>
+	
+	<bean id="dcdAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="dcdAssembler" />
+	</bean>
+
+	<bean id="taxCodeAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="taxCodeDtoAssembler" />
+	</bean>
+
+	<bean id="paymentGatewayAdapter" class="com.elasticpath.importexport.common.adapters.paymentgateway.PaymentGatewayAdapter" parent="abstractDomainAdapter">
+		<property name="assembler" ref="paymentGatewayDtoAssembler"/>
+	</bean>
+	
+	<bean id="warehouseAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="warehouseDtoAssembler" />
+	</bean>
+
+	<bean id="storeAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="storeDtoAssembler" />
+	</bean>
+	
+	<bean id="storeAssociationAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="storeAssociationDtoAssembler" />
+	</bean>
+	
+	<bean id="customerAdapter" class="com.elasticpath.importexport.common.adapters.customer.CustomerAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="customerDtoAssembler" />
+		<property name="validator" ref="validator" />
+		<property name="summariser" ref="customerConstraintViolationsSummariser" />
+	</bean>
+
+	<bean id="cmUserAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="cmUserDtoAssembler" />
+	</bean>
+
+	<bean id="userRoleAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="userRoleDtoAssembler" />
+	</bean>
+	
+	<bean id="taxJurisdictionAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="taxJurisdictionDtoAssembler" />
+	</bean>
+	
+	<bean id="priceListAssignmentAdapter" class="com.elasticpath.importexport.common.adapters.pricing.PriceListAssignmentAdapter" parent="abstractDomainAdapter">
+		<property name="priceListAssignmentAssembler">
+			<bean class="com.elasticpath.importexport.common.adapters.pricing.PriceListAssignmentAssembler">
+				<property name="beanFactory" ref="elasticPath"/>
+				<property name="catalogService" ref="catalogService"/>
+                <property name="priceListDescriptorService" ref="priceListDescriptorService"/>
+                <property name="sellingContextAdapter" ref="sellingContextAdapter" />
+                <property name="tagDictionaryService" ref="tagDictionaryService" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="parameterValueAdapter" class="com.elasticpath.importexport.common.adapters.dynamiccontent.ParameterValueAdapter"
+		parent="abstractDomainAdapter" />
+		
+	<bean id="couponConfigAdapter" class="com.elasticpath.importexport.common.adapters.promotion.coupon.CouponConfigAdapter" parent="abstractDomainAdapter" />
+	
+	<bean id="couponUsageAdapter" class="com.elasticpath.importexport.common.adapters.promotion.coupon.CouponUsageAdapter" parent="abstractDomainAdapter"/>
+	
+	<bean id="couponSetAdapter" class="com.elasticpath.importexport.common.adapters.promotion.coupon.CouponSetAdapter" parent="abstractDomainAdapter">
+		<property name="couponConfigAdapter">
+			<ref bean = "couponConfigAdapter"/>
+		</property>
+		<property name="couponUsageAdapter">
+			<ref bean="couponUsageAdapter" />
+		</property>
+	</bean>
+	
+	<bean id="giftCertificateAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="giftCertificateDtoAssembler" />
+	</bean>
+
+	<bean id="giftCertificateTransactionAdapter" class="com.elasticpath.importexport.common.adapters.DtoAssemblerDelegatingAdapter"
+		parent="abstractDomainAdapter">
+		<property name="assembler" ref="giftCertificateTransactionDtoAssembler" />
+	</bean>
+	
+	<bean id="contentSpaceAdapter" class="com.elasticpath.importexport.common.adapters.contentspace.ContentSpaceAdapter"
+		parent="abstractDomainAdapter" />
+		
+    <bean id="shippingServiceLevelAdapter" class="com.elasticpath.importexport.common.adapters.shipping.ShippingServiceLevelAdapter"
+		parent="abstractDomainAdapter">
+		<property name="storeService" ref="storeService" />
+		<property name="beanFactory" ref="elasticPath"/>
+		<property name="shippingRegionService" ref="shippingRegionService" />
+	</bean>				
+		
+	<bean id="shippingRegionAdapter" class="com.elasticpath.importexport.common.adapters.shipping.ShippingRegionAdapter"
+		parent="abstractDomainAdapter" />	
+		
+	<bean id="conditionalExpressionAdapter" class="com.elasticpath.importexport.common.adapters.tag.ConditionalExpressionAdapter" 
+		parent="abstractDomainAdapter">
+	</bean>	
+			
+	<bean id="sellingContextAdapter" class="com.elasticpath.importexport.common.adapters.tag.SellingContextAdapter" parent="abstractDomainAdapter">
+		<property name="conditionalExpressionAdapter">
+			<ref bean="conditionalExpressionAdapter"/>
+		</property>
+		<property name="sellingContextService">
+			<ref bean="sellingContextService"/>
+		</property>
+		<property name="tagConditionService">
+			<ref bean="tagConditionService"/>
+		</property>
+	</bean>
+	
+	<bean id="cmImportJobAdapter" class="com.elasticpath.importexport.common.adapters.cmimportjob.data.CmImportJobAdapter" 
+		parent="abstractDomainAdapter">
+        <property name="catalogService" ref="catalogService" />
+        <property name="storeService" ref="storeService" />
+        <property name="warehouseService" ref="warehouseService" />
+	</bean>
+</beans>

@@ -1,0 +1,28 @@
+/* ----- General Formatting ----- */
+
+body { background:#fff; color:#333; margin:0; padding:0; border:0; border-top:0px; font-family:verdana, arial, helvetica, sans-serif; padding-bottom:10px; font-size:8.5pt; }
+div, td { font-size:8.5pt;}	
+h1	{ color:#333; font-size:10pt; margin:0;}	
+
+#containment { width:auto; text-align:center; margin-top:10px; border:0px;}
+
+/* ----- Checkout Formatting ----- */
+
+#primarycontent { text-align:left; width:540px; padding:10px; border:1px solid #DBDBDB;}
+#primarycontent h1 { color:#f60;font-weight:bold;font-size:11pt;background-color:#fff;padding:0px;margin:20px 0px;line-height:13px; }
+#primarycontent h2 { color:#333;font-weight:bold;font-size:10pt;background-color:#fff;padding:0px 0px 8px 0px;margin:30px 0px 20px 0px;line-height:16px;background-image:url(../images/dash.gif);background-position:100% 100%;background-repeat:repeat-x;}
+
+#body { text-align:left; width:540px; padding:10px; border:1px solid #DBDBDB;}
+#body h1 { color:#f60;font-weight:bold;font-size:11pt;background-color:#fff;padding:0px;margin:20px 0px;line-height:13px; }
+#body h2 { color:#333;font-weight:bold;font-size:10pt;background-color:#fff;padding:0px 0px 8px 0px;margin:30px 0px 20px 0px;line-height:16px;background-image:url(../images/dash.gif);background-position:100% 100%;background-repeat:repeat-x;}
+
+#checkout-receipt-shipping { float:left;width:250px; }
+#checkout-receipt-billing { float:right;width:250px; }
+#checkout-receipt-delivery { float:left;width:250px; }
+#checkout-receipt-payment { float:right;width:250px; }
+#checkout-receipt-cart { clear:both; }
+#checkout-receipt-cart h2 { background-image:none; }
+#checkout-receipt-cart .order { width:100%; }
+#checkout-receipt-totals { float:right;width:300px; }
+
+.divider-clear { height:1px;margin:0px 0px 0px 0px;clear:both;overflow:hidden; } 

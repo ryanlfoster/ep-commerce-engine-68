@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+	<import file="common.xml" />
+
+	<job>
+		<id>${jenkinsJobPrefix}-Source-Release</id>
+		<parent>abstract-scm</parent>
+		<scmType>${scmType}-wipe-source-release</scmType>
+		<jobType>free</jobType>
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>SCM_URL</name>
+				<description>Path to pull source code from.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>SCM_REVISION</name>
+				<description>Which revision to build.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_VERSION</name>
+				<description>Normally passed from an upstream job. This is a top-level input parameter to the initial job.</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_REPOSITORY_ID</name>
+				<description>Which release repository to use (if applicable).</description>
+			</parameter>
+
+			<!-- Commerce Engine platform parameters -->
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SCM</name>
+				<value>git@github.elasticpath.net:Hive/commerce-engine.git</value>
+				<description><![CDATA[URL from which to checkout Commerce Engine code. Defaults to Hive.]]></description>
+			</parameter>
+
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SCM_VERSION</name>
+				<description><![CDATA[Version of Commerce Engine to checkout. Must be revision, branch, or tag, as specified by EP_PLATFORM_SCM_VERSION_TYPE. No default.]]></description>
+			</parameter>
+
+
+			<!-- Commerce Manager Client platform parameters -->
+			<!-- Note: There is no CM Client version here, because it uses the same version as CE -->
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_CMCLIENT_SCM</name>
+				<value>git@github.elasticpath.net:Hive/commerce-manager-client.git</value>
+				<description><![CDATA[URL from which to checkout Commerce Manager Client code. Defaults to Hive.]]></description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_CMCLIENT_SCM_VERSION</name>
+				<description><![CDATA[Version of Commerce Manager Client to checkout. Must be revision, branch, or tag, as specified by EP_PLATFORM_SCM_VERSION_TYPE. No default.]]></description>
+			</parameter>
+
+			<!-- Hosted 3rd party parameters -->
+			<parameter>
+				<type>string</type>
+				<name>HOSTED3RDPARTY_VERSION</name>
+				<value>LATEST</value>
+				<description><![CDATA[Version of hosted 3rd party to use. Defaults to LATEST.]]></description>
+			</parameter>
+
+
+			<!-- Restricted 3rd party parameters -->
+			<parameter>
+				<type>string</type>
+				<name>RESTRICTED3RDPARTY_VERSION</name>
+				<value>LATEST</value>
+				<description><![CDATA[Version of restricted 3rd party to use. Defaults to LATEST.]]></description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<!-- Execute shell: remove .m2 -->
+			<shell>
+				<command>
+				<![CDATA[
+					rm -rf ~/.m2/repository/com/elasticpath
+				]]>
+				</command>
+			</shell>
+
+			<!-- Execute shell: dummy pom.xml -->
+			<shell>
+				<command>
+				<![CDATA[
+mkdir -p target/source-release-work
+echo "<project><modelVersion>4.0.0</modelVersion><groupId>dummy</groupId><artifactId>dummy</artifactId><version>1.0-SNAPSHOT</version></project>" > target/source-release-work/pom.xml
+				]]>
+				</command>
+			</shell>
+
+			<!-- Top-level maven target: generate-scm-urls -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-U -B -e com.elasticpath.tools:ep-source-release-helper:generate-scm-urls</targets>
+				<pom>target/source-release-work/pom.xml</pom>
+				<properties>
+				<![CDATA[
+platformVersion=${RELEASE_VERSION}
+hosted3rdPartyVersion=${HOSTED3RDPARTY_VERSION}
+restricted3rdPartyVersion=${RESTRICTED3RDPARTY_VERSION}
+scmUrlsFile=scm-urls.properties
+				]]>
+				</properties>
+			</maven>
+
+			<!-- Inject env vars: scm-urls.properties -->
+			<xml>
+				<content>
+				<![CDATA[
+					<EnvInjectBuilder>
+						<info>
+							<propertiesFilePath>scm-urls.properties</propertiesFilePath>
+						</info>
+					</EnvInjectBuilder>
+				]]>
+				</content>
+			</xml>
+
+			<!-- Top-level maven target: source-release/pom.xml -->
+			<maven>
+				<mavenName>${mavenName}</mavenName>
+				<targets>-U -B -e deploy</targets>
+				<pom>non-distributable/source-release/pom.xml</pom>
+				<properties>
+				<![CDATA[
+ce.scmUrl=scm:git:${EP_PLATFORM_SCM}
+ce.scmVersion=${EP_PLATFORM_SCM_VERSION}
+cmc.scmUrl=scm:git:${EP_PLATFORM_CMCLIENT_SCM}
+cmc.scmVersion=${EP_PLATFORM_CMCLIENT_SCM_VERSION}
+grandparent.version=${EP_GRANDPARENT_VERSION}
+code-checking-rules.version=${EP_CODE_CHECKING_RULES_VERSION}
+				]]>
+				</properties>
+			</maven>
+		</tasks>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Licensing-Report</id>
+		<parent>abstract-scm</parent>
+		<scmType>${scmType}-wipe-source-release</scmType>
+		<appendTasks>true</appendTasks>
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_REPOSITORY_ID</name>
+				<description>Which release repository to use (if applicable).</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SCM</name>
+				<value>${scmUrl}</value>
+				<description>
+				<![CDATA[
+				Path to pull source code from. (SCM_URL is set with proper URL, however, it gets overwritten when triggered by upstream job.)
+				]]>
+				</description>
+			</parameter>
+		</parameters>
+		<pom>non-distributable/licensing-report/pom.xml</pom>
+		<mavenGoals>
+		<![CDATA[
+			-U -e deploy
+		]]>
+		</mavenGoals>
+	</job>
+
+	<job>
+		<id>${jenkinsJobPrefix}-Source-Release-Smoke-Test</id>
+		<parent>abstract-scm</parent>
+		<scmType>${scmType}-wipe-source-release</scmType>
+		<jobType>free</jobType>
+		<appendTasks>true</appendTasks>
+		<description>Fetches the source release and attempts to build it. Requires wget, unzip, Java and Maven binaries to exist on the slave.</description>
+		<node>${releaseSmokeTestNodeLabel}</node>
+		<parameters>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_VERSION</name>
+				<description>Must be a valid, existing Elastic Path release (example: 6.4.0.2012072911)</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>RELEASE_REPOSITORY_ID</name>
+				<description>Which release repository to use (if applicable).</description>
+			</parameter>
+			<parameter>
+				<type>string</type>
+				<name>EP_PLATFORM_SCM</name>
+				<value>${scmUrl}</value>
+				<description>
+				<![CDATA[
+					Path to pull source code from. (SCM_URL is set with proper URL, however, it gets overwritten when triggered by upstream job.)
+				]]>
+				</description>
+			</parameter>
+		</parameters>
+
+		<tasks>
+			<shell>
+				<command>
+				<![CDATA[
+					wget http://maven.elasticpath.com/nexus/service/local/repositories/$$RELEASE_REPOSITORY_ID/content/com/elasticpath/Commerce-Engine/$$EP_PLATFORM_VERSION/Commerce-Engine-$$EP_PLATFORM_VERSION.zip
+					unzip Commerce-Engine-$$EP_PLATFORM_VERSION.zip -d $$EP_PLATFORM_VERSION
+					cp $WORKSPACE/non-distributable/source-release/src/main/resources/ep-smoke-test.sh $WORKSPACE/ep-smoke-test.sh
+					chmod u+x ep-smoke-test.sh
+					./ep-smoke-test.sh
+				]]>
+				</command>
+			</shell>
+		</tasks>
+	</job>
+</jobs>

@@ -1,0 +1,187 @@
+# RED = Not done yet
+# GREEN = Completed
+# BLUE = Existing
+
+digraph {
+
+ rankdir=LR;
+
+ "CMUSER" [color=green];
+ "USER_ROLE" [color=green];
+ "WAREHOUSE" [color=green];
+ "STORE" [color=green];
+ "STOREASSOCIATION" [color=green];
+ "PRODUCT" [color=blue];
+ "CATALOG" [color=blue];
+ "TAXCODE" [color=green];
+ "TAXJURISDICTION" [color=green];
+ "CUSTOMER" [color=green];
+ "GIFTCERTIFICATE" [color=green];
+ "ORDER" [color=red];
+"CUSTOMERPROFILE_ATTRIBUTE" [color=green];
+ "PAYMENTGATEWAY" [color=green];
+ "SHIPPINGSERVICELEVEL" [color=red];
+ "DYNAMICCONTENT" [color=green];
+ "DYNAMICCONTENTDELIVERY" [color=green];
+ "CONTENTSPACE" [color=red];
+ "SELLINGCONTEXT" [color=red];
+ "PRICELISTASSIGNMENT" [color=green];
+ "CUSTOMERGROUP" [color=red];
+ "IMPORTJOB" [color=red];
+
+subgraph cluster_order { label="Order"; ORDER; orderaddress; orderitemdata; ordernumbergenerator; orderreturnsku; ordersku; shipmenttax; orderreturn; orderpayment; ordershipment;
+	 orderaudit; order; orderlock; picklist; }
+
+subgraph cluster_done {  "WAREHOUSE";  "STORE"; "TAXCODE"; "TAXJURISDICTION"; "PRODUCT"; "CATALOG"; "PAYMENTGATEWAY"; label="Done";
+	 DYNAMICCONTENT; DYNAMICCONTENTDELIVERY; PRICELISTASSIGNMENT; STOREASSOCIATION; storeassociation; "CUSTOMERPROFILE_ATTRIBUTE"; "USER_ROLE"; userrole;
+	 storecreditcardtype; storepaymentgateway; storesupportedcurrency; storesupportedlocale; storetaxcode; storetaxjurisdiction; storewarehouse;
+	 warehouse; taxcategory; taxjurisdiction; taxcode; taxregion; taxvalue; taxcode; paymentgateway; paymentgatewayproperties; store;
+	 CUSTOMER; customer; customerauthentication; customercreditcard; customergrouprolex; customergroupx; customerdeleted;
+	 "CMUSER"; cmuserrolex; passwordhistory; userrolepermissionx; cmuserpricelist; cmuser; userrole;
+	 cmusercatalog; cmuserstore; cmuserwarehouse; GIFTCERTIFICATE; giftcertificate; giftcertificatetransaction;
+
+
+ }
+
+ "GIFTCERTIFICATE" -> giftcertificate;
+ "GIFTCERTIFICATE" -> giftcertificatetransaction;
+
+ giftcertificate -> "CUSTOMER";
+ giftcertificate -> "STORE";
+ giftcertificate -> "ORDER";
+
+
+ "IMPORTJOB" -> "CATALOG";
+ "IMPORTJOB" -> "STORE";
+ "IMPORTJOB" -> "WAREHOUSE";
+ "IMPORTJOB" -> "importjobstatus";
+ "importjobstatus" -> "importbadrow";
+ "importbadrow" -> "importfault";
+ "IMPORTJOB" -> "importmappings";
+ "IMPORTJOB" -> "importnotification";
+ "importnotification" -> "importnotificationmetadata";
+
+ "DYNAMICCONTENTDELIVERY" -> "DYNAMICCONTENT";
+ "CUSTOMER" -> "STORE";
+ "SHIPPINGSERVICELEVEL" -> "shippingservicelevel";
+ "shippingservicelevel" -> "shippingregion";
+ "shippingservicelevel" -> "STORE";
+ "shippingservicelevel" -> "shippingcostcalculationmethod";
+ "shippingcostcalculationmethod" -> "shippingcostcalculationparam";
+
+ "CUSTOMER" -> customer;
+ "CUSTOMER" -> customerauthentication;
+ "CUSTOMER" -> customercreditcard;
+ "CUSTOMER" -> customerdeleted;
+ "CUSTOMER" -> CUSTOMERGROUP;
+ "CUSTOMER" -> customergrouprolex;
+ "CUSTOMER" -> customergroupx;
+ "CUSTOMER" -> customerprofilevalue;
+
+ "CUSTOMERGROUP" -> customergroup;
+
+ customer -> customerauthentication;
+ customerdeleted -> customer;
+ customergrouprolex -> customergroup;
+ customergroupx -> customergroup;
+ customergroupx -> customer;
+ customerprofilevalue -> customer;
+ "CUSTOMERPROFILE_ATTRIBUTE" -> attribute;
+
+ "STOREASSOCIATION" -> storeassociation -> "STORE";
+
+ "STORE" -> "CATALOG"
+ "STORE" -> storecreditcardtype;
+ "STORE" -> storepaymentgateway;
+ "STORE" -> storesupportedcurrency;
+ "STORE" -> storesupportedlocale;
+ "STORE" -> storetaxcode;
+ "STORE" -> storetaxjurisdiction;
+ "STORE" -> storewarehouse;
+
+ "CMUSER" -> cmuser;
+ "CMUSER" -> cmusercatalog;
+ "CMUSER" -> cmuserpricelist;
+
+ "CMUSER" -> cmuserrolex;
+ "CMUSER" -> cmuserstore;
+ "CMUSER" -> cmuserwarehouse;
+ "CMUSER" -> passwordhistory;
+
+ advancedsearchquery -> cmuser;
+ 
+
+  "TAXJURISDICTION" -> taxcategory -> taxjurisdiction;
+  "TAXCODE" -> taxcode;
+  "TAXJURISDICTION" -> taxjurisdiction -> taxregion;
+  "TAXJURISDICTION" -> taxregion;
+  "TAXJURISDICTION" -> taxvalue;
+  taxvalue -> taxregion;
+  taxvalue -> taxcode;
+ storepaymentgateway -> store;
+ storepaymentgateway -> "PAYMENTGATEWAY";
+ 
+ storewarehouse -> "WAREHOUSE";
+ storetaxcode -> "TAXCODE";
+ storetaxjurisdiction -> "TAXJURISDICTION";
+
+"USER_ROLE" -> userrole;
+ cmuserrolex ->  "USER_ROLE";
+ cmusercatalog -> "CATALOG";
+ cmuserstore -> "STORE";
+ cmuserwarehouse -> "WAREHOUSE";
+
+ userrolepermissionx -> userrole;
+ userrole -> cmuserrolex;
+
+ "WAREHOUSE" -> warehouse;
+ 
+ "ORDER" -> order;
+ "ORDER" -> orderpayment;
+ "ORDER" -> orderaddress;
+ "ORDER" -> orderaudit;
+ "ORDER" -> orderitemdata;
+ "ORDER" -> orderlock;
+ "ORDER" -> ordernumbergenerator;
+ "ORDER" -> orderreturn; 
+ "ORDER" -> orderreturnsku;
+ "ORDER" -> ordershipment;
+ "ORDER" -> ordersku; 
+ "ORDER" -> picklist;
+ "ORDER" -> shipmenttax;
+
+ picklist -> "WAREHOUSE";
+ picklist -> "CMUSER";
+
+ shipmenttax -> ordershipment;
+ shipmenttax -> orderreturn;
+
+ ordershipment -> "SHIPPINGSERVICELEVEL";
+ ordershipment -> order;
+ ordershipment -> picklist;
+ ordersku -> ordershipment;
+ ordersku -> ordersku;
+ ordersku -> "PRODUCT";
+ orderpayment -> "GIFTCERTIFICATE";
+ orderpayment -> order;
+ orderpayment -> ordershipment;
+ orderlock -> "CMUSER"
+ orderlock -> order;
+ orderreturn -> order;
+ orderreturn -> "CMUSER";
+ orderitemdata -> ordersku;
+ orderaudit -> order;
+ orderaudit -> "CMUSER";
+ order -> "CUSTOMER";
+ order -> "STORE";
+ orderreturnsku -> orderreturn;
+ orderreturnsku -> ordersku;
+
+
+ "PAYMENTGATEWAY" -> paymentgateway;
+ "PAYMENTGATEWAY" -> paymentgatewayproperties;
+ 
+ paymentgatewayproperties -> paymentgateway;
+
+
+}

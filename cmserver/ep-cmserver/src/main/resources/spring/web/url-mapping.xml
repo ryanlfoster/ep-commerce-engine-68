@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+  <bean id="exceptionResolver"
+        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.dao.DataAccessException">
+                    dataAccessFailure
+                </prop>
+            </props>
+        </property>
+  </bean>
+
+  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+  <!-- Allows for the merging of URL mappings, for example if defined in some bean. -->
+  <bean id="SimpleUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"
+		parent="AbstractSimpleUrlHandlerMapping"/>
+
+  <bean id="AbstractSimpleUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"
+		abstract="true">
+    <property name="mappings">
+      <props>
+		<prop key="/authenticationService.login">httpAuthenticationProvider</prop>
+		<prop key="/resourceRetrievalService.remote">httpResourceRetrievalService</prop>
+		<prop key="/renderImage.remote">imageController</prop>
+		<prop key="/assetImageController.remote">assetImageController</prop>
+		<prop key="/emailService.remote">httpEmailService</prop>
+		<prop key="/orderReturnEmailService.remote">httpOrderReturnEmailService</prop>
+		<prop key="/notificationService.remote">httpNotificationService</prop>
+		<prop key="/importService.remote">httpImportService</prop>
+		<prop key="/productService.remote">httpProductService</prop>
+		<prop key="/productBundleService.remote">httpProductBundleService</prop>
+		<prop key="/productModelService.remote">httpProductModelService</prop>
+		<prop key="/digitalAssetAuditService.remote">httpDigitalAssetAuditService</prop>
+		<prop key="/attributeService.remote">httpAttributeService</prop>
+		<prop key="/brandService.remote">httpBrandService</prop>
+		<prop key="/catalogService.remote">httpCatalogService</prop>
+		<prop key="/categoryService.remote">httpCategoryService</prop>
+		<prop key="/categoryTypeService.remote">httpCategoryTypeService</prop>
+		<prop key="/giftCertificateService.remote">httpGiftCertificateService</prop>
+		<prop key="/productInventoryManagementService.remote">httpProductInventoryManagementService</prop>
+		<prop key="/productAssociationService.remote">httpProductAssociationService</prop>
+		<prop key="/productRecommendationService.remote">httpProductRecommendationService</prop>
+		<prop key="/productSkuService.remote">httpProductSkuService</prop>
+		<prop key="/productTypeService.remote">httpProductTypeService</prop>
+		<prop key="/skuOptionService.remote">httpSkuOptionService</prop>
+		<prop key="/couponService.remote">httpCouponService</prop>
+		<prop key="/couponUsageService.remote">httpCouponUsageService</prop>
+		<prop key="/topSellerService.remote">httpTopSellerService</prop>
+		<prop key="/customerGroupService.remote">httpCustomerGroupService</prop>
+		<prop key="/customerService.remote">httpCustomerService</prop>
+		<prop key="/customerSessionService.remote">httpCustomerSessionService</prop>
+		<prop key="/orderService.remote">httpOrderService</prop>
+		<prop key="/orderLockService.remote">httpOrderLockService</prop>
+		<prop key="/returnAndExchangeService.remote">httpReturnAndExchangeService</prop>
+		<prop key="/paymentGatewayService.remote">httpPaymentGatewayService</prop>
+		<prop key="/ruleElementService.remote">httpRuleElementService</prop>
+		<prop key="/ruleParameterService.remote">httpRuleParameterService</prop>
+		<prop key="/reportingRuleService.remote">httpReportingRuleService</prop>
+		<prop key="/ruleService.remote">httpRuleService</prop>
+		<prop key="/ruleSetService.remote">httpRuleSetService</prop>
+		<prop key="/shippingRegionService.remote">httpShippingRegionService</prop>
+		<prop key="/shippingServiceLevelService.remote">httpShippingServiceLevelService</prop>
+		<prop key="/shoppingCartService.remote">httpShoppingCartService</prop>
+		<prop key="/storeService.remote">httpStoreService</prop>
+		<prop key="/warehouseService.remote">httpWarehouseService</prop>
+		<prop key="/taxCalculationService.remote">httpTaxCalculationService</prop>
+		<prop key="/taxCodeService.remote">httpTaxCodeService</prop>
+		<prop key="/taxJurisdictionService.remote">httpTaxJurisdictionService</prop>
+		<prop key="/cmUserService.remote">httpCmUserService</prop>
+		<prop key="/userRoleService.remote">httpUserRoleService</prop>
+		<prop key="/reportService.remote">httpReportService</prop>
+		<prop key="/synonymGroupService.remote">httpSynonymService</prop>
+		<prop key="/propertyService.remote">httpPropertyService</prop>
+		<prop key="/paymentService.remote">httpPaymentService</prop>
+		<prop key="/allocationService.remote">httpAllocationService</prop>
+		<prop key="/settingsService.remote">httpSettingsService</prop>
+		<prop key="/advancedSearchQueryDao.remote">httpAdvancedSearchQueryDao</prop>
+		<prop key="/timeService.remote">httpTimeService</prop>
+		<prop key="/indexSearchService.remote">httpIndexSearchService</prop>
+		<prop key="/timeService.remote">httpTimeService</prop>
+		<prop key="/cmPasswordPolicy.remote">httpCmPasswordPolicy</prop>
+		<prop key="/commandService.remote">httpCommandService</prop>
+		<prop key="/indexBuildStatusService.remote">httpIndexBuildStatusService</prop>
+		<prop key="/indexNotificationService.remote">httpIndexNotificationService</prop>
+		<prop key="/dynamicContentService.remote">httpDynamicContentService</prop>
+		<prop key="/contentspaceService.remote">httpContentspaceService</prop>
+		<prop key="/dynamicContentDeliveryService.remote">httpDynamicContentDeliveryService</prop>
+		<prop key="/sellingContextService.remote">httpSellingContextService</prop>
+		<prop key="/tagDictionaryService.remote">httpTagDictionaryService</prop>
+		<prop key="/tagDefinitionService.remote">httpTagDefinitionService</prop>
+                <prop key="/tagConditionService.remote">httpTagConditionService</prop>
+                <prop key="/tagConditionDSLBuilder.remote">httpTagConditionDSLBuilder</prop>
+		<prop key="/tagConditionBuilder.remote">httpTagConditionBuilder</prop>
+		<prop key="/tagOperatorService.remote">httpTagOperatorService</prop>
+                <prop key="/selectableTagValuesService.remote">httpSelectableTagValuesService</prop>
+		<prop key="/tagGroupService.remote">httpTagGroupService</prop>
+		<prop key="/priceLookupFacade.remote">httpPriceLookupFacade</prop>
+		<prop key="/priceListService.remote">httpPriceListService</prop>
+		<prop key="/priceListLookupService.remote">httpPriceListLookupService</prop>
+		<prop key="/priceListHelperService.remote">httpPriceListHelperService</prop>
+		<prop key="/priceListAssignmentHelperService.remote">httpPriceListAssignmentHelperService</prop>
+		<prop key="/priceListAssignmentService.remote">httpPriceListAssignmentService</prop>
+		<prop key="/changeSetManagementService.remote">httpChangeSetManagementService</prop>
+		<prop key="/changeSetService.remote">httpChangeSetService</prop>
+		<prop key="/priceListDescriptorService.remote">httpPriceListDescriptorService</prop>
+		<prop key="/couponConfigService.remote">httpCouponConfigService</prop>
+		<prop key="/couponService.remote">httpCouponService</prop>
+		<prop key="/couponDtoMediator.remote">httpCouponDtoMediator</prop>
+		<prop key="/couponUsageDtoMediator.remote">httpCouponUsageDtoMediator</prop>
+		<prop key="/productTypeDao.remote">httpProductTypeDao</prop>
+		<prop key="/paymentGatewayFactory.remote">httpPaymentGatewayFactory</prop>
+		<!--
+			CM Email Template/Properties Cache Invalidation URL.
+			This implementation should not be used in production.
+		 -->
+		<prop key="/invalidate-cache.ep">cacheInvalidationController</prop>
+		<prop key="/bundleValidator.remote">httpBundleValidator</prop>
+		<prop key="/shopperService.remote">httpShopperService</prop>
+		<prop key="/epQLSearchEngine.remote">httpEpQLSearchEngine</prop>
+		<prop key="/diagnostics.ep">diagnosticController</prop>
+      </props>
+    </property>
+  </bean>
+
+  <!--  exception handler -->
+  <bean id="epSystemExceptionHandler" class="com.elasticpath.cmweb.exceptionhandler.EpSystemExceptionHandler">
+    <property name="order"><value>100</value></property>
+    <property name="viewName"><value>error</value></property>
+  </bean>
+  <!--  end of exception handler -->
+
+  <bean id="errorController" class="com.elasticpath.cmweb.controller.impl.SimplePageControllerImpl">
+	<property name="viewName"><value>error</value></property>
+  </bean>
+
+
+  <bean id="indexPageController" class="com.elasticpath.cmweb.controller.impl.SimplePageControllerImpl">
+    <property name="viewName"><value>home</value></property>
+  </bean>
+
+  <bean id="abstractEpFormController" abstract="true" class="com.elasticpath.cmweb.controller.impl.AbstractEpFormController">
+    	<property name="requestHelper"><ref bean="requestHelper"/></property>
+  </bean>
+
+  <bean id="abstractEpController" abstract="true" class="com.elasticpath.cmweb.controller.impl.AbstractEpControllerImpl">
+    	<property name="requestHelper"><ref bean="requestHelper"/></property>
+  </bean>
+
+  <bean id="invalidAccessController" class="com.elasticpath.cmweb.controller.impl.InvalidAccessControllerImpl"
+  	parent="abstractEpController">
+	<property name="viewName"><value>error</value></property>
+  </bean>
+
+  <bean id="imageController"
+	class="com.elasticpath.cmweb.controller.impl.ImageControllerImpl"
+	parent="abstractEpController">
+		<property name="imageService" ref="imageService" />
+	<property name="imageControllerHelper" ref="imageControllerHelper"/>
+  </bean>
+
+  <bean id="assetImageController"
+	class="com.elasticpath.cmweb.controller.impl.AssetImageControllerImpl"
+	parent="imageController">
+	<property name="assetRepository" ref="assetRepository" />
+  </bean>
+
+	<bean id="cacheInvalidationController"
+		class="com.elasticpath.cmweb.controller.impl.CacheInvalidationControllerImpl">
+		<property name="cacheInvalidationStrategy" ref="triggeredCacheInvalidationStrategy" />
+	</bean>
+
+	<bean id="diagnosticController"
+		class="com.elasticpath.cmweb.controller.impl.DiagnosticControllerImpl">
+	</bean>
+
+</beans>

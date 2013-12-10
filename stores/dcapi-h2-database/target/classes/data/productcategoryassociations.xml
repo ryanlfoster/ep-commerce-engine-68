@@ -1,0 +1,1307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<productcategoryassociations>
+<product code="GM38829">
+    <catalog code="Mobile">
+        <category code="MobileGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="MobileGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="bundle_terminator">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tb_9878943">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0970179">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="handsfree_urik1121">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt1568346">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0926084">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="htcevo">
+    <catalog code="Mobile">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="galaxyq">
+    <catalog code="Mobile">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="handsfree_sony9191">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0984938">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="TV_76522">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt777789bttf">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_8909032">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_3456789">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="TV_78432">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_6789012">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tbcp_0123456">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt5656565">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_4324324">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="GM10293">
+    <catalog code="Mobile">
+        <category code="MobileGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="MobileGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0050083">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="GI29389">
+    <catalog code="Mobile">
+        <category code="IPhoneGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="IPhoneGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt1483735">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="GA29391">
+    <catalog code="Mobile">
+        <category code="AndroidGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="AndroidGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0034583">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>2</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="GA19920">
+    <catalog code="Mobile">
+        <category code="AndroidGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="AndroidGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_5678901">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_222333">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="handsfree_shippable">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_333444">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tbcp_1234567">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="TV_87465">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="TV_72542">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_4567890">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tbcp_4325453">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="GI18293">
+    <catalog code="Mobile">
+        <category code="IPhoneGames">
+            <default>true</default>
+            <featuredorder>2</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="IPhoneGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="ps94949">
+    <catalog code="search_catalog">
+        <category code="PopSongs">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt999123t">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="hidden_prod">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_111222">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_2345678">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0114369">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="GI29939">
+    <catalog code="Mobile">
+        <category code="IPhoneGames">
+            <default>true</default>
+            <featuredorder>1</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="IPhoneGames">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0373883">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0068646">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tb_dyn12345">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_4567890">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tbcp_2345678">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="FoCUs">
+    <catalog code="Mobile">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt8789434">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt888456tw">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="galaxys2">
+    <catalog code="Mobile">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="bundle_nopriceitem">
+    <catalog code="Mobile">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_7890123">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_8901234">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt64464fn">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_1234567">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="bundle_disney">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_444555">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_3456789">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_555666">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="movie_2345678">
+    <catalog code="search_catalog">
+        <category code="Movies_DVD">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt0162661">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>5</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="handsfree_efah1234">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_8974323">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="xperiapro">
+    <catalog code="Mobile">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Smartphones">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="TV_76567">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt966001av">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>3</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_1234567">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_5678901">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_9012345">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tbcp_3456789">
+    <catalog code="Mobile">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="TV">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="tt258022dh">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>1</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="mb_2893033">
+    <catalog code="Mobile">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>4</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="Toastie">
+        <category code="Movies">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="portable_tv">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+
+<product code="NoStockPhysicalItem">
+    <catalog code="Mobile">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+    <catalog code="MobileCatalog">
+        <category code="Accessories">
+            <default>true</default>
+            <featuredorder>0</featuredorder>
+        </category>
+    </catalog>
+</product>
+</productcategoryassociations>

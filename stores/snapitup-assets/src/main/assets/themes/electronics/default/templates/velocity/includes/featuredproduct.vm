@@ -1,0 +1,26 @@
+#**
+* Display the featured products.
+*#
+#macro (displayFeaturedProduct $featuredProductList $showCount $catalogViewResultBean)
+	#if (($featuredProductList) && ($featuredProductList.size()>0))
+		#set ($totCount = 0)
+		 <div class="featured">
+		 	<h3>#springMessage("featuredProduct.featuredProducts")</h3>		 	
+			 <div id="product-grid-2">
+				#foreach ($product in $featuredProductList)	
+					#set ($price = $catalogViewResultBean.getPrice($product.getCode())) 
+					#set ($totCount = $totCount + 1)
+					#if (($showCount ==0)||($totCount <= $showCount))
+						#displayProductSmall($product $price)
+						#if($mathTool.mod($totCount, 2) == 0)
+							<div class="clear10"></div>
+						#end
+					#end	
+				#end
+		      <div class="clear1"></div>
+	      </div>
+		</div>
+	#end
+#end
+
+#displayFeaturedProduct($featuredProductList $catalogFeaturedProductCount $catalogViewResultBean)

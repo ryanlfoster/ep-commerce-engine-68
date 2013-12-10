@@ -1,0 +1,517 @@
+/* PowerReviews default stylesheet copyright 2006 all rights reserved */
+.prReviewEngine {
+/* put font information in merchant specific stylesheets in this class entry */
+    font: inherit;
+}
+
+/* Summary styles */
+#prReviewSummary {
+    border:1px solid #cccccc;
+    background:#fff url(images/review_summary_bg.gif) bottom left repeat-x;
+}
+
+.prSummaryHeader {
+    background: #dddddd;
+    margin:0;
+    padding:.5em 1em .6em 1em;  /* large right padding to accept the absolutely positioned print link*/
+    height:1em;
+    line-height:1.0;
+    position:relative;  /* to establish the reference for print link positioning*/
+}
+
+.prSummaryTitle {
+    font-size: .95em;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.prSummaryCobrand {  /* "(Powered by PowerReviews.com)" */
+    font-size: .78em;
+}
+
+/*
+a.prSummaryCobrandLink, a.prSummaryCobrandLink:hover {
+	color:#000;
+	text-decoration:none;
+	}
+*/
+
+.prSummaryBody {  /* Contains Avg. Rating, pros/cons, and write link */
+    display:none;
+	margin:1em;
+    padding:0;
+    overflow:auto; /* to auto-expand around contained floats */
+}
+
+.prSummaryRating {
+    font-weight:bold;
+    font-size:1.2em;
+    padding:0 0 1em;
+    border-bottom:1px solid #ddd;
+    line-height: 20px; /* height of large stars row */
+}
+
+.prSummaryRating .prSummaryAverageRatingText {
+    float:left;
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.prSummaryWriteReview {  /* Already own it? ... */
+    margin:1em;
+    padding:0;
+    overflow:auto;
+    text-align:right;
+}
+
+a.prSummaryWriteReviewLink:link, a.prSummaryWriteReviewLink:visited, a.prSummaryWriteReviewLink:hover, a.prSummaryWriteReviewLink:active {
+    font-size: 1em;
+}
+
+.prSummaryKey {		/* Pros,Cons,Best Uses keys */
+    width: 100px;  /* this should be big enough that "Best Uses" doesn't wrap */
+    font-weight:bold;
+    vertical-align:top;
+    text-align:right;
+    padding:0px;
+    float:left;
+    clear:left;
+}
+
+.prSummaryValue {  /* values for pros,cons,best uses */
+    margin-left:100px;	/* add left space equal to the width of the key */
+    vertical-align:top;
+    text-align:left;
+    padding: 0px 0px 0px 10px;  /* I've padded the values.  you could also add some extra space to the left margin, and keep this zero */
+}
+
+.prSummaryCount {
+    font-weight:normal;
+}
+
+.prSummaryPrintableViewLink {
+    display:none;
+    font-size:.9em;
+    position:absolute;  /* to get around the Safari float issue, I've positioned these absolutely in the header */
+    bottom:.6em;
+    right:10px;
+    width:11em;
+    text-align:right;
+}
+
+.prSummaryPrintableViewLink img {
+    position:relative;
+    top:3px; /* nudge the printer icon to fit better with text*/
+}
+
+
+.prReviewSort {  /* Reviewed by ... and Sort box */
+    background:#dddddd;
+    margin:0 0 0;
+    padding:.3em 1em;
+    border-bottom:1px solid #cccccc;
+    font-weight:bold;
+    font-size:.95em;
+    text-align:right;
+    text-transform:uppercase;  /* for flexibility */
+}
+
+.prReviewSortBox {
+    text-transform:none;  /* keep this mixed case if the container has been uppercased */
+}
+
+.prReviewCount {  /* Reviewed by ... */
+    text-transform:capitalize;
+    float:left;
+    margin:.3em 0;
+}
+
+/* Review styles
+--------------------------------------------------*/
+
+#prMiniSiteIndividualReviews { /* wrap around all reviews */
+
+}
+
+.prReviewWrap {  /* wraps all reviews */
+    margin:1em 0;
+    padding:0 1em;
+    border-bottom:1px solid #cccccc;
+}
+
+/* EXPERT STYLES
+	--------------------------------------------------*/
+
+	.prReviewWrap.prExpert {
+		margin:1em 0 0;
+		padding-top:0;
+		background:url(images/grad_expert_bg.png) top left repeat-x;
+		border:1px solid #d9b38e;
+		border-width:1px 1px 2px 1px;
+		}
+
+	.prExpertHeader { /* "Industry Expert" etc. */
+		position:relative;
+		top:0;
+		left:-0.8em;
+		margin:0;
+		padding:5px 0 0; /* top padding only */
+		height:40px;
+		font-size:1.25em;
+		font-weight:bold;
+		color:#af8e2c;
+		}
+
+	.prExpertHeader .prExpertHelp { /* "what's this?" */
+		padding-left:.5em;
+		font-size:.75em;
+		font-weight:normal;
+		text-indent:0;
+		color:#af8e2c;
+		}
+
+	.prExpertHelp a {
+		color:#af8e2c;
+		}
+
+	/* Set backgrounds and give padding to the two different types */
+	.prReviewWrap.prExpert.prStaff .prExpertHeader {
+		padding-left:55px;
+		background:url(images/expert_staff_bg.png) top left no-repeat;
+		}
+
+	.prReviewWrap.prExpert.prIndustry .prExpertHeader {
+		padding-left:45px;
+		background:url(images/expert_industry_bg.png) top left no-repeat;
+		}
+
+.prReviewRating {  /* Contains headline and stars */
+    font-size:1.15em;
+}
+
+.prReviewRatingHeadline {  /* just the headline */
+    display:inline;
+    font-weight: bold;
+    margin-left: 6px;
+}
+
+.prReviewAuthor {  /* wrapper for name, location, date */
+    margin:1em 0;
+}
+
+.prReviewAuthorName span,  /* set actual name, location date values to bold */
+.prReviewAuthorLocation span,
+    .prReviewAuthorDate span {
+    font-weight:bold;
+}
+
+
+.prReviewPoints {  /* wrapper for pros,cons,best-uses in reviews */
+    margin:1em 0;
+    overflow:auto;
+}
+
+.prReviewKey {  /* these keys and values work like the ones in the summary */
+    width: 90px;
+    font-weight:bold;
+    vertical-align:top;
+    text-align:right;
+    padding:0px;
+    float:left;
+    clear:left;
+}
+.prReviewValue {
+    margin-left:90px; /* match the width of the keys */
+    vertical-align:top;
+    text-align:left;
+    padding: 0px 0px 0px 10px;  /* pad it out */
+}
+
+.prAdditionalRatingName {  /* Contains rating text */
+    width:90px;
+    font-weight:bold;
+    vertical-align:top;
+    text-align:right;
+    margin-top:5px;
+    clear:left;
+    float:left;
+}
+
+.prAdditionalRatingValue {
+    margin-left:90px; /* match the width of the keys */
+    vertical-align:top;
+    text-align:left;
+    padding: 0px 0px 0px 10px;  /* pad it out */
+    margin-top:5px;
+}
+
+
+.prReviewText { /* The actual review paragraph(s) */
+    clear:both;  /* make sure it clears the keys and values above */
+    margin:1.5em 0 1em;  /* some real breathing room here */
+}
+
+.prReviewHelpfulText {  /* "X of Y found this review helpful" */
+    font-size: .9em;
+    font-style: italic;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+a.prReviewHelpfulTextLink:link, a.prReviewHelpfulTextLink:visited, a.prReviewHelpfulTextLink:hover, a.prReviewHelpfulTextLink:active {
+    font-size: 1em;
+}
+
+.prReviewHelpfulCount,  /* "X of Y" */
+.prReviewHelpful {  /* "helpful" */
+    font-weight:bold;
+}
+
+
+.prReviewTools {  /* wrapper div for whole helpful/report issue thing */
+    margin:.5em -1em;
+    padding:.5em 1em 0;
+}
+
+.prReviewRateHelpful {  /* Was this review ... ? */
+
+}
+
+.prReviewReportIssue {  /* "You may also ..." */
+    font-size: .9em;
+    font-style: italic;
+    margin-left: 0.5em;
+}
+
+
+/* Review Pages
+--------------------------------------------------*/
+
+.prPagination {
+    padding:0em 1em 0.9em 1em;
+    line-height:1.0;
+    color:#444;
+    border-bottom:1px solid #bbb;
+    font-size:0.95em;
+    position: relative;
+    margin-top: .8em;
+}
+
+.prPagination .prPageCount {
+
+}
+
+.prPagination .prPageNav {
+    position: absolute;
+    right: 1em;
+}
+
+/* Snippet styles */
+.prSnippetEngine {
+/* put font information in merchant specific stylesheets in this class entry */
+}
+.prSnippetEngine div {
+    padding: 5px;
+}
+.prSnippetTitle {
+    display:block;
+    font-weight:bold;
+}
+/* Hide Read Review link if displayed in product right display menu */
+#prod-right .prSnippetTitle {
+    display:none;
+}
+.prSnippetRating {
+    display:block;
+}
+.prSnippetMsg {
+    display:block;
+    padding-left: 0px;
+}
+.prSnippetWriteReview {
+    display:block;
+}
+/* Hide Write a Review link if displayed in product right display menu */
+#prod-right .prSnippetWriteReview {
+    display:none;
+}
+.prSnippetReadReviews {
+    display:block;
+}
+/* Hide Read Review link if displayed in product right display menu */
+#prod-right .prSnippetReadReviews {
+    display:none;
+}
+a.prSnippetLink {
+    font-size: 1em;
+}
+.prSnippetRatingClickable {
+    display:none;
+}
+.prSnippetRatingUnclickable {
+    display:block;
+    line-height: 15px; /* height of small stars row */
+}
+/* Hide rating if displayed in product right display menu */
+#prod-right .prSnippetRatingUnclickable {
+    display:none;
+}
+.prSnippetNumberOfRatingsText {
+    display:inline;
+}
+/* for merchant response */
+.prMerchantResponse {
+    border: 1px solid #e6e5e2;
+    background: #eeeeee;
+    font-style: italic;
+    padding: 5px;
+    margin-left: 50px;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.prVerified {
+    position:relative;
+    display:inline;
+    margin:0 0 -.55em 0.5em;
+    border-style:none;
+}
+
+/*  Image Display
+------------------------------------- */
+
+.prCustomerPics {
+    clear:both;
+    width:100%;
+    margin:0;
+    padding:0 0 10px;
+    overflow:auto;
+}
+
+.prPic {
+    position:relative;
+    top:0;
+    left:0;
+    width:207px;
+    float:left;
+    margin:0 0px 25px 0px;
+    padding:10px 0px 0;
+    background:#fff url("images/shade_light.gif") bottom left repeat-x;
+    border:1px solid #ddd;
+}
+
+.prPic.prLeft {
+    margin-right:12px;
+}
+
+.prPic .prCaption {
+    margin:0 10px 5px;
+    font-size:11px;
+    color:#333;
+}
+
+.prPicContent {
+    position:relative;
+    top:0;
+    left:0;
+    margin:0 2px 10px 9px;
+    text-align:center;
+    line-height:0;
+}
+
+/*core drop shadow rules*/
+.prPicContent, .wrap1, .wrap2 {
+    display:inline-table;
+/* \*/display:block;/**/
+}
+
+.prPicContent {
+    float:left;
+    background:url(images/shadows/shadow.gif) right bottom no-repeat;
+}
+
+.prPicContent .wrap1 {
+    background:url(images/shadows/corner_bl.gif) -15px 100% no-repeat;
+}
+
+.prPicContent .wrap2 {
+    padding:0 7px 7px 0;
+    background:url(images/shadows/corner_tr.gif) 100% -15px no-repeat;
+}
+
+.prPicContent .wrap2 img {
+    display:block;
+    padding:4px;
+    background:#fff;
+    border:1px solid #bbb;
+}
+
+/* extra styles for hover hilites */
+
+.prPicContent .wrap2 a:hover img {
+    background:#9cf;
+    border-color:#36f;
+}
+
+
+.prPic .prPicTags {
+    float:left;
+    width:70px;
+    margin:0;
+    padding-bottom:10px;
+    font-size:9px;
+    line-height:13px;
+    color:#777;
+}
+
+.prPicTags .prTaglabel, .prVidTags .prTaglabel {
+    font-weight:bold;
+    font-size:10px;
+}
+
+/* stars rating styles */
+div.prStars {
+    position: relative;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 112px;
+    float: left;
+    padding: 0;
+    margin: 0 0.25em 0 0;
+    line-height: 20px;
+}
+/* order is important here! http://css-discuss.incutio.com/?page=MultipleClasses */
+div.prStars.prStarsSmall {
+    height: 15px;
+    width: 83px;
+    line-height: 15px;
+}
+
+/* VIDEOS */
+.prVidContent {
+    position:relative;
+    top:0;
+    left:0;
+    margin:0 2px 10px 9px;
+    text-align:center;
+    line-height:0;
+    background-color: black;
+    padding: 4px;
+    float:left;
+}
+.prVidContent div.wrap {
+    border-top: 7px dotted white;
+    border-bottom: 7px dotted white;
+    padding: 5px 0 5px 0;
+}
+.prVidContent div.wrap a img {
+    border: none;
+}
+.prPic .prVidTags {
+    float:left;
+    width:90px;
+    margin:0 0 0 5px;
+    padding-bottom:10px;
+    font-size:9px;
+    line-height:13px;
+    color:#777;
+}

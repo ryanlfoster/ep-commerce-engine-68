@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="demoProvider"
+		class="com.elasticpath.domain.geoip.provider.impl.NullGeoIpProviderImpl" lazy-init="true">
+		<property name="locations">
+			<map>
+				<!-- local host  -->
+				<entry><key><value>127.0.0.1</value></key><ref bean="localhostLocation" /></entry>
+				<entry><key><value>127.0.1.1</value></key><ref bean="geoLocation1" /></entry>
+
+				<entry><key><value>84.47.179.31</value></key><ref bean="geoLocation4" /></entry>
+				<entry><key><value>81.26.156.31</value></key><ref bean="geoLocation4" /></entry>
+				<entry><key><value>192.168.222.204</value></key><ref bean="geoLocation4" /></entry>				
+				<entry><key><value>10.10.30.135</value></key><ref bean="geoLocation5" /></entry>
+				<entry><key><value>12.68.78.1</value></key><ref bean="geoLocation2" /></entry>
+				<entry><key><value>127.23.56.111</value></key><ref bean="geoLocation3" /></entry>
+				<entry><key><value>192.168.222.203</value></key><ref bean="geoLocation6" /></entry>
+				<entry><key><value>192.168.222.201</value></key><ref bean="geoLocation6" /></entry>
+				<entry><key><value>10.10.30.60</value></key><ref bean="geoLocation7" /></entry>
+                <entry><key><value>10.10.2.1</value></key><ref bean="geoLocation8" /></entry>
+				
+				
+			</map>
+		</property>
+		<!-- if GEOIP_FIRST_LEVEL_DOMAIN and GEOIP_SECOND_LEVEL_DOMAIN not provider by geop ip service use 
+		the dns name resolver, otherwise delete this property.  
+		-->
+		<!--property name="domainNameResolver">
+			<bean class="com.elasticpath.domain.geoip.provider.impl.DomainNameResolverImpl"/>
+		</property-->		
+	</bean>
+
+	<bean id="localhostLocation"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="00001" />
+		<property name="carrierName" value="Verizon Communications"/>
+		<property name="city" value="New York" />
+		<property name="connectionSpeed" value="512 kb\s" />
+		<property name="connectionType" value="cable" />
+		<property name="continent" value="North America" />
+		<property name="countryCode" value="us" />
+		<property name="ipRoutingType" value="fixed" />
+		<property name="latitude" value="40.47" />
+		<property name="longitude" value="73.58" />
+		<property name="phoneNumber" value="1231234234" />
+		<property name="region" value="NY" />
+		<property name="registeredOrganization" value="ElasticPath" />
+		<property name="secondLevelDomain" value="elasticpath" />
+		<property name="state" value="NY" />
+		<property name="gmtTimeZone" value="-5" />
+		<property name="topLevelDomain" value="com" />
+		<property name="zipCode" value="10020" />
+	</bean>
+
+	<bean id="geoLocation1"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-001" />
+		<property name="carrierName" value="wireless" />
+		<property name="city" value="Kiev" />
+		<property name="connectionSpeed" value="256 kb\s" />
+		<property name="connectionType" value="wlan" />
+		<property name="continent" value="eurasia" />
+		<property name="countryCode" value="ua" />
+		<property name="ipRoutingType" value="fixed" />
+		<property name="latitude" value="89.98" />
+		<property name="longitude" value="45.23" />
+		<property name="phoneNumber" value="1231234234" />
+		<property name="region" value="kiev" />
+		<property name="registeredOrganization" value="luxoft-ua" />
+		<property name="secondLevelDomain" value="luxoft" />
+		<property name="state" value="ukraine" />
+		<property name="gmtTimeZone" value="+2" />
+		<property name="topLevelDomain" value="ua" />
+		<property name="zipCode" value="878978" />
+	</bean>
+
+	<bean id="geoLocation2"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-002" />
+		<property name="carrierName" value="coaxial" />
+		<property name="city" value="Moscow" />
+		<property name="connectionSpeed" value="128 Kb\s" />
+		<property name="connectionType" value="dial-up" />
+		<property name="continent" value="eurasia" />
+		<property name="countryCode" value="ru" />
+		<property name="ipRoutingType" value="anonymizer" />
+		<property name="latitude" value="55.75" />
+		<property name="longitude" value="53.23" />
+		<property name="phoneNumber" value="3453453425" />
+		<property name="region" value="moscow" />
+		<property name="registeredOrganization" value="luxoft-ru" />
+		<property name="secondLevelDomain" value="luxoft" />
+		<property name="state" value="russia" />
+		<property name="gmtTimeZone" value="+1" />
+		<property name="topLevelDomain" value="ru" />
+		<property name="zipCode" value="2341234" />
+	</bean>
+
+	<bean id="geoLocation3"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-003" />
+		<property name="carrierName" value="optical" />
+		<property name="city" value="Vancouver" />
+		<property name="connectionSpeed" value="10 Mb\s" />
+		<property name="connectionType" value="broadband" />
+		<property name="continent" value="north america" />
+		<property name="countryCode" value="ca" />
+		<property name="ipRoutingType" value="aol" />
+		<property name="latitude" value="23.56" />
+		<property name="longitude" value="12.56" />
+		<property name="phoneNumber" value="134869786" />
+		<property name="region" value="bc" />
+		<property name="registeredOrganization" value="ep" />
+		<property name="secondLevelDomain" value="elasticpath" />
+		<property name="state" value="canada" />
+		<property name="gmtTimeZone" value="-10.5" />
+		<property name="topLevelDomain" value="com" />
+		<property name="zipCode" value="vb24bn" />
+	</bean>
+	
+	<bean id="geoLocation4"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-003" />
+		<property name="carrierName" value="loopback" />
+		<property name="city" value="Kiev" />
+		<property name="connectionSpeed" value="1000 Mb\s" />
+		<property name="connectionType" value="broadband" />
+		<property name="continent" value="Europe" />
+		<property name="countryCode" value="ua" />
+		<property name="ipRoutingType" value="aol" />
+		<property name="latitude" value="23.56" />
+		<property name="longitude" value="12.56" />
+		<property name="phoneNumber" value="134869786" />
+		<property name="region" value="bc" />
+		<property name="registeredOrganization" value="ep" />
+		<property name="state" value="kiev" />
+		<property name="gmtTimeZone" value="+2" />
+		<property name="secondLevelDomain" value="luxoft" />
+		<property name="topLevelDomain" value="com" />
+		<property name="zipCode" value="01300" />
+	</bean>
+	
+	<bean id="geoLocation5"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+		<property name="asnNumber" value="asn-001" />
+                <property name="carrierName" value="VODAFONE ESPANA S.A." />
+                <property name="city" value="Barcelona" />
+                <property name="connectionSpeed" value="256 kb\s" />
+                <property name="connectionType" value="wlan" />
+                <property name="continent" value="eurasia" />
+                <property name="countryCode" value="es" />
+                <property name="ipRoutingType" value="fixed" />
+                <property name="phoneNumber" value="1231234234" />
+                <property name="secondLevelDomain" value="testing123" />
+                <property name="state" value="CT" />
+                <property name="gmtTimeZone" value="+1" />
+                <property name="topLevelDomain" value="es" />
+                <property name="zipCode" value="08999" />		
+	</bean>
+	
+	<bean id="geoLocation6"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+            <property name="asnNumber" value="asn-002" />
+            <property name="carrierName" value="wireless" />
+            <property name="city" value="Omsk" />
+            <property name="connectionSpeed" value="256 kb\s" />
+            <property name="connectionType" value="wlan" />
+            <property name="continent" value="eurasia" />
+            <property name="countryCode" value="ru" />
+            <property name="ipRoutingType" value="fixed" />
+            <property name="latitude" value="89.98" />
+            <property name="longitude" value="45.23" />
+            <property name="phoneNumber" value="6441235566" />
+            <property name="region" value="omsk" />
+            <property name="registeredOrganization" value="luxoft-ru" />
+            <property name="secondLevelDomain" value="luxoft" />
+            <property name="state" value="russia" />
+            <property name="gmtTimeZone" value="+6" />
+            <property name="topLevelDomain" value="ru" />
+            <property name="zipCode" value="644000" />
+	</bean>
+	
+	<bean id="geoLocation7"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+				<property name="carrierName" value="Telecom Italia Net"/>
+                <property name="city" value="Roma" />
+                <property name="connectionSpeed" value="512 kb\s" />
+                <property name="connectionType" value="cable" />
+                <property name="continent" value="eurasia" />
+                <property name="countryCode" value="it" />
+                <property name="ipRoutingType" value="fixed" />
+                <property name="secondLevelDomain" value="raiuno" />
+                <property name="state" value="LZ" />
+                <property name="gmtTimeZone" value="+1" />
+                <property name="topLevelDomain" value="com" />
+                <property name="zipCode" value="I-10123" />		
+	</bean>
+	
+	<bean id="geoLocation8"
+		class="com.elasticpath.domain.geoip.location.impl.GeoIpLocationImpl">
+			<property name="city" value="Vancouver" />
+            <property name="connectionSpeed" value="1000 Mb\s" />
+            <property name="connectionType" value="broadband" />
+            <property name="continent" value="North America" />
+            <property name="countryCode" value="CA" />
+            <property name="ipRoutingType" value="proxy" />
+            <property name="state" value="BC" />
+            <property name="gmtTimeZone" value="-8" />
+            <property name="secondLevelDomain" value="elasticpath" />
+            <property name="topLevelDomain" value="com" />
+            <property name="zipCode" value="V6Z 2A9" />
+	</bean>
+	
+	<!-- Values for ValuesProvider -->
+
+	<bean id="timeZoneSelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableFloatTagValueProviderImpl">
+		<property name="resourceName" value="geoip/timezone_GMT.csv" />
+		<property name="delimiter" value=";" />
+		<property name="skipFirstLine" value="false" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	
+	<bean id="countryCodeSelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/iso_countries.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="ipRoutingTypeSelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/ip_routing_type.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="ipConnectionTypeSelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/ip_connection_type.csv" />
+		<property name="delimiter" value=";" />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="continentSelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/continent.csv" />
+		<property name="delimiter" value=";" />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="1" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="stateSelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/country_state_abbreviation.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="3" />
+		<property name="nameFieldIndex" value="2" />
+	</bean>
+	
+	<bean id="citySelectableValueProvider-demo" class="com.elasticpath.domain.geoip.provider.impl.NullSelectableStringTagValueProviderImpl">
+		<property name="resourceName" value="geoip/country_state_city.csv" />
+		<property name="delimiter" value="," />
+		<property name="skipFirstLine" value="true" />
+		<property name="valueFieldIndex" value="3" />
+		<property name="nameFieldIndex" value="3" />
+	</bean>
+
+</beans>

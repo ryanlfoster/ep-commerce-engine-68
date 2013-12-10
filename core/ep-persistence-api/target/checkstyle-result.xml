@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/AbstractEntityImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/AbstractPersistableImpl.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/ChangeCollisionException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/Entity.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/EntityUtils.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/EpPersistenceException.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/FetchGroupLoadTuner.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/FlushMode.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/LoadTuner.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/Persistable.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/PersistenceEngine.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/PersistenceSession.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/PersistenceSessionFactory.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/Query.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/StringExternalizer.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/main/java/com/elasticpath/persistence/api/Transaction.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/test/java/com/elasticpath/persistence/api/AbstractEntityImplTest.java">
+</file>
+<file name="/Users/ugomech/Documents/Commerce-Engine/platform/core/ep-persistence-api/src/test/java/com/elasticpath/persistence/api/AbstractPersistableImplTest.java">
+</file>
+</checkstyle>

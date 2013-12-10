@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://webservices.quova.com/OnDemand/GeoPoint/v1/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://webservices.quova.com/OnDemand/GeoPoint/v1/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://webservices.quova.com/OnDemand/GeoPoint/v1/">
+      <s:element name="GetIpInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ipAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIpInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIpInfoResult" type="tns:IpInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IpInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:Response" />
+              <s:element minOccurs="0" maxOccurs="1" name="IPAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IPType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AnonymizerStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Network" type="tns:Network" />
+              <s:element minOccurs="0" maxOccurs="1" name="Location" type="tns:Location" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="IPBase" abstract="true" />
+      <s:complexType name="Coordinates">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Longitude" nillable="true" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="Latitude" nillable="true" type="s:float" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="City">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AreaCode" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Confidence" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Coordinates" type="tns:Coordinates" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MSA">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" nillable="true" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DMA">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" nillable="true" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="State">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Confidence" nillable="true" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Country">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Confidence" nillable="true" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Region">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Continent">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Location">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Continent" type="tns:Continent" />
+              <s:element minOccurs="0" maxOccurs="1" name="Region" type="tns:Region" />
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="tns:Country" />
+              <s:element minOccurs="0" maxOccurs="1" name="State" type="tns:State" />
+              <s:element minOccurs="0" maxOccurs="1" name="DMA" type="tns:DMA" />
+              <s:element minOccurs="0" maxOccurs="1" name="MSA" type="tns:MSA" />
+              <s:element minOccurs="0" maxOccurs="1" name="City" type="tns:City" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Domain">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="TopLevel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SecondLevel" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Network">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IPBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Domain" type="tns:Domain" />
+              <s:element minOccurs="0" maxOccurs="1" name="AOL" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Carrier" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ASN" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Connection" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LineSpeed" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IPRoutingType" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Response">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IpInfo" nillable="true" type="tns:IpInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetIpInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIpInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetIpInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIpInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIpInfoHttpGetIn">
+    <wsdl:part name="ipAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIpInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:IpInfo" />
+  </wsdl:message>
+  <wsdl:portType name="GeoPointSoap">
+    <wsdl:operation name="GetIpInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns GeoDirectory data for a given IP Address (octet or integer representation)</wsdl:documentation>
+      <wsdl:input message="tns:GetIpInfoSoapIn" />
+      <wsdl:output message="tns:GetIpInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GeoPointHttpGet">
+    <wsdl:operation name="GetIpInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns GeoDirectory data for a given IP Address (octet or integer representation)</wsdl:documentation>
+      <wsdl:input message="tns:GetIpInfoHttpGetIn" />
+      <wsdl:output message="tns:GetIpInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeoPointSoap" type="tns:GeoPointSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIpInfo">
+      <soap:operation soapAction="https://webservices.quova.com/OnDemand/GeoPoint/v1/GetIpInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeoPointSoap12" type="tns:GeoPointSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIpInfo">
+      <soap12:operation soapAction="https://webservices.quova.com/OnDemand/GeoPoint/v1/GetIpInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeoPointHttpGet" type="tns:GeoPointHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetIpInfo">
+      <http:operation location="/GetIpInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeoPoint">
+    <wsdl:port name="GeoPointSoap" binding="tns:GeoPointSoap">
+      <soap:address location="https://webservices.quova.com/OnDemand/GeoPoint/v1/default.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GeoPointSoap12" binding="tns:GeoPointSoap12">
+      <soap12:address location="https://webservices.quova.com/OnDemand/GeoPoint/v1/default.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GeoPointHttpGet" binding="tns:GeoPointHttpGet">
+      <http:address location="https://webservices.quova.com/OnDemand/GeoPoint/v1/default.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
